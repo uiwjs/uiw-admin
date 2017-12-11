@@ -1,4 +1,4 @@
-React Parcel uiw Example
+UIW Admin
 ===
 
 A minimum viable React app with Parcel Bundler
