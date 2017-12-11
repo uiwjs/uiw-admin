@@ -19,9 +19,9 @@ A minimum viable React app with Parcel Bundler
 Clone and install deps
 
 ```bash
-git clone git@github.com:jaredpalmer/uiw-parcel-example.git
+git clone git@github.com:uiw-react/uiw-admin.git
 
-cd uiw-parcel-example
+cd uiw-admin
 yarn
 yarn start
 ```
@@ -36,8 +36,6 @@ npm run build
 
 This will compile your JS and copy your `index.html` to the dist folder which you can deploy whereever as as a good ol' webpage.
 
-## See Also
+## License
 
-- https://parceljs.org/
-- https://github.com/parcel-bundler/parcel
-- [React Parcel Example with hot reload](https://github.com/albinotonnina/hot-parcel-react)
+Licensed under the MIT License.
