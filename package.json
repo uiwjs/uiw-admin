@@ -1,0 +1,39 @@
+{
+  "name": "parceljs",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development parcel src/index.html ",
+    "build": "cross-env NODE_ENV=production parcel build src/index.html --no-minify",
+    "format": "prettier --write './{src,test}/**/*.{js,json,md}'",
+    "lint": "prettier --list-different './{src,test}/**/*.{js,json,md}'",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://g.showgold.cn/wangchujiang/parceljs-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^7.2.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-minify": "^0.2.0",
+    "babel-preset-react-app": "^3.1.0",
+    "cross-env": "^5.1.1",
+    "less": "^2.7.3",
+    "parcel-bundler": "^1.1.0",
+    "postcss-modules": "^1.1.0",
+    "prettier": "^1.9.1"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "transform-runtime": "0.0.0",
+    "uiw": "^1.5.2"
+  }
+}
