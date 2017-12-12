@@ -1,0 +1,46 @@
+.descriptionList {
+  background-color: white;
+  display: inline-block;
+}
+
+.title {
+  padding: 10px 5px;
+  font-size: 16px;
+}
+
+.term {
+  font-size: 14px;
+  padding: 10px 5px;
+}
+
+.detail {
+  font-size: 14px;
+  text-indent:28px;
+  line-height: 1.2rem;
+}
+
+.description {
+  margin-bottom: 10px;
+}
+
+.horizontal {
+  > div:first-child {
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.vertical {
+  > div {
+    display: inline-flex;
+    word-break: break-all;
+  }
+  > div:first-child {
+    width: 20%;
+  }
+  > div:nth-child(2) {
+    width: 80%;
+  }
+}
