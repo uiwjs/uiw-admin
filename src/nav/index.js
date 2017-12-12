@@ -70,6 +70,11 @@ export const getNavData = app => [
             icon: 'time',
             path: 'countdown',
             component: Bundle([], () => import('../routes/Component/CountDown')),
+          }, {
+            name: '文本省略',
+            icon: 'pie-chart',
+            path: 'ellipsis',
+            component: Bundle([], () => import('../routes/Component/Ellipsis')),
           }
         ]
       }, {
