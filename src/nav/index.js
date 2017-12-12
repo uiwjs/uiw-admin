@@ -65,6 +65,11 @@ export const getNavData = app => [
             icon: 'smile',
             path: 'avatarlist',
             component: Bundle([], () => import('../routes/Component/AvatarList')),
+          }, {
+            name: '倒计时',
+            icon: 'time',
+            path: 'countdown',
+            component: Bundle([], () => import('../routes/Component/CountDown')),
           }
         ]
       }, {
