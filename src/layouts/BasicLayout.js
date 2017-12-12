@@ -111,6 +111,7 @@ export default class CustomRouter extends Component {
   }
   render() {
     const { getRouteData } = this.props;
+    console.log('logo===>')
     return (
       <div className={styles.wapper}>
         <div className={styles.sider}>

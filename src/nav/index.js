@@ -60,6 +60,11 @@ export const getNavData = app => [
                 component: Bundle([], () => import('../routes/Component/Form/FormElements')),
               }
             ]
+          }, {
+            name: '头像列表',
+            icon: 'smile',
+            path: 'avatarlist',
+            component: Bundle([], () => import('../routes/Component/AvatarList')),
           }
         ]
       }, {

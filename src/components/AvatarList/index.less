@@ -1,0 +1,22 @@
+.avatarList {
+  display: inline-block;
+  ul {
+    display: inline-block;
+    margin-left: 8px;
+    font-size: 0;
+  }
+  & + .avatarList {
+    margin-left: 8px;
+  }
+}
+
+.avatarListItem {
+  display: inline-block;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.avatarItemSmall,.avatarItemDefault,.avatarItemLarge {
+  margin-left: -8px;
+}

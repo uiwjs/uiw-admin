@@ -22,7 +22,8 @@ function getRouteData(navData, path) {
     return null;
   }
   const route = navData.filter(item => item.layout === path)[0];
-  const nodeList = getPlainNode(route.children);
+  // const nodeList = getPlainNode(route.children);
+  const nodeList = [];
   return nodeList;
 }
 

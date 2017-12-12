@@ -21,7 +21,7 @@ export default class Lazyload extends Component {
     const { path, mod } = this.state;
     const page = await props.load();
     this.setState({
-      mod: page
+      mod: page.default
     })
   }
 

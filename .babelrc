@@ -7,10 +7,6 @@
     "transform-runtime"
   ],
   "env": {
-    "production": {
-      "presets": [
-        "minify"
-      ]
-    }
+    "production": {}
   }
 }
