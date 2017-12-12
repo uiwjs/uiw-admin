@@ -17,11 +17,12 @@
         a {
           color: #ccc;
           text-decoration: none;
+          transition: color .3s;
         }
         &:after {
           right: 0;
         }
-        &.active, &.active a {
+        &.active, &.active a ,a:hover{
           color: #0fa120;
         }
         &.disabled {
@@ -30,6 +31,9 @@
       }
       .w-sub-menu-con {
         background: #2a3035;
+      }
+      .w-sub-menu-title {
+        transition: color .3s;
       }
     }
   }
