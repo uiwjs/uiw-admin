@@ -113,7 +113,14 @@ export default class CustomRouter extends Component {
     const { getRouteData } = this.props;
     return (
       <div className={styles.wapper}>
-        <div className={styles.sider}>
+        <div className={styles.sider} ref={(elm) => {
+          if (elm) {
+            this.timer = setTimeout(() => {
+              elm.style.height = `${window.document.body.clientHeight}px`;
+              clearTimeout(this.timer);
+            })
+          }
+        }}>
           <div className={styles.logo}>
             <Link to="/">
               <svg viewBox="0 0 256 256">
