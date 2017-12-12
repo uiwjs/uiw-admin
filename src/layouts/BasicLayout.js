@@ -2,7 +2,7 @@ import { HashRouter, Route, Switch, BrowserRouter as Router, Redirect, withRoute
 import React, { Component, createElement } from 'react';
 import PropTypes from 'prop-types';
 import NotFound from '../routes/Exception/404';
-import { Menu, Icon, Breadcrumb } from 'uiw';
+import { Menu, Icon, Breadcrumb, Badge } from 'uiw';
 
 import styles from './BasicLayout.less';
 
@@ -115,6 +115,7 @@ export default class CustomRouter extends Component {
       <div className={styles.wapper}>
         <div className={styles.sider} ref={(elm) => {
           if (elm) {
+            if (this.timer) clearTimeout(this.timer);
             this.timer = setTimeout(() => {
               elm.style.height = `${window.document.body.clientHeight}px`;
               clearTimeout(this.timer);
@@ -135,6 +136,21 @@ export default class CustomRouter extends Component {
         </div>
         <div className={styles.content}>
           <div className={styles.header}>
+            <div className={styles.headerLeft}>
+              <a target="_blank" href="https://github.com/uiw-react/uiw-admin">
+                <Icon type="github" />
+              </a>
+            </div>
+            <div className={styles.headerRight}>
+              <div className={styles.item}>
+                <Icon type="lock" />
+              </div>
+              <div className={styles.item}>
+                <Badge dot count={4}>
+                  <Icon type='bell' />
+                </Badge>
+              </div>
+            </div>
           </div>
           <Switch>
             {getRouteData('BasicLayout').map((item, index) => {
