@@ -33,6 +33,7 @@
     "babel-polyfill": "^6.26.0",
     "g2": "^2.3.13",
     "lodash-decorators": "^4.5.0",
+    "luxon": "^0.2.7",
     "numeral": "^2.0.6",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",

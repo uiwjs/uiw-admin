@@ -82,7 +82,7 @@ export const getNavData = app => [
             component: Bundle([], () => import('../routes/Component/DescriptionList')),
           },
           {
-            name: '图标',
+            name: '图表',
             icon: 'area-chart',
             path: 'charts',
             children: [

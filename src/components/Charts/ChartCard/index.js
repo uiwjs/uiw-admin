@@ -44,9 +44,11 @@ const ChartCard = ({
       }
     </div>
   );
+
   return (
     <Card
       bodyStyle={{ padding: '20px 24px 8px 24px' }}
+      className={styles.card}
       {...rest}
     >
       {<Loading loading={loading}>{content}</Loading>}
