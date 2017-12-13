@@ -34,6 +34,6 @@
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "transform-runtime": "0.0.0",
-    "uiw": "^1.5.3"
+    "uiw": "^1.5.4"
   }
 }
