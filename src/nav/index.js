@@ -80,6 +80,11 @@ export const getNavData = app => [
             icon: 'dot-chart',
             path: 'description-list',
             component: Bundle([], () => import('../routes/Component/DescriptionList')),
+          }, {
+            name: '处理结果',
+            icon: 'circle-check',
+            path: 'result',
+            component: Bundle([], () => import('../routes/Component/Result')),
           }
         ]
       }, {
