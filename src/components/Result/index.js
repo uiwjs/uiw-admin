@@ -37,7 +37,7 @@ export default class Result extends Component {
   }
 
   render() {
-    const { className, icon, title, description, extra, actions } = this.props;
+    const { className, children, icon, title, description, extra, actions } = this.props;
     const cls = classNames(styles.resultWrapper, className, {
 
     })
@@ -47,6 +47,7 @@ export default class Result extends Component {
         {title && <p className={styles.title}>{title}</p>}
         {description && <p className={styles.description}>{description}</p>}
         {extra && <p className={styles.extra}>{extra}</p>}
+        {children && <div className={styles.children}>{children}</div>}
         {actions && <div className={styles.actions}>{this.renderAction(actions)}</div>}
       </div>
     );
