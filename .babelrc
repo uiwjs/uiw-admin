@@ -4,7 +4,9 @@
     "env"
   ],
   "plugins": [
-    "transform-runtime"
+    "transform-runtime",
+    "transform-decorators-legacy",
+    "transform-class-properties"
   ],
   "env": {
     "production": {}
