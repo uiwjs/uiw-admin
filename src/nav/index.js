@@ -75,6 +75,11 @@ export const getNavData = app => [
             icon: 'pie-chart',
             path: 'ellipsis',
             component: Bundle([], () => import('../routes/Component/Ellipsis')),
+          }, {
+            name: '描述列表',
+            icon: 'dot-chart',
+            path: 'description-list',
+            component: Bundle([], () => import('../routes/Component/DescriptionList')),
           }
         ]
       }, {
