@@ -40,7 +40,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="总销售额"
-              action={<Tooltip title="指标说明"><Icon type="information-o" /></Tooltip>}
+              action={<Tooltip content="指标说明" className={styles.tooltip}><Icon type="information-o" /></Tooltip>}
               total={yuan(126560)}
               footer={<Field label="日均销售额" value={`￥${numeral(12423).format('0,0')}`} />}
               contentHeight={46}
@@ -57,13 +57,28 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="访问量"
-              action={<Tooltip title="指标说明"><Icon type="information-o" /></Tooltip>}
+              action={<Tooltip content="指标说明" className={styles.tooltip}><Icon type="information-o" /></Tooltip>}
               total={numeral(8846).format('0,0')}
               footer={<Field label="日访问量" value={numeral(1234).format(0, 0)} />}
               contentHeight={46}
             >
               <MiniArea
                 color="#975FE4"
+                height={46}
+                data={visitData}
+              />
+            </ChartCard>
+          </Col>
+          <Col {...topColResponseiveProps}>
+            <ChartCard
+              bordered={false}
+              title="支付笔数"
+              action={<Tooltip content='指标说明' className={styles.tooltip}><Icon type="information-o" /></Tooltip>}
+              total={numeral(6560).format('0,0')}
+              footer={<Field label="转化率" value="60%" />}
+              contentHeight={46}
+            >
+              <MiniBar
                 height={46}
                 data={visitData}
               />

@@ -62,7 +62,7 @@ class MiniBar extends PureComponent {
       title: null,
       crosshairs: false,
       map: {
-        name: x,
+        name: 'x',
       }
     });
     chart.interval().position('x*y').color(color);
