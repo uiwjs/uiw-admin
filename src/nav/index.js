@@ -85,6 +85,11 @@ export const getNavData = app => [
             icon: 'circle-check',
             path: 'result',
             component: Bundle([], () => import('../routes/Component/Result')),
+          }, {
+            name: '底部工具栏',
+            icon: 'cut',
+            path: 'footer-toolbar',
+            component: Bundle([], () => import('../routes/Component/FooterToolbar')),
           },
           {
             name: '图表',
