@@ -1,0 +1,27 @@
+.footToolbar {
+  background-color: #ffffff;
+  height: 58px;
+  line-height: 58px;
+  padding: 0 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+  &:after {
+    content: '';
+    clear: both;
+  }
+}
+
+.extra {
+  float: left;
+}
+
+.actions {
+  float: right;
+}
+
+.children {
+ max-height: 58px;
+ overflow: hidden;
+}
