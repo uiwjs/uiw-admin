@@ -4,3 +4,4 @@ export { default as MiniArea } from './MiniArea';
 export { default as MiniBar } from './MiniBar';
 export { default as ChartCard } from './ChartCard';
 export { default as Field } from './Field/';
+export { default as MiniProgress } from './MiniProgress';
