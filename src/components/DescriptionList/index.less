@@ -6,16 +6,16 @@
 .title {
   padding: 10px 5px;
   font-size: 16px;
+  font-weight: bolder;
 }
 
 .term {
   font-size: 14px;
-  padding: 10px 5px;
+  line-height: 1.2rem;
 }
 
 .detail {
   font-size: 14px;
-  text-indent:28px;
   line-height: 1.2rem;
 }
 
@@ -38,9 +38,13 @@
     word-break: break-all;
   }
   > div:first-child {
-    width: 20%;
+    float: left;
+    width: 80px;
   }
   > div:nth-child(2) {
-    width: 80%;
+    float: left;
+    width: 100%;
+    margin-left: -80px;
+    padding-left: 80px;
   }
 }
