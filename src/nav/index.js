@@ -90,6 +90,11 @@ export const getNavData = app => [
             icon: 'cut',
             path: 'footer-toolbar',
             component: Bundle([], () => import('../routes/Component/FooterToolbar')),
+          }, {
+            name: '全局页脚',
+            icon: 'copyright',
+            path: 'global-footer',
+            component: Bundle([], () => import('../routes/Component/GlobalFooter')),
           },
           {
             name: '图表',
