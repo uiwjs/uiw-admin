@@ -16,19 +16,18 @@ export default class Bar extends PureComponent {
   }
 
   componentDidMount() {
+    window.addEventListener('resize', this.resize)
     this.renderChart(this.props.data);
-
-    window.addEventListener('resize', this.resize.bind(this))
   }
 
   componentWillReceiveProps(nextProps) {
     if (!equal(this.props, nextProps)) {
-      this.renderChartO(nextProps.data);
+      this.renderChart(nextProps.data);
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize.bind(this));
+    window.removeEventListener('resize', this.resize);
     if (this.chart) {
       this.chart.destroy();
     }
@@ -75,7 +74,7 @@ export default class Bar extends PureComponent {
   renderChart(data) {
     const { autoHideXLables } = this.state;
     const {
-     height = 0,
+      height = 0,
       fit = true,
       color = 'rgba(24, 144, 255, 0.85)',
       margin = [32, 0, (autoHideXLables ? 8 : 32), 40],
@@ -127,9 +126,9 @@ export default class Bar extends PureComponent {
       },
     });
 
-    chart.tootip({
+    chart.tooltip({
       title: null,
-      crosshairs: fasle,
+      crosshairs: false,
       map: {
         name: 'x',
       },
@@ -137,6 +136,7 @@ export default class Bar extends PureComponent {
     chart.interval().position('x*y').color(color).style({
       fillOpacity: 1,
     });
+
     chart.render();
     this.chart = chart;
   }
@@ -157,10 +157,10 @@ export default class Bar extends PureComponent {
 
 Bar.propTypes = {
   color: PropTypes.bool,
-  margin: [PropTypes.number, PropTypes.number, PropTypes.number, PropTypes.number],
+  margin: PropTypes.array,
   height: PropTypes.number,
   data: PropTypes.array,
-  autoLabel: PropTypes.boolean,
+  autoLabel: PropTypes.bool,
 };
 Bar.defaultProps = {
   // tooltip: false,

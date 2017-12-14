@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import numeral from 'numeral';
-import { Tooltip, Icon, Layout } from 'uiw';
+import classNames from 'classnames';
+
+import { Tooltip, Icon, Layout, Card, Tabs, DatePicker } from 'uiw';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import {
   yuan,
@@ -12,7 +14,11 @@ import {
   ChartCard,
   MiniProgress
 } from '../../components/Charts'
-import { visitData } from '../Component/Charts/chartDatas'
+import {
+  visitData,
+  salesData,
+  rankingListData
+} from '../Component/Charts/chartDatas'
 import Trend from '../../components/Trend'
 import styles from './Analysis.less'
 
@@ -25,13 +31,23 @@ const topColResponseiveProps = {
   xl: 6,
   style: { marginBottom: 24 }
 }
+
 export default class Analysis extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      btnactive: 0,
+      dateactive: 0,
     }
   }
+  onClick = (idx) => {
+    this.setState({ btnactive: idx })
+  }
+
+  onClickDate = (idx) => {
+    this.setState({ dateactive: idx })
+  }
+
 
   render() {
     return (
@@ -106,8 +122,106 @@ export default class Analysis extends Component {
               <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
             </ChartCard>
           </Col>
-        </Row>
+          <Col span='24'>
+            <Card
+              bordered={false}
+              bodyStyle={{ padding: 0 }}
+              style={{ margin: '0 9px' }}
+            >
+              <div className={styles.salesCard}>
+                <Row className={styles.row}>
+                  {['销售额', '访问量',].map((item, idx) => {
+                    return (
+                      <Col span="4" key={idx}>
+                        <div
+                          className={classNames(styles.tabModal, {
+                            [`${styles.moduleActive}`]: this.state.btnactive === idx
+                          })}
+                          onClick={this.onClick.bind(this, idx)}
+                        >
+                          <div>{item}</div>
+                        </div>
+                      </Col>
+                    );
+                  })}
+                  <div className={styles.datePicker}>
+                    {['今天', '本周', '本月', '本年'].map((item, idx) => {
+                      return (
+                        <span
+                          key={idx}
+                          className={classNames({
+                            [`${styles.dateActive}`]: this.state.dateactive === idx
+                          })}
+                          onClick={this.onClickDate.bind(this, idx)}
+                        >
+                          {item}
+                        </span>
+                      );
+                    })}
 
+
+                    <DatePicker showToday={true} style={{ width: 125 }} />
+                    <DatePicker showToday={true} style={{ width: 125 }} />
+                  </div>
+
+                </Row>
+                {this.state.btnactive ?
+                  <Row type='flex'>
+                    <Col xl={16} lg={12} md={12} sm={24} xs={24}>
+                      <div className={styles.salesBar}>
+                        <Bar
+                          height={295}
+                          title="销售额趋势"
+                          data={salesData}
+                        />
+                      </div>
+                    </Col>
+                    <Col xl={8} lg={12} md={12} sm={24} xs={24}>
+                      <div className={styles.salesRank}>
+                        <h4 className={styles.rankingTitle}>门店销售额排名</h4>
+                        <ul className={styles.rankingList}>
+                          {rankingListData.map((item, i) => {
+                            return (<li key={item.title}>
+                              <span className={(i < 3) ? styles.active : ''}>{i + 1}</span>
+                              <span>{item.title}</span>
+                              <span>{numeral(item.total).format('0,0')}</span>
+                            </li>)
+                          })}
+                        </ul>
+                      </div>
+                    </Col>
+                  </Row>
+                  :
+                  <Row type='flex'>
+                    <Col xl={16} lg={12} md={12} sm={24} xs={24}>
+                      <div className={styles.salesBar}>
+                        <Bar
+                          height={296}
+                          title="销售额趋势"
+                          data={salesData}
+                        />
+                      </div>
+                    </Col>
+                    <Col xl={8} lg={12} md={12} sm={24} xs={24}>
+                      <div className={styles.salesRank}>
+                        <h4 className={styles.rankingTitle}>门店销售额排名</h4>
+                        <ul className={styles.rankingList}>
+                          {rankingListData.map((item, i) => {
+                            return (<li key={item.title}>
+                              <span className={(i < 3) ? styles.active : ''}>{i + 1}</span>
+                              <span>{item.title}</span>
+                              <span>{numeral(item.total).format('0,0')}</span>
+                            </li>)
+                          })}
+                        </ul>
+                      </div>
+                    </Col>
+                  </Row>
+                }
+              </div>
+            </Card>
+          </Col>
+        </Row>
       </PageHeaderLayout>
     );
   }
