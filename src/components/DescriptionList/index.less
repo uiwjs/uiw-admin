@@ -1,26 +1,33 @@
 .descriptionList {
   background-color: white;
   display: inline-block;
+  width: 100%;
+  padding: 10px;
 }
 
 .title {
   padding: 10px 5px;
   font-size: 16px;
+  font-weight: bolder;
 }
 
 .term {
   font-size: 14px;
-  padding: 10px 5px;
+  line-height: 1.2rem;
+  &:after {
+    content: ':';
+    padding:0 8px 0 2px;
+  }
 }
 
 .detail {
   font-size: 14px;
-  text-indent:28px;
   line-height: 1.2rem;
 }
 
 .description {
   margin-bottom: 10px;
+  padding: 0 10px;
 }
 
 .horizontal {
@@ -38,9 +45,9 @@
     word-break: break-all;
   }
   > div:first-child {
-    width: 20%;
+    display: table-cell;
   }
   > div:nth-child(2) {
-    width: 80%;
+    display: table-cell;
   }
 }

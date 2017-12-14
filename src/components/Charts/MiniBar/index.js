@@ -17,7 +17,7 @@ class MiniBar extends PureComponent {
 
   componentWillUnmount() {
     if (this.chart) {
-      this.chart.destory();
+      this.chart.destroy();
     }
   }
 

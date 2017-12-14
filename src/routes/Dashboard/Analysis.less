@@ -1,9 +1,129 @@
 
+@import "../../utils/utils.less";
+
 .trendText {
   margin-left: 8px;
   color:#999;
 }
 
-.tooltip{
-  position: fixed;
+.rankingList {
+  margin: 25px 0 0;
+  padding: 0;
+  list-style: none;
+  min-width:200px;
+  li {
+    .clearfix();
+    margin-top: 16px;
+    span {
+      color: fade(#000, 65%);
+      font-size: 14px;
+      line-height: 22px;
+    }
+    span:first-child {
+      background-color:  hsv(0, 0, 96%);
+      border-radius: 20px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 24px;
+      height: 20px;
+      line-height: 20px;
+      width: 20px;
+      text-align: center;
+    }
+    span.active {
+      //background-color: @primary-color;
+      background-color: #314659;
+      color: #fff;
+    }
+    span:last-child {
+      float: right;
+    }
+  }
+}
+
+.salesCard{
+
+  .row{
+    border-bottom: 1px solid rgb(206, 206, 206);
+  }
+  .datePicker{
+    position: absolute;
+    right: 10px;
+    top:10px;
+    font-size:14px;
+    > span{
+      padding:0 5px;
+      &:hover{
+        cursor: pointer;
+        color: #1890ff;
+      }
+    }
+    .dateActive{
+      color: #1890ff;
+    }
+    
+  }
+  .tabModal{
+    margin-bottom:-1px;
+    text-align: center;
+    font-size:16px; 
+    >div{
+      padding:15px 0;
+    }
+    &:hover{
+      cursor: pointer;
+    }
+  }
+
+  .moduleActive{
+    color: #1890ff;
+    border-bottom:2px solid #1890ff;
+  }
+  .salesBar{
+    padding: 0 0 32px 32px;
+   
+  }
+  .salesRank {
+    padding: 0 32px 32px 72px;
+  }
+  .salesCard {
+    :global {
+      .w-card-head {
+        position: relative;
+      }
+    }
+  }
+}
+
+
+
+@media screen and (max-width: 1200px) {
+  .salesExtra {
+    display: none;
+  }
+
+  .rankingList {
+    li {
+      span:first-child {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .rankingTitle {
+    margin-top: 16px;
+  }
+
+  .salesCard .salesBar {
+    padding: 16px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .salesExtraWrap {
+    display: none;
+  }
 }
