@@ -1,6 +1,7 @@
 .descriptionList {
   background-color: white;
   display: inline-block;
+  padding: 10px;
 }
 
 .title {
@@ -12,6 +13,10 @@
 .term {
   font-size: 14px;
   line-height: 1.2rem;
+  &:after {
+    content: ':';
+    padding:0 8px 0 2px;
+  }
 }
 
 .detail {
@@ -21,6 +26,7 @@
 
 .description {
   margin-bottom: 10px;
+  padding: 0 10px;
 }
 
 .horizontal {
@@ -38,13 +44,9 @@
     word-break: break-all;
   }
   > div:first-child {
-    float: left;
-    width: 80px;
+    display: table-cell;
   }
   > div:nth-child(2) {
-    float: left;
-    width: 100%;
-    margin-left: -80px;
-    padding-left: 80px;
+    display: table-cell;
   }
 }
