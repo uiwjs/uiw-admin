@@ -9,7 +9,8 @@ import {
   Bar,
   MiniBar,
   MiniArea,
-  ChartCard
+  ChartCard,
+  MiniProgress
 } from '../../components/Charts'
 import { visitData } from '../Component/Charts/chartDatas'
 import Trend from '../../components/Trend'
@@ -82,6 +83,27 @@ export default class Analysis extends Component {
                 height={46}
                 data={visitData}
               />
+            </ChartCard>
+          </Col>
+          <Col {...topColResponseiveProps}>
+            <ChartCard
+              bordered={false}
+              title="运营活动效果"
+              action={<Tooltip title="指标说明"><Icon type="info-circle-o" /></Tooltip>}
+              total="78%"
+              footer={
+                <div style={{ whiteSpace: 'nowrap', overflow: 'hidden' }}>
+                  <Trend flag="up" style={{ marginRight: 16 }}>
+                    周同比<span className={styles.trendText}>12%</span>
+                  </Trend>
+                  <Trend flag="down">
+                    日环比<span className={styles.trendText}>11%</span>
+                  </Trend>
+                </div>
+              }
+              contentHeight={46}
+            >
+              <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
             </ChartCard>
           </Col>
         </Row>
