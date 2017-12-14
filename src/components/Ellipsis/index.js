@@ -91,14 +91,19 @@ export default class Ellipsis extends Component {
     }
   }
 
-  bisection(th, m, b, e, text, shadowNode) {
+  /**
+   * th: 目标节点高度
+   * mid:文本长度中间值
+   * begin:文本开始index
+   * end:文本长度
+   * text:文本内通
+   * shadowNode:表层节点
+  */
+
+  bisection(th, mid, begin, end, text, shadowNode) {
     const suffix = '...';
-    let mid = m;
-    let end = e;
-    let begin = b;
     shadowNode.innerHTML = text.substring(0, mid) + suffix;
     let sh = shadowNode.offsetHeight;
-
     if (sh <= th) {
       shadowNode.innerHTML = text.substring(0, mid + 1) + suffix;
       sh = shadowNode.offsetHeight;

@@ -51,7 +51,7 @@ const ChartCard = ({
       className={styles.card}
       {...rest}
     >
-      {<Loading loading={loading}>{content}</Loading>}
+      {content}
     </Card>
   )
 }
