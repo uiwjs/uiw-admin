@@ -4,14 +4,15 @@
   "description": "",
   "scripts": {
     "start": "cross-env NODE_ENV=development parcel src/index.html ",
-    "build": "cross-env NODE_ENV=production parcel build src/index.html --no-minify",
+    "build": "cross-env NODE_ENV=production parcel build src/index.html --public-url ./",
+    "deploy": "node scripts/deploy.js",
     "format": "prettier --write './{src,test}/**/*.{js,json,md}'",
     "lint": "prettier --list-different './{src,test}/**/*.{js,json,md}'",
     "test": "npm run lint"
   },
   "repository": {
     "type": "git",
-    "url": "http://g.showgold.cn/wangchujiang/parceljs-demo.git"
+    "url": "https://github.com/uiw-react/uiw-admin.git"
   },
   "keywords": [],
   "author": "",
@@ -23,8 +24,11 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-minify": "^0.2.0",
     "babel-preset-react-app": "^3.1.0",
+    "colors-cli": "^1.0.13",
     "cross-env": "^5.1.1",
+    "gh-pages": "^1.1.0",
     "less": "^2.7.3",
+    "loading-cli": "^1.0.6",
     "parcel-bundler": "^1.6.2",
     "postcss-modules": "^1.1.0",
     "prettier": "^1.9.1"
