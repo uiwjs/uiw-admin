@@ -1,7 +1,7 @@
 UIW Admin
 ===
 
-A minimum viable React app with Parcel Bundler
+A minimum viable React app with Parcel Bundler. Preview: https://uiw-react.github.io/uiw-admin/
 
 **What's inside?**
 
