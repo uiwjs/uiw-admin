@@ -4,7 +4,7 @@ import styles from './index.less';
 
 export default class PageHeader extends PureComponent {
   render() {
-    const { title, content, showBreadcrumb } = this.props;
+    const { title, content, extraContent,showBreadcrumb } = this.props;
     const { renderBreadcrumb } = this.context;
     return (
       <div className={styles.pageHeader}>
@@ -12,9 +12,10 @@ export default class PageHeader extends PureComponent {
         <div className={styles.title}>
           {title}
         </div>
-        {content && (
-          <div className={styles.content}> {content} </div>
-        )}
+        <div className={styles.row}>
+          {content && <div className={styles.content}>{content}</div>}
+          {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
+        </div>
       </div>
     )
   }

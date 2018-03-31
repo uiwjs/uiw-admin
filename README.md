@@ -24,6 +24,7 @@ Clone and install deps
 git clone git@github.com:uiw-react/uiw-admin.git
 
 cd uiw-admin
+npm install                                                                   
 yarn
 yarn start
 ```
