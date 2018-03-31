@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import { Row, Col, Card, List, Avatar } from 'uiw';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PageHeader from '../../components/PageHeader';
 import styles from './Workplace.less'
 
 export default class Workplace extends Component {
@@ -16,12 +16,12 @@ export default class Workplace extends Component {
                     <div className={styles.contentTitle}>
                         早安，热巴，祝你开心每一天！
                     </div>
-                    <div>曾经有一份真诚的爱情放在我面前，我没有珍惜，等我失去的时候我才后悔莫及，人世间最痛苦的事莫过于此。</div>
+                    <div>曾经有一份真诚的爱情放在我面前，我没有珍惜，等我失去的时。</div>
                 </div>
             </div>
         );
-        const extraContent =(
-            <div className={styles.extraContent}>
+        const pageHeaderExtra =(
+            <div className={styles.pageHeaderExtra}>
                 <div className={styles.statItem}>
                     <p>项目数</p>
                     <p>56</p>
@@ -32,15 +32,14 @@ export default class Workplace extends Component {
                 </div>
                 <div className={styles.statItem}>
                     <p>项目访问</p>
-                    <p>12345</p>
+                    <p>1,235</p>
                 </div>
             </div>
         );
-        console.log(".extraContent",extraContent);
         return (
-            <PageHeaderLayout content={pageHeaderContent} extraContent={extraContent}> 
+            <PageHeader content={pageHeaderContent} extraContent={pageHeaderExtra}> 
             这里是内容
-            </PageHeaderLayout>
+            </PageHeader>
             
             
         );
