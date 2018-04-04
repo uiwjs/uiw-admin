@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import CountDown from '../../../components/CountDown';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
@@ -8,7 +8,7 @@ export default () => (
   <PageHeaderLayout title="倒计时" content="倒计时组件。">
     <CountDown
       onEnd={() => {
-        console.log('onEnd')
+        // console.log('onEnd');
       }}
       target={time}
       className="my-countdown"

@@ -4,7 +4,7 @@ import styles from './index.less';
 
 export default class PageHeader extends PureComponent {
   render() {
-    const { title, content, extraContent,showBreadcrumb } = this.props;
+    const { title, content, extraContent, showBreadcrumb } = this.props;
     const { renderBreadcrumb } = this.context;
     return (
       <div className={styles.pageHeader}>
@@ -17,7 +17,7 @@ export default class PageHeader extends PureComponent {
           {extraContent && <div className={styles.extraContent}>{extraContent}</div>}
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -29,7 +29,7 @@ PageHeader.contextTypes = {
 
 PageHeader.propTypes = {
   showBreadcrumb: PropTypes.bool,
-}
+};
 PageHeader.defaultProps = {
-  showBreadcrumb: true
-}
+  showBreadcrumb: true,
+};

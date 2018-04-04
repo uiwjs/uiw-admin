@@ -33,7 +33,7 @@ class MiniArea extends PureComponent {
       return;
     }
 
-    //clean
+    // clean
     this.node.innerHTML = '';
 
     const chart = new G2.Chart({
@@ -44,7 +44,7 @@ class MiniArea extends PureComponent {
       plotCfg: {
         margin: [36, 5, 30, 5],
       },
-      legend: null
+      legend: null,
     });
 
     if (!xAxis && !yAxis) {
@@ -54,25 +54,18 @@ class MiniArea extends PureComponent {
     if (xAxis) {
       chart.axis('x', xAxis);
     } else {
-      chart.axis('x', false)
+      chart.axis('x', false);
     }
 
     if (yAxis) {
       chart.axis('y', yAxis);
     } else {
-      chart.axis('y', false)
+      chart.axis('y', false);
     }
 
     const dataConfig = {
-      x: {
-        type: 'cat',
-        range: [0, 1],
-        ...xAxis,
-      },
-      y: {
-        min: 0,
-        ...yAxis,
-      },
+      x: { type: 'cat', range: [0, 1], ...xAxis },
+      y: { min: 0, ...yAxis },
     };
 
     chart.tooltip({
@@ -94,7 +87,10 @@ class MiniArea extends PureComponent {
     if (line) {
       const view2 = chart.createView();
       view2.source(data.dataConfig);
-      view2.line().position('x*y').color(borderColor).size(borderWidth).shape('smooth');
+      view2.line().position('x*y')
+        .color(borderColor)
+        .size(borderWidth)
+        .shape('smooth');
       view2.tooltip(false);
     }
     chart.render();
@@ -109,7 +105,7 @@ class MiniArea extends PureComponent {
           <div ref={this.handleRef.bind(this)} />
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -121,8 +117,8 @@ MiniArea.propTypes = {
   borderColor: PropTypes.string,
   line: PropTypes.bool,
   animate: PropTypes.bool,
-  xAxis: PropTypes.shape({ title: PropTypes.any, line: PropTypes.any, gridAlign: PropTypes.any, labels: PropTypes.any, tickLine: PropTypes.any, grid: PropTypes.any, }),
-  yAxis: PropTypes.shape({ title: PropTypes.any, line: PropTypes.any, gridAlign: PropTypes.any, labels: PropTypes.any, tickLine: PropTypes.any, grid: PropTypes.any, }),
+  xAxis: PropTypes.shape({ title: PropTypes.any, line: PropTypes.any, gridAlign: PropTypes.any, labels: PropTypes.any, tickLine: PropTypes.any, grid: PropTypes.any }),
+  yAxis: PropTypes.shape({ title: PropTypes.any, line: PropTypes.any, gridAlign: PropTypes.any, labels: PropTypes.any, tickLine: PropTypes.any, grid: PropTypes.any }),
   data: PropTypes.array,
 };
 MiniArea.defaultProps = {

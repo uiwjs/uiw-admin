@@ -12,11 +12,11 @@ export default class Bar extends PureComponent {
     super(props);
     this.state = {
       autoHideXLables: false,
-    }
+    };
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize)
+    window.addEventListener('resize', this.resize);
     this.renderChart(this.props.data);
   }
 
@@ -33,10 +33,9 @@ export default class Bar extends PureComponent {
     }
     this.resize.cancel();
   }
-
   /**
    * Bind() 绑定当前方法，类等等
-   * Denounce(200)  延迟2毫秒执行下面方法 
+   * Denounce(200) 延迟2毫秒执行下面方法
   */
   @Bind()
   @Debounce(200)
@@ -84,7 +83,7 @@ export default class Bar extends PureComponent {
       return;
     }
 
-    //clean
+    // clean
     this.node.innerHTML = '';
 
     const { Frame } = G2;
@@ -95,9 +94,7 @@ export default class Bar extends PureComponent {
       forceFit: fit,
       height: height - 22,
       legend: null,
-      plotCfg: {
-        margin
-      },
+      plotCfg: { margin },
     });
 
     if (autoHideXLables) {
@@ -107,31 +104,23 @@ export default class Bar extends PureComponent {
         labels: false,
       });
     } else {
-      chart.axis('x', {
-        title: false
-      })
+      chart.axis('x', { title: false });
     }
     chart.axis('y', {
       title: false,
       line: false,
-      tickLine: false
+      tickLine: false,
     });
 
     chart.source(frame, {
-      x: {
-        type: 'cat',
-      },
-      y: {
-        min: 0,
-      },
+      x: { type: 'cat' },
+      y: { min: 0 },
     });
 
     chart.tooltip({
       title: null,
       crosshairs: false,
-      map: {
-        name: 'x',
-      },
+      map: { name: 'x' },
     });
     chart.interval().position('x*y').color(color).style({
       fillOpacity: 1,
@@ -151,7 +140,7 @@ export default class Bar extends PureComponent {
           <div ref={this.handleRef.bind(this)} />
         </div>
       </div>
-    )
+    );
   }
 }
 

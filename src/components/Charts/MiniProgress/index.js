@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Tooltip } from 'uiw';
 
 import styles from './index.less';
@@ -22,7 +21,7 @@ const MiniProgress = ({ target, color = 'rgb(19, 194, 194)', strokeWidth, percen
         style={{
           backgroundColor: (color || null),
           width: (percent ? `${percent}%` : null),
-          height: (strokeWidth || null)
+          height: (strokeWidth || null),
         }}
       />
     </div>

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { Avatar, Tooltip } from 'uiw';
 import PropTypes from 'prop-types';
 import styles from './index.less';
 
@@ -26,5 +25,5 @@ FooterToolbar.propTypes = {
   clsActions: PropTypes.node,
   className: PropTypes.string,
   extraClassName: PropTypes.string,
-  actionClassName: PropTypes.string
-}
+  actionClassName: PropTypes.string,
+};

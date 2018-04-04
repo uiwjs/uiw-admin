@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Avatar, Tooltip } from 'uiw';
 import PropTypes from 'prop-types';
 import styles from './index.less';
 
-const fillZero = (num) => num < 10 ? `0${num}` : num;
+const fillZero = (num) => {
+  return num < 10 ? `0${num}` : num;
+};
 
 const hours = 60 * 60 * 1000;
 const minutes = 60 * 1000;
@@ -14,11 +15,11 @@ export default class CountDown extends Component {
     super(props);
     const current = Date.now();
     const target = this.getValidDate(props.target);
-    let timeleft = target - current;
+    const timeleft = target - current;
     this.state = {
       current,
       target,
-      timeleft
+      timeleft,
     };
     this.interval = props.interval;
   }
@@ -27,10 +28,9 @@ export default class CountDown extends Component {
     try {
       if (Object.prototype.toString.call(param) === '[object Date]') {
         return param.getTime();
-      } else {
-        let time = new Date(param).getTime()
-        return time;
       }
+      const time = new Date(param).getTime();
+      return time;
     } catch (e) {
       throw new Error('invalid target prop', e);
     }
@@ -52,7 +52,7 @@ export default class CountDown extends Component {
   }
 
   tick() {
-    this.timer = setInterval(() => { this.count() }, this.interval);
+    this.timer = setInterval(() => { this.count(); }, this.interval);
   }
 
   clear() {
@@ -63,9 +63,9 @@ export default class CountDown extends Component {
     const { onEnd } = this.props;
     const { timeleft } = this.state;
     if (timeleft > this.interval) {
-      this.setState({ timeleft: timeleft - this.interval })
+      this.setState({ timeleft: timeleft - this.interval });
     } else {
-      this.setState({ timeleft: 0 }, this.clear)
+      this.setState({ timeleft: 0 }, this.clear);
       onEnd && onEnd();
     }
   }
@@ -81,21 +81,19 @@ export default class CountDown extends Component {
     const { format, className } = this.props;
     const { timeleft } = this.state;
     const cls = classNames(styles.countdown, {
-      [className]: className
-    })
+      [className]: className,
+    });
     // 负数处理
-    let _timeleft = timeleft > 0 ? timeleft : 0;
-
-    return (<span className={cls}>{format ? format(_timeleft) : this.format(_timeleft)}</span>)
+    const _timeleft = timeleft > 0 ? timeleft : 0;
+    return (<span className={cls}>{format ? format(_timeleft) : this.format(_timeleft)}</span>);
   }
 }
 
 CountDown.propTypes = {
   target: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.number, PropTypes.string]),
-  interval: PropTypes.number
-}
+  interval: PropTypes.number,
+};
 
 CountDown.defaultProps = {
-  interval: 1000
-}
-
+  interval: 1000,
+};

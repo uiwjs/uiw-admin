@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Icon, Button } from 'uiw';
-import PropTypes from 'prop-types';
 import styles from './index.less';
 
 export default class Result extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {}
+    this.state = {};
   }
 
   renderIcon(icon) {
@@ -22,13 +20,15 @@ export default class Result extends Component {
 
   renderAction(actions) {
     if (Array.isArray(actions)) {
-      let buttons = actions.map((it) => {
+      const buttons = actions.map((it) => {
         const { id, key, text, icon, ...others } = it;
-        return (<Button {...others} key={`${id || key || Math.random()}`} >
-          {it.text}
-          {it.icon && <Icon type={it.icon} />}
-        </Button>)
-      })
+        return (
+          <Button {...others} key={`${id || key || Math.random()}`} >
+            {it.text}
+            {it.icon && <Icon type={it.icon} />}
+          </Button>
+        );
+      });
       return buttons;
     } else if (React.isValidElement(actions)) {
       return actions;
@@ -38,9 +38,7 @@ export default class Result extends Component {
 
   render() {
     const { className, children, icon, title, description, extra, actions } = this.props;
-    const cls = classNames(styles.resultWrapper, className, {
-
-    })
+    const cls = classNames(styles.resultWrapper, className);
     return (
       <div className={cls}>
         {icon && <p className={styles.iconBar}>{this.renderIcon(icon)}</p>}

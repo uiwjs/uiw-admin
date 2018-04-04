@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import classNames from 'classNames';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { Tooltip } from 'uiw';
 import styles from './index.less';
@@ -44,13 +44,13 @@ export default class Ellipsis extends Component {
     super(props);
     this.state = {
       text: '',
-      targetCount: 0
+      targetCount: 0,
     };
   }
 
   componentDidMount() {
     if (this.node) {
-      this.computeLine()
+      this.computeLine();
     }
   }
 
@@ -64,7 +64,7 @@ export default class Ellipsis extends Component {
     const { lines } = this.props;
     if (lines && !isSupportLineClamp) {
       const text = this.shadowChildren.innerText;
-      const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10)
+      const lineHeight = parseInt(getComputedStyle(this.root).lineHeight, 10);
       const targetHeight = lines * lineHeight;
       this.content.style.height = `${targetHeight}px`;
       const totalHeight = this.shadowChildren.offsetHeight;
@@ -86,8 +86,8 @@ export default class Ellipsis extends Component {
 
       this.setState({
         text,
-        targetCount: count
-      })
+        targetCount: count,
+      });
     }
   }
 
@@ -99,7 +99,6 @@ export default class Ellipsis extends Component {
    * text:文本内通
    * shadowNode:表层节点
   */
-
   bisection(th, mid, begin, end, text, shadowNode) {
     const suffix = '...';
     shadowNode.innerHTML = text.substring(0, mid) + suffix;
@@ -109,25 +108,22 @@ export default class Ellipsis extends Component {
       sh = shadowNode.offsetHeight;
       if (sh > th) {
         return mid;
-      } else {
-        begin = mid;
-        mid = Math.floor((end - begin) / 2) + begin;
-        return this.bisection(th, mid, begin, end, text, shadowNode);
       }
-    } else {
-      if (mid - 1 < 0) {
-        return mid;
-      }
-      shadowNode.innerHTML = text.substring(0, mid - 1) + suffix;
-      sh = shadowNode.offsetHeight;
-      if (sh <= th) {
-        return mid - 1;
-      } else {
-        end = mid;
-        mid = Math.floor((end - begin) / 2) + begin;
-        return this.bisection(th, mid, begin, end, text, shadowNode);
-      }
+      begin = mid;
+      mid = Math.floor((end - begin) / 2) + begin;
+      return this.bisection(th, mid, begin, end, text, shadowNode);
     }
+    if (mid - 1 < 0) {
+      return mid;
+    }
+    shadowNode.innerHTML = text.substring(0, mid - 1) + suffix;
+    sh = shadowNode.offsetHeight;
+    if (sh <= th) {
+      return mid - 1;
+    }
+    end = mid;
+    mid = Math.floor((end - begin) / 2) + begin;
+    return this.bisection(th, mid, begin, end, text, shadowNode);
   }
 
   handleRoot(n) {
@@ -164,7 +160,7 @@ export default class Ellipsis extends Component {
 
     const cls = classNames(styles.ellipsis, className, {
       [styles.lines]: lines && !isSupportLineClamp,
-      [styles.linesClamp]: lines && isSupportLineClamp
+      [styles.linesClamp]: lines && isSupportLineClamp,
     });
 
     if (!lines && !length) {
@@ -175,7 +171,7 @@ export default class Ellipsis extends Component {
       );
     }
 
-    //length
+    // length
     if (!lines) {
       return (
         <EllipsisText
@@ -226,14 +222,14 @@ export default class Ellipsis extends Component {
           <div className={styles.shadow} ref={this.handleShadow.bind(this)}><span>{text}</span></div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 Ellipsis.propTypes = {
   tooltip: PropTypes.bool,
   length: PropTypes.number,
-  lines: PropTypes.number
+  lines: PropTypes.number,
 };
 Ellipsis.defaultProps = {
   // tooltip: false,

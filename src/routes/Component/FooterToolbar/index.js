@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, Button, Icon } from 'uiw';
 import FooterToolbar from '../../../components/FooterToolbar';
 import AvatarList from '../../../components/AvatarList';
@@ -32,25 +32,19 @@ export default () => (
         浙江省杭州市西湖区万塘路18号
       </Description>
     </DescriptionList>
-    <Card title="默认尺寸和大尺寸" noHover={true} style={{ marginBottom: 74, marginTop: 16 }}>
+    <Card title="默认尺寸和大尺寸" noHover style={{ marginBottom: 74, marginTop: 16 }}>
       <AvatarList size="small">
-        <AvatarList.Item src="https://avatars1.githubusercontent.com/u/23475830?s=96&v=4" tips="avatar" onClick={(e) => {
-          console.log(e)
-        }} />
+        <AvatarList.Item src="https://avatars1.githubusercontent.com/u/23475830?s=96&v=4" tips="avatar" />
         <AvatarList.Item />
         <AvatarList.Item src="https://avatars2.githubusercontent.com/u/1680273?s=40&v=4" />
       </AvatarList>
       <AvatarList>
-        <AvatarList.Item src="https://avatars2.githubusercontent.com/u/1680273?s=40&v=4" tips="avatar" onClick={(e) => {
-          console.log(e)
-        }} />
+        <AvatarList.Item src="https://avatars2.githubusercontent.com/u/1680273?s=40&v=4" tips="avatar" />
         <AvatarList.Item />
         <AvatarList.Item src="https://avatars2.githubusercontent.com/u/1680273?s=40&v=4" />
       </AvatarList>
       <AvatarList size="large">
-        <AvatarList.Item src="https://avatars0.githubusercontent.com/u/6764390?s=200&v=4" tips="avatar" onClick={(e) => {
-          console.log(e)
-        }} />
+        <AvatarList.Item src="https://avatars0.githubusercontent.com/u/6764390?s=200&v=4" tips="avatar" />
         <AvatarList.Item src="https://avatars2.githubusercontent.com/u/69631?s=200&v=4" />
         <AvatarList.Item src="https://raw.githubusercontent.com/github/explore/fd96fceccf8c42c99cbe29cf0f8dcc4736fcb85a/topics/nodejs/nodejs.png" />
       </AvatarList>
@@ -58,7 +52,7 @@ export default () => (
     <FooterToolbar
       extra={<Icon type="uiw" style={{ fontSize: 24 }} />}
       style={{ width: 'calc(100% - 290px)' }}
-      actions={(<div><Button> 立即预订 <Icon type="heart-off" /> </Button> <Button type="primary"  > 立即预订 <Icon type="heart-on" /> </Button></div>)}
+      actions={(<div><Button> 立即预订 <Icon type="heart-off" /> </Button> <Button type="primary"> 立即预订 <Icon type="heart-on" /> </Button></div>)}
     >
       <div style={{ textAlign: 'center', fontSize: 12 }}>
         <span>&copy;<a href="https://www.woaibangong.com" style={{ color: '#3d90f2' }}>我爱办公</a></span>&nbsp;&nbsp;&nbsp;&nbsp;<span>App下载</span>

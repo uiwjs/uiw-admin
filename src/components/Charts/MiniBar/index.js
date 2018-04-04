@@ -11,7 +11,7 @@ class MiniBar extends PureComponent {
 
   componentWillReceiveProps(nextProps) {
     if (!equal(this.props, nextProps)) {
-      this.renderChart(nextProps.data)
+      this.renderChart(nextProps.data);
     }
   }
 
@@ -44,26 +44,20 @@ class MiniBar extends PureComponent {
       plotCfg: {
         margin: [36, 5, 30, 5],
       },
-      legend: null
+      legend: null,
     });
 
     chart.axis(false);
 
     chart.source(frame, {
-      x: {
-        type: 'cat',
-      },
-      y: {
-        min: 0
-      }
+      x: { type: 'cat' },
+      y: { min: 0 },
     });
 
     chart.tooltip({
       title: null,
       crosshairs: false,
-      map: {
-        name: 'x',
-      }
+      map: { name: 'x' },
     });
     chart.interval().position('x*y').color(color);
     chart.render();
@@ -73,17 +67,14 @@ class MiniBar extends PureComponent {
 
   render() {
     const { height } = this.props;
-
     return (
       <div className={styles.miniChart} style={{ height }}>
         <div className={styles.chartContent}>
           <div ref={this.handleRef.bind(this)} />
         </div>
       </div>
-    )
-
+    );
   }
-
 }
 
 export default MiniBar;

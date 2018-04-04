@@ -6,37 +6,38 @@ import styles from './index.less';
 
 const upperCase = (text) => {
   if (!text) return text;
-  let upperCaseLetter = text.substr(0, 1).toUpperCase(), strOther = text.substr(1);
+  const upperCaseLetter = text.substr(0, 1).toUpperCase();
+  const strOther = text.substr(1);
   return upperCaseLetter + strOther;
-}
+};
 
 const renderAvatar = (src, size) => {
-  return src ? <Avatar src={src} size={size} /> : <Avatar icon="user" size={size} />
-}
+  return src ? <Avatar src={src} size={size} /> : <Avatar icon="user" size={size} />;
+};
 
 const Item = ({ src, size, tips, onClick }) => {
   const cls = classNames(styles.avatarListItem, {
-    [styles[`avatarItem${upperCase(size)}`]]: size
-  })
+    [styles[`avatarItem${upperCase(size)}`]]: size,
+  });
   return (
     <li className={cls} onClick={onClick}>
       {
-        tips ?
-          (<Tooltip content={tips}>
+        tips ? (
+          <Tooltip content={tips}>
             {renderAvatar(src, size)}
-          </Tooltip>) :
-          renderAvatar(src, size)
+          </Tooltip>
+        ) : renderAvatar(src, size)
       }
     </li>
   );
-}
+};
 
 export default class AvatarList extends PureComponent {
   render() {
     const { children, size, ...others } = this.props;
-    const childrenWithProps = React.Children.map(children, child => cloneElement(child, { size }))
+    const childrenWithProps = React.Children.map(children, child => cloneElement(child, { size }));
     return (
-      <div className={styles.avatarList}>
+      <div className={styles.avatarList} {...others}>
         <ul>
           {childrenWithProps}
         </ul>
@@ -49,11 +50,11 @@ AvatarList.Item = Item;
 
 AvatarList.propTypes = {
   size: PropTypes.oneOf(['small', 'default', 'large']),
-}
+};
 
 AvatarList.defaultProps = {
   size: 'default',
-}
+};
 
 /**
  * cloneElement https://segmentfault.com/a/1190000010062928

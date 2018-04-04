@@ -6,6 +6,6 @@ const Field = ({ label, value, ...rest }) => (
     <span>{label}</span>
     <span>{value}</span>
   </div>
-)
+);
 
 export default Field;

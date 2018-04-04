@@ -6,7 +6,7 @@ import styles from './index.less';
 const { Row, Col } = Layout;
 
 const getFlexProps = (column) => {
-  let flexProps = { xs: '24', sm: '6', md: '4', lg: '3' }
+  let flexProps = { xs: '24', sm: '6', md: '4', lg: '3' };
   switch (column) {
     case 1:
       flexProps = { xs: '24', sm: '24', md: '24', lg: '24' }; break;
@@ -19,13 +19,13 @@ const getFlexProps = (column) => {
     default:
   }
   return flexProps;
-}
+};
 
 const Description = ({ term, column, layout, className, children, ...others }) => {
   const cls = classNames(styles.description, className, styles[layout]);
   const flexProps = getFlexProps(column);
   return (
-    <Col {...flexProps} className={cls}  {...others}>
+    <Col {...flexProps} className={cls} {...others}>
       {term && <div className={styles.term}>{term}</div>}
       {children && <div className={styles.detail}>{children}</div>}
     </Col>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Icon } from 'uiw';
 import GlobalFooter from '../../../components/GlobalFooter';
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
@@ -11,23 +11,22 @@ export default () => (
         text: '我爱办公',
         href: 'https://www.woaibangong.com',
         target: '_blank',
-        icon: (<Icon type="uiw" />)
+        icon: (<Icon type="uiw" />),
       }, {
         id: '2',
         text: 'APP下载',
         href: 'https://download.woaibangong.com',
         target: '_blank',
-        icon: (<Icon type="appstore" />)
+        icon: (<Icon type="appstore" />),
       }, {
         id: '3',
         text: 'Smart管理平台',
         href: 'https://smart.woaibangong.com',
         target: '_blank',
-        icon: (<Icon type="android" />)
+        icon: (<Icon type="android" />),
       }]}
       copyright="我爱办公"
-    >
-    </GlobalFooter>
+    />
     <br />
     <GlobalFooter
       links={<a href="https://uiw-react.github.io/#/cn/quick-start">UIW</a>}

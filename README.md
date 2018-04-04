@@ -1,17 +1,17 @@
-UIW Admin
+uiw admin
 ===
 
-A minimum viable React app with Parcel Bundler.
+A minimum viable React app with Webpack 4.
 
 Preview: https://uiw-react.github.io/uiw-admin/
 
 **What's inside?**
 
-* `parcel-bundler`
+* `Webpack`
 * `react`
 * `react-dom`
 * `react-router`
-* `babel-preset-react-app`
+* `react-router`
 * `less`
 * `autoprefixer`
 * `uiw-react` A Component Library for React
@@ -24,9 +24,8 @@ Clone and install deps
 git clone git@github.com:uiw-react/uiw-admin.git
 
 cd uiw-admin
-npm install                                                                   
-yarn
-yarn start
+npm install
+npm start
 ```
 
 Then open `http://localhost:1234` and edit `index.js` and press save. Parcel will automagically hot reload you files whenever you make changes.

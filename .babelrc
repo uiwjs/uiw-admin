@@ -1,13 +1,23 @@
 {
   "presets": [
-    "react-app",
-    "env"
+    [ "env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "ie >= 10"
+          ]
+        }
+      }
+    ],
+    "react"
   ],
   "plugins": [
+    "transform-object-rest-spread",
     "transform-decorators-legacy",
-    "transform-class-properties"
-  ],
-  "env": {
-    "production": {}
-  }
+    "syntax-dynamic-import",
+    "transform-async-to-generator",
+    "transform-class-properties",
+    "transform-runtime"
+  ]
 }

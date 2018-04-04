@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import numeral from 'numeral';
 import classNames from 'classnames';
 
-import { Tooltip, Icon, Layout, Card, Tabs, DatePicker } from 'uiw';
+import { Tooltip, Icon, Layout, Card, DatePicker } from 'uiw';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import {
   yuan,
@@ -12,15 +11,15 @@ import {
   MiniBar,
   MiniArea,
   ChartCard,
-  MiniProgress
-} from '../../components/Charts'
+  MiniProgress,
+} from '../../components/Charts';
 import {
   visitData,
   salesData,
-  rankingListData
-} from '../Component/Charts/chartDatas'
-import Trend from '../../components/Trend'
-import styles from './Analysis.less'
+  rankingListData,
+} from '../Component/Charts/chartDatas';
+import Trend from '../../components/Trend';
+import styles from './Analysis.less';
 
 const { Row, Col } = Layout;
 const topColResponseiveProps = {
@@ -29,8 +28,8 @@ const topColResponseiveProps = {
   md: 12,
   lg: 12,
   xl: 6,
-  style: { marginBottom: 24 }
-}
+  style: { marginBottom: 24 },
+};
 
 export default class Analysis extends Component {
   constructor(props) {
@@ -38,14 +37,14 @@ export default class Analysis extends Component {
     this.state = {
       btnactive: 0,
       dateactive: 0,
-    }
+    };
   }
   onClick = (idx) => {
-    this.setState({ btnactive: idx })
+    this.setState({ btnactive: idx });
   }
 
   onClickDate = (idx) => {
-    this.setState({ dateactive: idx })
+    this.setState({ dateactive: idx });
   }
 
 
@@ -90,7 +89,7 @@ export default class Analysis extends Component {
             <ChartCard
               bordered={false}
               title="支付笔数"
-              action={<Tooltip content='指标说明' className={styles.tooltip}><Icon type="information-o" /></Tooltip>}
+              action={<Tooltip content="指标说明" className={styles.tooltip}><Icon type="information-o" /></Tooltip>}
               total={numeral(6560).format('0,0')}
               footer={<Field label="转化率" value="60%" />}
               contentHeight={46}
@@ -122,7 +121,7 @@ export default class Analysis extends Component {
               <MiniProgress percent={78} strokeWidth={8} target={80} color="#13C2C2" />
             </ChartCard>
           </Col>
-          <Col span='24'>
+          <Col span="24">
             <Card
               bordered={false}
               bodyStyle={{ padding: 0 }}
@@ -130,12 +129,12 @@ export default class Analysis extends Component {
             >
               <div className={styles.salesCard}>
                 <Row className={styles.row}>
-                  {['销售额', '访问量',].map((item, idx) => {
+                  {['销售额', '访问量'].map((item, idx) => {
                     return (
                       <Col span="4" key={idx}>
                         <div
                           className={classNames(styles.tabModal, {
-                            [`${styles.moduleActive}`]: this.state.btnactive === idx
+                            [`${styles.moduleActive}`]: this.state.btnactive === idx,
                           })}
                           onClick={this.onClick.bind(this, idx)}
                         >
@@ -150,7 +149,7 @@ export default class Analysis extends Component {
                         <span
                           key={idx}
                           className={classNames({
-                            [`${styles.dateActive}`]: this.state.dateactive === idx
+                            [`${styles.dateActive}`]: this.state.dateactive === idx,
                           })}
                           onClick={this.onClickDate.bind(this, idx)}
                         >
@@ -158,15 +157,13 @@ export default class Analysis extends Component {
                         </span>
                       );
                     })}
-
-
-                    <DatePicker showToday={true} style={{ width: 125 }} />
-                    <DatePicker showToday={true} style={{ width: 125 }} />
+                    <DatePicker showToday style={{ width: 125 }} />
+                    <DatePicker showToday style={{ width: 125 }} />
                   </div>
 
                 </Row>
                 {this.state.btnactive ?
-                  <Row type='flex'>
+                  <Row type="flex">
                     <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                       <div className={styles.salesBar}>
                         <Bar
@@ -181,18 +178,20 @@ export default class Analysis extends Component {
                         <h4 className={styles.rankingTitle}>门店销售额排名</h4>
                         <ul className={styles.rankingList}>
                           {rankingListData.map((item, i) => {
-                            return (<li key={item.title}>
-                              <span className={(i < 3) ? styles.active : ''}>{i + 1}</span>
-                              <span>{item.title}</span>
-                              <span>{numeral(item.total).format('0,0')}</span>
-                            </li>)
+                            return (
+                              <li key={item.title}>
+                                <span className={(i < 3) ? styles.active : ''}>{i + 1}</span>
+                                <span>{item.title}</span>
+                                <span>{numeral(item.total).format('0,0')}</span>
+                              </li>
+                            );
                           })}
                         </ul>
                       </div>
                     </Col>
                   </Row>
                   :
-                  <Row type='flex'>
+                  <Row type="flex">
                     <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                       <div className={styles.salesBar}>
                         <Bar
@@ -207,11 +206,13 @@ export default class Analysis extends Component {
                         <h4 className={styles.rankingTitle}>门店销售额排名</h4>
                         <ul className={styles.rankingList}>
                           {rankingListData.map((item, i) => {
-                            return (<li key={item.title}>
-                              <span className={(i < 3) ? styles.active : ''}>{i + 1}</span>
-                              <span>{item.title}</span>
-                              <span>{numeral(item.total).format('0,0')}</span>
-                            </li>)
+                            return (
+                              <li key={item.title}>
+                                <span className={(i < 3) ? styles.active : ''}>{i + 1}</span>
+                                <span>{item.title}</span>
+                                <span>{numeral(item.total).format('0,0')}</span>
+                              </li>
+                            );
                           })}
                         </ul>
                       </div>

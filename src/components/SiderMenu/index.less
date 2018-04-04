@@ -1,0 +1,63 @@
+
+.sider {
+  float: left;
+  width: 260px;
+  min-height: 260px;
+  background: #343a40;
+  min-height: 100vh;
+  :global {
+    .w-menu{
+      background: transparent;
+      border-right: transparent;
+      color: #ccc;
+      .w-menu-item{
+        a {
+          color: #ccc;
+          text-decoration: none;
+          transition: color .3s;
+        }
+        &:after {
+          right: 0;
+        }
+        &.active, &.active a ,a:hover{
+          color: #0fa120;
+        }
+        &.disabled {
+          color: #989898 !important;
+        }
+      }
+      .w-sub-menu-con {
+        background: #2a3035;
+      }
+      .w-sub-menu-title {
+        transition: color .3s;
+      }
+    }
+  }
+}
+
+.logo {
+  height: 64px;
+  position: relative;
+  line-height: 64px;
+  padding-left: 24px;
+  padding-bottom: 10px;
+  svg {
+    height: 38px;
+    width: 38px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  svg path{
+    fill: #fff;
+  }
+  h1 {
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 0 0 12px;
+    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
+}

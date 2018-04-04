@@ -1,12 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { Card, Loading } from 'uiw';
+import { Card } from 'uiw';
 
 import styles from './index.less';
 
 const ChartCard = ({
-  loading = false, contentHeight, title, avatar, action, total, footer, children, ...rest
+  contentHeight, title, avatar, action, total, footer, children, ...rest
 }) => {
   const content = (
     <div className={styles.chartCard}>
@@ -53,8 +53,8 @@ const ChartCard = ({
     >
       {content}
     </Card>
-  )
-}
+  );
+};
 
 export default ChartCard;
 
@@ -64,7 +64,7 @@ ChartCard.propTypes = {
   // footer: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   // avatar: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   total: PropTypes.oneOfType([PropTypes.element, PropTypes.number, PropTypes.string]),
-  contentHeight: PropTypes.number
+  contentHeight: PropTypes.number,
 };
 ChartCard.defaultProps = {
   // tooltip: false,

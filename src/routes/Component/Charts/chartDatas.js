@@ -31,6 +31,6 @@ for (let i = 0; i < 7; i += 1) {
 export {
   visitData,
   salesData,
-  rankingListData
+  rankingListData,
 };
 
