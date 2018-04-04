@@ -18,7 +18,7 @@ export default {
   },
   output: {
     publicPath: '/',
-    filename: '[name].js',
+    filename: 'js/[name].js',
   },
   module: {
     strictExportPresence: true,
@@ -166,6 +166,9 @@ export default {
       favicon: paths.appFavicon,
       inject: true,
       template: paths.appHtml,
+    }),
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(pkg.version),
     }),
     new webpack.HotModuleReplacementPlugin(),
     new FriendlyErrorsWebpackPlugin(),

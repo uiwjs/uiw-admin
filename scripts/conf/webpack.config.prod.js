@@ -1,11 +1,14 @@
+import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import path from 'path';
 import loaderUtils from 'loader-utils'; // webpack 内部插件
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
+// import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import paths from './path';
-// import pkg from '../../package.json';
+import pkg from '../../package.json';
 
 export default {
   mode: 'production',
@@ -13,11 +16,12 @@ export default {
     app: [
       paths.appIndexJs,
     ],
+    // vendors: ['react', 'react-dom', 'react-router-dom'],
   },
   output: {
     path: paths.appBuildDist,
-    publicPath: '/',
-    filename: '[name].js',
+    publicPath: './',
+    filename: 'js/[name].js',
   },
   module: {
     strictExportPresence: true,
@@ -57,7 +61,7 @@ export default {
                 loader: require.resolve('css-loader'),
                 options: {
                   modules: true,
-                  // minimize: true,
+                  minimize: true,
                   localIdentName: '[local]',
                   importLoaders: 1,
                   getLocalIdent: (context, localIdentName, localName) => {
@@ -108,6 +112,17 @@ export default {
               cacheDirectory: true,
             },
           },
+          {
+            test: /w-iconfont\.(eot|ttf|svg)$/,
+            use: [
+              {
+                loader: require.resolve('file-loader'),
+                options: {
+                  name: './static/[name].[hash:8].[ext]',
+                },
+              },
+            ],
+          },
           // “file-loader”确保这些资源由WebpackDevServer服务。
           // 当您导入资源时，您将获得（虚拟）文件名。
           // 在生产中，它们将被复制到`build`文件夹。
@@ -122,7 +137,7 @@ export default {
               {
                 loader: require.resolve('file-loader'),
                 options: {
-                  name: 'static/fonts/[name].[hash:8].[ext]',
+                  name: 'static/[name].[hash:8].[ext]',
                 },
               },
             ],
@@ -131,8 +146,24 @@ export default {
       },
     ],
   },
+  // https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+  // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
   optimization: {
+    runtimeChunk: true,
+    // minimizer: [],
+    // minimizer: [
+    //   new UglifyJsPlugin({
+    //     cache: true,
+    //     parallel: true,
+    //     sourceMap: true, // set to true if you want JS source maps
+    //   }),
+    // ],
     splitChunks: {
+      chunks: 'all',
+      minSize: 0,
+      maxAsyncRequests: Infinity,
+      maxInitialRequests: Infinity,
+      name: true,
       cacheGroups: {
         styles: {
           name: 'styles',
@@ -140,6 +171,38 @@ export default {
           chunks: 'all',
           enforce: true,
         },
+        // default: {
+        //   chunks: 'async',
+        //   minSize: 30000,
+        //   minChunks: 2,
+        //   maxAsyncRequests: 5,
+        //   maxInitialRequests: 3,
+        //   priority: -20,
+        //   reuseExistingChunk: true,
+        // },
+        // vendors: {
+        //   name: 'vendors',
+        //   enforce: true,
+        //   // test: (module) => {
+        //   //   return (
+        //   //     module.resource &&
+        //   //     (module.resource.startsWith(root('node_modules')) ||
+        //   //       module.resource.startsWith(root('vendor')))
+        //   //   );
+        //   // },
+        //   priority: -40,
+        //   reuseExistingChunk: true,
+        // },
+        // commons: {
+        //   name: 'commons',
+        //   chunks: 'initial',
+        //   minChunks: 1,
+        //   // test: (module) => {
+        //   //   return module.resource && module.resource.startsWith(root('src'));
+        //   // },
+        //   priority: -5,
+        //   reuseExistingChunk: true,
+        // },
       },
     },
   },
@@ -149,12 +212,15 @@ export default {
       inject: true,
       template: paths.appHtml,
     }),
-    // 注意：如果在“loader”中没有ExtractTextPlugin.extract（..），这将不起作用。
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(pkg.version),
+    }),
+    new OptimizeCSSAssetsPlugin({}),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: 'static/css/[name].css',
-      chunkFilename: 'static/css/[id].css',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
   ],
 };
