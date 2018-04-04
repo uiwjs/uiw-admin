@@ -7,14 +7,13 @@ Preview: https://uiw-react.github.io/uiw-admin/
 
 **What's inside?**
 
-* `Webpack`
-* `react`
-* `react-dom`
-* `react-router`
-* `react-router`
-* `less`
-* `autoprefixer`
-* `uiw-react` A Component Library for React
+* [webpack](https://github.com/webpack/webpack) A bundler for javascript and friends.
+* [react](https://github.com/facebook/react/) A declarative, efficient, and flexible JavaScript library for building user interfaces.
+* [react-router](https://github.com/ReactTraining/react-router) Declarative routing for React.
+* [less](https://github.com/less/less.js) Less. The dynamic stylesheet language.
+* [autoprefixer](https://github.com/postcss/autoprefixer) Parse CSS and add vendor prefixes to rules by Can I Use.
+* [uiw-react](https://github.com/uiw-react/uiw) A Component Library for React
+* ....
 
 ## Getting started
 
