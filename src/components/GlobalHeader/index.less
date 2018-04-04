@@ -1,12 +1,26 @@
 .header {
   border-bottom: 1px solid #ccc;
-  min-height: 52px;
-  line-height: 52px;
-  padding: 0 18px;
+  min-height: 32px;
+  line-height: 32px;
+  padding: 10px 10px;
   background: #fff;
+  display: flex;
+  justify-content: space-between;
+  [class*=" w-icon-"], [class^=w-icon-] {
+    font-size: 18px;
+    height: 23px;
+    width: 23px;
+    line-height: 23px;
+    display: inline-block;
+    text-align: center;
+    color: #464646;
+  }
+  :global(.w-badge) {
+    vertical-align: inherit;
+    font-weight: bold;
+  }
 }
 .headerLeft {
-  float: left;
   a {
     display: inline-block;
     padding: 0 8px;
@@ -20,12 +34,9 @@
   }
 }
 .headerRight {
-  float: right;
   .item {
     display: inline-block;
-    padding: 0 8px;
-    height: 30px;
-    line-height: 30px;
+    padding: 0 3px;
     border-radius: 5px;
     transition: background-color .3s, color .3s;
     cursor: pointer;

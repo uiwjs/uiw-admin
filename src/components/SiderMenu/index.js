@@ -64,6 +64,7 @@ export default class GlobalHeader extends PureComponent {
     const { menuData } = this.props;
     const defaultOpened = this.getSelectedMenuKeys();
     const defaultActive = defaultOpened && defaultOpened.length > 0 ? defaultOpened[defaultOpened.length - 1] : '/';
+    const version = VERSION; // eslint-disable-line 
     return (
       <div className={styles.sider}>
         <div className={styles.logo}>
@@ -71,7 +72,7 @@ export default class GlobalHeader extends PureComponent {
             <svg viewBox="0 0 256 256">
               <path d="M84.4999999,25 L133,60.1408731 L114.474648,117 L54.5253515,117 L36,60.1408731 L84.4999999,25 Z M84.4999999,231 L36,195.859127 L54.5253515,139 L114.474648,139 L133,195.859127 L84.4999999,231 Z M220,158.475503 L163.141427,177 L128,128.499472 L163.139977,80 L219.999104,98.5262065 L220,158.475503 Z" />
             </svg>
-            <h1>Uiw Admin</h1>
+            <h1>Uiw Admin <sup>{version}</sup></h1>
           </Link>
         </div>
         <Menu
