@@ -3,6 +3,7 @@ import path from 'path';
 import loaderUtils from 'loader-utils'; // webpack 内部插件
 import postcssFlexbugsFixes from 'postcss-flexbugs-fixes';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import paths from './path';
 // import pkg from '../../package.json';
 
@@ -51,12 +52,12 @@ export default {
           {
             test: /\.(css|less)$/,
             use: [
-              require.resolve('style-loader'),
+              MiniCssExtractPlugin.loader,
               {
                 loader: require.resolve('css-loader'),
                 options: {
                   modules: true,
-                  minimize: true,
+                  // minimize: true,
                   localIdentName: '[local]',
                   importLoaders: 1,
                   getLocalIdent: (context, localIdentName, localName) => {
@@ -130,11 +131,30 @@ export default {
       },
     ],
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+  },
   plugins: [
     new HtmlWebpackPlugin({
       favicon: paths.appFavicon,
       inject: true,
       template: paths.appHtml,
+    }),
+    // 注意：如果在“loader”中没有ExtractTextPlugin.extract（..），这将不起作用。
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: 'static/css/[name].css',
+      chunkFilename: 'static/css/[id].css',
     }),
   ],
 };
