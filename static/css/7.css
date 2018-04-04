@@ -1,0 +1,122 @@
+.pageHeaderPR2iQ {
+  background: #fff;
+  padding: 16px 26px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+.rowPR2iQ {
+  display: -ms-flexbox;
+  display: flex;
+}
+.titlePR2iQ {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+.contentPR2iQ {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.extraContentPR2iQ {
+  margin-left: 68px;
+  min-width: 242px;
+}
+
+.content1L00R {
+  margin: 18px 15px 0;
+}
+
+.avatarList1T1W7 {
+  display: inline-block;
+}
+.avatarList1T1W7 ul {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0;
+}
+.avatarList1T1W7 + .avatarList1T1W7 {
+  margin-left: 8px;
+}
+.avatarListItem1T1W7 {
+  display: inline-block;
+}
+.avatarListItem1T1W7:hover {
+  cursor: pointer;
+}
+.avatarItemSmall1T1W7,
+.avatarItemDefault1T1W7,
+.avatarItemLarge1T1W7 {
+  margin-left: -8px;
+}
+
+.descriptionListne8kB {
+  background-color: white;
+  display: inline-block;
+  width: 100%;
+  padding: 10px;
+}
+.titlene8kB {
+  padding: 10px 5px;
+  font-size: 16px;
+  font-weight: bolder;
+}
+.termne8kB {
+  font-size: 14px;
+  line-height: 1.2rem;
+}
+.termne8kB:after {
+  content: ':';
+  padding: 0 8px 0 2px;
+}
+.detailne8kB {
+  font-size: 14px;
+  line-height: 1.2rem;
+}
+.descriptionne8kB {
+  margin-bottom: 10px;
+  padding: 0 10px;
+}
+.horizontalne8kB > div:first-child {
+  max-width: 80%;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.verticalne8kB > div {
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  word-break: break-all;
+}
+.verticalne8kB > div:first-child {
+  display: table-cell;
+}
+.verticalne8kB > div:nth-child(2) {
+  display: table-cell;
+}
+
+.footToolbar1OHQi {
+  background-color: #ffffff;
+  height: 58px;
+  line-height: 58px;
+  padding: 0 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+}
+.footToolbar1OHQi:after {
+  content: '';
+  clear: both;
+}
+.extra1OHQi {
+  float: left;
+}
+.actions1OHQi {
+  float: right;
+}
+.children1OHQi {
+  max-height: 58px;
+  overflow: hidden;
+}
+

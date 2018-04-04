@@ -1,0 +1,59 @@
+.pageHeaderPR2iQ {
+  background: #fff;
+  padding: 16px 26px 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+.rowPR2iQ {
+  display: -ms-flexbox;
+  display: flex;
+}
+.titlePR2iQ {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+.contentPR2iQ {
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+.extraContentPR2iQ {
+  margin-left: 68px;
+  min-width: 242px;
+}
+
+.content1L00R {
+  margin: 18px 15px 0;
+}
+
+.ellipsis19mjO {
+  overflow: hidden;
+  display: inline-block;
+  word-break: break-all;
+  width: 100%;
+}
+.lines19mjO {
+  position: relative;
+}
+.lines19mjO .shadow19mjO {
+  display: block;
+  position: relative;
+  color: transparent;
+  opacity: 0;
+  z-index: -999;
+}
+.lineClamp19mjO {
+  position: relative;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+     text-overflow: ellipsis;
+  display: -webkit-box;
+}
+
+.cardItem3rPkR {
+  margin-bottom: 16px;
+}
+.cardItem3rPkR .w-card-body {
+  font-size: 14px;
+}
+
