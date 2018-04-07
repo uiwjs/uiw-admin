@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import GlobalHeader from '../components/GlobalHeader';
 import SiderMenu from '../components/SiderMenu';
@@ -26,7 +27,7 @@ const getRedirect = (item) => {
 };
 getMenuData().forEach(getRedirect);
 
-export default class BasicLayout extends Component {
+class BasicLayout extends Component {
   render() {
     const { routerData, location } = this.props;
     const RouteComponents = [];
@@ -35,9 +36,11 @@ export default class BasicLayout extends Component {
         RouteComponents.push(<Route exact key={idx + 1} path={path} component={routerData[path].component} />);
       }
     });
+    // console.log('collapsed:', this.props.collapsed);
     return (
       <div className={styles.wapper}>
         <SiderMenu
+          collapsed={this.props.collapsed}
           location={location}
           menuData={getMenuData()}
         />
@@ -55,3 +58,10 @@ export default class BasicLayout extends Component {
     );
   }
 }
+
+
+const mapState = ({ global }) => ({
+  collapsed: global.collapsed,
+});
+
+export default connect(mapState)(BasicLayout);

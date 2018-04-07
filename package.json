@@ -17,6 +17,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rematch/core": "^0.6.0",
+    "classnames": "^2.2.5",
     "g2": "^2.3.13",
     "lodash-decorators": "^4.5.0",
     "luxon": "^0.2.7",
@@ -25,6 +27,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-dynamic-loadable": "^1.0.8",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "uiw": "^1.7.3"
   },

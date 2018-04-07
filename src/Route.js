@@ -4,7 +4,6 @@ import { getRouterData } from './common/router';
 
 const RoutersContainer = withRouter(({ history, location }) => {
   const routerData = getRouterData();
-  // const UserLayout = routerData['/user'].component;
   const BasicLayout = routerData['/'].component;
   const resetProps = {
     location,

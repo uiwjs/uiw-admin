@@ -10,6 +10,8 @@ Preview: https://uiw-react.github.io/uiw-admin/
 * [webpack](https://github.com/webpack/webpack) A bundler for javascript and friends.
 * [react](https://github.com/facebook/react/) A declarative, efficient, and flexible JavaScript library for building user interfaces.
 * [react-router](https://github.com/ReactTraining/react-router) Declarative routing for React.
+* [react-redux](https://github.com/reactjs/react-redux) Official React bindings for Redux.
+* [Rematch](https://github.com/rematch/rematch) A Redux Framework.
 * [less](https://github.com/less/less.js) Less. The dynamic stylesheet language.
 * [autoprefixer](https://github.com/postcss/autoprefixer) Parse CSS and add vendor prefixes to rules by Can I Use.
 * [uiw-react](https://github.com/uiw-react/uiw) A Component Library for React

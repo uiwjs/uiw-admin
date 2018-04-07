@@ -6,10 +6,8 @@ const pkg = require('../package.json');
 
 const ORIGIN = 'https://github.com/uiw-react/uiw-admin.git';
 const BRANCH = 'gh-pages';
-// eslint-disable-next-line
-console.log('  Start public to your git repo'.green);
-// eslint-disable-next-line
-console.log(`  ${ORIGIN}\n`.green);
+console.log('  Start public to your git repo'.green); // eslint-disable-line
+console.log(`  ${ORIGIN}\n`.green); // eslint-disable-line
 const load = loading({
   text: 'Please wait ...'.blue,
   color: 'blue',
@@ -24,9 +22,7 @@ ghpages.publish(path.resolve(path.join(process.cwd(), 'dist')), {
 }, (err) => {
   load.stop();
   if (err) {
-    // eslint-disable-next-line
-    return console.log(err);
+    return console.log(err); // eslint-disable-line
   }
-  // eslint-disable-next-line
-  console.log(`\n  Push to ${BRANCH} success!\n`.green.bold);
+  console.log(`\n  Push to ${BRANCH} success!\n`.green.bold); // eslint-disable-line
 });
