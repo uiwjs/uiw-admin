@@ -61,12 +61,13 @@ export default class GlobalHeader extends PureComponent {
     });
   }
   render() {
-    const { menuData } = this.props;
+    const { menuData, collapsed } = this.props;
     const defaultOpened = this.getSelectedMenuKeys();
     const defaultActive = defaultOpened && defaultOpened.length > 0 ? defaultOpened[defaultOpened.length - 1] : '/';
     const version = VERSION; // eslint-disable-line 
+    const width = collapsed ? 80 : 260;
     return (
-      <div className={styles.sider}>
+      <div className={styles.sider} style={{ width, maxWidth: width, minWidth: width }}>
         <div className={styles.logo}>
           <Link to="/">
             <svg viewBox="0 0 256 256">
@@ -76,6 +77,9 @@ export default class GlobalHeader extends PureComponent {
           </Link>
         </div>
         <Menu
+          mode={collapsed ? 'inline' : 'vertical'}
+          inlineCollapsed={collapsed}
+          theme="dark"
           defaultActive={defaultActive}
           defaultOpened={defaultOpened}
           onClose={this.onClose.bind(this)}

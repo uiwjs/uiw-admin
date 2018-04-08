@@ -28,15 +28,19 @@ const getRedirect = (item) => {
 getMenuData().forEach(getRedirect);
 
 class BasicLayout extends Component {
+  onCollapse() {
+    const { collapsed, changeCollapsed } = this.props;
+    console.log('collapsed:', collapsed);
+    changeCollapsed(!collapsed);
+  }
   render() {
-    const { routerData, location } = this.props;
+    const { routerData, location, collapsed } = this.props;
     const RouteComponents = [];
     Object.keys(routerData).forEach((path, idx) => {
       if (path !== '/') {
         RouteComponents.push(<Route exact key={idx + 1} path={path} component={routerData[path].component} />);
       }
     });
-    // console.log('collapsed:', this.props.collapsed);
     return (
       <div className={styles.wapper}>
         <SiderMenu
@@ -45,7 +49,19 @@ class BasicLayout extends Component {
           menuData={getMenuData()}
         />
         <div className={styles.content}>
-          <GlobalHeader />
+          <GlobalHeader
+            leftMenu={[
+              {
+                icon: collapsed ? 'menu-fold' : 'menu-unfold',
+                onClick: this.onCollapse.bind(this),
+              },
+              {
+                icon: 'github',
+                target: '_blank',
+                href: 'https://github.com/uiw-react/uiw-admin',
+              },
+            ]}
+          />
           <Switch>
             {redirectData.map(item => (
               <Redirect key={item.from} exact from={item.from} to={item.to} />
@@ -64,4 +80,8 @@ const mapState = ({ global }) => ({
   collapsed: global.collapsed,
 });
 
-export default connect(mapState)(BasicLayout);
+const mapDispatch = ({ global }) => ({
+  changeCollapsed: global.changeCollapsed,
+});
+
+export default connect(mapState, mapDispatch)(BasicLayout);
