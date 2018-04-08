@@ -13,6 +13,7 @@
     "react"
   ],
   "plugins": [
+    ["import", { "libraryName": "uiw" }],
     "transform-object-rest-spread",
     "transform-decorators-legacy",
     "syntax-dynamic-import",
