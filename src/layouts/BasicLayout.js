@@ -30,7 +30,6 @@ getMenuData().forEach(getRedirect);
 class BasicLayout extends Component {
   onCollapse() {
     const { collapsed, changeCollapsed } = this.props;
-    console.log('collapsed:', collapsed);
     changeCollapsed(!collapsed);
   }
   render() {

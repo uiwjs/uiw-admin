@@ -62,7 +62,7 @@ export default class GlobalHeader extends PureComponent {
   }
   render() {
     const { menuData, collapsed } = this.props;
-    const defaultOpened = this.getSelectedMenuKeys();
+    const defaultOpened = collapsed ? [] : this.getSelectedMenuKeys();
     const defaultActive = defaultOpened && defaultOpened.length > 0 ? defaultOpened[defaultOpened.length - 1] : '/';
     const version = VERSION; // eslint-disable-line 
     const width = collapsed ? 80 : 260;
