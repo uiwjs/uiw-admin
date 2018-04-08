@@ -28,7 +28,7 @@ const topColResponseiveProps = {
   md: 12,
   lg: 12,
   xl: 6,
-  style: { marginBottom: 24 },
+  style: { marginBottom: 16 },
 };
 
 export default class Analysis extends Component {
@@ -51,7 +51,7 @@ export default class Analysis extends Component {
   render() {
     return (
       <PageHeaderLayout title="数据分析" showBreadcrumb={false}>
-        <Row>
+        <Row style={{ marginLeft: -10, marginRight: -10 }}>
           <Col {...topColResponseiveProps} >
             <ChartCard
               bordered={false}
