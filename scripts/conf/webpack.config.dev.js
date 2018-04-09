@@ -10,12 +10,11 @@ import pkg from '../../package.json';
 
 export default {
   mode: 'development',
-  entry: {
-    app: [
-      paths.appIndexJs,
-    ],
-    vendors: Object.keys(pkg.dependencies || {}),
-  },
+  entry: [
+    require.resolve('webpack-hot-dev-clients/webpackHotDevClient'),
+    paths.appIndexJs,
+    // vendors: Object.keys(pkg.dependencies || {}),
+  ],
   output: {
     publicPath: '/',
     filename: 'js/[name].js',
@@ -94,39 +93,6 @@ export default {
               require.resolve('less-loader'),
             ],
           },
-          // {
-          //   test: /\.(css|less)$/,
-          //   use: [
-          //     require.resolve('style-loader'),
-          //     {
-          //       loader: require.resolve('css-loader'),
-          //       options: {
-          //         modules: true,
-          //         localIdentName: '[name]-[hash:base64:5]',
-          //         importLoaders: 1,
-          //       },
-          //     },
-          //     {
-          //       loader: require.resolve('postcss-loader'),
-          //       options: {
-          //         ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
-          //         plugins: () => [
-          //           postcssFlexbugsFixes,
-          //           // require('postcss-flexbugs-fixes'),
-          //           autoprefixer({
-          //             browsers: [
-          //               '>1%',
-          //               'last 4 versions',
-          //               'Firefox ESR',
-          //             ],
-          //             flexbox: 'no-2009',
-          //           }),
-          //         ],
-          //       },
-          //     },
-          //     require.resolve('less-loader'),
-          //   ],
-          // },
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
