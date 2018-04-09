@@ -71,7 +71,7 @@ export default class GlobalHeader extends PureComponent {
         <div className={styles.logo}>
           <Link to="/">
             <span>{logo}</span>
-            <h1>{title} {sup && <sup>{sup}</sup>}</h1>
+            {!collapsed && <h1>{title} {sup && <sup>{sup}</sup>}</h1>}
           </Link>
         </div>
         <Menu
