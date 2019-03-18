@@ -1,0 +1,13 @@
+[
+  {
+    "name": "仪表盘",
+    "path": "dashboard",
+    "icon": "home",
+    "children": [
+      {
+        "name": "仪表盘",
+        "path": "dashboard"
+      }
+    ]
+  }
+]
