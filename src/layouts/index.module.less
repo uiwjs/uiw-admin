@@ -1,0 +1,98 @@
+.nav {
+  background: #202225;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 64px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.logo {
+  width: 32px;
+  padding: 5px 0 0 0;
+  margin: 0 auto;
+}
+
+.sidebar {
+  position: fixed;
+  background: #343a40;
+  width: 250px;
+  left: 64px;
+  top: 0;
+  bottom: 0;
+}
+
+.content {
+  padding: 20px;
+  margin-left: 314px;
+  overflow: auto;
+}
+
+.toolbar {
+  position: absolute;
+  right: 18px;
+}
+
+.btn {
+  color: #fff;
+  user-select: none;
+  > svg {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    cursor: pointer;
+    rect {
+      transition: fill .3s;
+    }
+    &:hover {
+      g rect:first-child {
+        fill: #fff;
+      }
+      g rect:last-child {
+        fill: #969696;
+      }
+    }
+  }
+}
+
+.topmenu {
+  .btn {
+    display: flex;
+    align-items: center;
+    > svg {
+      margin-bottom: 0;
+      margin-right: 8px;
+      margin-left: 5px;
+    }
+  }
+  .nav {
+    text-align: right;
+    width: initial;
+    bottom: initial;
+    flex-direction: row;
+    right: 0;
+    display: flex;
+    z-index: 98;
+    .logo {
+      display: inline-block;
+      margin: 0 6px;
+      padding: 1px 0 0 0;
+      white-space: nowrap;
+      * {
+        vertical-align: middle;
+      }
+      span.title {
+        color: #fff;
+        font-size: 24px;
+        margin-left: 10px;
+      }
+    }
+  }
+  .sidebar {
+    background-color: #fff;
+    border-right: 1px solid #d5d5d5;
+  }
+}
