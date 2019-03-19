@@ -11,16 +11,38 @@
 }
 
 .logo {
-  width: 32px;
-  padding: 5px 0 0 0;
-  margin: 0 auto;
+  height: 50px;
+  position: relative;
+  line-height: 50px;
+  padding-left: 24px;
+  padding-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  svg {
+    height: 38px;
+    width: 38px;
+    display: inline-block;
+    vertical-align: middle;
+    path {
+      fill: #fff;
+    }
+  }
+  h1{
+    color: #fff;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 20px;
+    margin: 0 0 0 18px;
+    font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+  }
 }
 
 .sidebar {
   position: fixed;
   background: #343a40;
   width: 250px;
-  left: 64px;
+  left: 0;
   top: 0;
   bottom: 0;
 }

@@ -1,9 +1,13 @@
 [
   {
-    "name": "仪表盘",
+    "name": "组件",
     "path": "dashboard",
     "icon": "home",
     "children": [
+      {
+        "divider": true,
+        "name": "仪表盘"
+      },
       {
         "name": "仪表盘",
         "path": "dashboard"

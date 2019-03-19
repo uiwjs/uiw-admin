@@ -15,7 +15,7 @@ const dynamicWrapper = (models, component) => dynamic({
 
 export const getRouterData = () => {
   const conf = {
-    '/': {
+    '/dashboard': {
       component: dynamicWrapper([], () => import('../layouts/BasicLayout')),
     },
     '/dashboard/dashboard': {

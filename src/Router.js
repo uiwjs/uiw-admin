@@ -4,7 +4,7 @@ import { getRouterData } from './common/router';
 
 const RoutersContainer = withRouter(({ history, location }) => {
   const routerData = getRouterData();
-  const BasicLayout = routerData['/'].component;
+  const BasicLayout = routerData['/dashboard'].component;
   const resetProps = {
     location,
     history,
@@ -13,7 +13,7 @@ const RoutersContainer = withRouter(({ history, location }) => {
 
   return (
     <Switch>
-      <Route path="/" render={props => <BasicLayout {...props} {...resetProps} />} />
+      <Route path="/dashboard" render={props => <BasicLayout {...props} {...resetProps} />} />
     </Switch>
   );
 });
