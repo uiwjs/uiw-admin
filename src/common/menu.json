@@ -11,6 +11,10 @@
       {
         "name": "仪表盘",
         "path": "dashboard"
+      },
+      {
+        "name": "数据分析",
+        "path": "analysis"
       }
     ]
   }

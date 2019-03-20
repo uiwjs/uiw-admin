@@ -5,7 +5,7 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <h1>仪表盘</h1>
+        <h1>数据分析</h1>
       </div>
     );
   }

@@ -84,9 +84,9 @@ export default class UserLayout extends PureComponent {
             paddingTop: topmenu ? 90 : 20,
           }}
         >
-          <div className={styles.toolbar}>
+          {/* <div className={styles.toolbar}>
             <VersionSelect data={version} />
-          </div>
+          </div> */}
           <Switch>
             {RouteComponents}
           </Switch>

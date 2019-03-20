@@ -21,6 +21,9 @@ export const getRouterData = () => {
     '/dashboard/dashboard': {
       component: dynamicWrapper([], () => import('../routes/Dashboard/dashboard')),
     },
+    '/dashboard/analysis': {
+      component: dynamicWrapper([], () => import('../routes/Dashboard/analysis')),
+    },
   };
   return conf;
 };
