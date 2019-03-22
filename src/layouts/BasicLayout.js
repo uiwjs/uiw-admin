@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import classnames from 'classnames';
 import GlobalHeader from '../components/GlobalHeader';
@@ -12,7 +13,7 @@ const LOGO = (
   </svg>
 );
 
-export default class UserLayout extends PureComponent {
+class BasicLayout extends PureComponent {
   constructor(props) {
     super(props);
     const topmenu = localStorage.getItem('_menu');
@@ -29,8 +30,12 @@ export default class UserLayout extends PureComponent {
     localStorage.setItem('_menu', !this.state.topmenu);
     this.setState({ topmenu: !this.state.topmenu });
   }
+  onCollapse = () => {
+    const { collapsed, changeCollapsed } = this.props;
+    changeCollapsed(!collapsed);
+  }
   render() {
-    const { routerData } = this.props;
+    const { routerData, collapsed } = this.props;
     const { topmenu } = this.state;
     const menuData = getMenuData();
     const RouteComponents = [];
@@ -64,7 +69,19 @@ export default class UserLayout extends PureComponent {
           <SiderMenu topmenu={topmenu} menuData={menuData} {...this.props} />
         </div>
         <div className={styles.content}>
-          <GlobalHeader></GlobalHeader>
+          <GlobalHeader
+            leftMenu={[
+              {
+                icon: collapsed ? 'menu-fold' : 'menu-unfold',
+                onClick: this.onCollapse.bind(this),
+              },
+              {
+                icon: 'github',
+                target: '_blank',
+                href: 'https://github.com/uiw-react/uiw-admin',
+              },
+            ]}
+          />
           <Switch>
             {RouteComponents}
           </Switch>
@@ -73,3 +90,13 @@ export default class UserLayout extends PureComponent {
     );
   }
 }
+
+const mapState = ({ global }) => ({
+  collapsed: global.collapsed,
+});
+
+const mapDispatch = ({ global }) => ({
+  changeCollapsed: global.changeCollapsed,
+});
+
+export default connect(mapState, mapDispatch)(BasicLayout);
