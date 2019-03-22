@@ -1,14 +1,10 @@
 import React, { PureComponent } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import classnames from 'classnames';
-import Nav from '../components/Nav';
+import GlobalHeader from '../components/GlobalHeader';
 import SiderMenu from '../components/SiderMenu';
-import VersionSelect from '../components/VersionSelect';
 import { getMenuData, getMenuCurrentData } from '../common/menu';
-// import logo from '../components/icons/logo';
-// import menu from '../components/icons/menu';
 import styles from './index.module.less';
-import version from '../version.json';
 
 const LOGO = (
   <svg viewBox="0 0 256 256">
@@ -58,16 +54,6 @@ export default class UserLayout extends PureComponent {
     });
     return (
       <div className={cls}>
-        {/* <div className={styles.nav}>
-          <div className={styles.logo}>
-            <Link to="/">
-              <span className={styles.svg}>{logo.dark}</span>
-              {topmenu && <span className={styles.title}>uiw</span>}
-            </Link>
-          </div>
-          <Nav topmenu={topmenu} className="nav-menu" menuData={menuData} routerData={routerData} />
-          <div className={styles.btn} onClick={this.onSettingTopMenu}>{topmenu ? menu.menu : menu.menutop}</div>
-        </div> */}
         <div className={styles.sidebar}>
           <div className={styles.logo}>
             <Link to="/">
@@ -77,16 +63,8 @@ export default class UserLayout extends PureComponent {
           </div>
           <SiderMenu topmenu={topmenu} menuData={menuData} {...this.props} />
         </div>
-        <div
-          className={styles.content}
-          style={{
-            marginLeft: topmenu ? 250 : 250,
-            paddingTop: topmenu ? 90 : 20,
-          }}
-        >
-          {/* <div className={styles.toolbar}>
-            <VersionSelect data={version} />
-          </div> */}
+        <div className={styles.content}>
+          <GlobalHeader></GlobalHeader>
           <Switch>
             {RouteComponents}
           </Switch>
