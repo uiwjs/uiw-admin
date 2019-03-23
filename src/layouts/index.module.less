@@ -1,3 +1,9 @@
+.wapper{
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  flex: auto;
+}
 .nav {
   background: #202225;
   position: fixed;
@@ -39,10 +45,17 @@
 }
 
 .sidebar {
+  width: 260px;
+  min-width: 256px;
+  max-width: 256px;
+  min-height: 260px;
   background: #343a40;
-  width: 250px;
-  height: 100vh;
-  float: left;
+  min-height: 100vh;
+  transition: all .3s;
+  a {
+    text-decoration: none;
+    transition: color .3s;
+  }
 }
 
 .content {

@@ -54,11 +54,8 @@ class BasicLayout extends PureComponent {
         );
       }
     });
-    const cls = classnames({
-      [styles.topmenu]: topmenu,
-    });
     return (
-      <div className={cls}>
+      <div className={styles.wapper}>
         <div className={styles.sidebar}>
           <div className={styles.logo}>
             <Link to="/">
@@ -72,19 +69,17 @@ class BasicLayout extends PureComponent {
           <GlobalHeader
             leftMenu={[
               {
-                icon: collapsed ? 'menu-fold' : 'menu-unfold',
-                onClick: this.onCollapse.bind(this),
-              },
-              {
                 icon: 'github',
                 target: '_blank',
                 href: 'https://github.com/uiw-react/uiw-admin',
               },
             ]}
           />
-          <Switch>
-            {RouteComponents}
-          </Switch>
+          <div>
+            <Switch>
+              {RouteComponents}
+            </Switch>
+          </div>
         </div>
       </div>
     );
