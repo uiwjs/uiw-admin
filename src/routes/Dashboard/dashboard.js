@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar } from 'uiw';
+import { Avatar, Row, Col, Card } from 'uiw';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './dashboard.module.less';
 
@@ -36,7 +36,20 @@ export default class Dashboard extends React.Component {
     );
     return (
       <PageHeaderLayout content={pageHeaderContent} extraContent={pageHeaderExtra}>
-        eeee
+        <Row gutter={16} style={{ margin: '15px 7px' }}>
+          <Col xl={16} lg={24} md={24} sm={24} xs={24}>
+            <Card
+              className={styles.projectList}
+              style={{ marginBottom: 15 }}
+              title="进行中的项目"
+              bordered={false}
+              extra={<a href="#">全部项目</a>}
+              bodyStyle={{ padding: 0 }}
+            >
+              <span>dddd</span>
+            </Card>
+          </Col>
+        </Row>
       </PageHeaderLayout>
     );
   }
