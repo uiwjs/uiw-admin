@@ -1,25 +1,26 @@
 import React from 'react';
-import { HashRouter, Switch, withRouter, Route } from 'react-router-dom';
-import { getRouterData } from './common/router';
+import { Switch, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import BasicLayout from './layouts/BasicLayout';
 
-const RoutersContainer = withRouter(({ history, location }) => {
-  const routerData = getRouterData();
-  const BasicLayout = routerData['/dashboard'].component;
-  const resetProps = {
-    location,
-    history,
-    routerData,
-  };
+class RoutersController extends React.PureComponent {
+  render() {
+    const { resetProps } = this.props;
+    return (
+      <Switch>
+        <Route path="/dashboard" render={props => <BasicLayout {...props} {...resetProps} />} />
+      </Switch>
+    );
+  }
+}
 
-  return (
-    <Switch>
-      <Route path="/dashboard" render={props => <BasicLayout {...props} {...resetProps} />} />
-    </Switch>
-  );
+const mapState = ({ global }) => ({
+  test: global.test,
 });
 
-export default () => (
-  <HashRouter>
-    <RoutersContainer />
-  </HashRouter>
-);
+const mapDispatch = ({ global }) => ({
+  verify: global.verify,
+});
+
+export default connect(mapState, mapDispatch)(RoutersController);
+
