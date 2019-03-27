@@ -1,7 +1,8 @@
 import React from 'react';
 import { Avatar, Row, Col, Card } from 'uiw';
+import { Link } from 'react-router-dom';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-import styles from './dashboard.module.less';
+import styles from './index.module.less';
 
 export default class Dashboard extends React.Component {
   render() {
@@ -46,11 +47,21 @@ export default class Dashboard extends React.Component {
               extra={<a href="#">全部项目</a>}
               bodyStyle={{ padding: 0 }}
             >
-              <span>dddd</span>
+              <Card className={styles.projectGrid}>
+                <div className={styles.cardTitle}>
+                  <div className={styles.cardTitle}>
+                    <Avatar size="small" src="https://avatars1.githubusercontent.com/u/1680273?v=4" />
+                    <Link to="#">我爱漂亮妹妹</Link>
+                  </div>
+                </div>
+                <div className={styles.cardContent}>
+                  <p className={styles.description}><a href="https://uiwjs.github.io">https://uiwjs.github.io</a></p>
+                </div>
+              </Card>
             </Card>
           </Col>
         </Row>
-      </PageHeaderLayout>
+      </PageHeaderLayout >
     );
   }
 }
