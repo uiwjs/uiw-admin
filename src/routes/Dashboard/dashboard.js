@@ -37,8 +37,8 @@ export default class Dashboard extends React.Component {
     );
     return (
       <PageHeaderLayout content={pageHeaderContent} extraContent={pageHeaderExtra}>
-        <Row gutter={16} style={{ margin: '15px 7px' }}>
-          <Col xl={16} lg={24} md={24} sm={24} xs={24}>
+        <Row gutter={10} style={{ margin: '15px 7px' }}>
+          <Col grow={4}>
             <Card
               className={styles.projectList}
               style={{ marginBottom: 15 }}
@@ -59,9 +59,35 @@ export default class Dashboard extends React.Component {
                 </div>
               </Card>
             </Card>
+            <Card
+              title="动态"
+              style={{ marginBottom: 15 }}
+            >
+              <div>ddd</div>
+            </Card>
+          </Col>
+          <Col grow={2}>
+            <Card
+              title="快速开始 / 便捷导航"
+              style={{ marginBottom: 15 }}
+            >
+              <div>ddd</div>
+            </Card>
+            <Card
+              title="XX 指数"
+              style={{ marginBottom: 15 }}
+            >
+              <div>111</div>
+            </Card>
+            <Card
+              title="团队"
+              style={{ marginBottom: 15 }}
+            >
+              <div>666</div>
+            </Card>
           </Col>
         </Row>
-      </PageHeaderLayout >
+      </PageHeaderLayout>
     );
   }
 }
