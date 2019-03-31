@@ -2,7 +2,35 @@ import React from 'react';
 import { Avatar, Row, Col, Card } from 'uiw';
 import { Link } from 'react-router-dom';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import EditableLinkGroup from '../../components/EditableLinkGroup';
 import styles from './index.module.less';
+
+const links = [
+  {
+    title: '操作一',
+    href: '',
+  },
+  {
+    title: '操作二',
+    href: '',
+  },
+  {
+    title: '操作三',
+    href: '',
+  },
+  {
+    title: '操作四',
+    href: '',
+  },
+  {
+    title: '操作五',
+    href: '',
+  },
+  {
+    title: '操作六',
+    href: '',
+  },
+];
 
 export default class Dashboard extends React.Component {
   render() {
@@ -63,7 +91,7 @@ export default class Dashboard extends React.Component {
               title="动态"
               style={{ marginBottom: 15 }}
             >
-              <div>ddd</div>
+              <div>1212</div>
             </Card>
           </Col>
           <Col grow={2}>
@@ -71,7 +99,12 @@ export default class Dashboard extends React.Component {
               title="快速开始 / 便捷导航"
               style={{ marginBottom: 15 }}
             >
-              <div>ddd</div>
+              <EditableLinkGroup
+                links={links}
+                onAdd={() => { console.log('===>>', 'onAdd'); }}
+                linkElement={Link}
+              />
+
             </Card>
             <Card
               title="XX 指数"
