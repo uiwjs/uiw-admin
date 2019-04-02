@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { Switch, Route, Link } from 'react-router-dom';
-import classnames from 'classnames';
+import { Switch, Route, Link, Redirect } from 'react-router-dom';
 import GlobalHeader from '../components/GlobalHeader';
 import SiderMenu from '../components/SiderMenu';
 import { getMenuData, getMenuCurrentData } from '../common/menu';
@@ -13,7 +11,7 @@ const LOGO = (
   </svg>
 );
 
-class BasicLayout extends PureComponent {
+export default class BasicLayout extends PureComponent {
   constructor(props) {
     super(props);
     const topmenu = localStorage.getItem('_menu');
@@ -30,17 +28,14 @@ class BasicLayout extends PureComponent {
     localStorage.setItem('_menu', !this.state.topmenu);
     this.setState({ topmenu: !this.state.topmenu });
   }
-  onCollapse = () => {
-    const { collapsed, changeCollapsed } = this.props;
-    changeCollapsed(!collapsed);
-  }
   render() {
-    const { routerData, collapsed } = this.props;
+    const { routerData } = this.props;
     const { topmenu } = this.state;
     const menuData = getMenuData();
     const RouteComponents = [];
     Object.keys(routerData || []).forEach((path, idx) => {
-      if (/^(\/dashboard)/.test(path)) {
+      if (!/^(\/home|\/)$/.test(path)) {
+        // if (path !== '/' && path !== '/home') {
         RouteComponents.push(
           <Route
             exact
@@ -48,6 +43,19 @@ class BasicLayout extends PureComponent {
             path={path}
             render={(props) => {
               const Com = routerData[path].component;
+              return <Com {...props} pageData={getMenuCurrentData(props.location.pathname)} />;
+            }}
+          />
+        );
+      } else {
+        RouteComponents.push(
+          <Route
+            exact
+            key={idx + 1}
+            path={path}
+            render={(props) => {
+              console.log('routerData:', routerData);
+              const Com = routerData['/home'].component;
               return <Com {...props} pageData={getMenuCurrentData(props.location.pathname)} />;
             }}
           />
@@ -85,13 +93,3 @@ class BasicLayout extends PureComponent {
     );
   }
 }
-
-const mapState = ({ global }) => ({
-  collapsed: global.collapsed,
-});
-
-const mapDispatch = ({ global }) => ({
-  changeCollapsed: global.changeCollapsed,
-});
-
-export default connect(mapState, mapDispatch)(BasicLayout);

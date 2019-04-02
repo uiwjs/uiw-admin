@@ -5,7 +5,6 @@ export const global = {
   },
   reducers: {
     updateState: (state, payload) => ({ ...state, ...payload }),
-    changeCollapsed: (state, payload) => ({ ...state, collapsed: payload }),
   },
   effects: {},
 };

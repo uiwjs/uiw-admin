@@ -1,6 +1,6 @@
 [
   {
-    "name": "仪表盘",
+    "name": "图表",
     "path": "dashboard",
     "icon": "home",
     "children": [
