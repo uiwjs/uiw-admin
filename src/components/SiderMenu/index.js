@@ -1,29 +1,41 @@
 import React, { Component } from 'react';
+import { Menu } from 'uiw';
 import { NavLink } from 'react-router-dom';
-import classnames from 'classnames';
 import styles from './index.module.less';
-import nav from '../icons/nav';
+// import nav from '../icons/nav';
 
 export default class SiderMenu extends Component {
+  renderMenu(menus, k) {
+    const items = [];
+    menus.forEach((item, key) => {
+      if (item.children) {
+        items.push(
+          <Menu.SubMenu key={key} icon={item.icon} text={item.name} collapse>
+            {this.renderMenu(item.children, `${k}${key}`)}
+          </Menu.SubMenu>
+        );
+      } else if (item.divider) {
+        items.push(<Menu.Divider key={`${k}${key}`} title={item.name} />);
+      } else {
+        items.push(
+          <Menu.Item
+            tagName={NavLink}
+            to={item.path}
+            key={`${k}${key}`}
+            icon={item.icon}
+            text={item.name}
+          />
+        );
+      }
+    });
+    return items;
+  }
   render() {
-    const { location, topmenu } = this.props;
-    const path = location.pathname.split('/')[1];
-    const navData = this.props.menuData.filter(item => item.path === `/${path}`)[0];
-    if (!navData) {
-      return null;
-    }
+    const { menuData } = this.props;
     return (
-      <div className={classnames(styles.wapper, { [`${styles.topmenu}`]: topmenu })}>
-        <h2 className={styles.title}>{nav[navData.icon]}<span>{navData.name}</span></h2>
-        <div className={styles.menu}>
-          {navData.children && navData.children.map((item, idx) => {
-            if (item.divider) {
-              return <div key={idx} className={styles.divider}>{item.name}</div>;
-            }
-            return <NavLink activeClassName={styles.selected} key={idx} to={item.path} replace>{item.name}</NavLink>;
-          })}
-        </div>
-      </div>
+      <Menu theme="dark" className={styles.menu}>
+        {this.renderMenu(menuData, 'k')}
+      </Menu>
     );
   }
 }

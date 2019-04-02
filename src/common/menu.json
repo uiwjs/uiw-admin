@@ -1,19 +1,49 @@
 [
   {
-    "name": "组件",
+    "name": "仪表盘",
     "path": "dashboard",
     "icon": "home",
     "children": [
-      {
-        "divider": true,
-        "name": "图表"
-      },
       {
         "name": "仪表盘",
         "path": "dashboard"
       },
       {
         "name": "数据分析",
+        "path": "analysis"
+      }
+    ]
+  },
+  {
+    "name": "表单页",
+    "path": "form",
+    "icon": "home",
+    "children": [
+      {
+        "name": "基础表单",
+        "path": "basic-form"
+      },
+      {
+        "name": "分步表单",
+        "path": "step-form"
+      },
+      {
+        "name": "高级表单",
+        "path": "advanced-form"
+      }
+    ]
+  },
+  {
+    "icon": "home",
+    "name": "个人页面",
+    "path": "account",
+    "children": [
+      {
+        "name": "个人设置",
+        "path": "dashboard"
+      },
+      {
+        "name": "个人中心",
         "path": "analysis"
       }
     ]

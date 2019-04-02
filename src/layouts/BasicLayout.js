@@ -39,7 +39,7 @@ class BasicLayout extends PureComponent {
     const { topmenu } = this.state;
     const menuData = getMenuData();
     const RouteComponents = [];
-    Object.keys(routerData).forEach((path, idx) => {
+    Object.keys(routerData || []).forEach((path, idx) => {
       if (/^(\/dashboard)/.test(path)) {
         RouteComponents.push(
           <Route

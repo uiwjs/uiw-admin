@@ -32,6 +32,8 @@ module.exports = {
       //     }
       //   }
       // };
+    } else {
+      conf.devtool = 'source-map';
     }
     return conf;
   },
