@@ -3,34 +3,8 @@ import { Avatar, Row, Col, Card } from 'uiw';
 import { Link } from 'react-router-dom';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
+import DashboardData from './dashboardData';
 import styles from './index.module.less';
-
-const links = [
-  {
-    title: '操作一',
-    href: '',
-  },
-  {
-    title: '操作二',
-    href: '',
-  },
-  {
-    title: '操作三',
-    href: '',
-  },
-  {
-    title: '操作四',
-    href: '',
-  },
-  {
-    title: '操作五',
-    href: '',
-  },
-  {
-    title: '操作六',
-    href: '',
-  },
-];
 
 export default class Dashboard extends React.Component {
   render() {
@@ -75,17 +49,21 @@ export default class Dashboard extends React.Component {
               extra={<a href="#">全部项目</a>}
               bodyStyle={{ padding: 0 }}
             >
-              <Card className={styles.projectGrid}>
-                <div className={styles.cardTitle}>
-                  <div className={styles.cardTitle}>
-                    <Avatar size="small" src="https://avatars1.githubusercontent.com/u/1680273?v=4" />
-                    <Link to="#">我爱漂亮妹妹</Link>
-                  </div>
-                </div>
-                <div className={styles.cardContent}>
-                  <p className={styles.description}><a href="https://uiwjs.github.io">https://uiwjs.github.io</a></p>
-                </div>
-              </Card>
+              {
+                DashboardData.notice.length > 0 && DashboardData.notice.map(item => (
+                  <Card className={styles.projectGrid}>
+                    <div className={styles.cardTitle}>
+                      <div className={styles.cardTitle}>
+                        <Avatar size="small" src={item.logo} />
+                        <Link to="#">item.title</Link>
+                      </div>
+                    </div>
+                    <div className={styles.cardContent}>
+                      <p className={styles.description}><a href="https://uiwjs.github.io">https://uiwjs.github.io</a></p>
+                    </div>
+                  </Card>
+                ))
+              }
             </Card>
             <Card
               title="动态"
@@ -100,7 +78,7 @@ export default class Dashboard extends React.Component {
               style={{ marginBottom: 15 }}
             >
               <EditableLinkGroup
-                links={links}
+                links={DashboardData.links}
                 onAdd={() => { console.log('===>>', 'onAdd'); }}
                 linkElement={Link}
               />
@@ -116,7 +94,18 @@ export default class Dashboard extends React.Component {
               title="团队"
               style={{ marginBottom: 15 }}
             >
-              <div>666</div>
+              <Row gutter={10}>
+                {
+                  DashboardData.members.map(item => (
+                    <Col key={`menbers-item-${item.id}`} span="12">
+                      <Link to={item.link}>
+                        <Avatar src={item.logo} />
+                        <span>{item.title}</span>
+                      </Link>
+                    </Col>
+                  ))
+                }
+              </Row>
             </Card>
           </Col>
         </Row>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Card, Tooltip, Icon } from 'uiw';
+import { Row, Col, Card } from 'uiw';
 import styles from './analysis.module.less';
 
 export default class Dashboard extends React.Component {

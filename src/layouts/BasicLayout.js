@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Switch, Route, Link, Redirect } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import GlobalHeader from '../components/GlobalHeader';
 import SiderMenu from '../components/SiderMenu';
 import { getMenuData, getMenuCurrentData } from '../common/menu';
