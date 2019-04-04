@@ -51,7 +51,7 @@ export default class Dashboard extends React.Component {
             >
               {
                 DashboardData.notice.length > 0 && DashboardData.notice.map(item => (
-                  <Card className={styles.projectGrid}>
+                  <Card className={styles.projectGrid} key={item.id}>
                     <div className={styles.cardTitle}>
                       <div className={styles.cardTitle}>
                         <Avatar size="small" src={item.logo} />
@@ -82,7 +82,6 @@ export default class Dashboard extends React.Component {
                 onAdd={() => { console.log('===>>', 'onAdd'); }}
                 linkElement={Link}
               />
-
             </Card>
             <Card
               title="XX 指数"
