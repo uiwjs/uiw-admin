@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Row, Col, Card } from 'uiw';
+import { Avatar, Row, Col, Card, formatter } from 'uiw';
 import { Link } from 'react-router-dom';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
@@ -55,11 +55,12 @@ export default class Dashboard extends React.Component {
                     <div className={styles.cardTitle}>
                       <div className={styles.cardTitle}>
                         <Avatar size="small" src={item.logo} />
-                        <Link to="#">item.title</Link>
+                        <Link to="#">{item.title}</Link>
                       </div>
                     </div>
                     <div className={styles.cardContent}>
-                      <p className={styles.description}><a href="https://uiwjs.github.io">https://uiwjs.github.io</a></p>
+                      <div className={styles.description}>{item.description}</div>
+                      <p className={styles.projectItemContent}><a href="https://uiwjs.github.io">{item.member}</a><span>{formatter(item.updatedAt)}</span></p>
                     </div>
                   </Card>
                 ))
