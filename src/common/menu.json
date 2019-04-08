@@ -21,15 +21,15 @@
     "children": [
       {
         "name": "基础表单",
-        "path": "basic-form"
+        "path": "sample"
       },
       {
         "name": "分步表单",
-        "path": "step-form"
+        "path": "step"
       },
       {
         "name": "高级表单",
-        "path": "advanced-form"
+        "path": "advanced"
       }
     ]
   },

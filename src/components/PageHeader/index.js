@@ -3,11 +3,12 @@ import styles from './index.module.less';
 
 export default class PageHeader extends PureComponent {
   render() {
-    const { title, content, extraContent } = this.props;
+    const { title, content, extraContent, action } = this.props;
     return (
       <div className={styles.pageHeader}>
-        <div className={styles.title}>
-          {title}
+        <div className={styles.row}>
+          {title && <h1 className={styles.title}>{title}</h1>}
+          {action && <div className={styles.action}>{action}</div>}
         </div>
         <div className={styles.row}>
           {content && <div className={styles.content}>{content}</div>}
