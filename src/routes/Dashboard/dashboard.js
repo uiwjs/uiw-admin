@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Row, Col, Card, formatter } from 'uiw';
 import { Link } from 'react-router-dom';
-import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PageHeader from '../../components/PageHeader';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
 import DashboardData from './dashboardData';
 import styles from './index.module.less';
@@ -38,7 +38,8 @@ export default class Dashboard extends React.Component {
       </div>
     );
     return (
-      <PageHeaderLayout content={pageHeaderContent} extraContent={pageHeaderExtra}>
+      <div>
+        <PageHeader content={pageHeaderContent} extraContent={pageHeaderExtra} />
         <Row gutter={10} style={{ margin: '15px 7px' }}>
           <Col grow={4}>
             <Card
@@ -109,7 +110,7 @@ export default class Dashboard extends React.Component {
             </Card>
           </Col>
         </Row>
-      </PageHeaderLayout>
+      </div>
     );
   }
 }
