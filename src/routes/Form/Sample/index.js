@@ -1,8 +1,8 @@
 import React from 'react';
-import { Form, Input } from 'uiw';
+import { Form, FormItem, Input, Row, Col, Button } from 'uiw';
 import PageHeader from '../../../components/PageHeader';
+import styles from './index.module.less';
 
-const FormItem = Form.Item;
 export default class SampleForm extends React.Component {
   constructor(props) {
     super(props);
@@ -11,16 +11,6 @@ export default class SampleForm extends React.Component {
     };
   }
   render() {
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 6 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 18 },
-      },
-    };
     return (
       <div>
         <PageHeader
@@ -28,17 +18,22 @@ export default class SampleForm extends React.Component {
           action={<a href="">编辑</a>}
           content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景"
         />
-        {/* <div>
-          <Form>
-            <FormItem
-              label="可选字段"
-              labelFor="basic-input-inline"
-              help={<span>在上面的字段中输入一个值</span>}
-            >
-              <Input id="basic-input-inline" type="text"/>
-            </FormItem>
-          </Form>
-        </div> */}
+        <div className={styles.sampleForm}>
+          <FormItem
+            label="可选字段"
+            labelFor="basic-input-inline"
+          >
+            <Input id="basic-input-inline" type="text"/>
+          </FormItem>
+          <FormItem
+            label="用户名"
+            labelFor="username-input-inline"
+            labelClassName="username"
+            help="用户名长度至少为8个字符串。"
+          >
+            <Input id="username-input-inline" type="text"/>
+          </FormItem>
+        </div>
       </div>
     );
   }

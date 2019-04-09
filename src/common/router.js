@@ -30,6 +30,9 @@ export const getRouterData = () => {
     '/form/sample': {
       component: dynamicWrapper([], () => import('../routes/Form/Sample')),
     },
+    '/form/step': {
+      component: dynamicWrapper([], () => import('../routes/Form/Step')),
+    },
 
   };
   return conf;
