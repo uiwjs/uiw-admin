@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, Button } from 'uiw';
+import { Row, Col, Card } from 'uiw';
 
 export default class Home extends Component {
   render() {
