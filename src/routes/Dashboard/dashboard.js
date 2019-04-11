@@ -99,9 +99,9 @@ export default class Dashboard extends React.Component {
                 {
                   DashboardData.members.map(item => (
                     <Col key={`menbers-item-${item.id}`} span="12">
-                      <Link to={item.link}>
+                      <Link to={item.link} className={styles.membersLink}>
                         <Avatar src={item.logo} />
-                        <span>{item.title}</span>
+                        <span className={styles.members}>{item.title}</span>
                       </Link>
                     </Col>
                   ))
