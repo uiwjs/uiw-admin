@@ -78,6 +78,20 @@ const avatars = [
   'http://img5.imgtn.bdimg.com/it/u=3372096268,4227823703&fm=27&gp=0.jpg',
 ];
 
+const avatars2 = [
+  'http://img5.imgtn.bdimg.com/it/u=3325212690,29220839&fm=27&gp=0.jpg',
+  'http://img0.imgtn.bdimg.com/it/u=4127899898,2449637072&fm=27&gp=0.jpg',
+  'http://img0.imgtn.bdimg.com/it/u=2787811980,3666585010&fm=27&gp=0.jpg',
+  'http://img0.imgtn.bdimg.com/it/u=4127899898,2449637072&fm=27&gp=0.jpg',
+  'http://img0.imgtn.bdimg.com/it/u=4127899898,2449637072&fm=27&gp=0.jpg',
+  'http://img0.imgtn.bdimg.com/it/u=2787811980,3666585010&fm=27&gp=0.jpg',
+  'http://img5.imgtn.bdimg.com/it/u=3372096268,4227823703&fm=27&gp=0.jpg',
+  'http://img2.imgtn.bdimg.com/it/u=1432917965,1193452257&fm=27&gp=0.jpg',
+  'http://img5.imgtn.bdimg.com/it/u=3372096268,4227823703&fm=27&gp=0.jpg',
+  'http://img5.imgtn.bdimg.com/it/u=3372096268,4227823703&fm=27&gp=0.jpg',
+];
+
+
 const notice = [
   {
     id: 'xxx1',
@@ -141,4 +155,105 @@ const notice = [
   },
 ];
 
-export default { links, members, notice };
+const activities = [
+  {
+    id: 'trend-1',
+    updatedAt: new Date(),
+    user: {
+      name: 'Gloaming',
+      avatar: avatars2[0],
+    },
+    group: {
+      name: '似是故人来',
+      link: 'http://www.yto.net.cn/',
+    },
+    project: {
+      name: '《红豆》',
+      link: 'http://www.yto.net.cn/',
+    },
+    template: '在 @{group} 新建项目 @{project}',
+  },
+  {
+    id: 'trend-2',
+    updatedAt: new Date(),
+    user: {
+      name: 'Albert',
+      avatar: avatars2[1],
+    },
+    group: {
+      name: '相爱很难',
+      link: 'http://www.yto.net.cn/',
+    },
+    project: {
+      name: '《邮差》',
+      link: 'http://www.yto.net.cn/',
+    },
+    template: '在 @{group} 新建项目 @{project}',
+  },
+  {
+    id: 'trend-3',
+    updatedAt: new Date(),
+    user: {
+      name: '丽丽',
+      avatar: avatars2[2],
+    },
+    group: {
+      name: '明知故犯',
+      link: 'http://www.yto.net.cn/',
+    },
+    project: {
+      name: '《不爱我的我不爱》',
+      link: 'http://www.yto.net.cn/',
+    },
+    template: '在 @{group} 新建项目 @{project}',
+  },
+  {
+    id: 'trend-4',
+    updatedAt: new Date(),
+    user: {
+      name: '建林',
+      avatar: avatars2[4],
+    },
+    project: {
+      name: '百年孤寂',
+      link: 'http://www.yto.net.cn/',
+    },
+    template: '将 @{project} 更新至已发布状态',
+  },
+  {
+    id: 'trend-5',
+    updatedAt: new Date(),
+    user: {
+      name: '大山',
+      avatar: avatars2[3],
+    },
+    project: {
+      name: '流年',
+      link: 'http://www.yto.net.cn/',
+    },
+    comment: {
+      name: '留言',
+      link: 'http://www.yto.net.cn/',
+    },
+    template: '在 @{project} 发布了 @{comment}',
+  },
+  {
+    id: 'trend-6',
+    updatedAt: new Date(),
+    user: {
+      name: '风尘',
+      avatar: avatars2[5],
+    },
+    group: {
+      name: '香奈儿',
+      link: 'http://www.yto.net.cn/',
+    },
+    project: {
+      name: '《蝴蝶》',
+      link: 'http://www.yto.net.cn/',
+    },
+    template: '在 @{group} 新建项目 @{project}',
+  },
+];
+
+export default { links, members, notice, activities };

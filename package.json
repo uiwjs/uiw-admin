@@ -30,7 +30,8 @@
     "bizcharts": "^3.4.3",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "g2": "^2.3.13",
-    "dva": "^2.4.1"
+    "dva": "^2.4.1",
+    "moment": "2.19.4"
   },
   "devDependencies": {
     "@kkt/plugin-less": "^1.0.2",
