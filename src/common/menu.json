@@ -15,6 +15,21 @@
     ]
   },
   {
+    "name": "结果",
+    "path": "result",
+    "icon": "home",
+    "children": [
+      {
+        "name": "成功",
+        "path": "success"
+      },
+      {
+        "name": "失败",
+        "path": "fail"
+      }
+    ]
+  },
+  {
     "name": "表单页",
     "path": "form",
     "icon": "home",
