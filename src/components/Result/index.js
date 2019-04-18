@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Icon, Button } from 'uiw';
 import PropTypes from 'prop-types';
-import styles from './index.less';
+import styles from './index.module.less';
 
 export default class Result extends Component {
   renderIcon(icon) {
