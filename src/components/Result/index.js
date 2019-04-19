@@ -7,7 +7,7 @@ import styles from './index.module.less';
 export default class Result extends Component {
   renderIcon(icon) {
     if (typeof icon === 'string') {
-      return React.createElement(Icon, { type: icon });
+      return (<Icon type="circle-close-o" />);
     } else if (React.isValidElement(icon)) {
       return icon;
     }
@@ -47,7 +47,7 @@ export default class Result extends Component {
     });
     // 如果是错误的icon显示颜色为红色
     const iconCls = classNames(styles.iconBar, {
-      [styles.error]: icon === 'close-circle',
+      [styles.error]: icon === 'close-circle-o',
     });
     return (
       <div className={cls}>
