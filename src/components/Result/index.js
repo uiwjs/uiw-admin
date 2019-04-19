@@ -6,8 +6,9 @@ import styles from './index.module.less';
 
 export default class Result extends Component {
   renderIcon(icon) {
+    console.log('actAlign', icon);
     if (typeof icon === 'string') {
-      return (<Icon type="circle-close-o" />);
+      return (<Icon type={icon} />);
     } else if (React.isValidElement(icon)) {
       return icon;
     }

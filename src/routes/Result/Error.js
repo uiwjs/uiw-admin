@@ -25,7 +25,7 @@ export default class Error extends PureComponent {
       <div style={{ margin: 15 }}>
         <Card bordered={false}>
           <Result
-            icon="close-circle-o"
+            icon="circle-close-o"
             title="提交失败"
             description="请核对并修改以下信息后，再重新提交。"
             style={{ marginTop: 48, marginBottom: 16 }}
