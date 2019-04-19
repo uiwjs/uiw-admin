@@ -46,9 +46,10 @@ export default class Result extends Component {
       [styles.right]: actAlign === 'right',
       [styles.center]: actAlign === 'center',
     });
+    console.log('circle-close-o', icon);
     // 如果是错误的icon显示颜色为红色
     const iconCls = classNames(styles.iconBar, {
-      [styles.error]: icon === 'close-circle-o',
+      [styles.error]: icon === 'circle-close-o',
     });
     return (
       <div className={cls}>
