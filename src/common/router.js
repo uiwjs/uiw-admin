@@ -39,6 +39,9 @@ export const getRouterData = () => {
     '/result/fail': {
       component: dynamicWrapper([], () => import('../routes/Result/Error')),
     },
+    '/profile/basic': {
+      component: dynamicWrapper([], () => import('../routes/Profile/BasicProfile')),
+    },
   };
   return conf;
 };

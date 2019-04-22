@@ -49,6 +49,17 @@
     ]
   },
   {
+    "name": "详情页",
+    "path": "profile",
+    "icon": "home",
+    "children": [
+      {
+        "name": "基础详情页",
+        "path": "basic"
+      }
+    ]
+  },
+  {
     "name": "列表页",
     "path": "list",
     "icon": "home",
