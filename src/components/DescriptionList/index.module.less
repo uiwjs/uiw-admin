@@ -1,0 +1,65 @@
+.descriptionList {
+  background-color: white;
+  display: inline-block;
+  width: 100%;
+  :global {
+    .ant-row {
+      margin-bottom: -16px;
+    }
+  }
+}
+
+.title {
+  padding-bottom: 16px;
+  font-size: 16px;
+  font-weight: bolder;
+  color:rgba(0, 0, 0, 0.65);
+}
+
+.term {
+    font-size: 14px;
+    line-height: 1.2rem;
+    padding-bottom: 16px;
+    margin-right: 8px;
+    color: rgba(0, 0, 0, 0.85);
+    white-space: nowrap;
+    display: table-cell;
+
+    &:after {
+      content: ":";
+      margin: 0 8px 0 2px;
+      position: relative;
+      top: -.5px;
+    }
+  }
+
+  .detail {
+    font-size: 14px;
+    line-height: 1.2rem;
+    width: 100%;
+    padding-bottom: 16px;
+    color: rgba(0, 0, 0, 0.85);
+    display: table-cell;
+  }
+
+.horizontal {
+  > div:first-child {
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.vertical {
+  > div {
+    display: inline-flex;
+    word-break: break-all;
+  }
+  > div:first-child {
+    display: table-cell;
+  }
+  > div:nth-child(2) {
+    display: table-cell;
+  }
+}

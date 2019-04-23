@@ -21,6 +21,15 @@ export default class BasicProfile extends Component {
             </DescriptionList>
             <Divider />
           </DescriptionList>
+          <DescriptionList column={3} layout="vertical" title="用户信息" >
+            <Description term="用户姓名">Adam Lee</Description>
+            <Description term="联系电话">18100000000</Description>
+            <Description term="常用快递">菜鸟仓储</Description>
+            <Description term="取货地址">上海市青浦区E通世界1018号</Description>
+            <Description term="备注">无</Description>
+          </DescriptionList>
+          <Divider />
+
         </Card>
       </div>
     );
