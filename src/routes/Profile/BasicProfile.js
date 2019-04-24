@@ -12,16 +12,14 @@ export default class BasicProfile extends Component {
       <div>
         <PageHeader title="基础详情页" />
         <Card bordered={false} style={{ margin: 15 }}>
-          <DescriptionList>
-            <DescriptionList title="退款申请" column={3} layout="vertical" >
-              <Description term="取货单号">1000000000</Description>
-              <Description term="状态">已取货</Description>
-              <Description term="销售单号">12341234122</Description>
-              <Description term="子订单">43211234122</Description>
-            </DescriptionList>
-            <Divider />
+          <DescriptionList title="退款申请" column={3} layout="vertical">
+            <Description term="取货单号">1000000000</Description>
+            <Description term="状态">已取货</Description>
+            <Description term="销售单号">12341234122</Description>
+            <Description term="子订单">43211234122</Description>
           </DescriptionList>
-          <DescriptionList column={3} layout="vertical" title="用户信息" >
+          <Divider />
+          <DescriptionList title="用户信息" column={3} layout="vertical">
             <Description term="用户姓名">Adam Lee</Description>
             <Description term="联系电话">18100000000</Description>
             <Description term="常用快递">菜鸟仓储</Description>
