@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, Badge, Table, Divider } from 'uiw';
 import PageHeader from '../../components/PageHeader';
 import DescriptionList from '../../components/DescriptionList';
+// import profile from './profile';
 import styles from './BasicProfile.module.less';
 
 const { Description } = DescriptionList;
@@ -27,7 +28,14 @@ export default class BasicProfile extends Component {
             <Description term="备注">无</Description>
           </DescriptionList>
           <Divider />
-
+          <div className={styles.title}>退货商品</div>
+          {/* <Table
+            style={{ marginBottom: 24 }}
+            pagination={false}
+            dataSource={goodsData}
+            columns={goodsColumns}
+            rowKey="id"
+          /> */}
         </Card>
       </div>
     );

@@ -8,35 +8,6 @@ import DashboardData from './dashboardData';
 import styles from './index.module.less';
 
 export default class Dashboard extends React.Component {
-  renderActivities = () => {
-    DashboardData.activities.length > 0 && DashboardData.activities.map((item) => {
-      const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
-        if (item[key]) {
-          return <a href={item[key].link} key={item[key].name}>{item[key].name}</a>;
-        }
-        return key;
-      });
-      return (
-        <List.Item key={item.id}>
-          <List.Item.Meta
-            avatar={<Avatar src={item.user.avatar} />}
-            title={
-              <span>
-                <a>{item.user.name}</a>
-                &nbsp;
-                <span className={styles.event}>{events}</span>
-              </span>
-            }
-            description={
-              <span className={styles.datetime} title={item.updatedAt}>
-                {moment(item.updatedAt).fromNow()}
-              </span>
-            }
-          />
-        </List.Item>
-      );
-    });
-  }
   render() {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
@@ -67,6 +38,12 @@ export default class Dashboard extends React.Component {
         </div>
       </div>
     );
+    const data = [
+      '人总是在接近幸福时倍感幸福，在幸福进行时却患得患失。',
+      '因为爱过，所以慈悲；因为懂得，所以宽容。',
+      '你如果认识从前的我，也许你会原谅现在的我。',
+      <span>你还不来，我怎敢老去。</span>,
+    ];
     return (
       <div>
         <PageHeader content={pageHeaderContent} extraContent={pageHeaderExtra} />
@@ -102,11 +79,14 @@ export default class Dashboard extends React.Component {
               style={{ marginBottom: 15 }}
               bordered={false}
             >
-              <List>
-                <List.Item>"X战警新变种人"首曝海报特写诡异人脸</List.Item>
-                <List.Item>六大变五大？传迪士尼600亿收购福斯</List.Item>
-                <List.Item>快跑!《侏罗纪世界2》正式预告要来了</List.Item>
-              </List>
+              <List
+                dataSource={data}
+                striped
+                size="small"
+                renderItem={(item) => {
+                  return (<List.Item>{item}</List.Item>);
+                }}
+              />
             </Card>
           </Col>
           <Col grow={2}>
