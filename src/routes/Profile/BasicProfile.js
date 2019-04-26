@@ -1,14 +1,100 @@
 import React, { Component } from 'react';
 import { Card, Badge, Table, Divider } from 'uiw';
+import { Link } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 import DescriptionList from '../../components/DescriptionList';
-// import profile from './profile';
+import { getProfileBasicData } from './profile';
 import styles from './BasicProfile.module.less';
 
 const { Description } = DescriptionList;
 
 export default class BasicProfile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
   render() {
+    console.log('profile', getProfileBasicData);
+    let goodsData = [];
+    if (getProfileBasicData.basicGoods.length) {
+      let num = 0;
+      let amount = 0;
+      getProfileBasicData.basicGoods.forEach((item) => {
+        num += Number(item.num);
+        amount += Number(item.amount);
+      });
+      goodsData = getProfileBasicData.basicGoods.concat({
+        id: '总计',
+        num,
+        amount,
+      });
+    }
+    const renderContent = (value, row, index) => {
+      const obj = {
+        children: value,
+        props: {},
+      };
+      if (index === getProfileBasicData.basicGoods.length) {
+        obj.props.colSpan = 0;
+      }
+      return obj;
+    };
+
+    const goodsColumns = [{
+      title: '商品编号',
+      dataIndex: 'id',
+      key: 'id',
+      render: (text, row, index) => {
+        if (index < getProfileBasicData.basicGoods.length) {
+          return <Link to="/">{text}</Link>;
+        }
+        return {
+          children: <span style={{ fontWeight: 600 }}>总计</span>,
+          props: {
+            colSpan: 4,
+          },
+        };
+      },
+    }, {
+      title: '商品名称',
+      dataIndex: 'name',
+      key: 'name',
+      render: renderContent,
+    }, {
+      title: '商品条码',
+      dataIndex: 'barcode',
+      key: 'barcode',
+      render: renderContent,
+    }, {
+      title: '单价',
+      dataIndex: 'price',
+      key: 'price',
+      align: 'right',
+      render: renderContent,
+    }, {
+      title: '数量（件）',
+      dataIndex: 'num',
+      key: 'num',
+      align: 'right',
+      render: (text, row, index) => {
+        if (index < getProfileBasicData.basicGoods.length) {
+          return text;
+        }
+        return <span style={{ fontWeight: 600 }}>{text}</span>;
+      },
+    }, {
+      title: '金额',
+      dataIndex: 'amount',
+      key: 'amount',
+      align: 'right',
+      render: (text, row, index) => {
+        if (index < getProfileBasicData.basicGoods.length) {
+          return text;
+        }
+        return <span style={{ fontWeight: 600 }}>{text}</span>;
+      },
+    }];
     return (
       <div>
         <PageHeader title="基础详情页" />
@@ -29,13 +115,13 @@ export default class BasicProfile extends Component {
           </DescriptionList>
           <Divider />
           <div className={styles.title}>退货商品</div>
-          {/* <Table
+          <Table
             style={{ marginBottom: 24 }}
             pagination={false}
             dataSource={goodsData}
             columns={goodsColumns}
             rowKey="id"
-          /> */}
+          />
         </Card>
       </div>
     );
