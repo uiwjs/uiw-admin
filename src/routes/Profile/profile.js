@@ -36,7 +36,6 @@ const basicGoods = [
 
 const basicProgress = [
   {
-    key: '1',
     time: '2017-10-01 14:10',
     rate: '联系客户',
     status: 'processing',
@@ -44,7 +43,6 @@ const basicProgress = [
     cost: '5mins',
   },
   {
-    key: '2',
     time: '2017-10-01 14:05',
     rate: '取货员出发',
     status: 'success',
@@ -52,7 +50,6 @@ const basicProgress = [
     cost: '1h',
   },
   {
-    key: '3',
     time: '2017-10-01 13:05',
     rate: '取货员接单',
     status: 'success',
@@ -60,7 +57,6 @@ const basicProgress = [
     cost: '5mins',
   },
   {
-    key: '4',
     time: '2017-10-01 13:00',
     rate: '申请审批通过',
     status: 'success',
@@ -68,7 +64,6 @@ const basicProgress = [
     cost: '1h',
   },
   {
-    key: '5',
     time: '2017-10-01 12:00',
     rate: '发起退货申请',
     status: 'success',

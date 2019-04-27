@@ -43,57 +43,58 @@ export default class BasicProfile extends Component {
 
     const goodsColumns = [{
       title: '商品编号',
-      dataIndex: 'id',
       key: 'id',
-      render: (text, row, index) => {
-        if (index < getProfileBasicData.basicGoods.length) {
-          return <Link to="/">{text}</Link>;
-        }
-        return {
-          children: <span style={{ fontWeight: 600 }}>总计</span>,
-          props: {
-            colSpan: 4,
-          },
-        };
-      },
     }, {
       title: '商品名称',
-      dataIndex: 'name',
       key: 'name',
-      render: renderContent,
     }, {
       title: '商品条码',
-      dataIndex: 'barcode',
       key: 'barcode',
-      render: renderContent,
     }, {
       title: '单价',
-      dataIndex: 'price',
       key: 'price',
-      align: 'right',
-      render: renderContent,
     }, {
       title: '数量（件）',
-      dataIndex: 'num',
       key: 'num',
-      align: 'right',
-      render: (text, row, index) => {
-        if (index < getProfileBasicData.basicGoods.length) {
-          return text;
-        }
-        return <span style={{ fontWeight: 600 }}>{text}</span>;
-      },
+      // render: (text, row, index) => {
+      //   if (index < getProfileBasicData.basicGoods.length) {
+      //     return text;
+      //   }
+      //   return <span style={{ fontWeight: 600 }}>{text}</span>;
+      // },
     }, {
       title: '金额',
-      dataIndex: 'amount',
       key: 'amount',
-      align: 'right',
-      render: (text, row, index) => {
-        if (index < getProfileBasicData.basicGoods.length) {
-          return text;
-        }
-        return <span style={{ fontWeight: 600 }}>{text}</span>;
-      },
+      // render: (text, row, index) => {
+      //   if (index < getProfileBasicData.basicGoods.length) {
+      //     return text;
+      //   }
+      //   return <span style={{ fontWeight: 600 }}>{text}</span>;
+      // },
+    }];
+    const progressColumns = [{
+      title: '时间',
+      dataIndex: 'time',
+      key: 'time',
+    }, {
+      title: '当前进度',
+      dataIndex: 'rate',
+      key: 'rate',
+    }, {
+      title: '状态',
+      dataIndex: 'status',
+      key: 'status',
+      render: text => (
+        text === 'success' ? <Badge color="#28a745">成功</Badge> : <Badge color="#ffc107">进行中</Badge>
+      ),
+    }, {
+      title: '操作员ID',
+      dataIndex: 'operator',
+      key: 'operator',
+    }, {
+      title: '耗时',
+      dataIndex: 'cost',
+      key: 'cost',
     }];
     return (
       <div>
@@ -117,10 +118,13 @@ export default class BasicProfile extends Component {
           <div className={styles.title}>退货商品</div>
           <Table
             style={{ marginBottom: 24 }}
-            pagination={false}
-            dataSource={goodsData}
+            data={goodsData}
             columns={goodsColumns}
-            rowKey="id"
+          />
+          <Table
+            style={{ marginBottom: 24 }}
+            data={getProfileBasicData.basicProgress}
+            columns={progressColumns}
           />
         </Card>
       </div>
