@@ -42,6 +42,9 @@ export const getRouterData = () => {
     '/profile/basic': {
       component: dynamicWrapper([], () => import('../routes/Profile/BasicProfile')),
     },
+    '/profile/advanced': {
+      component: dynamicWrapper([], () => import('../routes/Profile/AdvancedProfile')),
+    },
   };
   return conf;
 };

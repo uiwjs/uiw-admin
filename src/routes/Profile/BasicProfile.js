@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card, Badge, Table, Divider } from 'uiw';
-import { Link } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 import DescriptionList from '../../components/DescriptionList';
 import { getProfileBasicData } from './profile';
@@ -74,26 +73,21 @@ export default class BasicProfile extends Component {
     }];
     const progressColumns = [{
       title: '时间',
-      dataIndex: 'time',
       key: 'time',
     }, {
       title: '当前进度',
-      dataIndex: 'rate',
       key: 'rate',
     }, {
       title: '状态',
-      dataIndex: 'status',
       key: 'status',
       render: text => (
         text === 'success' ? <Badge color="#28a745">成功</Badge> : <Badge color="#ffc107">进行中</Badge>
       ),
     }, {
       title: '操作员ID',
-      dataIndex: 'operator',
       key: 'operator',
     }, {
       title: '耗时',
-      dataIndex: 'cost',
       key: 'cost',
     }];
     return (

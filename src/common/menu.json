@@ -56,6 +56,10 @@
       {
         "name": "基础详情页",
         "path": "basic"
+      },
+      {
+        "name": "高级详情页",
+        "path": "advanced"
       }
     ]
   },
