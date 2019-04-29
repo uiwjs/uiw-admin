@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Badge, Table, Divider } from 'uiw';
+import { Link } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
 import DescriptionList from '../../components/DescriptionList';
 import { getProfileBasicData } from './profile';
@@ -55,21 +56,9 @@ export default class BasicProfile extends Component {
     }, {
       title: '数量（件）',
       key: 'num',
-      // render: (text, row, index) => {
-      //   if (index < getProfileBasicData.basicGoods.length) {
-      //     return text;
-      //   }
-      //   return <span style={{ fontWeight: 600 }}>{text}</span>;
-      // },
     }, {
       title: '金额',
       key: 'amount',
-      // render: (text, row, index) => {
-      //   if (index < getProfileBasicData.basicGoods.length) {
-      //     return text;
-      //   }
-      //   return <span style={{ fontWeight: 600 }}>{text}</span>;
-      // },
     }];
     const progressColumns = [{
       title: '时间',
