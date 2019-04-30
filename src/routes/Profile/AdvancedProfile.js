@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'uiw';
-import classNames from 'classnames';
+import { Button, ButtonGroup, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'uiw';
+import { Link } from 'react-router-dom';
 import PageHeader from '../../components/PageHeader';
+import DescriptionList from '../../components/DescriptionList';
 import styles from './AdvancedProfile.module.less';
 
-const ButtonGroup = Button.Group;
-
+const { Description } = DescriptionList;
 export default class AdvancedProfile extends Component {
   constructor(props) {
     super(props);
@@ -22,18 +22,6 @@ export default class AdvancedProfile extends Component {
         <Menu.Item key="2">选项二</Menu.Item>
         <Menu.Item key="3">选项三</Menu.Item>
       </Menu>
-    );
-    const action = (
-      <div>
-        <ButtonGroup>
-          <Button>操作</Button>
-          <Button>操作</Button>
-          <Dropdown overlay={menu} placement="bottomRight">
-            <Button><Icon type="ellipsis" /></Button>
-          </Dropdown>
-        </ButtonGroup>
-        <Button type="primary">主操作</Button>
-      </div>
     );
     const extra = (
       <Row>
@@ -54,14 +42,23 @@ export default class AdvancedProfile extends Component {
       key: 'rule',
       tab: '规则',
     }];
+    const description = (
+      <DescriptionList className={styles.headerList} column={2} layout="vertical" col="2">
+        <Description term="创建人">小莉</Description>
+        <Description term="订购产品">XX 服务</Description>
+        <Description term="创建时间">2017-07-07</Description>
+        <Description term="关联单据"><Link to="/">12421</Link></Description>
+        <Description term="生效日期">2017-07-07 ~ 2017-08-08</Description>
+        <Description term="备注">请于两个工作日内确认</Description>
+      </DescriptionList>
+    );
     return (
       <div>
         <PageHeader
           logo={<img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png" />}
-          // title="单号：234231029431"
-          // action={action}
-          // extraContent={extra}
-          // tabList={tabList}
+          title="单号：234231029431"
+          content={description}
+          extraContent={extra}
         />
       </div>
     );
