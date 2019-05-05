@@ -8,9 +8,12 @@ import styles from './index.module.less';
  * @param {*} column 一行需要展示的列数
  */
 const getFlexProps = (column) => {
-  let flexProps = { span: 12 };
+  let flexProps = { span: 8 };
   switch (column) {
-    case 1: flexProps = { span: 12 }; break;
+    case 1: flexProps = { span: 24 }; break;
+    case 2: flexProps = { span: 12 }; break;
+    case 3: flexProps = { span: 8 }; break;
+    case 4: flexProps = { span: 6 }; break;
     default:
   }
   return flexProps;
