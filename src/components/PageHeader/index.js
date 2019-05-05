@@ -4,8 +4,8 @@ import styles from './index.module.less';
 
 export default class PageHeader extends PureComponent {
   render() {
-    const { logo, title, content, extraContent, action } = this.props;
-    console.log('action', action);
+    const { logo, title, content, extraContent, action, tabList } = this.props;
+    const tabDefaultValue = tabList && (tabList.filter(item => item.default)[0] || tabList[0]);
     return (
       <div className={styles.pageHeader}>
         <div className={styles.detail}>
@@ -21,6 +21,19 @@ export default class PageHeader extends PureComponent {
             </div>
           </div>
         </div>
+        {
+          tabList &&
+          tabList.length &&
+          <Tabs
+            className={styles.tabs}
+            activeKey={(tabDefaultValue && tabDefaultValue.key)}
+            onChange={this.onChange}
+          >
+            {
+              tabList.map(item => <Tabs.Pane label={item.tab} key={item.key} />)
+            }
+          </Tabs>
+        }
       </div>
     );
   }

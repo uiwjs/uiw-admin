@@ -59,6 +59,7 @@ export default class AdvancedProfile extends Component {
           title="单号：234231029431"
           content={description}
           extraContent={extra}
+          tabList={tabList}
         />
       </div>
     );
