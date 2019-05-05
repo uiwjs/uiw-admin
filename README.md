@@ -51,5 +51,10 @@ uiw-admin
     └── utils                # 工具库，如接口调用封装
 ```
 
-## 本地开发&使用
+## uiw-admin 实例运行
+```bash
+npm install          # 下载依赖包
+npm run start        # 开发模式运行
+npm run build        # 编译工程
+```
 
