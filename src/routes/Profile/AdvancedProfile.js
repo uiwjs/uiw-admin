@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, ButtonGroup, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'uiw';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import PageHeader from '../../components/PageHeader';
 import DescriptionList from '../../components/DescriptionList';
 import styles from './AdvancedProfile.module.less';
@@ -52,6 +53,25 @@ export default class AdvancedProfile extends Component {
         <Description term="备注">请于两个工作日内确认</Description>
       </DescriptionList>
     );
+    const desc1 = (
+      <div className={classNames(styles.textSecondary, styles.stepDescription)}>
+        <div>
+          小莉
+          <Icon type="dingding-o" style={{ marginLeft: 8 }} />
+        </div>
+        <div>2016-12-12 12:32</div>
+      </div>
+    );
+
+    const desc2 = (
+      <div className={styles.stepDescription}>
+        <div>
+          安安
+          <Icon type="dingding-o" style={{ color: '#00A0E9', marginLeft: 8 }} />
+        </div>
+        <div><Link to="/">催一下</Link></div>
+      </div>
+    );
     return (
       <div>
         <PageHeader
@@ -61,6 +81,16 @@ export default class AdvancedProfile extends Component {
           extraContent={extra}
           tabList={tabList}
         />
+        <div style={{ margin: 15 }}>
+          <Card title="流程进度" style={{ marginBottom: 15 }} bordered={false}>
+            <Steps direction={stepDirection} progressDot current={1}>
+              <Steps.Step title="创建项目" description={desc1} />
+              <Steps.Step title="部门初审" description={desc2} />
+              <Steps.Step title="财务复核" />
+              <Steps.Step title="完成" />
+            </Steps>
+          </Card>
+        </div>
       </div>
     );
   }
