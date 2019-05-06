@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, ButtonGroup, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'uiw';
+import { Button, ButtonGroup, Menu, Dropdown, Icon, Row, Col, Steps, Card, Tabs, Badge, Table, Tooltip, Divider } from 'uiw';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import PageHeader from '../../components/PageHeader';
@@ -13,8 +13,13 @@ export default class AdvancedProfile extends Component {
     this.state = {
       operationkey: 'tab1',
       stepDirection: 'horizontal',
+      advancedLoading: true,
     };
   }
+  onOperationTabChange = (key) => {
+    this.setState({ operationkey: key });
+  };
+
   render() {
     const { stepDirection } = this.state;
     const menu = (
@@ -72,6 +77,123 @@ export default class AdvancedProfile extends Component {
         <div><Link to="/">催一下</Link></div>
       </div>
     );
+    const operationTabList = [{
+      key: 'tab1',
+      tab: '操作日志一',
+    }, {
+      key: 'tab2',
+      tab: '操作日志二',
+    }, {
+      key: 'tab3',
+      tab: '操作日志三',
+    }];
+    const advancedOperation1 = [
+      {
+        key: 'op1',
+        type: '订购关系生效',
+        name: '牛小小',
+        status: 'agree',
+        updatedAt: '2017-10-03  19:23:12',
+        memo: '-',
+      },
+      {
+        key: 'op2',
+        type: '财务复审',
+        name: '熊小倩',
+        status: 'reject',
+        updatedAt: '2017-10-03  19:23:12',
+        memo: '不通过原因',
+      },
+      {
+        key: 'op3',
+        type: '部门初审',
+        name: '王毛毛',
+        status: 'agree',
+        updatedAt: '2017-10-03  19:23:12',
+        memo: '-',
+      },
+      {
+        key: 'op4',
+        type: '提交订单',
+        name: '刘东东',
+        status: 'agree',
+        updatedAt: '2017-10-03  19:23:12',
+        memo: '很棒',
+      },
+      {
+        key: 'op5',
+        type: '创建订单',
+        name: '张益达',
+        status: 'agree',
+        updatedAt: '2017-10-03  19:23:12',
+        memo: '-',
+      },
+    ];
+    const advancedOperation2 = [
+      {
+        key: 'op1',
+        type: '订购关系生效',
+        name: '牛小小',
+        status: 'agree',
+        updatedAt: '2017-10-03  19:23:12',
+        memo: '-',
+      },
+    ];
+    const advancedOperation3 = [
+      {
+        key: 'op1',
+        type: '创建订单',
+        name: '张益达',
+        status: 'agree',
+        updatedAt: '2017-10-03  19:23:12',
+        memo: '-',
+      },
+    ];
+    const columns = [{
+      title: '操作类型',
+      dataIndex: 'type',
+      key: 'type',
+    }, {
+      title: '操作人',
+      dataIndex: 'name',
+      key: 'name',
+    }, {
+      title: '执行结果',
+      dataIndex: 'status',
+      key: 'status',
+      render: text => (
+        text === 'agree' ? <Badge status="success" text="成功" /> : <Badge status="error" text="驳回" />
+      ),
+    }, {
+      title: '操作时间',
+      dataIndex: 'updatedAt',
+      key: 'updatedAt',
+    }, {
+      title: '备注',
+      dataIndex: 'memo',
+      key: 'memo',
+    }];
+    const contentList = {
+      tab1: <Table
+        pagination={false}
+        loading={this.state.advancedLoading}
+        dataSource={advancedOperation1}
+        columns={columns}
+      />,
+      tab2: <Table
+        pagination={false}
+        loading={this.state.advancedLoading}
+        dataSource={advancedOperation2}
+        columns={columns}
+      />,
+      tab3: <Table
+        pagination={false}
+        loading={this.state.advancedLoading}
+        dataSource={advancedOperation3}
+        columns={columns}
+      />,
+    };
+    const tabDefaultValue = operationTabList && (operationTabList.filter(item => item.default)[0] || operationTabList[0]);
     return (
       <div>
         <PageHeader
@@ -141,6 +263,20 @@ export default class AdvancedProfile extends Component {
             <div className={styles.noData}>
               <Icon type="frown-o" />暂无数据
             </div>
+          </Card>
+          <Card
+            className={styles.tabsCard}
+            bordered={false}
+            tabList={operationTabList}
+          >
+            <Tabs
+              onTabClick={ this.onOperationTabChange}
+              activeKey={(tabDefaultValue && tabDefaultValue.key)}
+            >
+              {
+                operationTabList.map(item => <Tabs.Pane label={item.tab} key={item.key}>{contentList[this.state.operationkey]}</Tabs.Pane>)
+              }
+            </Tabs>
           </Card>
         </div>
       </div>
