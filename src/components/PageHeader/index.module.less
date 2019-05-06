@@ -16,21 +16,30 @@
       display: block;
     }
   }
-  .row{
-    display: flex;
-    .title{
-      font-size: 16px;
-      font-weight: 500;
-      color: rgba(0, 0, 0, 0.85);
-      margin-bottom: 10px;
-    }
-    .action{
-      float: right;
+  .main{
+    flex: auto;
+    .row{
+      display: flex;
+      .title{
+        font-size: 16px;
+        font-weight: 500;
+        color: rgba(0, 0, 0, 0.85);
+        margin-bottom: 10px;
+        flex: auto;
+      }
+      .action{
+        margin-left: 56px;
+        min-width: 266px;
+        text-align: right;
+        flex: auto;
+        font-size: 14px;
+      }
     }
   }
   .content{
     margin-bottom: 16px;
     font-size: 14px;
+    color: rgba(0, 0, 0, 0.65);
   }
   .extraContent{
     margin-left: 68px;
