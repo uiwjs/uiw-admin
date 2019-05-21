@@ -23,7 +23,7 @@ export default class StepForm extends React.Component {
         />
         <div className={styles.stepForm}>
           <div className={styles.stepBox}>
-
+            test
           </div>
         </div>
       </div>

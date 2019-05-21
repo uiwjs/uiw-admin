@@ -1,7 +1,6 @@
 import React from 'react';
 import { Avatar, Row, Col, Card, formatter, List } from 'uiw';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import PageHeader from '../../components/PageHeader';
 import EditableLinkGroup from '../../components/EditableLinkGroup';
 import DashboardData from './dashboardData';
