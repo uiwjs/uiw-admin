@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, withRouter } from 'react-router-dom';
+import { Router, withRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import '@uiw/reset.css';
-import { getRouterData } from './common/router';
-import RoutersController from './Router';
-import { store } from './store';
-import './styles/index.less';
+import history from './routes/history';
+import { getRouterData } from './routes/router';
+import RoutersController from './routes/RoutersController';
+import { store } from './models';
+import '@uiw/reset.css/reset.less';
+import './global.less';
 
 const RoutersContainer = withRouter(({ history: historyData, location }) => {
   const routerData = getRouterData();
@@ -22,7 +23,7 @@ const RoutersContainer = withRouter(({ history: historyData, location }) => {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
+    <Router history={history}>
       <RoutersContainer />
     </Router>
   </Provider>,

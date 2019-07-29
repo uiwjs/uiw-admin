@@ -13,37 +13,26 @@ uiw-admin
 │   └── utils.js
 ├── package.json
 ├── public
-│   ├── iconfont              # 字体文件
-│   │   ├── iconfont.css
-│   │   ├── ....
-│   │   └── iconfont.woff
+│   ├── favicon.ico          
 │   └── index.html            # HTML 入口模板
 └── src
     ├── assets                # 本地静态资源目录
     │   ├── ...
     │   └── logo.svg
-    ├── common               # 通用布局
-    │   ├── menu.js
-    │   ├── menu.json
-    │   ├── router.js
     ├── components            # 业务通用组件
     │   ├── ActiveChart
     │   ├── ...
     │   └── Trend
-    ├── g2.js                 # 可视化图形配置
     ├── index.js              # 应用入口
-    ├── index.less            # 全局样式
+    ├── global.less           # 全局样式
     ├── layouts               # 通用布局
     │   ├── BasicLayout.js
     │   ├── BasicLayout.less
     │   ├── PageHead.js
     │   ├── PageHeaderLayout.js
-    ├── models               # dva model 目录
-    ├── nav                  # 应用公用配置目录，如导航信息
-    ├── router.js            # 路由入口
-    ├── routes               # 业务页面入口和常用模板
-    │   ├── ...
-    │   └── User
+    ├── models               # @rematch/core model 目录
+    ├── pages                # 页面对应的文件
+    ├── routes               # 路由相关配置
     ├── services             # 后台接口服务
     │   ├── api.js           # 接口调用方法
     │   ├── ...
@@ -51,7 +40,8 @@ uiw-admin
     └── utils                # 工具库，如接口调用封装
 ```
 
-## uiw-admin 实例运行
+## 开发运行
+
 ```bash
 npm install          # 下载依赖包
 npm run start        # 开发模式运行
