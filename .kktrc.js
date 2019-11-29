@@ -1,51 +1,37 @@
-const path = require('path');
-const apiMocker = require('mocker-api');
+import path from 'path';
+import apiMocker from 'mocker-api';
 
-module.exports = {
-  plugins: [
-    require.resolve('@kkt/plugin-less'),
-  ],
-  // Modify the webpack config
-  config: (conf, { dev, env }, webpack) => {
-    if (env === 'prod') {
-      // conf = {
-      //   ...conf,
-      //   optimization: {
-      //     ...conf.optimization,
-      //     // https://webpack.js.org/plugins/split-chunks-plugin/
-      //     splitChunks: {
-      //       chunks: 'async',
-      //       minSize: 30000,
-      //       minChunks: 2,
-      //       maxAsyncRequests: 5,
-      //       maxInitialRequests: 3,
-      //       automaticNameDelimiter: '~',
-      //       name: true,
-      //       cacheGroups: {
-      //         vendors: {
-      //           test: /[\\/]node_modules[\\/]/,
-      //           priority: -10
-      //         },
-      //         default: {
-      //           minChunks: 2,
-      //           priority: -20,
-      //           reuseExistingChunk: true
-      //         }
-      //       }
-      //     }
-      //   }
-      // };
+export const loaderOneOf = [
+  require.resolve('@kkt/loader-less'),
+]
+
+export default (conf, { isEnvDevelopment }, webpack) => {
+  const pkg = require(path.resolve(process.cwd(), 'package.json'));
+  conf.module.rules.map((item) => {
+    if (item.oneOf) {
+      item.oneOf.unshift({
+        test: /\.md$/,
+        use: require.resolve('raw-loader'),
+      });
     }
-    if (dev) {
-      conf.devServer.before = (app) => {
-        apiMocker(app, path.resolve('./mocker/index.js'), {
-          proxy: {
-            // '/repos/*': 'https://api.github.com/',
-          },
-          changeHost: true,
-        });
-      };
-    }
-    return conf;
-  },
-};
+    return item;
+  });
+  // 获取版本
+  conf.plugins.push(
+    new webpack.DefinePlugin({
+      VERSION: JSON.stringify(pkg.version),
+    })
+  );
+
+  if (isEnvDevelopment) {
+    conf.devServer.before = (app) => {
+      apiMocker(app, path.resolve('./mocker/index.js'), {
+        proxy: {
+          // '/repos/*': 'https://api.github.com/',
+        },
+        changeHost: true,
+      });
+    };
+  }
+  return conf;
+}
