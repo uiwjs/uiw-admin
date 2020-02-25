@@ -1,9 +1,18 @@
 import path from 'path';
-import apiMocker from 'mocker-api';
 
 export const loaderOneOf = [
   require.resolve('@kkt/loader-less'),
-]
+];
+
+export const mocker = {
+  path: path.resolve('./mocker/index.js'),
+  /**
+   * https://github.com/jaywcjlove/mocker-api/tree/96c2eb94694571e0e3003e6ad9ce1c809499f577#options
+   */
+  option: {
+    changeHost: true,
+  }
+}
 
 export default (conf, { isEnvDevelopment }, webpack) => {
   const pkg = require(path.resolve(process.cwd(), 'package.json'));
@@ -23,15 +32,5 @@ export default (conf, { isEnvDevelopment }, webpack) => {
     })
   );
 
-  if (isEnvDevelopment) {
-    conf.devServer.before = (app) => {
-      apiMocker(app, path.resolve('./mocker/index.js'), {
-        proxy: {
-          // '/repos/*': 'https://api.github.com/',
-        },
-        changeHost: true,
-      });
-    };
-  }
   return conf;
 }

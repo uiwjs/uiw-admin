@@ -4,20 +4,13 @@ import { connect } from 'react-redux';
 
 class RoutersController extends React.PureComponent {
   componentDidMount() {
-    // this.props.verify();
+    this.props.verify();
   }
   render() {
     const { resetProps, token, userData } = this.props;
     const BasicLayout = resetProps.routerData['/'].component;
     const UserLayout = resetProps.routerData['/login'].component;
     const HelpLayout = resetProps.routerData['/help'].component;
-    // isAuthenticated = true 表示身份经过验证
-    // 请求是否登录验证
-    // if (!this.props.isAuthenticated) {
-    //   return (
-    //     <span>是否登录的验证</span>
-    //   );
-    // }
     resetProps.token = token;
     resetProps.userData = userData;
     return (

@@ -22,7 +22,7 @@ export default class BasicLayout extends PureComponent {
     });
     return (
       <div className={styles.container}>
-        Help Layout
+        Basic Layout
         <Switch>
           {RouteComponents}
         </Switch>

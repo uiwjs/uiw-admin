@@ -17,3 +17,10 @@ export function login(params) {
 export function verify() {
   return request('/api/user/verify');
 }
+
+/**
+ * 验证是否登录
+ */
+export function logout() {
+  return request('/api/user/logout');
+}

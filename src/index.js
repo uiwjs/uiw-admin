@@ -4,7 +4,7 @@ import { Router, withRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import history from './routes/history';
 import { getRouterData } from './routes/router';
-import RoutersController from './routes/RoutersController';
+import RoutersController from './routes/Controller';
 import { store } from './models';
 import '@uiw/reset.css/reset.less';
 import './global.less';

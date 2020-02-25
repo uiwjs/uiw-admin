@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Notify } from 'uiw';
 import { splitUrl } from './utils.js';
+import history from '../routes/history';
 
 // Get the current location.
 // const location = history.location;
@@ -63,6 +64,11 @@ export default function request(url, options = {}) {
       const response = err.response;
       if (response.status >= 200 && response.status < 300) {
         return response;
+      }
+      console.log('response.status:', response.status)
+      if (response.status === 401) {
+        history.push('/login');
+        return
       }
       const errortext = codeMessage[response.status] || response.statusText;
       Notify.error({

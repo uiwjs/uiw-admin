@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col, Button, Notify, Input, Checkbox } from 'uiw';
+import { Form, Row, Col, Button, Input, Checkbox } from 'uiw';
 import { connect } from 'react-redux';
 import logo from '../../assets/logo-dark.svg';
 import styles from './index.module.less';
@@ -9,7 +9,7 @@ class Login extends React.Component {
     const { loading } = this.props;
     return (
       <Row justify="center" align="middle" style={{ height: '100%' }}>
-        <Col span="4">
+        <Col span="5">
           <div className={styles.logo}>
             <img src={logo} alt="Logo" />
           </div>
@@ -35,7 +35,7 @@ class Login extends React.Component {
             fields={{
               username: {
                 labelClassName: 'fieldLabel',
-                labelStyle: { width: 60 },
+                labelStyle: { width: 160 },
                 labelFor: 'username',
                 children: <Input disabled={loading} preIcon="user" id="username" placeholder="用户名: admin" />,
               },
@@ -43,7 +43,7 @@ class Login extends React.Component {
                 labelClassName: 'fieldLabel',
                 labelStyle: { width: 60 },
                 labelFor: 'password',
-                children: <Input disabled={loading} preIcon="lock" id="password" type="password" placeholder="密码: uiw" />,
+                children: <Input disabled={loading} preIcon="lock" id="password" type="password" placeholder="密码: admin" />,
               },
               terms: {
                 style: { margin: 0 },
@@ -63,7 +63,7 @@ class Login extends React.Component {
                   </Row>
                   <Row style={{ marginBottom: 10 }}>
                     <Col align="middle">{fields.terms}</Col>
-                    <Col><a href="#">服务条款</a></Col>
+                    <Col><a href="https://uiwjs.github.io">服务条款</a></Col>
                   </Row>
                   <Row>
                     <Col>
