@@ -14,3 +14,12 @@ Package | Version | Description
 [`@uiw-admin/router-control`](https://www.npmjs.com/package/@uiw-admin/router-control) | [![npm](https://img.shields.io/npm/v/@uiw-admin/router-control.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/router-control) | - 
 [`@uiw-admin/user-login`](https://www.npmjs.com/package/@uiw-admin/user-login) | [![npm](https://img.shields.io/npm/v/@uiw-admin/user-login.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/user-login) | - 
 
+### Development
+
+```bash
+$ npm install # Install dependencies
+$ npm run bootstrap
+$ npm run bootstrap:webiste
+$ npm run hoist
+$ npm run build
+```
