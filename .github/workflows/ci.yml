@@ -17,4 +17,4 @@ jobs:
     - run: npm install
     - run: npm run hoist
     - run: npm run build
-    - run: npm run build:example
+    - run: npm run b:website
