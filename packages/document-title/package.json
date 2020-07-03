@@ -41,9 +41,7 @@
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"
   },
-  "dependencies": {
-    "@babel/runtime": "7.10.4"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/runtime": "7.10.4",
     "@types/react": "16.9.35",
