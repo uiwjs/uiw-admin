@@ -9,8 +9,8 @@ import dynamic from 'react-dynamic-loadable';
 import Controller, { DefaultProps, getRouterList } from '@uiw-admin/router-control';
 import DocumentTitle from '@uiw-admin/document-title';
 import LogoHeader from './LogoHeader';
-import './index.css';
 import Menu from './Menu';
+import './index.css';
 
 const { Header, Footer, Sider, Content } = Layout;
 
