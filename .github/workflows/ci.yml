@@ -1,10 +1,10 @@
-name: Build uiw
+name: Build uiw-admin
 on:
   push:
     branches:
       - master
 jobs:
-  build-uiw:
+  build-uiw-admin:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@master

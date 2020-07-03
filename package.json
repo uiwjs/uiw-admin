@@ -19,7 +19,7 @@
     "//--------": "//--------",
     "bootstrap": "lerna bootstrap",
     "hoist": "lerna bootstrap --hoist",
-    "bootstrap:webiste": "lerna bootstrap --scope @example/uiw",
+    "bootstrap:webiste": "lerna bootstrap --scope @examples/base",
     "type": "npm run t:cjs && npm run t:esm",
     "t:esm": "lerna exec --scope @uiw-admin/* -- tsbb types --outDir lib/esm --target ESNEXT",
     "t:cjs": "lerna exec --scope @uiw-admin/* -- tsbb types --outDir lib/cjs --target ESNEXT",
