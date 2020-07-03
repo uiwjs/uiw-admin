@@ -1,0 +1,62 @@
+{
+  "name": "@uiw-admin/basic-layouts",
+  "version": "4.0.3",
+  "description": "Divider component",
+  "author": "Kenny Wong <wowohoo@qq.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/basic-layouts#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uiwjs/uiw-admin.git"
+  },
+  "license": "MIT",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "design",
+    "uiw",
+    "uiw-react",
+    "uiw-admin",
+    "react.js",
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "ui",
+    "css",
+    "uikit",
+    "react-ui",
+    "framework",
+    "front-end",
+    "frontend"
+  ],
+  "peerDependencies": {
+    "@babel/runtime": ">=7.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "uiw": ">=4.1.1"
+  },
+  "dependencies": {
+    "@uiw-admin/document-title": "^4.0.3",
+    "@uiw-admin/router-control": "^4.0.3",
+    "classnames": "^2.2.6",
+    "react-dynamic-loadable": "2.0.1"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.9.6",
+    "@types/classnames": "2.2.10",
+    "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.7",
+    "@types/react-router-dom": "5.1.5",
+    "react": "16.13.0",
+    "react-dom": "16.13.1",
+    "react-router-dom": "5.2.0",
+    "uiw": "4.6.2"
+  }
+}

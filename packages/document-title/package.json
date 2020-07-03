@@ -1,0 +1,54 @@
+{
+  "name": "@uiw-admin/document-title",
+  "version": "4.0.3",
+  "description": "Document Title",
+  "author": "Kenny Wong <wowohoo@qq.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/document-title#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uiwjs/uiw-admin.git"
+  },
+  "license": "MIT",
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "design",
+    "uiw",
+    "uiw-react",
+    "uiw-admin",
+    "react.js",
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "ui",
+    "css",
+    "uikit",
+    "react-ui",
+    "framework",
+    "front-end",
+    "frontend"
+  ],
+  "peerDependencies": {
+    "@babel/runtime": ">=7.0.0",
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.4.4"
+  },
+  "devDependencies": {
+    "@babel/runtime": "7.9.6",
+    "@types/react": "16.9.35",
+    "@types/react-dom": "16.9.7",
+    "react": "16.13.0",
+    "react-dom": "16.13.1"
+  }
+}

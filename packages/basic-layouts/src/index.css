@@ -1,0 +1,55 @@
+.uiw-admin-global-sider-menu {
+  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  overflow: auto;
+}
+
+.uiw-admin-global-sider-menu .w-menu-item {
+  padding: 7px 7px;
+}
+
+.w-layout-header.uiw-admin-global-header > * {
+  vertical-align: middle;
+}
+.w-layout-header.uiw-admin-global-header {
+  border-bottom: 1px solid #ccc;
+  height: 53px;
+  min-height: 53px;
+  line-height: 53px;
+  background-color: #fff;
+  padding-left: 10px;
+}
+
+
+
+
+.uiw-admin-global-title {
+  position: relative;
+  padding: 0 14px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .3s;
+}
+.uiw-admin-global-title h1 {
+  box-sizing: border-box;
+  display: inline-block;
+  margin: 0 0 0 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 20px;
+  vertical-align: middle;
+  animation: fade-in;
+  animation-duration: .3s;
+  white-space: nowrap;
+}
+.uiw-admin-global-title a {
+  display: flex;
+  align-items: center;
+  padding-top: 16px;
+  padding-bottom: 10px;
+  text-decoration: none;
+}
+.uiw-admin-global-title img {
+  display: inline-block;
+  height: 36px;
+  vertical-align: middle;
+}

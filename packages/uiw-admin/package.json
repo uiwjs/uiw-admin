@@ -1,0 +1,20 @@
+{
+  "name": "uiw-admin",
+  "version": "4.0.3",
+  "description": "UIW Admin Project",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uiwjs/uiw-admin.git"
+  },
+  "keywords": [
+    "uiw",
+    "react",
+    "admin",
+    "uiw-admin"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "jaywcjlove",
+  "license": "MIT"
+}

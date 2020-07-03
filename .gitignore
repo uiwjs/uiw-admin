@@ -1,11 +1,20 @@
-node_modules
 dist
+lib
+coverage
+node_modules
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 package-lock.json
+yarn.lock
+
+*.lerna_backup
 .DS_Store
 .cache
-.rdoc-dist
 .vscode
+.idea
+.snap
+.env
 
 *.bak
 *.tem
@@ -13,3 +22,8 @@ package-lock.json
 #.swp
 *.*~
 ~*.*
+
+# IDEA
+*.iml
+*.ipr
+*.iws

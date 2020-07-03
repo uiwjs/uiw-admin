@@ -1,0 +1,14 @@
+{
+  "packages": ["examples/*", "packages/*"],
+  "version": "independent",
+  "command": {
+    "create": {
+      "license": "MIT"
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--no-package-lock"],
+      "yarnClientArgs": ["--no-yarn-lock"],
+      "forceLocal": true
+    }
+  }
+}
