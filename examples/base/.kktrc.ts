@@ -1,30 +1,7 @@
 import path from 'path';
 import { OptionConf } from 'kkt';
 import webpack from 'webpack';
-
-/**
- * 解决在 GitHub Actions 里面报错
- * `[mini-css-extract-plugin] warning Conflicting order`
- * https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250#issuecomment-415345126
- * https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250#issuecomment-426102538
- */
-class FilterWarningsPlugin {
-  options: any;
-  constructor(options: any) {
-    this.options = options;
-  }
-
-  apply(compiler: any) {
-    compiler.hooks.afterEmit.tap(
-      'FilterPlugin',
-      (compilation: any) => {
-        compilation.warnings = (compilation.warnings).filter(
-          (warning: any) => !this.options.filter.test(warning.message)
-        );
-      }
-    );
-  }
-}
+import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
 
 type Webpack = typeof webpack;
 
@@ -62,7 +39,10 @@ export default (
    * https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250#issuecomment-426102538
    */
   conf.plugins!.push(
-    new FilterWarningsPlugin({ filter: /chunk styles \[mini-css-extract-plugin]\nConflicting order between:/ }),
+    new FilterWarningsPlugin({
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+    }),
+    // new FilterWarningsPlugin({ filter: /chunk styles \[mini-css-extract-plugin]\nConflicting order between:/ }),
   );
 
   return conf;
