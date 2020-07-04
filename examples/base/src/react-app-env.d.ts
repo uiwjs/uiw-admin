@@ -82,3 +82,5 @@ declare module 'react-dynamic-loadable' {
   function _default(options: Options): void;
   export default _default;
 }
+
+declare module 'webpack-filter-warnings-plugin'
