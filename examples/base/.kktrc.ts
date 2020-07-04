@@ -14,12 +14,12 @@ class FilterWarningsPlugin {
     this.options = options;
   }
 
-  apply(compiler) {
+  apply(compiler: any) {
     compiler.hooks.afterEmit.tap(
       'FilterPlugin',
-      (compilation) => {
+      (compilation: any) => {
         compilation.warnings = (compilation.warnings).filter(
-          warning => !this.options.filter.test(warning.message)
+          (warning: any) => !this.options.filter.test(warning.message)
         );
       }
     );
