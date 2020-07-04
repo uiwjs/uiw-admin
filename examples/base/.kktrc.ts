@@ -1,7 +1,6 @@
 import path from 'path';
 import { OptionConf } from 'kkt';
 import webpack from 'webpack';
-import FilterWarningsPlugin from 'webpack-filter-warnings-plugin'
 
 type Webpack = typeof webpack;
 
@@ -31,7 +30,7 @@ export default (
       VERSION: JSON.stringify(pkg.version),
     }),
   );
-
+  const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
   /**
    * 解决在 GitHub Actions 里面报错
    * `[mini-css-extract-plugin] warning Conflicting order`
