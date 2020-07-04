@@ -26,7 +26,7 @@
     "b:css": "lerna exec --scope @uiw-admin/* -- compile-less -d src -o lib/esm",
     "b:lib": "lerna exec --scope @uiw-admin/* -- tsbb build --target react",
     "build": "npm run b:lib && npm run type && npm run b:css",
-    "b:website": "lerna exec --scope @examples/base -- npm run build",
+    "b:website": "lerna exec --scope @examples/base --no-ci -- npm run build",
     "watch": "lerna exec --scope @uiw-admin/* -- tsbb watch --target react",
     "version": "lerna version --no-changelog --no-git-tag-version --no-push --yes",
     "publish": "lerna publish from-package",
