@@ -51,7 +51,7 @@
   "devDependencies": {
     "@babel/runtime": "7.12.5",
     "@types/classnames": "2.2.11",
-    "@types/react": "16.9.35",
+    "@types/react": "16.9.55",
     "@types/react-dom": "16.9.7",
     "@types/react-router-dom": "5.1.5",
     "react": "16.14.0",
