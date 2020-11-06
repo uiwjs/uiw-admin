@@ -4,7 +4,10 @@ import webpack from 'webpack';
 
 type Webpack = typeof webpack;
 
-export const loaderOneOf = [require.resolve('@kkt/loader-less')];
+
+export const loaderOneOf = [
+  require.resolve('@kkt/loader-less')
+];
 
 export const moduleScopePluginOpts = [path.resolve(process.cwd(), 'README.md')];
 
@@ -30,20 +33,19 @@ export default (
       VERSION: JSON.stringify(pkg.version),
     }),
   );
-  const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
-  /**
-   * 解决在 GitHub Actions 里面报错
-   * `[mini-css-extract-plugin] warning Conflicting order`
-   * https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250#issuecomment-415345126
-   * https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250#issuecomment-426102538
-   */
-  conf.plugins!.push(
-    new FilterWarningsPlugin({
-        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
-    }),
-    // new FilterWarningsPlugin({ filter: /chunk styles \[mini-css-extract-plugin]\nConflicting order between:/ }),
-  );
-
+  // const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
+  // /**
+  //  * 解决在 GitHub Actions 里面报错
+  //  * `[mini-css-extract-plugin] warning Conflicting order`
+  //  * https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250#issuecomment-415345126
+  //  * https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250#issuecomment-426102538
+  //  */
+  // conf.plugins!.push(
+  //   new FilterWarningsPlugin({
+  //       exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+  //   }),
+  //   // new FilterWarningsPlugin({ filter: /chunk styles \[mini-css-extract-plugin]\nConflicting order between:/ }),
+  // );
   return conf;
 };
 
