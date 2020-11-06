@@ -45,12 +45,12 @@
     "react-dynamic-loadable": "2.0.1"
   },
   "devDependencies": {
-    "@babel/runtime": "7.10.4",
+    "@babel/runtime": "7.12.5",
     "@types/react": "16.9.35",
     "@types/react-dom": "16.9.7",
     "@types/react-router-dom": "5.1.5",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
     "react-router-dom": "5.2.0"
   }
 }
