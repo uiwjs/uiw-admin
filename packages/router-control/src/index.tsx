@@ -1,7 +1,7 @@
 import React from 'react';
 import { StaticContext } from 'react-router';
 import * as H from 'history';
-import {  RouteComponentProps, Router } from 'react-router-dom';
+import { RouteComponentProps, Router } from 'react-router-dom';
 import { Route, Redirect, BrowserRouter, Switch } from 'react-router-dom';
 import {createBrowserHistory} from 'history'
 import dynamic from 'react-dynamic-loadable';
@@ -27,14 +27,8 @@ export interface match<Params extends { [K in keyof Params]?: string } = {}> {
 }
 
 export type DefaultProps = React.PropsWithChildren<
-    RouteComponentProps<any, StaticContext, H.History.PoorMansUnknown>
+    RouteComponentProps<any, StaticContext, H.LocationState>
   > & {
-  location: H.Location<H.LocationState>;
-  history: H.History<H.LocationState>;
-  staticContext?: StaticContext & {
-    statusCode?: number;
-  };
-  match: match;
   routes: Routers[];
 }
 
