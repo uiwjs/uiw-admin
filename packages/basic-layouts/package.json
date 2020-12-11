@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/basic-layouts",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "description": "Divider component",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/basic-layouts#readme",
@@ -43,8 +43,8 @@
     "uiw": ">=4.1.1"
   },
   "dependencies": {
-    "@uiw-admin/document-title": "^4.1.0",
-    "@uiw-admin/router-control": "^4.1.0",
+    "@uiw-admin/document-title": "^4.1.1",
+    "@uiw-admin/router-control": "^4.1.1",
     "classnames": "^2.2.6",
     "react-dynamic-loadable": "2.0.3"
   },
