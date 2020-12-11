@@ -1,6 +1,6 @@
 {
   "name": "@examples/base",
-  "version": "4.0.3",
+  "version": "4.1.0",
   "description": "Use Rematch & TypeScript for the project.",
   "private": true,
   "scripts": {
@@ -16,9 +16,9 @@
   "dependencies": {
     "@rematch/core": "1.4.0",
     "@rematch/loading": "1.2.1",
-    "@uiw-admin/basic-layouts": "^4.0.3",
-    "@uiw-admin/router-control": "^4.0.3",
-    "@uiw-admin/user-login": "^4.0.3",
+    "@uiw-admin/basic-layouts": "^4.1.0",
+    "@uiw-admin/router-control": "^4.1.0",
+    "@uiw-admin/user-login": "^4.1.0",
     "@uiw/reset.css": "1.0.4",
     "axios": "0.19.2",
     "react": "17.0.1",
@@ -34,8 +34,8 @@
     "@types/react-dom": "17.0.0",
     "@types/react-redux": "7.1.7",
     "@types/react-router-dom": "5.1.6",
-    "webpack-filter-warnings-plugin": "1.2.1",
-    "kkt": "5.10.3"
+    "kkt": "5.10.3",
+    "webpack-filter-warnings-plugin": "1.2.1"
   },
   "eslintConfig": {
     "extends": "react-app"
