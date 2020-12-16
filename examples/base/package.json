@@ -1,6 +1,6 @@
 {
   "name": "@examples/base",
-  "version": "4.0.3",
+  "version": "4.1.1",
   "description": "Use Rematch & TypeScript for the project.",
   "private": true,
   "scripts": {
@@ -16,26 +16,26 @@
   "dependencies": {
     "@rematch/core": "1.4.0",
     "@rematch/loading": "1.2.1",
-    "@uiw-admin/basic-layouts": "^4.0.3",
-    "@uiw-admin/router-control": "^4.0.3",
-    "@uiw-admin/user-login": "^4.0.3",
+    "@uiw-admin/basic-layouts": "^4.1.1",
+    "@uiw-admin/router-control": "^4.1.1",
+    "@uiw-admin/user-login": "^4.1.1",
     "@uiw/reset.css": "1.0.4",
     "axios": "0.19.2",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
-    "react-dynamic-loadable": "2.0.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-dynamic-loadable": "2.0.3",
     "react-redux": "7.2.0",
     "react-router-dom": "5.2.0",
-    "uiw": "4.6.14"
+    "uiw": "4.6.19"
   },
   "devDependencies": {
     "@kkt/loader-less": "5.10.3",
-    "@types/react": "16.9.34",
-    "@types/react-dom": "16.9.6",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
     "@types/react-redux": "7.1.7",
     "@types/react-router-dom": "5.1.6",
-    "webpack-filter-warnings-plugin": "1.2.1",
-    "kkt": "5.10.3"
+    "kkt": "5.10.3",
+    "webpack-filter-warnings-plugin": "1.2.1"
   },
   "eslintConfig": {
     "extends": "react-app"

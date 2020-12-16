@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/router-control",
-  "version": "4.0.3",
+  "version": "4.1.1",
   "description": "router-control",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/router-control#readme",
@@ -42,15 +42,15 @@
     "react-dom": ">=16.8.0"
   },
   "dependencies": {
-    "react-dynamic-loadable": "2.0.1"
+    "react-dynamic-loadable": "2.0.3"
   },
   "devDependencies": {
     "@babel/runtime": "7.12.5",
-    "@types/react": "16.9.55",
-    "@types/react-dom": "16.9.9",
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
     "@types/react-router-dom": "5.1.6",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
     "react-router-dom": "5.2.0"
   }
 }

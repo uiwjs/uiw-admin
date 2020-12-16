@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/user-login",
-  "version": "4.0.3",
+  "version": "4.1.1",
   "description": "Divider component",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/user-login#readme",
@@ -48,10 +48,10 @@
   "devDependencies": {
     "@babel/runtime": "7.12.5",
     "@types/classnames": "2.2.11",
-    "@types/react": "16.9.55",
-    "@types/react-dom": "16.9.9",
-    "react": "16.14.0",
-    "react-dom": "16.14.0",
-    "uiw": "4.6.14"
+    "@types/react": "17.0.0",
+    "@types/react-dom": "17.0.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "uiw": "4.6.19"
   }
 }
