@@ -29,7 +29,7 @@
     "b:website": "lerna exec --scope @examples/base -- npm run build",
     "watch": "lerna exec --scope @uiw-admin/* -- tsbb watch --target react",
     "version": "lerna version --no-changelog --no-git-tag-version --no-push --yes",
-    "publish": "lerna publish from-package",
+    "publish": "npm run build && lerna publish from-package",
     "start": "lerna exec --scope @examples/base npm run start",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "clean": "lerna clean",
