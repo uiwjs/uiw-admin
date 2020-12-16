@@ -34,10 +34,11 @@ export type BasicLayoutProps = DefaultProps & {
    * 页脚
    */
   footer?: React.ReactElement;
+  headerRight?: React.ReactElement;
 };
 
 export default function BasicLayout(props = {} as BasicLayoutProps) {
-  const { routes = [], loadModels = () => null, loadingComponent, footer, projectName = 'UIW Admin' } = props;
+  const { routes = [], loadModels = () => null, loadingComponent, footer, headerRight, projectName = 'UIW Admin' } = props;
   const [collapsed, setCollapsed] = useState(false);
   const data = getRouterList(routes);
   const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
@@ -60,9 +61,10 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
             <Button
               basic
               icon={collapsed ? 'menu-unfold' : 'menu-fold'}
-              style={{fontSize: 12}}
+              style={{ fontSize: 12 }}
               onClick={() => setCollapsed(!collapsed)}
             />
+            {headerRight}
           </Header>
           <Content>
             <Switch>
