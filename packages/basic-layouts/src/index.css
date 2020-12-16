@@ -17,6 +17,8 @@
   line-height: 53px;
   background-color: #fff;
   padding-left: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 
