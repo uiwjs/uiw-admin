@@ -1,8 +1,11 @@
-name: Build uiw-admin
+name: Build
 on:
   push:
     branches:
       - master
+
+env:
+  SKIP_PREFLIGHT_CHECK: true
 jobs:
   build-uiw-admin:
     runs-on: ubuntu-18.04
