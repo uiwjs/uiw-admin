@@ -22,8 +22,8 @@ Package | Version | Description
 
 ```bash
 $ npm install # Install dependencies
-$ npm run bootstrap
-$ npm run bootstrap:webiste
 $ npm run hoist
 $ npm run build
+
+$ npm run start # Run example website
 ```
