@@ -3,6 +3,10 @@ UIW Admin Project
 
 一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [kkt](https://github.com/kktjs/kkt) 的初始级别项目，集成路由、Redux、选项卡等特性。
 
+## Open in CodeSandbox
+
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
+
 ### Packages
 
 This git repository is a repo built using Lerna. It contains several packages:
