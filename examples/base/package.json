@@ -1,6 +1,6 @@
 {
   "name": "@examples/base",
-  "version": "4.1.3",
+  "version": "4.1.4",
   "description": "Use Rematch & TypeScript for the project.",
   "private": true,
   "scripts": {
@@ -16,9 +16,9 @@
   "dependencies": {
     "@rematch/core": "1.4.0",
     "@rematch/loading": "1.2.1",
-    "@uiw-admin/basic-layouts": "^4.1.3",
-    "@uiw-admin/router-control": "^4.1.3",
-    "@uiw-admin/user-login": "^4.1.3",
+    "@uiw-admin/basic-layouts": "^4.1.4",
+    "@uiw-admin/router-control": "^4.1.4",
+    "@uiw-admin/user-login": "^4.1.4",
     "@uiw/reset.css": "1.0.4",
     "axios": "0.21.1",
     "react": "17.0.1",
