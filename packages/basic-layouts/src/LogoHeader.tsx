@@ -1,5 +1,5 @@
-import React, {useMemo} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 interface LogoHeaderProps {
   collapsed?: boolean;
@@ -9,7 +9,8 @@ interface LogoHeaderProps {
 
 export default (props: LogoHeaderProps = {}) => {
   const logo = useMemo(
-    () => props.logo && <img src={props.logo} alt={props.projectName || 'logo'} />,
+    () =>
+      props.logo && <img src={props.logo} alt={props.projectName || 'logo'} />,
     [props.logo],
   );
   const name = useMemo(
@@ -20,7 +21,10 @@ export default (props: LogoHeaderProps = {}) => {
   return useMemo(
     () => (
       <div className="uiw-admin-global-title">
-        <Link to="/" style={props.collapsed ? {justifyContent: 'center'} : {}}>
+        <Link
+          to="/"
+          style={props.collapsed ? { justifyContent: 'center' } : {}}
+        >
           {logo}
           {!props.collapsed && name}
         </Link>
@@ -28,4 +32,4 @@ export default (props: LogoHeaderProps = {}) => {
     ),
     [props.collapsed],
   );
-}
+};

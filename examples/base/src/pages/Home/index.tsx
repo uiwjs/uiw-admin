@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button } from 'uiw';
 import { DefaultProps } from '@uiw-admin/router-control';
-import {Link}from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default class Home extends Component<DefaultProps> {
   render() {

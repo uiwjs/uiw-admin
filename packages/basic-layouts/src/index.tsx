@@ -1,4 +1,4 @@
-import React, {useMemo, Fragment, useState} from 'react';
+import React, { useMemo, Fragment, useState } from 'react';
 import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
@@ -6,7 +6,10 @@ import { StaticContext } from 'react-router';
 import { History } from 'history';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 import dynamic from 'react-dynamic-loadable';
-import Controller, { DefaultProps, getRouterList } from '@uiw-admin/router-control';
+import Controller, {
+  DefaultProps,
+  getRouterList,
+} from '@uiw-admin/router-control';
 import DocumentTitle from '@uiw-admin/document-title';
 import LogoHeader from './LogoHeader';
 import Menu from './Menu';
@@ -15,7 +18,11 @@ import './index.css';
 const { Header, Footer, Sider, Content } = Layout;
 
 // wrapper of dynamic
-const dynamicWrapper = (component: () => Promise<any>, modelFun: Promise<any>[] | null, loadingComponent?: JSX.Element) =>
+const dynamicWrapper = (
+  component: () => Promise<any>,
+  modelFun: Promise<any>[] | null,
+  loadingComponent?: JSX.Element,
+) =>
   dynamic({
     models: (modelFun || null) as any,
     component,
@@ -38,7 +45,14 @@ export type BasicLayoutProps = DefaultProps & {
 };
 
 export default function BasicLayout(props = {} as BasicLayoutProps) {
-  const { routes = [], loadModels = () => null, loadingComponent, footer, headerRight, projectName = 'UIW Admin' } = props;
+  const {
+    routes = [],
+    loadModels = () => null,
+    loadingComponent,
+    footer,
+    headerRight,
+    projectName = 'UIW Admin',
+  } = props;
   const [collapsed, setCollapsed] = useState(false);
   const data = getRouterList(routes);
   const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
@@ -46,9 +60,10 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
     <Fragment>
       <DocumentTitle title={projectName || ''} />
       <Layout hasSider style={{ height: '100%' }}>
-        <Sider collapsed={collapsed} className={classnames('uiw-admin-global-sider-menu', {
-          
-        })}>
+        <Sider
+          collapsed={collapsed}
+          className={classnames('uiw-admin-global-sider-menu', {})}
+        >
           <LogoHeader
             collapsed={collapsed}
             projectName={projectName}
@@ -73,21 +88,30 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
                   return null;
                 }
                 if (props.location.pathname === item.path && item.redirect) {
-                  return (
-                    <Redirect to={item.redirect} key={index}/>
-                  );
+                  return <Redirect to={item.redirect} key={index} />;
                 }
                 if (!item.component) {
                   return null;
                 }
                 const modelFun = loadModels(item.models || []);
-                const Com = dynamicWrapper(item.component, modelFun, loadingComponent) as any;
+                const Com = dynamicWrapper(
+                  item.component,
+                  modelFun,
+                  loadingComponent,
+                ) as any;
                 return (
                   <Route
                     key={index}
                     exact
                     path={item.path}
-                    render={(childProps) => <Com {...childProps} {...props} routes={item.routes || []} routesList={data} />}
+                    render={(childProps) => (
+                      <Com
+                        {...childProps}
+                        {...props}
+                        routes={item.routes || []}
+                        routesList={data}
+                      />
+                    )}
                   />
                 );
               })}
@@ -98,4 +122,4 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
       </Layout>
     </Fragment>
   );
-};
+}

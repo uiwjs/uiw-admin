@@ -4,9 +4,7 @@ import { DefaultProps } from '@uiw-admin/router-control';
 
 class UserLayout extends PureComponent<DefaultProps> {
   render() {
-    return (
-      <UserLogin />
-    );
+    return <UserLogin />;
   }
 }
 

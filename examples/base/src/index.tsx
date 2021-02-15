@@ -17,7 +17,7 @@ ReactDOM.render(
             const modelData = md.default || md;
             store.model({ name: m, ...modelData });
           });
-        })
+        });
       }}
     />
   </Provider>,

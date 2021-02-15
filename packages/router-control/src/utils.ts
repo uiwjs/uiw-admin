@@ -11,7 +11,7 @@ export interface Routers {
   routes?: Routers[];
 }
 
-export function getRouterList(data: Routers[] = [],  treeList: Routers[] = []) {
+export function getRouterList(data: Routers[] = [], treeList: Routers[] = []) {
   data.forEach((node) => {
     if (node.routes) {
       treeList = getRouterList(node.routes, treeList);
@@ -19,6 +19,6 @@ export function getRouterList(data: Routers[] = [],  treeList: Routers[] = []) {
       node.key = node.path;
       treeList.push(node);
     }
-  })
+  });
   return treeList;
 }

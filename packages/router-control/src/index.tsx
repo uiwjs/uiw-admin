@@ -3,7 +3,7 @@ import { StaticContext } from 'react-router';
 import * as H from 'history';
 import { RouteComponentProps, Router, HashRouter } from 'react-router-dom';
 import { Route, Redirect, Switch } from 'react-router-dom';
-import {createBrowserHistory} from 'history'
+import { createBrowserHistory } from 'history';
 import dynamic from 'react-dynamic-loadable';
 
 export * from './utils';
@@ -27,13 +27,16 @@ export interface match<Params extends { [K in keyof Params]?: string } = {}> {
 }
 
 export type DefaultProps = React.PropsWithChildren<
-    RouteComponentProps<any, StaticContext, H.LocationState>
-  > & {
+  RouteComponentProps<any, StaticContext, H.LocationState>
+> & {
   routes: Routers[];
-}
+};
 
 // wrapper of dynamic
-const dynamicWrapper = (component: () => Promise<any>, modelFun: Promise<any>[]) =>
+const dynamicWrapper = (
+  component: () => Promise<any>,
+  modelFun: Promise<any>[],
+) =>
   dynamic({
     models: (modelFun || null) as any,
     // models: () =>
@@ -63,7 +66,7 @@ export default function Controller(props: ControllerProps = {}) {
     <Switch>
       {routes.map((item, index) => {
         if (item.redirect) {
-          return <Redirect key={index} from={item.path} to={item.redirect} />
+          return <Redirect key={index} from={item.path} to={item.redirect} />;
         }
         if (!item.component) {
           return null;
