@@ -14,9 +14,9 @@
     "isolatedModules": true,
     "declaration": true,
     "baseUrl": "src",
-    "jsx": "react",
+    "jsx": "react-jsx",
     "noFallthroughCasesInSwitch": true,
     "noEmit": true
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", ".kktrc.ts"]
 }
