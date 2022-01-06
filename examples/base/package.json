@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@rematch/core": "2.2.0",
-    "@rematch/loading": "1.2.1",
+    "@rematch/loading": "2.1.2",
     "@uiw-admin/basic-layouts": "^4.1.4",
     "@uiw-admin/router-control": "^4.1.4",
     "@uiw-admin/user-login": "^4.1.4",

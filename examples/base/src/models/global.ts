@@ -1,16 +1,17 @@
 import { createModel } from '@rematch/core';
-import { Dispatch } from './';
+import { Dispatch, RootModel } from './';
 
 export interface GlobalState {
-  test?: string;
+  test: string;
+  [s: string]: any
 }
 
-export default createModel({
+export default createModel<RootModel>()({
   state: {
     test: '测试全局State',
   },
   reducers: {
-    updateState: (state: any, payload: GlobalState): GlobalState => ({
+    updateState: (state: GlobalState, payload: GlobalState) => ({
       ...state,
       ...payload,
     }),

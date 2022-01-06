@@ -1,5 +1,5 @@
 import { createModel } from '@rematch/core';
-import { Dispatch } from './';
+import { Dispatch, RootModel } from './';
 // import { login } from '../servers/login';
 
 export interface LoginState {
@@ -9,13 +9,13 @@ export interface LoginState {
   };
 }
 
-export default createModel({
+export default createModel<RootModel>()({
   state: {
     userData: null,
     token: null,
   },
   reducers: {
-    updateState: (state: LoginState, payload: LoginState): LoginState => ({
+    updateState: (state: any, payload: LoginState) => ({
       ...state,
       ...payload,
     }),
