@@ -9,8 +9,8 @@
     "url": "https://github.com/uiwjs/uiw-admin.git"
   },
   "license": "MIT",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
   "files": [
     "lib",
     "src"
@@ -45,18 +45,18 @@
   "dependencies": {
     "@uiw-admin/document-title": "^4.1.3",
     "@uiw-admin/router-control": "^4.1.4",
-    "classnames": "^2.2.6",
-    "react-dynamic-loadable": "2.0.5"
+    "classnames": "2.3.1",
+    "react-dynamic-loadable": "3.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "7.12.13",
-    "@types/classnames": "2.2.11",
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.1",
-    "@types/react-router-dom": "5.1.7",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-router-dom": "5.2.0",
-    "uiw": "4.7.12"
+    "@babel/runtime": "7.16.7",
+    "@types/classnames": "2.3.1",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@types/react-router-dom": " 5.3.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-router-dom": "6.2.1",
+    "uiw": "4.9.7"
   }
 }
