@@ -6,6 +6,7 @@ Create a project for the React component library containing a website preview of
 ## Open in CodeSandbox
 
 [![Edit uiw-admin Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
+[![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/uiwjs/uiw-admin/tree/master/examples/base?embed=1&hideNavigation=0&hidedevtools=0)
 
 ## Quick Start
 
