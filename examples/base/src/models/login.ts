@@ -21,7 +21,7 @@ export default createModel<RootModel>()({
     }),
   },
   effects: (dispatch: any) => ({
-    async submit() {
+    async submit({ payload }) {
       const dph = dispatch as Dispatch;
       dph.login.updateState({ token: '测试2' });
       // this.updateState()

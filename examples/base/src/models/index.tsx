@@ -1,8 +1,8 @@
 import {
   init,
   RematchRootState,
-  RematchDispatch,
   Models,
+  RematchDispatch,
 } from '@rematch/core';
 import loading, { ExtraModelsFromLoading } from '@rematch/loading';
 import global from './global';
@@ -26,5 +26,5 @@ export const store = init<RootModel, FullModel>({
 export const { dispatch } = store;
 
 export type Store = typeof store;
-export type Dispatch = RematchDispatch<RootModel>;
+export type Dispatch = RematchDispatch<RootModel>
 export type RootState = RematchRootState<RootModel, FullModel>;
