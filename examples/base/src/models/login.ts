@@ -1,7 +1,7 @@
 import { createModel } from '@rematch/core';
-import { Dispatch, RootModel } from './';
+import { RootModel } from './';
 // import { login } from '../servers/login';
-
+import history from "./../routes/history"
 export interface LoginState {
   token?: string;
   userData?: {
@@ -21,9 +21,10 @@ export default createModel<RootModel>()({
     }),
   },
   effects: (dispatch: any) => ({
-    async submit({ payload }) {
-      const dph = dispatch as Dispatch;
-      dph.login.updateState({ token: '测试2' });
+    async submit(payload) {
+      dispatch.login.updateState({ token: '测试2' });
+      console.log("payload", payload)
+      history.push("/home")
       // this.updateState()
       // await login({ username: 'test', password: 'www' });
       // dispatch.sharks.increment(payload)

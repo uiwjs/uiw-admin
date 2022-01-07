@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Button } from 'uiw';
-import { DefaultProps } from '@uiw-admin/router-control';
+import { useNavigate } from 'react-router-dom';
 
-export default class Home extends Component<DefaultProps> {
-  render() {
-    const { history } = this.props;
-    return (
-      <div>
-        Dashboard
-        <hr />
-        <Button onClick={() => history.push('/login')}>Logout</Button>
-      </div>
-    );
-  }
+const Dashboard = () => {
+  const navigate = useNavigate()
+
+  return (
+    <div>
+      Dashboard
+      <hr />
+      <Button onClick={() => navigate("/", { replace: true })}>Logout</Button>
+    </div>
+  );
 }
+export default Dashboard

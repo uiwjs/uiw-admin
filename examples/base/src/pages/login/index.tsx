@@ -8,7 +8,6 @@ import { RootState, Dispatch } from '../../models';
 const Login = () => {
   const dispatch = useDispatch<Dispatch>()
   const loading = useSelector((state: RootState) => state.loading.effects.login.submit)
-  // const loginState = useSelector((state: RootState) => state.login)
 
   return (
     <Row justify="center" align="middle" style={{ height: '100%' }}>
