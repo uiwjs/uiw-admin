@@ -1,11 +1,9 @@
 import React from 'react';
-import { StaticContext } from 'react-router';
-import * as H from 'history';
-import { RouteComponentProps, Router, HashRouter } from 'react-router-dom';
-import { Route, Redirect, Switch } from 'react-router-dom';
+// import * as H from 'history';
+import { Router, HashRouter, Navigate, useLocation, } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import dynamic from 'react-dynamic-loadable';
-
 export * from './utils';
 
 export interface Routers {
@@ -26,11 +24,10 @@ export interface match<Params extends { [K in keyof Params]?: string } = {}> {
   url: string;
 }
 
-export type DefaultProps = React.PropsWithChildren<
-  RouteComponentProps<any, StaticContext, H.LocationState>
-> & {
+export type DefaultProps = {
   routes: Routers[];
 };
+
 
 // wrapper of dynamic
 const dynamicWrapper = (
@@ -63,10 +60,11 @@ export interface ControllerProps {
 export default function Controller(props: ControllerProps = {}) {
   const { routes = [], loadModels = () => [] } = props;
   const Child = () => (
-    <Switch>
+    <Routes>
       {routes.map((item, index) => {
         if (item.redirect) {
-          return <Redirect key={index} from={item.path} to={item.redirect} />;
+          return <Route path={item.path} element={<Navigate replace to={item.redirect} />} />
+          // return <Redirect key={index} from={item.path} to={item.redirect} />;
         }
         if (!item.component) {
           return null;
@@ -77,16 +75,19 @@ export default function Controller(props: ControllerProps = {}) {
           <Route
             path={item.path}
             key={index}
-            render={(childProps) => (
+            children={(childProps: any) => (
               <Com {...childProps} {...props} routes={item.routes || []} />
             )}
           />
         );
       })}
-    </Switch>
+    </Routes>
   );
   return (
-    <Router history={createBrowserHistory()}>
+    <Router
+      location={useLocation()}
+      navigator={createBrowserHistory()}
+    >
       {props.isHashRouter ? (
         <HashRouter>
           <Child />

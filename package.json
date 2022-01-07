@@ -8,7 +8,7 @@
     "url": "https://github.com/uiwjs/uiw-admin.git"
   },
   "scripts": {
-    "init": "npm run clean && rm -rf node_modules && npm install && npm run bootstrap && npm run build",
+    "initi": "npm run clean && rm -rf node_modules && npm install && npm run bootstrap && npm run build",
     "prepare": "husky install",
     "-----layout-----": "----------",
     "build:layout:ui": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb build",

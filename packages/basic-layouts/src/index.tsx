@@ -2,11 +2,9 @@ import React, { useMemo, Fragment, useState } from 'react';
 import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
-import { StaticContext } from 'react-router';
-import { History } from 'history';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Route, Navigate } from 'react-router-dom';
 import dynamic from 'react-dynamic-loadable';
-import Controller, {
+import {
   DefaultProps,
   getRouterList,
 } from '@uiw-admin/router-control';
@@ -82,13 +80,14 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
             {headerRight}
           </Header>
           <Content>
-            <Switch>
+            <Route>
               {data.map((item, index) => {
                 if (!item.path) {
                   return null;
                 }
                 if (props.location.pathname === item.path && item.redirect) {
-                  return <Redirect to={item.redirect} key={index} />;
+                  return <Route path={item.path} element={<Navigate replace to={item.redirect} />} />
+                  // return <Redirect to={item.redirect} key={index} />;
                 }
                 if (!item.component) {
                   return null;
@@ -102,9 +101,8 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
                 return (
                   <Route
                     key={index}
-                    exact
                     path={item.path}
-                    render={(childProps) => (
+                    children={(childProps: any) => (
                       <Com
                         {...childProps}
                         {...props}
@@ -115,7 +113,7 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
                   />
                 );
               })}
-            </Switch>
+            </Route>
           </Content>
           {footerView}
         </Layout>

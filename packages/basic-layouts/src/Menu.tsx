@@ -14,11 +14,11 @@ function renderMenuItem(
   collapsed: boolean,
   level?: boolean,
 ) {
-  return routes.map((item, index) => {
+  return routes.map((item: any, index: number) => {
     const props = {
       key: index,
       icon: item.icon,
-    } as MenuItemProps & SubMenuProps;
+    } as MenuItemProps<any> & SubMenuProps<any>;
     if (level) {
       props.className = classnames({
         'uiw-admin-global-sider-menu-collapsed': collapsed,
