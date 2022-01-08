@@ -27,6 +27,7 @@ export default (
     // 当前开发模式需要
     // https://github.com/marmelab/react-admin/issues/3078#issuecomment-579128213
     // react: path.resolve('./node_modules/react'),
+    // "react-dom": path.resolve('./node_modules/react-dom'),
     // "react-router": path.resolve("./node_modules/react-router"),
     // "react-router-dom": path.resolve("./node_modules/react-router-dom"),
     '@/': path.resolve(__dirname, 'src'),

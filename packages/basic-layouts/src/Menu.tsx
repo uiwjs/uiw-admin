@@ -1,9 +1,7 @@
 import React, { Fragment } from 'react';
 import classnames from 'classnames';
-import { NavLink } from 'react-router-dom';
 import Menu, { MenuItemProps, SubMenuProps } from '@uiw/react-menu';
-import { DefaultProps } from '@uiw-admin/router-control';
-
+import { DefaultProps, history } from '@uiw-admin/router-control';
 interface MenuProps {
   collapsed?: boolean;
   routes?: DefaultProps['routes'];
@@ -24,10 +22,10 @@ function renderMenuItem(
         'uiw-admin-global-sider-menu-collapsed': collapsed,
       });
     }
-    if (item.redirect) {
+    if (item.index) {
       return <Fragment key={index} />;
     }
-    if (item.routes) {
+    if (item.children) {
       if (collapsed) {
         props.overlayProps = {
           isOutside: true,
@@ -36,14 +34,17 @@ function renderMenuItem(
       }
       return (
         <Menu.SubMenu {...props} text={item.name || '-'} collapse={collapsed}>
-          {renderMenuItem(item.routes, collapsed)}
+          {renderMenuItem(item.children, collapsed)}
         </Menu.SubMenu>
       );
     }
     return (
       <Menu.Item
         {...props}
-        tagName={NavLink}
+        // tagName={}
+        onClick={() => {
+          history.push(item.path)
+        }}
         to={item.path}
         text={item.name || '-'}
       />

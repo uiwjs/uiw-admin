@@ -5,20 +5,11 @@ import '@uiw/reset.css';
 import { store } from './models';
 import { routers } from './routes/router';
 import './index.css';
-import { useRoutes } from 'react-router-dom';
-import history, { HistoryRouter } from './routes/history';
-
-// 这个转换掉
-
-const Rout = () => {
-  return useRoutes(routers)
-}
+import Control from '@uiw-admin/router-control';
 
 ReactDOM.render(
   <Provider store={store}>
-    <HistoryRouter history={history} >
-      <Rout />
-    </HistoryRouter>
+    <Control routes={routers} />
   </Provider>,
   document.getElementById('root'),
 );

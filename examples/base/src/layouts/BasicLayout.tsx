@@ -1,14 +1,23 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import BasicLayout from '@uiw-admin/basic-layouts';
-import { DefaultProps } from '@uiw-admin/router-control';
-import { RootState } from '../models';
-import logo from './logo.svg';
 import { Outlet } from "react-router-dom";
+import { Routers } from "@uiw-admin/router-control"
 
-function BasicLayoutScreen() {
-  // console.log('props:', props);
-  return <Outlet />;
+interface BasicLayoutProps {
+  routes?: Routers[]
 }
+
+function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+  console.log("props", props)
+  return <div>
+    <BasicLayout {...props}  >
+      <Outlet />
+    </BasicLayout>
+  </div>
+}
+
+// BasicLayoutScreen.defaultProps = {
+//   routes: []
+// }
 
 export default BasicLayoutScreen;

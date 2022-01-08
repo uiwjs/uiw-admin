@@ -1,7 +1,7 @@
 import { createModel } from '@rematch/core';
 import { RootModel } from './';
 // import { login } from '../servers/login';
-import history from "./../routes/history"
+import { history } from "@uiw-admin/router-control"
 export interface LoginState {
   token?: string;
   userData?: {
