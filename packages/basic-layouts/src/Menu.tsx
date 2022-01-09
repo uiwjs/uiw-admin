@@ -53,7 +53,6 @@ function renderMenuItem(
 
 export default (props: MenuProps = {}) => {
   const { routes = [], collapsed } = props;
-
   return React.useMemo(() => {
     return <Menu
       theme="dark"

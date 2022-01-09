@@ -7,15 +7,12 @@ import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
 
 const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")) as any)
-const LoginPage = Loadable(React.lazy(() => import("../pages/login")))
-const Home = Loadable(React.lazy(() => import("../pages/Home")))
-const Dashboard = Loadable(React.lazy(() => import("../pages/Dashboard")))
 
 // 这块内容需要进行转换掉 
 export const routers: Routers[] = [
   {
     path: "/login",
-    element: <LoginPage />
+    element: React.lazy(() => import("../pages/login"))
   },
   {
     path: "/",
@@ -23,17 +20,17 @@ export const routers: Routers[] = [
     children: [
       {
         index: true,
-        element: <Home />,
+        element: React.lazy(() => import("../pages/Home")),
       },
       {
         path: "/courses",
         name: "Dashboard",
-        element: <Dashboard />,
+        element: React.lazy(() => import("../pages/Dashboard")),
       },
       {
         path: "/home",
         name: "首页",
-        element: <Home />,
+        element: React.lazy(() => import("../pages/Home")),
       },
       {
         path: "/dom",
@@ -42,12 +39,12 @@ export const routers: Routers[] = [
           {
             path: "/dom/courses",
             name: "Dashboard",
-            element: <Dashboard />,
+            element: React.lazy(() => import("../pages/Dashboard")),
           },
           {
             path: "/dom/home",
             name: "home",
-            element: <Home />,
+            element: React.lazy(() => import("../pages/Home")),
           },
         ]
       }
