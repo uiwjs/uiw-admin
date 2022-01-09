@@ -1,5 +1,8 @@
+#root > div {
+  height: 100%;
+}
 .uiw-admin-global-sider-menu {
-  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   overflow: auto;
 }
 
@@ -20,16 +23,12 @@
   display: flex;
   justify-content: space-between;
 }
-
-
-
-
 .uiw-admin-global-title {
   position: relative;
   padding: 0 14px;
   overflow: hidden;
   cursor: pointer;
-  transition: all .3s;
+  transition: all 0.3s;
 }
 .uiw-admin-global-title h1 {
   box-sizing: border-box;
@@ -40,7 +39,7 @@
   font-size: 20px;
   vertical-align: middle;
   animation: fade-in;
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   white-space: nowrap;
 }
 .uiw-admin-global-title a {

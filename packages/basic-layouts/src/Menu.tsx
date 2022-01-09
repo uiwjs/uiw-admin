@@ -41,7 +41,6 @@ function renderMenuItem(
     return (
       <Menu.Item
         {...props}
-        // tagName={}
         onClick={() => {
           history.push(item.path)
         }}
@@ -53,14 +52,15 @@ function renderMenuItem(
 }
 
 export default (props: MenuProps = {}) => {
-  const { routes = [] } = props;
-  return (
-    <Menu
+  const { routes = [], collapsed } = props;
+
+  return React.useMemo(() => {
+    return <Menu
       theme="dark"
-      inlineCollapsed={!!props.collapsed}
+      inlineCollapsed={!!collapsed}
       style={{ padding: '0 12px' }}
     >
-      {renderMenuItem(routes, !!props.collapsed, true)}
+      {renderMenuItem(routes, !!collapsed, true)}
     </Menu>
-  );
+  }, [JSON.stringify(routes), collapsed]);
 };

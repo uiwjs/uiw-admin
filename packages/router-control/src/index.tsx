@@ -3,6 +3,7 @@ export * from './utils';
 import { unstable_HistoryRouter, useRoutes, useNavigate, NavigateFunction } from "react-router-dom";
 import type { RouteObject } from "react-router-dom";
 import { createBrowserHistory } from 'history';
+
 export const HistoryRouter = unstable_HistoryRouter
 export const history = createBrowserHistory()
 export let navigate: NavigateFunction = () => { };
@@ -26,7 +27,7 @@ export interface ControllerProps {
   routes?: Routers[];
 }
 
-export const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>, models?: string[]) => (props: any) => {
+export const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (props: any) => {
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
       <Component {...props} />
