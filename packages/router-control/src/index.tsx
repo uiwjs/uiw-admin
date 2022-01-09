@@ -1,5 +1,4 @@
 import React from 'react';
-export * from './utils';
 import {
   unstable_HistoryRouter, useRoutes, useNavigate, NavigateFunction,
   useLocation, useParams, Route, createRoutesFromChildren
@@ -11,15 +10,14 @@ export const HistoryRouter = unstable_HistoryRouter
 export const history = createBrowserHistory()
 export let navigate: NavigateFunction = () => { };
 
-export interface Routers extends RouteObject {
+export interface Routers extends Omit<RouteObject, "children"> {
   path?: string;
   key?: string;
   name?: string;
   icon?: string;
   element?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
-  component?: string;
-  routes?: Routers[];
-  children?: Routers[]
+  children?: React.ReactNode[]
+  routes?: Routers[]
 }
 
 export type DefaultProps = {
@@ -69,15 +67,15 @@ export const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>
 const getTree = (routes: Routers[] = []): JSX.Element[] => {
   return routes.map((item, ind) => {
     const obj = { ...item }
-    if (item.children) {
-      obj.children = getTree(item.children) as Routers["children"]
+    if (item.routes) {
+      obj.children = getTree(item.routes) as Routers["children"]
     }
     if (item.element && !React.isValidElement(item.element)) {
       const Com = Loadable(item.element as React.LazyExoticComponent<() => JSX.Element>)
       obj.element = <Com />
     }
     if (React.isValidElement(obj.element) && obj.children) {
-      obj.element = React.cloneElement(obj.element, { routes: item.children || [] } as any)
+      obj.element = React.cloneElement(obj.element, { routes: item.routes || [] } as any)
     }
     return <Route key={ind} {...obj} />
   })

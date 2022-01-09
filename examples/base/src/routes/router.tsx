@@ -17,7 +17,7 @@ export const routers: Routers[] = [
   {
     path: "/",
     element: <BasicLayout />,
-    children: [
+    routes: [
       {
         index: true,
         element: React.lazy(() => import("../pages/Home")),
@@ -35,7 +35,7 @@ export const routers: Routers[] = [
       {
         path: "/dom",
         name: "子项",
-        children: [
+        routes: [
           {
             path: "/dom/courses",
             name: "Dashboard",

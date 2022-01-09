@@ -25,7 +25,7 @@ function renderMenuItem(
     if (item.index) {
       return <Fragment key={index} />;
     }
-    if (item.children) {
+    if (item.routes) {
       if (collapsed) {
         props.overlayProps = {
           isOutside: true,
@@ -34,7 +34,7 @@ function renderMenuItem(
       }
       return (
         <Menu.SubMenu {...props} text={item.name || '-'} collapse={collapsed}>
-          {renderMenuItem(item.children, collapsed)}
+          {renderMenuItem(item.routes, collapsed)}
         </Menu.SubMenu>
       );
     }

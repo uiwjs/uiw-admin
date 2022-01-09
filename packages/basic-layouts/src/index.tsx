@@ -5,18 +5,12 @@ import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
 import LogoHeader from './LogoHeader';
 import Menu from './Menu';
-// import { getRouterList } from "@uiw-admin/router-control"
 import './index.css';
 
 import { getMenu } from "./utils"
 const { Header, Footer, Sider, Content } = Layout;
 
 export type BasicLayoutProps = {
-  /**
-   * 加载 models
-   */
-  loadModels?: (models: string[]) => Promise<any>[];
-  loadingComponent?: JSX.Element;
   logo?: string;
   projectName?: string;
   /**
