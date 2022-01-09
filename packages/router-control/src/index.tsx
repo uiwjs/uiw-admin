@@ -1,99 +1,100 @@
 import React from 'react';
-import { StaticContext } from 'react-router';
-import * as H from 'history';
-import { RouteComponentProps, Router, HashRouter } from 'react-router-dom';
-import { Route, Redirect, Switch } from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-import dynamic from 'react-dynamic-loadable';
-
 export * from './utils';
+import {
+  unstable_HistoryRouter, useRoutes, useNavigate, NavigateFunction,
+  useLocation, useParams, Route, createRoutesFromChildren
+} from "react-router-dom";
+import type { RouteObject } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 
-export interface Routers {
-  path: string;
+export const HistoryRouter = unstable_HistoryRouter
+export const history = createBrowserHistory()
+export let navigate: NavigateFunction = () => { };
+
+export interface Routers extends RouteObject {
+  path?: string;
   key?: string;
-  redirect?: string;
   name?: string;
   icon?: string;
-  component?: () => Promise<React.ReactNode>;
-  models?: string[];
+  element?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
+  component?: string;
   routes?: Routers[];
+  children?: Routers[]
 }
 
-export interface match<Params extends { [K in keyof Params]?: string } = {}> {
-  params: Params;
-  isExact: boolean;
-  path: string;
-  url: string;
-}
-
-export type DefaultProps = React.PropsWithChildren<
-  RouteComponentProps<any, StaticContext, H.LocationState>
-> & {
+export type DefaultProps = {
   routes: Routers[];
 };
 
-// wrapper of dynamic
-const dynamicWrapper = (
-  component: () => Promise<any>,
-  modelFun: Promise<any>[],
-) =>
-  dynamic({
-    models: (modelFun || null) as any,
-    // models: () =>
-    //   models.map((m: string) => {
-    //     return import(`../models/${m}.ts`).then((md) => {
-    //       const modelData = md.default || md;
-    //       store.model({ name: m, ...modelData });
-    //     });
-    //   }),
-    component,
-    LoadingComponent: () => <span>loading....</span>,
-  });
-
 export interface ControllerProps {
-  /** 是否为 hash 路由 */
-  isHashRouter?: boolean;
   routes?: Routers[];
-  /**
-   * 加载 models
-   */
-  loadModels?: (models: string[]) => Promise<any>[];
+}
+
+export const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (props: any) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const params = useParams();
+  return (
+    <React.Suspense fallback={<div>Loading...</div>}>
+      <Component  {...props} router={{ location, navigate, params }} />
+    </React.Suspense>
+  );
+};
+// const getTree = (routes: Routers[] = []): Routers[] => {
+//   return routes.map((item) => {
+//     const { element: Element } = item
+//     const obj = { ...item }
+//     if (Element && Object.prototype.toString.call(Element) === "[object Function]") {
+//       const Com = Element as (props: any) => JSX.Element
+//       obj.element = <Com />
+//     }
+//     if (obj.children && obj.element) {
+//       /** 处理数据用于渲染侧边路由使用 */
+//       const dom = React.isValidElement(obj.element) ? React.cloneElement(obj.element, { routes: obj.children } as any) : obj.element;
+//       return {
+//         ...obj,
+//         element: dom
+//       }
+//     } else if (obj.children) {
+//       return {
+//         ...obj,
+//         children: getTree(obj.children)
+//       }
+//     }
+//     return {
+//       ...obj
+//     }
+//   })
+// }
+const getTree = (routes: Routers[] = []): JSX.Element[] => {
+  return routes.map((item, ind) => {
+    const obj = { ...item }
+    if (item.children) {
+      obj.children = getTree(item.children) as Routers["children"]
+    }
+    if (item.element && !React.isValidElement(item.element)) {
+      const Com = Loadable(item.element as React.LazyExoticComponent<() => JSX.Element>)
+      obj.element = <Com />
+    }
+    if (React.isValidElement(obj.element) && obj.children) {
+      obj.element = React.cloneElement(obj.element, { routes: item.children || [] } as any)
+    }
+    return <Route key={ind} {...obj} />
+  })
+}
+
+export function RouteChild(props: ControllerProps = {}) {
+  const { routes = [] } = props;
+  const rou = createRoutesFromChildren(getTree(routes))
+  const dom = useRoutes(rou)
+  /** 赋值 用于跳转 */
+  navigate = useNavigate()
+  return dom
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routes = [], loadModels = () => [] } = props;
-  const Child = () => (
-    <Switch>
-      {routes.map((item, index) => {
-        if (item.redirect) {
-          return <Redirect key={index} from={item.path} to={item.redirect} />;
-        }
-        if (!item.component) {
-          return null;
-        }
-        const modelFun = loadModels(item.models || []);
-        const Com = dynamicWrapper(item.component, modelFun) as any;
-        return (
-          <Route
-            path={item.path}
-            key={index}
-            render={(childProps) => (
-              <Com {...childProps} {...props} routes={item.routes || []} />
-            )}
-          />
-        );
-      })}
-    </Switch>
-  );
-  return (
-    <Router history={createBrowserHistory()}>
-      {props.isHashRouter ? (
-        <HashRouter>
-          <Child />
-        </HashRouter>
-      ) : (
-        <Child />
-      )}
-    </Router>
-  );
+  const { routes = [] } = props;
+  return <HistoryRouter history={history} >
+    <RouteChild routes={routes} />
+  </HistoryRouter>
 }

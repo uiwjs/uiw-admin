@@ -1,14 +1,13 @@
 import React from 'react';
-
 export interface Routers {
-  path: string;
+  path?: string;
   key?: string;
-  redirect?: string;
   name?: string;
   icon?: string;
-  component?: () => Promise<React.ReactNode>;
-  models?: string[];
+  element?: JSX.Element;
+  component?: string;
   routes?: Routers[];
+  children?: Routers[]
 }
 
 export function getRouterList(data: Routers[] = [], treeList: Routers[] = []) {

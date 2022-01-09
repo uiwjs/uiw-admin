@@ -1,7 +1,7 @@
 import { createModel } from '@rematch/core';
-import { Dispatch } from './';
+import { RootModel } from './';
 // import { login } from '../servers/login';
-
+import { history } from "@uiw-admin/router-control"
 export interface LoginState {
   token?: string;
   userData?: {
@@ -9,21 +9,22 @@ export interface LoginState {
   };
 }
 
-export default createModel({
+export default createModel<RootModel>()({
   state: {
     userData: null,
     token: null,
   },
   reducers: {
-    updateState: (state: LoginState, payload: LoginState): LoginState => ({
+    updateState: (state: any, payload: LoginState) => ({
       ...state,
       ...payload,
     }),
   },
   effects: (dispatch: any) => ({
-    async submit() {
-      const dph = dispatch as Dispatch;
-      dph.login.updateState({ token: '测试2' });
+    async submit(payload) {
+      dispatch.login.updateState({ token: '测试2' });
+      console.log("payload", payload)
+      history.push("/home")
       // this.updateState()
       // await login({ username: 'test', password: 'www' });
       // dispatch.sharks.increment(payload)

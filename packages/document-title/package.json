@@ -9,8 +9,8 @@
     "url": "https://github.com/uiwjs/uiw-admin.git"
   },
   "license": "MIT",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
   "files": [
     "lib",
     "src"
@@ -37,15 +37,15 @@
     "frontend"
   ],
   "peerDependencies": {
-    "@babel/runtime": ">=7.0.0",
-    "react": ">=16.8.0",
-    "react-dom": ">=16.8.0"
+    "@babel/runtime": ">=7.10.0",
+    "react": ">=17.x",
+    "react-dom": ">=17.x"
   },
   "devDependencies": {
-    "@babel/runtime": "7.12.13",
-    "@types/react": "17.0.2",
-    "@types/react-dom": "17.0.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "@babel/runtime": "7.16.7",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }

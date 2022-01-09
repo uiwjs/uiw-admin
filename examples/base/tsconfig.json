@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["es6", "dom"],
+    "target": "esnext",
+    "lib": [
+      "esnext",
+      "dom"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,9 +17,12 @@
     "isolatedModules": true,
     "declaration": true,
     "baseUrl": "src",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "noFallthroughCasesInSwitch": true,
     "noEmit": true
   },
-  "include": ["src/**/*", ".kktrc.ts"]
+  "include": [
+    "src/**/*",
+    ".kktrc.ts"
+  ]
 }

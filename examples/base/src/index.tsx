@@ -2,24 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import '@uiw/reset.css';
-import Controller from '@uiw-admin/router-control';
 import { store } from './models';
 import { routers } from './routes/router';
 import './index.css';
+import Control from '@uiw-admin/router-control';
 
 ReactDOM.render(
   <Provider store={store}>
-    <Controller
-      routes={routers}
-      loadModels={(models = []) => {
-        return models.map((m) => {
-          return import(`./models/${m}.ts`).then((md) => {
-            const modelData = md.default || md;
-            store.model({ name: m, ...modelData });
-          });
-        });
-      }}
-    />
+    <Control routes={routers} />
   </Provider>,
   document.getElementById('root'),
 );
