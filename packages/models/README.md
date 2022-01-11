@@ -1,11 +1,7 @@
 # `models`
 
-> TODO: description
+## Installation
 
-## Usage
-
-```
-const models = require('models');
-
-// TODO: DEMONSTRATE API
+```bash
+npm i @uiw-admin/models --save
 ```

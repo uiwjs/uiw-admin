@@ -1,11 +1,7 @@
 # `layout-tabs`
 
-> TODO: description
+## Installation
 
-## Usage
-
-```
-const layoutTabs = require('layout-tabs');
-
-// TODO: DEMONSTRATE API
+```bash
+npm i @uiw-admin/layout-tabs --save
 ```

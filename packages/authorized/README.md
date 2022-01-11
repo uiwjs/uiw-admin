@@ -1,11 +1,7 @@
 # `authorized`
 
-> TODO: description
+## Installation
 
-## Usage
-
-```
-const authorized = require('authorized');
-
-// TODO: DEMONSTRATE API
+```bash
+npm i @uiw-admin/authorized --save
 ```
