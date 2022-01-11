@@ -1,0 +1,32 @@
+{
+  "name": "@uiw-admin/models",
+  "version": "4.1.4",
+  "description": "Basic Layouts",
+  "author": "Kenny Wong <wowohoo@qq.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/basic-layouts#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "lib",
+    "esm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uiwjs/uiw-admin.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/uiwjs/uiw-admin/issues"
+  },
+  "peerDependencies": {
+    "@rematch/core": ">=2.2.0",
+    "@rematch/loading": ">=2.1.2"
+  },
+  "devDependencies": {
+    "@rematch/core": "2.2.0",
+    "@rematch/loading": "2.1.2"
+  }
+}

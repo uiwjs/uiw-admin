@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'uiw';
 import { useNavigate } from 'react-router-dom';
 
-const Dashboard = () => {
+const Dashboard = (props: any) => {
   const navigate = useNavigate()
   const [state, setState] = React.useState("")
   return (

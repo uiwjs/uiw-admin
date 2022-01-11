@@ -3,11 +3,10 @@ import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
+import { RoutersProps } from "@uiw-admin/router-control"
 import LogoHeader from './LogoHeader';
 import Menu from './Menu';
 import Bread from "./Breadcrumb"
-import { useLocation, } from "react-router-dom";
-import LayoutTabs from "@uiw-admin/layout-tabs"
 import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 const { Header, Footer, Sider, Content } = Layout;
@@ -20,18 +19,18 @@ export type BasicLayoutProps = {
    */
   footer?: React.ReactElement;
   headerRight?: React.ReactElement;
-  routes?: any[];
+  routes?: RoutersProps[];
   children?: React.ReactNode
 };
 
 
-export default function BasicLayout(props = {} as BasicLayoutProps) {
+export default function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
     footer,
     headerRight,
     projectName = 'UIW Admin',
-  } = props;
+  } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
   /** 转换 用于 侧边路由展示 */
@@ -42,11 +41,9 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
     return <Menu collapsed={collapsed} routes={routeData} />
   }, [JSON.stringify(routeData), collapsed])
 
-  // console.log(routeListData)
   const mapRoute = React.useMemo(() => {
     return new BreadcrumbMap(routeData)
   }, [JSON.stringify(routeData)])
-  // console.log(mapRoute)
 
   return (
     <Fragment>
@@ -77,7 +74,7 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
             {headerRight}
           </Header>
           <Content>
-            <LayoutTabs routes={routes} />
+            {props.children}
           </Content>
           {footerView}
         </Layout>

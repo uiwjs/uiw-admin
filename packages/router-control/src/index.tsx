@@ -17,24 +17,31 @@ export interface Routers extends Omit<RouteObject, "children"> {
   name?: string;
   icon?: string;
   redirect?: string;
-  component?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
-  element?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
-  children?: React.ReactNode[]
+  component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
   routes?: Routers[]
+  model?: string[];
+}
+
+export interface RoutersProps extends Routers {
+  component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
+  children?: React.ReactNode[]
+  /** 用于路由校验权限 */
+  isAuth?: boolean
 }
 
 export type DefaultProps = {
-  routes: Routers[];
+  routes: RoutersProps[];
 };
 
 export interface ControllerProps {
-  routes?: Routers[];
+  routes?: RoutersProps[];
   /** 路由模式   默认 history  */
   routeType?: "history" | "hash" | "browser";
-  basename?: string
+  basename?: string;
+  addModel?: (model: string[]) => void
 }
 
-export const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (props: any) => {
+export const Loadable = (Component: React.LazyExoticComponent<(props?: any) => JSX.Element>) => (props: any) => {
   const location = useLocation();
   const navigate = useNavigate();
   const params = useParams();
@@ -45,11 +52,14 @@ export const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>
     </React.Suspense>
   );
 };
-const getTree = (routes: Routers[] = [], auths: string | null): JSX.Element[] => {
+const getTree = (routes: RoutersProps[] = [], auths: string | null, addModel?: (model: string[]) => void): JSX.Element[] => {
   let list: JSX.Element[] = []
   routes.forEach((item, ind) => {
     if (item.routes) {
-      item.children = getTree(item.routes, auths)
+      item.children = getTree(item.routes, auths, addModel)
+    }
+    if (addModel && !item.element && item.model) {
+      addModel(item.model)
     }
     if (!React.isValidElement(item.component) && item.component && !item.element) {
       const Com = Loadable(item.component as React.LazyExoticComponent<() => JSX.Element>)
@@ -61,18 +71,24 @@ const getTree = (routes: Routers[] = [], auths: string | null): JSX.Element[] =>
     if (React.isValidElement(item.element) && item.children) {
       item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
     }
-    console.log(item.redirect, item.element)
     /** 在这边加路由权限 控制就好了 */
+    // isAuth 这边加这个属性
+    // 1. 如果加了这个属性 说明  跳转需求进行权限校验
+    // 2. 如果没加这个属性 说明  跳转不用权限校验
+    // 3. 加了这个属性为 false 说明 这个路由是没权限的，需要跳转403页面
+    // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
+    // 5. 还有一种方案 直接 element 进行赋值
+
     list.push(<Route key={ind} {...item} />)
   })
   return list
 }
 
 export function RouteChild(props: ControllerProps = {}) {
-  const { routes = [] } = props;
+  const { routes = [], addModel } = props;
   // 这边取权限校验值
   const auths = sessionStorage.getItem("auth")
-  const roue = React.useMemo(() => createRoutesFromChildren(getTree(routes, auths)), [auths])
+  const roue = React.useMemo(() => createRoutesFromChildren(getTree(routes, auths, addModel)), [auths])
   const dom = useRoutes(roue)
   /** 赋值 用于跳转 */
   navigate = useNavigate()
@@ -80,17 +96,17 @@ export function RouteChild(props: ControllerProps = {}) {
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routes = [], routeType, basename = "/" } = props;
+  const { routes = [], routeType, basename = "/", addModel } = props;
   if (routeType === "hash") {
     return <HashRouter window={window} basename={basename} >
-      <RouteChild routes={routes} />
+      <RouteChild routes={routes} addModel={addModel} />
     </HashRouter>
   } else if (routeType === "browser") {
     return <BrowserRouter window={window} basename={basename}  >
-      <RouteChild routes={routes} />
+      <RouteChild routes={routes} addModel={addModel} />
     </BrowserRouter>
   }
   return <HistoryRouter history={history} basename={basename}  >
-    <RouteChild routes={routes} />
+    <RouteChild routes={routes} addModel={addModel} />
   </HistoryRouter>
 }

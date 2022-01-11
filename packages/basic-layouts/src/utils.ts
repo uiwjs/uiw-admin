@@ -1,7 +1,7 @@
-import { Routers } from "@uiw-admin/router-control"
+import { RoutersProps } from "@uiw-admin/router-control"
 /** 菜单转化 去除 dom  */
-export function getMenu(data: Routers[] = []) {
-  let treeList: Routers[] = []
+export function getMenu(data: RoutersProps[] = []) {
+  let treeList: RoutersProps[] = []
   data.forEach((item) => {
     let obj = { ...item }
     if (item.routes) {
@@ -17,7 +17,7 @@ export function getMenu(data: Routers[] = []) {
 }
 
 /** 把数组扁平化 用于 选项卡渲染 */
-export const getRoutesList = (data: Routers[] = [], list: Routers[] = []) => {
+export const getRoutesList = (data: RoutersProps[] = [], list: RoutersProps[] = []) => {
   data.forEach((item) => {
     if (item.routes) {
       getRoutesList(item.routes, list)
@@ -30,12 +30,12 @@ export const getRoutesList = (data: Routers[] = [], list: Routers[] = []) => {
 
 /** 菜单 转换成 渲染面包屑导航  */
 export class BreadcrumbMap {
-  breadcrumb: Map<string, Routers[]> = new Map([])
-  flat: Routers[] = [];
-  constructor(routeData: Routers[]) {
+  breadcrumb: Map<string, RoutersProps[]> = new Map([])
+  flat: RoutersProps[] = [];
+  constructor(routeData: RoutersProps[]) {
     this.init(routeData)
   }
-  private init(route: Routers[], parent?: Routers[]) {
+  private init(route: RoutersProps[], parent?: RoutersProps[]) {
     route.forEach((item) => {
       let par = (parent || []).concat([item])
       /** 始终把自己加载最后 */

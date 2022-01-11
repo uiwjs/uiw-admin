@@ -1,9 +1,15 @@
 import React from 'react';
 import { Button } from 'uiw';
+import { useSelector } from 'react-redux';
 import { useNavigate, Link, } from 'react-router-dom';
+import { RootState } from '../../models';
+
 const Home = () => {
   const navigate = useNavigate()
   const [state, setState] = React.useState("")
+  const store = useSelector((state: RootState) => state.home)
+  console.log("store", store)
+
   return (
     <div>
       首页

@@ -1,25 +1,17 @@
 import React from "react";
 import { Tabs } from "uiw"
-import { Routers, } from "@uiw-admin/router-control"
-import { getRoutesList } from "./utils"
+import { RoutersProps, } from "@uiw-admin/router-control"
+import { getRoutesList, getRender } from "./utils"
 import { matchPath, } from "react-router"
 import "./styles/index.css"
 import {
   useNavigate,
   useLocation,
+  Location
 } from "react-router-dom";
 
-const getRender = (routeListData: Routers[], location: any) => {
-  return routeListData.find((item) => {
-    if (location && location.pathname && item.path) {
-      return matchPath({ path: item.path, }, location.pathname)
-    }
-    return false
-  })
-}
-
 interface LayoutTabsProps {
-  routes: Routers[]
+  routes: RoutersProps[]
 }
 const LayoutTabs = (props: LayoutTabsProps) => {
   const { routes } = props
@@ -27,10 +19,17 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   const navigate = useNavigate()
 
   const routeListData = getRoutesList(routes)
-  const [pathArr, setPathArr] = React.useState<Routers[]>([])
-  const Current: Routers = getRender(routeListData, location)
+  const [pathArr, setPathArr] = React.useState<(RoutersProps & { location: Location })[]>([])
+  const Current = getRender(routeListData, location) as RoutersProps
 
   React.useEffect(() => {
+    /** 在这边加路由权限 控制就好了 */
+    // isAuth 这边加这个属性
+    // 1. 如果加了这个属性 说明  跳转需求进行权限校验
+    // 2. 如果没加这个属性 说明  跳转不用权限校验
+    // 3. 加了这个属性为 false 说明 这个路由是没权限的，需要跳转403页面
+    // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
+    // 5. 如果也没有页面 直接 跳转404页面
     if (!Current) {
       // 没找到跳转
       return;
@@ -47,9 +46,11 @@ const LayoutTabs = (props: LayoutTabsProps) => {
 
   React.useMemo(() => {
     const tabData = [...pathArr].map((item) => {
-      const match = matchPath({ path: item.path, }, location.pathname);
-      if (match) {
-        item.location = location;
+      if (item.path) {
+        const match = matchPath({ path: item.path, }, location.pathname);
+        if (match) {
+          item.location = location;
+        }
       }
       return item;
     });
@@ -60,10 +61,10 @@ const LayoutTabs = (props: LayoutTabsProps) => {
     <Tabs
       type="card"
       activeKey={location.pathname}
-      onTabClick={(tab, key, e) => {
-        const tabs = pathArr.find((item) => item.location.pathname === tab)
-        if (tabs && location.pathname !== tab) {
-          navigate(`${tab}${tabs.location.search}`, { state: tabs.location.state })
+      onTabClick={(keys) => {
+        const tabs = pathArr.find((item) => item.location.pathname === keys)
+        if (tabs && location.pathname !== keys) {
+          navigate(`${keys}${tabs.location.search}`, { state: tabs.location.state, replace: true })
         }
       }}
     >
@@ -73,10 +74,13 @@ const LayoutTabs = (props: LayoutTabsProps) => {
     </Tabs>
     <div className="uiw-layout-tabs-body"  >
       {pathArr.map((item, index) => {
-        const match = matchPath({ path: item.path, }, location.pathname)
+        const match = matchPath({ path: item.path as string, }, location.pathname)
         return <div
-          key={item.path || ""}
-          style={{ display: match ? "block" : "none" }}
+          key={item.location.pathname}
+          style={{
+            display: match ? "block" : "none",
+            overflow: 'auto',
+          }}
         >
           {item.element}
         </div>
