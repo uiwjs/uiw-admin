@@ -1,0 +1,8 @@
+.uiw-layout-tabs-warp {
+  height: 100%;
+}
+.uiw-layout-tabs-warp .uiw-layout-tabs-body {
+  padding: 10px;
+  background: #fff;
+  height: 100%;
+}

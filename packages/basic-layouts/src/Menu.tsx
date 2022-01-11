@@ -3,6 +3,8 @@ import classnames from 'classnames';
 import Menu, { MenuItemProps, SubMenuProps } from '@uiw/react-menu';
 import { DefaultProps, navigate } from '@uiw-admin/router-control';
 import { useLocation } from "react-router-dom";
+import { matchPath } from "react-router"
+
 interface MenuProps {
   collapsed?: boolean;
   routes?: DefaultProps['routes'];
@@ -24,7 +26,7 @@ function renderMenuItem(
         'uiw-admin-global-sider-menu-collapsed': collapsed,
       });
     }
-    if (item.path === pathName) {
+    if (matchPath({ path: item.path, }, location.pathname)) {
       props.active = true;
     }
     if (item.index) {
@@ -47,7 +49,11 @@ function renderMenuItem(
       <Menu.Item
         {...props}
         onClick={() => {
-          navigate(item.path)
+          if (item.path === "/courses1/:id") {
+            navigate("/courses1/12", { state: { ad: 122 } })
+          } else {
+            navigate(item.path)
+          }
         }}
         to={item.path}
         text={item.name || '-'}

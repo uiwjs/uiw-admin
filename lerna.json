@@ -3,7 +3,7 @@
     "packages/*",
     "examples/*"
   ],
-  "version": "1.8.19",
+  "version": "4.1.4",
   "command": {
     "create": {
       "license": "MIT"

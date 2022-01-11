@@ -9,7 +9,7 @@ const Home = () => {
       首页
       <input value={state} onChange={(event) => setState(event.target.value)} />
       <Button onClick={() => navigate("/", { replace: true })}>Logout</Button>
-      <Button onClick={() => navigate("/courses", { replace: true })}>courses</Button>
+      <Button onClick={() => navigate("/courses222222", { replace: true })}>courses</Button>
       <Link to="/">退出登录</Link>
     </div>
   );

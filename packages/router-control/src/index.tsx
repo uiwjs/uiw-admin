@@ -2,7 +2,7 @@ import React from 'react';
 import {
   unstable_HistoryRouter, useRoutes, useNavigate, NavigateFunction,
   useLocation, useParams, Route, createRoutesFromChildren,
-  HashRouter, BrowserRouter
+  HashRouter, BrowserRouter,
 } from "react-router-dom";
 import type { RouteObject } from "react-router-dom";
 import { createBrowserHistory } from 'history';
@@ -16,6 +16,7 @@ export interface Routers extends Omit<RouteObject, "children"> {
   key?: string;
   name?: string;
   icon?: string;
+  redirect?: string;
   component?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
   element?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
   children?: React.ReactNode[]
@@ -60,7 +61,7 @@ const getTree = (routes: Routers[] = [], auths: string | null): JSX.Element[] =>
     if (React.isValidElement(item.element) && item.children) {
       item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
     }
-    console.log("auths", auths)
+    console.log(item.redirect, item.element)
     /** 在这边加路由权限 控制就好了 */
     list.push(<Route key={ind} {...item} />)
   })
@@ -71,7 +72,6 @@ export function RouteChild(props: ControllerProps = {}) {
   const { routes = [] } = props;
   // 这边取权限校验值
   const auths = sessionStorage.getItem("auth")
-
   const roue = React.useMemo(() => createRoutesFromChildren(getTree(routes, auths)), [auths])
   const dom = useRoutes(roue)
   /** 赋值 用于跳转 */

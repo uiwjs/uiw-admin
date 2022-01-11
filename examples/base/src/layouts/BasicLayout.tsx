@@ -9,9 +9,7 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   return <div>
-    <BasicLayout {...props}  >
-      <Outlet />
-    </BasicLayout>
+    <BasicLayout {...props} />
   </div>
 }
 export default BasicLayoutScreen;

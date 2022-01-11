@@ -8,7 +8,7 @@ export function getMenu(data: Routers[] = []) {
       const child = getMenu(obj.routes)
       obj.routes = child
     }
-    if (item.path) {
+    if (item.path && item.path !== "*") {
       const { element, component, children, path, ...rest } = obj
       treeList.push({ ...rest, path, key: path })
     }
@@ -42,7 +42,9 @@ export class BreadcrumbMap {
       if (item.routes) {
         this.init(item.routes, par)
       }
-      this.breadcrumb.set(item.path || "", par)
+      if (item.path && item.path !== "*") {
+        this.breadcrumb.set(item.path, par)
+      }
       this.flat.push(item)
     })
   }

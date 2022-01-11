@@ -1,0 +1,42 @@
+{
+  "name": "@uiw-admin/layout-tabs",
+  "version": "4.1.4",
+  "description": "layout tabs",
+  "author": "Kenny Wong <wowohoo@qq.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "lib",
+    "esm"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uiwjs/uiw-admin.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/uiwjs/uiw-admin/issues"
+  },
+  "peerDependencies": {
+    "react": ">=17.x",
+    "react-dom": ">=17.x",
+    "uiw": ">=4.9.7"
+  },
+  "dependencies": {
+    "@babel/runtime": "7.16.7",
+    "@uiw-admin/router-control": "4.1.4"
+  },
+  "devDependencies": {
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@types/react-router-dom": "5.3.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "uiw": "4.9.7",
+    "react-router-dom": "6.2.1"
+  }
+}
