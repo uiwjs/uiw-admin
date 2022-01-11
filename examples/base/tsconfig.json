@@ -19,7 +19,7 @@
     "baseUrl": "src",
     "jsx": "react",
     "noFallthroughCasesInSwitch": true,
-    "noEmit": true
+    "noEmit": true,
   },
   "include": [
     "src/**/*",

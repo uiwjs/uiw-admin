@@ -5,9 +5,10 @@ import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
 import LogoHeader from './LogoHeader';
 import Menu from './Menu';
+import Bread from "./Breadcrumb"
 import './index.css';
 
-import { getMenu } from "./utils"
+import { getMenu, getRoutesList, BreadcrumbMap } from "./utils"
 const { Header, Footer, Sider, Content } = Layout;
 
 export type BasicLayoutProps = {
@@ -33,6 +34,17 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
   const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
+
+
+  const Menus = React.useMemo(() => {
+    return <Menu collapsed={collapsed} routes={routeData} />
+  }, [JSON.stringify(routeData), collapsed])
+  const routeListData = getRoutesList(routes)
+  console.log(routeListData)
+  const mapRoute = React.useMemo(() => {
+    return new BreadcrumbMap(routeData)
+  }, [JSON.stringify(routeData)])
+  console.log(mapRoute)
   return (
     <Fragment>
       <DocumentTitle title={projectName || ''} />
@@ -46,16 +58,19 @@ export default function BasicLayout(props = {} as BasicLayoutProps) {
             projectName={projectName}
             logo={props.logo}
           />
-          <Menu collapsed={collapsed} routes={routeData} />
+          {Menus}
         </Sider>
         <Layout>
           <Header className="uiw-admin-global-header">
-            <Button
-              basic
-              icon={collapsed ? 'menu-unfold' : 'menu-fold'}
-              style={{ fontSize: 12 }}
-              onClick={() => setCollapsed(!collapsed)}
-            />
+            <div>
+              <Button
+                basic
+                icon={collapsed ? 'menu-unfold' : 'menu-fold'}
+                style={{ fontSize: 12, marginRight: 20 }}
+                onClick={() => setCollapsed(!collapsed)}
+              />
+              <Bread routeMap={mapRoute} />
+            </div>
             {headerRight}
           </Header>
           <Content>

@@ -1,7 +1,8 @@
 import React from 'react';
 import {
   unstable_HistoryRouter, useRoutes, useNavigate, NavigateFunction,
-  useLocation, useParams, Route, createRoutesFromChildren
+  useLocation, useParams, Route, createRoutesFromChildren,
+  HashRouter, BrowserRouter
 } from "react-router-dom";
 import type { RouteObject } from "react-router-dom";
 import { createBrowserHistory } from 'history';
@@ -15,6 +16,7 @@ export interface Routers extends Omit<RouteObject, "children"> {
   key?: string;
   name?: string;
   icon?: string;
+  component?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
   element?: JSX.Element | React.LazyExoticComponent<() => JSX.Element>;
   children?: React.ReactNode[]
   routes?: Routers[]
@@ -26,73 +28,69 @@ export type DefaultProps = {
 
 export interface ControllerProps {
   routes?: Routers[];
+  /** 路由模式   默认 history  */
+  routeType?: "history" | "hash" | "browser";
+  basename?: string
 }
 
 export const Loadable = (Component: React.LazyExoticComponent<() => JSX.Element>) => (props: any) => {
   const location = useLocation();
   const navigate = useNavigate();
   const params = useParams();
+
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
       <Component  {...props} router={{ location, navigate, params }} />
     </React.Suspense>
   );
 };
-// const getTree = (routes: Routers[] = []): Routers[] => {
-//   return routes.map((item) => {
-//     const { element: Element } = item
-//     const obj = { ...item }
-//     if (Element && Object.prototype.toString.call(Element) === "[object Function]") {
-//       const Com = Element as (props: any) => JSX.Element
-//       obj.element = <Com />
-//     }
-//     if (obj.children && obj.element) {
-//       /** 处理数据用于渲染侧边路由使用 */
-//       const dom = React.isValidElement(obj.element) ? React.cloneElement(obj.element, { routes: obj.children } as any) : obj.element;
-//       return {
-//         ...obj,
-//         element: dom
-//       }
-//     } else if (obj.children) {
-//       return {
-//         ...obj,
-//         children: getTree(obj.children)
-//       }
-//     }
-//     return {
-//       ...obj
-//     }
-//   })
-// }
-const getTree = (routes: Routers[] = []): JSX.Element[] => {
-  return routes.map((item, ind) => {
-    const obj = { ...item }
+const getTree = (routes: Routers[] = [], auths: string | null): JSX.Element[] => {
+  let list: JSX.Element[] = []
+  routes.forEach((item, ind) => {
     if (item.routes) {
-      obj.children = getTree(item.routes) as Routers["children"]
+      item.children = getTree(item.routes, auths)
     }
-    if (item.element && !React.isValidElement(item.element)) {
-      const Com = Loadable(item.element as React.LazyExoticComponent<() => JSX.Element>)
-      obj.element = <Com />
+    if (!React.isValidElement(item.component) && item.component && !item.element) {
+      const Com = Loadable(item.component as React.LazyExoticComponent<() => JSX.Element>)
+      item.element = <Com />
     }
-    if (React.isValidElement(obj.element) && obj.children) {
-      obj.element = React.cloneElement(obj.element, { routes: item.routes || [] } as any)
+    if (React.isValidElement(item.component) && !item.element) {
+      item.element = item.component
     }
-    return <Route key={ind} {...obj} />
+    if (React.isValidElement(item.element) && item.children) {
+      item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
+    }
+    console.log("auths", auths)
+    /** 在这边加路由权限 控制就好了 */
+    list.push(<Route key={ind} {...item} />)
   })
+  return list
 }
 
 export function RouteChild(props: ControllerProps = {}) {
   const { routes = [] } = props;
-  const rou = createRoutesFromChildren(getTree(routes))
-  const dom = useRoutes(rou)
+  // 这边取权限校验值
+  const auths = sessionStorage.getItem("auth")
+
+  const roue = React.useMemo(() => createRoutesFromChildren(getTree(routes, auths)), [auths])
+  const dom = useRoutes(roue)
   /** 赋值 用于跳转 */
   navigate = useNavigate()
   return dom
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routes = [] } = props;
-  return <HistoryRouter history={history} >
+  const { routes = [], routeType, basename = "/" } = props;
+  if (routeType === "hash") {
+    return <HashRouter window={window} basename={basename} >
+      <RouteChild routes={routes} />
+    </HashRouter>
+  } else if (routeType === "browser") {
+    return <BrowserRouter window={window} basename={basename}  >
+      <RouteChild routes={routes} />
+    </BrowserRouter>
+  }
+  return <HistoryRouter history={history} basename={basename}  >
     <RouteChild routes={routes} />
   </HistoryRouter>
 }

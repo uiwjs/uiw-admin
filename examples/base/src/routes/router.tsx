@@ -1,36 +1,43 @@
 
 // import BasicLayout from "./../layouts/BasicLayout"
-// import Home from "../pages/Home"
+// import Home from "@/pages/Home"
 // import Dashboard from "../pages/Dashboard"
-// import Login from "../pages/login"
+// import Login from "@/pages/login"
 import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
 
 const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")) as any)
+const Home = Loadable(React.lazy(() => import("../pages/Home")) as any)
+const Dashboard = Loadable(React.lazy(() => import("../pages/Dashboard")) as any)
 
 // 这块内容需要进行转换掉 
 export const routers: Routers[] = [
   {
     path: "/login",
-    element: React.lazy(() => import("../pages/login"))
+    component: React.lazy(() => import("../pages/login"))
   },
   {
     path: "/",
-    element: <BasicLayout />,
+    component: <BasicLayout />,
     routes: [
       {
         index: true,
-        element: React.lazy(() => import("../pages/Home")),
+        component: <Home />,
       },
       {
         path: "/courses",
         name: "Dashboard",
-        element: React.lazy(() => import("../pages/Dashboard")),
+        component: <Dashboard />,
+      },
+      {
+        path: "/courses1",
+        name: "Dashboard1",
+        component: <Dashboard />,
       },
       {
         path: "/home",
         name: "首页",
-        element: React.lazy(() => import("../pages/Home")),
+        component: React.lazy(() => import("../pages/Home")),
       },
       {
         path: "/dom",
@@ -39,12 +46,12 @@ export const routers: Routers[] = [
           {
             path: "/dom/courses",
             name: "Dashboard",
-            element: React.lazy(() => import("../pages/Dashboard")),
+            component: React.lazy(() => import("../pages/Dashboard")),
           },
           {
             path: "/dom/home",
             name: "home",
-            element: React.lazy(() => import("../pages/Home")),
+            component: React.lazy(() => import("../pages/Home")),
           },
         ]
       }

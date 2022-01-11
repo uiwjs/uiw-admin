@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import Menu, { MenuItemProps, SubMenuProps } from '@uiw/react-menu';
-import { DefaultProps, history } from '@uiw-admin/router-control';
+import { DefaultProps, navigate } from '@uiw-admin/router-control';
+import { useLocation } from "react-router-dom";
 interface MenuProps {
   collapsed?: boolean;
   routes?: DefaultProps['routes'];
@@ -10,6 +11,7 @@ interface MenuProps {
 function renderMenuItem(
   routes: MenuProps['routes'] = [],
   collapsed: boolean,
+  pathName: string,
   level?: boolean,
 ) {
   return routes.map((item: any, index: number) => {
@@ -21,6 +23,9 @@ function renderMenuItem(
       props.className = classnames({
         'uiw-admin-global-sider-menu-collapsed': collapsed,
       });
+    }
+    if (item.path === pathName) {
+      props.active = true;
     }
     if (item.index) {
       return <Fragment key={index} />;
@@ -34,7 +39,7 @@ function renderMenuItem(
       }
       return (
         <Menu.SubMenu {...props} text={item.name || '-'} collapse={collapsed}>
-          {renderMenuItem(item.routes, collapsed)}
+          {renderMenuItem(item.routes, collapsed, pathName)}
         </Menu.SubMenu>
       );
     }
@@ -42,7 +47,7 @@ function renderMenuItem(
       <Menu.Item
         {...props}
         onClick={() => {
-          history.push(item.path)
+          navigate(item.path)
         }}
         to={item.path}
         text={item.name || '-'}
@@ -53,13 +58,13 @@ function renderMenuItem(
 
 export default (props: MenuProps = {}) => {
   const { routes = [], collapsed } = props;
-  return React.useMemo(() => {
-    return <Menu
-      theme="dark"
-      inlineCollapsed={!!collapsed}
-      style={{ padding: '0 12px' }}
-    >
-      {renderMenuItem(routes, !!collapsed, true)}
-    </Menu>
-  }, [JSON.stringify(routes), collapsed]);
+  const location = useLocation()
+  const pathName = location.pathname
+  return <Menu
+    theme="dark"
+    inlineCollapsed={!!collapsed}
+    style={{ padding: '0 12px' }}
+  >
+    {renderMenuItem(routes, !!collapsed, pathName, true)}
+  </Menu>
 };
