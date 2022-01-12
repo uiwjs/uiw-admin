@@ -2,7 +2,7 @@ import React from 'react';
 import {
   unstable_HistoryRouter, useRoutes, useNavigate, NavigateFunction,
   useLocation, useParams, Route, createRoutesFromChildren,
-  HashRouter, BrowserRouter,
+  HashRouter, BrowserRouter, Navigate
 } from "react-router-dom";
 import type { RouteObject } from "react-router-dom";
 import { createBrowserHistory } from 'history';
@@ -19,7 +19,7 @@ export interface Routers extends Omit<RouteObject, "children"> {
   redirect?: string;
   component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
   routes?: Routers[]
-  model?: string[];
+  models?: string[];
 }
 
 export interface RoutersProps extends Routers {
@@ -38,7 +38,7 @@ export interface ControllerProps {
   /** 路由模式   默认 history  */
   routeType?: "history" | "hash" | "browser";
   basename?: string;
-  addModel?: (model: string[]) => void
+  addModel?: (models: string[]) => void
 }
 
 export const Loadable = (Component: React.LazyExoticComponent<(props?: any) => JSX.Element>) => (props: any) => {
@@ -52,14 +52,14 @@ export const Loadable = (Component: React.LazyExoticComponent<(props?: any) => J
     </React.Suspense>
   );
 };
-const getTree = (routes: RoutersProps[] = [], auths: string | null, addModel?: (model: string[]) => void): JSX.Element[] => {
+const getTree = (routes: RoutersProps[] = [], auths: string | null, addModel?: (models: string[]) => void): JSX.Element[] => {
   let list: JSX.Element[] = []
   routes.forEach((item, ind) => {
     if (item.routes) {
       item.children = getTree(item.routes, auths, addModel)
     }
-    if (addModel && !item.element && item.model) {
-      addModel(item.model)
+    if (addModel && !item.element && item.models) {
+      addModel(item.models)
     }
     if (!React.isValidElement(item.component) && item.component && !item.element) {
       const Com = Loadable(item.component as React.LazyExoticComponent<() => JSX.Element>)
@@ -70,6 +70,9 @@ const getTree = (routes: RoutersProps[] = [], auths: string | null, addModel?: (
     }
     if (React.isValidElement(item.element) && item.children) {
       item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
+    }
+    if (item.index && item.redirect) {
+      item.element = <Navigate to={item.redirect} />
     }
     /** 在这边加路由权限 控制就好了 */
     // isAuth 这边加这个属性

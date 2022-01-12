@@ -17,9 +17,9 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   const { routes } = props
   const location = useLocation()
   const navigate = useNavigate()
+  const [pathArr, setPathArr] = React.useState<(RoutersProps & { location: Location })[]>([])
 
   const routeListData = getRoutesList(routes)
-  const [pathArr, setPathArr] = React.useState<(RoutersProps & { location: Location })[]>([])
   const Current = getRender(routeListData, location) as RoutersProps
 
   React.useEffect(() => {

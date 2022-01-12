@@ -9,6 +9,11 @@ import Menu from './Menu';
 import Bread from "./Breadcrumb"
 import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
+import {
+  useLocation,
+} from "react-router-dom";
+import BodyContent from "./Content"
+
 const { Header, Footer, Sider, Content } = Layout;
 
 export type BasicLayoutProps = {
@@ -74,7 +79,9 @@ export default function BasicLayout(props: BasicLayoutProps) {
             {headerRight}
           </Header>
           <Content>
-            {props.children}
+            <BodyContent>
+              {props.children}
+            </BodyContent>
           </Content>
           {footerView}
         </Layout>

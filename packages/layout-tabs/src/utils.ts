@@ -18,7 +18,10 @@ export const getRoutesList = (data: RoutersProps[] = [], list: RoutersProps[] = 
 
 export const getRender = (routeListData: RoutersProps[], location: Location) => {
   return routeListData.find((item) => {
-    if (location && location.pathname && item.path) {
+    if (location.pathname === "/" && item.index && item.redirect) {
+      return item.index
+    }
+    if (location && location.pathname && item.path && location.pathname !== "/") {
       return matchPath({ path: item.path, }, location.pathname)
     }
     return false

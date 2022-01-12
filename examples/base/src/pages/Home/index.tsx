@@ -9,6 +9,7 @@ const Home = () => {
   const [state, setState] = React.useState("")
   const store = useSelector((state: RootState) => state.home)
   console.log("store", store)
+  console.log((window as any).routerBase)
 
   return (
     <div>

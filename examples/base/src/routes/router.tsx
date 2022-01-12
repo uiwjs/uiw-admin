@@ -20,6 +20,7 @@ export const routers: Routers[] = [
       {
         index: true,
         redirect: '/home',
+        component: React.lazy(() => import("../pages/Home")),
       },
       {
         path: "/courses",
