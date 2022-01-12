@@ -23,7 +23,7 @@ export interface Routers extends Omit<RouteObject, "children"> {
 }
 
 export interface RoutersProps extends Routers {
-  component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
+  element?: React.ReactNode;
   children?: React.ReactNode[]
   /** 用于路由校验权限 */
   isAuth?: boolean
