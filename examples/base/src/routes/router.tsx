@@ -15,7 +15,7 @@ export const routers: Routers[] = [
   {
     path: "/",
     models: ["global"],
-    component: React.lazy(() => import("../layouts/BasicLayout")),
+    component: <BasicLayout />,
     routes: [
       {
         index: true,

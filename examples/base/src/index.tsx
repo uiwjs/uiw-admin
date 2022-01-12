@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import '@uiw/reset.css';
 import { store, createModels } from './models';
 import { routers } from './routes/router';
-import './index.css';
 import Control, { history } from '@uiw-admin/router-control';
 import { SWRConfig } from 'swr'
 import request from "./utils/request"
+import '@uiw/reset.css';
+import './index.css';
 
 function localStorageProvider() {
   // 初始化时，我们将数据从 `localStorage` 恢复到一个 map 中。
