@@ -32,7 +32,7 @@ function renderMenuItem(
     if (item.index) {
       return <Fragment key={index} />;
     }
-    if (item.routes) {
+    if (item.children) {
       if (collapsed) {
         props.overlayProps = {
           isOutside: true,

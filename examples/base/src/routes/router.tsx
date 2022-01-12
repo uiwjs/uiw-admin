@@ -25,17 +25,17 @@ export const routers: Routers[] = [
       {
         path: "/courses",
         name: "Dashboard",
-        component: <Dashboard />,
+        component: React.lazy(() => import("../pages/Dashboard")),
       },
       {
         path: "/courses1",
         name: "Dashboard1",
-        component: <Dashboard />,
+        component: React.lazy(() => import("../pages/Dashboard")),
       },
       {
         path: "/courses1/:id",
         name: "Dashboard1",
-        component: <Dashboard />,
+        component: React.lazy(() => import("../pages/Dashboard")),
       },
       {
         path: "/home",
