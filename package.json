@@ -20,7 +20,7 @@
     "build:tabs:ui": "lerna exec --scope @uiw-admin/layout-tabs -- tsbb build",
     "watch:tabs:ui": "lerna exec --scope @uiw-admin/layout-tabs -- tsbb watch",
     "//--------": "//--------",
-    "install": "npm run build && npm run install:pkg  && npm run install:webiste",
+    "install": "npm run build && npm run install:pkg && npm run install:webiste",
     "bootstrap": "lerna bootstrap",
     "install:pkg": "lerna bootstrap --scope @uiw-admin/* --hoist",
     "install:webiste": "lerna bootstrap --scope @examples/base --hoist",

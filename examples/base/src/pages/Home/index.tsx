@@ -10,13 +10,18 @@ import {
   Navigate,
   Outlet
 } from "react-router-dom";
+import useSWR, { useSWRConfig, } from 'swr'
+
 const Home = () => {
+  const { provider } = useSWRConfig() as any
+  const prt = provider()
   const navigate = useNavigate()
   let location = useLocation();
   const [state, setState] = React.useState("")
-  const store = useSelector((state: RootState) => state.home)
-  console.log("store", store)
-  console.log((window as any).routerBase)
+  // const store = useSelector((state: RootState) => state.home)
+  // console.log("store", store)
+  // console.log((window as any).routerBase)
+  console.log("prt", prt)
 
   return (
     <div>
