@@ -8,13 +8,13 @@ const Dashboard = Loadable(React.lazy(() => import("../pages/Dashboard")))
 export const routers: Routers[] = [
   {
     path: "/login",
-    model: ["login"],
+    models: ["login"],
     component: React.lazy(() => import("../pages/login"))
   },
 
   {
     path: "/",
-    model: ["global"],
+    models: ["global"],
     component: <BasicLayout />,
     routes: [
       {
@@ -40,7 +40,7 @@ export const routers: Routers[] = [
       {
         path: "/home",
         name: "首页",
-        model: ["home"],
+        models: ["home"],
         component: React.lazy(() => import("../pages/Home")),
       },
       {

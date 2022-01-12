@@ -3,9 +3,16 @@ import { Button } from 'uiw';
 import { useSelector } from 'react-redux';
 import { useNavigate, Link, } from 'react-router-dom';
 import { RootState } from '../../models';
-
+import {
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+  Outlet
+} from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate()
+  let location = useLocation();
   const [state, setState] = React.useState("")
   const store = useSelector((state: RootState) => state.home)
   console.log("store", store)

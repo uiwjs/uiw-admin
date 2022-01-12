@@ -2,7 +2,7 @@ import React from 'react';
 import BasicLayout from '@uiw-admin/basic-layouts';
 import { Outlet } from "react-router-dom";
 import { RoutersProps } from "@uiw-admin/router-control"
-import LayoutTabs from "@uiw-admin/layout-tabs"
+// import LayoutTabs from "@uiw-admin/layout-tabs"
 
 interface BasicLayoutProps {
   routes: RoutersProps[]
