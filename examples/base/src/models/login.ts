@@ -23,7 +23,7 @@ export default createModel<RootModel>()({
   effects: (dispatch: any) => ({
     async submit(payload) {
       dispatch.login.updateState({ token: '测试2' });
-      console.log("payload", payload)
+      sessionStorage.setItem("auth", JSON.stringify(["/home", "/dac"]))
       history.push("/home")
       // this.updateState()
       // await login({ username: 'test', password: 'www' });

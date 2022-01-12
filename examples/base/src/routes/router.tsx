@@ -1,54 +1,70 @@
-
-// import BasicLayout from "./../layouts/BasicLayout"
-// import Home from "../pages/Home"
-// import Dashboard from "../pages/Dashboard"
-// import Login from "../pages/login"
 import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
 
-const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")) as any)
+const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")))
+const Dashboard = Loadable(React.lazy(() => import("../pages/Dashboard")))
 
 // 这块内容需要进行转换掉 
 export const routers: Routers[] = [
   {
     path: "/login",
-    element: React.lazy(() => import("../pages/login"))
+    models: ["login"],
+    component: React.lazy(() => import("../pages/login"))
   },
+
   {
     path: "/",
-    element: <BasicLayout />,
-    children: [
+    models: ["global"],
+    component: <BasicLayout />,
+    routes: [
       {
         index: true,
-        element: React.lazy(() => import("../pages/Home")),
+        redirect: '/home',
+        component: React.lazy(() => import("../pages/Home")),
       },
       {
         path: "/courses",
         name: "Dashboard",
-        element: React.lazy(() => import("../pages/Dashboard")),
+        component: React.lazy(() => import("../pages/Dashboard")),
+      },
+      {
+        path: "/courses1",
+        name: "Dashboard1",
+        component: React.lazy(() => import("../pages/Dashboard")),
+      },
+      {
+        path: "/courses1/:id",
+        name: "Dashboard1",
+        component: React.lazy(() => import("../pages/Dashboard")),
       },
       {
         path: "/home",
         name: "首页",
-        element: React.lazy(() => import("../pages/Home")),
+        models: ["home"],
+        component: React.lazy(() => import("../pages/Home")),
       },
       {
         path: "/dom",
         name: "子项",
-        children: [
+        routes: [
           {
             path: "/dom/courses",
             name: "Dashboard",
-            element: React.lazy(() => import("../pages/Dashboard")),
+            component: React.lazy(() => import("../pages/Dashboard")),
           },
           {
             path: "/dom/home",
             name: "home",
-            element: React.lazy(() => import("../pages/Home")),
+            component: React.lazy(() => import("../pages/Home")),
           },
         ]
-      }
+      },
+      {
+        path: "*",
+        name: "404",
+        component: <div>测试</div>
+      },
     ]
-  }
+  },
 ];
 

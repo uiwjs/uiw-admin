@@ -4,10 +4,31 @@ import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../assets/logo-dark.svg';
 import styles from './index.module.less';
 import { RootState, Dispatch } from '../../models';
+import useSWR, { useSWRConfig, } from 'swr'
+import { useNavigate, Link, } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch<Dispatch>()
+  const navigate = useNavigate()
+
+  const { provider } = useSWRConfig() as any
+  const prt = provider()
   const loading = useSelector((state: RootState) => state.loading.effects.login.submit)
+  const [store, setStore] = React.useState<any>()
+
+  const { data, } = useSWR(store ? ['/api/login', {
+    method: "POST",
+    body: { username: "admin", password: "admin" }
+  }] : null)
+  if (data && data.token) {
+    prt.set("login", { ...data })
+  }
+  React.useEffect(() => {
+    if (data && data.token) {
+      navigate("/home")
+    }
+  }, [JSON.stringify(data)])
+
 
   return (
     <Row justify="center" align="middle" style={{ height: '100%' }}>
@@ -25,10 +46,13 @@ const Login = () => {
               const err: any = new Error();
               err.filed = errorObj;
               throw err;
+            } else {
+              console.log(2)
+              setStore({ username: current.username, password: current.password })
             }
-            dispatch.login.submit({
-              username: current.username,
-            });
+            // dispatch.login.submit({
+            //   username: current.username,
+            // });
           }}
           onSubmitError={(error: any) => {
             if (error.filed) {
