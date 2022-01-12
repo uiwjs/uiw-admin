@@ -1,6 +1,4 @@
-import { createModel } from '@rematch/core';
-import { RootModel } from './';
-// import { login } from '../servers/login';
+import { ModelDefault } from './';
 import { history } from "@uiw-admin/router-control"
 export interface LoginState {
   token?: string;
@@ -9,7 +7,7 @@ export interface LoginState {
   };
 }
 
-export default createModel<RootModel>()({
+const login: ModelDefault = {
   state: {
     userData: null,
     token: null,
@@ -31,4 +29,6 @@ export default createModel<RootModel>()({
       // `dispatch.s` will suggest `sharks`
     },
   }),
-});
+};
+
+export default login

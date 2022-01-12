@@ -1,12 +1,11 @@
-import { createModel } from '@rematch/core';
-import { Dispatch, RootModel } from './';
+import { Dispatch, ModelDefault } from './';
 
 export interface GlobalState {
   test: string;
   [s: string]: any
 }
 
-export default createModel<RootModel>()({
+const home: ModelDefault = {
   state: {
     test: 'home',
   },
@@ -22,4 +21,5 @@ export default createModel<RootModel>()({
       dph.global.updateState({ test: 'homg2323' });
     },
   }),
-});
+};
+export default home

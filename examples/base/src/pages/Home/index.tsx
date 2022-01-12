@@ -18,10 +18,10 @@ const Home = () => {
   const navigate = useNavigate()
   let location = useLocation();
   const [state, setState] = React.useState("")
-  // const store = useSelector((state: RootState) => state.home)
-  // console.log("store", store)
+  const store = useSelector((state: RootState) => state.home)
+  console.log("store", store)
   // console.log((window as any).routerBase)
-  console.log("prt", prt)
+  // console.log("prt", prt)
 
   return (
     <div>

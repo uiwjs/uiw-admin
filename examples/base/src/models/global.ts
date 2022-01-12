@@ -1,12 +1,10 @@
-import { createModel } from '@rematch/core';
-import { Dispatch, RootModel } from './';
-
+import { Dispatch, ModelDefault } from './';
 export interface GlobalState {
   test: string;
   [s: string]: any
 }
 
-export default createModel<RootModel>()({
+const global: ModelDefault = {
   state: {
     test: '测试全局State',
   },
@@ -22,4 +20,6 @@ export default createModel<RootModel>()({
       dph.global.updateState({ test: '测试2' });
     },
   }),
-});
+};
+
+export default global

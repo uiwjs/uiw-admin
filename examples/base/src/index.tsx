@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import '@uiw/reset.css';
-import { store, addModel } from './models';
+import { store, createModels } from './models';
 import { routers } from './routes/router';
 import './index.css';
 import Control, { history } from '@uiw-admin/router-control';
@@ -38,7 +38,7 @@ ReactDOM.render(
           models.map(async (m) => {
             const md = await import(`./models/${m}.ts`);
             const modelData = md.default || md;
-            addModel({ name: m, ...modelData });
+            createModels(modelData, m)
           });
         }}
       />
