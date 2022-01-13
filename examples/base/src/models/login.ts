@@ -8,6 +8,7 @@ export interface LoginState {
 }
 
 const login: ModelDefault = {
+  name: "login",
   state: {
     userData: null,
     token: null,

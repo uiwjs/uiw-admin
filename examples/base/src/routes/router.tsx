@@ -14,7 +14,7 @@ export const routers: Routers[] = [
 
   {
     path: "/",
-    models: ["global"],
+    models: ["global", "Doc/doc"],
     component: <BasicLayout />,
     routes: [
       {

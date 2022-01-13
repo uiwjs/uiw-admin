@@ -19,7 +19,9 @@ const Home = () => {
   let location = useLocation();
   const [state, setState] = React.useState("")
   const store = useSelector((state: RootState) => state.home)
+  const storeDoc = useSelector((state: RootState) => state.doc)
   console.log("store", store)
+  console.log("storeDoc", storeDoc)
   // console.log((window as any).routerBase)
   // console.log("prt", prt)
 

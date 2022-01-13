@@ -6,6 +6,7 @@ export interface GlobalState {
 }
 
 const home: ModelDefault = {
+  name: "home",
   state: {
     test: 'home',
   },

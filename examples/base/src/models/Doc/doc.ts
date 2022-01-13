@@ -1,13 +1,13 @@
-import { Dispatch, ModelDefault } from './';
+import { Dispatch, ModelDefault } from '@uiw-admin/models';
 export interface GlobalState {
   test: string;
   [s: string]: any
 }
 
 const global: ModelDefault = {
-  name: "global",
+  name: "doc",
   state: {
-    test: '测试全局State',
+    test: 'doc model',
   },
   reducers: {
     updateState: (state: GlobalState, payload: GlobalState) => ({
