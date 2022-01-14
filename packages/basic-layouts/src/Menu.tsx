@@ -29,7 +29,7 @@ function renderMenuItem(
     if (matchPath({ path: item.path, }, location.pathname)) {
       props.active = true;
     }
-    if (item.index) {
+    if (item.index || item.hideInMenu) {
       return <Fragment key={index} />;
     }
     if (item.routes) {
