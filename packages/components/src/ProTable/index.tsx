@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Checkbox, Pagination, Loader } from 'uiw';
+import { Table, Button, Input, Form, Pagination, Loader, Row, Col } from 'uiw';
 
 export default function ProTabel() {
   const datas = [
@@ -53,14 +53,79 @@ export default function ProTabel() {
       key: 'info',
     },
   ];
+
   return (
-    <div>
+    <div style={{ padding: 10 }}>
       <Loader loading={false} style={{ display: 'block' }}>
-        <Table
-          columns={columns}
-          data={datas}
-          footer={<Pagination current={2} pageSize={10} total={30} divider />}
-        />
+        <>
+          <Form
+            resetOnSubmit={false}
+            onSubmit={({ initial, current }) => {}}
+            onSubmitError={(error) => {
+              if (error.filed) {
+                return { ...error.filed };
+              }
+              return null;
+            }}
+            fields={{
+              username: {
+                labelClassName: 'fieldLabel',
+                labelStyle: { width: 160 },
+                labelFor: 'username',
+                label: '用户名',
+                children: (
+                  <Input
+                    preIcon="user"
+                    id="username"
+                    placeholder="用户名: admin"
+                  />
+                ),
+              },
+              password: {
+                labelClassName: 'fieldLabel',
+                labelStyle: { width: 60 },
+                label: '用户名',
+                labelFor: 'password',
+                children: (
+                  <Input
+                    preIcon="lock"
+                    id="password"
+                    type="password"
+                    placeholder="密码: admin"
+                  />
+                ),
+              },
+            }}
+          >
+            {({ fields, state, canSubmit, resetForm }) => {
+              return (
+                <div>
+                  <Row gutter={10}  >
+                    <Col fixed>{fields.username}</Col>
+                    <Col fixed>{fields.password}</Col>
+                    <Col style={{marginTop: 31}}>
+                      <Button
+                        disabled={!canSubmit()}
+                        type="primary"
+                        htmlType="submit"
+                      >
+                        提交
+                      </Button>
+                      <Button type="danger" onClick={resetForm}>
+                        重置表单
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
+              );
+            }}
+          </Form>
+          <Table
+            columns={columns}
+            data={datas}
+            footer={<Pagination current={2} pageSize={10} total={30} divider />}
+          />
+        </>
       </Loader>
     </div>
   );
