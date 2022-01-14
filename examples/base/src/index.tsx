@@ -35,7 +35,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Control
         routes={routers}
-        addModel={(models) => {
+        addModel={(models: string[]) => {
           models.map(async (m) => {
             const md = await import(`./models/${m}.ts`);
             const modelData = md.default || md;

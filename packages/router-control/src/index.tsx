@@ -57,23 +57,29 @@ export const Loadable = (Component: React.LazyExoticComponent<(props?: any) => J
 const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (models: string[]) => void): JSX.Element[] => {
   let list: JSX.Element[] = []
   routes.forEach((item, ind) => {
+    // 判断是否有子项进行递归处理
     if (item.routes) {
       item.children = getTree(item.routes, authList, addModel)
     }
+    // 加载 models 
     if (addModel && !item.element && item.models) {
       addModel(item.models)
     }
+    // 懒加载
     if (!React.isValidElement(item.component) && item.component && !item.element) {
       const Com = Loadable(item.component as React.LazyExoticComponent<() => JSX.Element>)
       item.element = <Com />
     }
+    //  当 element 没有值的时候进行赋值
     if (React.isValidElement(item.component) && !item.element) {
       item.element = item.component
     }
+    // 有子项数据
     if (React.isValidElement(item.element) && item.children) {
       item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
     }
 
+    //  `/` 重定向
     if (item.index && item.redirect) {
       item.element = <Navigate to={item.redirect} />
     }
