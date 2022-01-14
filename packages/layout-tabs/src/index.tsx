@@ -32,6 +32,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
     // 5. 如果也没有页面 直接 跳转404页面
     if (!Current) {
       // 没找到跳转
+      navigate("/404")
       return;
     }
     if (Current && Current.redirect) {

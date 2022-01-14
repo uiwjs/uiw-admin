@@ -28,7 +28,7 @@ export interface Routers extends Omit<RouteObject, "children"> {
 
 export interface RoutersProps extends Routers {
   element?: React.ReactNode;
-  children?: React.ReactNode[]
+  children?: React.ReactNode[],
 }
 
 export type DefaultProps = {
@@ -90,11 +90,12 @@ const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (mo
     // 3. 加了这个属性为 false 说明 这个路由是没权限的，需要跳转403页面
     // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
     // 5. 还有一种方案 直接 element 进行赋值
-    if (item.path && !["/", "*", "/403", "/404", "/500", "/welcome"].includes(item.path)) {
+    // @ts-ignore
+    if (AUTH && item.path && !["/", "*", "/403", "/404", "/500", "/welcome", "/home"].includes(item.path)) {
       const fig = authList.find(ite => ite === item.path)
       item.isAuth = !!fig || item.isAuth
-      if (!item.isAuth) { // 说明没权限 页面,(使用单页面 不使用 tab 切换页面)
-        item.path = "/403"
+      if (!item.isAuth) { // 说明没权限 页面  直接改 element 方式简单 不用渲染做校验
+        item.element = <div>403，无权访问</div>
       }
     }
     list.push(<Route key={ind} {...item} />)

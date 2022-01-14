@@ -17,7 +17,6 @@ export default (props: AuthorizedProps = {}) => {
       return React.cloneElement(child, { ...child.props });
     });
   }
-
   /** Navigate 重定向 会报错  */
   React.useEffect(() => {
     if (props.redirectPath) {
