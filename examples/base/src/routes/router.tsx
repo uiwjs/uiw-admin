@@ -18,11 +18,12 @@ export const routers: Routers[] = [
     component: <BasicLayout />,
     routes: [
       {
-        index: true,
+       
         redirect: '/home',
         component: React.lazy(() => import("../pages/Home")),
       },
       {
+        index: true,
         path: "/tableList",
         name: "查询表格",
         component: React.lazy(() => import("../pages/TableList")),

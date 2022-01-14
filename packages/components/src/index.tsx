@@ -1,7 +1,1 @@
-import React from 'react'
-
-export default function index() {
-  return (
-    null
-  )
-}
+export { default as ProTable } from './ProTable'
