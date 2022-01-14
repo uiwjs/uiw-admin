@@ -10,7 +10,18 @@ import Bread from "./Breadcrumb"
 import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
+import HeaderRight from './HeaderRight'
+import { MenuItemProps } from 'uiw'
 const { Header, Footer, Sider, Content } = Layout;
+
+
+export interface HeaderMenuItemsProps extends MenuItemProps<any> {
+  title: React.ReactNode;
+  icon: JSX.Element | string | false | null;
+  onClick?: () => void;
+  divider?: boolean;
+  render?: React.ReactNode;
+}
 
 export type BasicLayoutProps = {
   logo?: string;
@@ -22,6 +33,18 @@ export type BasicLayoutProps = {
   headerRight?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode
+  /**
+   * avatar 头像
+   * userName 用户名
+   */
+  profile?: {
+    avatar?: string;
+    userName?: string;
+  }
+  /**
+   * 菜单
+   */
+  menus?: HeaderMenuItemsProps[];
 };
 
 
@@ -29,8 +52,9 @@ export default function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
     footer,
-    headerRight,
     projectName = 'UIW Admin',
+    profile = {},
+    menus = []
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -45,6 +69,10 @@ export default function BasicLayout(props: BasicLayoutProps) {
   const mapRoute = React.useMemo(() => {
     return new BreadcrumbMap(routeData)
   }, [JSON.stringify(routeData)])
+
+  const renderHeaderRightMenu = useMemo(() => {
+    return <HeaderRight profile={profile} menus={menus} />
+  }, [profile, menus])
 
   return (
     <Fragment>
@@ -72,7 +100,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
               />
               <Bread routeMap={mapRoute} />
             </div>
-            {headerRight}
+            {renderHeaderRightMenu}
           </Header>
           <Content>
             <BodyContent>
