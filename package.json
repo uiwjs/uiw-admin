@@ -19,11 +19,16 @@
     "-----tabs-----": "----------",
     "build:tabs:ui": "lerna exec --scope @uiw-admin/layout-tabs -- tsbb build",
     "watch:tabs:ui": "lerna exec --scope @uiw-admin/layout-tabs -- tsbb watch",
+    "-----components-----": "----------",
+    "build:components:ui": "lerna exec --scope @uiw-admin/components -- tsbb build",
+    "watch:components:ui": "lerna exec --scope @uiw-admin/components -- tsbb watch",
+    "-----models-----": "----------",
+    "build:models:ui": "lerna exec --scope @uiw-admin/models -- tsbb build",
+    "watch:models:ui": "lerna exec --scope @uiw-admin/models -- tsbb watch",
     "//--------": "//--------",
-    "install": "npm run build && npm run install:pkg && npm run install:webiste",
     "bootstrap": "lerna bootstrap",
-    "install:pkg": "lerna bootstrap --scope @uiw-admin/* --hoist",
-    "install:webiste": "lerna bootstrap --scope @examples/base --hoist",
+    "install:pkg": "lerna bootstrap --scope @uiw-admin/*",
+    "install:webiste": "lerna bootstrap --scope @examples/base",
     "-----------": "--------------",
     "build:pk": "lerna exec --scope @uiw-admin/* -- tsbb build",
     "watch:pk": "lerna exec --scope @uiw-admin/* -- tsbb watch",
@@ -56,22 +61,28 @@
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
+    "@kkt/less-modules": "7.0.5",
+    "@kkt/raw-modules": "7.0.5",
+    "@kkt/scope-plugin-options": "7.0.5",
+    "@types/classnames": "2.3.1",
+    "@types/react": "17.0.38",
+    "@types/react-dom": "17.0.11",
+    "@types/react-redux": "7.1.21",
+    "@types/react-router-dom": "5.3.2",
+    "@babel/core": "7.16.7",
     "husky": "7.0.4",
     "lerna": "4.0.0",
     "lint-staged": "12.1.5",
     "prettier": "2.5.1",
     "tsbb": "3.5.4",
-    "@kkt/less-modules": "7.0.5",
-    "@kkt/react-library": "7.0.5",
-    "@types/jest": "27.4.0",
-    "@types/react": "17.0.38",
-    "@types/react-dom": "17.0.11",
-    "@types/react-test-renderer": "17.0.1",
-    "babel-plugin-import": "1.13.3",
-    "jest-environment-jsdom": "27.4.6",
-    "kkt": "7.0.5",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-test-renderer": "17.0.2"
+    "kkt": "7.0.5"
+  },
+  "workspaces": {
+    "packages": [
+      "examples/*",
+      "packages/*"
+    ],
+    "nohoist": [
+    ]
   }
 }
