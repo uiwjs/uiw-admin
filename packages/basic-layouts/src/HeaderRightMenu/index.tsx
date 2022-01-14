@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, Menu, Avatar, Popover } from 'uiw';
+import { Menu, Avatar, Popover } from 'uiw';
 import { useNavigate } from 'react-router-dom';
 import { HeaderMenuItemsProps } from '../'
 import './index.css';
@@ -65,9 +65,9 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
 
   return (
     <div className="uiw-global-header-menu">
-      <span className="aned-global-header-right-menu">
+      <span className="uiw-global-header-menu">
         <Popover trigger="click" placement="bottomRight" content={menuView}>
-          {profile?.avatar ? <img src={profile.avatar} /> : <Avatar icon="user" size="default" />}
+          {profile?.avatar ? <img src={profile.avatar} /> : <Avatar icon="user" size="large" />}
         </Popover>
       </span>
     </div>
