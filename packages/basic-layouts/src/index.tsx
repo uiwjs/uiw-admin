@@ -11,11 +11,11 @@ import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
 import HeaderRightMenu from './HeaderRightMenu'
-import { MenuItemProps } from 'uiw'
+import { Row } from 'uiw'
 const { Header, Footer, Sider, Content } = Layout;
 
 
-export interface HeaderMenuItemsProps extends MenuItemProps<any> {
+export interface HeaderMenuItemsProps {
   title: React.ReactNode;
   icon: JSX.Element | string | false | null;
   onClick?: () => void;
@@ -30,14 +30,16 @@ export type BasicLayoutProps = {
    * 页脚
    */
   footer?: React.ReactElement;
-  headerRight?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode
   /**
    * avatar 头像
    * userName 用户名
+   * menuLeft 菜单左侧
+   * menuRight 菜单右侧
    */
   profile?: {
+    menuLeft?: React.ReactElement;
     avatar?: string;
     userName?: string;
   }
@@ -54,7 +56,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
     footer,
     projectName = 'UIW Admin',
     profile = {},
-    menus = []
+    menus = [],
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -71,7 +73,13 @@ export default function BasicLayout(props: BasicLayoutProps) {
   }, [JSON.stringify(routeData)])
 
   const renderHeaderRightMenu = useMemo(() => {
-    return <HeaderRightMenu profile={profile} menus={menus} />
+    return (
+
+      <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
+        {profile?.menuLeft}
+        <HeaderRightMenu profile={profile} menus={menus} />
+      </div>
+    )
   }, [profile, menus])
 
   return (
@@ -102,7 +110,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
             </div>
             {renderHeaderRightMenu}
           </Header>
-          <Content>
+          <Content className='uiw-admin-global-content'  >
             <BodyContent>
               {props.children}
             </BodyContent>

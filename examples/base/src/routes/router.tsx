@@ -9,6 +9,7 @@ export const routers: Routers[] = [
   {
     path: "/login",
     models: ["login"],
+    isAuth: true,
     component: React.lazy(() => import("../pages/login"))
   },
 
@@ -16,14 +17,16 @@ export const routers: Routers[] = [
     path: "/",
     models: ["global", "Doc/doc"],
     component: <BasicLayout />,
+    isAuth: true,
     routes: [
       {
-       
-        redirect: '/home',
+        index: true,
+        isAuth: true,
+        redirect: '/tableList',
         component: React.lazy(() => import("../pages/Home")),
       },
       {
-        index: true,
+        isAuth: true,
         path: "/tableList",
         name: "查询表格",
         component: React.lazy(() => import("../pages/TableList")),
@@ -31,30 +34,51 @@ export const routers: Routers[] = [
       {
         path: "/home",
         name: "首页",
+        isAuth: true,
         models: ["home"],
         component: React.lazy(() => import("../pages/Home")),
       },
       {
         path: "/dom",
         name: "子项",
+        isAuth: true,
         routes: [
           {
             path: "/dom/courses",
             name: "Dashboard",
+            isAuth: true,
             component: React.lazy(() => import("../pages/Dashboard")),
           },
           {
             path: "/dom/home",
             name: "home",
+            isAuth: true,
             component: React.lazy(() => import("../pages/Home")),
           },
         ]
       },
       {
+        path: "/403",
+        name: "403",
+        isAuth: true,
+        hideInMenu: true,
+        component: <div>403</div>
+      },
+      {
+        path: "/500",
+        name: "500",
+        isAuth: true,
+        hideInMenu: true,
+        component: <div>500</div>
+      },
+      {
         path: "*",
         name: "404",
-        component: <div>测试</div>
+        isAuth: true,
+        hideInMenu: true,
+        component: <div>404</div>
       },
+
     ]
   },
 ];

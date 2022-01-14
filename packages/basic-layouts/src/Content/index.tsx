@@ -3,9 +3,9 @@ interface ContentProps {
   children: React.ReactNode;
 }
 export default (props: ContentProps) => {
-  return <React.Fragment>
+  return <div style={{ height: "100%", overflow: "auto" }}>
     {props.children}
-  </React.Fragment>
+  </div>
 }
 
 
