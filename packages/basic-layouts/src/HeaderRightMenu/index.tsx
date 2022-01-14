@@ -66,7 +66,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
   return (
     <div className="uiw-global-header-menu">
       <span className="aned-global-header-right-menu">
-        <Popover trigger="hover" placement="bottomRight" content={menuView}>
+        <Popover trigger="click" placement="bottomRight" content={menuView}>
           {profile?.avatar ? <img src={profile.avatar} /> : <Avatar icon="user" size="default" />}
         </Popover>
       </span>
