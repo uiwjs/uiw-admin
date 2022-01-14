@@ -23,19 +23,9 @@ export const routers: Routers[] = [
         component: React.lazy(() => import("../pages/Home")),
       },
       {
-        path: "/courses",
-        name: "Dashboard",
-        component: React.lazy(() => import("../pages/Dashboard")),
-      },
-      {
-        path: "/courses1",
-        name: "Dashboard1",
-        component: React.lazy(() => import("../pages/Dashboard")),
-      },
-      {
-        path: "/courses1/:id",
-        name: "Dashboard1",
-        component: React.lazy(() => import("../pages/Dashboard")),
+        path: "/tableList",
+        name: "查询表格",
+        component: React.lazy(() => import("../pages/TableList")),
       },
       {
         path: "/home",

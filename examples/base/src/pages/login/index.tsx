@@ -3,7 +3,7 @@ import { Form, Row, Col, Button, Input, Checkbox } from 'uiw';
 import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../assets/logo-dark.svg';
 import styles from './index.module.less';
-import { RootState, Dispatch } from '../../models';
+import { RootState, Dispatch } from '@uiw-admin/models';
 import useSWR, { useSWRConfig, } from 'swr'
 import { useNavigate, Link, } from 'react-router-dom';
 

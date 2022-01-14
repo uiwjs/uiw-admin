@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { store, createModels } from './models';
+import '@uiw/reset.css';
+import { store, addModel } from '@uiw-admin/models';
 import { routers } from './routes/router';
 import Control, { history } from '@uiw-admin/router-control';
 import { SWRConfig } from 'swr'
@@ -24,7 +25,7 @@ function localStorageProvider() {
 ReactDOM.render(
   <SWRConfig
     value={{
-      revalidateOnFocus: false,
+      // revalidateOnFocus: false,
       fetcher: (resource, init) => {
         return request(resource, init)
       },

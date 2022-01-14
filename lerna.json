@@ -15,5 +15,8 @@
       ],
       "forceLocal": true
     }
-  }
+  },
+  "npmClient": "yarn",
+  "useWorkspaces": true
+
 }
