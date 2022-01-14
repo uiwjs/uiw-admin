@@ -59,7 +59,7 @@ jobs:
         draft: false
         prerelease: false
 
-    - run: npm run build:website
+    - run: yarn run build:website
       env:
         CI: false
 
