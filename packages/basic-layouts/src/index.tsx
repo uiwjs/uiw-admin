@@ -102,7 +102,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
             </div>
             {renderHeaderRightMenu}
           </Header>
-          <Content>
+          <Content className='uiw-admin-global-content'  >
             <BodyContent>
               {props.children}
             </BodyContent>

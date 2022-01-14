@@ -54,3 +54,8 @@
   height: 36px;
   vertical-align: middle;
 }
+.uiw-admin-global-content {
+  overflow: auto;
+  height: 100%;
+  padding: 14px;
+}
