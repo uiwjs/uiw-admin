@@ -15,7 +15,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: 12
+        node-version: 14
 
     - name: Look Changelog
       uses: jaywcjlove/changelog-generator@v1.3.9
@@ -24,9 +24,8 @@ jobs:
         filter-author: (jaywcjlove|小弟调调™|dependabot\[bot\]|Renovate Bot)
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
-    - run: npm install
-    - run: npm run hoist
-    - run: npm run build
+    - run: yarn install
+    - run: yarn run build
 
     - name: Create Tag
       id: create_tag
@@ -60,13 +59,13 @@ jobs:
         draft: false
         prerelease: false
 
-    - run: npm run b:website
+    - run: npm run build:website
       env:
         CI: false
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        deploy_key: ${{ secrets.GITHUB TOKEN }}
         publish_branch: heroku
-        publish_dir: ./examples/base
+        publish_dir: ./examples/base/build

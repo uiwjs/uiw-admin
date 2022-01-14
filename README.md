@@ -20,9 +20,10 @@ Package | Version | Description
 
 ### Development
 
+使用yarn workspaces管理nodemodules
+
 ```bash
-$ npm install # Install dependencies
-$ npm run hoist
+$ yarn install # Install dependencies
 $ npm run build
 
 $ npm run start # Run example website
