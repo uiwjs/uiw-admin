@@ -1,4 +1,4 @@
-import { ModelDefault } from './';
+import { ModelDefault } from '@uiw-admin/models';
 import { history } from "@uiw-admin/router-control"
 export interface LoginState {
   token?: string;

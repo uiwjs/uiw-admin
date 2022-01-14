@@ -1,4 +1,4 @@
-import { Dispatch, ModelDefault } from './';
+import { Dispatch, ModelDefault } from '@uiw-admin/models';
 export interface GlobalState {
   test: string;
   [s: string]: any

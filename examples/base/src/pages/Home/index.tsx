@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'uiw';
 import { useSelector } from 'react-redux';
 import { useNavigate, Link, } from 'react-router-dom';
-import { RootState } from '../../models';
+import { RootState } from '@uiw-admin/models';
 import {
   Routes,
   Route,

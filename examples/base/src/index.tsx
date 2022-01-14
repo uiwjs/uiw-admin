@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import '@uiw/reset.css';
-import { store, addModel } from '@uiw-admin/models';
+import { store, createModels } from '@uiw-admin/models';
 import { routers } from './routes/router';
 import Control, { history } from '@uiw-admin/router-control';
 import { SWRConfig } from 'swr'
