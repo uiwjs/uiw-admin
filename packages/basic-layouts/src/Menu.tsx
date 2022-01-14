@@ -21,6 +21,13 @@ function renderMenuItem(
       key: index,
       icon: item.icon,
     } as MenuItemProps<any> & SubMenuProps<any>;
+    let isAuth = true;
+    if (Reflect.has(item, "isAuth")) {
+      isAuth = Reflect.get(item, "isAuth")
+    }
+    if (item.index || item.hideInMenu || !isAuth) {
+      return <Fragment key={index} />;
+    }
     if (level) {
       props.className = classnames({
         'uiw-admin-global-sider-menu-collapsed': collapsed,
@@ -28,9 +35,6 @@ function renderMenuItem(
     }
     if (matchPath({ path: item.path, }, location.pathname)) {
       props.active = true;
-    }
-    if (item.index || item.hideInMenu) {
-      return <Fragment key={index} />;
     }
     if (item.routes) {
       if (collapsed) {

@@ -10,7 +10,18 @@ import Bread from "./Breadcrumb"
 import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
+import HeaderRightMenu from './HeaderRightMenu'
+import { Row } from 'uiw'
 const { Header, Footer, Sider, Content } = Layout;
+
+
+export interface HeaderMenuItemsProps {
+  title: React.ReactNode;
+  icon: JSX.Element | string | false | null;
+  onClick?: () => void;
+  divider?: boolean;
+  render?: React.ReactNode;
+}
 
 export type BasicLayoutProps = {
   logo?: string;
@@ -19,9 +30,23 @@ export type BasicLayoutProps = {
    * 页脚
    */
   footer?: React.ReactElement;
-  headerRight?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode
+  /**
+   * avatar 头像
+   * userName 用户名
+   * menuLeft 菜单左侧
+   * menuRight 菜单右侧
+   */
+  profile?: {
+    menuLeft?: React.ReactElement;
+    avatar?: string;
+    userName?: string;
+  }
+  /**
+   * 菜单
+   */
+  menus?: HeaderMenuItemsProps[];
 };
 
 
@@ -29,8 +54,9 @@ export default function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
     footer,
-    headerRight,
     projectName = 'UIW Admin',
+    profile = {},
+    menus = [],
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -45,6 +71,16 @@ export default function BasicLayout(props: BasicLayoutProps) {
   const mapRoute = React.useMemo(() => {
     return new BreadcrumbMap(routeData)
   }, [JSON.stringify(routeData)])
+
+  const renderHeaderRightMenu = useMemo(() => {
+    return (
+
+      <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
+        {profile?.menuLeft}
+        <HeaderRightMenu profile={profile} menus={menus} />
+      </div>
+    )
+  }, [profile, menus])
 
   return (
     <Fragment>
@@ -72,9 +108,9 @@ export default function BasicLayout(props: BasicLayoutProps) {
               />
               <Bread routeMap={mapRoute} />
             </div>
-            {headerRight}
+            {renderHeaderRightMenu}
           </Header>
-          <Content>
+          <Content className='uiw-admin-global-content'  >
             <BodyContent>
               {props.children}
             </BodyContent>

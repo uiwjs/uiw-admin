@@ -1,0 +1,12 @@
+.uiw-global-header-menu {
+  line-height: 42px;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 15px;
+}
+.uiw-global-header-menu img {
+  height: 24px;
+  width: 24px;
+  margin-top: -5px;
+  vertical-align: middle;
+}
