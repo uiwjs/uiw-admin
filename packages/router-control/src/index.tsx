@@ -20,6 +20,8 @@ export interface Routers extends Omit<RouteObject, "children"> {
   component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
   routes?: Routers[]
   models?: string[];
+  /** 是否隐藏菜单 */
+  hideInMenu?: boolean;
 }
 
 export interface RoutersProps extends Routers {
