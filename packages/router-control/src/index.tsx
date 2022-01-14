@@ -84,7 +84,7 @@ const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (mo
     // 3. 加了这个属性为 false 说明 这个路由是没权限的，需要跳转403页面
     // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
     // 5. 还有一种方案 直接 element 进行赋值
-    if (item.path && !["/", "*", "/403", "/404", "/500", "welcome"].includes(item.path)) {
+    if (item.path && !["/", "*", "/403", "/404", "/500", "/welcome"].includes(item.path)) {
       const fig = authList.find(ite => ite === item.path)
       item.isAuth = !!fig || item.isAuth
       if (!item.isAuth) { // 说明没权限 页面,(使用单页面 不使用 tab 切换页面)
