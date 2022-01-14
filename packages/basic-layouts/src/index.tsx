@@ -10,7 +10,7 @@ import Bread from "./Breadcrumb"
 import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
-import HeaderRight from './HeaderRight'
+import HeaderRightMenu from './HeaderRightMenu'
 import { MenuItemProps } from 'uiw'
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -71,7 +71,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
   }, [JSON.stringify(routeData)])
 
   const renderHeaderRightMenu = useMemo(() => {
-    return <HeaderRight profile={profile} menus={menus} />
+    return <HeaderRightMenu profile={profile} menus={menus} />
   }, [profile, menus])
 
   return (

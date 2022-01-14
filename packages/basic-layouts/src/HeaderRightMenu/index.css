@@ -2,6 +2,7 @@
   line-height: 42px;
   display: inline-block;
   cursor: pointer;
+  margin-right: 15px;
 }
 .uiw-global-header-menu img {
   height: 24px;

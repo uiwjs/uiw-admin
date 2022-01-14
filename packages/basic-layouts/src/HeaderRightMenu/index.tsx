@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown, Menu, Avatar } from 'uiw';
+import { Dropdown, Menu, Avatar, Popover } from 'uiw';
 import { useNavigate } from 'react-router-dom';
 import { HeaderMenuItemsProps } from '../'
 import './index.css';
@@ -12,7 +12,7 @@ export interface HeaderRightProps {
   }
 }
 
-export default function HeaderRight(props: HeaderRightProps) {
+export default function HeaderRightMenu(props: HeaderRightProps) {
 
   const navigate = useNavigate()
 
@@ -20,7 +20,7 @@ export default function HeaderRight(props: HeaderRightProps) {
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
     {
-      title: profile?.userName || 'admin',
+      title: <span style={{ fontSize: 15 }}>账号 {profile?.userName || 'admin'}</span>,
       icon: "user",
     },
     {
@@ -48,9 +48,9 @@ export default function HeaderRight(props: HeaderRightProps) {
   ];
 
   const menuView = (
-    <div>
-      <Menu bordered style={{ maxWidth: 250 }}>
-        {menuData.map(({ title, link, icon, onClick, divider, render, ...otherProps }, index: number) => {
+    <div style={{ width: 150 }}>
+      <Menu>
+        {menuData.map(({ title, icon, onClick, divider, render, ...otherProps }, index: number) => {
           if (divider) {
             return <Menu.Divider key={index} />;
           }
@@ -65,15 +65,11 @@ export default function HeaderRight(props: HeaderRightProps) {
 
   return (
     <div className="uiw-global-header-menu">
-      <Dropdown menu={menuView} trigger="hover" placement="bottomRight">
-        <span className="aned-global-header-right-menu">
-          {profile?.avatar ? (
-            <img src={profile.avatar} />
-          ) : (
-            <Avatar icon="user" size="default" />
-          )}
-        </span>
-      </Dropdown>
+      <span className="aned-global-header-right-menu">
+        <Popover trigger="hover" placement="bottomRight" content={menuView}>
+          {profile?.avatar ? <img src={profile.avatar} /> : <Avatar icon="user" size="default" />}
+        </Popover>
+      </span>
     </div>
   )
 }
