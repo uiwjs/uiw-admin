@@ -31,7 +31,6 @@ const Search = () => {
       }}
     >
       {({ fields, state, canSubmit }) => {
-        console.log('fields:', state);
         return (
           <div>
             <Row gutter={10} style={{ marginBottom: 10 }}>

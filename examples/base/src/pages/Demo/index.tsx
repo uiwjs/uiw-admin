@@ -3,6 +3,7 @@ import { Row, Col, Button, Card, Table, Pagination, Checkbox } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
 import Search from './search'
+import Detail from './Detail'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>();
@@ -15,6 +16,12 @@ const Demo = () => {
       payload,
     });
   };
+
+  function handleChange(type: string, record: any) {
+    if (type === 'add') {
+      updateData({ drawerVisible: true })
+    }
+  }
 
   function onClickCheckedItem(rowNumber: number, env: any) {
     const isChecked = env.target.checked;
@@ -87,8 +94,8 @@ const Demo = () => {
       <Card>
         <Row gutter={10}>
           <Col>
-            <Button type="primary" htmlType="submit">新增</Button>
-            <Button type="danger"> 删除 </Button>
+            <Button style={{ width: 60 }} type="primary" onClick={handleChange.bind(this, 'add')}>新增</Button>
+            <Button style={{ width: 60 }} type="danger" onClick={handleChange.bind(this, 'delete')}> 删除 </Button>
           </Col>
         </Row>
       </Card>
@@ -100,6 +107,7 @@ const Demo = () => {
           footer={<Pagination current={2} pageSize={10} total={20} divider />}
         />
       </Card>
+      <Detail />
     </React.Fragment>
   );
 }
