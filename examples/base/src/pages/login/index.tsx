@@ -50,7 +50,6 @@ const Login = () => {
               err.filed = errorObj;
               throw err;
             } else {
-              console.log(2)
               setStore({ username: current.username, password: current.password })
             }
             // dispatch.login.submit({

@@ -75,15 +75,50 @@ export const AuthLayout = (props: any) => {
   }
   return props.children
 }
+/** 递归路由 判断是否有权限  */
+export const getDeepTreeRoute = (routes: RoutersProps[], authList: string[]) => {
+  return routes.map((item) => {
+    const itemObj = { ...item }
+    // @ts-ignore
+    if (AUTH && itemObj.path &&
+      !["/", "*", "/403", "/404", "/500", "/welcome", "/home", "/login"].includes(itemObj.path)
+    ) {
+      const fig = authList.find(ite => ite === itemObj.path)
+      // itemObj.isAuth = !!fig || !!itemObj.isAuth
+      // 1. fig 存在
+      // 2. fig 不存在 但是 item.isAuth===true 存在
+      // 3. fig  不存在 item.isAuth 不存在
+      if (!!fig) {
+        itemObj.isAuth = true
+      } else if (!fig && item.isAuth) {
+        itemObj.isAuth = true
+      } else {
+        itemObj.isAuth = false;
+        itemObj.hideInMenu = true;
+        itemObj.component = <div>403，无权访问</div>
+      }
+    }
+    if (itemObj.routes) {
+      itemObj.routes = getDeepTreeRoute(itemObj.routes, authList)
+    }
+    if (itemObj.path && ["*", "/403", "/404", "/500",].includes(itemObj.path)) {
+      itemObj.hideInMenu = true
+    }
+    // 默认有权限的就是有权限
+    if (item.isAuth) {
+      itemObj.isAuth = true
+    }
+    return { ...itemObj }
+  })
+}
 
-const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (models: string[]) => void): JSX.Element[] => {
+const getTree = (routes: RoutersProps[] = [], addModel?: (models: string[]) => void): JSX.Element[] => {
   let list: JSX.Element[] = []
   routes.forEach((item, ind) => {
-    const itemObj = { ...item }
-
+    const itemObj = item
     // 判断是否有子项进行递归处理
     if (item.routes) {
-      itemObj.children = getTree(itemObj.routes, authList, addModel)
+      itemObj.children = getTree(itemObj.routes, addModel)
     }
     // 加载 models 
     if (addModel && !itemObj.element && itemObj.models) {
@@ -111,21 +146,6 @@ const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (mo
         {itemObj.element}
       </AuthLayout>
     }
-    /** 在这边加路由权限 控制就好了 */
-    // isAuth 这边加这个属性
-    // 1. 如果加了这个属性 说明  跳转需求进行权限校验
-    // 2. 如果没加这个属性 说明  跳转不用权限校验
-    // 3. 加了这个属性为 false 说明 这个路由是没权限的，需要跳转403页面
-    // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
-    // 5. 还有一种方案 直接 element 进行赋值
-    // @ts-ignore
-    if (AUTH && itemObj.path && !["/", "*", "/403", "/404", "/500", "/welcome", "/home"].includes(itemObj.path)) {
-      const fig = authList.find(ite => ite === itemObj.path)
-      itemObj.isAuth = !!fig || itemObj.isAuth
-      if (!itemObj.isAuth) { // 说明没权限 页面  直接改 element 方式简单 不用渲染做校验
-        itemObj.element = <div>403，无权访问</div>
-      }
-    }
     list.push(<Route key={ind} {...itemObj} />)
   })
   return list
@@ -141,11 +161,12 @@ export function RouteChild(props: ControllerProps = {}) {
     }
     return []
   }, [authStr])
-  const roue = React.useMemo(() => createRoutesFromChildren(getTree(routes, authList, addModel)), [JSON.stringify(authList)])
+  const roue = React.useMemo(() =>
+    createRoutesFromChildren(getTree(getDeepTreeRoute(routes, authList), addModel)),
+    [JSON.stringify(authList)])
   const dom = useRoutes(roue)
   /** 赋值 用于跳转 */
   navigate = useNavigate()
-  console.log(dom)
   return dom
 }
 

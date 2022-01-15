@@ -1,5 +1,4 @@
 module.exports.authList = [
-  "/login",
   "/tableList",
   "/home",
   "/dom",

@@ -8,7 +8,6 @@ export const routers: Routers[] = [
   {
     path: "/login",
     models: ["login"],
-    isAuth: true,
     component: React.lazy(() => import("../pages/login"))
   },
   {
@@ -18,8 +17,7 @@ export const routers: Routers[] = [
     routes: [
       {
         index: true,
-        redirect: '/tableList',
-        component: React.lazy(() => import("../pages/Home")),
+        redirect: '/tableList'
       },
       {
         path: "/tableList",
@@ -56,19 +54,16 @@ export const routers: Routers[] = [
       {
         path: "/403",
         name: "403",
-        hideInMenu: true,
         component: <div>403</div>
       },
       {
         path: "/500",
         name: "500",
-        hideInMenu: true,
         component: <div>500</div>
       },
       {
         path: "*",
         name: "404",
-        hideInMenu: true,
         component: <div>404</div>
       },
 
