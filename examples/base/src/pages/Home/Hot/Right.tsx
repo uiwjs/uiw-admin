@@ -7,7 +7,7 @@ const Right = () => {
   return <div style={{ width: "50%", }} >
     <Card
       bordered={false}
-      title="统计"
+      title={<span style={{ fontSize: 16, fontWeight: "bold" }}>统计</span>}
       style={{ height: 400 }}
     >
       <PIEChart data={pieData1} />

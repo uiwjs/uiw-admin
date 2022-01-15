@@ -11,7 +11,7 @@ const Home = () => {
       <Head />
       <Tab />
       <Hot />
-      <Card title="统计" style={{ marginTop: 14 }} >
+      <Card title={<span style={{ fontSize: 16, fontWeight: "bold" }}>统计</span>} style={{ marginTop: 14 }} >
         <LineChart
           data={lineData1}
           xField='year'

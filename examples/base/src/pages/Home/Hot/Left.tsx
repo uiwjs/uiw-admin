@@ -26,7 +26,7 @@ const columns: TableColumns[] = [
 
 const Tables = () => {
   return <div style={{ flex: 1, marginRight: 14, }} >
-    <Card title="热点" style={{ height: 400 }}  >
+    <Card title={<span style={{ fontSize: 16, fontWeight: "bold" }} >热点</span>} style={{ height: 400 }}  >
       <div style={{ display: "flex", justifyContent: "space-between", }} >
         <div style={{ flex: 1 }} >
           <div style={{ color: "#bbb" }} >搜索用户</div>
