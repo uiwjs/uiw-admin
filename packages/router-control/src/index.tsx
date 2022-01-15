@@ -12,13 +12,22 @@ export const history = createBrowserHistory()
 export let navigate: NavigateFunction = () => { };
 
 export interface Routers extends Omit<RouteObject, "children"> {
-  path?: string;
   key?: string;
+  /** 默认跳转 */
+  index?: boolean;
+  /** 路径 */
+  path?: string;
+  /** 名称 */
   name?: string;
+  /**  图标 */
   icon?: string;
+  /** 重定向  当 index===true生效 */
   redirect?: string;
+  /** 组件 */
   component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
+  /** 子集 路由 */
   routes?: Routers[]
+  /** 加载 model 的文件名称 */
   models?: string[];
   /** 是否隐藏菜单 */
   hideInMenu?: boolean;
@@ -27,7 +36,9 @@ export interface Routers extends Omit<RouteObject, "children"> {
 }
 
 export interface RoutersProps extends Routers {
+  /** 渲染使用的组件 */
   element?: React.ReactNode;
+  /** 子集渲染的组件集合 */
   children?: React.ReactNode[],
 }
 
