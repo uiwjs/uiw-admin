@@ -54,9 +54,20 @@ export const Loadable = (Component: React.LazyExoticComponent<(props?: any) => J
     </React.Suspense>
   );
 };
+
+/** 这是一种是否登录验证方式 */
+export const AuthLayout = (props: any) => {
+  const token = sessionStorage.getItem("token")
+  if (!token) {
+    return <Navigate to="/login" replace />
+  }
+  return props.children
+}
+
 const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (models: string[]) => void): JSX.Element[] => {
   let list: JSX.Element[] = []
   routes.forEach((item, ind) => {
+    let isAuthLayout = false
     // 判断是否有子项进行递归处理
     if (item.routes) {
       item.children = getTree(item.routes, authList, addModel)
@@ -73,16 +84,22 @@ const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (mo
     //  当 element 没有值的时候进行赋值
     if (React.isValidElement(item.component) && !item.element) {
       item.element = item.component
+      isAuthLayout = true
     }
     // 有子项数据
     if (React.isValidElement(item.element) && item.children) {
       item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
     }
-
     //  `/` 重定向
     if (item.index && item.redirect) {
       item.element = <Navigate to={item.redirect} />
     }
+    if (item.element && item.path === "/" && isAuthLayout) {
+      item.element = <AuthLayout>
+        {item.element}
+      </AuthLayout>
+    }
+
     /** 在这边加路由权限 控制就好了 */
     // isAuth 这边加这个属性
     // 1. 如果加了这个属性 说明  跳转需求进行权限校验

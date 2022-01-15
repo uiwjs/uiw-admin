@@ -6,22 +6,24 @@ export * from "./Auth"
 
 interface AuthorizedProps {
   authority?: boolean;
-  children?: React.ReactNode;
+  children: JSX.Element;
   redirectPath?: string;
 }
-export default (props: AuthorizedProps = {}) => {
+const AuthPage = (props: AuthorizedProps = { children: <React.Fragment /> }): JSX.Element => {
   let navigate = useNavigate();
   if (props.authority) {
-    return React.Children.map(props.children, (child) => {
-      if (!React.isValidElement(child)) return child;
-      return React.cloneElement(child, { ...child.props });
-    });
+    return props.children
   }
   /** Navigate 重定向 会报错  */
   React.useEffect(() => {
     if (props.redirectPath) {
-      navigate("/home", { replace: true })
+      navigate(props.redirectPath, { replace: true })
+    } else {
+      navigate("/login", { replace: true })
     }
   }, [props.redirectPath])
-  return <React.Fragment />
+  return <React.Suspense fallback={<span>Loading...</span>} >
+    <React.Fragment />
+  </React.Suspense>
 };
+export default AuthPage

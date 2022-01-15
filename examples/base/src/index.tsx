@@ -10,6 +10,9 @@ import request from "./utils/request"
 import '@uiw/reset.css';
 import './index.css';
 
+// 为了开发验证通过
+sessionStorage.setItem("token", "12333333")
+
 function localStorageProvider() {
   // 初始化时，我们将数据从 `localStorage` 恢复到一个 map 中。
   const map = new Map(JSON.parse(localStorage.getItem('app-cache') || '[]'))
@@ -43,7 +46,7 @@ ReactDOM.render(
           });
         }}
       />
-    </Provider>,
+    </Provider>
   </SWRConfig>,
   document.getElementById('root'),
 );

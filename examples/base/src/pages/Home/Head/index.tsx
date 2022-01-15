@@ -1,10 +1,10 @@
 import React from "react";
 import { Card, Progress } from "uiw"
-import { Chart, LineAdvance, Tooltip, Interval } from 'bizcharts';
+import { Chart, Tooltip, Interval } from 'bizcharts';
 import { cardData1, cardData2 } from "./../data"
+import AreaChart from "./../Area"
 
 const Head = () => {
-
   return <div style={{ display: "flex", justifyContent: "space-between" }}>
     <div style={{ width: "24%" }} >
       <Card
@@ -14,16 +14,7 @@ const Head = () => {
         footer={<span> 日访问量 1,234 </span>}
       >
         <div style={{ fontSize: 20 }} >8,846</div>
-        <Chart autoFit height={60} data={cardData1} pure >
-          <LineAdvance
-            shape="smooth"
-            point
-            area
-            position="month*temperature"
-            color="#8A2BE2"
-          />
-          <Tooltip shared showTitle={false} />
-        </Chart>
+        <AreaChart data={cardData1} />
       </Card>
     </div>
     <div style={{ width: "24%" }} >
@@ -34,16 +25,7 @@ const Head = () => {
         footer={<span> 日访问量 1,234 </span>}
       >
         <div style={{ fontSize: 20 }} >8,846</div>
-        <Chart autoFit height={60} data={cardData1} pure >
-          <LineAdvance
-            shape="smooth"
-            point
-            area
-            position="month*temperature"
-            color="#8A2BE2"
-          />
-          <Tooltip shared showTitle={false} />
-        </Chart>
+        <AreaChart data={cardData1} />
       </Card>
     </div>
     <div style={{ width: "24%" }} >

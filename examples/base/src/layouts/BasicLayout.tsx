@@ -3,6 +3,7 @@ import BasicLayout from '@uiw-admin/basic-layouts';
 import { Outlet } from "react-router-dom";
 import { RoutersProps } from "@uiw-admin/router-control"
 // import LayoutTabs from "@uiw-admin/layout-tabs"
+// import Auth from "@uiw-admin/authorized"
 
 interface BasicLayoutProps {
   routes: RoutersProps[]
@@ -10,7 +11,6 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
-
   const basicLayoutProps = {
     routes: routes,
     menus: [
@@ -22,10 +22,23 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     ],
     profile: { avatar: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Ffd%2Ff1%2Fda%2Ffdf1dacb8ff0b8f13ed29bcbee42f328.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644762318&t=a0151d354747c67b096619184d7142d8" }
   }
+
+  // 验证是否登录的方式
+  // 1. 使用 Auth 组件
+  // 2. 路由中进行处理  path==="/" 的 element 外层包裹组件进行重定向 
+  // return (
+  //   <Auth >
+  //   <BasicLayout {...basicLayoutProps} {...props} >
+  //     <Outlet />
+  //     {/* <LayoutTabs routes={routes || []} /> */}
+  //   </BasicLayout>
+  //   </Auth>
+  // )
   return (
     <BasicLayout {...basicLayoutProps} {...props} >
       <Outlet />
       {/* <LayoutTabs routes={routes || []} /> */}
-    </BasicLayout>)
+    </BasicLayout>
+  )
 }
 export default BasicLayoutScreen;
