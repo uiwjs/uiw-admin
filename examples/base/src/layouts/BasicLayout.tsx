@@ -25,7 +25,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       avatar: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Ffd%2Ff1%2Fda%2Ffdf1dacb8ff0b8f13ed29bcbee42f328.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644762318&t=a0151d354747c67b096619184d7142d8",
       menuLeft: (
         <div style={{ marginRight: 15 }}>
-          <Badge count={999}>
+          <Badge count={66}>
             <Icon type="bell" color="#343a40" style={{ fontSize: 20 }} />
           </Badge>
         </div>
