@@ -62,6 +62,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
+  console.log(routes)
   const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
 
   const Menus = React.useMemo(() => {

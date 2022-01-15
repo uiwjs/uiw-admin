@@ -1,3 +1,5 @@
+const { authList } = require('./auth');
+
 let token = '';
 
 module.exports.login = function (req, res) {
@@ -23,6 +25,7 @@ module.exports.login = function (req, res) {
       skype: '',
       state: 'active',
       token: '5c2d6d45-ec94-319c-a9c8-cae43e192b65',
+      authList: authList || [],
     });
   }
   return res.status(401).json({
@@ -57,6 +60,7 @@ module.exports.verify = function (req, res) {
     skype: '',
     state: 'active',
     token: token,
+    authList: authList || [],
   });
 };
 

@@ -33,8 +33,8 @@ const Head = () => {
           data={cardData1}
           xField='month'
           yField='temperature'
-          color={["#8A2BE2", "#BA55D3"]}
           smooth
+          color="#975FE4"
         />
       </Card>
     </div>

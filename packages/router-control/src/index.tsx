@@ -79,40 +79,38 @@ export const AuthLayout = (props: any) => {
 const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (models: string[]) => void): JSX.Element[] => {
   let list: JSX.Element[] = []
   routes.forEach((item, ind) => {
-    // 为了多次加载不进行再次嵌套 默认不进行嵌套
-    let isAuthLayout = false
+    const itemObj = { ...item }
+
     // 判断是否有子项进行递归处理
     if (item.routes) {
-      item.children = getTree(item.routes, authList, addModel)
+      itemObj.children = getTree(itemObj.routes, authList, addModel)
     }
     // 加载 models 
-    if (addModel && !item.element && item.models) {
-      addModel(item.models)
+    if (addModel && !itemObj.element && itemObj.models) {
+      addModel(itemObj.models)
     }
     // 懒加载
-    if (!React.isValidElement(item.component) && item.component && !item.element) {
+    if (!React.isValidElement(itemObj.component) && itemObj.component) {
       const Com = Loadable(item.component as React.LazyExoticComponent<() => JSX.Element>)
-      item.element = <Com />
+      itemObj.element = <Com />
     }
     //  当 element 没有值的时候进行赋值
-    if (React.isValidElement(item.component) && !item.element) {
-      item.element = item.component
-      isAuthLayout = true
+    if (React.isValidElement(itemObj.component) && !itemObj.element) {
+      itemObj.element = itemObj.component
     }
     // 有子项数据
-    if (React.isValidElement(item.element) && item.children) {
-      item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
+    if (React.isValidElement(itemObj.element) && itemObj.children) {
+      itemObj.element = React.cloneElement(itemObj.element, { routes: itemObj.routes || [] } as any)
     }
     //  `/` 重定向
-    if (item.index && item.redirect) {
-      item.element = <Navigate to={item.redirect} />
+    if (itemObj.index && itemObj.redirect) {
+      itemObj.element = <Navigate to={itemObj.redirect} />
     }
-    if (item.element && item.path === "/" && isAuthLayout) {
-      item.element = <AuthLayout>
-        {item.element}
+    if (itemObj.element && itemObj.path === "/") {
+      itemObj.element = <AuthLayout>
+        {itemObj.element}
       </AuthLayout>
     }
-
     /** 在这边加路由权限 控制就好了 */
     // isAuth 这边加这个属性
     // 1. 如果加了这个属性 说明  跳转需求进行权限校验
@@ -121,14 +119,14 @@ const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (mo
     // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
     // 5. 还有一种方案 直接 element 进行赋值
     // @ts-ignore
-    if (AUTH && item.path && !["/", "*", "/403", "/404", "/500", "/welcome", "/home"].includes(item.path)) {
-      const fig = authList.find(ite => ite === item.path)
-      item.isAuth = !!fig || item.isAuth
-      if (!item.isAuth) { // 说明没权限 页面  直接改 element 方式简单 不用渲染做校验
-        item.element = <div>403，无权访问</div>
+    if (AUTH && itemObj.path && !["/", "*", "/403", "/404", "/500", "/welcome", "/home"].includes(itemObj.path)) {
+      const fig = authList.find(ite => ite === itemObj.path)
+      itemObj.isAuth = !!fig || itemObj.isAuth
+      if (!itemObj.isAuth) { // 说明没权限 页面  直接改 element 方式简单 不用渲染做校验
+        itemObj.element = <div>403，无权访问</div>
       }
     }
-    list.push(<Route key={ind} {...item} />)
+    list.push(<Route key={ind} {...itemObj} />)
   })
   return list
 }
@@ -143,11 +141,11 @@ export function RouteChild(props: ControllerProps = {}) {
     }
     return []
   }, [authStr])
-
   const roue = React.useMemo(() => createRoutesFromChildren(getTree(routes, authList, addModel)), [JSON.stringify(authList)])
   const dom = useRoutes(roue)
   /** 赋值 用于跳转 */
   navigate = useNavigate()
+  console.log(dom)
   return dom
 }
 

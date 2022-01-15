@@ -26,8 +26,10 @@ const Login = () => {
   React.useEffect(() => {
     if (data && data.token) {
       sessionStorage.setItem("token", data.token)
+      sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
       navigate("/home")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(data)])
 
 
