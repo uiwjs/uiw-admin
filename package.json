@@ -57,6 +57,7 @@
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
+    "@uiw/react-menu": "4.9.7",
     "@babel/core": "7.16.7",
     "husky": "7.0.4",
     "lerna": "4.0.0",
@@ -64,6 +65,9 @@
     "prettier": "2.5.1",
     "tsbb": "3.5.4",
     "kkt": "7.0.5"
+  },
+  "resolutions": {
+    "@uiw/react-menu": "4.9.7"
   },
   "workspaces": {
     "packages": [

@@ -25,6 +25,7 @@ const Login = () => {
   }
   React.useEffect(() => {
     if (data && data.token) {
+      sessionStorage.setItem("token", data.token)
       navigate("/home")
     }
   }, [JSON.stringify(data)])
