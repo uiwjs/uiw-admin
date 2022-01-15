@@ -11,7 +11,7 @@ import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
 import HeaderRightMenu from './HeaderRightMenu'
-import { Row } from 'uiw'
+
 const { Header, Footer, Sider, Content } = Layout;
 
 
@@ -36,7 +36,6 @@ export type BasicLayoutProps = {
    * avatar 头像
    * userName 用户名
    * menuLeft 菜单左侧
-   * menuRight 菜单右侧
    */
   profile?: {
     menuLeft?: React.ReactElement;
@@ -74,7 +73,6 @@ export default function BasicLayout(props: BasicLayoutProps) {
 
   const renderHeaderRightMenu = useMemo(() => {
     return (
-
       <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
         {profile?.menuLeft}
         <HeaderRightMenu profile={profile} menus={menus} />
