@@ -13,7 +13,8 @@ const demo: ModelDefault = {
       { name: 'Angelababy', age: '54', info: '1989年2月28日出生于上海市，华语影视女演员、时尚模特。', edit: '' },
       { name: '唐嫣', age: '12', info: '1983年12月6日出生于上海市，毕业于中央戏剧学院表演系本科班', edit: '' },
       { name: '吴亦凡', age: '4', info: '1990年11月06日出生于广东省广州市，华语影视男演员、流行乐歌手。', edit: '' },
-    ]
+    ],
+    drawerVisible:false
   },
   reducers: {
     updateState: (state: any, payload: any) => ({
