@@ -11,6 +11,7 @@ import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
 import HeaderRightMenu from './HeaderRightMenu'
+import FullScreen from './FullScreen'
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -75,6 +76,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
     return (
       <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
         {profile?.menuLeft}
+        <FullScreen />
         <HeaderRightMenu profile={profile} menus={menus} />
       </div>
     )

@@ -15,7 +15,7 @@ export const routers: Routers[] = [
 
   {
     path: "/",
-    models: ["global", "Doc/doc"],
+    models: ["global", "Doc/doc","demo"],
     component: <BasicLayout />,
     isAuth: true,
     routes: [
@@ -56,6 +56,12 @@ export const routers: Routers[] = [
             component: React.lazy(() => import("../pages/Home")),
           },
         ]
+      },
+      {
+        isAuth: true,
+        path: "/demo",
+        name: "demo",
+        component: React.lazy(() => import("../pages/Demo")),
       },
       {
         path: "/403",
