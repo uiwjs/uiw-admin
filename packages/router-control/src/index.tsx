@@ -57,6 +57,7 @@ export const Loadable = (Component: React.LazyExoticComponent<(props?: any) => J
 
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
+  // 本地 存储 token
   const token = sessionStorage.getItem("token")
   if (!token) {
     return <Navigate to="/login" replace />
@@ -67,6 +68,7 @@ export const AuthLayout = (props: any) => {
 const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (models: string[]) => void): JSX.Element[] => {
   let list: JSX.Element[] = []
   routes.forEach((item, ind) => {
+    // 为了多次加载不进行再次嵌套 默认不进行嵌套
     let isAuthLayout = false
     // 判断是否有子项进行递归处理
     if (item.routes) {

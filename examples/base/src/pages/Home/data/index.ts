@@ -39,7 +39,7 @@ export const cardData1 = [
 
 
 export const cardData2 = [
-  { year: '1951 年', sales: 0 },
+  { year: '1951 年', sales: 30 },
   { year: '1952 年', sales: 52 },
   { year: '1956 年', sales: 61 },
   { year: '1957 年', sales: 45 },
@@ -89,9 +89,70 @@ export const tableData1: TableDataType[] = [
   { sort: 3, search: "所属3", use: 123, range: "13%", fig: "up" },
   { sort: 4, search: "所属4", use: 34, range: "45%", fig: "up" },
   { sort: 5, search: "所属5", use: 134, range: "24%", fig: "up" },
-  { sort: 6, search: "所属6", use: 34, range: "15%", fig: "down" },
-  { sort: 8, search: "所属7", use: 456, range: "12%", fig: "up" },
-  { sort: 7, search: "所属8", use: 456, range: "45%", fig: "down" },
-  { sort: 9, search: "所属9", use: 189, range: "2%", fig: "up" },
-  { sort: 10, search: "所属10", use: 32, range: "23%", fig: "down" },
 ]
+
+
+
+// 数据源
+export const pieData1 = [
+  {
+    type: "分类一",
+    value: 27,
+  },
+  {
+    type: "分类二",
+    value: 25,
+  },
+  {
+    type: "分类三",
+    value: 18,
+  },
+  {
+    type: "分类四",
+    value: 15,
+  },
+  {
+    type: "分类五",
+    value: 10,
+  },
+  {
+    type: "其它",
+    value: 5,
+  },
+];
+
+
+
+// 数据源
+export const lineData1 = [
+  { year: '1991', value: 12, type: "1号" },
+  { year: '1992', value: 15, type: "1号" },
+  { year: '1993', value: 10, type: "1号" },
+  { year: '1994', value: 7, type: "1号" },
+  { year: '1995', value: 10, type: "1号" },
+  { year: '1996', value: 16, type: "1号" },
+  { year: '1997', value: 12, type: "1号" },
+  { year: '1998', value: 11, type: "1号" },
+  { year: '1999', value: 16, type: "1号" },
+
+  { year: '1991', value: 13, type: "2号" },
+  { year: '1992', value: 16, type: "2号" },
+  { year: '1993', value: 18, type: "2号" },
+  { year: '1994', value: 23, type: "2号" },
+  { year: '1995', value: 11, type: "2号" },
+  { year: '1996', value: 12, type: "2号" },
+  { year: '1997', value: 21, type: "2号" },
+  { year: '1998', value: 18, type: "2号" },
+  { year: '1999', value: 12, type: "2号" },
+
+
+  { year: '1991', value: 4, type: "3号" },
+  { year: '1992', value: 12, type: "3号" },
+  { year: '1993', value: 24, type: "3号" },
+  { year: '1994', value: 12, type: "3号" },
+  { year: '1995', value: 9, type: "3号" },
+  { year: '1996', value: 11, type: "3号" },
+  { year: '1997', value: 23, type: "3号" },
+  { year: '1998', value: 19, type: "3号" },
+  { year: '1999', value: 15, type: "3号" },
+];
