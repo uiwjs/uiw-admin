@@ -10,18 +10,10 @@ import Bread from "./Breadcrumb"
 import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
-import HeaderRightMenu from './HeaderRightMenu'
-import { Row } from 'uiw'
+import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu'
+import FullScreen from './FullScreen'
+
 const { Header, Footer, Sider, Content } = Layout;
-
-
-export interface HeaderMenuItemsProps {
-  title: React.ReactNode;
-  icon: JSX.Element | string | false | null;
-  onClick?: () => void;
-  divider?: boolean;
-  render?: React.ReactNode;
-}
 
 export type BasicLayoutProps = {
   logo?: string;
@@ -32,24 +24,7 @@ export type BasicLayoutProps = {
   footer?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode
-  /**
-   * avatar 头像
-   * userName 用户名
-   * menuLeft 菜单左侧
-   * menuRight 菜单右侧
-   */
-  profile?: {
-    menuLeft?: React.ReactElement;
-    avatar?: string;
-    userName?: string;
-  }
-  /**
-   * 菜单
-   */
-  menus?: HeaderMenuItemsProps[];
-};
-
-
+} & HeaderRightProps;
 export default function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
@@ -57,11 +32,13 @@ export default function BasicLayout(props: BasicLayoutProps) {
     projectName = 'UIW Admin',
     profile = {},
     menus = [],
+    onReloadAuth
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
+
   const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
 
   const Menus = React.useMemo(() => {
@@ -74,10 +51,10 @@ export default function BasicLayout(props: BasicLayoutProps) {
 
   const renderHeaderRightMenu = useMemo(() => {
     return (
-
       <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
         {profile?.menuLeft}
-        <HeaderRightMenu profile={profile} menus={menus} />
+        <FullScreen />
+        <HeaderRightMenu onReloadAuth={onReloadAuth} profile={profile} menus={menus} />
       </div>
     )
   }, [profile, menus])

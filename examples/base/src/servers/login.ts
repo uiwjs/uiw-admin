@@ -15,3 +15,13 @@ export function login(params: Login) {
     body: { ...params },
   });
 }
+
+/**
+ * 刷新权限
+ * @param {Object} params
+ */
+export function reloadAuth() {
+  return request('/api/reloadAuth', {
+    method: 'POST',
+  });
+}

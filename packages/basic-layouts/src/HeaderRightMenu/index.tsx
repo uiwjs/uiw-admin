@@ -1,22 +1,40 @@
 import React from 'react'
 import { Menu, Avatar, Popover } from 'uiw';
 import { useNavigate } from 'react-router-dom';
-import { HeaderMenuItemsProps } from '../'
 import './index.css';
 
+
+export interface HeaderMenuItemsProps {
+  title: React.ReactNode;
+  icon: JSX.Element | string | false | null;
+  onClick?: () => void;
+  divider?: boolean;
+  render?: React.ReactNode;
+}
 export interface HeaderRightProps {
+  /**
+  * 菜单
+  */
   menus?: Array<HeaderMenuItemsProps>
+  /**
+   * avatar 头像
+   * userName 用户名
+   * menuLeft 菜单左侧
+   */
   profile?: {
     avatar?: string;
     userName?: string;
-  }
+    menuLeft?: React.ReactElement;
+  },
+  // 重新加载权限
+  onReloadAuth: () => void
 }
 
 export default function HeaderRightMenu(props: HeaderRightProps) {
 
   const navigate = useNavigate()
 
-  const { menus = [], profile = {} } = props
+  const { menus = [], profile = {}, onReloadAuth } = props
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
     {
@@ -29,7 +47,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     {
       title: '刷新权限',
       icon: "reload",
-      onClick: () => { },
+      onClick: () => onReloadAuth(),
     },
     {
       title: '修改密码',
@@ -43,7 +61,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     {
       title: '退出登录',
       icon: "logout",
-      onClick: () => navigate("/", { replace: true })
+      onClick: () => navigate("/login", { replace: true })
     },
   ];
 
@@ -67,7 +85,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     <div className="uiw-global-header-menu">
       <span className="uiw-global-header-menu">
         <Popover trigger="click" placement="bottomRight" content={menuView}>
-          {profile?.avatar ? <img src={profile.avatar} /> : <Avatar icon="user" size="large" />}
+          {profile?.avatar ? <img src={profile.avatar} /> : <Avatar icon="user" size="default" />}
         </Popover>
       </span>
     </div>

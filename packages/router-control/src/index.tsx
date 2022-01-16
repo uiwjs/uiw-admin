@@ -12,13 +12,22 @@ export const history = createBrowserHistory()
 export let navigate: NavigateFunction = () => { };
 
 export interface Routers extends Omit<RouteObject, "children"> {
-  path?: string;
   key?: string;
+  /** 默认跳转 */
+  index?: boolean;
+  /** 路径 */
+  path?: string;
+  /** 名称 */
   name?: string;
+  /**  图标 */
   icon?: string;
+  /** 重定向  当 index===true生效 */
   redirect?: string;
+  /** 组件 */
   component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
+  /** 子集 路由 */
   routes?: Routers[]
+  /** 加载 model 的文件名称 */
   models?: string[];
   /** 是否隐藏菜单 */
   hideInMenu?: boolean;
@@ -27,8 +36,10 @@ export interface Routers extends Omit<RouteObject, "children"> {
 }
 
 export interface RoutersProps extends Routers {
+  /** 渲染使用的组件 */
   element?: React.ReactNode;
-  children?: React.ReactNode[]
+  /** 子集渲染的组件集合 */
+  children?: React.ReactNode[],
 }
 
 export type DefaultProps = {
@@ -54,44 +65,88 @@ export const Loadable = (Component: React.LazyExoticComponent<(props?: any) => J
     </React.Suspense>
   );
 };
-const getTree = (routes: RoutersProps[] = [], authList: string[], addModel?: (models: string[]) => void): JSX.Element[] => {
-  let list: JSX.Element[] = []
-  routes.forEach((item, ind) => {
-    if (item.routes) {
-      item.children = getTree(item.routes, authList, addModel)
-    }
-    if (addModel && !item.element && item.models) {
-      addModel(item.models)
-    }
-    if (!React.isValidElement(item.component) && item.component && !item.element) {
-      const Com = Loadable(item.component as React.LazyExoticComponent<() => JSX.Element>)
-      item.element = <Com />
-    }
-    if (React.isValidElement(item.component) && !item.element) {
-      item.element = item.component
-    }
-    if (React.isValidElement(item.element) && item.children) {
-      item.element = React.cloneElement(item.element, { routes: item.routes || [] } as any)
-    }
 
-    if (item.index && item.redirect) {
-      item.element = <Navigate to={item.redirect} />
-    }
-    /** 在这边加路由权限 控制就好了 */
-    // isAuth 这边加这个属性
-    // 1. 如果加了这个属性 说明  跳转需求进行权限校验
-    // 2. 如果没加这个属性 说明  跳转不用权限校验
-    // 3. 加了这个属性为 false 说明 这个路由是没权限的，需要跳转403页面
-    // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
-    // 5. 还有一种方案 直接 element 进行赋值
-    if (item.path && !["/", "*", "/403", "/404", "/500", "welcome"].includes(item.path)) {
-      const fig = authList.find(ite => ite === item.path)
-      item.isAuth = !!fig || item.isAuth
-      if (!item.isAuth) { // 说明没权限 页面,(使用单页面 不使用 tab 切换页面)
-        item.path = "/403"
+/** 这是一种是否登录验证方式 */
+export const AuthLayout = (props: any) => {
+  // 本地 存储 token
+  const token = sessionStorage.getItem("token")
+  if (!token) {
+    return <Navigate to="/login" replace />
+  }
+  return props.children
+}
+/** 递归路由 判断是否有权限  */
+export const getDeepTreeRoute = (routes: RoutersProps[], authList: string[]) => {
+  return routes.map((item) => {
+    const itemObj = { ...item }
+    // @ts-ignore
+    if (AUTH && itemObj.path &&
+      !["/", "*", "/403", "/404", "/500", "/welcome", "/home", "/login"].includes(itemObj.path)
+    ) {
+      const fig = authList.find(ite => ite === itemObj.path)
+      // itemObj.isAuth = !!fig || !!itemObj.isAuth
+      // 1. fig 存在
+      // 2. fig 不存在 但是 item.isAuth===true 存在
+      // 3. fig  不存在 item.isAuth 不存在
+      if (!!fig) {
+        itemObj.isAuth = true
+      } else if (!fig && item.isAuth) {
+        itemObj.isAuth = true
+      } else {
+        itemObj.isAuth = false;
+        itemObj.hideInMenu = true;
+        itemObj.component = <div>403，无权访问</div>
       }
     }
-    list.push(<Route key={ind} {...item} />)
+    if (itemObj.routes) {
+      itemObj.routes = getDeepTreeRoute(itemObj.routes, authList)
+    }
+    if (itemObj.path && ["*", "/403", "/404", "/500",].includes(itemObj.path)) {
+      itemObj.hideInMenu = true
+    }
+    // 默认有权限的就是有权限
+    if (item.isAuth) {
+      itemObj.isAuth = true
+    }
+    return { ...itemObj }
+  })
+}
+
+const getTree = (routes: RoutersProps[] = [], addModel?: (models: string[]) => void): JSX.Element[] => {
+  let list: JSX.Element[] = []
+  routes.forEach((item, ind) => {
+    const itemObj = item
+    // 判断是否有子项进行递归处理
+    if (item.routes) {
+      itemObj.children = getTree(itemObj.routes, addModel)
+    }
+    // 加载 models 
+    if (addModel && !itemObj.element && itemObj.models) {
+      addModel(itemObj.models)
+    }
+    // 懒加载
+    if (!React.isValidElement(itemObj.component) && itemObj.component) {
+      const Com = Loadable(item.component as React.LazyExoticComponent<() => JSX.Element>)
+      itemObj.element = <Com />
+    }
+    //  当 element 没有值的时候进行赋值
+    if (React.isValidElement(itemObj.component) && !itemObj.element) {
+      itemObj.element = itemObj.component
+    }
+    // 有子项数据
+    if (React.isValidElement(itemObj.element) && itemObj.children) {
+      itemObj.element = React.cloneElement(itemObj.element, { routes: itemObj.routes || [] } as any)
+    }
+    //  `/` 重定向
+    if (itemObj.index && itemObj.redirect) {
+      itemObj.element = <Navigate to={itemObj.redirect} />
+    }
+    if (itemObj.element && itemObj.path === "/") {
+      itemObj.element = <AuthLayout>
+        {itemObj.element}
+      </AuthLayout>
+    }
+    list.push(<Route key={ind} {...itemObj} />)
   })
   return list
 }
@@ -106,8 +161,9 @@ export function RouteChild(props: ControllerProps = {}) {
     }
     return []
   }, [authStr])
-
-  const roue = React.useMemo(() => createRoutesFromChildren(getTree(routes, authList, addModel)), [JSON.stringify(authList)])
+  const roue = React.useMemo(() =>
+    createRoutesFromChildren(getTree(getDeepTreeRoute(routes, authList), addModel)),
+    [JSON.stringify(authList)])
   const dom = useRoutes(roue)
   /** 赋值 用于跳转 */
   navigate = useNavigate()
@@ -116,16 +172,20 @@ export function RouteChild(props: ControllerProps = {}) {
 
 export default function Controller(props: ControllerProps = {}) {
   const { routes = [], routeType, basename = "/", addModel } = props;
+
+  // @ts-ignore
+  let base = BASE_NAME || basename
+
   if (routeType === "hash") {
-    return <HashRouter window={window} basename={basename} >
+    return <HashRouter window={window} basename={base} >
       <RouteChild routes={routes} addModel={addModel} />
     </HashRouter>
   } else if (routeType === "browser") {
-    return <BrowserRouter window={window} basename={basename}  >
+    return <BrowserRouter window={window} basename={base}  >
       <RouteChild routes={routes} addModel={addModel} />
     </BrowserRouter>
   }
-  return <HistoryRouter history={history} basename={basename}  >
+  return <HistoryRouter history={history} basename={base}  >
     <RouteChild routes={routes} addModel={addModel} />
   </HistoryRouter>
 }

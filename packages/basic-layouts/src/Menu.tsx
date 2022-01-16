@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import Menu, { MenuItemProps, SubMenuProps } from '@uiw/react-menu';
-import { DefaultProps, navigate } from '@uiw-admin/router-control';
-import { useLocation } from "react-router-dom";
-import { matchPath } from "react-router"
+import { DefaultProps, } from '@uiw-admin/router-control';
+import { useLocation, useNavigate } from "react-router-dom";
+import { matchPath, NavigateFunction } from "react-router"
 
 interface MenuProps {
   collapsed?: boolean;
@@ -14,6 +14,7 @@ function renderMenuItem(
   routes: MenuProps['routes'] = [],
   collapsed: boolean,
   pathName: string,
+  navigate: NavigateFunction,
   level?: boolean,
 ) {
   return routes.map((item: any, index: number) => {
@@ -25,7 +26,7 @@ function renderMenuItem(
     if (Reflect.has(item, "isAuth")) {
       isAuth = Reflect.get(item, "isAuth")
     }
-    if (item.index || item.hideInMenu || !isAuth) {
+    if (item.index || item.hideInMenu || !isAuth || item.path === "*") {
       return <Fragment key={index} />;
     }
     if (level) {
@@ -45,7 +46,7 @@ function renderMenuItem(
       }
       return (
         <Menu.SubMenu {...props} text={item.name || '-'} collapse={collapsed}>
-          {renderMenuItem(item.routes, collapsed, pathName)}
+          {renderMenuItem(item.routes, collapsed, pathName, navigate)}
         </Menu.SubMenu>
       );
     }
@@ -75,12 +76,13 @@ function renderMenuItem(
 export default (props: MenuProps = {}) => {
   const { routes = [], collapsed } = props;
   const location = useLocation()
+  const navigate = useNavigate()
   const pathName = location.pathname
   return <Menu
     theme="dark"
     inlineCollapsed={!!collapsed}
     style={{ padding: '0 12px' }}
   >
-    {renderMenuItem(routes, !!collapsed, pathName, true)}
+    {renderMenuItem(routes, !!collapsed, pathName, navigate, true)}
   </Menu>
 };

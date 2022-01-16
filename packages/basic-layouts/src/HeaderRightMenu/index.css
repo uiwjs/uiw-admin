@@ -2,11 +2,10 @@
   line-height: 42px;
   display: inline-block;
   cursor: pointer;
-  margin-right: 15px;
 }
 .uiw-global-header-menu img {
-  height: 42px;
-  width: 42px;
+  height: 30px;
+  width: 30px;
   margin-top: -5px;
   vertical-align: middle;
   border-radius:50px;

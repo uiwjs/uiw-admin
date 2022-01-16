@@ -23,8 +23,11 @@
     "build:components:ui": "lerna exec --scope @uiw-admin/components -- tsbb build",
     "watch:components:ui": "lerna exec --scope @uiw-admin/components -- tsbb watch",
     "-----models-----": "----------",
-    "build:models:ui": "lerna exec --scope @uiw-admin/models -- tsbb build",
-    "watch:models:ui": "lerna exec --scope @uiw-admin/models -- tsbb watch",
+    "build:models": "lerna exec --scope @uiw-admin/models -- tsbb build",
+    "watch:models": "lerna exec --scope @uiw-admin/models -- tsbb watch",
+    "-----config-----": "----------",
+    "build:config": "lerna exec --scope @uiw-admin/models -- tsbb build",
+    "watch:config": "lerna exec --scope @uiw-admin/models -- tsbb watch",
     "-----------": "--------------",
     "build:pk": "lerna exec --scope @uiw-admin/* -- tsbb build",
     "watch:pk": "lerna exec --scope @uiw-admin/* -- tsbb watch",
@@ -65,10 +68,14 @@
     "tsbb": "3.5.4",
     "kkt": "7.0.5"
   },
+  "resolutions": {
+    "@uiw/react-menu": "4.9.7",
+    "mini-css-extract-plugin": "2.4.7"
+  },
   "workspaces": {
     "packages": [
-      "examples/*",
-      "packages/*"
+      "packages/*",
+      "examples/*"
     ],
     "nohoist": []
   }

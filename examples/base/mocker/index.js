@@ -1,5 +1,6 @@
-const { login, verify, logout } = require('./login');
 const { getData } = require('./selectPage');
+const { login, verify, logout, selectDemoPage, reloadAuth } = require('./login');
+
 
 const proxy = {
   'GET /api/user': { id: 1, username: 'kenny', sex: 6 },
@@ -8,6 +9,8 @@ const proxy = {
   'POST /api/logout': logout,
   'GET /api/user/verify': verify,
   'POST /api/getData': getData,
+  'POST /api/selectDemoPage': selectDemoPage,
+  "POST /api/reloadAuth": reloadAuth,
 };
 
 module.exports = proxy;

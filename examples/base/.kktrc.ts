@@ -1,41 +1,23 @@
 import path from 'path';
-import webpack, { Configuration } from 'webpack';
-import { MockerAPIOptions, LoaderConfOptions } from 'kkt';
+import { MockerAPIOptions, } from 'kkt';
 import lessModules from '@kkt/less-modules';
 import rawModules from '@kkt/raw-modules';
 import scopePluginOptions from '@kkt/scope-plugin-options';
 import pkg from './package.json';
+import defaultConfig from "@uiw-admin/config"
 
-export default (
-  conf: Configuration,
-  env: string,
-  options: LoaderConfOptions,
-) => {
-  conf = rawModules(conf, env, { ...options });
-  conf = scopePluginOptions(conf, env, {
-    ...options,
-    allowedFiles: [path.resolve(process.cwd(), 'README.md')],
-  });
-  conf = lessModules(conf, env, options);
-  // Get the project version.
-  conf.plugins!.push(
-    new webpack.DefinePlugin({
-      VERSION: JSON.stringify(pkg.version),
-      _AF: JSON.stringify("哈哈哈")
-    }),
-  );
-  // conf.resolve!.alias = {
-  //   // 当前开发模式需要
-  //   // https://github.com/marmelab/react-admin/issues/3078#issuecomment-579128213
-  //   // react: path.resolve('./node_modules/react'),
-  //   // "react-dom": path.resolve('./node_modules/react-dom'),
-  //   // "react-router": path.resolve("./node_modules/react-router"),
-  //   // "react-router-dom": path.resolve("./node_modules/react-router-dom"),
-  //   '@/': path.resolve(__dirname, 'src'),
-  // };
-  return conf;
-};
-
+export default defaultConfig({
+  define: {
+    VERSION: JSON.stringify(pkg.version),
+    // BASE_NAME: "/uiw"
+  },
+  // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
+  loader: [
+    rawModules,
+    { loader: scopePluginOptions, options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] } },
+    lessModules
+  ],
+})
 export const proxySetup = (): MockerAPIOptions => {
   /**
    * mocker-api that creates mocks for REST APIs.
