@@ -1,14 +1,16 @@
 import React from 'react';
 import { ProDrawer } from '@uiw-admin/components'
 import { Form, Input, Select, Row, Col, Button } from 'uiw'
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, Dispatch } from '@uiw-admin/models';
+import { useSelector } from 'react-redux';
+import { RootState } from '@uiw-admin/models';
+interface DetailProps {
+  updateData?: any
+}
 
+const Detail = (props: DetailProps) => {
 
-const Detail = () => {
-  const dispatch = useDispatch<Dispatch>();
-  const { demo: { drawerVisible } } = useSelector((state: RootState) => state);
-
+  const { updateData } = props
+  const { demo: { drawerVisible, tableType } } = useSelector((state: RootState) => state);
 
   const options = [
     { value: 1, label: '苹果' },
@@ -17,17 +19,10 @@ const Detail = () => {
     { value: 4, label: '东北大冻梨' },
   ]
 
-  const updateData = (payload: any) => {
-    dispatch({
-      type: 'demo/updateState',
-      payload,
-    });
-  };
-
   return (
     <ProDrawer
       width={800}
-      title="新增"
+      title={tableType === 'add' ? '新增' : tableType === 'edit' ? '编辑' : '编辑'}
       visible={drawerVisible}
       onClose={() => updateData({ drawerVisible: false })}
       buttons={[

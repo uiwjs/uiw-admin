@@ -1,11 +1,15 @@
 import React from 'react';
 import { Form, Input, Row, Col, Button } from 'uiw'
-const Search = () => {
+
+interface SearchProps {
+  updateData: any;
+}
+
+const Search = (props: SearchProps) => {
+  const { updateData } = props
   return (
     <Form
-      onSubmit={({ initial, current }) => {
-        console.log('-->>', initial, current);
-      }}
+      onSubmit={({ initial, current: fliter }) => updateData({ current: 1, filter: fliter })}
       fields={{
         name: {
           labelClassName: 'fieldLabel',
@@ -30,7 +34,7 @@ const Search = () => {
         },
       }}
     >
-      {({ fields, state, canSubmit }) => {
+      {({ fields, state, canSubmit, resetForm }) => {
         return (
           <div>
             <Row gutter={10} style={{ marginBottom: 10 }}>
@@ -42,7 +46,7 @@ const Search = () => {
               <Col />
               <Col fixed align="bottom">
                 <Button disabled={!canSubmit()} type="primary" htmlType="submit">搜索</Button>
-                <Button type="danger"> 重置 </Button>
+                <Button type="danger" onClick={() => { resetForm(); updateData({ filter: {} }) }}> 重置 </Button>
               </Col>
             </Row>
           </div>
