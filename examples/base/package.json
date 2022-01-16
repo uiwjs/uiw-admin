@@ -38,6 +38,7 @@
     "uiw": "4.9.7"
   },
   "devDependencies": {
+    "@uiw-admin/config": "4.1.4",
     "@kkt/less-modules": "7.0.5",
     "@kkt/raw-modules": "7.0.5",
     "@kkt/scope-plugin-options": "7.0.5",
