@@ -32,6 +32,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
     projectName = 'UIW Admin',
     profile = {},
     menus = [],
+    onReloadAuth
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -53,7 +54,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
       <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
         {profile?.menuLeft}
         <FullScreen />
-        <HeaderRightMenu onReloadAuth={props.onReloadAuth} profile={profile} menus={menus} />
+        <HeaderRightMenu onReloadAuth={onReloadAuth} profile={profile} menus={menus} />
       </div>
     )
   }, [profile, menus])

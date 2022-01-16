@@ -34,7 +34,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
 
   const navigate = useNavigate()
 
-  const { menus = [], profile = {} } = props
+  const { menus = [], profile = {}, onReloadAuth } = props
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
     {
@@ -47,7 +47,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     {
       title: '刷新权限',
       icon: "reload",
-      onClick: props.onReloadAuth,
+      onClick: onReloadAuth?.(),
     },
     {
       title: '修改密码',
