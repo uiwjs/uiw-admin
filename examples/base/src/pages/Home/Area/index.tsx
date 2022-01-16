@@ -11,7 +11,7 @@ export interface AreaChartProps {
 const AreaChart = (props: AreaChartProps) => {
   const { data, height = 60, color = "#8A2BE2", position = "month*temperature" } = props
   return (
-    <Chart autoFit height={height} data={data} pure >
+    <Chart autoFit padding={6} height={height} data={data} pure >
       <LineAdvance
         shape="smooth"
         point

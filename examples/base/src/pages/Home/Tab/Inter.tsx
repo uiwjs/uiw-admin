@@ -5,7 +5,7 @@ import { IntervalData1 } from "./../data"
 const Inter = () => {
   return (
     <div style={{ padding: 20, flex: 1 }}>
-      <Chart autoFit data={IntervalData1} height={250} padding="auto" >
+      <Chart autoFit data={IntervalData1} height={250} padding={6} >
         <Interval position="year*sales" />
         <Interaction type="active-region" />
       </Chart>
