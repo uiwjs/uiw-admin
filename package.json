@@ -60,7 +60,6 @@
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
-    "@uiw/react-menu": "4.9.7",
     "@babel/core": "7.16.7",
     "husky": "7.0.4",
     "lerna": "4.0.0",
@@ -70,7 +69,8 @@
     "kkt": "7.0.5"
   },
   "resolutions": {
-    "@uiw/react-menu": "4.9.7"
+    "@uiw/react-menu": "4.9.7",
+    "mini-css-extract-plugin": "2.4.7"
   },
   "workspaces": {
     "packages": [

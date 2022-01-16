@@ -9,7 +9,9 @@ import defaultConfig from "@uiw-admin/config"
 export default defaultConfig({
   define: {
     VERSION: JSON.stringify(pkg.version),
+    // BASE_NAME: "/uiw"
   },
+  // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
   loader: [
     rawModules,
     { loader: scopePluginOptions, options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] } },

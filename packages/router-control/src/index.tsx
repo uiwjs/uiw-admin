@@ -172,16 +172,20 @@ export function RouteChild(props: ControllerProps = {}) {
 
 export default function Controller(props: ControllerProps = {}) {
   const { routes = [], routeType, basename = "/", addModel } = props;
+
+  // @ts-ignore
+  let base = BASE_NAME || basename
+
   if (routeType === "hash") {
-    return <HashRouter window={window} basename={basename} >
+    return <HashRouter window={window} basename={base} >
       <RouteChild routes={routes} addModel={addModel} />
     </HashRouter>
   } else if (routeType === "browser") {
-    return <BrowserRouter window={window} basename={basename}  >
+    return <BrowserRouter window={window} basename={base}  >
       <RouteChild routes={routes} addModel={addModel} />
     </BrowserRouter>
   }
-  return <HistoryRouter history={history} basename={basename}  >
+  return <HistoryRouter history={history} basename={base}  >
     <RouteChild routes={routes} addModel={addModel} />
   </HistoryRouter>
 }

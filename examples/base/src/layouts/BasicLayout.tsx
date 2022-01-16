@@ -27,7 +27,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   })
 
   const basicLayoutProps = {
-    onReloadAuth: run,
+    onReloadAuth: () => run(),
     routes: routes,
     menus: [
       {

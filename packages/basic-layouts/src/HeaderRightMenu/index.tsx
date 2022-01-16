@@ -47,7 +47,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     {
       title: '刷新权限',
       icon: "reload",
-      onClick: onReloadAuth?.(),
+      onClick: () => onReloadAuth(),
     },
     {
       title: '修改密码',
