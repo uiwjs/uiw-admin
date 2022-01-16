@@ -3,6 +3,9 @@ import BasicLayout from '@uiw-admin/basic-layouts';
 import { Outlet } from "react-router-dom";
 import { RoutersProps } from "@uiw-admin/router-control"
 import { Badge, Icon } from 'uiw'
+import { useRequest } from 'ahooks'
+import { reloadAuth } from "./../servers/login"
+
 // import LayoutTabs from "@uiw-admin/layout-tabs"
 // import Auth from "@uiw-admin/authorized"
 
@@ -12,7 +15,19 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
+  const { run } = useRequest(reloadAuth, {
+    manual: true,
+    onSuccess: (data) => {
+      if (data.code === 200) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+        window.location.reload()
+      }
+    }
+  })
+
   const basicLayoutProps = {
+    onReloadAuth: run,
     routes: routes,
     menus: [
       {

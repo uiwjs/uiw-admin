@@ -34,6 +34,14 @@ module.exports.login = function (req, res) {
   });
 };
 
+module.exports.reloadAuth = function (req, res) {
+  return res.json({
+    code: 200,
+    token: '5c2d6d45-ec94-319c-a9c8-cae43e192b65',
+    authList: authList || [],
+  });
+};
+
 module.exports.verify = function (req, res) {
   if (!token) {
     return res.status(401).json({

@@ -10,7 +10,7 @@ import Bread from "./Breadcrumb"
 import './index.css';
 import { getMenu, BreadcrumbMap } from "./utils"
 import BodyContent from "./Content"
-import HeaderRightMenu from './HeaderRightMenu'
+import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu'
 import FullScreen from './FullScreen'
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -33,23 +33,7 @@ export type BasicLayoutProps = {
   footer?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode
-  /**
-   * avatar 头像
-   * userName 用户名
-   * menuLeft 菜单左侧
-   */
-  profile?: {
-    menuLeft?: React.ReactElement;
-    avatar?: string;
-    userName?: string;
-  }
-  /**
-   * 菜单
-   */
-  menus?: HeaderMenuItemsProps[];
-};
-
-
+} & HeaderRightProps;
 export default function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
@@ -78,7 +62,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
       <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
         {profile?.menuLeft}
         <FullScreen />
-        <HeaderRightMenu profile={profile} menus={menus} />
+        <HeaderRightMenu onReloadAuth={props.onReloadAuth} profile={profile} menus={menus} />
       </div>
     )
   }, [profile, menus])

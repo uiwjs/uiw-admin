@@ -5,11 +5,22 @@ import { HeaderMenuItemsProps } from '../'
 import './index.css';
 
 export interface HeaderRightProps {
+  /**
+  * 菜单
+  */
   menus?: Array<HeaderMenuItemsProps>
+  /**
+   * avatar 头像
+   * userName 用户名
+   * menuLeft 菜单左侧
+   */
   profile?: {
     avatar?: string;
     userName?: string;
-  }
+    menuLeft?: React.ReactElement;
+  },
+  // 重新加载权限
+  onReloadAuth: () => void
 }
 
 export default function HeaderRightMenu(props: HeaderRightProps) {
@@ -29,7 +40,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     {
       title: '刷新权限',
       icon: "reload",
-      onClick: () => { },
+      onClick: props.onReloadAuth,
     },
     {
       title: '修改密码',
