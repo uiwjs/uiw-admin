@@ -46,10 +46,11 @@
     "uiw": ">=4.9.7"
   },
   "dependencies": {
-    "classnames": "2.3.1",
     "@babel/runtime": "7.16.7",
+    "@uiw-admin/document-title": "4.1.4",
     "@uiw-admin/router-control": "4.1.4",
-    "@uiw-admin/document-title": "4.1.4"
+    "@uiw-admin/utils": "4.1.4",
+    "classnames": "2.3.1"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
