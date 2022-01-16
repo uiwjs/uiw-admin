@@ -181,7 +181,7 @@ export default function Controller(props: ControllerProps = {}) {
       <RouteChild routes={routes} addModel={addModel} />
     </HashRouter>
   } else if (routeType === "browser") {
-    return <BrowserRouter window={window} basename={`/#${base}`}  >
+    return <BrowserRouter window={window} basename={base}  >
       <RouteChild routes={routes} addModel={addModel} />
     </BrowserRouter>
   }
