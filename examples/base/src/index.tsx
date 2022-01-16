@@ -43,7 +43,7 @@ ReactDOM.render(
           });
         }}
       />
-    </Provider>,
+    </Provider>
   </SWRConfig>,
   document.getElementById('root'),
 );

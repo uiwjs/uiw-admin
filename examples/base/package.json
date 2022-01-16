@@ -24,6 +24,7 @@
     "@uiw-admin/models": "4.1.4",
     "@uiw-admin/router-control": "4.1.4",
     "@uiw-admin/user-login": "4.1.4",
+    "@uiw-admin/utils": "4.1.4",
     "@uiw/reset.css": "1.0.5",
     "axios": "0.24.0",
     "bizcharts": "4.1.15",
