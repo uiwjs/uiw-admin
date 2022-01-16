@@ -15,15 +15,6 @@ import FullScreen from './FullScreen'
 
 const { Header, Footer, Sider, Content } = Layout;
 
-
-export interface HeaderMenuItemsProps {
-  title: React.ReactNode;
-  icon: JSX.Element | string | false | null;
-  onClick?: () => void;
-  divider?: boolean;
-  render?: React.ReactNode;
-}
-
 export type BasicLayoutProps = {
   logo?: string;
   projectName?: string;
@@ -41,6 +32,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
     projectName = 'UIW Admin',
     profile = {},
     menus = [],
+    onReloadAuth
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -62,7 +54,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
       <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
         {profile?.menuLeft}
         <FullScreen />
-        <HeaderRightMenu onReloadAuth={props.onReloadAuth} profile={profile} menus={menus} />
+        <HeaderRightMenu onReloadAuth={onReloadAuth} profile={profile} menus={menus} />
       </div>
     )
   }, [profile, menus])
