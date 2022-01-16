@@ -1,9 +1,16 @@
 import React from 'react'
 import { Menu, Avatar, Popover } from 'uiw';
 import { useNavigate } from 'react-router-dom';
-import { HeaderMenuItemsProps } from '../'
 import './index.css';
 
+
+export interface HeaderMenuItemsProps {
+  title: React.ReactNode;
+  icon: JSX.Element | string | false | null;
+  onClick?: () => void;
+  divider?: boolean;
+  render?: React.ReactNode;
+}
 export interface HeaderRightProps {
   /**
   * 菜单
@@ -54,7 +61,7 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     {
       title: '退出登录',
       icon: "logout",
-      onClick: () => navigate("/", { replace: true })
+      onClick: () => navigate("/login", { replace: true })
     },
   ];
 

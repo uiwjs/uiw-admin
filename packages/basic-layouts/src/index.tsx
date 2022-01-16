@@ -15,15 +15,6 @@ import FullScreen from './FullScreen'
 
 const { Header, Footer, Sider, Content } = Layout;
 
-
-export interface HeaderMenuItemsProps {
-  title: React.ReactNode;
-  icon: JSX.Element | string | false | null;
-  onClick?: () => void;
-  divider?: boolean;
-  render?: React.ReactNode;
-}
-
 export type BasicLayoutProps = {
   logo?: string;
   projectName?: string;
