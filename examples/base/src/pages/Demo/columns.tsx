@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from 'uiw'
 
-interface attrProps {
+interface AttrProps {
   handleEditTable: (type: string, record: any) => void
 }
 
-export const columns = (attr: attrProps) => [
+export const columns = (attr: AttrProps) => [
   {
     title: '姓名',
     key: 'name',

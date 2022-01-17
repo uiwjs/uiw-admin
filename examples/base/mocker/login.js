@@ -79,6 +79,17 @@ module.exports.logout = function (req, res) {
   });
 };
 
+module.exports.refesh = function (req, res) {
+  return res.status(200).json({
+    code: 200,
+    message: "刷新权限成功",
+    data: {
+      authList: authList || []
+    },
+  });
+};
+
+
 module.exports.selectDemoPage = function (req, res) {
   const { pageSize, page } = req.body;
   const list = [];
