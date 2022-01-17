@@ -57,7 +57,7 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns}) => {
         <Pagination
           current={pageIndex}
           pageSize={pageSize}
-          total={data?.total}
+          total={formatData && data ? formatData(data).total : data?.total}
           divider
           onChange={(page) => {
             setPageIndex(page);      
