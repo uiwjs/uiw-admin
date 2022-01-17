@@ -13,7 +13,7 @@ const Exception403 = () => {
       <h1>403</h1>
       <h2>抱歉，你无权访问该页面</h2>
       <Button
-        onClick={() => navigate("/home")}
+        onClick={() => navigate("/home", { replace: true })}
         type="primary"
       >返回首页</Button>
     </div>
