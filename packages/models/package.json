@@ -39,11 +39,7 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
-  "peerDependencies": {
-    "@rematch/core": ">=2.2.0",
-    "@rematch/loading": ">=2.1.2"
-  },
-  "devDependencies": {
+  "dependencies": {
     "@rematch/core": "2.2.0",
     "@rematch/loading": "2.1.2"
   }

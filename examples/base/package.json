@@ -16,8 +16,6 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "7.16.5",
-    "@rematch/core": "2.2.0",
-    "@rematch/loading": "2.1.2",
     "@uiw-admin/basic-layouts": "4.1.4",
     "@uiw-admin/components": "4.1.4",
     "@uiw-admin/layout-tabs": "4.1.4",
@@ -32,12 +30,11 @@
     "classnames": "2.3.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-dynamic-loadable": "3.0.0",
     "react-redux": "7.2.6",
     "react-router-dom": "6.2.1",
     "swr": "^1.1.2",
     "uiw": "4.9.7",
-    "ahooks":"3.1.5"
+    "ahooks": "3.1.5"
   },
   "devDependencies": {
     "@uiw-admin/config": "4.1.4",
