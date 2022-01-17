@@ -97,7 +97,6 @@ module.exports.selectDemoPage = function (req, res) {
   setTimeout(() => {
     return res.status(200).json({
       code: 200,
-      message: '退出登录！',
       data: {
         rows: newDataList,
         total: 50

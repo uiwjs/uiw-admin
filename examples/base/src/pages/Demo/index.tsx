@@ -5,24 +5,16 @@ import { RootState, Dispatch } from '@uiw-admin/models';
 import { columns } from './columns';
 import Search from './search'
 import Detail from './Detail'
-import { useRequest } from 'ahooks'
-import { selectDemoPage } from '../../servers/demo'
+import useSWR from 'swr';
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>();
 
   const { demo: { current, pageSize, total, dataSource, filter } } = useSelector((state: RootState) => state);
 
-  const updateData = (payload: any) => {
-    dispatch({
-      type: 'demo/updateState',
-      payload,
-    });
-  };
-
-   // 分页请求
-  const { run, loading } = useRequest(selectDemoPage, {
-    manual: true,
+  const { isValidating } = useSWR(["/api/selectDemoPage", { method: "POST", body: { page: current, pageSize, queryData: filter } }], {
+    revalidateOnFocus: false,
+    // revalidateOnMount: false,
     onSuccess: (res) => {
       if (res?.code === 200) {
         const { data } = res
@@ -31,16 +23,16 @@ const Demo = () => {
           total: data?.total
         })
       }
-    },
-  });
+    }
+  })
 
-  React.useEffect(() => {
-    run({
-      page: current,
-      pageSize,
-      queryData: filter
-    })
-  }, [current, filter, pageSize, run])
+
+  const updateData = (payload: any) => {
+    dispatch({
+      type: 'demo/updateState',
+      payload,
+    });
+  };
 
   // 操作
   function handleEditTable(type: string, record: any) {
@@ -54,7 +46,7 @@ const Demo = () => {
   }
 
   return (
-    <Loader loading={loading} size="large" style={{ display: 'block' }} >
+    <Loader loading={isValidating} size="large" style={{ display: 'block' }} >
       <React.Fragment>
         <Card>
           <Search updateData={updateData} />

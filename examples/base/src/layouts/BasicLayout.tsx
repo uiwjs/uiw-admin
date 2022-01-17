@@ -16,16 +16,19 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
-  const { data, mutate } = useSWR(["/api/reloadAuth", { method: "POST" }], {
+  const { mutate } = useSWR(["/api/reloadAuth", { method: "POST" }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
+    onSuccess: (data) => {
+      if (data && data.code === 200) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+        window.location.reload()
+      }
+    }
   })
 
-  if (data && data.code === 200) {
-    sessionStorage.setItem("token", data.token)
-    sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
-    window.location.reload()
-  }
+
 
   const basicLayoutProps = {
     onReloadAuth: async () => mutate(),
