@@ -1,5 +1,6 @@
 import { ModelDefault } from '@uiw-admin/models';
 import { history } from "@uiw-admin/router-control"
+import { refesh } from '../servers/login'
 export interface LoginState {
   token?: string;
   userData?: {
@@ -29,6 +30,16 @@ const login: ModelDefault = {
       // dispatch.sharks.increment(payload)
       // `dispatch.s` will suggest `sharks`
     },
+    async refeshAuth() {
+      const data = await refesh()
+      if (data?.code === 200) {
+        sessionStorage.setItem("auth", JSON.stringify(data?.data?.authList || []))
+        window.location.reload()
+      } else {
+        sessionStorage.removeItem("auth")
+        history.push("/login")
+      }
+    }
   }),
 };
 
