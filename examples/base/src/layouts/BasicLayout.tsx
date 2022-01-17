@@ -3,8 +3,9 @@ import BasicLayout from '@uiw-admin/basic-layouts';
 import { Outlet } from "react-router-dom";
 import { RoutersProps } from "@uiw-admin/router-control"
 import { Badge, Icon } from 'uiw'
-import { useRequest } from 'ahooks'
-import { reloadAuth } from "./../servers/login"
+
+import useSWR from 'swr'
+
 
 // import LayoutTabs from "@uiw-admin/layout-tabs"
 // import Auth from "@uiw-admin/authorized"
@@ -15,10 +16,11 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
-  const { run } = useRequest(reloadAuth, {
-    manual: true,
+  const { mutate } = useSWR(["/api/reloadAuth", { method: "POST" }], {
+    revalidateOnMount: false,
+    revalidateOnFocus: false,
     onSuccess: (data) => {
-      if (data.code === 200) {
+      if (data && data.code === 200) {
         sessionStorage.setItem("token", data.token)
         sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         window.location.reload()
@@ -26,8 +28,10 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     }
   })
 
+
+
   const basicLayoutProps = {
-    onReloadAuth: () => run(),
+    onReloadAuth: async () => mutate(),
     routes: routes,
     menus: [
       {
@@ -43,7 +47,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
           <Badge count={66}>
             <Icon type="bell" color="#343a40" style={{ fontSize: 20 }} />
           </Badge>
-        </div>
+        </div >
       )
     }
   }
