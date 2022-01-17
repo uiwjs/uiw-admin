@@ -6,7 +6,7 @@ import { store, createModels } from '@uiw-admin/models';
 import { routers } from './routes/router';
 import Control from '@uiw-admin/router-control';
 import { SWRConfig } from 'swr'
-import request from "./utils/request"
+import { request } from "@uiw-admin/utils"
 import '@uiw/reset.css';
 import './index.css';
 
