@@ -48,18 +48,42 @@ export const routers: Routers[] = [
         component: React.lazy(() => import("../pages/Demo")),
       },
       {
+        path: "/exceptions",
+        name: "异常",
+        routes: [
+          {
+            path: "/exceptions/403",
+            name: "403",
+            component: <Exceptions403 />
+          },
+          {
+            path: "/exceptions/500",
+            name: "500",
+            component: <Exceptions500 />
+          },
+          {
+            path: "/exceptions/404",
+            name: "404",
+            component: <Exceptions404 />
+          },
+        ]
+      },
+      {
         path: "/403",
         name: "403",
+        hideInMenu: true,
         component: <Exceptions403 />
       },
       {
         path: "/500",
         name: "500",
+        hideInMenu: true,
         component: <Exceptions500 />
       },
       {
         path: "/404",
         name: "404",
+        hideInMenu: true,
         component: <Exceptions404 />
       },
       {
