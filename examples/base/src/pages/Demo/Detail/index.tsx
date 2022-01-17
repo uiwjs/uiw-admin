@@ -1,16 +1,17 @@
 import React from 'react';
 import { ProDrawer } from '@uiw-admin/components'
 import { Form, Input, Select, Row, Col, Button } from 'uiw'
-import { useSelector } from 'react-redux';
-import { RootState } from '@uiw-admin/models';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, Dispatch } from '@uiw-admin/models';
+
 interface DetailProps {
   updateData?: any
 }
 
 const Detail = (props: DetailProps) => {
-
-  const { updateData } = props
-  const { demo: { drawerVisible, tableType } } = useSelector((state: RootState) => state);
+  //const { updateData } = props
+  const dispatch = useDispatch<Dispatch>();
+  const { demo: { drawerVisible, tableType, queryInfo, isView } } = useSelector((state: RootState) => state);
 
   const options = [
     { value: 1, label: '苹果' },
@@ -19,40 +20,34 @@ const Detail = (props: DetailProps) => {
     { value: 4, label: '东北大冻梨' },
   ]
 
+  const onClose = () => dispatch({ type: "demo/clean" })
+
   return (
     <ProDrawer
       width={800}
       title={tableType === 'add' ? '新增' : tableType === 'edit' ? '编辑' : '编辑'}
       visible={drawerVisible}
-      onClose={() => updateData({ drawerVisible: false })}
-      buttons={[
-        {
-          label: "取消",
-          type: "danger",
-          onPress: () => updateData({ drawerVisible: false })
-        },
-      ]}
+      onClose={onClose}
     >
       <Form
-        onSubmit={({ initial, current }) => {
-          console.log('current', current);
-        }}
+        title="基础信息"
+        onSubmit={({ initial, current }) => dispatch({ type: tableType === 'add' ? "demo/insert" : "demo/update", payload: current })}
         fields={{
           firstName: {
             labelClassName: 'fieldLabel',
             labelStyle: { width: 60 },
             inline: true,
             label: '姓氏',
-            initialValue: '周',
-            children: <Input />
+            initialValue: queryInfo?.firstName,
+            children: <Input disabled={isView} />
           },
           lastName: {
             labelClassName: 'fieldLabel',
             labelStyle: { width: 60 },
-            initialValue: '先生',
+            initialValue: queryInfo?.lastName,
             inline: true,
             label: '名字',
-            children: <Input />
+            children: <Input disabled={isView} />
           },
           email: {
             labelClassName: 'fieldLabel',
@@ -60,19 +55,19 @@ const Detail = (props: DetailProps) => {
             validator: (currentValue) => {
               return currentValue && currentValue.length < 2 ? 'Password must be 8+ characters' : null;
             },
-            initialValue: '42309872@qq.com',
+            initialValue: queryInfo?.email,
             inline: true,
             label: 'Email',
-            children: <Input />
+            children: <Input disabled={isView} />
           },
           select: {
             labelClassName: 'fieldLabel',
             labelStyle: { width: 60 },
-            initialValue: 4,
+            initialValue: queryInfo?.select,
             inline: true,
             label: '选择器',
             children: (
-              <Select>
+              <Select disabled={isView}>
                 <Select.Option>请选择</Select.Option>
                 {options.map(({ label, value }) => <Select.Option value={value} key={value}>{label}</Select.Option>)}
               </Select>
@@ -91,10 +86,12 @@ const Detail = (props: DetailProps) => {
               <Row gutter={10}>
                 <Col>{fields.select}</Col>
               </Row>
-              <Row gutter={10}>
-                <Col />
-                <Col fixed align="bottom"><Button disabled={!canSubmit()} type="primary" htmlType="submit">提交</Button></Col>
-              </Row>
+              {!isView && (
+                <Row gutter={10}>
+                  <Col />
+                  <Col fixed align="bottom"><Button disabled={!canSubmit()} type="primary" htmlType="submit">提交</Button></Col>
+                </Row>
+              )}
             </div>
           )
         }}
