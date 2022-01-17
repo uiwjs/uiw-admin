@@ -47,7 +47,7 @@ const Demo = () => {
 
 
 #### buttonsColumns参数
-[继承于antd,请参考Button其余参数](https://3x.ant.design/components/button-cn/#header)
+[继承于antd,请参考Button其余参数](https://uiwjs.github.io/#/components/button)
 
 | 参数       | 说明                                                   | 类型                     | 默认值 |
 | :--------- | :--------------------------------------------------- | :------------------------| :----- |
