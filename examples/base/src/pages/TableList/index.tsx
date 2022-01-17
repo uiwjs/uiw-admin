@@ -10,15 +10,16 @@ export default function Demo() {
         data: data.data,
       };
     },
-    // 格式化查询参数 会接收到pageIndex 当前页  pageSize 页码
-    query: (pageIndex: number) => {
-      console.log(pageIndex);
+    // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
+    query: (pageIndex: number, searchValues: any) => {
       return {
         page: pageIndex,
         pageSize: 10,
+        data: searchValues
       };
     },
   });
+
 
   return (
     <ProTable
@@ -28,10 +29,26 @@ export default function Demo() {
         {
           title: '名字',
           key: 'name',
+          props: {
+            widget: 'input',
+            initialValue: 'zzz',
+            // 组件属性
+            widgetProps: {
+              preIcon: 'user',
+              placeholder: '输入用户名'
+            }
+          },
         },
         {
           title: '年龄',
           key: 'age',
+          props: {
+            widget: 'select',
+            option: [
+              { label: '20', value: 20 },
+              { label: '10', value: 10 },
+            ],
+          },
         },
         {
           title: '地址',

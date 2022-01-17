@@ -5,27 +5,26 @@ type Result = {
   data:  Record<string, string | number | JSX.Element>[];
 }
 
-
-
 type Params = {
   formatData?: (res: any) => Result,
-  query?: (pageIndex: number, pageSize: number) => ({
+  query?: (pageIndex: number, searchValues: object) => ({
     [key: string]: any
   })
 }
 
-
 export interface useTableData extends Params {
-  data:  Record<string, string | number | JSX.Element>[],
-  total: number,
-  key: string,
-  reset: () => void,
-  refersh: () => void,
+  data:  Record<string, string | number | JSX.Element>[]
+  total: number
+  key: string
+  reset: () => void
+  refersh: () => void
+  onSearch: () => void
   updateStore: (p: stateParams) => void
-  
+  searchValues: object,
+  loading: boolean
 }
 
-type stateParams = {
+export type stateParams = {
   data?:  Record<string, string | number | JSX.Element>[],
   total?: number,
   selectChecked?: [],
@@ -34,7 +33,6 @@ type stateParams = {
 
 const useTable = (key: string, params: Params = {}): useTableData => {
 
-  // const tableRef = useRef(null)
   const { formatData, query } = params
 
 
@@ -46,8 +44,12 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     // 选中的行
     selectChecked: [],
     selectCheckedRows: [],
+    // 表单值
+    searchValues: {},
+    // 加载状态
+    loading: false,
   });
-  
+  // 更新store
   const updateStore = (datas: stateParams) => {
     setState({
       ...state,
@@ -55,16 +57,27 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     })
   }
 
+  // 重置
+  const reset = () => {
+
+  }
+  // 刷新当前页数据
+  const refersh = () => {
+
+  }
+  // 点击查询
+  const onSearch = () => {
+
+  }
+
   return {
     key,
     // 重置
-    reset: () => {
-
-    },
+    reset,
     // 刷新当前页数据
-    refersh: () => {
-
-    },
+    refersh,
+    // 点击查询
+    onSearch,
     formatData,
     query,
     updateStore,
