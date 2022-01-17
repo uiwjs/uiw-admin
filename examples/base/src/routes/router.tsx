@@ -1,5 +1,6 @@
 import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
+import { Exceptions403, Exceptions500, Exceptions404 } from "@uiw-admin/exceptions"
 
 const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")))
 
@@ -28,7 +29,7 @@ export const routers: Routers[] = [
         path: "/home",
         name: "首页",
         models: ["home"],
-        component: React.lazy(() => import("../pages/Home")),
+        component: <div>首页</div>,
       },
       {
         path: "/dom",
@@ -39,11 +40,6 @@ export const routers: Routers[] = [
             name: "Dashboard",
             component: React.lazy(() => import("../pages/Dashboard")),
           },
-          {
-            path: "/dom/home",
-            name: "home",
-            component: React.lazy(() => import("../pages/Home")),
-          },
         ]
       },
       {
@@ -52,21 +48,49 @@ export const routers: Routers[] = [
         component: React.lazy(() => import("../pages/Demo")),
       },
       {
+        path: "/exceptions",
+        name: "异常",
+        routes: [
+          {
+            path: "/exceptions/403",
+            name: "403",
+            component: <Exceptions403 />
+          },
+          {
+            path: "/exceptions/500",
+            name: "500",
+            component: <Exceptions500 />
+          },
+          {
+            path: "/exceptions/404",
+            name: "404",
+            component: <Exceptions404 />
+          },
+        ]
+      },
+      {
         path: "/403",
         name: "403",
-        component: <div>403</div>
+        hideInMenu: true,
+        component: <Exceptions403 />
       },
       {
         path: "/500",
         name: "500",
-        component: <div>500</div>
+        hideInMenu: true,
+        component: <Exceptions500 />
+      },
+      {
+        path: "/404",
+        name: "404",
+        hideInMenu: true,
+        component: <Exceptions404 />
       },
       {
         path: "*",
         name: "404",
-        component: <div>404</div>
+        component: <Exceptions404 />
       },
-
     ]
   },
 ];

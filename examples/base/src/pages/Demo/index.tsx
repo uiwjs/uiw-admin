@@ -1,17 +1,13 @@
 import React from 'react';
-import { Row, Col, Button, Card, Table, Pagination, Loader } from 'uiw'
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, Dispatch } from '@uiw-admin/models';
+import { useDispatch } from 'react-redux';
+import { Dispatch } from '@uiw-admin/models';
+import { ProTable, useTable } from '@uiw-admin/components';
+import { selectPage } from 'servers/demo'
 import { columns } from './columns';
-import Search from './search'
 import Detail from './Detail'
-import { useRequest } from 'ahooks'
-import { selectDemoPage } from '../../servers/demo'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>();
-
-  const { demo: { current, pageSize, total, dataSource, filter } } = useSelector((state: RootState) => state);
 
   const updateData = (payload: any) => {
     dispatch({
@@ -20,27 +16,23 @@ const Demo = () => {
     });
   };
 
-   // 分页请求
-  const { run, loading } = useRequest(selectDemoPage, {
-    manual: true,
-    onSuccess: (res) => {
-      if (res?.code === 200) {
-        const { data } = res
-        updateData({
-          dataSource: data?.rows || [],
-          total: data?.total
-        })
-      }
+  const table = useTable(selectPage, {
+    // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
+    formatData: (data: any) => {
+      return {
+        total: data.data.total,
+        data: data.data.rows || [],
+      };
+    },
+    // 格式化查询参数 会接收到pageIndex 当前页  pageSize 页码
+    query: (pageIndex: number) => {
+      console.log(pageIndex);
+      return {
+        page: pageIndex,
+        pageSize: 10,
+      };
     },
   });
-
-  React.useEffect(() => {
-    run({
-      page: current,
-      pageSize,
-      queryData: filter
-    })
-  }, [current, filter, pageSize, run])
 
   // 操作
   function handleEditTable(type: string, record: any) {
@@ -48,38 +40,42 @@ const Demo = () => {
       isView: type === 'view',
       tableType: type
     })
-    if (type === 'add' || type === 'view' || type === 'edit') {
-      updateData({ drawerVisible: true })
+    if (type === 'add') {
+      updateData({ drawerVisible: true, queryInfo: {} })
+    }
+    if (type === 'edit' || type === 'view') {
+      dispatch({
+        type: 'demo/selectById',
+        payload: { id: record?.id }
+      });
     }
   }
 
   return (
-    <Loader loading={loading} size="large" style={{ display: 'block' }} >
-      <React.Fragment>
-        <Card>
-          <Search updateData={updateData} />
-        </Card>
-        <div style={{ marginTop: 14 }} />
-        <Card>
-          <Row gutter={10}>
-            <Col>
-              <Button style={{ width: 60 }} type="primary" onClick={handleEditTable.bind(this, 'add')}>新增</Button>
-              <Button style={{ width: 60 }} type="danger" onClick={handleEditTable.bind(this, 'export')}> 导出 </Button>
-              <Button style={{ width: 60 }} type="light" onClick={handleEditTable.bind(this, 'export')}> 导入 </Button>
-            </Col>
-          </Row>
-        </Card>
-        <div style={{ marginTop: 14 }} />
-        <Card>
-          <Table
-            columns={columns({ handleEditTable: handleEditTable })}
-            data={dataSource}
-            footer={<Pagination current={current} pageSize={pageSize} total={total} divider onChange={(current: number, _: any, pageSize: number) => updateData({ current, pageSize })} />}
-          />
-        </Card>
-        <Detail updateData={updateData} />
-      </React.Fragment>
-    </Loader>
+    <React.Fragment>
+      <ProTable
+        btns={[
+          {
+            label: '新增',
+            type: 'primary',
+            onClick: handleEditTable.bind(this, 'add')
+          },
+          {
+            label: '导出',
+            type: "danger",
+            onClick: handleEditTable.bind(this, 'export')
+          },
+          {
+            label: '导入',
+            type: "dark",
+            onClick: handleEditTable.bind(this, 'import')
+          },
+        ]}
+        columns={columns({ handleEditTable: handleEditTable })}
+        table={table}
+      />
+      <Detail updateData={updateData} />
+    </React.Fragment>
   );
 }
 export default Demo

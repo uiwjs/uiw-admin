@@ -3,8 +3,9 @@ import BasicLayout from '@uiw-admin/basic-layouts';
 import { Outlet } from "react-router-dom";
 import { RoutersProps } from "@uiw-admin/router-control"
 import { Badge, Icon } from 'uiw'
-import { useRequest } from 'ahooks'
-import { reloadAuth } from "./../servers/login"
+
+import useSWR from 'swr'
+
 
 // import LayoutTabs from "@uiw-admin/layout-tabs"
 // import Auth from "@uiw-admin/authorized"
@@ -15,10 +16,11 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
-  const { run } = useRequest(reloadAuth, {
-    manual: true,
+  const { mutate } = useSWR(["/api/reloadAuth", { method: "POST" }], {
+    revalidateOnMount: false,
+    revalidateOnFocus: false,
     onSuccess: (data) => {
-      if (data.code === 200) {
+      if (data && data.code === 200) {
         sessionStorage.setItem("token", data.token)
         sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         window.location.reload()
@@ -26,24 +28,32 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     }
   })
 
+
+
   const basicLayoutProps = {
-    onReloadAuth: () => run(),
+    onReloadAuth: async () => mutate(),
     routes: routes,
+    // 修改密码以及其他操作在项目中进行
     menus: [
       {
         title: '欢迎来到uiw',
         icon: "smile",
         onClick: () => { }
+      },
+      {
+        title: '修改密码',
+        icon: "setting",
+        onClick: () => { }
       }
     ],
     profile: {
-      avatar: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Ffd%2Ff1%2Fda%2Ffdf1dacb8ff0b8f13ed29bcbee42f328.jpeg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1644762318&t=a0151d354747c67b096619184d7142d8",
+      avatar: require('../assets/head.png'),
       menuLeft: (
         <div style={{ marginRight: 15 }}>
           <Badge count={66}>
             <Icon type="bell" color="#343a40" style={{ fontSize: 20 }} />
           </Badge>
-        </div>
+        </div >
       )
     }
   }

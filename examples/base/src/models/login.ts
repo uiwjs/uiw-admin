@@ -1,5 +1,6 @@
 import { ModelDefault } from '@uiw-admin/models';
 import { history } from "@uiw-admin/router-control"
+
 export interface LoginState {
   token?: string;
   userData?: {
@@ -28,7 +29,7 @@ const login: ModelDefault = {
       // await login({ username: 'test', password: 'www' });
       // dispatch.sharks.increment(payload)
       // `dispatch.s` will suggest `sharks`
-    },
+    }
   }),
 };
 

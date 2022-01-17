@@ -1,11 +1,11 @@
 import React from 'react';
 import { Button } from 'uiw'
 
-interface attrProps {
+interface AttrProps {
   handleEditTable: (type: string, record: any) => void
 }
 
-export const columns = (attr: attrProps) => [
+export const columns = (attr: AttrProps) => [
   {
     title: '姓名',
     key: 'name',
@@ -22,10 +22,10 @@ export const columns = (attr: attrProps) => [
     title: '操作',
     key: 'edit',
     width: 98,
-    render: () => (
+    render: (text: any, key: any, rowData: any) => (
       <div>
-        <Button size="small" type="danger" onClick={attr.handleEditTable.bind(this, 'edit')}>编辑</Button>
-        <Button size="small" type="success" onClick={attr.handleEditTable.bind(this, 'view')}>查看</Button>
+        <Button size="small" type="danger" onClick={attr.handleEditTable.bind(this, 'edit',rowData)}>编辑</Button>
+        <Button size="small" type="success" onClick={attr.handleEditTable.bind(this, 'view',rowData)}>查看</Button>
       </div>
     ),
   },

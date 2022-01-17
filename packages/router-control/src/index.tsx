@@ -4,6 +4,7 @@ import {
   useLocation, useParams, Route, createRoutesFromChildren,
   HashRouter, BrowserRouter, Navigate
 } from "react-router-dom";
+import { Exceptions403 } from "@uiw-admin/exceptions"
 import type { RouteObject } from "react-router-dom";
 import { createBrowserHistory } from 'history';
 
@@ -27,7 +28,7 @@ export interface Routers extends Omit<RouteObject, "children"> {
   component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
   /** 子集 路由 */
   routes?: Routers[]
-  /** 加载 model 的文件名称 */
+  /** 加载 model 的文件路径 , ts 结尾的文件 */
   models?: string[];
   /** 是否隐藏菜单 */
   hideInMenu?: boolean;
@@ -95,7 +96,7 @@ export const getDeepTreeRoute = (routes: RoutersProps[], authList: string[]) => 
       } else {
         itemObj.isAuth = false;
         itemObj.hideInMenu = true;
-        itemObj.component = <div>403，无权访问</div>
+        itemObj.component = <Exceptions403 />
       }
     }
     if (itemObj.routes) {
