@@ -9,6 +9,7 @@ npm i @uiw-admin/router-control --save
 ## 参数
 
 ```ts
+
 export interface Routers extends Omit<RouteObject, "children"> {
   key?: string;
   /** 默认跳转 */
@@ -33,6 +34,14 @@ export interface Routers extends Omit<RouteObject, "children"> {
   isAuth?: boolean
 }
 
+export interface ControllerProps {
+  routes?: RoutersProps[];
+  /** 路由模式   默认 history  */
+  routeType?: "history" | "hash" | "browser";
+  basename?: string;
+  addModel?: (models: string[]) => void
+}
+
 ```
 
 
@@ -43,6 +52,7 @@ import { Exceptions403, Exceptions500, Exceptions404 } from "@uiw-admin/exceptio
 import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
 import Control from '@uiw-admin/router-control';
+import { store, createModels } from '@uiw-admin/models';
 
 // 这块内容需要进行转换掉 
 export const routers: Routers[] = [
@@ -112,6 +122,13 @@ export default ()=>{
     <Control
       routeType="hash"
       routes={routers}
+      addModel={(models: string[]) => {
+          models.map(async (m) => {
+            const md = await import(`./models/${m}.ts`);
+            const modelData = md.default || md;
+            createModels(modelData, m)
+          });
+        }}
     />
   )
 }
