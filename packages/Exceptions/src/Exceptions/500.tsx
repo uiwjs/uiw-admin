@@ -13,7 +13,7 @@ const Exception500 = () => {
       <h1>500</h1>
       <h2>抱歉，服务器出错了</h2>
       <Button
-        onClick={() => navigate("/home")}
+        onClick={() => navigate("/home", { replace: true })}
         type="primary"
       >返回首页</Button>
     </div>
