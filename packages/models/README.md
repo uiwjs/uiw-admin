@@ -24,6 +24,8 @@ npm i @uiw-admin/models --save
 
 ## createModels 
 
+> 把单个 `model` 添加进 `store` 中的 `models`
+
 ```ts
 
 import { createModels } from "@uiw-admin/models"
