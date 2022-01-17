@@ -29,7 +29,7 @@ export interface ConfigProps {
   output?: Omit<Configuration["output"], "publicPath">
 }
 export default (props: ConfigProps) => {
-  const { plugins, alias, define, loader: ConfFunArr, moreConfig, publicPath, output } = props || {}
+  const { plugins, alias, define, loader: ConfFunArr, moreConfig, publicPath = "/", output } = props || {}
   return (conf: Configuration, env: string, options: LoaderConfOptions) => {
     if (ConfFunArr) {
       ConfFunArr.forEach((fun) => {
@@ -51,7 +51,7 @@ export default (props: ConfigProps) => {
     conf.resolve!.alias = {
       ...(alias || {}),
     };
-    if (publicPath) {
+    if (publicPath && process.env.NODE_ENV === "production") {
       conf.output = {
         /** 添加 publicPath  如果不加 path ，打包会找不到文件报错 */
         path: path.resolve(process.cwd(), 'build'),
