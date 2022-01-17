@@ -1,5 +1,6 @@
 import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
+import { Exceptions403, Exceptions500, Exceptions404 } from "@uiw-admin/exceptions"
 
 const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")))
 
@@ -54,17 +55,17 @@ export const routers: Routers[] = [
       {
         path: "/403",
         name: "403",
-        component: <div>403</div>
+        component: <Exceptions403 />
       },
       {
         path: "/500",
         name: "500",
-        component: <div>500</div>
+        component: <Exceptions500 />
       },
       {
         path: "*",
         name: "404",
-        component: <div>404</div>
+        component: <Exceptions404 />
       },
 
     ]
