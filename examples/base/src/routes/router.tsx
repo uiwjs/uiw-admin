@@ -29,7 +29,7 @@ export const routers: Routers[] = [
         path: "/home",
         name: "首页",
         models: ["home"],
-        component: React.lazy(() => import("../pages/Home")),
+        component: <div>首页</div>,
       },
       {
         path: "/dom",
@@ -39,11 +39,6 @@ export const routers: Routers[] = [
             path: "/dom/courses",
             name: "Dashboard",
             component: React.lazy(() => import("../pages/Dashboard")),
-          },
-          {
-            path: "/dom/home",
-            name: "home",
-            component: React.lazy(() => import("../pages/Home")),
           },
         ]
       },
@@ -63,11 +58,15 @@ export const routers: Routers[] = [
         component: <Exceptions500 />
       },
       {
+        path: "/404",
+        name: "404",
+        component: <Exceptions404 />
+      },
+      {
         path: "*",
         name: "404",
         component: <Exceptions404 />
       },
-
     ]
   },
 ];
