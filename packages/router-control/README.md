@@ -42,6 +42,7 @@ export interface Routers extends Omit<RouteObject, "children"> {
 import { Exceptions403, Exceptions500, Exceptions404 } from "@uiw-admin/exceptions"
 import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
+import Control from '@uiw-admin/router-control';
 
 // 这块内容需要进行转换掉 
 export const routers: Routers[] = [
@@ -105,6 +106,16 @@ export const routers: Routers[] = [
     ]
   },
 ];
+
+export default ()=>{
+  return (
+    <Control
+      routeType="hash"
+      routes={routers}
+    />
+  )
+}
+
 ```
 
 
