@@ -22,7 +22,7 @@ ReactDOM.render(
   >
     <Provider store={store}>
       <Control
-        // routeType="hash"
+        routeType="hash"
         routes={routers}
         addModel={(models: string[]) => {
           models.map(async (m) => {

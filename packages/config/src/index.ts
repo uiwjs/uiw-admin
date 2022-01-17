@@ -29,7 +29,7 @@ export interface ConfigProps {
   output?: Omit<Configuration["output"], "publicPath">
 }
 export default (props: ConfigProps) => {
-  const { plugins, alias, define, loader: ConfFunArr, moreConfig, publicPath = "/", output } = props || {}
+  const { plugins, alias, define, loader: ConfFunArr, moreConfig, publicPath = "./", output } = props || {}
   return (conf: Configuration, env: string, options: LoaderConfOptions) => {
     if (ConfFunArr) {
       ConfFunArr.forEach((fun) => {
