@@ -3,6 +3,7 @@ import { ProDrawer } from '@uiw-admin/components'
 import { Form, Input, Select, Row, Col, Button, Notify } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
+import { insert, update } from 'servers/demo'
 import useSWR from 'swr'
 
 interface DetailProps {
@@ -24,13 +25,13 @@ const Detail = (props: DetailProps) => {
   const onClose = () => dispatch({ type: "demo/clean" })
 
   const { mutate } = useSWR([
-    (tableType === 'add' && '/api/demo/insert') || (tableType === 'edit' && '/api/demo/update'), { method: "POST", body: queryInfo }], {
+    (tableType === 'add' && insert) || (tableType === 'edit' && update), { method: "POST", body: queryInfo }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
     onSuccess: (data) => {
       if (data && data.code === 200) {
         Notify.success({ title: data.message });
-        dispatch({ type: "demo/clean" })
+        onClose()
       }
     },
   })
