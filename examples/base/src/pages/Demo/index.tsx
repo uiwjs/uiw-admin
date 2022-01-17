@@ -1,9 +1,10 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from '@uiw-admin/models';
+import { ProTable, useTable } from '@uiw-admin/components';
+import { selectPage } from 'servers/demo'
 import { columns } from './columns';
 import Detail from './Detail'
-import { ProTable, useTable } from '@uiw-admin/components';
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>();
@@ -15,7 +16,7 @@ const Demo = () => {
     });
   };
 
-  const table = useTable('/api/demo/selectPage', {
+  const table = useTable(selectPage, {
     // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
     formatData: (data: any) => {
       return {

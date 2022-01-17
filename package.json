@@ -29,6 +29,8 @@
     "build:config": "lerna exec --scope @uiw-admin/models -- tsbb build",
     "watch:config": "lerna exec --scope @uiw-admin/models -- tsbb watch",
     "-----------": "--------------",
+    "build:utils": "lerna exec --scope @uiw-admin/utils -- tsbb build",
+    "watch:utils": "lerna exec --scope @uiw-admin/utils -- tsbb watch",
     "build:pk": "lerna exec --scope @uiw-admin/* -- tsbb build",
     "watch:pk": "lerna exec --scope @uiw-admin/* -- tsbb watch",
     "build": "npm run build:pk ",

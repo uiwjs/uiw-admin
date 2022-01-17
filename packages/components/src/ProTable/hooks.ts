@@ -3,9 +3,7 @@ import {
   createContext,
 } from 'react';
 
-export const StoreCtx = createContext({
-  data: []
-});
+export const StoreCtx = createContext({});
 
 
 export const useStore = () => {

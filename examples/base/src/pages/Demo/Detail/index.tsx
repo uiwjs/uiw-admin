@@ -1,37 +1,52 @@
 import React from 'react';
 import { ProDrawer } from '@uiw-admin/components'
-import { Form, Input, Select, Row, Col, Button } from 'uiw'
+import { Form, Input, Select, Row, Col, Button, Notify } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
+import { insert, update } from 'servers/demo'
+import useSWR from 'swr'
 
 interface DetailProps {
   updateData?: any
 }
 
+const options = [
+  { value: 1, label: '苹果' },
+  { value: 2, label: '西瓜' },
+  { value: 3, label: '香蕉' },
+  { value: 4, label: '东北大冻梨' },
+]
+
 const Detail = (props: DetailProps) => {
-  //const { updateData } = props
+  const { updateData } = props
   const dispatch = useDispatch<Dispatch>();
   const { demo: { drawerVisible, tableType, queryInfo, isView } } = useSelector((state: RootState) => state);
 
-  const options = [
-    { value: 1, label: '苹果' },
-    { value: 2, label: '西瓜' },
-    { value: 3, label: '香蕉' },
-    { value: 4, label: '东北大冻梨' },
-  ]
-
   const onClose = () => dispatch({ type: "demo/clean" })
+
+  const { mutate } = useSWR([
+    (tableType === 'add' && insert) || (tableType === 'edit' && update), { method: "POST", body: queryInfo }], {
+    revalidateOnMount: false,
+    revalidateOnFocus: false,
+    onSuccess: (data) => {
+      if (data && data.code === 200) {
+        Notify.success({ title: data.message });
+        onClose()
+      }
+    },
+  })
 
   return (
     <ProDrawer
       width={800}
-      title={tableType === 'add' ? '新增' : tableType === 'edit' ? '编辑' : '编辑'}
+      title={tableType === 'add' ? '新增' : tableType === 'edit' ? '编辑' : '查看'}
       visible={drawerVisible}
       onClose={onClose}
     >
       <Form
         title="基础信息"
-        onSubmit={({ initial, current }) => dispatch({ type: tableType === 'add' ? "demo/insert" : "demo/update", payload: current })}
+        onSubmit={({ initial, current }) => mutate()}
+        onChange={({ initial, current }) => updateData({ queryInfo: { ...queryInfo, current } })}
         fields={{
           firstName: {
             labelClassName: 'fieldLabel',

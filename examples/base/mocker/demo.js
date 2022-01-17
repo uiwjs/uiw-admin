@@ -16,7 +16,7 @@ module.exports.selectPage = function (req, res) {
   setTimeout(() => {
     return res.status(200).json({
       code: 200,
-      message: '退出登录！',
+      message: '获取数据成功',
       data: {
         rows: newDataList,
         total: 50

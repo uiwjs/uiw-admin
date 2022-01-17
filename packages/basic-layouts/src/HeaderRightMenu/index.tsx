@@ -44,17 +44,12 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
     {
       divider: true,
     },
+    ...menus,
     {
       title: '刷新权限',
       icon: "reload",
       onClick: () => onReloadAuth(),
     },
-    {
-      title: '修改密码',
-      icon: "setting",
-      onClick: () => { }
-    },
-    ...menus,
     {
       divider: true,
     },
