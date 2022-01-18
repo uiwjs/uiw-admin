@@ -14,7 +14,20 @@ export type ConfFun = (conf: Configuration, evn: string, options?: LoaderConfOpt
 
 export interface ConfigProps {
   /** 别名 */
-  alias?: { [s: string]: string },
+  alias?: | {
+    /**
+     * New request.
+     */
+    alias: string | false | string[];
+    /**
+     * Request to be redirected.
+     */
+    name: string;
+    /**
+     * Redirect only exact matching request.
+     */
+    onlyModule?: boolean;
+  }[] | { [index: string]: string | false | string[] };
   /** 插件 */
   plugins?: Configuration["plugins"],
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
@@ -28,6 +41,7 @@ export interface ConfigProps {
   /** 输出 */
   output?: Omit<Configuration["output"], "publicPath">
 }
+
 export default (props: ConfigProps) => {
   const { plugins, alias, define, loader: ConfFunArr, moreConfig, publicPath = "./", output } = props || {}
   return (conf: Configuration, env: string, options: LoaderConfOptions) => {
@@ -48,9 +62,16 @@ export default (props: ConfigProps) => {
       }),
       ...(plugins || [])
     );
-    conf.resolve!.alias = {
-      ...(alias || {}),
-    };
+
+    if (Array.isArray(alias)) {
+      conf.resolve!.alias = [
+        ...alias,
+      ]
+    } else if (Object.prototype.toString.call(alias) === "[object Object]") {
+      conf.resolve!.alias = {
+        ...alias,
+      };
+    }
     if (publicPath && process.env.NODE_ENV === "production") {
       conf.output = {
         /** 添加 publicPath  如果不加 path ，打包会找不到文件报错 */

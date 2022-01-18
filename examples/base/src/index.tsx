@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import '@uiw/reset.css';
 import { store, createModels } from '@uiw-admin/models';
 import { routers } from './routes/router';
 import Control from '@uiw-admin/router-control';
