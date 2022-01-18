@@ -1,6 +1,12 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useMemo,
+} from 'react';
 import useSWR from 'swr';
-import { Table, Pagination, TableColumns, Button } from 'uiw';
+import { Table, Pagination, TableColumns } from 'uiw';
 import { request } from '@uiw-admin/utils';
 import { useStore } from './hooks';
 import { Fields } from './BaseForm';
@@ -12,60 +18,66 @@ interface BaseTableProps {
 
 const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
   const [pageIndex, setPageIndex] = useState(1);
-  const [loading, setLoading] = useState(false);
+
+  const [prevData, setPrevData] = useState({
+    data: [],
+    total: 0,
+  });
 
   const store = useStore();
 
   let { formatData, updateStore, query, key, searchValues } = store as any;
 
+  // 表单默认值
+  const defaultValues = useMemo(() => {
+    const defaultSearchValues: Fields = {};
+    columns.forEach((col) => {
+      if (col?.props?.initialValue) {
+        const name = col.key || col.props.key;
+        defaultSearchValues[name] = col.props.initialValue;
+      }
+    });
+
+    return defaultSearchValues;
+  }, [JSON.stringify(columns)]);
+
   // 是否首次调取数据
   const isFirstMountRef = useRef(false);
   // 格式化接口查询参数
-  const formatQuery = (defaultSearchValues?: Fields, page?:number) => {
+  const formatQuery = useCallback(() => {
     if (query) {
-      return query(page || pageIndex, defaultSearchValues || searchValues);
+      return query(
+        pageIndex,
+        isFirstMountRef.current === false ? defaultValues : searchValues,
+      );
     } else {
       // 默认传参
       return {
-        page: page || pageIndex,
+        page: 1,
         pageSize: 10,
       };
     }
-  };
+  }, [pageIndex, JSON.stringify(defaultValues), JSON.stringify(searchValues)]);
 
   const pageSize = formatQuery().pageSize || 10;
 
-
-  const { data, error, mutate, isValidating } = useSWR(
+  const { data, isValidating } = useSWR(
     [key, { method: 'POST', body: formatQuery() }],
     request,
     {
-      revalidateOnMount: false,
+      // revalidateOnMount: false,
       revalidateOnFocus: false,
     },
   );
-  // 分页查询
-  const onSearch = useCallback(async (current) => {
-    setLoading(true)
-    setPageIndex(1)
-    await request(key, { method: 'POST', body: formatQuery(current, 1) }).then(res => {
-      setLoading(false)
-      mutate(res, false);
-      console.log(123);
-     
-    });
-  }, [request, mutate, JSON.stringify(searchValues)]);
 
-  const onPageChange = useCallback(async (page) => {
-    setLoading(true)
-    setPageIndex(page)
-    request(key, { method: 'POST', body: formatQuery(undefined, page) }).then(res => {
-      setLoading(false)
-      mutate(res, false);
-     
-    });
-  }, [request, mutate, JSON.stringify(searchValues), pageIndex]);
-
+  // 查询
+  const onSearch = useCallback(async () => {
+    setPageIndex(1);
+  }, []);
+  // 分页
+  const onPageChange = useCallback((page) => {
+    setPageIndex(page);
+  }, []);
 
   useEffect(() => {
     // 获取表单默认值
@@ -76,44 +88,49 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
         defaultSearchValues[name] = col.props.initialValue;
       }
     });
-    updateStore({
+    const stores: any = {
       data: data?.data,
       total: data?.total,
-      loading: loading,
-      onSearch
-    });
+      loading: !data || isValidating,
+      onSearch,
+    };
 
     if (!isFirstMountRef.current) {
       isFirstMountRef.current = true;
-      updateStore({
-        searchValues: defaultSearchValues,
-      });
-      setLoading(true)
-      // 第一次加载
-      request(key, {
-        method: 'POST',
-        body: formatQuery(defaultSearchValues),
-      }).then((res) => {
-        setLoading(false)
-        mutate(res, false);
-      });
+      // 默认表单值
+
+      stores.searchValues = defaultSearchValues;
     }
-  }, [JSON.stringify(data), onSearch, loading, JSON.stringify(columns)]);
+
+    updateStore(stores);
+
+    // 上一次请求数据
+    if (data) {
+      setPrevData(data);
+    }
+  }, [JSON.stringify(data), isValidating, onSearch, JSON.stringify(columns)]);
 
   return (
     <Table
       columns={columns}
-      data={formatData && data ? formatData(data).data : data?.data}
-      style={style}
+      data={
+        formatData && data
+          ? formatData(data).data
+          : data?.data || prevData?.data
+      }
+      // style={{overflowX: 'scroll'}}
       footer={
         <Pagination
           current={pageIndex}
           pageSize={pageSize}
-          total={formatData && data ? formatData(data).total : data?.total}
+          total={
+            formatData && data
+              ? formatData(data).total
+              : data?.total || prevData?.total
+          }
           divider
           onChange={(page) => {
-            
-            onPageChange(page)
+            onPageChange(page);
           }}
         />
       }

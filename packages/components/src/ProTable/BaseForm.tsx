@@ -5,18 +5,18 @@ import {
   Form,
   Row,
   Col,
-  Radio,
   Checkbox,
   Switch,
-  SearchSelect,
   Textarea,
   DateInput,
   TimePicker,
   MonthPicker,
   FormSubmitProps,
+  SearchSelect
 } from 'uiw';
 import { FormCol } from './index';
 import Select from './widgets/Select';
+import FormRadio from './widgets/Radio';
 import { useStore } from './hooks';
 
 interface BaseFormProps {
@@ -29,11 +29,11 @@ export type Fields = {
 
 const widgets = {
   input: Input,
-  radio: Radio,
+  radio: FormRadio,
   checkbox: Checkbox,
   switch: Switch,
   select: Select,
-  // searchSelect: SearchSelect,
+  searchSelect: SearchSelect,
   textarea: Textarea,
   dateInput: DateInput,
   timePicker: TimePicker,
@@ -88,9 +88,9 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
   // 重置
 
-  const onReset = (resetForm: () => void) => {
-    resetForm();
-  };
+  // const onReset = (resetForm: () => void) => {
+  //   resetForm();
+  // };
 
   return (
     <Form
@@ -110,9 +110,9 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       {({ fields, state, canSubmit, resetForm }) => {
         return (
           <div>
-            <Row gutter={10}>
+            <Row gutter={12}>
               {Object.keys(fields).map((key) => (
-                <Col key={key} fixed>
+                <Col key={key} fixed style={{ width: '20%' }}>
                   {fields[key]}
                 </Col>
               ))}

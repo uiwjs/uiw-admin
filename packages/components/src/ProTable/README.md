@@ -1,3 +1,12 @@
+## ProTable
+
+集成搜索表单，table的列表组件
+
+
+### demo
+
+```js
+
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -19,8 +28,6 @@ export default function Demo() {
       };
     },
   });
-
-  console.log(table);
 
   return (
     <ProTable
@@ -115,3 +122,50 @@ export default function Demo() {
     />
   );
 }
+
+
+```
+
+## Porps
+
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| columns | 与uiw table colunms用法一致	| ColumnProps[]		| [] |
+
+### columns props
+
+配置搜索表单
+
+
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| widget | 表单组件	| 	支持例子中的组件, 组件名与uiw表单组件名字一致，只是首字母小写了	| - |
+| widgetProps | 组件数组	| 	与uiw对应的组件属性一致	| - |
+
+## useTable
+
+### params
+
+
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| key | 接口请求地址	| string		| - |
+| options | 配置集合	| object		| {} |
+
+### options
+
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| formatData | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式	| (data) => {total: 10, data: []}	| - |
+| query | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据	|  (pageIndex: number, searchValues: any)	=> {page:  pageIndex, pageSize: 10, searchValues}	| {} |
+
+
+### response
+
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| data | 接口请求数据	| Array	| - |
+| total | 数据总数	| Number		| - |
+| searchValues | 表单值	| Object		| - |
+
+别的值咱不需要使用

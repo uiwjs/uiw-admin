@@ -17,14 +17,34 @@ interface ProtableProps {
 
 export interface FormCol extends TableColumns {
   props?: {
-    widget: 'input' | 'radio' | 'checkbox' | 'switch' | 'select' | 'textarea' | 'dateInput' | 'timePicker' | 'monthPicker',
-    [key: string]: any
-  }
+    widget:
+      | 'input'
+      | 'radio'
+      | 'checkbox'
+      | 'switch'
+      | 'select'
+      | 'textarea'
+      | 'dateInput'
+      | 'timePicker'
+      | 'searchSelect'
+      | 'monthPicker';
+    [key: string]: any;
+  };
 }
 
 const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
-
-  const { key, data, reset, refersh, updateStore, formatData, query, searchValues, loading, onSearch } = table;
+  const {
+    key,
+    data,
+    reset,
+    refersh,
+    updateStore,
+    formatData,
+    query,
+    searchValues,
+    loading,
+    onSearch,
+  } = table;
 
   const store = useMemo(
     () => ({
@@ -36,28 +56,38 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
       formatData,
       query,
       searchValues,
-      onSearch
+      onSearch,
     }),
-    [JSON.stringify(data), reset, refersh, key, updateStore, formatData, query, JSON.stringify(searchValues), onSearch],
+    [
+      JSON.stringify(data),
+      reset,
+      refersh,
+      key,
+      updateStore,
+      formatData,
+      query,
+      JSON.stringify(searchValues),
+      onSearch,
+    ],
   );
 
-
+  console.log('loading--->', loading);
   return (
     <StoreCtx.Provider value={store}>
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
-        <BaseForm  columns={columns} />
+        <BaseForm columns={columns} />
         {/* 操作区域 */}
-        {
-          btns.length > 0 &&   <div style={{ marginTop: 14, background: '#fff', padding: 10 }}>
-          {btns.map((btn: any, idx) => (
-            <Button key={idx.toString()} style={{ marginRight: 5 }} {...btn}>
-              {btn.label}
-            </Button>
-          ))}
-        </div>
-        }
-      
+        {btns.length > 0 && (
+          <div style={{ marginTop: 14, background: '#fff', padding: 10 }}>
+            {btns.map((btn: any, idx) => (
+              <Button key={idx.toString()} style={{ marginRight: 5 }} {...btn}>
+                {btn.label}
+              </Button>
+            ))}
+          </div>
+        )}
+
         {/* 列表组件 */}
         <Table columns={columns} />
       </Skeleton>
