@@ -1,9 +1,9 @@
 import React from 'react';
+import { Button } from 'uiw'
 import { useDispatch } from 'react-redux';
 import { Dispatch } from '@uiw-admin/models';
 import { ProTable, useTable } from '@uiw-admin/components';
 import { selectPage } from 'servers/demo'
-import { columns } from './columns';
 import Detail from './Detail'
 
 const Demo = () => {
@@ -71,7 +71,47 @@ const Demo = () => {
             onClick: handleEditTable.bind(this, 'import')
           },
         ]}
-        columns={columns({ handleEditTable: handleEditTable })}
+        columns={[
+          {
+            title: '姓名',
+            key: 'name',
+            props: {
+              widget: 'input',
+              initialValue: 'zzz',
+              // 组件属性
+              widgetProps: {
+                preIcon: 'user',
+                placeholder: '输入用户名'
+              }
+            },
+          },
+          {
+            title: '年龄',
+            key: 'age',
+            props: {
+              widget: 'select',
+              option: [
+                { label: '20', value: 20 },
+                { label: '10', value: 10 },
+              ],
+            },
+          },
+          {
+            title: '地址',
+            key: 'info',
+          },
+          {
+            title: '操作',
+            key: 'edit',
+            width: 98,
+            render: (text: any, key: any, rowData: any) => (
+              <div>
+                <Button size="small" type="danger" onClick={handleEditTable.bind(this, 'edit',rowData)}>编辑</Button>
+                <Button size="small" type="success" onClick={handleEditTable.bind(this, 'view',rowData)}>查看</Button>
+              </div>
+            ),
+          },
+        ]}
         table={table}
       />
       <Detail updateData={updateData} />
