@@ -70,7 +70,7 @@
     "tsbb": "3.5.4"
   },
   "resolutions": {
-    "@uiw/react-menu": "4.9.7",
+    "@uiw/react-menu": "4.9.10",
     "mini-css-extract-plugin": "2.4.7"
   },
   "workspaces": {
