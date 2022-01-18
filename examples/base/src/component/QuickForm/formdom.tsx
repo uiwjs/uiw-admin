@@ -1,8 +1,8 @@
 import React from 'react';
-import { QuickFormProps } from './index'
-import { Controller, Control, UseFormTrigger, FieldValues } from 'react-hook-form'
+import { QuickFormProps } from './'
 import { Row, Col } from 'uiw'
 import WidgetsItem from './widgets'
+import { Control, UseFormTrigger, FieldValues } from 'react-hook-form'
 import './style/form-item.less';
 
 export type FromDomsProps = {
@@ -16,10 +16,10 @@ export type FromDomsProps = {
 const FromDom = ({
   formDatas = [],
   onItemChange,
+  span = 3,
   control,
-  errors,
   trigger,
-  span = 3
+  errors
 }: FromDomsProps) => {
   return (
     <div className="w-form-grid" style={{ gridTemplateColumns: `repeat(${span}, 1fr)` }}>
@@ -36,33 +36,17 @@ const FromDom = ({
             color: "#000000d9"
           }
 
-          const children = (
-            <Controller
-              key={item.name}
-              control={control}
-              render={({ field: { onChange, value }, }) => {
-                const widgetsItemProps = {
-                  ...item,
-                  onChange,
-                  value,
-                  trigger,
-                  onItemChange
-                }
-                return <WidgetsItem {...widgetsItemProps} />
-              }}
-              name={item.name}
-              rules={item.rules}
-              defaultValue={item.initValue ? item.initValue : ''}
-            />
-          )
+          const childrenProps = { ...item, onItemChange, control, trigger }
+          const children = <WidgetsItem {...childrenProps} />
 
+          // 隐藏不显示
           if (item.hide) {
             return null
           }
 
           return (
             <div key={item.name}>
-              <Row>
+              <Row className="w-form-item-center">
                 <Col fixed className={clsLabel}>
                   {item?.rules && <span style={{ paddingTop: 5, paddingRight: 5 }}>*</span>}
                   <span style={{ paddingLeft: item?.rules ? 0 : 12, ...labelFontStyle }}>{item?.label || ''}</span>

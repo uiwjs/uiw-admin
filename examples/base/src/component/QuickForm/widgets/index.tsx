@@ -1,44 +1,65 @@
 import React from 'react';
 import { Input, Select } from 'uiw';
 import { FormOptionsProps } from '../index'
+import { useController } from 'react-hook-form'
 
 function WidgetsItem({
-  name,
+  // formDatas 表单项参数
+  name: labelName,
   type,
+  render,
+  initValue,
+  rules,
   options,
   attributes,
-  onChange,
-  value,
-  trigger,
-  onItemChange
+  // 组件api监听表单值变化
+  onItemChange,
+  // react-hook-form/useForm
+  control,
+  trigger
 }: any) {
+
+  const { field: { onChange, name, onBlur, value, ref } } = useController({
+    name: labelName,
+    control,
+    rules: rules,
+    defaultValue: initValue,
+  });
+
   const dom = () => {
     if (type === 'input') {
       return (
         <div style={{ flex: 1 }}>
           <Input
-            value={value}
+            ref={ref}
+            name={name}
+            value={value || ''}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
               onChange(event)
               trigger(name)
               onItemChange?.(name, event)
             }}
-            onBlur={() => trigger(name)}
+            onBlur={() => {
+              onBlur()
+              trigger(name)
+            }}
             {...attributes}
           />
         </div>
       )
     }
     if (type === 'select') {
-      console.log('value', value)
       return (
         <div style={{ flex: 1 }}>
           <Select
+            name={name}
+            ref={ref}
             onChange={(value) => {
               onChange(value)
               trigger(name)
               onItemChange?.(name, value)
             }}
+            onBlur={onBlur()}
             value={value}
             {...attributes}
           >
@@ -47,6 +68,10 @@ function WidgetsItem({
           </Select>
         </div>
       )
+    }
+    // 自定义组件
+    if (type === 'render') {
+      return render?.({ name, ref, onChange, onBlur })
     }
     return null
   }

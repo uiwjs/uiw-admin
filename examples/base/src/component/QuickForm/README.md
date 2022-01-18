@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import QuickForm from 'component/QuickForm'
 const Demo = ()=>{
+  const baseRef = useRef();
   const queryInfo = {}
   return (
      <QuickForm
