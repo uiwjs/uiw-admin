@@ -34,7 +34,7 @@ function renderMenuItem(
         'uiw-admin-global-sider-menu-collapsed': collapsed,
       });
     }
-    if (matchPath({ path: item.path, }, location.pathname)) {
+    if (matchPath({ path: item.path, }, pathName)) {
       props.active = true;
     }
     if (item.routes) {
