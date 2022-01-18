@@ -1,97 +1,82 @@
 import React from 'react';
-import { Input } from 'uiw';
 import { QuickFormProps } from './index'
-import { Controller } from 'react-hook-form'
-import { Control, FieldError, FieldValues } from 'react-hook-form/dist/types/form';
-import { DeepMap } from 'react-hook-form/dist/types/utils';
+import { Controller, Control, UseFormTrigger, FieldValues } from 'react-hook-form'
+import { Row, Col } from 'uiw'
+import WidgetsItem from './widgets'
+import './style/form-item.less';
 
-import './index.css'
-export interface FromDomsProps {
-  values: QuickFormProps & {
-    control: Control<FieldValues>;
-    errors: DeepMap<FieldValues, FieldError>;
-    trigger: (name?: string | string[] | undefined) => Promise<boolean>;
+export type FromDomsProps = {
+  control: Control<FieldValues, object>;
+  errors: {
+    [x: string]: any;
   }
-}
+  trigger: UseFormTrigger<FieldValues>;
+} & QuickFormProps
 
-const FromDom = (props: FromDomsProps) => {
-  const {
-    values: {
-      formDatas = [],
-      onItemChange,
-      control,
-      errors,
-      trigger,
-      span = 3
-    }
-  } = props;
-
-  const renderContent = ({
-    label,
-    name,
-    type,
-    value,
-    options,
-    onChange,
-    attributes,
-  }: any) => {
-    if (type === 'input') {
-      return (
-        <div style={{ flex: 1 }}>
-          <Input
-            value={value}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-              onChange(event)
-              trigger(name)
-              onItemChange && onItemChange(name, event)
-            }}
-            onBlur={() => {
-              trigger(name)
-            }}
-            {...attributes}
-          />
-        </div>
-      )
-    }
-  }
-  
+const FromDom = ({
+  formDatas = [],
+  onItemChange,
+  control,
+  errors,
+  trigger,
+  span = 3
+}: FromDomsProps) => {
   return (
-    <div className="grid" style={{ gridTemplateColumns: `repeat(${span}, 1fr)` }}>
+    <div className="w-form-grid" style={{ gridTemplateColumns: `repeat(${span}, 1fr)` }}>
       {
-        formDatas.map((item, index) => (
-          item.hide ? null : (
+        formDatas.map(item => {
+
+          const clsLabel = ['w-form-label', item?.rules ? 'w-form-label-require' : null]
+            .filter(Boolean)
+            .join(' ')
+            .trim();
+
+          const labelFontStyle = {
+            fontWeight: 600,
+            color: "#000000d9"
+          }
+
+          const children = (
+            <Controller
+              key={item.name}
+              control={control}
+              render={({ field: { onChange, value }, }) => {
+                const widgetsItemProps = {
+                  ...item,
+                  onChange,
+                  value,
+                  trigger,
+                  onItemChange
+                }
+                return <WidgetsItem {...widgetsItemProps} />
+              }}
+              name={item.name}
+              rules={item.rules}
+              defaultValue={item.initValue ? item.initValue : ''}
+            />
+          )
+
+          if (item.hide) {
+            return null
+          }
+
+          return (
             <div key={item.name}>
-              <div className="form-item" key={index}>
-                <div className="form-item-label">
-                  {item?.rules && <span style={{ color: '#ff4d4f', paddingRight: 5, paddingTop: 5 }}>*</span>}
-                  <span style={{ paddingLeft: item?.rules ? 0 : 12, fontWeight: 600 }}>{item?.label || ''}</span>
-                </div>
-                <Controller
-                  key={item.name}
-                  control={control}
-                  render={({ onChange, value, onBlur }) => {
-                    return (
-                      <React.Fragment>
-                        {renderContent({
-                          ...item,
-                          onChange,
-                          value,
-                          onBlur,
-                        })}
-                      </React.Fragment>
-                    )
-                  }}
-                  name={item.name}
-                  rules={item.rules}
-                  defaultValue={item.initValue ? item.initValue : ''}
-                />
-              </div>
-              {errors[item.name] && errors[item.name].message && (
-                <div className="form-item-error"> {errors[item.name].message}</div>
-              )}
+              <Row>
+                <Col fixed className={clsLabel}>
+                  {item?.rules && <span style={{ paddingTop: 5, paddingRight: 5 }}>*</span>}
+                  <span style={{ paddingLeft: item?.rules ? 0 : 12, ...labelFontStyle }}>{item?.label || ''}</span>
+                </Col>
+                <Col>{children}</Col>
+              </Row>
+              <Row>
+                {errors[item.name] && errors[item.name].message && (
+                  <Col className="w-form-label-error"> {errors[item.name].message}</Col>
+                )}
+              </Row>
             </div>
           )
-        ))
+        })
       }
     </div>
   )
