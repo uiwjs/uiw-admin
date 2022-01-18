@@ -43,6 +43,7 @@ export default function Demo() {
         {
           title: '年龄',
           key: 'age',
+          width: 50,
           props: {
             widget: 'select',
             option: [

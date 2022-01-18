@@ -33,7 +33,7 @@
     "react-redux": "7.2.6",
     "react-router-dom": "6.2.1",
     "swr": "^1.1.2",
-    "uiw": "4.9.7"
+    "uiw": "4.9.10"
   },
   "devDependencies": {
     "@uiw-admin/config": "4.1.4",

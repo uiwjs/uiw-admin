@@ -42,7 +42,7 @@
   "peerDependencies": {
     "react": ">=17.x",
     "react-dom": ">=17.x",
-    "uiw": ">=4.9.7"
+    "uiw": ">=4.9.10"
   },
   "dependencies": {
     "@babel/runtime": "7.16.7",
@@ -54,7 +54,7 @@
     "@types/react-router-dom": "5.3.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "uiw": "4.9.7",
+    "uiw": "4.9.10",
     "react-router-dom": "6.2.1"
   }
 }
