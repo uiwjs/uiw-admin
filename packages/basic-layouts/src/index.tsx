@@ -92,7 +92,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
               {props.children}
             </BodyContent>
           </Content>
-          {footerView}
+          {/* {footerView} */}
         </Layout>
       </Layout>
     </Fragment>

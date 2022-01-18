@@ -5,9 +5,9 @@ interface FormSelectProps {
   option?: HTMLOptionElement[];
 }
 
-const FormSelect: React.FC<FormSelectProps> = ({ option }) => {
+const FormSelect: React.FC<FormSelectProps> = ({ option, ...others }) => {
   return (
-    <Select>
+    <Select {...others}>
       <Select.Option value="">请选择</Select.Option>
       {option &&
         option.map((opt) => (
