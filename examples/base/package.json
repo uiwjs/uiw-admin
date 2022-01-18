@@ -37,6 +37,7 @@
     "uiw": "4.9.10"
   },
   "devDependencies": {
+    "@uiw-admin/plugins": "4.1.4",
     "@uiw-admin/config": "4.1.4",
     "@kkt/less-modules": "7.0.6",
     "@kkt/raw-modules": "7.0.6",

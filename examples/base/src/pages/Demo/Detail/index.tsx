@@ -3,7 +3,7 @@ import { ProDrawer } from '@uiw-admin/components'
 import { Form, Input, Select, Row, Col, Button, Notify } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
-import { insert, update } from 'servers/demo'
+import { insert, update } from '@/servers/demo'
 import useSWR from 'swr'
 
 interface DetailProps {
