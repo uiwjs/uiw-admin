@@ -13,6 +13,7 @@
   },
   "files": [
     "lib",
+    "esm",
     "src"
   ],
   "repository": {

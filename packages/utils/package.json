@@ -12,6 +12,7 @@
     "test": "__tests__"
   },
   "files": [
+    "esm",
     "lib"
   ],
   "repository": {
