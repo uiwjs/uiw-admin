@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.1c52c8f2.css",
-    "main.js": "/static/js/main.8af54737.js",
+    "main.css": "/static/css/main.c102613a.css",
+    "main.js": "/static/js/main.4df64676.js",
     "static/css/954.7bd8c748.chunk.css": "/static/css/954.7bd8c748.chunk.css",
     "static/js/954.1435daeb.chunk.js": "/static/js/954.1435daeb.chunk.js",
     "static/css/134.5ea83f2c.chunk.css": "/static/css/134.5ea83f2c.chunk.css",
@@ -43,8 +43,8 @@
     "static/js/262.91478034.chunk.js": "/static/js/262.91478034.chunk.js",
     "static/js/476.15f431dc.chunk.js": "/static/js/476.15f431dc.chunk.js",
     "static/js/826.a9430f80.chunk.js": "/static/js/826.a9430f80.chunk.js",
-    "uiw-vendor.css": "/static/css/uiw-vendor.9c9f1dd5.css",
-    "uiw-vendor.js": "/static/js/uiw-vendor.68a74ba2.js",
+    "uiw-vendor.css": "/static/css/uiw-vendor.73ee22da.css",
+    "uiw-vendor.js": "/static/js/uiw-vendor.563d82f4.js",
     "babel-standalone-vendor.js": "/static/js/babel-standalone-vendor.4b3e8958.chunk.js",
     "codemirror-vendor.js": "/static/js/codemirror-vendor.16cb84b9.chunk.js",
     "refractor-vendor.js": "/static/js/refractor-vendor.7107b02a.chunk.js",
@@ -52,8 +52,8 @@
     "react-vendor.js": "/static/js/react-vendor.7aee5bc5.js",
     "static/js/859.66514900.chunk.js": "/static/js/859.66514900.chunk.js",
     "index.html": "/index.html",
-    "main.1c52c8f2.css.map": "/static/css/main.1c52c8f2.css.map",
-    "main.8af54737.js.map": "/static/js/main.8af54737.js.map",
+    "main.c102613a.css.map": "/static/css/main.c102613a.css.map",
+    "main.4df64676.js.map": "/static/js/main.4df64676.js.map",
     "954.7bd8c748.chunk.css.map": "/static/css/954.7bd8c748.chunk.css.map",
     "954.1435daeb.chunk.js.map": "/static/js/954.1435daeb.chunk.js.map",
     "134.5ea83f2c.chunk.css.map": "/static/css/134.5ea83f2c.chunk.css.map",
@@ -95,8 +95,8 @@
     "262.91478034.chunk.js.map": "/static/js/262.91478034.chunk.js.map",
     "476.15f431dc.chunk.js.map": "/static/js/476.15f431dc.chunk.js.map",
     "826.a9430f80.chunk.js.map": "/static/js/826.a9430f80.chunk.js.map",
-    "uiw-vendor.9c9f1dd5.css.map": "/static/css/uiw-vendor.9c9f1dd5.css.map",
-    "uiw-vendor.68a74ba2.js.map": "/static/js/uiw-vendor.68a74ba2.js.map",
+    "uiw-vendor.73ee22da.css.map": "/static/css/uiw-vendor.73ee22da.css.map",
+    "uiw-vendor.563d82f4.js.map": "/static/js/uiw-vendor.563d82f4.js.map",
     "babel-standalone-vendor.4b3e8958.chunk.js.map": "/static/js/babel-standalone-vendor.4b3e8958.chunk.js.map",
     "codemirror-vendor.16cb84b9.chunk.js.map": "/static/js/codemirror-vendor.16cb84b9.chunk.js.map",
     "refractor-vendor.7107b02a.chunk.js.map": "/static/js/refractor-vendor.7107b02a.chunk.js.map",
@@ -105,10 +105,10 @@
     "859.66514900.chunk.js.map": "/static/js/859.66514900.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/uiw-vendor.9c9f1dd5.css",
-    "static/js/uiw-vendor.68a74ba2.js",
+    "static/css/uiw-vendor.73ee22da.css",
+    "static/js/uiw-vendor.563d82f4.js",
     "static/js/react-vendor.7aee5bc5.js",
-    "static/css/main.1c52c8f2.css",
-    "static/js/main.8af54737.js"
+    "static/css/main.c102613a.css",
+    "static/js/main.4df64676.js"
   ]
 }
