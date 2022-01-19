@@ -5,7 +5,7 @@ import rawModules from '@kkt/raw-modules';
 import scopePluginOptions from '@kkt/scope-plugin-options';
 import pkg from './package.json';
 import defaultConfig from "@uiw-admin/config"
-import { DvaWebpackPlugin } from "@uiw-admin/plugins"
+// import { DvaWebpackPlugin } from "@uiw-admin/plugins"
 
 export default defaultConfig({
   define: {
@@ -13,7 +13,7 @@ export default defaultConfig({
     // BASE_NAME: "/uiw"
   },
   plugins: [
-    new DvaWebpackPlugin()
+    // new DvaWebpackPlugin()
   ],
   // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
   loader: [
