@@ -14,18 +14,11 @@ import {
   FormSubmitProps,
   SearchSelect,
 } from 'uiw';
-import { FormCol } from './index';
 import Select from './widgets/Select';
 import FormRadio from './widgets/Radio';
 import { useStore } from './hooks';
+import { BaseFormProps, Fields } from './types'
 
-interface BaseFormProps {
-  columns: FormCol[];
-}
-
-export type Fields = {
-  [key: string]: any;
-};
 
 const widgets = {
   input: Input,

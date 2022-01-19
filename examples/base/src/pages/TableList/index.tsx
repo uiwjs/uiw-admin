@@ -12,7 +12,7 @@ export default function Demo() {
       };
     },
     // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
-    query: (pageIndex: number, searchValues: any) => {
+    query: (pageIndex, searchValues) => {
       return {
         page: pageIndex,
         pageSize: 10,
