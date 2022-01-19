@@ -16,7 +16,7 @@
     "375.js": "/375.js",
     "858.js": "/858.js",
     "825.js": "/825.js",
-    "245.js": "/245.js",
+    "80.js": "/80.js",
     "403.svg": "/c017a98ef237a66df982.svg",
     "head.png": "/36447999380a95380e00.png",
     "500.svg": "/3610ef9bee10a27a1f14.svg",
@@ -39,7 +39,7 @@
     "375.js.map": "/375.js.map",
     "858.js.map": "/858.js.map",
     "825.js.map": "/825.js.map",
-    "245.js.map": "/245.js.map"
+    "80.js.map": "/80.js.map"
   },
   "entrypoints": [
     "main.js",
