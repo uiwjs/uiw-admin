@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[19],{166:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var u=n(89),i=o(n(1)),l=o(n(219));function o(e){return e&&e.__esModule?e:{default:e}}t.default=function(){return i.default.createElement(l.default,{type:"500",style:{minHeight:500,height:"80%"},linkElement:u.Link})}}}]);
