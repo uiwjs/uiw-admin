@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
+import { useCity } from '../../queries'
 
 export default function Demo() {
   const table = useTable('/api/getData', {
@@ -20,11 +21,19 @@ export default function Demo() {
     },
   });
 
-  console.log(table);
+  const [val, setVal] = useState('')
+
+  const { city = [], isLoading } = useCity(val)
+
+  const handleSearch = (val: string) => {
+    setVal(val)
+
+  }
+
 
   return (
     <ProTable
-      btns={[{ label: '新增', type: 'primary' }]}
+      btns={[{ label: '新增', type: 'primary'}, { label: '重置',  onClick: table.onSearch }]}
       table={table}
       columns={[
         {
@@ -56,6 +65,8 @@ export default function Demo() {
           title: '地址',
           key: 'info',
           props: {
+            label: '详细地址',
+            key: 'detailAddress',
             widget: 'textarea',
           },
         },
@@ -69,6 +80,13 @@ export default function Demo() {
         {
           title: 'timePicker',
           key: 'timePicker',
+          props: {
+            widget: 'timePicker',
+          },
+        },
+        {
+          title: 'timePicker',
+          key: 'timePicker1',
           props: {
             widget: 'timePicker',
           },
@@ -99,16 +117,19 @@ export default function Demo() {
           },
         },
         {
-          title: 'SearchSelect',
-          key: 'SearchSelect',
-          props: {
+          title: '家乡',
+          key: 'city',
+          width: 50,
+          props: {  
             widget: 'searchSelect',
             widgetProps: {
-              option: [
-                { label: 'a', value: 2 },
-                { label: 'aa', value: 3 },
-                { label: 'aaa', value: 4 },
-              ],
+              allowClear: true,
+              placeholder: "请输入选择",
+              showSearch: true,
+              loading: isLoading,
+              option: city,
+              onSearch: handleSearch,
+
             },
           },
         },
