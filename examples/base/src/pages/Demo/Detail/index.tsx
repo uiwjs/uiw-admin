@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProDrawer, ProForm } from '@uiw-admin/components'
-import { Notify } from 'uiw'
+import { Notify, FileInput } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
 import { insert, update } from '../../../servers/demo'
@@ -31,7 +31,7 @@ const Detail = (props: DetailProps) => {
   })
 
   const dataSource: any = items(queryInfo, { isView })
-  
+
   return (
     <ProDrawer
       width={800}
@@ -41,19 +41,23 @@ const Detail = (props: DetailProps) => {
       buttons={[
         {
           label: "保存",
-          onPress: () => mutate(),
-          width: 80,
+          onClick: () => mutate(),
           show: !isView,
+          style:{ width: 80 },
+          type:"primary"
         },
         {
           label: "取消",
           type: "dark",
-          onPress: onClose
+          onClick: onClose,
+          style:{ width: 80 },
         }
       ]}
     >
       <ProForm
         title="基础信息"
+        renderWidgetsList={{ fileInput: FileInput }}
+        // 更新表单的值
         onChange={(initial: any, current: any) => updateData({ queryInfo: { ...queryInfo, ...current } })}
         formDatas={dataSource}
       />

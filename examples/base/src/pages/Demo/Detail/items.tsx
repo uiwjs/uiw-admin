@@ -4,7 +4,8 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     key: 'firstName',
     widget: 'input',
     initialValue: queryInfo?.firstName,
-    widgetProps: { disabled: isView }
+    widgetProps: { disabled: isView },
+    hide: true
   },
   {
     label: '名字',
@@ -32,5 +33,10 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     ],
     initialValue: queryInfo?.select,
     widgetProps: { disabled: isView }
+  },
+  {
+    label: "自定义组件",
+    key: 'id1',
+    widget: "fileInput",
   }
 ]

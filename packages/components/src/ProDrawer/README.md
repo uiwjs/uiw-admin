@@ -36,6 +36,7 @@ const Demo = () => {
 ## 参数
 
 #### 基础参数
+[继承于uiw,请参考Drawer其余参数](https://uiwjs.github.io/#/components/drawer)
 
 | 参数       | 说明                                                 | 类型          | 默认值 |
 | :--------- | :--------------------------------------------------- | :------------ | :----- |
@@ -47,16 +48,12 @@ const Demo = () => {
 
 
 #### buttonsColumns参数
-[继承于antd,请参考Button其余参数](https://uiwjs.github.io/#/components/button)
+[继承于uiw,请参考Button其余参数](https://uiwjs.github.io/#/components/button)
 
 | 参数       | 说明                                                   | 类型                     | 默认值 |
 | :--------- | :--------------------------------------------------- | :------------------------| :----- |
 | label      | 按钮文本   | string                   |   ''   |
 | onPress  | 按钮点击事件          | ()=>void  |   -    |
 | show      | 	是否展示按钮       | boolean	 |  true
-| loading   |   loading          | boolean   |  true  |
-| size   |   按钮尺寸          | large, default, small   |  default  |
-| type   |   按钮类型          | primary, success, warning, danger, light, dark, link   |  primary  |
-| size   |   按钮宽          | number   |  60px  |
 
 

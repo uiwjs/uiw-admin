@@ -66,6 +66,8 @@ interface ProFormProps {
   title?: string | React.ReactNode | any;
   /** 表单类型 */
   formType?: 'collapse' | 'card';
+  /** 组件配置列表 */
+  renderWidgetsList?: Fields
 }
 
 // 表单项参数
@@ -74,8 +76,8 @@ interface FormItemsProps {
   label?: string;
   /** 表单元素字段名称 */
   key: string;
-  /** 表单元素类型 */
-  widget: 'input' | 'input'
+  /** 表单元素类型 可通过配置renderWidgetsList传递自定义组件 */
+  widget: 'input'
   | 'radio'
   | 'checkbox'
   | 'switch'
@@ -89,21 +91,17 @@ interface FormItemsProps {
   initialValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
   option?: FormItemsOptionsProps[];
+  /** 可参考uiw/表单组件api */
   widgetProps?: any;
   /** 是否显示 */
   hide?: boolean;
 }
 
-// 表单button参数
+// 继承于uiw/button
 interface BtnProps {
   label?: string;
   btnType: 'submit' | 'reset' | 'other';
-  onPress?: () => void;
   show?: boolean;
-  size?: 'large' | 'default' | 'small';
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'link';
-  loading?: boolean;
-  width?: number
 }
 
 // option参数

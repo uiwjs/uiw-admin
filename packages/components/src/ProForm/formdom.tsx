@@ -1,16 +1,33 @@
 import React from 'react';
-import { Form, Button } from 'uiw';
+import { Form, Button, FormFieldsProps } from 'uiw';
 import { ProFormProps } from './'
 import './style/form-item.less';
 
 function FormDom({
-  getFormFields,
+  formfields,
   onSubmit,
   onChange,
   onSubmitError,
   btns = [],
   span = 3,
-}: ProFormProps & { getFormFields: any }) {
+}: ProFormProps & { formfields: Record<string, FormFieldsProps<{}>> | undefined }) {
+
+  const renderBtn = ({ canSubmit, resetForm }: { canSubmit: () => boolean, resetForm: () => void }) => {
+    const children = btns.map(({ label, btnType, show = true, onClick, ...others }: any, index) => {
+      if (!show) return null
+      if (btnType === 'submit') {
+        return <Button key={index} disabled={!canSubmit()} htmlType="submit" {...others}>{label}</Button>
+      }
+      if (btnType === 'reset') {
+        return (
+          <Button key={index} onClick={() => resetForm} {...others}>{label}</Button>
+        )
+      }
+      return <Button key={index} {...others} onClick={onClick?.()}>{label}</Button>
+    })
+    return children
+  }
+
   return (
     <Form
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
@@ -27,7 +44,7 @@ function FormDom({
           return null;
         }
       }}
-      fields={getFormFields}
+      fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
         return (
@@ -40,26 +57,7 @@ function FormDom({
               ))}
             </div>
             <div className="w-form-item-center">
-              {
-                btns.map(({ label, btnType, onPress, show = true, size, type = 'primary', loading, width = 80 }, index) => {
-                  const btnProps = {
-                    loading: loading,
-                    style: { width: width },
-                    type: type,
-                    size: size,
-                  }
-                  if (!show) return null
-                  if (btnType === 'submit') {
-                    return <Button key={index} {...btnProps} disabled={!canSubmit()} htmlType="submit">{label}</Button>
-                  }
-                  if (btnType === 'reset') {
-                    return (
-                      <Button key={index} {...btnProps} onClick={() => { resetForm; onPress?.() }}>{label}</Button>
-                    )
-                  }
-                  return <Button key={index} {...btnProps} onClick={() => onPress?.()}>{label}</Button>
-                })
-              }
+              {renderBtn({ canSubmit, resetForm })}
             </div>
           </React.Fragment>
         );
