@@ -16,10 +16,18 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "declaration": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "jsx": "react",
     "noFallthroughCasesInSwitch": true,
     "noEmit": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@@/*": [
+        "./src/.uiw/*"
+      ]
+    }
   },
   "include": [
     "src/**/*",

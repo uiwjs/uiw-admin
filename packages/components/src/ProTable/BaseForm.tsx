@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useMemo } from 'react';
 import {
   Button,
   Input,
@@ -12,7 +12,7 @@ import {
   TimePicker,
   MonthPicker,
   FormSubmitProps,
-  SearchSelect
+  SearchSelect,
 } from 'uiw';
 import { FormCol } from './index';
 import Select from './widgets/Select';
@@ -47,16 +47,16 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
   const { columns } = props;
   // 获取表单配置
-  const getFormFields = () => {
+  const getFormFields = useMemo(() => {
     const fields: Fields = {};
     columns.forEach((col) => {
       if (col.props && Object.keys(col.props).length > 0) {
         const { widgetProps, key, widget, label, initialValue, ...otherProps } =
           col.props;
-        const name = col.key || key;
+        const name = key || col.key;
         const Widget = widgets[widget];
         fields[name] = {
-          label: col.title || label,
+          label: label || col.title,
           children: <Widget {...widgetProps} />,
           ...otherProps,
           initialValue,
@@ -65,15 +65,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
     });
 
     return fields;
-  };
-
-  // 处理更新默认值
-
-  useEffect(() => {
-    updateStore({
-      searchValues: { ...getFormFields().defaultValues },
-    });
-  }, [JSON.stringify(getFormFields().defaultValues)]);
+  }, [JSON.stringify(columns)]);
 
   // 查询
   const onFormSearch = ({ initial, current }: FormSubmitProps) => {
@@ -91,10 +83,11 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
   // const onReset = (resetForm: () => void) => {
   //   resetForm();
   // };
-
+  const itemsLength = Object.keys(getFormFields).length;
+  const emptyLength = 4 - itemsLength % 5
   return (
     <Form
-      style={{ background: '#fff', paddingBottom: 5 }}
+      style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
         onFormSearch({ initial, current });
@@ -105,7 +98,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
         }
         return null;
       }}
-      fields={getFormFields()}
+      fields={getFormFields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
         return (
@@ -116,14 +109,16 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                   {fields[key]}
                 </Col>
               ))}
-
-              <Col style={{ marginTop: 31 }}>
+              {Array(emptyLength).fill('').map((value, index) => (
+                <Col key={index} fixed style={{ width: '20%' }} />
+              ))}
+              <Col align="middle">
                 <Button type="primary" htmlType="submit">
                   查询
                 </Button>
                 {/* <Button type="warning" onClick={() => onReset(resetForm)}>
-                  重置表单
-                </Button> */}
+           重置表单
+         </Button> */}
               </Col>
             </Row>
           </div>

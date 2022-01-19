@@ -3,7 +3,7 @@ import { Button } from 'uiw'
 import { useDispatch } from 'react-redux';
 import { Dispatch } from '@uiw-admin/models';
 import { ProTable, useTable } from '@uiw-admin/components';
-import { selectPage } from 'servers/demo'
+import { selectPage } from '@/servers/demo'
 import Detail from './Detail'
 
 const Demo = () => {
@@ -106,8 +106,8 @@ const Demo = () => {
             width: 98,
             render: (text: any, key: any, rowData: any) => (
               <div>
-                <Button size="small" type="danger" onClick={handleEditTable.bind(this, 'edit',rowData)}>编辑</Button>
-                <Button size="small" type="success" onClick={handleEditTable.bind(this, 'view',rowData)}>查看</Button>
+                <Button size="small" type="danger" onClick={handleEditTable.bind(this, 'edit', rowData)}>编辑</Button>
+                <Button size="small" type="success" onClick={handleEditTable.bind(this, 'view', rowData)}>查看</Button>
               </div>
             ),
           },

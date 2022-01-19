@@ -141,6 +141,8 @@ export default function Demo() {
 | --  | -- | -- | -- |
 | widget | 表单组件	| 	支持例子中的组件, 组件名与uiw表单组件名字一致，只是首字母小写了	| - |
 | widgetProps | 组件数组	| 	与uiw对应的组件属性一致	| - |
+| label| 表单标题，如果不填则集成columns title	| 	String	| - |
+| key| 表单name，如果不填则集成columns key	| 	String	| - |
 
 ## useTable
 

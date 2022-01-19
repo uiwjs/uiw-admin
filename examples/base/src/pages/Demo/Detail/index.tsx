@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef } from 'react';
-import QuickForm, { RenderCallBackProps } from 'component/QuickForm'
+import QuickForm, { RenderCallBackProps } from '../../../component/QuickForm'
 import { ProDrawer } from '@uiw-admin/components'
 import { Checkbox, Col } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
@@ -41,6 +41,7 @@ const Detail = ({ updateData }: DetailProps) => {
               await formRef?.current?.trigger()
               const errors = await formRef?.current?.errors()
               const values = await formRef?.current?.getValues()
+              console.log('errors', errors, 'values', values)
               if (errors) return
               dispatch({ type: tableType === 'add' ? "demo/insert" : "demo/update", payload: values })
             }
