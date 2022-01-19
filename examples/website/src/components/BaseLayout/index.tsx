@@ -14,7 +14,7 @@ export default function Components(props: ComponentsProps) {
   return (
     <Layout className={styles.layout}>
       <Affix offsetTop={0} style={{ zIndex: 999 }}>
-        <GitHubCorners size={53} href="https://github.com/uiwjs/uiw-admin" />
+        <GitHubCorners size={53} target="_blank" href="https://github.com/uiwjs/uiw-admin" />
         <Header className={styles.header} style={{ display: 'flex', alignItems: 'center' }}>
           <svg viewBox="0 0 20 20" version="1.1">
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
