@@ -7,7 +7,6 @@ function FormDom({
   formfields,
   onSubmit,
   onChange,
-  onSubmitError,
   btns = [],
   span = 3,
 }: ProFormProps & { formfields: Record<string, FormFieldsProps<{}>> | undefined }) {
@@ -35,14 +34,10 @@ function FormDom({
       onSubmit={({ initial, current }) => onSubmit?.(initial, current)}
       onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
-        if (onSubmitError) {
-          onSubmitError(error)
-        } else {
-          if (error.filed) {
-            return { ...error.filed };
-          }
-          return null;
+        if (error.filed) {
+          return { ...error.filed };
         }
+        return null;
       }}
       fields={formfields}
     >

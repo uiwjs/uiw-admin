@@ -28,7 +28,7 @@ export interface FormItemsProps {
   /** 表单元素字段名称 */
   key: string;
   /** 表单元素类型 */
-  widget: 'input' | 'radio' | 'checkbox' | 'switch' | 'select' | 'textarea' | 'dateInput' | 'timePicker' | 'searchSelect' | 'monthPicker';
+  widget: 'input' | 'radio' | 'checkbox' | 'switch' | 'select' | 'textarea' | 'dateInput' | 'timePicker' | 'searchSelect' | 'monthPicker' | any;
   /** 表单元素值，可以是默认值 */
   initialValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
@@ -43,7 +43,6 @@ export interface ProFormProps {
   span?: number;
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
-  onSubmitError?: (error: any) => void;
   btns?: BtnProps[]
   title?: any;
   formType?: 'collapse' | 'card';

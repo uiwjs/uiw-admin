@@ -38,24 +38,29 @@ const Detail = (props: DetailProps) => {
       title={tableType === 'add' ? '新增' : tableType === 'edit' ? '编辑' : '查看'}
       visible={drawerVisible}
       onClose={onClose}
-      buttons={[
-        {
-          label: "保存",
-          onClick: () => mutate(),
-          show: !isView,
-          style:{ width: 80 },
-          type:"primary"
-        },
-        {
-          label: "取消",
-          type: "dark",
-          onClick: onClose,
-          style:{ width: 80 },
-        }
-      ]}
     >
       <ProForm
         title="基础信息"
+        onSubmit={(initial, current) => {
+          const errorObj: any = {};
+          if (!current?.lastName) {
+            errorObj.lastName = '名字不能为空';
+          }
+          if (Object.keys(errorObj).length > 0) {
+            const err: any = new Error();
+            err.filed = errorObj;
+            Notify.error({ title: '提交失败！' });
+            throw err;
+          }
+          mutate()
+        }}
+        btns={[
+          {
+            btnType: "submit",
+            label: "提交表单",
+            type: "primary"
+          }
+        ]}
         renderWidgetsList={{ fileInput: FileInput }}
         // 更新表单的值
         onChange={(initial: any, current: any) => updateData({ queryInfo: { ...queryInfo, ...current } })}

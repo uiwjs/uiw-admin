@@ -29,7 +29,6 @@ const Demo = () => {
          ]}
          onSubmit={(initial: any, current: any) => {} )}
          onChange={(initial: any, current: any) => {} )}
-         onSubmitError={(error:any)=>{}}
          formDatas={
            [
              {
@@ -58,8 +57,6 @@ interface ProFormProps {
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   /** 表单值变化回调 */
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
-  /** 提交后错误回调 */
-  onSubmitError?: (error: any) => void;
   /** 表单按钮 */
   btns?: BtnProps[]
   /** 标题 */
@@ -86,7 +83,8 @@ interface FormItemsProps {
   | 'dateInput'
   | 'timePicker'
   | 'searchSelect'
-  | 'monthPicker';
+  | 'monthPicker'
+  | any;
   /** 表单元素值，可以是默认值 */
   initialValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
