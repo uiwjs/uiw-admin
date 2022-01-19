@@ -1,10 +1,9 @@
 import { Outlet } from 'react-router-dom';
 import { Layout, Affix } from 'uiw';
+import GitHubCorners from '@uiw/react-github-corners';
 import pkg from 'uiw-admin/package.json';
 import styles from './index.module.less';
 import SiderMenu from '../SideMenu';
-// import Nav from '../components/Nav';
-// import { ThemeContext } from '../contexts';
 
 const { Header, Sider, Content } = Layout;
 export interface ComponentsProps {
@@ -15,6 +14,7 @@ export default function Components(props: ComponentsProps) {
   return (
     <Layout className={styles.layout}>
       <Affix offsetTop={0} style={{ zIndex: 999 }}>
+        <GitHubCorners size={53} href="https://github.com/uiwjs/uiw-admin" />
         <Header className={styles.header} style={{ display: 'flex', alignItems: 'center' }}>
           <svg viewBox="0 0 20 20" version="1.1">
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
