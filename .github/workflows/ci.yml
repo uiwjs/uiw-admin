@@ -66,6 +66,14 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: heroku
         publish_dir: ./examples/base/build
+    
+    - run: npm run www:build
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./examples/website/build
 
     - run: npm install @jsdevtools/npm-publish -g
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/Exceptions/package.json
