@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/262.91478034.chunk.js","mappings":"+GAAA","sources":["../../../packages/utils/README.md"],"sourcesContent":["export default \"# `utils`\\n\\n> TODO: description\\n\\n## Usage\\n\\n```\\nconst utils = require('@uiw-admin/utils');\\n\\n// TODO: DEMONSTRATE API\\n```\\n\\n\\n## request\\n\\n基于axios封装的请求方法\";"],"names":[],"sourceRoot":""}

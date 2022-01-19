@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[262],{93262:function(n,e,s){s.r(e),e.default="# `utils`\n\n> TODO: description\n\n## Usage\n\n```\nconst utils = require('@uiw-admin/utils');\n\n// TODO: DEMONSTRATE API\n```\n\n\n## request\n\n\u57fa\u4e8eaxios\u5c01\u88c5\u7684\u8bf7\u6c42\u65b9\u6cd5"}}]);
+//# sourceMappingURL=262.91478034.chunk.js.map

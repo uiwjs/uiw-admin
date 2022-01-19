@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[3],{28003:function(n,i,e){e.r(i),i.default="@uiw-admin/plugins\n===\n\n```bash\nnpm i @uiw-admin/plugins\n```"}}]);
+//# sourceMappingURL=3.e4a1d9f8.chunk.js.map

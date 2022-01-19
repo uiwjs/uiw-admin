@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[826],{31826:function(n,e,i){i.r(e),e.default="@uiw-admin/user-login\n---\n\n## Installation\n\n```bash\nnpm i @uiw-admin/user-login --save\n```"}}]);
+//# sourceMappingURL=826.a9430f80.chunk.js.map
