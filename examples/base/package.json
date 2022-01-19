@@ -45,6 +45,7 @@
     "@types/react-redux": "7.1.21",
     "@uiw-admin/config": "5.0.2",
     "@uiw-admin/plugins": "5.0.2",
+    "ajv": "8.9.0",
     "kkt": "7.0.6"
   },
   "resolutions": {
