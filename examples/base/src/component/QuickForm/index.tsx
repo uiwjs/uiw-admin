@@ -1,12 +1,18 @@
-import React, { useImperativeHandle, Fragment } from 'react';
-import { useForm } from 'react-hook-form'
-import { ValidationRules, ErrorOption } from 'react-hook-form/dist/types/form';
+import React, { useImperativeHandle } from 'react';
+import { useForm, FieldErrors, RefCallBack, Noop } from 'react-hook-form'
 import FormDom from './formdom'
 import { hasErrors } from './utils'
 
+export interface RenderCallBackProps {
+  name: any;
+  ref: RefCallBack;
+  onChange: (...event: any[]) => void;
+  onBlur: Noop
+}
+
 export interface FormOptionsProps {
   label: string;
-  value: string;
+  value: string | number;
   disabled?: boolean;
 }
 
@@ -16,53 +22,46 @@ export interface FormDataProps {
   /** 表单元素字段名称 */
   name: string;
   /** 表单元素类型 */
-  type: 'input';
-  /** 是否禁用 */
-  disabled?: boolean;
-  /** 表单元素样式 */
-  style?: React.CSSProperties;
+  type: 'input' | 'select' | 'render';
   /** 表单元素值，可以是默认值 */
   initValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
   options?: FormOptionsProps[];
   /** 校验规则 */
-  rules?: ValidationRules
+  rules?: FieldErrors
   /** 是否显示 */
   hide?: boolean;
   attributes?: any;
+  render?: (attr: RenderCallBackProps) => JSX.Element
 }
 
 export interface QuickFormProps {
-  /** 是否是预览模式 */
-  isView?: boolean;
+  /** 是否是查看模式 */
+  readonly?: boolean;
   /** 表单标题 */
   title?: string
   /** 表单集合 */
   formDatas: FormDataProps[];
-  options?: {
+  setOptions?: {
     submitErrorCheck?: boolean; //是否检查
     processValuesFunc?: (value: any) => void // 接收数据
   },
   /** 表单值变化 */
-  onItemChange?: (name: string, value: any | any[]) => Promise<void>
-  /** 一行几个 */
+  onItemChange?: (name: string, value: string | number | any | any[]) => Promise<void>
+  /** 表单横向排列个数 */
   span?: number;
 }
 
 
 
 function Index(props: QuickFormProps, ref: any) {
-  const {
-    title,
-    options = {},
-  } = props;
 
-  const { getValues, setValue, control, trigger, errors, reset, setError, clearErrors } = useForm()
+  const { getValues, setValue, trigger, control, formState: { errors }, reset, setError, clearErrors } = useForm()
 
   const defaultOptions = {
     submitErrorCheck: true, // 提交错误检查
     processValuesFunc: null, // 处理 values 数据
-    ...options
+    ...props.setOptions
   };
 
   // 暴露给父组件调用的方法
@@ -84,18 +83,20 @@ function Index(props: QuickFormProps, ref: any) {
     errors: async () => errors,
     reset: async (...args: any) => reset(...args),
     trigger: async () => trigger(),
-    setError: (name: string, error: ErrorOption) => setError(name, error),
+    setError: (name: string, error: FieldErrors) => setError(name, error),
     clearErrors: (name?: string | string[] | undefined) => clearErrors(name),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [options, trigger, reset, setError, clearErrors, errors, getValues, setValue]);
+  }), [props.setOptions, trigger, reset, setError, clearErrors, errors, getValues, setValue]);
+
+  const formDomProps = { ...props, control, trigger, errors }
 
   return (
-    <Fragment>
-      {title && (
-        <div style={{ marginBottom: 15 }}><h5>{title}</h5></div>
+    <React.Fragment>
+      {props?.title && (
+        <div style={{ marginBottom: 15 }}><h5>{props.title}</h5></div>
       )}
-      <FormDom values={{ ...props, control, trigger, errors }} />
-    </Fragment >
+      <FormDom {...formDomProps} />
+    </React.Fragment >
   )
 }
 

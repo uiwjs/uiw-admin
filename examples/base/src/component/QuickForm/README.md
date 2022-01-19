@@ -2,6 +2,7 @@
 import React, { useRef } from 'react';
 import QuickForm from 'component/QuickForm'
 const Demo = ()=>{
+  const baseRef = useRef();
   const queryInfo = {}
   return (
      <QuickForm
@@ -29,14 +30,20 @@ const Demo = ()=>{
             },
             rules: { required: '请输入名字' },
           },
-          {
-            type: 'input',
-            name: 'age',
+           {
+            type: 'select',
+            name: 'select',
             label: "年龄",
+            initValue: queryInfo?.select,
+            options: [
+              { value: 1, label: '苹果' },
+              { value: 2, label: '西瓜' },
+              { value: 3, label: '香蕉' },
+              { value: 4, label: '东北大冻梨' },
+            ],
             attributes: {
-              placeholder: '请输入年龄',
-            },
-            hide: true
+              placeholder: '请选择水果',
+            }
           },
         ]}
       />
