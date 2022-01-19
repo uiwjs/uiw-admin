@@ -4,33 +4,11 @@ import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
-import { useTableData } from './useTable';
+import { ProtableProps } from './types'
 
 // interface BtnItem extends ButtonProps{
 //   label: React.ReactNode;
 // };
-interface ProtableProps {
-  table: useTableData;
-  btns?: Array<ButtonProps>;
-  columns: FormCol[];
-}
-
-export interface FormCol extends TableColumns {
-  props?: {
-    widget:
-      | 'input'
-      | 'radio'
-      | 'checkbox'
-      | 'switch'
-      | 'select'
-      | 'textarea'
-      | 'dateInput'
-      | 'timePicker'
-      | 'searchSelect'
-      | 'monthPicker';
-    [key: string]: any;
-  };
-}
 
 const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
   const {
@@ -71,7 +49,6 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
     ],
   );
 
-  console.log('loading--->', loading);
   return (
     <StoreCtx.Provider value={store}>
       <Skeleton loading={loading}>
@@ -79,7 +56,7 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
         <BaseForm columns={columns} />
         {/* 操作区域 */}
         {btns.length > 0 && (
-          <div style={{ marginTop: 14, background: '#fff', padding: 10 }}>
+          <div style={{  background: '#fff', padding: 10 }}>
             {btns.map((btn: any, idx) => (
               <Button key={idx.toString()} style={{ marginRight: 5 }} {...btn}>
                 {btn.label}

@@ -47,3 +47,25 @@ module.exports.getData =  function (req, res) {
   }, 1000)
  
 };
+
+
+module.exports.getCity =  function (req, res) {
+
+ const search = req.query.val ? [{label: req.query.val, val: req.query.val}] : []
+  setTimeout(() => {
+    return res.status(200).json({
+      code: 1,
+      data: [
+        {
+          label: '南通',
+          value: '南通',
+        },
+        {
+          label: '通州',
+          value: '通州',
+        },
+      ].concat(search),
+    });
+  }, 1000)
+ 
+};

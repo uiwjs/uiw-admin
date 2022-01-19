@@ -1,4 +1,4 @@
-const { getData } = require('./selectPage');
+const { getData, getCity } = require('./selectPage');
 const { login, verify, logout, reloadAuth } = require('./login');
 const { selectPage, insert, update, selectById } = require('./demo')
 
@@ -9,6 +9,7 @@ const proxy = {
   'POST /api/login': login,
   'POST /api/logout': logout,
   'GET /api/user/verify': verify,
+  'GET /api/city': getCity,
   'POST /api/getData': getData,
   "POST /api/reloadAuth": reloadAuth,
   'POST /api/demo/selectPage': selectPage,
