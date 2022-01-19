@@ -1,7 +1,7 @@
 import React from 'react';
-import { Input, Select } from 'uiw';
+import { Input, Select, Radio, RadioGroup, Checkbox } from 'uiw';
 import { FormOptionsProps } from '../index'
-import { useController } from 'react-hook-form'
+import { useController, useFormContext } from 'react-hook-form'
 
 function WidgetsItem({
   // formDatas 表单项参数
@@ -15,9 +15,11 @@ function WidgetsItem({
   // 组件api监听表单值变化
   onItemChange,
   // react-hook-form/useForm
-  control,
-  trigger
+  // control,
+  // trigger
 }: any) {
+
+  const { control, trigger } = useFormContext()
 
   const { field: { onChange, name, onBlur, value, ref } } = useController({
     name: labelName,
@@ -25,6 +27,19 @@ function WidgetsItem({
     rules: rules,
     defaultValue: initValue,
   });
+
+  const widgetsProps = {
+    name: name,
+    ref: ref,
+    onChange: (value: any) => {
+      onChange(value)
+      trigger(name)
+      onItemChange?.(name, value)
+    },
+    onBlur: onBlur(),
+    value: value,
+    ...attributes
+  }
 
   const dom = () => {
     if (type === 'input') {
@@ -51,21 +66,28 @@ function WidgetsItem({
     if (type === 'select') {
       return (
         <div style={{ flex: 1 }}>
-          <Select
-            name={name}
-            ref={ref}
-            onChange={(value) => {
-              onChange(value)
-              trigger(name)
-              onItemChange?.(name, value)
-            }}
-            onBlur={onBlur()}
-            value={value}
-            {...attributes}
-          >
+          <Select {...widgetsProps}>
             <Select.Option>{attributes?.placeholder || '请选择'}</Select.Option>
             {options.map(({ disabled, label, value }: FormOptionsProps) => <Select.Option disabled={disabled} value={value} key={value}>{label}</Select.Option>)}
           </Select>
+        </div>
+      )
+    }
+    if (type === 'radio') {
+      return (
+        <div style={{ flex: 1 }}>
+          <RadioGroup {...widgetsProps}>
+            {options.map(({ disabled, label, value }: FormOptionsProps) => <Radio disabled={disabled} value={value}>{label}</Radio>)}
+          </RadioGroup>
+        </div>
+      )
+    }
+    if (type === 'checkbox') {
+      return (
+        <div style={{ flex: 1 }}>
+          <Checkbox.Group {...widgetsProps}>
+            {options.map(({ disabled, label, value }: FormOptionsProps) => <Checkbox disabled={disabled} value={value}>{label}</Checkbox>)}
+          </Checkbox.Group>
         </div>
       )
     }

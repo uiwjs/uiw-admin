@@ -1,5 +1,5 @@
 import React, { useImperativeHandle } from 'react';
-import { useForm, FieldErrors, RefCallBack, Noop } from 'react-hook-form'
+import { useForm, FieldErrors, RefCallBack, Noop, FormProvider, UseFormReturn, FieldValues } from 'react-hook-form'
 import FormDom from './formdom'
 import { hasErrors } from './utils'
 
@@ -22,7 +22,7 @@ export interface FormDataProps {
   /** 表单元素字段名称 */
   name: string;
   /** 表单元素类型 */
-  type: 'input' | 'select' | 'render';
+  type: 'input' | 'select' | 'radio' | 'checkbox' | 'render';
   /** 表单元素值，可以是默认值 */
   initValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
@@ -44,7 +44,7 @@ export interface QuickFormProps {
   formDatas: FormDataProps[];
   setOptions?: {
     submitErrorCheck?: boolean; //是否检查
-    processValuesFunc?: (value: any) => void // 接收数据
+    processValuesFunc?: (value: { [x: string]: any }) => void // 接收数据
   },
   /** 表单值变化 */
   onItemChange?: (name: string, value: string | number | any | any[]) => Promise<void>
@@ -56,8 +56,11 @@ export interface QuickFormProps {
 
 function Index(props: QuickFormProps, ref: any) {
 
-  const { getValues, setValue, trigger, control, formState: { errors }, reset, setError, clearErrors } = useForm()
+  const methods: UseFormReturn<FieldValues, object> = useForm()
 
+  const { watch, getValues, setValue, trigger, formState: { errors }, reset, setError, clearErrors } = methods
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const defaultOptions = {
     submitErrorCheck: true, // 提交错误检查
     processValuesFunc: null, // 处理 values 数据
@@ -85,18 +88,15 @@ function Index(props: QuickFormProps, ref: any) {
     trigger: async () => trigger(),
     setError: (name: string, error: FieldErrors) => setError(name, error),
     clearErrors: (name?: string | string[] | undefined) => clearErrors(name),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }), [props.setOptions, trigger, reset, setError, clearErrors, errors, getValues, setValue]);
+    watch: async () => watch()
 
-  const formDomProps = { ...props, control, trigger, errors }
+  }), [setValue, defaultOptions, getValues, trigger, errors, reset, setError, clearErrors, watch]);
 
   return (
-    <React.Fragment>
-      {props?.title && (
-        <div style={{ marginBottom: 15 }}><h5>{props.title}</h5></div>
-      )}
-      <FormDom {...formDomProps} />
-    </React.Fragment >
+    <FormProvider {...methods} >
+      {props?.title && <h3 style={{ marginTop: 10, marginBottom: 10 }}>{props?.title}</h3>}
+      <FormDom {...props} />
+    </FormProvider>
   )
 }
 

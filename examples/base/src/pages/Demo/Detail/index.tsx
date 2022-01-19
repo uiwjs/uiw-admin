@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef } from 'react';
-import QuickForm from 'component/QuickForm'
+import QuickForm, { RenderCallBackProps } from '../../../component/QuickForm'
 import { ProDrawer } from '@uiw-admin/components'
 import { Checkbox, Col } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,7 +12,7 @@ interface DetailProps {
 }
 
 // 自定义组件
-const NewCheckBox = forwardRef(({ name, onChange, onBlur }: any, ref) => {
+const NewCheckBox = forwardRef(({ name, onChange, onBlur }: RenderCallBackProps, ref) => {
   return (
     <Col>
       <Checkbox value="checkbox" name={name} onChange={onChange} onBlur={onBlur} />
@@ -43,6 +43,7 @@ const Detail = ({ updateData }: DetailProps) => {
               const values = await formRef?.current?.getValues()
               console.log('errors', errors, 'values', values)
               if (errors) return
+              dispatch({ type: tableType === 'add' ? "demo/insert" : "demo/update", payload: values })
             }
           }
         ]
@@ -50,7 +51,7 @@ const Detail = ({ updateData }: DetailProps) => {
     >
       <QuickForm
         ref={formRef}
-        title="测试QuickForm"
+        title="基础信息"
         onItemChange={async (name, value) => console.log('name', name, 'value', value)}
         formDatas={[
           {
@@ -94,7 +95,29 @@ const Detail = ({ updateData }: DetailProps) => {
             name: "id1",
             rules: { required: '自定义组件' },
             render: (attr) => <NewCheckBox {...attr} />
-          }
+          },
+          {
+            type: 'radio',
+            name: 'id2',
+            label: "性别",
+            initValue: queryInfo?.id2,
+            options: [
+              { value: 1, label: '男' },
+              { value: 2, label: '女' },
+              { value: 3, label: '人妖' },
+            ],
+          },
+          {
+            type: 'checkbox',
+            name: 'id3',
+            label: "菜系",
+            initValue: queryInfo?.id2,
+            options: [
+              { value: 1, label: '四川菜' },
+              { value: 2, label: '湖北菜' },
+              { value: 3, label: '西北菜' },
+            ],
+          },
         ]}
       />
     </ProDrawer>
