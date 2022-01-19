@@ -7,20 +7,10 @@ function selectById(params: { id: string }) {
     body: { ...params },
   });
 }
- function insert(params: any) {
-  return request('/api/demo/insert', {
-    method: 'POST',
-    body: { ...params },
-  });
-}
 
-// /api/demo/edit
-function update(params: any) {
-  return request('/api/demo/update', {
-    method: 'POST',
-    body: { ...params },
-  });
-}
+const update = '/api/demo/update'
+
+const insert = '/api/demo/insert'
 
 const selectPage = '/api/demo/selectPage'
 

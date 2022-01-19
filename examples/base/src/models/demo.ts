@@ -1,6 +1,5 @@
 import { ModelDefault, Dispatch } from '@uiw-admin/models';
-import { insert, selectById, update } from '../servers/demo'
-import { Notify } from 'uiw'
+import { selectById } from '../servers/demo'
 
 const demo: ModelDefault = {
   name: "demo",
@@ -17,22 +16,6 @@ const demo: ModelDefault = {
     }),
   },
   effects: (dispatch: any) => ({
-    async insert(payload: any) {
-      const dph = dispatch as Dispatch;
-      const data = await insert(payload);
-      if (data.code === 200) {
-        Notify.success({ title: data.message });
-        dph.demo.clean()
-      }
-    },
-    async update(payload: any) {
-      const dph = dispatch as Dispatch;
-      const data = await update(payload);
-      if (data.code === 200) {
-        Notify.success({ title: data.message });
-        dph.demo.clean()
-      }
-    },
     async selectById(payload: any) {
       const dph = dispatch as Dispatch;
       const data = await selectById(payload);
