@@ -1,4 +1,5 @@
-# `authorized`
+authorized
+===
 
 ## Installation
 
