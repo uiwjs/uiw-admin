@@ -42,7 +42,7 @@ function ProDrawer(props: ProDrawerProps) {
       {...others}
       footer={
         buttons.map(
-          ({ label = '', onPress, show = true, loading, type = "primary", width = 60, size = "default" }, idx) =>
+          ({ label = '', onPress, show = true, loading, type = "primary", width = 80, size = "default" }, idx) =>
             show && (
               <Button
                 style={{ width: width }}
