@@ -14,7 +14,8 @@ const Login = () => {
 
   const { provider } = useSWRConfig() as any
   const prt = provider()
-  const loading = useSelector((state: RootState) => state)
+  const loading = useSelector((state: RootState) => state.loading.effects.login.submit)
+
   const [store, setStore] = React.useState<any>()
 
   const { data, } = useSWR(store ? ['/api/login', {
