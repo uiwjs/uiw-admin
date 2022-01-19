@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/utils",
-  "version": "5.0.2",
+  "version": "4.1.4",
   "description": "> TODO: description",
   "author": "xingyuefeng <15262870437@163.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin#readme",
@@ -12,10 +12,11 @@
     "test": "__tests__"
   },
   "files": [
-    "esm",
-    "src",
     "lib"
   ],
+  "publishConfig": {
+    "registry": "http://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/uiwjs/uiw-admin.git"

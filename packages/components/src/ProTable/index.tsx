@@ -4,33 +4,11 @@ import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
-import { useTableData } from './useTable';
+import { ProtableProps } from './types'
 
 // interface BtnItem extends ButtonProps{
 //   label: React.ReactNode;
 // };
-interface ProtableProps {
-  table: useTableData;
-  btns?: Array<ButtonProps>;
-  columns: FormCol[];
-}
-
-export interface FormCol extends TableColumns {
-  props?: {
-    widget:
-      | 'input'
-      | 'radio'
-      | 'checkbox'
-      | 'switch'
-      | 'select'
-      | 'textarea'
-      | 'dateInput'
-      | 'timePicker'
-      | 'searchSelect'
-      | 'monthPicker';
-    [key: string]: any;
-  };
-}
 
 const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
   const {

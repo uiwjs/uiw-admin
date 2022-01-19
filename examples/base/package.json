@@ -1,6 +1,6 @@
 {
   "name": "@examples/base",
-  "version": "4.1.4",
+  "version": "5.0.2",
   "description": "Use Rematch & TypeScript for the project.",
   "private": true,
   "scripts": {
@@ -16,15 +16,15 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "7.16.5",
-    "@uiw-admin/basic-layouts": "4.1.4",
-    "@uiw-admin/components": "4.1.4",
-    "@uiw-admin/layout-tabs": "4.1.4",
-    "@uiw-admin/models": "4.1.4",
-    "@uiw-admin/router-control": "4.1.4",
-    "@uiw-admin/user-login": "4.1.4",
-    "@uiw-admin/utils": "4.1.4",
-    "@uiw-admin/authorized": "4.1.4",
-    "@uiw-admin/exceptions": "4.1.4",
+    "@uiw-admin/authorized": "5.0.2",
+    "@uiw-admin/basic-layouts": "5.0.2",
+    "@uiw-admin/components": "5.0.2",
+    "@uiw-admin/exceptions": "5.0.2",
+    "@uiw-admin/layout-tabs": "5.0.2",
+    "@uiw-admin/models": "5.0.2",
+    "@uiw-admin/router-control": "5.0.2",
+    "@uiw-admin/user-login": "5.0.2",
+    "@uiw-admin/utils": "5.0.2",
     "@uiw/reset.css": "1.0.5",
     "axios": "0.24.0",
     "classnames": "2.3.1",
@@ -36,8 +36,6 @@
     "uiw": "4.9.10"
   },
   "devDependencies": {
-    "@uiw-admin/plugins": "4.1.4",
-    "@uiw-admin/config": "4.1.4",
     "@kkt/less-modules": "7.0.6",
     "@kkt/raw-modules": "7.0.6",
     "@kkt/scope-plugin-options": "7.0.6",
@@ -45,7 +43,9 @@
     "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
     "@types/react-redux": "7.1.21",
-    "@types/react-router-dom": "5.3.2",
+    "@uiw-admin/config": "5.0.2",
+    "@uiw-admin/plugins": "5.0.2",
+    "ajv": "8.9.0",
     "kkt": "7.0.6"
   },
   "resolutions": {

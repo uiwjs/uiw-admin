@@ -9,7 +9,7 @@ import useSWR from 'swr';
 import { Table, Pagination, TableColumns } from 'uiw';
 import { request } from '@uiw-admin/utils';
 import { useStore } from './hooks';
-import { Fields } from './BaseForm';
+import { Fields } from './types';
 
 interface BaseTableProps {
   style?: React.CSSProperties;

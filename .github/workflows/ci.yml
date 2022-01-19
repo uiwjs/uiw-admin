@@ -4,8 +4,6 @@ on:
     branches:
       - master
 
-env:
-  SKIP_PREFLIGHT_CHECK: true
 jobs:
   build-uiw-admin:
     runs-on: ubuntu-18.04
@@ -45,19 +43,18 @@ jobs:
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
     - name: Create Release
-      id: create_release
-      uses: actions/create-release@latest
+      uses: ncipollo/release-action@v1
       if: steps.create_tag.outputs.successful
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ steps.create_tag.outputs.version }}
-        release_name: ${{ steps.create_tag.outputs.version }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        name: ${{ steps.create_tag.outputs.version }}
+        tag: ${{ steps.create_tag.outputs.version }}
         body: |
+          [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/uiw@${{steps.changelog.outputs.version}}/file/README.md)
+          
           ${{ steps.changelog.outputs.compareurl }}
+
           ${{ steps.changelog.outputs.changelog }}
-        draft: false
-        prerelease: false
 
     - run: yarn run build:website
       env:
@@ -69,3 +66,18 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: heroku
         publish_dir: ./examples/base/build
+
+    - run: npm install @jsdevtools/npm-publish -g
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/Exceptions/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/authorized/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/basic-layouts/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/components/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/config/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/document-title/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/layout-tabs/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/models/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/plugins/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/router-control/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/uiw-admin/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/user-login/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/utils/package.json
