@@ -5,9 +5,9 @@ import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
 import { IsModel } from './utils';
-import createDvaTemps, { createTemp } from './temp';
+import createRematchTemps, { createTemp } from './temp';
 
-class DvaWebpackPlugin {
+class RematchWebpackPlugin {
   oldModel: { path: string; filename: string }[] = [];
   deleteModel: string[] = [];
   field: string = '';
@@ -68,10 +68,10 @@ class DvaWebpackPlugin {
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
-    // 在项目的 src/.uiw/ 创建 dva.ts 用于models加载
+    // 在项目的 src/.uiw/ 创建 rematch.ts 用于models加载
     fs.writeFileSync(
-      path.resolve(process.cwd(), 'src/.uiw/dva.ts'),
-      createDvaTemps(modelStr),
+      path.resolve(process.cwd(), 'src/.uiw/rematch.ts'),
+      createRematchTemps(modelStr),
       { flag: 'w+', encoding: 'utf-8' },
     );
     this.field = '';
@@ -149,7 +149,7 @@ class DvaWebpackPlugin {
   };
 
   apply(compiler: webpack.Compiler) {
-    compiler.hooks.afterPlugins.tap('DvaWebpackPlugin', (...res) => {
+    compiler.hooks.afterPlugins.tap('RematchWebpackPlugin', (...res) => {
       if (process.env.NODE_ENV === 'development') {
         const watcher = fs.watch(path.resolve(process.cwd(), 'src'), {
           recursive: true,
@@ -166,4 +166,4 @@ class DvaWebpackPlugin {
   }
 }
 
-export default DvaWebpackPlugin;
+export default RematchWebpackPlugin;

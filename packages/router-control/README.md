@@ -11,125 +11,27 @@ npm i @uiw-admin/router-control --save
 
 ```ts
 
-export interface Routers extends Omit<RouteObject, "children"> {
-  key?: string;
-  /** 默认跳转 */
-  index?: boolean;
-  /** 路径 */
-  path?: string;
-  /** 名称 */
-  name?: string;
-  /**  图标 */
-  icon?: string;
-  /** 重定向  当 index===true生效 */
-  redirect?: string;
-  /** 组件 */
-  component?: JSX.Element | React.LazyExoticComponent<(props?: any) => JSX.Element>;
-  /** 子集 路由 */
-  routes?: Routers[]
-  /** 加载 model 的文件名称 */
-  models?: string[];
-  /** 是否隐藏菜单 */
-  hideInMenu?: boolean;
-  /** 用于路由校验权限 */
-  isAuth?: boolean
+// json文件格式
+export interface RoutersJSON extends Omit<Routers, "component"> {
+  component?: string
 }
 
 export interface ControllerProps {
-  routes?: RoutersProps[];
   /** 路由模式   默认 history  */
   routeType?: "history" | "hash" | "browser";
-  basename?: string;
-  addModel?: (models: string[]) => void
 }
 
 ```
 
-
 ## 案例
 
 ```ts
-import { Exceptions403, Exceptions500, Exceptions404 } from "@uiw-admin/exceptions"
-import { Routers, Loadable } from "@uiw-admin/router-control"
 import React from "react";
 import Control from '@uiw-admin/router-control';
-import { store, createModels } from '@uiw-admin/models';
-
-// 这块内容需要进行转换掉 
-export const routers: Routers[] = [
-  {
-    path: "/login",
-    models: ["login"],
-    component: React.lazy(() => import("../pages/login"))
-  },
-  {
-    path: "/",
-    models: ["global", "Doc/doc", "demo"],
-    component: <BasicLayout />,
-    routes: [
-      {
-        index: true,
-        redirect: '/tableList'
-      },
-      {
-        path: "/tableList",
-        name: "查询表格",
-        component: React.lazy(() => import("../pages/TableList")),
-      },
-      {
-        path: "/home",
-        name: "首页",
-        models: ["home"],
-        component: React.lazy(() => import("../pages/Home")),
-      },
-      {
-        path: "/dom",
-        name: "子项",
-        routes: [
-          {
-            path: "/dom/courses",
-            name: "Dashboard",
-            component: React.lazy(() => import("../pages/Dashboard")),
-          },
-          {
-            path: "/dom/home",
-            name: "home",
-            component: React.lazy(() => import("../pages/Home")),
-          },
-        ]
-      },
-      {
-        path: "/403",
-        name: "403",
-        component: <Exceptions403 />
-      },
-      {
-        path: "/500",
-        name: "500",
-        component: <Exceptions500 />
-      },
-      {
-        path: "*",
-        name: "404",
-        component: <Exceptions404 />
-      },
-
-    ]
-  },
-];
-
 export default ()=>{
   return (
     <Control
       routeType="hash"
-      routes={routers}
-      addModel={(models: string[]) => {
-          models.map(async (m) => {
-            const md = await import(`./models/${m}.ts`);
-            const modelData = md.default || md;
-            createModels(modelData, m)
-          });
-        }}
     />
   )
 }
