@@ -12,13 +12,22 @@ import {
   BrowserRouter,
   Navigate,
 } from 'react-router-dom';
+// @ts-ignore
+import RoutePathArr from "@@/routes"
+
 import { Exceptions403 } from '@uiw-admin/exceptions';
 import type { RouteObject } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
-export let navigate: NavigateFunction = () => {};
+export let navigate: NavigateFunction = () => { };
+
+
+// json文件格式
+export interface RoutersJSON extends Omit<Routers, "component"> {
+  component?: string
+}
 
 export interface Routers extends Omit<RouteObject, 'children'> {
   key?: string;
@@ -34,8 +43,8 @@ export interface Routers extends Omit<RouteObject, 'children'> {
   redirect?: string;
   /** 组件 */
   component?:
-    | JSX.Element
-    | React.LazyExoticComponent<(props?: any) => JSX.Element>;
+  | JSX.Element
+  | React.LazyExoticComponent<(props?: any) => JSX.Element>;
   /** 子集 路由 */
   routes?: Routers[];
   /** 加载 model 的文件路径 , ts 结尾的文件 */
@@ -58,26 +67,23 @@ export type DefaultProps = {
 };
 
 export interface ControllerProps {
-  routes?: RoutersProps[];
   /** 路由模式   默认 history  */
   routeType?: 'history' | 'hash' | 'browser';
-  basename?: string;
-  addModel?: (models: string[]) => void;
 }
 
 export const Loadable =
   (Component: React.LazyExoticComponent<(props?: any) => JSX.Element>) =>
-  (props: any) => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const params = useParams();
+    (props: any) => {
+      const location = useLocation();
+      const navigate = useNavigate();
+      const params = useParams();
 
-    return (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <Component {...props} router={{ location, navigate, params }} />
-      </React.Suspense>
-    );
-  };
+      return (
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <Component {...props} router={{ location, navigate, params }} />
+        </React.Suspense>
+      );
+    };
 
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
@@ -96,9 +102,7 @@ export const getDeepTreeRoute = (
   return routes.map((item) => {
     const itemObj = { ...item };
     // @ts-ignore
-    if (
-      AUTH &&
-      itemObj.path &&
+    if (AUTH && itemObj.path &&
       ![
         '/',
         '*',
@@ -141,18 +145,13 @@ export const getDeepTreeRoute = (
 
 const getTree = (
   routes: RoutersProps[] = [],
-  addModel?: (models: string[]) => void,
 ): JSX.Element[] => {
   let list: JSX.Element[] = [];
   routes.forEach((item, ind) => {
     const itemObj = item;
     // 判断是否有子项进行递归处理
     if (item.routes) {
-      itemObj.children = getTree(itemObj.routes, addModel);
-    }
-    // 加载 models
-    if (addModel && !itemObj.element && itemObj.models) {
-      addModel(itemObj.models);
+      itemObj.children = getTree(itemObj.routes,);
     }
     // 懒加载
     if (!React.isValidElement(itemObj.component) && itemObj.component) {
@@ -184,7 +183,6 @@ const getTree = (
 };
 
 export function RouteChild(props: ControllerProps = {}) {
-  const { routes = [], addModel } = props;
   // 这边取权限校验值
   const authStr = sessionStorage.getItem('auth');
   let authList: string[] = React.useMemo(() => {
@@ -196,7 +194,7 @@ export function RouteChild(props: ControllerProps = {}) {
   const roue = React.useMemo(
     () =>
       createRoutesFromChildren(
-        getTree(getDeepTreeRoute(routes, authList), addModel),
+        getTree(getDeepTreeRoute(RoutePathArr, authList),),
       ),
     [JSON.stringify(authList)],
   );
@@ -207,7 +205,7 @@ export function RouteChild(props: ControllerProps = {}) {
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routes = [], routeType, basename = '/', addModel } = props;
+  const { routeType, } = props;
 
   // @ts-ignore
   let base = BASE_NAME || basename;
@@ -215,19 +213,19 @@ export default function Controller(props: ControllerProps = {}) {
   if (routeType === 'hash') {
     return (
       <HashRouter window={window} basename={base}>
-        <RouteChild routes={routes} addModel={addModel} />
+        <RouteChild />
       </HashRouter>
     );
   } else if (routeType === 'browser') {
     return (
       <BrowserRouter window={window} basename={base}>
-        <RouteChild routes={routes} addModel={addModel} />
+        <RouteChild />
       </BrowserRouter>
     );
   }
   return (
     <HistoryRouter history={history} basename={base}>
-      <RouteChild routes={routes} addModel={addModel} />
+      <RouteChild />
     </HistoryRouter>
   );
 }

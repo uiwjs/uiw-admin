@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Params, useTableData, stateParams } from './types';
 
 const useTable = (key: string, params: Params = {}): useTableData => {
-  const { formatData, query } = params;
+  const { formatData, query, SWRConfiguration } = params;
 
   const [state, setState] = useState<any>({
     // 总页数
@@ -43,6 +43,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     formatData,
     query,
     updateStore,
+    SWRConfiguration,
     ...state,
   };
 };

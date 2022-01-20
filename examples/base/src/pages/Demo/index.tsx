@@ -54,7 +54,7 @@ const Demo = () => {
   return (
     <React.Fragment>
       <ProTable
-        btns={[
+        operateButtons={[
           {
             label: '新增',
             type: 'primary',

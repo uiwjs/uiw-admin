@@ -1,16 +1,13 @@
-import React, { useState, useMemo } from 'react';
-import { Button, Input, Form, ButtonProps, Row, Col, TableColumns } from 'uiw';
+import React, { useMemo } from 'react';
+import { Button } from 'uiw';
 import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 
-// interface BtnItem extends ButtonProps{
-//   label: React.ReactNode;
-// };
-
-const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
+const ProTabel: React.FC<ProtableProps> = (props) => {
+  const { table, columns, operateButtons = [], searchBtns, onBeforeSearch, ...tableProps } = props;
   const {
     key,
     data,
@@ -22,6 +19,7 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
     searchValues,
     loading,
     onSearch,
+    SWRConfiguration
   } = table;
 
   const store = useMemo(
@@ -35,6 +33,7 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
       query,
       searchValues,
       onSearch,
+      SWRConfiguration,
     }),
     [
       JSON.stringify(data),
@@ -46,6 +45,7 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
       query,
       JSON.stringify(searchValues),
       onSearch,
+      SWRConfiguration
     ],
   );
 
@@ -53,20 +53,19 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
     <StoreCtx.Provider value={store}>
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
-        <BaseForm columns={columns} />
+        <BaseForm columns={columns} searchBtns={searchBtns} onBeforeSearch={onBeforeSearch} />
         {/* 操作区域 */}
-        {btns.length > 0 && (
+        {operateButtons.length > 0 && (
           <div style={{ background: '#fff', padding: 10 }}>
-            {btns.map((btn: any, idx) => (
+            {operateButtons.map((btn: any, idx: number) => (
               <Button key={idx.toString()} style={{ marginRight: 5 }} {...btn}>
                 {btn.label}
               </Button>
             ))}
           </div>
         )}
-
         {/* 列表组件 */}
-        <Table columns={columns} />
+        <Table columns={columns} {...tableProps} />
       </Skeleton>
     </StoreCtx.Provider>
   );

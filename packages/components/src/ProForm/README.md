@@ -58,6 +58,8 @@ const Demo = () => {
 | buttonsContainer  | buttons容器样式(可调整button布局)	| React.CSSProperties		| - |
 | title | 标题	  | string 或 React.ReactNode		| - |
 | formType | 表单类型	  | 'collapse' 或 'card'		| 'card' |
+| submitRef | 获取表单提交事件ref	  |  any		| - |
+
 
 ## FormItemsProps
 | 参数 | 说明	| 类型	| 默认值 |

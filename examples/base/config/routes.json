@@ -1,0 +1,86 @@
+[
+  {
+    "path": "/login",
+    "component": "@/layouts/UserLayout"
+  },
+  {
+    "path": "/",
+    "component": "@/layouts/BasicLayout",
+    "routes": [
+      {
+        "index": true,
+        "redirect": "/tableList"
+      },
+      {
+        "path": "/tableList",
+        "name": "查询表格",
+        "component": "@/pages/TableList"
+      },
+      {
+        "path": "/home",
+        "name": "首页",
+        "component": "@/pages/TableList"
+      },
+      {
+        "path": "/dom",
+        "name": "子项",
+        "routes": [
+          {
+            "path": "/dom/courses",
+            "name": "Dashboard",
+            "component": "@/pages/Dashboard"
+          }
+        ]
+      },
+      {
+        "path": "/demo",
+        "name": "demo",
+        "component": "@/pages/Demo"
+      },
+      {
+        "path": "/exceptions",
+        "name": "异常",
+        "routes": [
+          {
+            "path": "/exceptions/403",
+            "name": "403",
+            "component": "403"
+          },
+          {
+            "path": "/exceptions/500",
+            "name": "500",
+            "component": "500"
+          },
+          {
+            "path": "/exceptions/404",
+            "name": "404",
+            "component": "404"
+          }
+        ]
+      },
+      {
+        "path": "/403",
+        "name": "403",
+        "hideInMenu": true,
+        "component": "403"
+      },
+      {
+        "path": "/500",
+        "name": "500",
+        "hideInMenu": true,
+        "component": "500"
+      },
+      {
+        "path": "/404",
+        "name": "404",
+        "hideInMenu": true,
+        "component": "404"
+      },
+      {
+        "path": "*",
+        "name": "404",
+        "component": "404"
+      }
+    ]
+  }
+]

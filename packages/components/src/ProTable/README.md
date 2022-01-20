@@ -27,11 +27,34 @@ export default function Demo() {
         data: searchValues,
       };
     },
+     // swr options
+    SWRConfiguration: {
+      revalidateOnFocus: false
+    }
   });
 
   return (
     <ProTable
-      btns={[{ label: '新增', type: 'primary' }]}
+      operateButtons={[
+        { label: '新增', type: 'primary' },
+      ]}
+      // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
+      // searchBtns={[
+      //   { label: '搜索', type: 'primary',  htmlType: 'submit',  onClick: () => {
+      //     table.onSearch()
+      //   }},
+      //   { label: '点我', onClick: () => null},
+      // ]}
+      onBeforeSearch={({ initial, current }) => {
+        const errorObj: any = {};
+        if (!current.name) errorObj.name = '名字不能为空！';
+        if (Object.keys(errorObj).length > 0) {
+          const err: any = new Error();
+          err.filed = errorObj;
+          throw err;
+        }
+        return true;
+      }}
       table={table}
       columns={[
         {
@@ -131,8 +154,12 @@ export default function Demo() {
 | 参数 | 说明	| 类型	| 默认值 |
 | --  | -- | -- | -- |
 | columns | 与uiw table colunms用法一致 必传	| ColumnProps[]		| [] |
-| btns | 操作栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
+| operateButtons | 操作栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
+| searchBtns | 搜索栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
 | table | useTable返回值	| Object 必传		|  |
+| onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询	| ({initial, current}) => Boolean 	|  |
+
+其余属性与uiw Table一致
 
 ### columns props
 
@@ -162,6 +189,7 @@ export default function Demo() {
 | --  | -- | -- | -- |
 | formatData | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式	| (data) => {total: 10, data: []}	| - |
 | query | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据	|  (pageIndex: number, searchValues: any)	=> {page:  pageIndex, pageSize: 10, searchValues}	| {} |
+| SWRConfiguration | swr配置	| SWRConfiguration	| {} |
 
 
 ### response

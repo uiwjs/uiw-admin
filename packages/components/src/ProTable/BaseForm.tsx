@@ -35,9 +35,9 @@ const widgets = {
 const BaseForm: React.FC<BaseFormProps> = (props) => {
   const store = useStore();
 
-  let { updateStore, reset, onSearch } = store as any;
+  let { updateStore, onSearch } = store as any;
 
-  const { columns } = props;
+  const { columns, searchBtns, onBeforeSearch } = props;
   // 获取表单配置
   const getFormFields = useMemo(() => {
     const fields: Fields = {};
@@ -82,7 +82,14 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
-        onFormSearch({ initial, current });
+        // 搜索前校验
+        if (onBeforeSearch && onBeforeSearch({initial, current})) {
+          onFormSearch({ initial, current });
+        } else {
+          onFormSearch({ initial, current });
+        }
+        
+        
       }}
       onSubmitError={(error) => {
         if (error.filed) {
@@ -107,12 +114,17 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                   <Col key={index} fixed style={{ width: '20%' }} />
                 ))}
               <Col align="middle">
-                <Button type="primary" htmlType="submit">
-                  查询
-                </Button>
-                {/* <Button type="warning" onClick={() => onReset(resetForm)}>
-           重置表单
-         </Button> */}
+                {searchBtns ? (
+                  searchBtns.map((btn: any, idx) => (
+                    <Button key={idx.toString()} {...btn}>
+                      {btn.label}
+                    </Button>
+                  ))
+                ) : (
+                  <Button type="primary" htmlType="submit">
+                    查询
+                  </Button>
+                )}
               </Col>
             </Row>
           </div>
