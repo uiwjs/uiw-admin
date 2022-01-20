@@ -7,7 +7,7 @@ import {
   createModel
 } from '@rematch/core';
 import loading, { ExtraModelsFromLoading } from '@rematch/loading';
-// no need to extend from Models
+
 export interface RootModel extends Models<RootModel> {
 }
 type FullModel = ExtraModelsFromLoading<RootModel>
@@ -25,3 +25,7 @@ export const createModels = (model: Model<RootModel>, name: string) => {
 }
 ${models}
 `}
+
+export const createTemp = (path: string, filename: string) => {
+  return `createModels(require("${path}").default,"${filename}");\n`
+}

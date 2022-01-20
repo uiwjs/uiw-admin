@@ -15,6 +15,8 @@ const Login = () => {
   const { provider } = useSWRConfig() as any
   const prt = provider()
   const loading = useSelector((state: RootState) => state.loading.effects.login.submit)
+  const state = useSelector((state: RootState) => state)
+  console.log(state)
 
   const [store, setStore] = React.useState<any>()
 

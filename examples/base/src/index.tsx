@@ -23,13 +23,13 @@ ReactDOM.render(
       <Control
         routeType="hash"
         routes={routers}
-        addModel={(models: string[]) => {
-          models.map(async (m) => {
-            const md = await import(`./models/${m}.ts`);
-            const modelData = md.default || md;
-            createModels(modelData, m)
-          });
-        }}
+      // addModel={(models: string[]) => {
+      //   models.map(async (m) => {
+      //     const md = await import(`./models/${m}.ts`);
+      //     const modelData = md.default || md;
+      //     createModels(modelData, m)
+      //   });
+      // }}
       />
     </Provider>
   </SWRConfig>,
