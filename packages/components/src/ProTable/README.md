@@ -157,7 +157,7 @@ export default function Demo() {
 | operateButtons | 操作栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
 | searchBtns | 搜索栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
 | table | useTable返回值	| Object 必传		|  |
-| onBeforeSearch | 查询前生命周期，可用于表单验证，返回true 继续查询	| ({initial, current}) => Boolean 	|  |
+| onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询	| ({initial, current}) => Boolean 	|  |
 
 其余属性与uiw Table一致
 
