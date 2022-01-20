@@ -36,6 +36,8 @@ export interface FormItemsProps {
   hide?: boolean;
   /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
   span?: string;
+  /** 是否必填 */
+  required?:boolean
 }
 
 export interface ProFormProps {
@@ -43,6 +45,7 @@ export interface ProFormProps {
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
   btns?: BtnProps[]
+  btnsContainer?:React.CSSProperties;
   title?: any;
   formType?: 'collapse' | 'card';
 }

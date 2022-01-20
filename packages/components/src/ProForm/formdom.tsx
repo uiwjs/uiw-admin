@@ -8,6 +8,7 @@ function FormDom({
   onSubmit,
   onChange,
   btns = [],
+  btnsContainer,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
 }) {
@@ -74,7 +75,7 @@ function FormDom({
                 );
               })}
             </Row>
-            <div className="w-form-item-center">
+            <div className="w-form-item-center" style={{ ...btnsContainer }}>
               {renderBtn({ canSubmit, resetForm })}
             </div>
           </React.Fragment>
