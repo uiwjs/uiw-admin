@@ -55,6 +55,8 @@ interface ProFormProps {
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
   /** 表单按钮 btnType:提交按钮(继承form表单submit)｜表单重置按钮(可重置表单值) ｜ 其他按钮 */
   btns?: Arrary<{label?: string; btnType: 'submit' | 'reset' | 'other'; show?: boolean;}&ButtonProps>
+  /** btns容器样式(可调整button布局) */
+  btnsContainer?:React.CSSProperties;
   /** 表单标题 */
   title?: string | React.ReactNode | any;
   /** 表单类型 */
@@ -87,6 +89,8 @@ interface FormItemsProps {
   hide?: boolean;
   /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
   span?: string;
+  /** 是否必填 */
+  required?:boolean
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
   option?: {
     label: string;

@@ -51,7 +51,7 @@ const Detail = (props: DetailProps) => {
       <ProForm
         title="基础信息"
         onSubmit={(initial, current) => {
-          const errorObj: any = {};
+          const errorObj:any = {};
           if (!current?.lastName) {
             errorObj.lastName = '名字不能为空';
           }
@@ -63,6 +63,7 @@ const Detail = (props: DetailProps) => {
           }
           mutate();
         }}
+        btnsContainer={{ justifyContent: "flex-start" }}
         btns={[
           {
             btnType: 'submit',
