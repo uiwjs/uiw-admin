@@ -68,6 +68,7 @@ jobs:
     - run: cp -rp ./examples/base/uiw-admin.zip ./examples/website/build
 
     - name: Heroku -> Setting the stack
+      working-directory: examples/base
       run: |
         cat > ~/app.json <<EOF
         {
