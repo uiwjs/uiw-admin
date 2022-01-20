@@ -4,6 +4,13 @@
 - 功能更新
 
 
+## 5.0.5
+
+- @uiw-admin/plugins
+  - 🐞 修复 自动加载 models 文件判断问题;
+- @uiw-admin/user-login
+  - 🌟 新增登录页面
+
 ## 5.0.3
 
 - @uiw-admin/components
