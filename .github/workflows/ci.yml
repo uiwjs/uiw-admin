@@ -67,6 +67,13 @@ jobs:
       working-directory: examples/base
     - run: cp -rp ./examples/base/uiw-admin.zip ./examples/website/build
 
+    - name: Deploy to heroku.com
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: heroku
+        publish_dir: ./examples/base
+
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
