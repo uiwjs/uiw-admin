@@ -59,8 +59,13 @@ class RoutesWebpackPlugin {
     const iss = fs.existsSync(this.routesPath);
     if (iss) {
       //存在 更新
-      const newStr = fs.readFileSync(this.routesPath, { encoding: "utf-8" }).toString()
-      if (newStr !== this.oldRouterJson) {
+      const newStr = fs.readFileSync(this.routesPath, { encoding: "utf-8" }).toString().trim()
+      // 文件存在但是为空
+      if (newStr === "") {
+        this.createTemps("[]");
+        return;
+      }
+      if ((newStr) !== this.oldRouterJson) {
         this.oldRouterJson = newStr
         this.routes = JSON.parse(this.oldRouterJson)
         this.createRoutes()
@@ -81,9 +86,6 @@ class RoutesWebpackPlugin {
         const watcher = fs.watch(this.routesPath);
         watcher.on('change', (type, filename) => {
           if (typeof filename === 'string' && filename === "routes.json") {
-            setTimeout(() => {
-
-            })
             this.checkField()
           }
         });
