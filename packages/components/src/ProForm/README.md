@@ -58,13 +58,11 @@ interface ProFormProps {
   /** 表单值变化回调 */
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
   /** 表单按钮 */
-  btns?: BtnProps[]
+  btns?: Arrary<{label?: string; btnType: 'submit' | 'reset' | 'other'; show?: boolean;}&ButtonProps>
   /** 标题 */
   title?: string | React.ReactNode | any;
   /** 表单类型 */
   formType?: 'collapse' | 'card';
-  /** 组件配置列表 */
-  renderWidgetsList?: Fields
 }
 
 // 表单项参数
@@ -88,24 +86,15 @@ interface FormItemsProps {
   /** 表单元素值，可以是默认值 */
   initialValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
-  option?: FormItemsOptionsProps[];
+  option?: {
+  label: string;
+  value: string | number;
+  disabled?: boolean;
+}
   /** 可参考uiw/表单组件api */
   widgetProps?: any;
   /** 是否显示 */
   hide?: boolean;
 }
 
-// 继承于uiw/button
-interface BtnProps {
-  label?: string;
-  btnType: 'submit' | 'reset' | 'other';
-  show?: boolean;
-}
-
-// option参数
-interface FormItemsOptionsProps {
-  label: string;
-  value: string | number;
-  disabled?: boolean;
-}
 ```
