@@ -6,6 +6,7 @@ const UserLayout = () => {
   const navigate = useNavigate()
 
   return <UserLogin
+    api="/api/login"
     btnProps={{ type: "primary" }}
     onSuccess={(data) => {
       if (data && data.token) {

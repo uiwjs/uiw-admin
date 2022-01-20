@@ -93,8 +93,8 @@ class DvaWebpackPlugin {
     // 如果是空的不用管了
     // 如果存在则直接重新生成
     if (this.deleteModel.length !== 0) {
-      this.restCreate();
       this.oldModel = newModel;
+      this.restCreate();
     }
   };
   // 文件变更时
@@ -109,9 +109,11 @@ class DvaWebpackPlugin {
     }
     // 1. 判断是否已经存在
     // 如果已经存在着直接更新
-    const isMode = IsModel(
-      fs.readFileSync(this.newPath, { encoding: 'utf-8' }),
-    );
+    let isMode = false;
+    // 先判断路径是否存在models 和ts|js 结尾
+    if (/\.(ts|js)$/.test(this.newPath) && /models/.test(this.newPath)) {
+      isMode = IsModel(fs.readFileSync(this.newPath, { encoding: 'utf-8' }));
+    }
     const newFile = this.oldModel.find((item) => item.path === this.newPath);
     if (newFile) {
       // 进行判断是否还是 model

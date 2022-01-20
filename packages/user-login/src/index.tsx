@@ -30,7 +30,9 @@ export interface UserLoginProps {
   /** 登录接口返回 */
   onSuccess?: (resp: any, form: FormValue | undefined) => void;
   /** 登录按钮 属性 */
-  btnProps?: Omit<ButtonProps, "ref">
+  btnProps?: Omit<ButtonProps, "ref">;
+  /** 请求接口 */
+  api?: string;
 }
 
 export default (props: UserLoginProps) => {
@@ -45,10 +47,11 @@ export default (props: UserLoginProps) => {
     children,
     projectName,
     onSuccess = () => null,
-    btnProps = {}
+    btnProps = {},
+    api
   } = props
   const [store, setStore] = React.useState<FormValue>()
-  const { isValidating, } = useSWR(store ? ["/api/login",
+  const { isValidating, } = useSWR(store ? [api,
     { method: 'POST', body: store }] : null,
     request,
     {
