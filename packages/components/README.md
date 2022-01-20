@@ -1,11 +1,11 @@
 # `components`
 
-> TODO: description
+> 业务组件
 
 ## Usage
 
 ```
-const components = require('components');
+import * from '@uiw-admin/components';
 
-// TODO: DEMONSTRATE API
+
 ```

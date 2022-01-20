@@ -20,6 +20,10 @@
     "path": "/components"
   },
   {
+    "label": "Protable",
+    "path": "/protable"
+  },
+  {
     "divider": true,
     "label": "依赖"
   },
