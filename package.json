@@ -4,8 +4,7 @@
   "description": "Use Rematch & TypeScript for the project.",
   "private": true,
   "scripts": {
-    "start": "kkt start",
-    "build": "kkt build"
+    "start": "kkt start"
   },
   "repository": {
     "type": "git",
