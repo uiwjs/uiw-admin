@@ -1,4 +1,5 @@
-# config
+config
+===
 
 > 简化 .kktrc 中配置
 

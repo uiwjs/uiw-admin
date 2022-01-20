@@ -3,15 +3,15 @@ import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
-import { RoutersProps } from "@uiw-admin/router-control"
+import { RoutersProps } from '@uiw-admin/router-control';
 import LogoHeader from './LogoHeader';
 import Menu from './Menu';
-import Bread from "./Breadcrumb"
+import Bread from './Breadcrumb';
 import './index.css';
-import { getMenu, BreadcrumbMap } from "./utils"
-import BodyContent from "./Content"
-import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu'
-import FullScreen from './FullScreen'
+import { getMenu, BreadcrumbMap } from './utils';
+import BodyContent from './Content';
+import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
+import FullScreen from './FullScreen';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -23,7 +23,7 @@ export type BasicLayoutProps = {
    */
   footer?: React.ReactElement;
   routes?: RoutersProps[];
-  children?: React.ReactNode
+  children?: React.ReactNode;
 } & HeaderRightProps;
 export default function BasicLayout(props: BasicLayoutProps) {
   const {
@@ -32,7 +32,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
     projectName = 'UIW Admin',
     profile = {},
     menus = [],
-    onReloadAuth
+    onReloadAuth,
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -42,22 +42,32 @@ export default function BasicLayout(props: BasicLayoutProps) {
   const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
 
   const Menus = React.useMemo(() => {
-    return <Menu collapsed={collapsed} routes={routeData} />
-  }, [JSON.stringify(routeData), collapsed])
+    return <Menu collapsed={collapsed} routes={routeData} />;
+  }, [JSON.stringify(routeData), collapsed]);
 
   const mapRoute = React.useMemo(() => {
-    return new BreadcrumbMap(routeData)
-  }, [JSON.stringify(routeData)])
+    return new BreadcrumbMap(routeData);
+  }, [JSON.stringify(routeData)]);
 
   const renderHeaderRightMenu = useMemo(() => {
     return (
-      <div style={{ display: 'flex', justifyItems: 'center', alignItems: "center" }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyItems: 'center',
+          alignItems: 'center',
+        }}
+      >
         {profile?.menuLeft}
         <FullScreen />
-        <HeaderRightMenu onReloadAuth={onReloadAuth} profile={profile} menus={menus} />
+        <HeaderRightMenu
+          onReloadAuth={onReloadAuth}
+          profile={profile}
+          menus={menus}
+        />
       </div>
-    )
-  }, [profile, menus])
+    );
+  }, [profile, menus]);
 
   return (
     <Fragment>
@@ -87,10 +97,8 @@ export default function BasicLayout(props: BasicLayoutProps) {
             </div>
             {renderHeaderRightMenu}
           </Header>
-          <Content className='uiw-admin-global-content'  >
-            <BodyContent>
-              {props.children}
-            </BodyContent>
+          <Content className="uiw-admin-global-content">
+            <BodyContent>{props.children}</BodyContent>
           </Content>
           {/* {footerView} */}
         </Layout>

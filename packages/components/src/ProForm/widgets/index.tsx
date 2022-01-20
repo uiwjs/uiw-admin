@@ -1,5 +1,5 @@
-import React from 'react'
-import { Fields } from "../";
+import React from 'react';
+import { Fields } from '../';
 import {
   Input,
   Checkbox,
@@ -10,13 +10,13 @@ import {
   MonthPicker,
   SearchSelect,
 } from 'uiw';
-import Radio from '../../ProTable/widgets/Radio'
-import Select from '../../ProTable/widgets/Select'
+import Radio from '../../ProTable/widgets/Radio';
+import Select from '../../ProTable/widgets/Select';
 /**  @@ 指向 /src/.uiw 目录 自定义表单组件列表 */
 // @ts-ignore
-import { customWidgetsList } from '@/widgets'
+import { customWidgetsList } from '@/widgets';
 
-export const commonWidgetsList:Fields = {
+export const commonWidgetsList: Fields = {
   input: Input,
   radio: Radio,
   checkbox: Checkbox,
@@ -27,11 +27,11 @@ export const commonWidgetsList:Fields = {
   dateInput: DateInput,
   timePicker: TimePicker,
   monthPicker: MonthPicker,
-  ...customWidgetsList
-}
+  ...customWidgetsList,
+};
 
 /**
- * 
+ *
  * @param formDatas 表单项 FormItemsProps[]
  * @returns fields  Record<string, FormFieldsProps<{}>>
  */
@@ -40,7 +40,15 @@ export function getFormFields(formDatas: any = []) {
   const fields: Fields = {};
   formDatas.forEach((col: any) => {
     if (col) {
-      const { hide = false, widgetProps, key, widget, label, initialValue, ...otherProps } = col;
+      const {
+        hide = false,
+        widgetProps,
+        key,
+        widget,
+        label,
+        initialValue,
+        ...otherProps
+      } = col;
       if (!hide) {
         const name = key;
         const Widget = widgetsList[widget];
@@ -51,7 +59,6 @@ export function getFormFields(formDatas: any = []) {
           initialValue,
         };
       }
-
     }
   });
   return fields;

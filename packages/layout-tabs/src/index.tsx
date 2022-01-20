@@ -1,26 +1,25 @@
-import React from "react";
-import { Tabs } from "uiw"
-import { RoutersProps, } from "@uiw-admin/router-control"
-import { getRoutesList, getRender } from "./utils"
-import { matchPath, } from "react-router"
-import "./styles/index.css"
-import {
-  useNavigate,
-  useLocation,
-  Location
-} from "react-router-dom";
+import React from 'react';
+import { Tabs } from 'uiw';
+import { RoutersProps } from '@uiw-admin/router-control';
+import { getRoutesList, getRender } from './utils';
+import { matchPath } from 'react-router';
+import './styles/index.css';
+import { useNavigate, useLocation, Location } from 'react-router-dom';
 
 interface LayoutTabsProps {
-  routes: RoutersProps[]
+  /** 子集路由 */
+  routes: RoutersProps[];
 }
 const LayoutTabs = (props: LayoutTabsProps) => {
-  const { routes } = props
-  const location = useLocation()
-  const navigate = useNavigate()
-  const [pathArr, setPathArr] = React.useState<(RoutersProps & { location: Location })[]>([])
+  const { routes } = props;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [pathArr, setPathArr] = React.useState<
+    (RoutersProps & { location: Location })[]
+  >([]);
 
-  const routeListData = getRoutesList(routes)
-  const Current = getRender(routeListData, location) as RoutersProps
+  const routeListData = getRoutesList(routes);
+  const Current = getRender(routeListData, location) as RoutersProps;
 
   React.useEffect(() => {
     /** 在这边加路由权限 控制就好了 */
@@ -32,23 +31,25 @@ const LayoutTabs = (props: LayoutTabsProps) => {
     // 5. 如果也没有页面 直接 跳转404页面
     if (!Current) {
       // 没找到跳转
-      navigate("/404")
+      navigate('/404');
       return;
     }
     if (Current && Current.redirect) {
-      navigate(Current.redirect)
+      navigate(Current.redirect);
       return;
     }
-    const curr = getRender(pathArr, location)
+    const curr = getRender(pathArr, location);
     if (!curr) {
-      setPathArr(pre => pre.concat([{ ...Current, location }]).filter((item) => !!item))
+      setPathArr((pre) =>
+        pre.concat([{ ...Current, location }]).filter((item) => !!item),
+      );
     }
-  }, [location.pathname])
+  }, [location.pathname]);
 
   React.useMemo(() => {
     const tabData = [...pathArr].map((item) => {
       if (item.path) {
-        const match = matchPath({ path: item.path, }, location.pathname);
+        const match = matchPath({ path: item.path }, location.pathname);
         if (match) {
           item.location = location;
         }
@@ -58,35 +59,45 @@ const LayoutTabs = (props: LayoutTabsProps) => {
     setPathArr(() => [...tabData]);
   }, [location.search]);
 
-  return <div className="uiw-layout-tabs-warp">
-    <Tabs
-      type="card"
-      activeKey={location.pathname}
-      onTabClick={(keys) => {
-        const tabs = pathArr.find((item) => item.location.pathname === keys)
-        if (tabs && location.pathname !== keys) {
-          navigate(`${keys}${tabs.location.search}`, { state: tabs.location.state, replace: true })
-        }
-      }}
-    >
-      {pathArr.map((item) => {
-        return <Tabs.Pane key={item.location.pathname} label={item.name} />
-      })}
-    </Tabs>
-    <div className="uiw-layout-tabs-body"  >
-      {pathArr.map((item, index) => {
-        const match = matchPath({ path: item.path as string, }, location.pathname)
-        return <div
-          key={item.location.pathname}
-          style={{
-            display: match ? "block" : "none",
-            overflow: 'auto',
-          }}
-        >
-          {item.element}
-        </div>
-      })}
+  return (
+    <div className="uiw-layout-tabs-warp">
+      <Tabs
+        type="card"
+        activeKey={location.pathname}
+        onTabClick={(keys) => {
+          const tabs = pathArr.find((item) => item.location.pathname === keys);
+          if (tabs && location.pathname !== keys) {
+            navigate(`${keys}${tabs.location.search}`, {
+              state: tabs.location.state,
+              replace: true,
+            });
+          }
+        }}
+      >
+        {pathArr.map((item) => {
+          return <Tabs.Pane key={item.location.pathname} label={item.name} />;
+        })}
+      </Tabs>
+      <div className="uiw-layout-tabs-body">
+        {pathArr.map((item, index) => {
+          const match = matchPath(
+            { path: item.path as string },
+            location.pathname,
+          );
+          return (
+            <div
+              key={item.location.pathname}
+              style={{
+                display: match ? 'block' : 'none',
+                overflow: 'auto',
+              }}
+            >
+              {item.element}
+            </div>
+          );
+        })}
+      </div>
     </div>
-  </div>
-}
-export default LayoutTabs
+  );
+};
+export default LayoutTabs;

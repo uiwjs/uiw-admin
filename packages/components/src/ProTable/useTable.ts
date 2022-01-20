@@ -1,14 +1,11 @@
-import { useState } from 'react'
-import { Params, useTableData, stateParams } from './types'
-
+import { useState } from 'react';
+import { Params, useTableData, stateParams } from './types';
 
 const useTable = (key: string, params: Params = {}): useTableData => {
-
-  const { formatData, query } = params
-
+  const { formatData, query } = params;
 
   const [state, setState] = useState<any>({
-     // 总页数
+    // 总页数
     total: 1,
     // 当前table数据源
     data: [],
@@ -25,21 +22,15 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     setState({
       ...state,
       ...datas,
-    })
-  }
+    });
+  };
 
   // 重置
-  const reset = () => {
-
-  }
+  const reset = () => {};
   // 刷新当前页数据
-  const refersh = () => {
-
-  }
+  const refersh = () => {};
   // 点击查询
-  const onSearch = () => {
-
-  }
+  const onSearch = () => {};
 
   return {
     key,
@@ -53,8 +44,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     query,
     updateStore,
     ...state,
-  }
-}
+  };
+};
 
-
-export default useTable
+export default useTable;

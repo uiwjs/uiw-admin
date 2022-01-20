@@ -17,8 +17,7 @@ import {
 import Select from './widgets/Select';
 import FormRadio from './widgets/Radio';
 import { useStore } from './hooks';
-import { BaseFormProps, Fields } from './types'
-
+import { BaseFormProps, Fields } from './types';
 
 const widgets = {
   input: Input,
@@ -77,7 +76,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
   //   resetForm();
   // };
   const itemsLength = Object.keys(getFormFields).length;
-  const emptyLength = 4 - itemsLength % 5
+  const emptyLength = 4 - (itemsLength % 5);
   return (
     <Form
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
@@ -102,9 +101,11 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                   {fields[key]}
                 </Col>
               ))}
-              {Array(emptyLength).fill('').map((value, index) => (
-                <Col key={index} fixed style={{ width: '20%' }} />
-              ))}
+              {Array(emptyLength)
+                .fill('')
+                .map((value, index) => (
+                  <Col key={index} fixed style={{ width: '20%' }} />
+                ))}
               <Col align="middle">
                 <Button type="primary" htmlType="submit">
                   查询

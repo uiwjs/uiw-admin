@@ -1,30 +1,30 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Icon } from "uiw"
+import { Icon } from 'uiw';
 
 /**
  * 当前是否全屏
  */
 function isFullScreen() {
-  let el: any = document
+  let el: any = document;
   return (
     el.mozFullScreen ||
     el.webkitIsFullScreen ||
     el.webkitFullScreen ||
     el.msFullScreen
-  )
+  );
 }
 
 /**
  * 判断当前文档是否能切换到全屏
  */
 function isFullscreenEnabled() {
-  let el: any = document
+  let el: any = document;
   return (
     el.fullscreenEnabled ||
     el.mozFullScreenEnabled ||
     el.webkitFullscreenEnabled ||
     el.msFullscreenEnabled
-  )
+  );
 }
 
 export default () => {
@@ -42,7 +42,7 @@ export default () => {
       element.msRequestFullscreen();
     }
   } else if (isFullScreen()) {
-    let el: any = document
+    let el: any = document;
     if (el.exitFullscreen) {
       el.exitFullscreen();
     } else if (el.webkitCancelFullScreen) {

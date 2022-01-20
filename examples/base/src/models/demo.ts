@@ -1,13 +1,13 @@
 import { ModelDefault, Dispatch } from '@uiw-admin/models';
-import { selectById } from '../servers/demo'
+import { selectById } from '../servers/demo';
 
 const demo: ModelDefault = {
-  name: "demo",
+  name: 'demo',
   state: {
     drawerVisible: false,
     tableType: '',
     queryInfo: {},
-    isView: false
+    isView: false,
   },
   reducers: {
     updateState: (state: any, payload: any) => ({
@@ -32,10 +32,10 @@ const demo: ModelDefault = {
         drawerVisible: false,
         tableType: '',
         queryInfo: {},
-        isView: false
+        isView: false,
       });
-    }
+    },
   }),
 };
 
-export default demo
+export default demo;

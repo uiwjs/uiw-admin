@@ -55,9 +55,14 @@ function ProForm(props: ProFormProps) {
   const formfields = useMemo(() => getFormFields(formDatas), [formDatas]);
 
   const renderForm = useMemo(() => {
-    const formDomProps = { ...props, formfields }
+    const formDomProps = { ...props, formfields };
     // 卡片类型
-    if (formType === 'card') return <Card title={title}><FormDom {...formDomProps} /></Card>
+    if (formType === 'card')
+      return (
+        <Card title={title}>
+          <FormDom {...formDomProps} />
+        </Card>
+      );
     // 折叠卡片类型
     if (formType === 'collapse') {
       return (
@@ -66,7 +71,7 @@ function ProForm(props: ProFormProps) {
             <FormDom {...formDomProps} />
           </Collapse.Panel>
         </Collapse>
-      )
+      );
     }
     // 一般表单
     return (
@@ -74,14 +79,10 @@ function ProForm(props: ProFormProps) {
         {title && <h3>{title}</h3>}
         <FormDom {...formDomProps} />
       </div>
-    )
-  }, [formType, formDatas, title])
+    );
+  }, [formType, formDatas, title]);
 
-  return (
-    <div style={{ flex: 1 }}>
-      {renderForm}
-    </div>
-  )
+  return <div style={{ flex: 1 }}>{renderForm}</div>;
 }
 
-export default ProForm
+export default ProForm;

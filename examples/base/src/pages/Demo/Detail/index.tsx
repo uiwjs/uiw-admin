@@ -1,41 +1,50 @@
 import React from 'react';
-import { ProDrawer, ProForm } from '@uiw-admin/components'
-import { Notify } from 'uiw'
+import { ProDrawer, ProForm } from '@uiw-admin/components';
+import { Notify } from 'uiw';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
-import { insert, update } from '../../../servers/demo'
-import { items } from './items'
-import useSWR from 'swr'
+import { insert, update } from '../../../servers/demo';
+import { items } from './items';
+import useSWR from 'swr';
 
 interface DetailProps {
-  updateData?: any
+  updateData?: any;
 }
 
 const Detail = (props: DetailProps) => {
-  const { updateData } = props
+  const { updateData } = props;
   const dispatch = useDispatch<Dispatch>();
-  const { demo: { drawerVisible, tableType, queryInfo, isView } } = useSelector((state: RootState) => state);
+  const {
+    demo: { drawerVisible, tableType, queryInfo, isView },
+  } = useSelector((state: RootState) => state);
 
-  const onClose = () => dispatch({ type: "demo/clean" })
+  const onClose = () => dispatch({ type: 'demo/clean' });
 
-  const { mutate } = useSWR([
-    (tableType === 'add' && insert) || (tableType === 'edit' && update), { method: "POST", body: queryInfo }], {
-    revalidateOnMount: false,
-    revalidateOnFocus: false,
-    onSuccess: (data) => {
-      if (data && data.code === 200) {
-        Notify.success({ title: data.message });
-        onClose()
-      }
+  const { mutate } = useSWR(
+    [
+      (tableType === 'add' && insert) || (tableType === 'edit' && update),
+      { method: 'POST', body: queryInfo },
+    ],
+    {
+      revalidateOnMount: false,
+      revalidateOnFocus: false,
+      onSuccess: (data) => {
+        if (data && data.code === 200) {
+          Notify.success({ title: data.message });
+          onClose();
+        }
+      },
     },
-  })
+  );
 
-  const dataSource: any = items(queryInfo, { isView })
+  const dataSource: any = items(queryInfo, { isView });
 
   return (
     <ProDrawer
       width={800}
-      title={tableType === 'add' ? '新增' : tableType === 'edit' ? '编辑' : '查看'}
+      title={
+        tableType === 'add' ? '新增' : tableType === 'edit' ? '编辑' : '查看'
+      }
       visible={drawerVisible}
       onClose={onClose}
     >
@@ -52,21 +61,23 @@ const Detail = (props: DetailProps) => {
             Notify.error({ title: '提交失败！' });
             throw err;
           }
-          mutate()
+          mutate();
         }}
         btns={[
           {
-            btnType: "submit",
-            label: "提交表单",
-            type: "primary"
-          }
+            btnType: 'submit',
+            label: '提交表单',
+            type: 'primary',
+          },
         ]}
         // 更新表单的值
-        onChange={(initial: any, current: any) => updateData({ queryInfo: { ...queryInfo, ...current } })}
+        onChange={(initial: any, current: any) =>
+          updateData({ queryInfo: { ...queryInfo, ...current } })
+        }
         formDatas={dataSource}
       />
     </ProDrawer>
-  )
-}
+  );
+};
 
-export default Detail
+export default Detail;

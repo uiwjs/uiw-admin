@@ -12,14 +12,14 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     key: 'lastName',
     widget: 'input',
     initialValue: queryInfo?.lastName,
-    widgetProps: { disabled: isView }
+    widgetProps: { disabled: isView },
   },
   {
     label: '邮箱',
     key: 'email',
     widget: 'input',
     initialValue: queryInfo?.email,
-    widgetProps: { disabled: isView }
+    widgetProps: { disabled: isView },
   },
   {
     label: '水果',
@@ -32,11 +32,11 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
       { value: 4, label: '东北大冻梨' },
     ],
     initialValue: queryInfo?.select,
-    widgetProps: { disabled: isView }
+    widgetProps: { disabled: isView },
   },
   {
-    label: "自定义组件",
+    label: '自定义组件',
     key: 'id1',
-    widget: "slider",
-  }
-]
+    widget: 'slider',
+  },
+];

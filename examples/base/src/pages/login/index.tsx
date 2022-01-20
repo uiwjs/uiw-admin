@@ -4,38 +4,45 @@ import { useSelector, useDispatch } from 'react-redux';
 import logo from '../../assets/logo-dark.svg';
 import styles from './index.module.less';
 import { RootState, Dispatch } from '@uiw-admin/models';
-import useSWR, { useSWRConfig, } from 'swr'
-import { useNavigate, Link, } from 'react-router-dom';
-
+import useSWR, { useSWRConfig } from 'swr';
+import { useNavigate, Link } from 'react-router-dom';
 
 const Login = () => {
-  const dispatch = useDispatch<Dispatch>()
-  const navigate = useNavigate()
+  const dispatch = useDispatch<Dispatch>();
+  const navigate = useNavigate();
 
-  const { provider } = useSWRConfig() as any
-  const prt = provider()
-  const loading = useSelector((state: RootState) => state.loading.effects.login.submit)
-  const state = useSelector((state: RootState) => state)
-  console.log(state)
+  const { provider } = useSWRConfig() as any;
+  const prt = provider();
+  const loading = useSelector(
+    (state: RootState) => state.loading.effects.login.submit,
+  );
+  const state = useSelector((state: RootState) => state);
+  console.log(state);
 
-  const [store, setStore] = React.useState<any>()
+  const [store, setStore] = React.useState<any>();
 
-  const { data, } = useSWR(store ? ['/api/login', {
-    method: "POST",
-    body: { username: "admin", password: "admin" }
-  }] : null)
+  const { data } = useSWR(
+    store
+      ? [
+          '/api/login',
+          {
+            method: 'POST',
+            body: { username: 'admin', password: 'admin' },
+          },
+        ]
+      : null,
+  );
   if (data && data.token) {
-    prt.set("login", { ...data })
+    prt.set('login', { ...data });
   }
   React.useEffect(() => {
     if (data && data.token) {
-      sessionStorage.setItem("token", data.token)
-      sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
-      navigate("/home")
+      sessionStorage.setItem('token', data.token);
+      sessionStorage.setItem('auth', JSON.stringify(data.authList || []));
+      navigate('/home');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(data)])
-
+  }, [JSON.stringify(data)]);
 
   return (
     <Row justify="center" align="middle" style={{ height: '100%' }}>
@@ -54,7 +61,10 @@ const Login = () => {
               err.filed = errorObj;
               throw err;
             } else {
-              setStore({ username: current.username, password: current.password })
+              setStore({
+                username: current.username,
+                password: current.password,
+              });
             }
             // dispatch.login.submit({
             //   username: current.username,
@@ -96,8 +106,7 @@ const Login = () => {
             },
             terms: {
               style: { margin: 0 },
-              validator: (currentValue) =>
-                !currentValue && '必须统一服务条款',
+              validator: (currentValue) => !currentValue && '必须统一服务条款',
               children: (
                 <Checkbox disabled={!!loading} value="1">
                   已阅读并同意
@@ -145,6 +154,6 @@ const Login = () => {
       </Col>
     </Row>
   );
-}
+};
 
 export default Login;

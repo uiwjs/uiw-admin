@@ -14,8 +14,15 @@ export default function Components(props: ComponentsProps) {
   return (
     <Layout className={styles.layout}>
       <Affix offsetTop={0} style={{ zIndex: 999 }}>
-        <GitHubCorners size={53} target="_blank" href="https://github.com/uiwjs/uiw-admin" />
-        <Header className={styles.header} style={{ display: 'flex', alignItems: 'center' }}>
+        <GitHubCorners
+          size={53}
+          target="_blank"
+          href="https://github.com/uiwjs/uiw-admin"
+        />
+        <Header
+          className={styles.header}
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
           <svg viewBox="0 0 20 20" version="1.1">
             <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
               <path
@@ -31,7 +38,7 @@ export default function Components(props: ComponentsProps) {
       </Affix>
       <Layout className={styles.layoutWrap}>
         <Sider width={260} className={styles.layoutSider}>
-          <SiderMenu style={{ width: 260, height: 'calc(100vh - 53px)' }}/>
+          <SiderMenu style={{ width: 260, height: 'calc(100vh - 53px)' }} />
         </Sider>
         <Content style={{ padding: 20 }} className={styles.layoutContent}>
           <Outlet />

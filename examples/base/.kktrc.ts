@@ -1,28 +1,28 @@
 import path from 'path';
-import { MockerAPIOptions, } from 'kkt';
+import { MockerAPIOptions } from 'kkt';
 import lessModules from '@kkt/less-modules';
 import rawModules from '@kkt/raw-modules';
 import scopePluginOptions from '@kkt/scope-plugin-options';
 import pkg from './package.json';
-import defaultConfig from "@uiw-admin/config"
-import { DvaWebpackPlugin ,WidgetsWebpackPlugin} from "@uiw-admin/plugins"
+import defaultConfig from '@uiw-admin/config';
+import { DvaWebpackPlugin, WidgetsWebpackPlugin } from '@uiw-admin/plugins';
 
 export default defaultConfig({
   define: {
     VERSION: JSON.stringify(pkg.version),
     // BASE_NAME: "/uiw"
   },
-  plugins: [
-    new DvaWebpackPlugin(),
-    new WidgetsWebpackPlugin()
-  ],
+  plugins: [new DvaWebpackPlugin(), new WidgetsWebpackPlugin()],
   // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
   loader: [
     rawModules,
-    { loader: scopePluginOptions, options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] } },
-    lessModules
+    {
+      loader: scopePluginOptions,
+      options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] },
+    },
+    lessModules,
   ],
-})
+});
 export const proxySetup = (): MockerAPIOptions => {
   /**
    * mocker-api that creates mocks for REST APIs.
