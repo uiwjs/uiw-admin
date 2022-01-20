@@ -3,13 +3,15 @@ import React from "react";
 import { Exceptions403, Exceptions500, Exceptions404 } from "@uiw-admin/exceptions"
 
 const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")))
+const UserLayout = Loadable(React.lazy(() => import("../layouts/UserLayout")))
 
 // 这块内容需要进行转换掉 
 export const routers: Routers[] = [
   {
     path: "/login",
     models: ["login"],
-    component: React.lazy(() => import("../pages/login"))
+    component: React.lazy(() => import("../layouts/UserLayout"))
+    // component: React.lazy(() => import("./../pages/login"))
   },
   {
     path: "/",
