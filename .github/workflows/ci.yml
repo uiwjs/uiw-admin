@@ -67,6 +67,14 @@ jobs:
       working-directory: examples/base
     - run: cp -rp ./examples/base/uiw-admin.zip ./examples/website/build
 
+    - name: Heroku -> Setting the stack
+      run: |
+        cat > ~/app.json <<EOF
+        {
+          "stack": "heroku-20"
+        }
+        EOF
+
     - name: Deploy to heroku.com
       uses: peaceiris/actions-gh-pages@v3
       with:
