@@ -19,6 +19,10 @@ export default function Demo() {
         data: searchValues,
       };
     },
+    // swr options
+    // SWRConfiguration: {
+    //   revalidateOnFocus: false
+    // }
   });
 
   const [val, setVal] = useState('');
@@ -31,10 +35,17 @@ export default function Demo() {
 
   return (
     <ProTable
+      // 操作栏按钮
       btns={[
         { label: '新增', type: 'primary' },
-        { label: '重置', onClick: table.onSearch },
       ]}
+      // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
+      // searchBtns={[
+      //   { label: '搜索', type: 'primary',  htmlType: 'submit',  onClick: () => {
+      //     table.onSearch()
+      //   }},
+      //   { label: '点我', onClick: () => null},
+      // ]}
       table={table}
       columns={[
         {
