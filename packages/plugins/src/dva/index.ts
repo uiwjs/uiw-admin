@@ -136,16 +136,16 @@ class DvaWebpackPlugin {
 
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('DvaWebpackPlugin', (...res) => {
-      const watcher = fs.watch(path.resolve(process.cwd(), "src"), { recursive: true });
-
-      watcher.on("change", (type, filename) => {
-        if (typeof filename === "string") {
-          this.field = filename as string;
-          this.newPath = path.resolve(process.cwd(), "src", this.field);
-          this.checkField()
-        }
-        // this.createDva(filename as string)
-      })
+      if (process.env.NODE_ENV === "development") {
+        const watcher = fs.watch(path.resolve(process.cwd(), "src"), { recursive: true });
+        watcher.on("change", (type, filename) => {
+          if (typeof filename === "string") {
+            this.field = filename as string;
+            this.newPath = path.resolve(process.cwd(), "src", this.field);
+            this.checkField()
+          }
+        })
+      }
     })
   }
 }
