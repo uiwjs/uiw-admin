@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form, Button, FormFieldsProps, Col, Row } from 'uiw';
-import { ProFormProps } from './';
+import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
+import { ProFormProps } from './type';
 import './style/form-item.less';
 
 function FormDom({
