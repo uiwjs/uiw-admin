@@ -11,6 +11,11 @@
 - @uiw-admin/user-login
   - 🌟 新增登录页面
 
+## 5.0.4
+
+- @uiw-admin/components
+  - 🐞 修复 `ProForm`增加btnsContainer&required&span props;
+
 ## 5.0.3
 
 - @uiw-admin/components
