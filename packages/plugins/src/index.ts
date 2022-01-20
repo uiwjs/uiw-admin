@@ -1,3 +1,3 @@
-export { default as DvaWebpackPlugin } from "./dva"
+export { default as DvaWebpackPlugin } from './dva';
 
-export {default as WidgetsWebpackPlugin} from "./widgets"
+export { default as WidgetsWebpackPlugin } from './widgets';

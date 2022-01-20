@@ -82,11 +82,9 @@ module.exports.logout = function (req, res) {
 module.exports.refesh = function (req, res) {
   return res.status(200).json({
     code: 200,
-    message: "刷新权限成功",
+    message: '刷新权限成功',
     data: {
-      authList: authList || []
+      authList: authList || [],
     },
   });
 };
-
-

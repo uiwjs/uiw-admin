@@ -2,5 +2,5 @@
 // import Markdown from '../../components/Markdown';
 
 export default function Page() {
-  return <div>home</div>
+  return <div>home</div>;
 }

@@ -1,18 +1,18 @@
-import React from "react"
+import React from 'react';
 
 export const getAuthPath = (path?: string): boolean => {
   // @ts-ignore
   if (AUTH) {
-    let authList: string[] = []
-    const authStr = sessionStorage.getItem("auth")
+    let authList: string[] = [];
+    const authStr = sessionStorage.getItem('auth');
     if (authStr) {
-      authList = JSON.parse(authStr)
+      authList = JSON.parse(authStr);
     }
-    const fig = authList.find(item => item === path)
-    return !!fig
+    const fig = authList.find((item) => item === path);
+    return !!fig;
   }
-  return true
-}
+  return true;
+};
 
 /** 校验按钮权限 */
 export interface AuthBtnProps {
@@ -23,16 +23,16 @@ export interface AuthBtnProps {
   children: React.ReactNode;
 }
 export const AuthBtn = (props: AuthBtnProps) => {
-  const { path, disabled, children } = props
+  const { path, disabled, children } = props;
   // @ts-ignore
   if (AUTH) {
-    const fig = getAuthPath(path)
+    const fig = getAuthPath(path);
     if (fig) {
       return children;
     } else if (disabled && React.isValidElement(children)) {
-      return React.cloneElement(children, { disabled })
+      return React.cloneElement(children, { disabled });
     }
-    return <React.Fragment />
+    return <React.Fragment />;
   }
-  return children
-}
+  return children;
+};

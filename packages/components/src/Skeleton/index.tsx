@@ -10,7 +10,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ children, loading = false }) => {
   return (
     <Loader
       loading={loading}
-      style={{ display: 'block', }}
+      style={{ display: 'block' }}
       // fullscreen={true}
       bgColor="rgba(255, 255, 255, 0.4)"
     >

@@ -4,7 +4,7 @@ import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
-import { ProtableProps } from './types'
+import { ProtableProps } from './types';
 
 // interface BtnItem extends ButtonProps{
 //   label: React.ReactNode;
@@ -56,7 +56,7 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [] }) => {
         <BaseForm columns={columns} />
         {/* 操作区域 */}
         {btns.length > 0 && (
-          <div style={{  background: '#fff', padding: 10 }}>
+          <div style={{ background: '#fff', padding: 10 }}>
             {btns.map((btn: any, idx) => (
               <Button key={idx.toString()} style={{ marginRight: 5 }} {...btn}>
                 {btn.label}

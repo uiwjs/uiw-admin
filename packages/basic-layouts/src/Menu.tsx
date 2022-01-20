@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import Menu, { MenuItemProps, SubMenuProps } from '@uiw/react-menu';
-import { DefaultProps, } from '@uiw-admin/router-control';
-import { useLocation, useNavigate } from "react-router-dom";
-import { matchPath, NavigateFunction } from "react-router"
+import { DefaultProps } from '@uiw-admin/router-control';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { matchPath, NavigateFunction } from 'react-router';
 
 interface MenuProps {
   collapsed?: boolean;
@@ -23,10 +23,10 @@ function renderMenuItem(
       icon: item.icon,
     } as MenuItemProps<any> & SubMenuProps<any>;
     let isAuth = true;
-    if (Reflect.has(item, "isAuth")) {
-      isAuth = Reflect.get(item, "isAuth")
+    if (Reflect.has(item, 'isAuth')) {
+      isAuth = Reflect.get(item, 'isAuth');
     }
-    if (item.index || item.hideInMenu || !isAuth || item.path === "*") {
+    if (item.index || item.hideInMenu || !isAuth || item.path === '*') {
       return <Fragment key={index} />;
     }
     if (level) {
@@ -34,7 +34,7 @@ function renderMenuItem(
         'uiw-admin-global-sider-menu-collapsed': collapsed,
       });
     }
-    if (matchPath({ path: item.path, }, pathName)) {
+    if (matchPath({ path: item.path }, pathName)) {
       props.active = true;
     }
     if (item.routes) {
@@ -63,7 +63,7 @@ function renderMenuItem(
           // if (item.path === "/courses1/:id") {
           //   navigate("/courses1/12", { state: { ad: 122 }, replace: true })
           // } else {
-          navigate(item.path, { replace: true })
+          navigate(item.path, { replace: true });
           // }
         }}
         to={item.path}
@@ -75,14 +75,16 @@ function renderMenuItem(
 
 export default (props: MenuProps = {}) => {
   const { routes = [], collapsed } = props;
-  const location = useLocation()
-  const navigate = useNavigate()
-  const pathName = location.pathname
-  return <Menu
-    theme="dark"
-    inlineCollapsed={!!collapsed}
-    style={{ padding: '0 12px' }}
-  >
-    {renderMenuItem(routes, !!collapsed, pathName, navigate, true)}
-  </Menu>
+  const location = useLocation();
+  const navigate = useNavigate();
+  const pathName = location.pathname;
+  return (
+    <Menu
+      theme="dark"
+      inlineCollapsed={!!collapsed}
+      style={{ padding: '0 12px' }}
+    >
+      {renderMenuItem(routes, !!collapsed, pathName, navigate, true)}
+    </Menu>
+  );
 };
