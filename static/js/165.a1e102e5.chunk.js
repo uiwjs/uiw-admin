@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[165],{57165:function(n,e,s){s.r(e),e.default="# `components`\n\n> TODO: description\n\n## Usage\n\n```\nconst components = require('components');\n\n// TODO: DEMONSTRATE API\n```\n"}}]);
-//# sourceMappingURL=165.a1e102e5.chunk.js.map

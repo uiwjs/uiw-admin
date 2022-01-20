@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/165.a1e102e5.chunk.js","mappings":"+GAAA","sources":["../../../packages/components/README.md"],"sourcesContent":["export default \"# `components`\\n\\n> TODO: description\\n\\n## Usage\\n\\n```\\nconst components = require('components');\\n\\n// TODO: DEMONSTRATE API\\n```\\n\";"],"names":[],"sourceRoot":""}
