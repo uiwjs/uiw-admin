@@ -70,7 +70,7 @@ jobs:
     - name: Heroku -> Setting
       working-directory: examples/base
       run: |
-        node -e `var fs = require("fs");var pkg = require("./package.json");delete pkg.scripts.build;fs.writeFileSync('./package.json', JSON.stringify(pkg, null, 2));`;
+        node -e 'var fs = require("fs");var pkg = require("./package.json");delete pkg.scripts.build;fs.writeFileSync("./package.json", JSON.stringify(pkg, null, 2));'
         # cat > ~/app.json <<EOF
         # {
         #   "stack": "heroku-20"
