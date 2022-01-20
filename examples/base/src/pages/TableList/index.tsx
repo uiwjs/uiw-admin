@@ -19,6 +19,10 @@ export default function Demo() {
         data: searchValues,
       };
     },
+    // swr options
+    // SWRConfiguration: {
+    //   revalidateOnFocus: false
+    // }
   });
 
   const [val, setVal] = useState('');
@@ -31,11 +35,26 @@ export default function Demo() {
 
   return (
     <ProTable
-      btns={[
-        { label: '新增', type: 'primary' },
-        { label: '重置', onClick: table.onSearch },
-      ]}
+      // 操作栏按钮
+      operateButtons={[{ label: '新增', type: 'primary' }]}
+      // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
+      // searchButtons={[
+      //   { label: '搜索', type: 'primary',  htmlType: 'submit',  onClick: () => {
+      //     table.onSearch()
+      //   }},
+      //   { label: '点我', onClick: () => null},
+      // ]}
       table={table}
+      onBeforeSearch={({ initial, current }) => {
+        const errorObj: any = {};
+        if (!current.name) errorObj.name = '名字不能为空！';
+        if (Object.keys(errorObj).length > 0) {
+          const err: any = new Error();
+          err.filed = errorObj;
+          throw err;
+        }
+        return true;
+      }}
       columns={[
         {
           title: '名字',
