@@ -10,9 +10,9 @@ import {
 import { ExtraModelsFromLoading } from '@rematch/loading';
 /**  @@ 指向 /src/.uiw 目录 */
 // @ts-ignore
-import { store, createModels } from '@@/dva';
+import { store, createModels } from '@@/rematch';
 
-export interface RootModel extends Models<RootModel> {}
+export interface RootModel extends Models<RootModel> { }
 
 type FullModel = ExtraModelsFromLoading<RootModel>;
 // export const store = init<RootModel, FullModel>({
