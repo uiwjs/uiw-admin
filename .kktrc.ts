@@ -5,14 +5,21 @@ import rawModules from '@kkt/raw-modules';
 import scopePluginOptions from '@kkt/scope-plugin-options';
 import pkg from './package.json';
 import defaultConfig from '@uiw-admin/config';
-import { DvaWebpackPlugin, WidgetsWebpackPlugin } from '@uiw-admin/plugins';
+import {
+  RematchWebpackPlugin, WidgetsWebpackPlugin,
+  RoutesWebpackPlugin
+} from '@uiw-admin/plugins';
 
 export default defaultConfig({
   define: {
     VERSION: JSON.stringify(pkg.version),
     // BASE_NAME: "/uiw"
   },
-  plugins: [new DvaWebpackPlugin(), new WidgetsWebpackPlugin()],
+  plugins: [
+    new RematchWebpackPlugin(),
+    new WidgetsWebpackPlugin(),
+    new RoutesWebpackPlugin()
+  ],
   // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
   loader: [
     rawModules,
