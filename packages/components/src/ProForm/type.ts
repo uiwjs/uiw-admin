@@ -1,16 +1,9 @@
 import { ButtonProps } from 'uiw';
-import {  commonWidgetsList } from './widgets'
+import { commonWidgetsList } from './widgets'
 
 export type Fields = {
   [key: string]: any;
 };
-
-export interface BtnProps extends ButtonProps {
-  label?: string;
-  btnType: 'submit' | 'reset' | 'other';
-  show?: boolean;
-}
-
 export interface FormItemsOptionsProps {
   label: string;
   value: string | number;
@@ -34,15 +27,19 @@ export interface FormItemsProps {
   /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
   span?: string;
   /** 是否必填 */
-  required?:boolean
+  required?: boolean
 }
 
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
-  btns?: BtnProps[]
-  btnsContainer?:React.CSSProperties;
+  submitRef?: any;
+  buttonsContainer?: React.CSSProperties;
   title?: any;
   formType?: 'collapse' | 'card';
+  showSaveButton?:boolean;
+  showResetButton?:boolean;
+  saveButtonProps?:ButtonProps;
+  resetButtonProps?:ButtonProps | any;
 }

@@ -1,7 +1,3 @@
-.w-form-grid {
-  display: grid;
-  grid-gap: 10px;
-}
 .w-form-item-center {
   display: flex;
   align-items: center;

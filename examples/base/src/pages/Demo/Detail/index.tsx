@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ProDrawer, ProForm } from '@uiw-admin/components';
 import { Notify } from 'uiw';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,6 +13,7 @@ interface DetailProps {
 
 const Detail = (props: DetailProps) => {
   const { updateData } = props;
+  const baseRef = useRef<any>()
   const dispatch = useDispatch<Dispatch>();
   const {
     demo: { drawerVisible, tableType, queryInfo, isView },
@@ -47,11 +48,19 @@ const Detail = (props: DetailProps) => {
       }
       visible={drawerVisible}
       onClose={onClose}
+      buttons={[
+        {
+          label: "保存",
+          type: "danger",
+          style: { width: 80 },
+          onClick: () => baseRef?.current?.click()
+        }
+      ]}
     >
       <ProForm
         title="基础信息"
         onSubmit={(initial, current) => {
-          const errorObj:any = {};
+          const errorObj: any = {};
           if (!current?.lastName) {
             errorObj.lastName = '名字不能为空';
           }
@@ -63,19 +72,13 @@ const Detail = (props: DetailProps) => {
           }
           mutate();
         }}
-        btnsContainer={{ justifyContent: "flex-start" }}
-        btns={[
-          {
-            btnType: 'submit',
-            label: '提交表单',
-            type: 'primary',
-          },
-        ]}
+        buttonsContainer={{ justifyContent: "flex-start" }}
         // 更新表单的值
         onChange={(initial: any, current: any) =>
           updateData({ queryInfo: { ...queryInfo, ...current } })
         }
         formDatas={dataSource}
+        submitRef={baseRef}
       />
     </ProDrawer>
   );

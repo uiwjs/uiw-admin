@@ -12,7 +12,7 @@ const Demo = () => {
        <ProForm
          formType="card"
          title="基础信息"
-         btns={[
+         buttons={[
             {
              label: "提交表单",
              btnType: "submit",
@@ -46,14 +46,16 @@ const Demo = () => {
 
 ## Porps
 
-
 | 参数 | 说明	| 类型	| 默认值 |
 | --  | -- | -- | -- |
 | formDatas | 表单项集合	| FormItemsProps[]		| [] |
 | onSubmit | 提交表单回调 需配合btns，继承uiw/form submit	| (initial: Record<string, any>, current: Record<string, any>) => void		| - |
 | onChange | 表单值变化回调，继承uiw/form onChange	| (initial: Record<string, any>, current: Record<string, any>) => void	| - |
-| btns | 按钮集合	|  BtnProps[]		| [] |
-| btnsContainer  | btns容器样式(可调整button布局)	| React.CSSProperties		| - |
+| showSaveButton | 展示提交按钮	|  boolean		| false |
+| showResetButton | 展示重置按钮	|  boolean		| false |
+| saveButtonProps | 提交按钮api;继承于uiw/button	|  boolean		| false |
+| resetButtonProps | 重置按钮api;继承于uiw/button	|  boolean		| false |
+| buttonsContainer  | buttons容器样式(可调整button布局)	| React.CSSProperties		| - |
 | title | 标题	  | string 或 React.ReactNode		| - |
 | formType | 表单类型	  | 'collapse' 或 'card'		| 'card' |
 
@@ -69,15 +71,6 @@ const Demo = () => {
 | hide| 是否显示| boolean| true |
 | span| 可以通过指定 24 列中每列的宽度来创建基本网格系统| string| '8' |
 | required| 是否必填| boolean | - |
-
-
-## BtnProps
-[继承于uiw,请参考Button其余参数](https://uiwjs.github.io/#/components/button)
-| 参数 | 说明	| 类型	| 默认值 |
-| --  | -- | -- | -- |
-| label| 按钮名称 | string	| 'card' |
-| btnType| 按钮类型(配合onSubmit可提交表单) | 'submit' 或 'reset' 或 'other'	| - |
-| show| 是否隐藏 | boolean	| true |
 
 ## FormItemsOptionsProps
 | 参数 | 说明	| 类型	| 默认值 |
