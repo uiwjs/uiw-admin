@@ -32,6 +32,10 @@
     "path": "/proform"
   },
   {
+    "label": "Skeleton",
+    "path": "/skeleton"
+  },
+  {
     "divider": true,
     "label": "依赖"
   },

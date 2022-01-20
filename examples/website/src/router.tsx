@@ -28,6 +28,7 @@ const UserLogin = Loadable(lazy(() => import('./pages/user-login')));
 const Protable = Loadable(lazy(() => import('./pages/components/Protable')));
 const ProDrawer = Loadable(lazy(() => import('./pages/components/ProDrawer')));
 const ProForm = Loadable(lazy(() => import('./pages/components/ProForm')));
+const Skeleton = Loadable(lazy(() => import('./pages/components/Skeleton')));
 
 export const routes: RouteObject[] = [
   {
@@ -55,6 +56,7 @@ export const routes: RouteObject[] = [
       { path: '/protable', element: <Protable /> },
       { path: '/prodrawer', element: <ProDrawer /> },
       { path: '/proform', element: <ProForm /> },
+      { path: '/skeleton', element: <Skeleton /> },
       { path: '*', element: <NoMatch /> },
     ],
   },
