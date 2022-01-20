@@ -24,6 +24,10 @@
     "path": "/protable"
   },
   {
+    "label": "Skeleton",
+    "path": "/skeleton"
+  },
+  {
     "divider": true,
     "label": "依赖"
   },
