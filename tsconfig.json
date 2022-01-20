@@ -14,13 +14,7 @@
     "esModuleInterop": true,
     "removeComments": false,
     "jsx": "react",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "types": [
-      "jest",
-      "node"
-    ]
-  },
+    "lib": ["esnext", "dom"],
+    "types": ["jest", "node"]
+  }
 }

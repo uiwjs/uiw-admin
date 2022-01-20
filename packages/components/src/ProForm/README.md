@@ -5,11 +5,10 @@
 ```js
 import { ProForm } from '@uiw-admin/components'
 import React, { useState } from 'react';
-import { Button } from 'antd'
+import { Button } from 'uiw'
 const Demo = () => {
   const [ isView ] = useState( false )
     return (
-     <div>
        <ProForm
          formType="card"
          title="基础信息"
@@ -40,61 +39,53 @@ const Demo = () => {
              }
            ]}
        />
-     </div>
   );
 }
 ```
 
-## 参数
-```ts
 
-interface ProFormProps {
-  /** 表单项集合 */
-  formDatas?: FormItemsProps[];
-  /** 一行几个 */
-  rowColspan?: number;
-  /** 提交表单回调 需配合btns */
-  onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
-  /** 表单值变化回调 */
-  onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
-  /** 表单按钮 */
-  btns?: Arrary<{label?: string; btnType: 'submit' | 'reset' | 'other'; show?: boolean;}&ButtonProps>
-  /** 标题 */
-  title?: string | React.ReactNode | any;
-  /** 表单类型 */
-  formType?: 'collapse' | 'card';
-}
+## Porps
 
-// 表单项参数
-interface FormItemsProps {
-  /** 表单元素标题 */
-  label?: string;
-  /** 表单元素字段名称 */
-  key: string;
-  /** 表单元素类型 可通过配置renderWidgetsList传递自定义组件 */
-  widget: 'input'
-  | 'radio'
-  | 'checkbox'
-  | 'switch'
-  | 'select'
-  | 'textarea'
-  | 'dateInput'
-  | 'timePicker'
-  | 'searchSelect'
-  | 'monthPicker'
-  | any;
-  /** 表单元素值，可以是默认值 */
-  initialValue?: any | any[];
-  /** 数据化选项内容, type为 radio、checkbox、select 生效 */
-  option?: {
-  label: string;
-  value: string | number;
-  disabled?: boolean;
-}
-  /** 可参考uiw/表单组件api */
-  widgetProps?: any;
-  /** 是否显示 */
-  hide?: boolean;
-}
 
-```
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| formDatas | 表单项集合	| FormItemsProps[]		| [] |
+| onSubmit | 提交表单回调 需配合btns，继承uiw/form submit	| (initial: Record<string, any>, current: Record<string, any>) => void		| - |
+| onChange | 表单值变化回调，继承uiw/form onChange	| (initial: Record<string, any>, current: Record<string, any>) => void	| - |
+| btns | 按钮集合	|  BtnProps[]		| [] |
+| btnsContainer  | btns容器样式(可调整button布局)	| React.CSSProperties		| - |
+| title | 标题	  | string 或 React.ReactNode		| - |
+| formType | 表单类型	  | 'collapse' 或 'card'		| 'card' |
+
+## FormItemsProps
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| label| 表单项名称 | string	| - |
+| key| 表单项key| string	| - |
+| widget| 表单项类型| typeof commonWidgetsList	| - |
+| initialValue| 表单项值，可以是默认值| any 或 any[]	| - |
+| option| 数据化选项内容, type为 radio、checkbox、select 生效| FormItemsOptionsProps[]| - |
+| widgetProps| 表单组件其余参数,参考uiw表单组件| any|- |
+| hide| 是否显示| boolean| true |
+| span| 可以通过指定 24 列中每列的宽度来创建基本网格系统| string| '8' |
+| required| 是否必填| boolean | - |
+
+
+## BtnProps
+[继承于uiw,请参考Button其余参数](https://uiwjs.github.io/#/components/button)
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| label| 按钮名称 | string	| 'card' |
+| btnType| 按钮类型(配合onSubmit可提交表单) | 'submit' 或 'reset' 或 'other'	| - |
+| show| 是否隐藏 | boolean	| true |
+
+## FormItemsOptionsProps
+| 参数 | 说明	| 类型	| 默认值 |
+| --  | -- | -- | -- |
+| label| 名称 | string(必传值)	| - |
+| value| key | string 或 number(必传值)	| - |
+| disabled| 是否禁用 | boolean	| - |
+
+## 注意
+- [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/from)
+- 组件默认集成了Input,Checkbox,Switch,Textarea,DateInput,TimePicker,MonthPicker,SearchSelect,Select,Radio。可通过配置widget注册自定义组件

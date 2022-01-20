@@ -18,16 +18,32 @@ const Footer = (props: FooterProps) => {
           编辑当前页面
         </a>
       )}
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/uiwjs/uiw-admin/issues/new">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/uiwjs/uiw-admin/issues/new"
+      >
         提交 Bug
       </a>
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/uiwjs/uiw-admin">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/uiwjs/uiw-admin"
+      >
         GitHub
       </a>
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/kktjs/kkt">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/kktjs/kkt"
+      >
         kkt
       </a>
-      <a target="_blank" rel="noopener noreferrer" href="https://github.com/uiwjs/uiw">
+      <a
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/uiwjs/uiw"
+      >
         uiwjs
       </a>
     </div>

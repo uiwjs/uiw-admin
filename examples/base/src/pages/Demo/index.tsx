@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from 'uiw'
+import { Button } from 'uiw';
 import { useDispatch } from 'react-redux';
 import { Dispatch } from '@uiw-admin/models';
 import { ProTable, useTable } from '@uiw-admin/components';
-import { selectPage } from '@/servers/demo'
-import Detail from './Detail'
+import { selectPage } from '@/servers/demo';
+import Detail from './Detail';
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>();
@@ -38,15 +38,15 @@ const Demo = () => {
   function handleEditTable(type: string, record: any) {
     updateData({
       isView: type === 'view',
-      tableType: type
-    })
+      tableType: type,
+    });
     if (type === 'add') {
-      updateData({ drawerVisible: true, queryInfo: {} })
+      updateData({ drawerVisible: true, queryInfo: {} });
     }
     if (type === 'edit' || type === 'view') {
       dispatch({
         type: 'demo/selectById',
-        payload: { id: record?.id }
+        payload: { id: record?.id },
       });
     }
   }
@@ -58,17 +58,17 @@ const Demo = () => {
           {
             label: '新增',
             type: 'primary',
-            onClick: handleEditTable.bind(this, 'add')
+            onClick: handleEditTable.bind(this, 'add'),
           },
           {
             label: '导出',
-            type: "danger",
-            onClick: handleEditTable.bind(this, 'export')
+            type: 'danger',
+            onClick: handleEditTable.bind(this, 'export'),
           },
           {
             label: '导入',
-            type: "dark",
-            onClick: handleEditTable.bind(this, 'import')
+            type: 'dark',
+            onClick: handleEditTable.bind(this, 'import'),
           },
         ]}
         columns={[
@@ -81,8 +81,8 @@ const Demo = () => {
               // 组件属性
               widgetProps: {
                 preIcon: 'user',
-                placeholder: '输入用户名'
-              }
+                placeholder: '输入用户名',
+              },
             },
           },
           {
@@ -106,8 +106,20 @@ const Demo = () => {
             width: 98,
             render: (text: any, key: any, rowData: any) => (
               <div>
-                <Button size="small" type="danger" onClick={handleEditTable.bind(this, 'edit', rowData)}>编辑</Button>
-                <Button size="small" type="success" onClick={handleEditTable.bind(this, 'view', rowData)}>查看</Button>
+                <Button
+                  size="small"
+                  type="danger"
+                  onClick={handleEditTable.bind(this, 'edit', rowData)}
+                >
+                  编辑
+                </Button>
+                <Button
+                  size="small"
+                  type="success"
+                  onClick={handleEditTable.bind(this, 'view', rowData)}
+                >
+                  查看
+                </Button>
               </div>
             ),
           },
@@ -117,5 +129,5 @@ const Demo = () => {
       <Detail updateData={updateData} />
     </React.Fragment>
   );
-}
-export default Demo
+};
+export default Demo;

@@ -25,7 +25,10 @@ export default function Code({ dependencies, codePen, ...other }: CodeProps) {
           content: `<div id="container"></div>`,
         },
         'src/index.js': {
-          content: props.code!.replace('_mount_', 'document.getElementById("container")'),
+          content: props.code!.replace(
+            '_mount_',
+            'document.getElementById("container")',
+          ),
         },
         '.kktrc.js': {
           content: `import webpack from "webpack";\nimport lessModules from "@kkt/less-modules";\nexport default (conf, env, options) => {\nconf = lessModules(conf, env, options);\nreturn conf;\n};`,
@@ -50,11 +53,22 @@ export default function Code({ dependencies, codePen, ...other }: CodeProps) {
               build: 'kkt build',
               test: 'kkt test --env=jsdom',
             },
-            browserslist: ['>0.2%', 'not dead', 'not ie <= 11', 'not op_mini all'],
+            browserslist: [
+              '>0.2%',
+              'not dead',
+              'not ie <= 11',
+              'not op_mini all',
+            ],
           },
         },
       },
     };
   }
-  return <CodePreview {...props} dependencies={{ ...dependencies, React, ...React }} style={{ marginBottom: 0 }} />;
+  return (
+    <CodePreview
+      {...props}
+      dependencies={{ ...dependencies, React, ...React }}
+      style={{ marginBottom: 0 }}
+    />
+  );
 }

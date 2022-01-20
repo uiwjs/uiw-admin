@@ -24,6 +24,18 @@
     "path": "/protable"
   },
   {
+    "label": "ProDrawer",
+    "path": "/prodrawer"
+  },
+  {
+    "label": "ProForm",
+    "path": "/proform"
+  },
+  {
+    "label": "Skeleton",
+    "path": "/skeleton"
+  },
+  {
     "divider": true,
     "label": "依赖"
   },

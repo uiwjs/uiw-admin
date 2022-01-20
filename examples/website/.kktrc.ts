@@ -6,7 +6,11 @@ import rawModules from '@kkt/raw-modules';
 import scopePluginOptions from '@kkt/scope-plugin-options';
 import pkg from './package.json';
 
-export default (conf: Configuration, env: 'production' | 'development', options: LoaderConfOptions) => {
+export default (
+  conf: Configuration,
+  env: 'production' | 'development',
+  options: LoaderConfOptions,
+) => {
   conf = rawModules(conf, env, options);
   conf = lessModules(conf, env, options);
   conf = scopePluginOptions(conf, env, {

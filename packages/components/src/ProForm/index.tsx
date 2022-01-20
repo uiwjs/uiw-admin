@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
-import { Collapse, Card,ButtonProps } from 'uiw';
+import { Collapse, Card, ButtonProps } from 'uiw';
 import FormDom from './formdom'
-import { getFormFields,commonWidgetsList } from './widgets'
+import { getFormFields, commonWidgetsList } from './widgets'
 import './style/form-item.less';
 
 export type Fields = {
@@ -11,9 +11,7 @@ export type Fields = {
 export interface BtnProps extends ButtonProps {
   label?: string;
   btnType: 'submit' | 'reset' | 'other';
-  onPress?: () => void;
   show?: boolean;
-  width?: number
 }
 
 export interface FormItemsOptionsProps {
@@ -36,30 +34,38 @@ export interface FormItemsProps {
   widgetProps?: any;
   /** 是否显示 */
   hide?: boolean;
-  full?:boolean;
+  /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
+  span?: string;
+  /** 是否必填 */
+  required?:boolean
 }
 
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
-  rowColspan?: number;
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
   btns?: BtnProps[]
+  btnsContainer?:React.CSSProperties;
   title?: any;
   formType?: 'collapse' | 'card';
 }
 
 function ProForm(props: ProFormProps) {
 
-  const { formDatas = [], title = "", formType = 'card'} = props
+  const { formDatas = [], title = "", formType = 'card' } = props
 
   // 获取表单配置
   const formfields = useMemo(() => getFormFields(formDatas), [formDatas]);
 
   const renderForm = useMemo(() => {
-    const formDomProps = { ...props, formfields }
+    const formDomProps = { ...props, formfields };
     // 卡片类型
-    if (formType === 'card') return <Card title={title}><FormDom {...formDomProps} /></Card>
+    if (formType === 'card')
+      return (
+        <Card title={title}>
+          <FormDom {...formDomProps} />
+        </Card>
+      );
     // 折叠卡片类型
     if (formType === 'collapse') {
       return (
@@ -68,7 +74,7 @@ function ProForm(props: ProFormProps) {
             <FormDom {...formDomProps} />
           </Collapse.Panel>
         </Collapse>
-      )
+      );
     }
     // 一般表单
     return (
@@ -76,14 +82,10 @@ function ProForm(props: ProFormProps) {
         {title && <h3>{title}</h3>}
         <FormDom {...formDomProps} />
       </div>
-    )
-  }, [formType, formDatas, title])
+    );
+  }, [formType, formDatas, title]);
 
-  return (
-    <div style={{ flex: 1 }}>
-      {renderForm}
-    </div>
-  )
+  return <div style={{ flex: 1 }}>{renderForm}</div>;
 }
 
-export default ProForm
+export default ProForm;

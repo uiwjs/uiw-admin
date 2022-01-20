@@ -3,10 +3,14 @@ UIW Admin Project
 
 一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [kkt](https://github.com/kktjs/kkt) 的初始级别项目，集成路由、Redux、选项卡等特性。
 
-## Open in CodeSandbox
+### Open in CodeSandbox
 
-[![Edit uiw-admin Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
-[![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/uiwjs/uiw-admin/tree/master/examples/base)
+[![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
+[![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/antdpro/antdp/tree/master/examples/antdp-base?embed=1&hideNavigation=0&hidedevtools=0)
+
+
+直接下载实例，本地预览: [`uiw-admin.zip`](https://uiwjs.github.io/uiw-admin/uiw-admin.zip)
+
 
 ### Packages
 
