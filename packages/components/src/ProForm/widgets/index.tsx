@@ -12,8 +12,11 @@ import {
 } from 'uiw';
 import Radio from '../../ProTable/widgets/Radio'
 import Select from '../../ProTable/widgets/Select'
+/**  @@ 指向 /src/.uiw 目录 自定义表单组件列表 */
+// @ts-ignore
+import { customWidgetsList } from '@@/widgets'
 
-const commonWidgetsList = {
+export const commonWidgetsList:Fields = {
   input: Input,
   radio: Radio,
   checkbox: Checkbox,
@@ -24,16 +27,17 @@ const commonWidgetsList = {
   dateInput: DateInput,
   timePicker: TimePicker,
   monthPicker: MonthPicker,
+  ...customWidgetsList
 }
 
 /**
  * 
  * @param formDatas 表单项 FormItemsProps[]
- * @param renderWidgetsList 表单组件注册列表 Fields
  * @returns fields  Record<string, FormFieldsProps<{}>>
  */
-export function getFormFields(formDatas: any = [], renderWidgetsList: Fields = {}) {
-  const widgetsList: Fields = { ...commonWidgetsList, ...renderWidgetsList };
+export function getFormFields(formDatas: any = []) {
+  const widgetsList: Fields = commonWidgetsList;
+  console.log('widgetsList', widgetsList)
   const fields: Fields = {};
   formDatas.forEach((col: any) => {
     if (col) {

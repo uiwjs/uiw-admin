@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { Collapse, Card,ButtonProps } from 'uiw';
 import FormDom from './formdom'
-import { getFormFields } from './widgets'
+import { getFormFields,commonWidgetsList } from './widgets'
 import './style/form-item.less';
 
 export type Fields = {
@@ -28,7 +28,7 @@ export interface FormItemsProps {
   /** 表单元素字段名称 */
   key: string;
   /** 表单元素类型 */
-  widget: 'input' | 'radio' | 'checkbox' | 'switch' | 'select' | 'textarea' | 'dateInput' | 'timePicker' | 'searchSelect' | 'monthPicker' | any;
+  widget: typeof commonWidgetsList;
   /** 表单元素值，可以是默认值 */
   initialValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
@@ -46,16 +46,14 @@ export interface ProFormProps {
   btns?: BtnProps[]
   title?: any;
   formType?: 'collapse' | 'card';
-  // 组件配置列表
-  renderWidgetsList?: Fields
 }
 
 function ProForm(props: ProFormProps) {
 
-  const { formDatas = [], title = "", formType = 'card', renderWidgetsList = {} } = props
+  const { formDatas = [], title = "", formType = 'card'} = props
 
   // 获取表单配置
-  const formfields = useMemo(() => getFormFields(formDatas, renderWidgetsList), [formDatas, renderWidgetsList]);
+  const formfields = useMemo(() => getFormFields(formDatas), [formDatas]);
 
   const renderForm = useMemo(() => {
     const formDomProps = { ...props, formfields }

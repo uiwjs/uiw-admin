@@ -1,6 +1,6 @@
 import React from 'react';
 import { ProDrawer, ProForm } from '@uiw-admin/components'
-import { Notify, FileInput } from 'uiw'
+import { Notify } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
 import { insert, update } from '../../../servers/demo'
@@ -61,7 +61,6 @@ const Detail = (props: DetailProps) => {
             type: "primary"
           }
         ]}
-        renderWidgetsList={{ fileInput: FileInput }}
         // 更新表单的值
         onChange={(initial: any, current: any) => updateData({ queryInfo: { ...queryInfo, ...current } })}
         formDatas={dataSource}
