@@ -65,6 +65,7 @@ class DvaWebpackPlugin {
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw)
     }
+    // 在项目的 src/.uiw/ 创建 dva.ts 用于models加载
     fs.writeFileSync(path.resolve(process.cwd(), "src/.uiw/dva.ts"), createDvaTemps(modelStr), { flag: "w+", encoding: "utf-8" })
     this.field = ''
     this.deleteModel = []
@@ -107,6 +108,7 @@ class DvaWebpackPlugin {
       // 进行判断是否还是 model
       if (!isMode) {
         this.deleteModel.push(this.newPath)
+        // 过滤出不是 一个 model 文件的项
         this.oldModel = this.oldModel.filter((item) => item.path !== this.newPath)
       }
       this.restCreate()

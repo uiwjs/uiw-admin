@@ -3,7 +3,6 @@ import { parse } from "@babel/parser"
 import traverse, { NodePath } from "@babel/traverse"
 import * as t from '@babel/types';
 
-
 type NodeFun = (t.Expression | t.FunctionDeclaration | t.TSDeclareFunction | t.ClassDeclaration)
 
 function getVarInit(

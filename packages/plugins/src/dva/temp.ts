@@ -1,3 +1,4 @@
+// 模板
 export default (models: string) => {
   return `
 import {

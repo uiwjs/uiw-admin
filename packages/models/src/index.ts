@@ -8,6 +8,7 @@ import {
   RematchStore
 } from '@rematch/core';
 import { ExtraModelsFromLoading } from '@rematch/loading';
+// @@ 指向 /src/.uiw 目录
 // @ts-ignore
 import { store, createModels } from "@@/dva"
 
