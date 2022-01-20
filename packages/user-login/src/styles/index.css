@@ -1,0 +1,43 @@
+.uiw-loayout-login {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* background-image: url('./../assets/bg.jpeg'); */
+}
+.uiw-loayout-login-warp {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  overflow: auto;
+}
+.uiw-loayout-login-warp-left {
+  justify-content: flex-start;
+}
+.uiw-loayout-login-warp-center {
+  justify-content: center;
+}
+.uiw-loayout-login-warp-right {
+  justify-content: flex-end;
+}
+.uiw-loayout-login-warp .uiw-loayout-login-body {
+  min-width: 350px;
+  min-height: 250px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -1px 0px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.uiw-loayout-login-warp .uiw-loayout-login-body .w-form {
+  flex: 1;
+}
+
+.uiw-loayout-login-warp .uiw-loayout-login-body .btn {
+  margin-top: 10px;
+}

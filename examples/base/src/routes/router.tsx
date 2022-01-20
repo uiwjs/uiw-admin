@@ -6,16 +6,16 @@ import {
   Exceptions404,
 } from '@uiw-admin/exceptions';
 
-const BasicLayout = Loadable(
-  React.lazy(() => import('../layouts/BasicLayout')),
-);
+const BasicLayout = Loadable(React.lazy(() => import("../layouts/BasicLayout")))
+const UserLayout = Loadable(React.lazy(() => import("../layouts/UserLayout")))
 
 // 这块内容需要进行转换掉
 export const routers: Routers[] = [
   {
-    path: '/login',
-    models: ['login'],
-    component: React.lazy(() => import('../pages/login')),
+    path: "/login",
+    models: ["login"],
+    component: React.lazy(() => import("../layouts/UserLayout"))
+    // component: React.lazy(() => import("./../pages/login"))
   },
   {
     path: '/',

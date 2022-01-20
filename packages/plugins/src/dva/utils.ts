@@ -38,6 +38,7 @@ export const IsModel = (content: string) => {
     // 在严格模式下解析并允许模块声明
     sourceType: 'module',
     plugins: [
+      "jsx",
       'typescript',
       'classProperties',
       'dynamicImport',

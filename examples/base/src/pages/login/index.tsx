@@ -24,12 +24,12 @@ const Login = () => {
   const { data } = useSWR(
     store
       ? [
-          '/api/login',
-          {
-            method: 'POST',
-            body: { username: 'admin', password: 'admin' },
-          },
-        ]
+        '/api/login',
+        {
+          method: 'POST',
+          body: { username: 'admin', password: 'admin' },
+        },
+      ]
       : null,
   );
   if (data && data.token) {
