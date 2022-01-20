@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Button, FormFieldsProps, Col, Row } from 'uiw';
-import { ProFormProps } from './'
+import { ProFormProps } from './';
 import './style/form-item.less';
 
 function FormDom({
@@ -8,24 +8,44 @@ function FormDom({
   onSubmit,
   onChange,
   btns = [],
-  rowColspan = 3,
-}: ProFormProps & { formfields: Record<string, FormFieldsProps<{}>> | undefined }) {
-
-  const renderBtn = ({ canSubmit, resetForm }: { canSubmit: () => boolean, resetForm: () => void }) => {
-    const children = btns.map(({ label, btnType, show = true, onClick, ...others }: any, index) => {
-      if (!show) return null
-      if (btnType === 'submit') {
-        return <Button key={index} disabled={!canSubmit()} htmlType="submit" {...others}>{label}</Button>
-      }
-      if (btnType === 'reset') {
+}: ProFormProps & {
+  formfields: Record<string, FormFieldsProps<{}>> | undefined;
+}) {
+  const renderBtn = ({ canSubmit, resetForm }: {
+    canSubmit: () => boolean;
+    resetForm: () => void;
+  }) => {
+    const children = btns.map(
+      ({ label, btnType, show = true, onClick, ...others }: any, index) => {
+        if (!show) return null;
+        if (btnType === 'submit') {
+          return (
+            <Button
+              key={index}
+              disabled={!canSubmit()}
+              htmlType="submit"
+              {...others}
+            >
+              {label}
+            </Button>
+          );
+        }
+        if (btnType === 'reset') {
+          return (
+            <Button key={index} onClick={() => resetForm} {...others}>
+              {label}
+            </Button>
+          );
+        }
         return (
-          <Button key={index} onClick={() => resetForm} {...others}>{label}</Button>
-        )
-      }
-      return <Button key={index} {...others} onClick={onClick?.()}>{label}</Button>
-    })
-    return children
-  }
+          <Button key={index} {...others} onClick={onClick?.()}>
+            {label}
+          </Button>
+        );
+      },
+    );
+    return children;
+  };
 
   return (
     <Form
@@ -46,12 +66,12 @@ function FormDom({
           <React.Fragment>
             <Row gutter={10}>
               {Object.keys(fields).map((key) => {
-                const colSpan = 24 / rowColspan
+                const colSpan = fields[key]?.props?.span || '8'
                 return (
-                  <Col key={key} span={colSpan} >
+                  <Col key={key} span={colSpan}>
                     {fields[key]}
                   </Col>
-                )
+                );
               })}
             </Row>
             <div className="w-form-item-center">
@@ -61,8 +81,7 @@ function FormDom({
         );
       }}
     </Form>
-  )
+  );
 }
 
-
-export default FormDom
+export default FormDom;

@@ -15,7 +15,7 @@ import { Drawer, Button, DrawerProps, ButtonProps } from 'uiw';
 interface ButtonItemsProps extends ButtonProps {
   label?: string;
   show?: boolean;
-  width?: number
+  width?: number;
 }
 
 interface ProDrawerProps extends DrawerProps {
@@ -24,10 +24,18 @@ interface ProDrawerProps extends DrawerProps {
   onClose?: any;
   width?: number;
   buttons?: Array<ButtonItemsProps>;
-  children?: React.ReactNode
+  children?: React.ReactNode;
 }
 function ProDrawer(props: ProDrawerProps) {
-  const { visible, title = '', onClose = null, width = 800, buttons = [], children, ...others } = props
+  const {
+    visible,
+    title = '',
+    onClose = null,
+    width = 800,
+    buttons = [],
+    children,
+    ...others
+  } = props;
   return (
     <Drawer
       title={title}
@@ -36,11 +44,14 @@ function ProDrawer(props: ProDrawerProps) {
       size={width}
       bodyStyle={{ padding: '0 10px 45px 10px' }}
       {...others}
-      footer={
-        buttons.map(({ label = '', show = true, ...others }: any, idx) => (
-          show && <Button key={idx} {...others}>{label}</Button>
-        ))
-      }
+      footer={buttons.map(
+        ({ label = '', show = true, ...others }: any, idx) =>
+          show && (
+            <Button key={idx} {...others}>
+              {label}
+            </Button>
+          ),
+      )}
     >
       {children}
     </Drawer>

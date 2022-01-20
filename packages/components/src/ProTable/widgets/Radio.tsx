@@ -1,5 +1,5 @@
 import React from 'react';
-import {Radio, RadioGroup } from 'uiw';
+import { Radio, RadioGroup } from 'uiw';
 
 interface FormSelectProps {
   option?: HTMLOptionElement[];

@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Loader, Icon } from 'uiw';
 import styles from './index.module.css';
@@ -37,5 +37,5 @@ export default function Page() {
         sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
       />
     </Fragment>
-  )
+  );
 }

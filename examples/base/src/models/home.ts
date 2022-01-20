@@ -2,11 +2,11 @@ import { Dispatch, ModelDefault } from '@uiw-admin/models';
 
 export interface GlobalState {
   test: string;
-  [s: string]: any
+  [s: string]: any;
 }
 
 const home: ModelDefault = {
-  name: "home",
+  name: 'home',
   state: {
     test: 'home',
   },
@@ -23,4 +23,4 @@ const home: ModelDefault = {
     },
   }),
 };
-export default home
+export default home;

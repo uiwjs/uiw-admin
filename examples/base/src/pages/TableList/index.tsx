@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
-import { useCity } from '../../queries'
+import { useCity } from '../../queries';
 
 export default function Demo() {
   const table = useTable('/api/getData', {
@@ -21,19 +21,20 @@ export default function Demo() {
     },
   });
 
-  const [val, setVal] = useState('')
+  const [val, setVal] = useState('');
 
-  const { city = [], isLoading } = useCity(val)
+  const { city = [], isLoading } = useCity(val);
 
   const handleSearch = (val: string) => {
-    setVal(val)
-
-  }
-
+    setVal(val);
+  };
 
   return (
     <ProTable
-      btns={[{ label: '新增', type: 'primary'}, { label: '重置',  onClick: table.onSearch }]}
+      btns={[
+        { label: '新增', type: 'primary' },
+        { label: '重置', onClick: table.onSearch },
+      ]}
       table={table}
       columns={[
         {
@@ -120,16 +121,15 @@ export default function Demo() {
           title: '家乡',
           key: 'city',
           width: 50,
-          props: {  
+          props: {
             widget: 'searchSelect',
             widgetProps: {
               allowClear: true,
-              placeholder: "请输入选择",
+              placeholder: '请输入选择',
               showSearch: true,
               loading: isLoading,
               option: city,
               onSearch: handleSearch,
-
             },
           },
         },
