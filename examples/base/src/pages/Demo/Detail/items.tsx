@@ -37,6 +37,6 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
   {
     label: "自定义组件",
     key: 'id1',
-    widget: "fileInput",
+    widget: "slider",
   }
 ]

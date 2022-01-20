@@ -14,7 +14,7 @@ import Radio from '../../ProTable/widgets/Radio'
 import Select from '../../ProTable/widgets/Select'
 /**  @@ 指向 /src/.uiw 目录 自定义表单组件列表 */
 // @ts-ignore
-import { customWidgetsList } from '@@/widgets'
+import { customWidgetsList } from '@/widgets'
 
 export const commonWidgetsList:Fields = {
   input: Input,
@@ -37,7 +37,6 @@ export const commonWidgetsList:Fields = {
  */
 export function getFormFields(formDatas: any = []) {
   const widgetsList: Fields = commonWidgetsList;
-  console.log('widgetsList', widgetsList)
   const fields: Fields = {};
   formDatas.forEach((col: any) => {
     if (col) {

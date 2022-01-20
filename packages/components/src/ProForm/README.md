@@ -52,7 +52,7 @@ interface ProFormProps {
   /** 表单项集合 */
   formDatas?: FormItemsProps[];
   /** 一行几个 */
-  span?: number;
+  rowColspan?: number;
   /** 提交表单回调 需配合btns */
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   /** 表单值变化回调 */

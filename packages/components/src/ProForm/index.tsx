@@ -36,11 +36,12 @@ export interface FormItemsProps {
   widgetProps?: any;
   /** 是否显示 */
   hide?: boolean;
+  full?:boolean;
 }
 
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
-  span?: number;
+  rowColspan?: number;
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
   btns?: BtnProps[]

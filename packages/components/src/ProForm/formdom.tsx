@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, FormFieldsProps } from 'uiw';
+import { Form, Button, FormFieldsProps, Col, Row } from 'uiw';
 import { ProFormProps } from './'
 import './style/form-item.less';
 
@@ -8,7 +8,7 @@ function FormDom({
   onSubmit,
   onChange,
   btns = [],
-  span = 3,
+  rowColspan = 3,
 }: ProFormProps & { formfields: Record<string, FormFieldsProps<{}>> | undefined }) {
 
   const renderBtn = ({ canSubmit, resetForm }: { canSubmit: () => boolean, resetForm: () => void }) => {
@@ -44,13 +44,16 @@ function FormDom({
       {({ fields, state, canSubmit, resetForm }) => {
         return (
           <React.Fragment>
-            <div className="w-form-grid" style={{ gridTemplateColumns: `repeat(${span}, 1fr)` }}>
-              {Object.keys(fields).map((key) => (
-                <div key={key} style={{ flex: 1 }}>
-                  {fields[key]}
-                </div>
-              ))}
-            </div>
+            <Row gutter={10}>
+              {Object.keys(fields).map((key) => {
+                const colSpan = 24 / rowColspan
+                return (
+                  <Col key={key} span={colSpan} >
+                    {fields[key]}
+                  </Col>
+                )
+              })}
+            </Row>
             <div className="w-form-item-center">
               {renderBtn({ canSubmit, resetForm })}
             </div>
