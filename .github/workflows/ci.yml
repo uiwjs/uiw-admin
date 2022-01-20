@@ -60,13 +60,6 @@ jobs:
       env:
         CI: false
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: heroku
-        publish_dir: ./examples/base/build
-    
     - run: npm run www:build
 
     - name: Deploy
