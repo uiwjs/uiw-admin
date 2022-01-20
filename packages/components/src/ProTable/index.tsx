@@ -6,7 +6,8 @@ import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 
-const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [], searchBtns, ...tableProps }) => {
+const ProTabel: React.FC<ProtableProps> = (props) => {
+  const { table, columns, operateButtons = [], searchBtns, onBeforeSearch, ...tableProps } = props;
   const {
     key,
     data,
@@ -52,18 +53,17 @@ const ProTabel: React.FC<ProtableProps> = ({ table, columns, btns = [], searchBt
     <StoreCtx.Provider value={store}>
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
-        <BaseForm columns={columns} searchBtns={searchBtns} />
+        <BaseForm columns={columns} searchBtns={searchBtns} onBeforeSearch={onBeforeSearch} />
         {/* 操作区域 */}
-        {btns.length > 0 && (
+        {operateButtons.length > 0 && (
           <div style={{ background: '#fff', padding: 10 }}>
-            {btns.map((btn: any, idx) => (
+            {operateButtons.map((btn: any, idx: number) => (
               <Button key={idx.toString()} style={{ marginRight: 5 }} {...btn}>
                 {btn.label}
               </Button>
             ))}
           </div>
         )}
-
         {/* 列表组件 */}
         <Table columns={columns} {...tableProps} />
       </Skeleton>

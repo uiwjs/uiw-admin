@@ -119,7 +119,6 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  })
           ? formatData(data).data
           : data?.data || prevData?.data
       }
-      // style={{overflowX: 'scroll'}}
       footer={
         <Pagination
           current={pageIndex}

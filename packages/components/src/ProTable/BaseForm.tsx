@@ -37,7 +37,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
   let { updateStore, onSearch } = store as any;
 
-  const { columns, searchBtns } = props;
+  const { columns, searchBtns, onBeforeSearch } = props;
   // 获取表单配置
   const getFormFields = useMemo(() => {
     const fields: Fields = {};
@@ -82,7 +82,14 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
-        onFormSearch({ initial, current });
+        // 搜索前校验
+        if (onBeforeSearch && onBeforeSearch({initial, current})) {
+          onFormSearch({ initial, current });
+        } else {
+          onFormSearch({ initial, current });
+        }
+        
+        
       }}
       onSubmitError={(error) => {
         if (error.filed) {

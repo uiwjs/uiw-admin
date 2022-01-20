@@ -35,7 +35,7 @@ export default function Demo() {
 
   return (
     <ProTable
-       btns={[
+      operateButtons={[
         { label: '新增', type: 'primary' },
       ]}
       // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
@@ -45,6 +45,16 @@ export default function Demo() {
       //   }},
       //   { label: '点我', onClick: () => null},
       // ]}
+      onBeforeSearch={({ initial, current }) => {
+        const errorObj: any = {};
+        if (!current.name) errorObj.name = '名字不能为空！';
+        if (Object.keys(errorObj).length > 0) {
+          const err: any = new Error();
+          err.filed = errorObj;
+          throw err;
+        }
+        return true;
+      }}
       table={table}
       columns={[
         {
@@ -144,9 +154,10 @@ export default function Demo() {
 | 参数 | 说明	| 类型	| 默认值 |
 | --  | -- | -- | -- |
 | columns | 与uiw table colunms用法一致 必传	| ColumnProps[]		| [] |
-| btns | 操作栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
+| operateButtons | 操作栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
 | searchBtns | 搜索栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
 | table | useTable返回值	| Object 必传		|  |
+| onBeforeSearch | 查询前生命周期，可用于表单验证，返回true 继续查询	| ({initial, current}) => Boolean 	|  |
 
 其余属性与uiw Table一致
 
