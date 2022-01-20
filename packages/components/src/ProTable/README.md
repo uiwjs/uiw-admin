@@ -130,7 +130,9 @@ export default function Demo() {
 
 | 参数 | 说明	| 类型	| 默认值 |
 | --  | -- | -- | -- |
-| columns | 与uiw table colunms用法一致	| ColumnProps[]		| [] |
+| columns | 与uiw table colunms用法一致 必传	| ColumnProps[]		| [] |
+| btns | 操作栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
+| table | useTable返回值	| Object 必传		|  |
 
 ### columns props
 
