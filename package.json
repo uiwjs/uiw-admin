@@ -1,5 +1,4 @@
 {
-  "name": "uiw-admin",
   "version": "4.0.0",
   "private": true,
   "description": "UIW Admin Project",
@@ -36,6 +35,9 @@
     "build": "npm run build:pk ",
     "build:website": "lerna exec --scope @examples/base -- npm run build",
     "----------": "-------------",
+    "www": "lerna exec --scope website -- npm run start",
+    "www:build": "lerna exec --scope website -- npm run build",
+    "-----www-doc-end-----": "-------website-doc------",
     "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
     "publish": "npm run build && lerna publish from-package",
     "start": "lerna exec --scope @examples/base npm run start",

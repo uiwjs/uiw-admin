@@ -1,0 +1,89 @@
+[
+  {
+    "label": "快速开始",
+    "path": "/quick-start"
+  },
+  {
+    "divider": true,
+    "label": "示例"
+  },
+  {
+    "label": "Example 示例",
+    "path": "/example"
+  },
+  {
+    "divider": true,
+    "label": "组件"
+  },
+  {
+    "label": "Components",
+    "path": "/components"
+  },
+  {
+    "divider": true,
+    "label": "依赖"
+  },
+  {
+    "label": "Authorized",
+    "path": "/authorized"
+  },
+  {
+    "label": "Basic Layouts",
+    "path": "/basic-layouts"
+  },
+  {
+    "label": "Config",
+    "path": "/config"
+  },
+  {
+    "label": "Document Title",
+    "path": "/document-title"
+  },
+  {
+    "label": "Exceptions",
+    "path": "/exceptions"
+  },
+  {
+    "label": "Layout Tabs",
+    "path": "/layout-tabs"
+  },
+  {
+    "label": "Models",
+    "path": "/models"
+  },
+  {
+    "label": "Plugins",
+    "path": "/plugins"
+  },
+  {
+    "label": "Router Control",
+    "path": "/router-control"
+  },
+  {
+    "label": "User Login",
+    "path": "/user-login"
+  },
+  {
+    "label": "Utils",
+    "path": "/utils"
+  },
+  {
+    "divider": true,
+    "label": "相关连接"
+  },
+  {
+    "label": "UIW 组件库",
+    "target": "__blank",
+    "path": "https://uiwjs.github.io/"
+  },
+  {
+    "label": "KKT",
+    "target": "__blank",
+    "path": "https://kktjs.github.io/kkt"
+  },
+  {
+    "label": "源码 Github 仓库",
+    "target": "__blank",
+    "path": "https://github.com/uiwjs/uiw-admin"
+  }
+]

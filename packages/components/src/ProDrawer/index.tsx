@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Drawer, Button, DrawerProps, Row, Col } from 'uiw';
+import { Drawer, Button, DrawerProps, ButtonProps } from 'uiw';
 
 /**
  * ProDrawer 组件继承于https://uiwjs.github.io/#/components/drawer
@@ -12,13 +12,9 @@ import { Drawer, Button, DrawerProps, Row, Col } from 'uiw';
  * @returns
  */
 
-interface ButtonItemsProps {
+interface ButtonItemsProps extends ButtonProps {
   label?: string;
-  onPress?: () => void;
   show?: boolean;
-  size?: 'large' | 'default' | 'small';
-  type?: 'primary' | 'success' | 'warning' | 'danger' | 'light' | 'dark' | 'link';
-  loading?: boolean;
   width?: number
 }
 
@@ -41,21 +37,9 @@ function ProDrawer(props: ProDrawerProps) {
       bodyStyle={{ padding: '0 10px 45px 10px' }}
       {...others}
       footer={
-        buttons.map(
-          ({ label = '', onPress, show = true, loading, type = "primary", width = 60, size = "default" }, idx) =>
-            show && (
-              <Button
-                style={{ width: width }}
-                key={idx}
-                type={type}
-                size={size}
-                onClick={onPress && onPress}
-                loading={loading}
-              >
-                {label}
-              </Button>
-            )
-        )
+        buttons.map(({ label = '', show = true, ...others }: any, idx) => (
+          show && <Button key={idx} {...others}>{label}</Button>
+        ))
       }
     >
       {children}

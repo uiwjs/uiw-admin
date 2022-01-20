@@ -1,21 +1,15 @@
 import React from 'react';
-import { ProDrawer } from '@uiw-admin/components'
-import { Form, Input, Select, Row, Col, Button, Notify } from 'uiw'
+import { ProDrawer, ProForm } from '@uiw-admin/components'
+import { Notify, FileInput } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState, Dispatch } from '@uiw-admin/models';
 import { insert, update } from '../../../servers/demo'
+import { items } from './items'
 import useSWR from 'swr'
 
 interface DetailProps {
   updateData?: any
 }
-
-const options = [
-  { value: 1, label: '苹果' },
-  { value: 2, label: '西瓜' },
-  { value: 3, label: '香蕉' },
-  { value: 4, label: '东北大冻梨' },
-]
 
 const Detail = (props: DetailProps) => {
   const { updateData } = props
@@ -36,6 +30,8 @@ const Detail = (props: DetailProps) => {
     },
   })
 
+  const dataSource: any = items(queryInfo, { isView })
+
   return (
     <ProDrawer
       width={800}
@@ -43,74 +39,33 @@ const Detail = (props: DetailProps) => {
       visible={drawerVisible}
       onClose={onClose}
     >
-      <Form
+      <ProForm
         title="基础信息"
-        onSubmit={({ initial, current }) => mutate()}
-        onChange={({ initial, current }) => updateData({ queryInfo: { ...queryInfo, current } })}
-        fields={{
-          firstName: {
-            labelClassName: 'fieldLabel',
-            labelStyle: { width: 60 },
-            inline: true,
-            label: '姓氏',
-            initialValue: queryInfo?.firstName,
-            children: <Input disabled={isView} />
-          },
-          lastName: {
-            labelClassName: 'fieldLabel',
-            labelStyle: { width: 60 },
-            initialValue: queryInfo?.lastName,
-            inline: true,
-            label: '名字',
-            children: <Input disabled={isView} />
-          },
-          email: {
-            labelClassName: 'fieldLabel',
-            labelStyle: { width: 60 },
-            validator: (currentValue) => {
-              return currentValue && currentValue.length < 2 ? 'Password must be 8+ characters' : null;
-            },
-            initialValue: queryInfo?.email,
-            inline: true,
-            label: 'Email',
-            children: <Input disabled={isView} />
-          },
-          select: {
-            labelClassName: 'fieldLabel',
-            labelStyle: { width: 60 },
-            initialValue: queryInfo?.select,
-            inline: true,
-            label: '选择器',
-            children: (
-              <Select disabled={isView}>
-                <Select.Option>请选择</Select.Option>
-                {options.map(({ label, value }) => <Select.Option value={value} key={value}>{label}</Select.Option>)}
-              </Select>
-            ),
-          },
+        onSubmit={(initial, current) => {
+          const errorObj: any = {};
+          if (!current?.lastName) {
+            errorObj.lastName = '名字不能为空';
+          }
+          if (Object.keys(errorObj).length > 0) {
+            const err: any = new Error();
+            err.filed = errorObj;
+            Notify.error({ title: '提交失败！' });
+            throw err;
+          }
+          mutate()
         }}
-      >
-        {({ fields, state, canSubmit }) => {
-          return (
-            <div>
-              <Row gutter={10} style={{ marginBottom: 10 }}>
-                <Col>{fields.firstName}</Col>
-                <Col>{fields.lastName}</Col>
-                <Col>{fields.email}</Col>
-              </Row>
-              <Row gutter={10}>
-                <Col>{fields.select}</Col>
-              </Row>
-              {!isView && (
-                <Row gutter={10}>
-                  <Col />
-                  <Col fixed align="bottom"><Button disabled={!canSubmit()} type="primary" htmlType="submit">提交</Button></Col>
-                </Row>
-              )}
-            </div>
-          )
-        }}
-      </Form>
+        btns={[
+          {
+            btnType: "submit",
+            label: "提交表单",
+            type: "primary"
+          }
+        ]}
+        renderWidgetsList={{ fileInput: FileInput }}
+        // 更新表单的值
+        onChange={(initial: any, current: any) => updateData({ queryInfo: { ...queryInfo, ...current } })}
+        formDatas={dataSource}
+      />
     </ProDrawer>
   )
 }
