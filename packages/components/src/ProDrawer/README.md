@@ -5,7 +5,7 @@
 ```js
 import { ProDrawer } from '@uiw-admin/components'
 import React, { useState } from 'react';
-import { Button } from 'antd'
+import { Button } from 'uiw'
 const Demo = () => {
   const [ drawerVisible,setDrawerVisible ] = useState( [] )
   const [ isView ] = useState( false )
