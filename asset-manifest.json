@@ -11,7 +11,7 @@
     "858.js": "/858.js",
     "529.js": "/529.js",
     "static/css/529.297f3348.chunk.css": "/static/css/529.297f3348.chunk.css",
-    "80.js": "/80.js",
+    "259.js": "/259.js",
     "403.svg": "/c017a98ef237a66df982.svg",
     "head.png": "/36447999380a95380e00.png",
     "500.svg": "/3610ef9bee10a27a1f14.svg",
@@ -29,7 +29,7 @@
     "858.js.map": "/858.js.map",
     "529.js.map": "/529.js.map",
     "529.297f3348.chunk.css.map": "/static/css/529.297f3348.chunk.css.map",
-    "80.js.map": "/80.js.map"
+    "259.js.map": "/259.js.map"
   },
   "entrypoints": [
     "main.js",
