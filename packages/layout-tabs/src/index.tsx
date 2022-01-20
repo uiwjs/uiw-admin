@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 
 interface LayoutTabsProps {
+  /** 子集路由 */
   routes: RoutersProps[]
 }
 const LayoutTabs = (props: LayoutTabsProps) => {
