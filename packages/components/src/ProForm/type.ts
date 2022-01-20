@@ -1,4 +1,4 @@
-import { ButtonProps } from 'uiw';
+import { ButtonProps,DescriptionsProps } from 'uiw';
 import { commonWidgetsList } from './widgets'
 
 export type Fields = {
@@ -26,6 +26,8 @@ export interface FormItemsProps {
   hide?: boolean;
   /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
   span?: string;
+  /** 只读模式下包含列的数量 参考Descriptions.Item	*/
+  readSpan?:number
   /** 是否必填 */
   required?: boolean
 }
@@ -38,8 +40,12 @@ export interface ProFormProps {
   buttonsContainer?: React.CSSProperties;
   title?: any;
   formType?: 'collapse' | 'card';
-  showSaveButton?:boolean;
-  showResetButton?:boolean;
-  saveButtonProps?:ButtonProps;
-  resetButtonProps?:ButtonProps | any;
+  showSaveButton?: boolean;
+  showResetButton?: boolean;
+  saveButtonProps?: ButtonProps;
+  resetButtonProps?: ButtonProps | any;
+  /** 是否是只读模式模式 */
+  readOnly?: boolean
+   /** 只读模式 参考Descriptions参数 */
+  readOnlyProps?:DescriptionsProps
 }

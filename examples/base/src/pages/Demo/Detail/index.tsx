@@ -79,6 +79,8 @@ const Detail = (props: DetailProps) => {
         }
         formDatas={dataSource}
         submitRef={baseRef}
+        readOnly={isView}
+        readOnlyProps={{ column: 2 }}
       />
     </ProDrawer>
   );

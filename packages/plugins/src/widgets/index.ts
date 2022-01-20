@@ -1,5 +1,5 @@
 /*
- * @Description: 简单版本的 自动加载 model
+ * @Description: 配合ProForm 挂载自定义组件
  */
 import fs from 'fs';
 import path from 'path';

@@ -6,7 +6,7 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     initialValue: queryInfo?.firstName,
     widgetProps: { disabled: isView },
     span: '24',
-    required:true
+    required: true
   },
   {
     label: '名字',
@@ -14,7 +14,7 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     widget: 'input',
     initialValue: queryInfo?.lastName,
     widgetProps: { disabled: isView },
-    required:true
+    required: true
   },
   {
     label: '邮箱',
@@ -22,7 +22,7 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     widget: 'input',
     initialValue: queryInfo?.email,
     widgetProps: { disabled: isView },
-    required:true
+    required: true
   },
   {
     label: '水果',
@@ -36,11 +36,33 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     ],
     initialValue: queryInfo?.select,
     widgetProps: { disabled: isView },
-    required:true
+    required: true
   },
   {
     label: '自定义组件',
     key: 'id1',
     widget: 'slider',
+    initialValue: 56,
   },
+  {
+    label: '详细地址',
+    key: 'detailAddress',
+    widget: 'textarea',
+    initialValue: '蟠龙路',
+  },
+  {
+    label: '男',
+    key: 'switch',
+    widget: 'switch',
+    initialValue: true,
+  },
+  {
+    label: '性别',
+    widget: 'radio',
+    option: [
+      { label: '男', value: 'man' },
+      { label: '女', value: 'girl' },
+    ],
+    initialValue: 'man',
+  }
 ];

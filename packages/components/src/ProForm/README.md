@@ -59,7 +59,8 @@ const Demo = () => {
 | title | 标题	  | string 或 React.ReactNode		| - |
 | formType | 表单类型	  | 'collapse' 或 'card'		| 'card' |
 | submitRef | 获取表单提交事件ref	  |  any		| - |
-
+| readOnly | 是否是只读模式模式	  |  boolean		| false |
+| readOnlyProps | 只读模式 参考Descriptions参数	  |  DescriptionsProps		| {} |
 
 ## FormItemsProps
 | 参数 | 说明	| 类型	| 默认值 |
@@ -73,6 +74,8 @@ const Demo = () => {
 | hide| 是否显示| boolean| true |
 | span| 可以通过指定 24 列中每列的宽度来创建基本网格系统| string| '8' |
 | required| 是否必填| boolean | - |
+| readSpan| 只读模式下包含列的数量 参考Descriptions.Item| number | 1 |
+
 
 ## FormItemsOptionsProps
 | 参数 | 说明	| 类型	| 默认值 |
