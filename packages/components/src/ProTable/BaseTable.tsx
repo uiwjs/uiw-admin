@@ -16,7 +16,7 @@ interface BaseTableProps {
   columns: TableColumns[];
 }
 
-const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
+const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  }) => {
   const [pageIndex, setPageIndex] = useState(1);
 
   const [prevData, setPrevData] = useState({
@@ -26,7 +26,7 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
 
   const store = useStore();
 
-  let { formatData, updateStore, query, key, searchValues } = store as any;
+  let { formatData, updateStore, query, key, searchValues, SWRConfiguration = {} } = store as any;
 
   // 表单默认值
   const defaultValues = useMemo(() => {
@@ -40,7 +40,6 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
 
     return defaultSearchValues;
   }, [JSON.stringify(columns)]);
-
   // 是否首次调取数据
   const isFirstMountRef = useRef(false);
   // 格式化接口查询参数
@@ -67,17 +66,19 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
     {
       // revalidateOnMount: false,
       revalidateOnFocus: false,
+      ...SWRConfiguration
     },
   );
 
   // 查询
   const onSearch = useCallback(async () => {
-    setPageIndex(1);
-  }, []);
+    setPageIndex(1)
+  }, [setPageIndex]);
+
   // 分页
   const onPageChange = useCallback((page) => {
     setPageIndex(page);
-  }, []);
+  }, [setPageIndex]);
 
   useEffect(() => {
     // 获取表单默认值
@@ -92,7 +93,7 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
       data: data?.data,
       total: data?.total,
       loading: !data || isValidating,
-      onSearch,
+      onSearch
     };
 
     if (!isFirstMountRef.current) {
@@ -108,7 +109,7 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
     if (data) {
       setPrevData(data);
     }
-  }, [JSON.stringify(data), isValidating, onSearch, JSON.stringify(columns)]);
+  }, [JSON.stringify(data), isValidating,  JSON.stringify(columns)]);
 
   return (
     <Table
@@ -134,6 +135,7 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns }) => {
           }}
         />
       }
+      {...tableProps}
     />
   );
 };

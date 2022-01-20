@@ -27,11 +27,24 @@ export default function Demo() {
         data: searchValues,
       };
     },
+     // swr options
+    SWRConfiguration: {
+      revalidateOnFocus: false
+    }
   });
 
   return (
     <ProTable
-      btns={[{ label: '新增', type: 'primary' }]}
+       btns={[
+        { label: '新增', type: 'primary' },
+      ]}
+      // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
+      // searchBtns={[
+      //   { label: '搜索', type: 'primary',  htmlType: 'submit',  onClick: () => {
+      //     table.onSearch()
+      //   }},
+      //   { label: '点我', onClick: () => null},
+      // ]}
       table={table}
       columns={[
         {
@@ -132,7 +145,10 @@ export default function Demo() {
 | --  | -- | -- | -- |
 | columns | 与uiw table colunms用法一致 必传	| ColumnProps[]		| [] |
 | btns | 操作栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
+| searchBtns | 搜索栏按钮集合，属性与uiw button一致	| ButtonProps[]		| [] |
 | table | useTable返回值	| Object 必传		|  |
+
+其余属性与uiw Table一致
 
 ### columns props
 
@@ -162,6 +178,7 @@ export default function Demo() {
 | --  | -- | -- | -- |
 | formatData | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式	| (data) => {total: 10, data: []}	| - |
 | query | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据	|  (pageIndex: number, searchValues: any)	=> {page:  pageIndex, pageSize: 10, searchValues}	| {} |
+| SWRConfiguration | swr配置	| SWRConfiguration	| {} |
 
 
 ### response

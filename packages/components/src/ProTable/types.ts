@@ -1,8 +1,10 @@
-import { ButtonProps, TableColumns } from 'uiw';
+import { ButtonProps, TableColumns, TableProps } from 'uiw';
+import { SWRConfiguration } from 'swr';
 
-export interface ProtableProps {
+export interface ProtableProps extends TableProps {
   table: useTableData;
   btns?: Array<ButtonProps>;
+  searchBtns?: Array<ButtonProps>;
   columns: FormCol[];
 }
 
@@ -25,6 +27,7 @@ export interface FormCol extends TableColumns {
 
 export interface BaseFormProps {
   columns: FormCol[];
+  searchBtns?: Array<ButtonProps>;
 }
 
 export type Fields = {
@@ -44,6 +47,7 @@ export type Params = {
   ) => {
     [key: string]: any;
   };
+  SWRConfiguration? : SWRConfiguration
 };
 
 export interface useTableData extends Params {
