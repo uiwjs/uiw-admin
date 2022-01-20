@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
-import { Collapse, Card,ButtonProps } from 'uiw';
+import { Collapse, Card, ButtonProps } from 'uiw';
 import FormDom from './formdom'
-import { getFormFields,commonWidgetsList } from './widgets'
+import { getFormFields, commonWidgetsList } from './widgets'
 import './style/form-item.less';
 
 export type Fields = {
@@ -11,9 +11,7 @@ export type Fields = {
 export interface BtnProps extends ButtonProps {
   label?: string;
   btnType: 'submit' | 'reset' | 'other';
-  onPress?: () => void;
   show?: boolean;
-  width?: number
 }
 
 export interface FormItemsOptionsProps {
@@ -36,12 +34,12 @@ export interface FormItemsProps {
   widgetProps?: any;
   /** 是否显示 */
   hide?: boolean;
-  full?:boolean;
+  /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
+  span?: string;
 }
 
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
-  rowColspan?: number;
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
   btns?: BtnProps[]
@@ -51,7 +49,7 @@ export interface ProFormProps {
 
 function ProForm(props: ProFormProps) {
 
-  const { formDatas = [], title = "", formType = 'card'} = props
+  const { formDatas = [], title = "", formType = 'card' } = props
 
   // 获取表单配置
   const formfields = useMemo(() => getFormFields(formDatas), [formDatas]);

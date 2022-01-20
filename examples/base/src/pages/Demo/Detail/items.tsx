@@ -5,7 +5,7 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
     widget: 'input',
     initialValue: queryInfo?.firstName,
     widgetProps: { disabled: isView },
-    hide: true
+    span: '24'
   },
   {
     label: '名字',

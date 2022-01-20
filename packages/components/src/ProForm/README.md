@@ -9,7 +9,6 @@ import { Button } from 'antd'
 const Demo = () => {
   const [ isView ] = useState( false )
     return (
-     <div>
        <ProForm
          formType="card"
          title="基础信息"
@@ -40,7 +39,6 @@ const Demo = () => {
              }
            ]}
        />
-     </div>
   );
 }
 ```
@@ -51,15 +49,13 @@ const Demo = () => {
 interface ProFormProps {
   /** 表单项集合 */
   formDatas?: FormItemsProps[];
-  /** 一行几个 */
-  rowColspan?: number;
   /** 提交表单回调 需配合btns */
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   /** 表单值变化回调 */
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
-  /** 表单按钮 */
+  /** 表单按钮 btnType:提交按钮(继承form表单submit)｜表单重置按钮(可重置表单值) ｜ 其他按钮 */
   btns?: Arrary<{label?: string; btnType: 'submit' | 'reset' | 'other'; show?: boolean;}&ButtonProps>
-  /** 标题 */
+  /** 表单标题 */
   title?: string | React.ReactNode | any;
   /** 表单类型 */
   formType?: 'collapse' | 'card';
@@ -85,16 +81,18 @@ interface FormItemsProps {
   | any;
   /** 表单元素值，可以是默认值 */
   initialValue?: any | any[];
-  /** 数据化选项内容, type为 radio、checkbox、select 生效 */
-  option?: {
-  label: string;
-  value: string | number;
-  disabled?: boolean;
-}
   /** 可参考uiw/表单组件api */
   widgetProps?: any;
   /** 是否显示 */
   hide?: boolean;
+  /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
+  span?: string;
+  /** 数据化选项内容, type为 radio、checkbox、select 生效 */
+  option?: {
+    label: string;
+    value: string | number;
+    disabled?: boolean;
+  }
 }
 
 ```

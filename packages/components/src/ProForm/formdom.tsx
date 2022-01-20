@@ -8,7 +8,6 @@ function FormDom({
   onSubmit,
   onChange,
   btns = [],
-  rowColspan = 3,
 }: ProFormProps & { formfields: Record<string, FormFieldsProps<{}>> | undefined }) {
 
   const renderBtn = ({ canSubmit, resetForm }: { canSubmit: () => boolean, resetForm: () => void }) => {
@@ -46,7 +45,8 @@ function FormDom({
           <React.Fragment>
             <Row gutter={10}>
               {Object.keys(fields).map((key) => {
-                const colSpan = 24 / rowColspan
+                const colSpan = fields[key]?.props?.span || '8'
+                console.log('colSpan',fields[key])
                 return (
                   <Col key={key} span={colSpan} >
                     {fields[key]}
