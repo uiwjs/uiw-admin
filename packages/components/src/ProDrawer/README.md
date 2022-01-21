@@ -7,7 +7,7 @@ import { ProDrawer } from '@uiw-admin/components'
 import React, { useState } from 'react';
 import { Button } from 'uiw'
 const Demo = () => {
-  const [ drawerVisible,setDrawerVisible ] = useState( [] )
+  const [ drawerVisible,setDrawerVisible ] = useState( false )
   const [ isView ] = useState( false )
     return (
      <div>
@@ -17,10 +17,10 @@ const Demo = () => {
         onClose={()=>setDrawerVisible(false)}
         width={800}
         buttons={[
-          { label: '取消', onPress: ()=>setDrawerVisible(false) },
+          { label: '取消', onClick: ()=>setDrawerVisible(false) },
           {
             label: '保存',
-            onPress: ()=>{},
+            onClick: ()=>{},
             show: !isView,
           },
         ]}
@@ -53,7 +53,6 @@ const Demo = () => {
 | 参数       | 说明                                                   | 类型                     | 默认值 |
 | :--------- | :--------------------------------------------------- | :------------------------| :----- |
 | label      | 按钮文本   | string                   |   ''   |
-| onPress  | 按钮点击事件          | ()=>void  |   -    |
 | show      | 	是否展示按钮       | boolean	 |  true
 
 
