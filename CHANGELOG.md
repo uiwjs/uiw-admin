@@ -18,6 +18,9 @@
   - 🌟 `ProTable`： 增加onBeforeSearch回调
   - 🌟 `ProTable`： 增加searchButtons属性配置搜索区域按钮
   
+- @uiw-admin/plugins
+  - 🌟 `RoutesWebpackPlugin` 新增路由加载插件
+  
 ## 5.0.5
 
 - @uiw-admin/plugins
