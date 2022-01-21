@@ -1,31 +1,21 @@
-export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
+import { formatter } from "uiw";
+export const items = (queryInfo: any) => [
   {
-    label: '姓氏',
-    key: 'firstName',
+    label: '输入框',
+    key: 'input',
     widget: 'input',
-    initialValue: queryInfo?.firstName,
-    widgetProps: { disabled: isView },
-    span: '24',
+    initialValue: queryInfo?.input,
+    widgetProps: {},
     required: true
   },
   {
-    label: '名字',
-    key: 'lastName',
-    widget: 'input',
-    initialValue: queryInfo?.lastName,
-    widgetProps: { disabled: isView },
-    required: true
+    label: '多行文本输入框',
+    key: 'textarea',
+    widget: 'textarea',
+    initialValue: queryInfo?.textarea,
   },
   {
-    label: '邮箱',
-    key: 'email',
-    widget: 'input',
-    initialValue: queryInfo?.email,
-    widgetProps: { disabled: isView },
-    required: true
-  },
-  {
-    label: '水果',
+    label: '选择器',
     key: 'select',
     widget: 'select',
     option: [
@@ -35,34 +25,55 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
       { value: 4, label: '东北大冻梨' },
     ],
     initialValue: queryInfo?.select,
-    widgetProps: { disabled: isView },
-    required: true
   },
   {
-    label: '自定义组件',
-    key: 'id1',
-    widget: 'slider',
-    initialValue: 56,
-  },
-  {
-    label: '详细地址',
-    key: 'detailAddress',
-    widget: 'textarea',
-    initialValue: '蟠龙路',
-  },
-  {
-    label: '男',
+    label: '开关',
     key: 'switch',
     widget: 'switch',
-    initialValue: true,
+    initialValue: queryInfo?.switch,
   },
   {
-    label: '性别',
+    label: '单选框',
     widget: 'radio',
+    key: "radio",
     option: [
       { label: '男', value: 'man' },
       { label: '女', value: 'girl' },
     ],
-    initialValue: 'man',
-  }
+    initialValue: queryInfo?.radio,
+  },
+  {
+    label: '多选框',
+    widget: 'checkbox',
+    key: "checkbox",
+    option: [
+      { label: '四川菜', value: 'sichuan' },
+      { label: '湖北菜', value: 'hubei' },
+    ],
+    initialValue: queryInfo?.checkbox,
+  },
+  {
+    label: '年月日',
+    key: 'dateInput',
+    widget: 'dateInput',
+    initialValue: queryInfo.dateInput && formatter(new Date(queryInfo.dateInput)),
+  },
+  {
+    label: '年月',
+    key: 'monthPicker',
+    widget: 'monthPicker',
+    initialValue: queryInfo.monthPicker && formatter(new Date(queryInfo.monthPicker)),
+  },
+  {
+    label: '时分秒',
+    key: 'timePicker',
+    widget: 'timePicker',
+    initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
+  },
+  {
+    label: '自定义组件',
+    key: 'slider',
+    widget: 'slider',
+    initialValue: queryInfo?.slider,
+  },
 ];

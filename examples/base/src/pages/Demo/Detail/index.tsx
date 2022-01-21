@@ -11,13 +11,10 @@ interface DetailProps {
   updateData?: any;
 }
 
-const Detail = (props: DetailProps) => {
-  const { updateData } = props;
+const Detail = ({ updateData }: DetailProps) => {
   const baseRef = useRef<any>()
   const dispatch = useDispatch<Dispatch>();
-  const {
-    demo: { drawerVisible, tableType, queryInfo, isView },
-  } = useSelector((state: RootState) => state);
+  const { demo: { drawerVisible, tableType, queryInfo, isView } } = useSelector((state: RootState) => state);
 
   const onClose = () => dispatch({ type: 'demo/clean' });
 
@@ -38,8 +35,6 @@ const Detail = (props: DetailProps) => {
     },
   );
 
-  const dataSource: any = items(queryInfo, { isView });
-
   return (
     <ProDrawer
       width={800}
@@ -53,12 +48,16 @@ const Detail = (props: DetailProps) => {
           label: "保存",
           type: "danger",
           style: { width: 80 },
+          show: !isView,
           onClick: () => baseRef?.current?.click()
         }
       ]}
     >
       <ProForm
         title="基础信息"
+        submitRef={baseRef}
+        readOnly={isView}
+        readOnlyProps={{ column: 2 }}
         onSubmit={(initial, current) => {
           const errorObj: any = {};
           if (!current?.lastName) {
@@ -77,10 +76,7 @@ const Detail = (props: DetailProps) => {
         onChange={(initial: any, current: any) =>
           updateData({ queryInfo: { ...queryInfo, ...current } })
         }
-        formDatas={dataSource}
-        submitRef={baseRef}
-        readOnly={isView}
-        readOnlyProps={{ column: 2 }}
+        formDatas={items(queryInfo) as any}
       />
     </ProDrawer>
   );

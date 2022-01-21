@@ -2,7 +2,7 @@ import React from 'react';
 import { Fields } from '../type';
 import {
   Input,
-  Checkbox,
+  // Checkbox,
   Switch,
   Textarea,
   DateInput,
@@ -12,6 +12,7 @@ import {
 } from 'uiw';
 import Radio from '../../ProTable/widgets/Radio';
 import Select from '../../ProTable/widgets/Select';
+import CheckBox from './CheckBox';
 /**  @@ 指向 /src/.uiw 目录 自定义表单组件列表 */
 // @ts-ignore
 import { customWidgetsList } from '@/widgets';
@@ -19,7 +20,7 @@ import { customWidgetsList } from '@/widgets';
 export const commonWidgetsList: Fields = {
   input: Input,
   radio: Radio,
-  checkbox: Checkbox,
+  checkbox: CheckBox,
   switch: Switch,
   select: Select,
   searchSelect: SearchSelect,

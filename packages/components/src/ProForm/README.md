@@ -2,31 +2,31 @@
 
 <!--ProForm-->
 
+### 基本使用(与uiw/form使用保持一致)
 ```js
 import { ProForm } from '@uiw-admin/components'
 import React, { useState } from 'react';
 import { Button } from 'uiw'
 const Demo = () => {
-  const [ isView ] = useState( false )
     return (
        <ProForm
          formType="card"
          title="基础信息"
-         buttons={[
-            {
-             label: "提交表单",
-             btnType: "submit",
-             type: "danger",
-             show: !isView
-           },
-           {
-             label: "重置表单",
-             btnType: "reset",
-             type: "danger",
-             show: !isView
-           }
-         ]}
-         onSubmit={(initial: any, current: any) => {} )}
+         showSaveButton
+         showResetButton
+         onSubmit={(initial, current) => {
+          const errorObj: any = {};
+          if (!current?.lastName) {
+            errorObj.lastName = '名字不能为空';
+          }
+          if (Object.keys(errorObj).length > 0) {
+            const err: any = new Error();
+            err.filed = errorObj;
+            Notify.error({ title: '提交失败！' });
+            throw err;
+          }
+          // 调用请求接口
+        }}
          onChange={(initial: any, current: any) => {} )}
          formDatas={
            [
@@ -35,7 +35,81 @@ const Demo = () => {
                key: 'firstName',
                widget: 'input',
                initialValue: '',
-               widgetProps: { disabled: isView }
+               widgetProps: {}
+               // 单独一行
+               span:"24"
+             }
+           ]}
+       />
+  );
+}
+```
+
+### 通过submitRef进行表单提交
+```js
+import { ProForm } from '@uiw-admin/components'
+import React, { useState,useRef } from 'react';
+import { Button } from 'uiw'
+const Demo = () => {
+
+  const submitRef = useRef<any>()
+
+    return (
+      <React.Fragment>
+       <ProForm
+         submitRef={submitRef}
+         title="基础信息"
+         onSubmit={(initial, current) => {
+          const errorObj: any = {};
+          if (!current?.lastName) {
+            errorObj.lastName = '名字不能为空';
+          }
+          if (Object.keys(errorObj).length > 0) {
+            const err: any = new Error();
+            err.filed = errorObj;
+            Notify.error({ title: '提交失败！' });
+            throw err;
+          }
+          // 调用请求接口
+        }}
+         formDatas={
+           [
+             {
+               label: '姓氏',
+               key: 'firstName',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {}
+             }
+           ]}
+       />
+       <Button onClick={()=>submitRef?.current?.click()}>保<Button>
+      </React.Fragment>
+  );
+}
+```
+
+### 只读模式
+```js
+import { ProForm } from '@uiw-admin/components'
+import React, { useState } from 'react';
+const Demo = () => {
+  const [ isView ] = useState( true )
+    return (
+       <ProForm
+         readOnly={isView}
+         title="基础信息"
+         // 只读模式下调整 一行的 DescriptionItems 数量,其余参数参考uiw/Descriptions
+         readOnlyProps={{ columns:3 }}
+         formDatas={
+           [
+             {
+               label: '姓氏',
+               key: 'firstName',
+               widget: 'input',
+               initialValue: '',
+               // 只读模式下单独一行
+               readSpan:3
              }
            ]}
        />
@@ -72,9 +146,9 @@ const Demo = () => {
 | option| 数据化选项内容, type为 radio、checkbox、select 生效| FormItemsOptionsProps[]| - |
 | widgetProps| 表单组件其余参数,参考uiw表单组件| any|- |
 | hide| 是否显示| boolean| true |
-| span| 可以通过指定 24 列中每列的宽度来创建基本网格系统| string| '8' |
-| required| 是否必填| boolean | - |
+| span| 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统| string| '8' |
 | readSpan| 只读模式下包含列的数量 参考Descriptions.Item| number | 1 |
+| required| 是否必填| boolean | - |
 
 
 ## FormItemsOptionsProps
