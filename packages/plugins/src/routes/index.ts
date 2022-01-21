@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
 import createTemp, { getJsonToString } from "./temp"
-
+import chokidar from "chokidar"
 export interface RoutersProps {
   /** 默认跳转 */
   index?: boolean;
@@ -31,13 +31,20 @@ class RoutesWebpackPlugin {
   routesPath = "";
   routes = []
   oldRouterJson = ""
+  cwd = ""
+  cwdConfig = ''
 
   constructor() {
     // 必须要存在这个文件
     this.routesPath = path.resolve(process.cwd(), "config/routes.json");
+    this.cwdConfig = path.resolve(process.cwd(), "config")
+    this.cwd = path.resolve(process.cwd())
   }
   // 生成临时路由
   createTemps = (strs: string) => {
+    if (strs === "[]") {
+      this.oldRouterJson = ""
+    }
     const routeTemp = createTemp(strs)
     fs.writeFileSync(path.resolve(process.cwd(), "src/.uiw/routes.tsx"), routeTemp, { encoding: "utf-8", flag: "w+" })
   }
@@ -80,12 +87,14 @@ class RoutesWebpackPlugin {
     compiler.hooks.afterPlugins.tap("RoutesWebpackPlugin", () => {
       this.checkField();
       if (process.env.NODE_ENV === "development") {
-        if (!fs.existsSync(this.routesPath)) {
-          return;
-        }
-        const watcher = fs.watch(this.routesPath);
-        watcher.on('change', (type, filename) => {
-          if (typeof filename === 'string' && filename === "routes.json") {
+        chokidar.watch(this.cwdConfig, {
+          cwd: this.cwd,
+        }).on('all', (event, path) => {
+          // 编辑 和删除进行处理 其他不进行处理
+          if (event === "unlink" && path === "config/routes.json") {
+            this.createTemps("[]")
+          }
+          if (["change", "add"].includes(event) && path === "config/routes.json") {
             this.checkField()
           }
         });
