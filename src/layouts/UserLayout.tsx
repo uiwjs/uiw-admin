@@ -14,7 +14,7 @@ const UserLayout = () => {
         sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         navigate("/home", { replace: true })
       } else {
-        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+        Notify.error({ title: "错误通知", description: data.error || "请求失败" })
       }
     }}
   />
