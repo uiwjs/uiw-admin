@@ -131,7 +131,7 @@ const Demo = () => {
 | resetButtonProps | 重置按钮api;继承于uiw/button	|  boolean		| false |
 | buttonsContainer  | buttons容器样式(可调整button布局)	| React.CSSProperties		| - |
 | title | 标题	  | string 或 React.ReactNode		| - |
-| formType | 表单类型	  | 'collapse' 或 'card'		| 'card' |
+| formType | 表单类型	  | 'collapse' 或 'card' 或 'pure'		| 'card' |
 | submitRef | 获取表单提交事件ref	  |  any		| - |
 | readOnly | 是否是只读模式模式	  |  boolean		| false |
 | readOnlyProps | 只读模式 参考Descriptions参数	  |  DescriptionsProps		| {} |
