@@ -56,7 +56,7 @@
     "static/js/523.d6037b3d.chunk.js": "/static/js/523.d6037b3d.chunk.js",
     "static/js/909.377e471b.chunk.js": "/static/js/909.377e471b.chunk.js",
     "uiw-vendor.css": "/static/css/uiw-vendor.73ee22da.css",
-    "uiw-vendor.js": "/static/js/uiw-vendor.563d82f4.js",
+    "uiw-vendor.js": "/static/js/uiw-vendor.ba1c25b3.js",
     "babel-standalone-vendor.js": "/static/js/babel-standalone-vendor.4b3e8958.chunk.js",
     "codemirror-vendor.js": "/static/js/codemirror-vendor.b15adf9d.chunk.js",
     "refractor-vendor.js": "/static/js/refractor-vendor.7107b02a.chunk.js",
@@ -120,7 +120,7 @@
     "523.d6037b3d.chunk.js.map": "/static/js/523.d6037b3d.chunk.js.map",
     "909.377e471b.chunk.js.map": "/static/js/909.377e471b.chunk.js.map",
     "uiw-vendor.73ee22da.css.map": "/static/css/uiw-vendor.73ee22da.css.map",
-    "uiw-vendor.563d82f4.js.map": "/static/js/uiw-vendor.563d82f4.js.map",
+    "uiw-vendor.ba1c25b3.js.map": "/static/js/uiw-vendor.ba1c25b3.js.map",
     "babel-standalone-vendor.4b3e8958.chunk.js.map": "/static/js/babel-standalone-vendor.4b3e8958.chunk.js.map",
     "codemirror-vendor.b15adf9d.chunk.js.map": "/static/js/codemirror-vendor.b15adf9d.chunk.js.map",
     "refractor-vendor.7107b02a.chunk.js.map": "/static/js/refractor-vendor.7107b02a.chunk.js.map",
@@ -130,7 +130,7 @@
   },
   "entrypoints": [
     "static/css/uiw-vendor.73ee22da.css",
-    "static/js/uiw-vendor.563d82f4.js",
+    "static/js/uiw-vendor.ba1c25b3.js",
     "static/js/react-vendor.7aee5bc5.js",
     "static/css/main.c102613a.css",
     "static/js/main.3f3dc008.js"
