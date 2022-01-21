@@ -3,7 +3,12 @@
 - bug修复
 - 功能更新
 
-
+## 5.0.6
+- @uiw-admin/components
+  - 🌟 `ProTable`： btns 重命名为 operateButtons
+  - 🌟 `ProTable`： 增加onBeforeSearch回调
+  - 🌟 `ProTable`： 增加searchButtons属性配置搜索区域按钮
+  
 ## 5.0.5
 
 - @uiw-admin/plugins
