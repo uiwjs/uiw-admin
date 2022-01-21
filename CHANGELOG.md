@@ -3,6 +3,10 @@
 - bug修复
 - 功能更新
 
+## 5.0.8
+- @uiw-admin/components
+  - 🌟 `ProForm`：  修复只读模式下dateInput 不支持YYYY-MM-DD HH:mm:ss时间格式 
+  - 🌟 `ProForm`：  只读模式下initialValue支持React.ReactNode类型
 ## 5.0.7
 - @uiw-admin/components
   - 🌟 `ProForm`：  增加只读模式 readOnly&readOnlyPropsreadSpan api 
