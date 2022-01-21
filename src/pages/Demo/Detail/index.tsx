@@ -55,6 +55,7 @@ const Detail = ({ updateData }: DetailProps) => {
     >
       <ProForm
         title="基础信息"
+        formType={isView ? 'pure' : 'card'}
         submitRef={baseRef}
         readOnly={isView}
         readOnlyProps={{ column: 2 }}
@@ -76,7 +77,7 @@ const Detail = ({ updateData }: DetailProps) => {
         onChange={(initial: any, current: any) =>
           updateData({ queryInfo: { ...queryInfo, ...current } })
         }
-        formDatas={items(queryInfo) as any}
+        formDatas={items(queryInfo,isView) as any}
       />
     </ProDrawer>
   );
