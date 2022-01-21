@@ -3,6 +3,11 @@
 - bug修复
 - 功能更新
 
+## 5.0.9 (未发版)
+- @uiw-admin/user-login
+  - 新增`onBefore`和`requestConfig`参数
+
+
 ## 5.0.8
 - @uiw-admin/components
   - 🌟 `ProForm`：  修复只读模式下dateInput 不支持YYYY-MM-DD HH:mm:ss时间格式 
