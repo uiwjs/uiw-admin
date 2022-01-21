@@ -52,6 +52,7 @@ module.exports.selectById = function (req, res) {
       switch: true,
       radio: 'man',
       checkbox: ['sichuan', 'hubei'],
+      dateInputsecond: '2021-1-21 23:59:59',
       dateInput: '2021-1-21',
       monthPicker: '2021-1-21',
       timePicker: '2021-1-21 23:59:59',

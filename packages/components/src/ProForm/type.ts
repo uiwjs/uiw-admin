@@ -39,7 +39,7 @@ export interface ProFormProps {
   submitRef?: any;
   buttonsContainer?: React.CSSProperties;
   title?: any;
-  formType?: 'collapse' | 'card';
+  formType?: 'collapse' | 'card'| 'pure';
   showSaveButton?: boolean;
   showResetButton?: boolean;
   saveButtonProps?: ButtonProps;

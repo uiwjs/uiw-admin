@@ -53,6 +53,15 @@ export const items = (queryInfo: any) => [
     initialValue: queryInfo?.checkbox,
   },
   {
+    label: '年月日时分秒',
+    key: 'dateInputsecond',
+    widget: 'dateInput',
+    widgetProps: {
+      format: "YYYY-MM-DD HH:mm:ss"
+    },
+    initialValue: queryInfo.dateInput && formatter(new Date(queryInfo.dateInput)),
+  },
+  {
     label: '年月日',
     key: 'dateInput',
     widget: 'dateInput',

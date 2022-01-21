@@ -55,6 +55,7 @@ const Detail = ({ updateData }: DetailProps) => {
     >
       <ProForm
         title="基础信息"
+        formType={isView ? 'pure' : 'card'}
         submitRef={baseRef}
         readOnly={isView}
         readOnlyProps={{ column: 2 }}

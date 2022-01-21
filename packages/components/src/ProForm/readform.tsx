@@ -10,10 +10,10 @@ export default ({
 }: ProFormProps) => {
   return (
     <Descriptions column={3} bordered title={title} {...readOnlyProps}>
-      {formDatas?.map(({ label, widget, initialValue, option, readSpan = 1 }, index) => {
+      {formDatas?.map(({ label, widget, initialValue = '', option = [], readSpan = 1, widgetProps = {} }, index) => {
         return (
           <Descriptions.Item span={readSpan} label={label} key={index}>
-            {getReadValue(widget, initialValue || '', option || [])}
+            {getReadValue(widget, initialValue, option, widgetProps)}
           </Descriptions.Item>
         )
       })}
