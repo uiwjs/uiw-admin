@@ -1,5 +1,6 @@
 import { FormItemsOptionsProps } from '../type'
 import { formatter } from 'uiw'
+import React from 'react';
 
 /**
  * 只读模式表单项 value转换
@@ -9,9 +10,10 @@ import { formatter } from 'uiw'
  * @returns 
  */
 
+
 // 目前只处理以下类型的initialValue,其余默认为传入的initialValue
 export function getReadValue(type: string | any, initialValue: any | any[], option: FormItemsOptionsProps[], widgetProps: any) {
-  let content: string | number = ''
+  let content: string | number | React.ReactNode = ''
   if (type === 'radio' || type === 'searchSelect' || type === 'select') {
     let value = option.filter((itm: FormItemsOptionsProps) => itm.value === initialValue) || [];
     if (value.length > 0) content = value[0].label;
@@ -28,7 +30,12 @@ export function getReadValue(type: string | any, initialValue: any | any[], opti
   } else if (type === 'dateInput') {
     content = initialValue && formatter(widgetProps?.format || 'YYYY-MM-DD', new Date(initialValue))
   } else {
-    content = (typeof initialValue === 'string' || typeof initialValue === 'number') ? initialValue : ''
+    // initialValue 支持 string number 或者 自定义
+    content = (
+      typeof initialValue === 'string' ||
+      typeof initialValue === 'number' ||
+      React.isValidElement(initialValue)
+    ) ? initialValue : ''
   }
   return content
 }

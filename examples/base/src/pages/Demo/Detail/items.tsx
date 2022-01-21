@@ -1,5 +1,6 @@
+import React from 'react'
 import { formatter } from "uiw";
-export const items = (queryInfo: any) => [
+export const items = (queryInfo: any, isView: boolean) => [
   {
     label: '输入框',
     key: 'input',
@@ -65,7 +66,7 @@ export const items = (queryInfo: any) => [
     label: '年月日',
     key: 'dateInput',
     widget: 'dateInput',
-    initialValue: queryInfo.dateInput && formatter('YYYY-MM-DD',new Date(queryInfo.dateInput)),
+    initialValue: queryInfo.dateInput && formatter('YYYY-MM-DD', new Date(queryInfo.dateInput)),
   },
   {
     label: '年月',
@@ -79,10 +80,11 @@ export const items = (queryInfo: any) => [
     widget: 'timePicker',
     initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
   },
+  // 只读模式下支持读取React.ReactNode
   {
     label: '自定义组件',
     key: 'slider',
     widget: 'slider',
-    initialValue: queryInfo?.slider,
+    initialValue: isView ? <div>{queryInfo?.slider}</div> : queryInfo?.slider,
   },
 ];

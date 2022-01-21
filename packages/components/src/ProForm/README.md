@@ -107,10 +107,11 @@ const Demo = () => {
                label: '姓名',
                key: 'firstName',
                widget: 'input',
-               initialValue: '周政',
+               // 只读模式下支持读取React.ReactNode
+               initialValue: <div>周政</div> ,
                // 只读模式下单独一行
                readSpan:3
-             }
+             },
            ]}
        />
   );

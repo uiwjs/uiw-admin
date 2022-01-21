@@ -77,7 +77,7 @@ const Detail = ({ updateData }: DetailProps) => {
         onChange={(initial: any, current: any) =>
           updateData({ queryInfo: { ...queryInfo, ...current } })
         }
-        formDatas={items(queryInfo) as any}
+        formDatas={items(queryInfo,isView) as any}
       />
     </ProDrawer>
   );
