@@ -10,11 +10,11 @@ import { formatter } from 'uiw'
  */
 
 // 目前只处理以下类型的initialValue,其余默认为传入的initialValue
-export function getReadValue(type:string | any, initialValue: any | any[], option: FormItemsOptionsProps[], widgetProps: any) {
-  let content: string = ''
+export function getReadValue(type: string | any, initialValue: any | any[], option: FormItemsOptionsProps[], widgetProps: any) {
+  let content: string | number = ''
   if (type === 'radio' || type === 'searchSelect' || type === 'select') {
     let value = option.filter((itm: FormItemsOptionsProps) => itm.value === initialValue) || [];
-    if(value.length > 0) content =  value[0].label;
+    if (value.length > 0) content = value[0].label;
   } else if (type === 'checkbox') {
     for (const itm of option as any) {
       if (initialValue.includes(itm.value)) content += `${itm.label}`;
@@ -28,7 +28,7 @@ export function getReadValue(type:string | any, initialValue: any | any[], optio
   } else if (type === 'dateInput') {
     content = initialValue && formatter(widgetProps?.format || 'YYYY-MM-DD', new Date(initialValue))
   } else {
-    content = typeof initialValue === 'string' ? initialValue : ''
+    content = (typeof initialValue === 'string' || typeof initialValue === 'number') ? initialValue : ''
   }
   return content
 }

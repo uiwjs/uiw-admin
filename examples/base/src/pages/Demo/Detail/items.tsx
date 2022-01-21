@@ -59,19 +59,19 @@ export const items = (queryInfo: any) => [
     widgetProps: {
       format: "YYYY-MM-DD HH:mm:ss"
     },
-    initialValue: queryInfo.dateInput && formatter(new Date(queryInfo.dateInput)),
+    initialValue: queryInfo.dateInputsecond && formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond)),
   },
   {
     label: '年月日',
     key: 'dateInput',
     widget: 'dateInput',
-    initialValue: queryInfo.dateInput && formatter(new Date(queryInfo.dateInput)),
+    initialValue: queryInfo.dateInput && formatter('YYYY-MM-DD',new Date(queryInfo.dateInput)),
   },
   {
     label: '年月',
     key: 'monthPicker',
     widget: 'monthPicker',
-    initialValue: queryInfo.monthPicker && formatter(new Date(queryInfo.monthPicker)),
+    initialValue: queryInfo.monthPicker && formatter('YYYY-MM', new Date(queryInfo.monthPicker)),
   },
   {
     label: '时分秒',
