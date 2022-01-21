@@ -5,7 +5,7 @@
 npm i @uiw-admin/plugins
 ```
 
-## DvaWebpackPlugin 
+## RematchWebpackPlugin 
 
 > 自动加载 models
 

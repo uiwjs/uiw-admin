@@ -104,10 +104,10 @@ const Demo = () => {
          formDatas={
            [
              {
-               label: '姓氏',
+               label: '姓名',
                key: 'firstName',
                widget: 'input',
-               initialValue: '',
+               initialValue: '周政',
                // 只读模式下单独一行
                readSpan:3
              }

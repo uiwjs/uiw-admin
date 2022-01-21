@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/plugins",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "description": "plugins",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/models#readme",
@@ -43,6 +43,7 @@
   "devDependencies": {
     "@babel/parser": "7.16.8",
     "@babel/traverse": "7.16.8",
-    "@babel/types": "7.16.8"
+    "@babel/types": "7.16.8",
+    "chokidar": "3.5.3"
   }
 }

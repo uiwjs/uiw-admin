@@ -14,16 +14,19 @@
       {
         "path": "/tableList",
         "name": "查询表格",
-        "component": "@/pages/TableList"
+        "component": "@/pages/TableList",
+        "icon": "search"
       },
       {
         "path": "/home",
         "name": "首页",
-        "component": "@/pages/TableList"
+        "component": "@/pages/TableList",
+        "icon": "home"
       },
       {
         "path": "/dom",
         "name": "子项",
+        "icon": "copy",
         "routes": [
           {
             "path": "/dom/courses",
@@ -35,11 +38,13 @@
       {
         "path": "/demo",
         "name": "demo",
-        "component": "@/pages/Demo"
+        "component": "@/pages/Demo",
+        "icon": "component"
       },
       {
         "path": "/exceptions",
         "name": "异常",
+        "icon": "warning-o",
         "routes": [
           {
             "path": "/exceptions/403",
