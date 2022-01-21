@@ -1,46 +1,39 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, Fragment } from 'react'
 import { Collapse, Card } from 'uiw';
 import FormDom from './formdom'
+import ReadFormDom from './readform'
 import { getFormFields } from './widgets'
 import { ProFormProps } from './type'
 import './style/form-item.less';
 
-function ProForm(props: ProFormProps) {
+export default function ProForm(props: ProFormProps) {
 
-  const { formDatas = [], title = "", formType = 'card' } = props
+  const { formDatas = [], title = "", formType = 'card', readOnly = false } = props
 
   // 获取表单配置
   const formfields = useMemo(() => getFormFields(formDatas), [formDatas]);
 
+  // 判断表单类型
   const renderForm = useMemo(() => {
-    const formDomProps = { ...props, formfields };
-    // 卡片类型
-    if (formType === 'card')
-      return (
-        <Card title={title}>
-          <FormDom {...formDomProps} />
-        </Card>
-      );
-    // 折叠卡片类型
+    const formDomProps = { ...props, formfields }
+
+    // 判断是否是详情模式
+    const children = readOnly ? <ReadFormDom {...props} /> : <FormDom {...formDomProps} />
+    // 非详情模式下渲染标题
+    const renderTitle = !readOnly ? title : null
+    if (formType === 'card') return <Card title={renderTitle}>{children}</Card>
     if (formType === 'collapse') {
       return (
-        <Collapse activeKey={['1']}>
+        <Collapse title={renderTitle} activeKey={['1']}>
           <Collapse.Panel header={title} key={'1'}>
-            <FormDom {...formDomProps} />
+            {children}
           </Collapse.Panel>
         </Collapse>
-      );
+      )
     }
-    // 一般表单
-    return (
-      <div>
-        {title && <h3>{title}</h3>}
-        <FormDom {...formDomProps} />
-      </div>
-    );
-  }, [formType, formDatas, title]);
+    return <Fragment>{renderTitle && <h3>{title}</h3>}{children}</Fragment>
+  }, [formType, formDatas, title])
 
-  return <div style={{ flex: 1 }}>{renderForm}</div>;
+
+  return renderForm
 }
-
-export default ProForm;

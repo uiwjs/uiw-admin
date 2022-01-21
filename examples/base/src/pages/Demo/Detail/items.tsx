@@ -1,31 +1,22 @@
-export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
+import React from 'react'
+import { formatter } from "uiw";
+export const items = (queryInfo: any, isView: boolean) => [
   {
-    label: '姓氏',
-    key: 'firstName',
+    label: '输入框',
+    key: 'input',
     widget: 'input',
-    initialValue: queryInfo?.firstName,
-    widgetProps: { disabled: isView },
-    span: '24',
-    required:true
+    initialValue: queryInfo?.input,
+    widgetProps: {},
+    required: true
   },
   {
-    label: '名字',
-    key: 'lastName',
-    widget: 'input',
-    initialValue: queryInfo?.lastName,
-    widgetProps: { disabled: isView },
-    required:true
+    label: '多行文本输入框',
+    key: 'textarea',
+    widget: 'textarea',
+    initialValue: queryInfo?.textarea,
   },
   {
-    label: '邮箱',
-    key: 'email',
-    widget: 'input',
-    initialValue: queryInfo?.email,
-    widgetProps: { disabled: isView },
-    required:true
-  },
-  {
-    label: '水果',
+    label: '选择器',
     key: 'select',
     widget: 'select',
     option: [
@@ -35,12 +26,65 @@ export const items = (queryInfo: any, { isView }: { isView: boolean }) => [
       { value: 4, label: '东北大冻梨' },
     ],
     initialValue: queryInfo?.select,
-    widgetProps: { disabled: isView },
-    required:true
   },
   {
+    label: '开关',
+    key: 'switch',
+    widget: 'switch',
+    initialValue: queryInfo?.switch,
+  },
+  {
+    label: '单选框',
+    widget: 'radio',
+    key: "radio",
+    option: [
+      { label: '男', value: 'man' },
+      { label: '女', value: 'girl' },
+    ],
+    initialValue: queryInfo?.radio,
+  },
+  {
+    label: '多选框',
+    widget: 'checkbox',
+    key: "checkbox",
+    option: [
+      { label: '四川菜', value: 'sichuan' },
+      { label: '湖北菜', value: 'hubei' },
+    ],
+    initialValue: queryInfo?.checkbox,
+  },
+  {
+    label: '年月日时分秒',
+    key: 'dateInputsecond',
+    widget: 'dateInput',
+    widgetProps: {
+      format: "YYYY-MM-DD HH:mm:ss"
+    },
+    initialValue: queryInfo.dateInputsecond && formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond)),
+  },
+  {
+    label: '年月日',
+    key: 'dateInput',
+    widget: 'dateInput',
+    initialValue: queryInfo.dateInput && formatter('YYYY-MM-DD', new Date(queryInfo.dateInput)),
+  },
+  {
+    label: '年月',
+    key: 'monthPicker',
+    widget: 'monthPicker',
+    initialValue: queryInfo.monthPicker && formatter('YYYY-MM', new Date(queryInfo.monthPicker)),
+  },
+  {
+    label: '时分秒',
+    key: 'timePicker',
+    widget: 'timePicker',
+    initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
+  },
+  // 只读模式下支持读取React.ReactNode
+  {
     label: '自定义组件',
-    key: 'id1',
+    key: 'slider',
     widget: 'slider',
+    initialValue: isView ? <div>{queryInfo?.slider}</div> : queryInfo?.slider,
   },
 ];

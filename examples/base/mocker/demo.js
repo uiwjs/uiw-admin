@@ -46,10 +46,17 @@ module.exports.selectById = function (req, res) {
     code: 200,
     message: '获取详情成功',
     data: {
-      firstName: '周',
-      lastName: '政',
-      email: '42308766@qq.com',
+      input: '周政',
+      textarea: '蟠龙路',
       select: 4,
+      switch: true,
+      radio: 'man',
+      checkbox: ['sichuan', 'hubei'],
+      dateInputsecond: '2021-1-21 23:59:59',
+      dateInput: '2021-1-21',
+      monthPicker: '2021-1-21',
+      timePicker: '2021-1-21 23:59:59',
+      slider: 90,
     },
   });
 };

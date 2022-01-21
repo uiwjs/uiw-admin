@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/config",
-  "version": "5.0.6",
+  "version": "5.0.8",
   "description": "config 全局配置",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/models#readme",

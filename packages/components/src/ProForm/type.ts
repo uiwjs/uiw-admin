@@ -1,16 +1,9 @@
-import { ButtonProps } from 'uiw';
-import {  commonWidgetsList } from './widgets'
+import { ButtonProps,DescriptionsProps } from 'uiw';
+import { commonWidgetsList } from './widgets'
 
 export type Fields = {
   [key: string]: any;
 };
-
-export interface BtnProps extends ButtonProps {
-  label?: string;
-  btnType: 'submit' | 'reset' | 'other';
-  show?: boolean;
-}
-
 export interface FormItemsOptionsProps {
   label: string;
   value: string | number;
@@ -33,16 +26,26 @@ export interface FormItemsProps {
   hide?: boolean;
   /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
   span?: string;
+  /** 只读模式下包含列的数量 参考Descriptions.Item	*/
+  readSpan?:number
   /** 是否必填 */
-  required?:boolean
+  required?: boolean
 }
 
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
   onSubmit?: (initial: Record<string, any>, current: Record<string, any>) => void;
   onChange?: (initial: Record<string, any>, current: Record<string, any>) => void;
-  btns?: BtnProps[]
-  btnsContainer?:React.CSSProperties;
+  submitRef?: any;
+  buttonsContainer?: React.CSSProperties;
   title?: any;
-  formType?: 'collapse' | 'card';
+  formType?: 'collapse' | 'card'| 'pure';
+  showSaveButton?: boolean;
+  showResetButton?: boolean;
+  saveButtonProps?: ButtonProps;
+  resetButtonProps?: ButtonProps | any;
+  /** 是否是只读模式模式 */
+  readOnly?: boolean
+   /** 只读模式 参考Descriptions参数 */
+  readOnlyProps?:DescriptionsProps
 }

@@ -15,7 +15,6 @@ import { Drawer, Button, DrawerProps, ButtonProps } from 'uiw';
 interface ButtonItemsProps extends ButtonProps {
   label?: string;
   show?: boolean;
-  width?: number;
 }
 
 interface ProDrawerProps extends DrawerProps {
@@ -43,7 +42,6 @@ function ProDrawer(props: ProDrawerProps) {
       onClose={onClose && onClose}
       size={width}
       bodyStyle={{ padding: '0 10px 45px 10px' }}
-      {...others}
       footer={buttons.map(
         ({ label = '', show = true, ...others }: any, idx) =>
           show && (
@@ -52,6 +50,7 @@ function ProDrawer(props: ProDrawerProps) {
             </Button>
           ),
       )}
+      {...others}
     >
       {children}
     </Drawer>
