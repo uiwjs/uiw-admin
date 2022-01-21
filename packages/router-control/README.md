@@ -12,7 +12,7 @@ npm i @uiw-admin/router-control --save
 ```ts
 
 // json文件格式
-export interface RoutersJSON extends Omit<Routers, "component"> {
+export interface RoutersJSON {
   key?: string;
   /** 默认跳转 */
   index?: boolean;
@@ -27,7 +27,7 @@ export interface RoutersJSON extends Omit<Routers, "component"> {
   /** 组件 */
   component?:string;
   /** 子集 路由 */
-  routes?: Routers[];
+  routes?: RoutersJSON[];
   /** 加载 model 的文件路径 , ts 结尾的文件 */
   models?: string[];
   /** 是否隐藏菜单 */
@@ -41,6 +41,70 @@ export interface ControllerProps {
   routeType?: "history" | "hash" | "browser";
 }
 
+```
+
+## routes.json 文件案例
+
+> `@` 指向 src 目录
+
+```json
+[
+  {
+    "path": "/login",
+    "component": "@/layouts/UserLayout"
+  },
+  {
+    "path": "/",
+    "component": "@/layouts/BasicLayout",
+    "routes": [
+      {
+        "index": true,
+        "redirect": "/tableList"
+      },
+      {
+        "path": "/home",
+        "name": "首页",
+        "component": "@/pages/TableList",
+        "icon": "home"
+      },
+      {
+        "path": "/dom",
+        "name": "子项",
+        "icon": "copy",
+        "routes": [
+          {
+            "path": "/dom/courses",
+            "name": "Dashboard",
+            "component": "@/pages/Dashboard"
+          }
+        ]
+      },
+      {
+        "path": "/403",
+        "name": "403",
+        "hideInMenu": true,
+        "component": "403"
+      },
+      {
+        "path": "/500",
+        "name": "500",
+        "hideInMenu": true,
+        "component": "500"
+      },
+      {
+        "path": "/404",
+        "name": "404",
+        "hideInMenu": true,
+        "component": "404"
+      },
+      {
+        "path": "*",
+        "name": "404",
+        "component": "404"
+      }
+    ]
+  }
+]
 ```
 
 ## 案例

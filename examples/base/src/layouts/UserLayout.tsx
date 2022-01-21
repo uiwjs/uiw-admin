@@ -8,6 +8,7 @@ const UserLayout = () => {
   return <UserLogin
     api="/api/login"
     btnProps={{ type: "primary" }}
+    onBefore={(value) => ({ a: 12, b: 1221 })}
     onSuccess={(data) => {
       if (data && data.token) {
         sessionStorage.setItem("token", data.token)
