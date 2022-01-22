@@ -16,61 +16,15 @@ import {
 import RoutePathArr from "@@/routes"
 
 import { Exceptions403 } from '@uiw-admin/exceptions';
-import type { RouteObject } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import { ControllerProps, RoutersProps, } from "./interface"
+export * from "./interface"
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
 export let navigate: NavigateFunction = () => { };
 
-
 // json文件格式
-export interface RoutersJSON extends Omit<Routers, "component"> {
-  component?: string
-}
-
-export interface Routers extends Omit<RouteObject, 'children'> {
-  key?: string;
-  /** 默认跳转 */
-  index?: boolean;
-  /** 路径 */
-  path?: string;
-  /** 名称 */
-  name?: string;
-  /**  图标 */
-  icon?: string;
-  /** 重定向  当 index===true生效 */
-  redirect?: string;
-  /** 组件 */
-  component?:
-  | JSX.Element
-  | React.LazyExoticComponent<(props?: any) => JSX.Element>;
-  /** 子集 路由 */
-  routes?: Routers[];
-  /** 加载 model 的文件路径 , ts 结尾的文件 */
-  models?: string[];
-  /** 是否隐藏菜单 */
-  hideInMenu?: boolean;
-  /** 用于路由校验权限 */
-  isAuth?: boolean;
-}
-
-export interface RoutersProps extends Routers {
-  /** 渲染使用的组件 */
-  element?: React.ReactNode;
-  /** 子集渲染的组件集合 */
-  children?: React.ReactNode[];
-}
-
-export type DefaultProps = {
-  routes: RoutersProps[];
-};
-
-export interface ControllerProps {
-  /** 路由模式   默认 history  */
-  routeType?: 'history' | 'hash' | 'browser';
-}
-
 export const Loadable =
   (Component: React.LazyExoticComponent<(props?: any) => JSX.Element>) =>
     (props: any) => {

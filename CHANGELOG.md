@@ -3,11 +3,19 @@
 - bug修复
 - 功能更新
 
+## 5.0.10 (未发版)
+- @uiw-admin/plugins
+  - 🌟 `RoutesWebpackPlugin` 支持`js`和`ts`文件
+- @uiw-admin/components
+  - 🌟 `Upload`： UploadImage组件更名为Upload
+  - 🌟 `Upload`： 增加错误提示
+  - 🌟 `Upload`： 增加pdf和xlsx文件类型上传
+
 ## 5.0.9
 - @uiw-admin/user-login
-  - 新增`onBefore`和`requestConfig`参数
+  - 🌟 新增`onBefore`和`requestConfig`参数
 - @uiw-admin/components
-  - 🌟 `ProForm`：  新增UploadImage上传图片组件(待测试)
+  - 🌟 `UploadImage`：  新增UploadImage上传图片组件(待测试)
   - 🌟 `ProForm`：  编辑与只读模式下增加图片上传功能和图片展示功能
 
 
