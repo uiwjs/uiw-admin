@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[3],{28003:function(n,e,s){s.r(e),e.default="@uiw-admin/plugins\n===\n\n```bash\nnpm i @uiw-admin/plugins\n```\n\n## RematchWebpackPlugin \n\n> \u81ea\u52a8\u52a0\u8f7d models\n\n## RoutesWebpackPlugin \n\n> json\u6587\u4ef6 \u8def\u7531\u8f6c\u5316(\u5fc5\u987b\u5b58\u5728config/routes.json\u624d\u80fd\u8fdb\u884c\u8f6c\u5316)"}}]);
-//# sourceMappingURL=3.d0b7b74b.chunk.js.map
