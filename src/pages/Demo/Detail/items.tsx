@@ -1,6 +1,6 @@
 import React from 'react'
 import { formatter } from "uiw";
-export const items = (queryInfo: any, isView: boolean) => [
+export const items = (queryInfo: any, attr: any) => [
   {
     label: '输入框',
     key: 'input',
@@ -85,6 +85,21 @@ export const items = (queryInfo: any, isView: boolean) => [
     label: '自定义组件',
     key: 'slider',
     widget: 'slider',
-    initialValue: isView ? <div>{queryInfo?.slider}</div> : queryInfo?.slider,
+    readSpan: 2,
+    initialValue: attr.isView ? <div>{queryInfo?.slider}</div> : queryInfo?.slider,
+  },
+  {
+    label: '上传组件',
+    key: 'uploadImage',
+    widget: 'uploadImage',
+    span: "24",
+    readSpan: 3,
+    widgetProps: {
+      accept: ['jpg', 'gif', 'png'],
+      onUploadChange: attr.uploadImage.onUploadChange,
+      fileList: queryInfo?.uploadImage,
+      maxNumber:3
+    },
+    initialValue: queryInfo?.uploadImage,
   },
 ];

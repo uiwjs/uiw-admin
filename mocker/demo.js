@@ -57,6 +57,23 @@ module.exports.selectById = function (req, res) {
       monthPicker: '2021-1-21',
       timePicker: '2021-1-21 23:59:59',
       slider: 90,
+      uploadImage: [
+        {
+          data_url:
+            'https://img1.baidu.com/it/u=793269991,2224346596&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
+          file: {
+            name: '周政.png',
+          },
+        },
+      ],
     },
+  });
+};
+
+module.exports.upload = function (req, res) {
+  return res.status(200).json({
+    code: 200,
+    message: '获取详情成功',
+    uid: '1234',
   });
 };
