@@ -48,16 +48,6 @@ class RoutesWebpackPlugin {
     const routeTemp = createTemp(strs)
     fs.writeFileSync(path.resolve(process.cwd(), "src/.uiw/routes.tsx"), routeTemp, { encoding: "utf-8", flag: "w+" })
   }
-  // 读取 路由 json 文件
-  createRoutes = () => {
-    //  读取文件数据
-    const routerTemp = JSON.stringify(this.routes, getJsonToString, 2)
-      .replace(/\"component\": (\"(.+?)\")/g, (global, m1, m2) => {
-        return `"component": ${m2.replace(/\^/g, '"')}`;
-      }).replace(/\\r\\n/g, '\r\n')
-      .replace(/\\n/g, '\r\n');
-    this.createTemps(routerTemp)
-  };
 
   //  判断上一次和下一次
   checkPreAndNext = () => {
