@@ -5,7 +5,7 @@
 
 ## 5.0.10 (未发版)
 - @uiw-admin/plugins
-  -  `RoutesWebpackPlugin` 支持`js`和`ts`文件
+  - 🌟 `RoutesWebpackPlugin` 支持`js`和`ts`文件
 
 ## 5.0.9
 - @uiw-admin/user-login
