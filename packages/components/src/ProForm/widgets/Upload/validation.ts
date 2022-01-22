@@ -38,8 +38,17 @@ export const isResolutionValid = (
   return false;
 };
 
-export const isImageValid = (fileType: string) => {
+// 判断文件类型
+export const getAcceptTypeValid = (fileType: string) => {
+  console.log('fileType', fileType)
   if (fileType.includes('image')) {
+    return true;
+  }
+  if (fileType.includes('pdf')) {
+    return true;
+  }
+  // xlsx
+  if (fileType.includes('vnd.openxmlformats-officedocument.spreadsheetml.sheet')) {
     return true;
   }
   return false;
@@ -80,7 +89,7 @@ export const getErrorValidation = async ({
   resolutionType,
   resolutionWidth,
   resolutionHeight,
-}:any): Promise<ErrorsType> => {
+}: any): Promise<ErrorsType> => {
   const newErrors: ErrorsType = {};
   if (!isMaxNumberValid(fileList.length + value.length, maxNumber, keyUpdate)) {
     newErrors.maxNumber = true;
@@ -88,7 +97,7 @@ export const getErrorValidation = async ({
     for (let i = 0; i < fileList.length; i += 1) {
       const { file } = fileList[i];
       if (!file) continue;
-      if (!isImageValid(file.type)) {
+      if (!getAcceptTypeValid(file.type)) {
         newErrors.accept = true;
         break;
       }
@@ -118,3 +127,17 @@ export const getErrorValidation = async ({
   if (Object.values(newErrors).find(Boolean)) return newErrors;
   return null;
 };
+
+
+// 是否是图片类型
+export const isImageValid = (type = ''): boolean => {
+  if (type) {
+    //获取最后一个/的位置
+    var index = type.lastIndexOf("/");
+    //获取后缀
+    var ext = type.substr(index + 1);
+    return ['png', 'jpg', 'jpeg', 'bmp', 'gif', 'webp', 'psd', 'svg', 'tiff'].indexOf(ext.toLowerCase()) !== -1
+  }
+  return false
+
+}
