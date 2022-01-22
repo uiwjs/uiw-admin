@@ -1,5 +1,5 @@
 # 文件上传
-
+[组件参考react-images-uploading](https://github.com/vutoan266/react-images-uploading)
 <!--Upload-->
 
 ### 基本使用(与uiw/form使用保持一致)
@@ -23,19 +23,19 @@ const Demo = () => {
 
 ## Porps
 ``` ts
-interface UploadImageProps extends ImageUploadingPropsType {
+interface UploadImageProps extends ReactUploadPropsType {
   // 上传变化的回调
-  onUploadChange?: (imageList: ImageListType) => void;
+  onUploadChange?: (imageList: FileListType) => void;
   // 图片列表
-  fileList?: ImageListType;
+  fileList?: FileListType;
   // 是否只读
   readOnly?: boolean;
 }
 
-interface ImageUploadingPropsType {
-  value: ImageListType;
-  onChange: (value: ImageListType, addUpdatedIndex?: Array<number>) => void;
-  children?: (props: ExportInterface) => React.ReactNode;
+interface ReactUploadPropsType {
+  value: FileListType;
+  onChange: (value: FileListType, addUpdatedIndex?: Array<number>) => void;
+  children?: (props: ChildrenInterface) => React.ReactNode;
   multiple?: boolean;
   maxNumber?: number;
   // 仅支持图片类型文件上传
@@ -44,14 +44,14 @@ interface ImageUploadingPropsType {
   resolutionWidth?: number;
   resolutionHeight?: number;
   resolutionType?: ResolutionType;
-  onError?: (errors: ErrorsType, files?: ImageListType) => void;
+  onError?: (errors: ErrorsType, files?: FileListType) => void;
   dataURLKey?: string;
   inputProps?: React.HTMLProps<HTMLInputElement>;
 }
 
-type ImageListType = Array<ImageType>;
+type FileListType = Array<FileType>;
 
-interface ImageType {
+interface FileType {
   dataURL?: string;
   file?: File;
   [key: string]: any;

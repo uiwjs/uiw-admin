@@ -2,14 +2,14 @@ import React, { useRef, useState, useCallback, useMemo } from 'react';
 import { openFileDialog, getListFiles, getAcceptTypeString } from './utils';
 import { getErrorValidation } from './validation';
 import {
-  ImageListType,
-  ImageUploadingPropsType,
+  FileListType,
+  ReactUploadPropsType,
   ErrorsType,
 } from './types';
 
 const DEFAULT_NULL_INDEX = -1
 
-const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
+const ReactUpload: React.FC<ReactUploadPropsType> = ({
   value = [],
   onChange,
   onError,
@@ -33,16 +33,16 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
     inputRef,
   ]);
 
-  const onImageUpload = useCallback((): void => {
+  const onFileUpload = useCallback((): void => {
     setKeyUpdate(DEFAULT_NULL_INDEX);
     handleClickInput();
   }, [handleClickInput]);
 
-  const onImageRemoveAll = useCallback((): void => {
+  const onFileRemoveAll = useCallback((): void => {
     onChange?.([]);
   }, [onChange]);
 
-  const onImageRemove = (index: number | Array<number>): void => {
+  const onFileRemove = (index: number | Array<number>): void => {
     const updatedList = [...inValue];
     if (Array.isArray(index)) {
       index.forEach((i) => {
@@ -54,12 +54,12 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
     onChange?.(updatedList);
   };
 
-  const onImageUpdate = (index: number): void => {
+  const onFileUpdate = (index: number): void => {
     setKeyUpdate(index);
     handleClickInput();
   };
 
-  const validate = async (fileList: ImageListType): Promise<boolean> => {
+  const validate = async (fileList: FileListType): Promise<boolean> => {
     const errorsValidation = await getErrorValidation({
       fileList,
       maxFileSize,
@@ -86,7 +86,7 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
     if (!fileList.length) return;
     const checkValidate = await validate(fileList);
     if (!checkValidate) return;
-    let updatedFileList: ImageListType;
+    let updatedFileList: FileListType;
     const updatedIndexes: number[] = [];
     if (keyUpdate > DEFAULT_NULL_INDEX) {
       const [firstFile] = fileList;
@@ -134,14 +134,14 @@ const ReactImageUploading: React.FC<ImageUploadingPropsType> = ({
       />
       {children?.({
         imageList: inValue,
-        onImageUpload,
-        onImageRemoveAll,
-        onImageUpdate,
-        onImageRemove,
+        onFileUpload,
+        onFileRemoveAll,
+        onFileUpdate,
+        onFileRemove,
         errors,
       })}
     </React.Fragment>
   );
 };
 
-export default ReactImageUploading;
+export default ReactUpload;

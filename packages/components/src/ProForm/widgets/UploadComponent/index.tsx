@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button, List, Icon, Modal, Message } from 'uiw'
-import ImageUploading from '../Upload';
-import { ImageUploadingPropsType, ImageListType, ErrorsType } from '../Upload/types'
+import ReactUpload from '../Upload';
+import { ReactUploadPropsType, FileListType, ErrorsType } from '../Upload/types'
 import { isImageValid } from '../Upload/validation'
 
 
-export interface UploadCompontneProps extends ImageUploadingPropsType {
+export interface UploadCompontneProps extends ReactUploadPropsType {
   // 上传变化的回调
-  onUploadChange?: (imageList: ImageListType) => void;
+  onUploadChange?: (imageList: FileListType) => void;
   // 图片列表
-  fileList?: ImageListType;
+  fileList?: FileListType;
   // 是否只读
   readOnly?: boolean;
 }
@@ -27,7 +27,7 @@ export default ({
   const [src, setSrc] = React.useState('');
 
 
-  const onChange = (imageList: ImageListType, addUpdateIndex: any) => {
+  const onChange = (imageList: FileListType, addUpdateIndex: any) => {
     setImages(imageList);
     onUploadChange?.(imageList)
   };
@@ -57,26 +57,26 @@ export default ({
   }
   return (
     <div style={{ flex: 1 }}>
-      <ImageUploading {...config}>
+      <ReactUpload {...config}>
         {({
           imageList,
-          onImageUpload,
-          onImageRemoveAll,
-          onImageUpdate,
-          onImageRemove,
+          onFileUpload,
+          onFileRemoveAll,
+          onFileUpdate,
+          onFileRemove,
           errors
         }: any) => {
           // 上传按钮权限
-          const uploadBtn = !readOnly && maxNumber !== imageList.length
+          const uploadBtn = maxNumber !== imageList.length
           // 全部删除按钮权限
           const deleteAllBtn = imageList.length > 0
           return (
             <div>
               <List
-                header={(
+                header={!readOnly && (
                   <div>
-                    {uploadBtn && <Button icon="upload" onClick={onImageUpload} type="primary">上传</Button>}
-                    {deleteAllBtn && <Button icon="delete" type="danger" onClick={onImageRemoveAll}>全部删除</Button>}
+                    {uploadBtn && <Button icon="upload" onClick={onFileUpload} type="primary">上传</Button>}
+                    {deleteAllBtn && <Button icon="delete" type="danger" onClick={onFileRemoveAll}>全部删除</Button>}
                   </div>
                 )}
                 style={{ marginTop: 10 }}
@@ -86,8 +86,8 @@ export default ({
                   return (
                     <List.Item extra={(
                       <div>
-                        {!readOnly && <Icon style={{ marginRight: 10 }} type="upload" onClick={() => onImageUpdate(index)} />}
-                        {!readOnly && <Icon style={{ marginRight: 10 }} type="delete" onClick={() => onImageRemove(index)} />}
+                        {!readOnly && <Icon style={{ marginRight: 10 }} type="upload" onClick={() => onFileUpdate(index)} />}
+                        {!readOnly && <Icon style={{ marginRight: 10 }} type="delete" onClick={() => onFileRemove(index)} />}
                         {/* 图片类型才能查看 */}
                         {isImageValid(type) && <Icon type="eye-o" onClick={() => onUploadView(image['data_url'], index)} />}
                       </div>
@@ -105,7 +105,7 @@ export default ({
             </div>
           )
         }}
-      </ImageUploading>
+      </ReactUpload>
       <Modal
         isOpen={visible}
         onClosed={() => setVisible(false)}
