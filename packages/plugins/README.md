@@ -11,4 +11,5 @@ npm i @uiw-admin/plugins
 
 ## RoutesWebpackPlugin 
 
-> json文件 路由转化(必须存在config/routes.json才能进行转化)
+> 路由转化,获取项目根目录下`congfig`文件夹下的`routes.json`或`routes.ts`或`routes.js`文件
+> 优先级  json > ts > js 

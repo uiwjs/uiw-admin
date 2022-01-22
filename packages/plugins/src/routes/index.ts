@@ -6,51 +6,62 @@ import path from 'path';
 import webpack from 'webpack';
 import createTemp, { getJsonToString } from "./temp"
 import chokidar from "chokidar"
-export interface RoutersProps {
-  /** 默认跳转 */
-  index?: boolean;
-  /** 路径 */
-  path?: string;
-  /** 名称 */
-  name?: string;
-  /**  图标 */
-  icon?: string;
-  /** 重定向  当 index===true生效 */
-  redirect?: string;
-  /** 组件 */
-  component?: string;
-  /** 子集 路由 */
-  routes?: RoutersProps[];
-  /** 是否隐藏菜单 */
-  hideInMenu?: boolean;
-  /** 用于路由校验权限 */
-  isAuth?: boolean;
-}
+import { getJSONData, stringToJson } from "./../utils"
+import { RoutersProps } from "./../utils/interface"
 
 class RoutesWebpackPlugin {
-  routesPath = "";
-  routes = []
-  oldRouterJson = ""
+  // json 文件地址
+  jsonFilePath = ''
+  // js文件地址
+  jsFilePath = ''
+  // ts 文件地址
+  tsFilePath = ""
+  // 渲染路由数组
+  routes: RoutersProps[] = []
+  // 上一次的路由数据
+  preString = ""
+  // 下一次渲染路由数据
+  nextString = ''
+  // 根目录
   cwd = ""
+  // 需要监听的文件目录
   cwdConfig = ''
 
   constructor() {
-    // 必须要存在这个文件
-    this.routesPath = path.resolve(process.cwd(), "config/routes.json");
+    // 必须要存在这个文件 优先级  json > ts > js
+    this.jsonFilePath = path.resolve(process.cwd(), "config/routes.json");
+    this.jsFilePath = path.resolve(process.cwd(), "config/routes.js");
+    this.tsFilePath = path.resolve(process.cwd(), "config/routes.ts");
+    // ----
     this.cwdConfig = path.resolve(process.cwd(), "config")
     this.cwd = path.resolve(process.cwd())
   }
   // 生成临时路由
   createTemps = (strs: string) => {
     if (strs === "[]") {
-      this.oldRouterJson = ""
+      this.preString = ""
+      this.nextString = ""
+    } else {
+      this.preString = this.nextString
+      this.nextString = ""
     }
     const routeTemp = createTemp(strs)
     fs.writeFileSync(path.resolve(process.cwd(), "src/.uiw/routes.tsx"), routeTemp, { encoding: "utf-8", flag: "w+" })
   }
   // 读取 路由 json 文件
   createRoutes = () => {
-    if (fs.existsSync(this.routesPath)) {
+    //  读取文件数据
+    const routerTemp = JSON.stringify(this.routes, getJsonToString, 2)
+      .replace(/\"component\": (\"(.+?)\")/g, (global, m1, m2) => {
+        return `"component": ${m2.replace(/\^/g, '"')}`;
+      }).replace(/\\r\\n/g, '\r\n')
+      .replace(/\\n/g, '\r\n');
+    this.createTemps(routerTemp)
+  };
+
+  //  判断上一次和下一次
+  checkPreAndNext = () => {
+    if (this.preString !== this.nextString) {
       //  读取文件数据
       const routerTemp = JSON.stringify(this.routes, getJsonToString, 2)
         .replace(/\"component\": (\"(.+?)\")/g, (global, m1, m2) => {
@@ -59,43 +70,63 @@ class RoutesWebpackPlugin {
         .replace(/\\n/g, '\r\n');
       this.createTemps(routerTemp)
     }
-  };
-  // 校验文件
-  checkField = async () => {
-    // 校验文件是否存在
-    const iss = fs.existsSync(this.routesPath);
-    if (iss) {
-      //存在 更新
-      const newStr = fs.readFileSync(this.routesPath, { encoding: "utf-8" }).toString().trim()
-      // 文件存在但是为空
-      if (newStr === "") {
-        this.createTemps("[]");
+  }
+  // 获取文件内容
+  getFileContent = (isType: "json" | "ts" | "js" | false) => {
+    if (isType === "json") {
+      this.nextString = fs.readFileSync(this.jsonFilePath, { encoding: "utf-8" }).toString().trim()
+      if (this.nextString !== "") {
+        this.routes = stringToJson(this.nextString)
+        this.nextString = JSON.stringify(this.routes)
+        this.checkPreAndNext()
         return;
       }
-      if ((newStr) !== this.oldRouterJson) {
-        this.oldRouterJson = newStr
-        this.routes = JSON.parse(this.oldRouterJson)
-        this.createRoutes()
+    } else if (isType === "ts") {
+      const content = fs.readFileSync(this.tsFilePath, { encoding: "utf-8" })
+      const { isJSON, jsonArr } = getJSONData(content)
+      if (isJSON) {
+        this.routes = jsonArr
+        this.nextString = JSON.stringify(jsonArr)
+        this.checkPreAndNext()
+        return;
       }
-    } else {
-      // 不存在
-      this.createTemps("[]")
+    } else if (isType === "js") {
+      const content = fs.readFileSync(this.jsFilePath, { encoding: "utf-8" })
+      const { isJSON, jsonArr } = getJSONData(content)
+      if (isJSON) {
+        this.routes = jsonArr
+        this.nextString = JSON.stringify(jsonArr)
+        this.checkPreAndNext()
+        return;
+      }
     }
-  };
+    this.createTemps("[]")
+  }
+
+  // 判断文件优先级 
+  JudgeFileType = () => {
+    let isType: "json" | "ts" | "js" | false = "json";
+    if (fs.existsSync(this.jsonFilePath)) {
+      isType = "json"
+    } else if (fs.existsSync(this.tsFilePath)) {
+      isType = "ts"
+    } else if (fs.existsSync(this.jsFilePath)) {
+      isType = "js"
+    } else {
+      isType = false
+    }
+    this.getFileContent(isType)
+  }
 
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap("RoutesWebpackPlugin", () => {
-      this.checkField();
+      this.JudgeFileType();
       if (process.env.NODE_ENV === "development") {
         chokidar.watch(this.cwdConfig, {
           cwd: this.cwd,
         }).on('all', (event, path) => {
-          // 编辑 和删除进行处理 其他不进行处理
-          if (event === "unlink" && path === "config/routes.json") {
-            this.createTemps("[]")
-          }
-          if (["change", "add"].includes(event) && path === "config/routes.json") {
-            this.checkField()
+          if (["change", "add", "unlink"].includes(event) && ["config/routes.json", "config/routes.ts", "config/routes.js"].includes(path)) {
+            this.JudgeFileType();
           }
         });
       }

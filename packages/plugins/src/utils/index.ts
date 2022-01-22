@@ -1,6 +1,8 @@
 import { parse } from '@babel/parser';
 import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
+import generate from "@babel/generator"
+import { RoutersProps } from "./interface"
 
 type NodeFun =
   | t.Expression
@@ -77,4 +79,60 @@ export const IsModel = (content: string) => {
     },
   });
   return isModel;
+};
+
+// 转换成对象
+export const stringToJson = (str: string) => {
+  const json = (new Function("return " + str))();
+  return json;
+}
+// ts/js 文件获取里面的 默认导出内容
+export const getJSONData = (content: string) => {
+  let isJSON = false;
+  let jsonArr: RoutersProps[] = [];
+  const ast = parse(content, {
+    // 在严格模式下解析并允许模块声明
+    sourceType: 'module',
+    plugins: [
+      "jsx",
+      'typescript',
+      'classProperties',
+      'dynamicImport',
+      'exportDefaultFrom',
+      'exportNamespaceFrom',
+      'functionBind',
+      'nullishCoalescingOperator',
+      'objectRestSpread',
+      'optionalChaining',
+      'decorators-legacy',
+    ],
+  });
+
+  traverse(ast, {
+    ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
+      let node = path.node.declaration;
+      node = getTSNode(node);
+      node = getVarInit(node, path);
+      node = getTSNode(node);
+      // 如果 node 是一个数组
+      if (t.isArrayExpression(node)) {
+        isJSON = true;
+        const code = generate(node, {
+          jsonCompatibleStrings: true,
+          // 输出中包含注释
+          comments: false,
+          jsescOption: {
+            quotes: "double",
+            json: true
+          },
+        }).code
+        jsonArr = stringToJson(code)
+
+      }
+    },
+  });
+  return {
+    isJSON,
+    jsonArr,
+  };
 };
