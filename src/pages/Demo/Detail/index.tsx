@@ -78,8 +78,8 @@ const Detail = ({ updateData }: DetailProps) => {
         }
         formDatas={items(queryInfo, {
           isView,
-          uploadImage: {
-            onUploadChange: (fileList: any) =>  updateData({ queryInfo: { ...queryInfo, uploadImage: fileList } })
+          upload: {
+            onUploadChange: (fileList: any) =>  updateData({ queryInfo: { ...queryInfo, upload: fileList } })
           }
         }) as any}
       />
