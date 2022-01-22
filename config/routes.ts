@@ -1,4 +1,5 @@
-[
+import { RoutersJSON } from "@uiw-admin/router-control"
+const routes: RoutersJSON[] = [
   {
     "path": "/login",
     "component": "@/layouts/UserLayout"
@@ -19,7 +20,7 @@
       },
       {
         "path": "/home",
-        "name": "首页-json文件",
+        "name": "首页-ts文件",
         "component": "@/pages/TableList",
         "icon": "home"
       },
@@ -89,3 +90,5 @@
     ]
   }
 ]
+
+export default routes
