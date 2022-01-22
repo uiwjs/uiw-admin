@@ -111,12 +111,12 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
               {Array(emptyLength)
                 .fill('')
                 .map((value, index) => (
-                  <Col key={index} fixed style={{ width: '20%' }} />
+                  <Col key={index.toString()} fixed style={{ width: '20%' }} />
                 ))}
-              <Col align="middle">
+              <Col align="middle" style={{textAlign: 'right', marginRight: 14}}>
                 {searchBtns ? (
                   searchBtns.map((btn: any, idx) => (
-                    <Button key={idx.toString()} {...btn}>
+                    <Button key={idx.toString()} style={{marginRight: 5}} {...btn}>
                       {btn.label}
                     </Button>
                   ))

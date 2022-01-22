@@ -8,13 +8,14 @@ const UserLayout = () => {
   return <UserLogin
     api="/api/login"
     btnProps={{ type: "primary" }}
+    onBefore={(value) => ({ a: 12, b: 1221 })}
     onSuccess={(data) => {
       if (data && data.token) {
         sessionStorage.setItem("token", data.token)
         sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         navigate("/home", { replace: true })
       } else {
-        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+        Notify.error({ title: "错误通知", description: data.error || "请求失败" })
       }
     }}
   />

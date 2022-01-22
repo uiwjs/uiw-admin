@@ -3,6 +3,11 @@
 - bug修复
 - 功能更新
 
+## 5.0.9 (未发版)
+- @uiw-admin/user-login
+  - 新增`onBefore`和`requestConfig`参数
+
+
 ## 5.0.8
 - @uiw-admin/components
   - 🌟 `ProForm`：  修复只读模式下dateInput 不支持YYYY-MM-DD HH:mm:ss时间格式 
@@ -17,6 +22,9 @@
   - 🌟 `ProTable`： btns 重命名为 operateButtons
   - 🌟 `ProTable`： 增加onBeforeSearch回调
   - 🌟 `ProTable`： 增加searchButtons属性配置搜索区域按钮
+  
+- @uiw-admin/plugins
+  - 🌟 `RoutesWebpackPlugin` 新增路由加载插件
   
 ## 5.0.5
 
