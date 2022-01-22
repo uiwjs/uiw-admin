@@ -6,6 +6,9 @@
 ## 5.0.9 (未发版)
 - @uiw-admin/user-login
   - 新增`onBefore`和`requestConfig`参数
+- @uiw-admin/components
+  - 🌟 `ProForm`：  新增UploadImage上传图片组件
+  - 🌟 `ProForm`：  编辑与只读模式下增加图片上传功能
 
 
 ## 5.0.8
