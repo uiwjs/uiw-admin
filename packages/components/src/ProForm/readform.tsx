@@ -9,7 +9,7 @@ export default ({
   readOnlyProps
 }: ProFormProps) => {
   return (
-    <Descriptions column={3} bordered title={title} {...readOnlyProps}>
+    <Descriptions bordered title={title} {...readOnlyProps}>
       {formDatas?.map(({ label, widget, initialValue = '', option = [], readSpan = 1, widgetProps = {} }, index) => {
         return (
           <Descriptions.Item span={readSpan} label={label} key={index}>
