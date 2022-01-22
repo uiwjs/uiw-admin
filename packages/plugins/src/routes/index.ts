@@ -71,17 +71,14 @@ class RoutesWebpackPlugin {
         this.checkPreAndNext()
         return;
       }
-    } else if (isType === "ts") {
-      const content = fs.readFileSync(this.tsFilePath, { encoding: "utf-8" })
-      const { isJSON, jsonArr } = getJSONData(content)
-      if (isJSON) {
-        this.routes = jsonArr
-        this.nextString = JSON.stringify(jsonArr)
-        this.checkPreAndNext()
-        return;
+    } else if (["js", "ts"].includes(isType as string)) {
+      let filePath = ""
+      if (isType === "js") {
+        filePath = this.jsFilePath
+      } else {
+        filePath = this.tsFilePath
       }
-    } else if (isType === "js") {
-      const content = fs.readFileSync(this.jsFilePath, { encoding: "utf-8" })
+      const content = fs.readFileSync(filePath, { encoding: "utf-8" })
       const { isJSON, jsonArr } = getJSONData(content)
       if (isJSON) {
         this.routes = jsonArr
