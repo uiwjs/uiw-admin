@@ -1,6 +1,7 @@
 import { FormItemsOptionsProps } from '../type'
 import { formatter } from 'uiw'
 import React from 'react';
+import UploadImage from '../widgets/UploadImage'
 
 /**
  * 只读模式表单项 value转换
@@ -29,6 +30,14 @@ export function getReadValue(type: string | any, initialValue: any | any[], opti
     content = initialValue && formatter('YYYY-MM', new Date(initialValue))
   } else if (type === 'dateInput') {
     content = initialValue && formatter(widgetProps?.format || 'YYYY-MM-DD', new Date(initialValue))
+  } else if (type === 'uploadImage') {
+    const uploadImageProps = {
+      readOnly: true,
+      fileList: initialValue,
+      value: initialValue,
+      onChange: () => { }
+    }
+    content = <UploadImage {...uploadImageProps} />
   } else {
     // initialValue 支持 string number 或者 自定义
     content = (

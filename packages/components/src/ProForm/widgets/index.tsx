@@ -2,7 +2,6 @@ import React from 'react';
 import { Fields } from '../type';
 import {
   Input,
-  // Checkbox,
   Switch,
   Textarea,
   DateInput,
@@ -13,6 +12,7 @@ import {
 import Radio from '../../ProTable/widgets/Radio';
 import Select from '../../ProTable/widgets/Select';
 import CheckBox from './CheckBox';
+import UploadImage from './UploadImage';
 /**  @@ 指向 /src/.uiw 目录 自定义表单组件列表 */
 // @ts-ignore
 import { customWidgetsList } from '@/widgets';
@@ -28,6 +28,7 @@ export const commonWidgetsList: Fields = {
   dateInput: DateInput,
   timePicker: TimePicker,
   monthPicker: MonthPicker,
+  uploadImage:UploadImage,
   ...customWidgetsList,
 };
 

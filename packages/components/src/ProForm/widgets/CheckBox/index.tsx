@@ -5,7 +5,7 @@ interface FormSelectProps {
   option?: HTMLOptionElement[];
 }
 
-const FormRadio: React.FC<FormSelectProps> = ({ option, ...others }) => {
+const FormCheckBox: React.FC<FormSelectProps> = ({ option, ...others }) => {
   return (
     <Checkbox.Group {...others}>
       {option &&
@@ -18,4 +18,4 @@ const FormRadio: React.FC<FormSelectProps> = ({ option, ...others }) => {
   );
 };
 
-export default FormRadio;
+export default FormCheckBox;
