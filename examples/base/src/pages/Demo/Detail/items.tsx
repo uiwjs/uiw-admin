@@ -90,16 +90,16 @@ export const items = (queryInfo: any, attr: any) => [
   },
   {
     label: '上传组件',
-    key: 'uploadImage',
-    widget: 'uploadImage',
+    key: 'upload',
+    widget: 'upload',
     span: "24",
     readSpan: 3,
     widgetProps: {
-      accept: ['jpg', 'gif', 'png'],
-      onUploadChange: attr.uploadImage.onUploadChange,
-      fileList: queryInfo?.uploadImage,
+      accept: ['jpg', 'gif', 'png','pdf','xlsx'],
+      onUploadChange: attr.upload.onUploadChange,
+      fileList: queryInfo?.upload,
       maxNumber:3
     },
-    initialValue: queryInfo?.uploadImage,
+    initialValue: queryInfo?.upload,
   },
 ];

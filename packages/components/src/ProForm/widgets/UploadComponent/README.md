@@ -1,10 +1,10 @@
-# 图片类型文件上传
+# 文件上传
 
-<!--UploadImage-->
+<!--Upload-->
 
 ### 基本使用(与uiw/form使用保持一致)
 ```js
-import UploadImage from '@uiw-admin/components/lib/ProForm/widgets/UploadImage'
+import Upload from '@uiw-admin/components/lib/ProForm/widgets/UploadComponent'
 import React, { useState } from 'react';
 import { Button } from 'uiw'
 const Demo = () => {
@@ -16,7 +16,7 @@ const Demo = () => {
     onUploadChange:(value:any)=>setfileList(value)
   }
     return (
-       <UploadImage {...config} />
+       <Upload {...config} />
   );
 }
 ```
