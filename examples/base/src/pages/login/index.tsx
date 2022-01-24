@@ -1,48 +1,46 @@
-import React from 'react';
-import { Form, Row, Col, Button, Input, Checkbox } from 'uiw';
-import { useSelector, useDispatch } from 'react-redux';
-import logo from '../../assets/logo-dark.svg';
-import styles from './index.module.less';
-import { RootState, Dispatch } from '@uiw-admin/models';
-import useSWR, { useSWRConfig } from 'swr';
-import { useNavigate, Link } from 'react-router-dom';
+import React from 'react'
+import { Form, Row, Col, Button, Input, Checkbox } from 'uiw'
+import { useSelector } from 'react-redux'
+import logo from '../../assets/logo-dark.svg'
+import styles from './index.module.less'
+import { RootState } from '@uiw-admin/models'
+import useSWR, { useSWRConfig } from 'swr'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  const dispatch = useDispatch<Dispatch>();
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const { provider } = useSWRConfig() as any;
-  const prt = provider();
+  const { provider } = useSWRConfig() as any
+  const prt = provider()
   const loading = useSelector(
-    (state: RootState) => state.loading.effects.login.submit,
-  );
-  const state = useSelector((state: RootState) => state);
-  console.log(state);
+    (state: RootState) => state.loading.effects.login.submit
+  )
+  const state = useSelector((state: RootState) => state)
+  console.log(state)
 
-  const [store, setStore] = React.useState<any>();
+  const [store, setStore] = React.useState<any>()
 
   const { data } = useSWR(
     store
       ? [
-        '/api/login',
-        {
-          method: 'POST',
-          body: { username: 'admin', password: 'admin' },
-        },
-      ]
-      : null,
-  );
+          '/api/login',
+          {
+            method: 'POST',
+            body: { username: 'admin', password: 'admin' }
+          }
+        ]
+      : null
+  )
   if (data && data.token) {
-    prt.set('login', { ...data });
+    prt.set('login', { ...data })
   }
   React.useEffect(() => {
     if (data && data.token) {
-      sessionStorage.setItem('token', data.token);
-      sessionStorage.setItem('auth', JSON.stringify(data.authList || []));
-      navigate('/home');
+      sessionStorage.setItem('token', data.token)
+      sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
+      navigate('/home')
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(data)]);
+  }, [JSON.stringify(data)])
 
   return (
     <Row justify="center" align="middle" style={{ height: '100%' }}>
@@ -53,18 +51,18 @@ const Login = () => {
         <Form
           resetOnSubmit={false}
           onSubmit={({ current }) => {
-            const errorObj: any = {};
-            if (!current.username) errorObj.username = '用户名不能为空！';
-            if (!current.password) errorObj.password = '密码不能为空！';
+            const errorObj: any = {}
+            if (!current.username) errorObj.username = '用户名不能为空！'
+            if (!current.password) errorObj.password = '密码不能为空！'
             if (Object.keys(errorObj).length > 0) {
-              const err: any = new Error();
-              err.filed = errorObj;
-              throw err;
+              const err: any = new Error()
+              err.filed = errorObj
+              throw err
             } else {
               setStore({
                 username: current.username,
-                password: current.password,
-              });
+                password: current.password
+              })
             }
             // dispatch.login.submit({
             //   username: current.username,
@@ -72,9 +70,9 @@ const Login = () => {
           }}
           onSubmitError={(error: any) => {
             if (error.filed) {
-              return { ...error.filed };
+              return { ...error.filed }
             }
-            return null;
+            return null
           }}
           fields={{
             username: {
@@ -88,7 +86,7 @@ const Login = () => {
                   id="username"
                   placeholder="用户名: admin"
                 />
-              ),
+              )
             },
             password: {
               labelClassName: 'fieldLabel',
@@ -102,7 +100,7 @@ const Login = () => {
                   type="password"
                   placeholder="密码: admin"
                 />
-              ),
+              )
             },
             terms: {
               style: { margin: 0 },
@@ -111,8 +109,8 @@ const Login = () => {
                 <Checkbox disabled={!!loading} value="1">
                   已阅读并同意
                 </Checkbox>
-              ),
-            },
+              )
+            }
           }}
         >
           {({ fields, canSubmit }) => {
@@ -144,7 +142,7 @@ const Login = () => {
                   </Col>
                 </Row>
               </>
-            );
+            )
           }}
         </Form>
         <div className={styles.footer}>
@@ -153,7 +151,7 @@ const Login = () => {
         </div>
       </Col>
     </Row>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

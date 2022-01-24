@@ -1,91 +1,91 @@
-import { RoutersJSON } from "@uiw-admin/router-control"
+import { RoutersJSON } from '@uiw-admin/router-control'
 const routes: RoutersJSON[] = [
   {
-    "path": "/login",
-    "component": "@/layouts/UserLayout"
+    path: '/login',
+    component: '@/layouts/UserLayout'
   },
   {
-    "path": "/",
-    "component": "@/layouts/BasicLayout",
-    "routes": [
+    path: '/',
+    component: '@/layouts/BasicLayout',
+    routes: [
       {
-        "index": true,
-        "redirect": "/tableList"
+        index: true,
+        redirect: '/tableList'
       },
       {
-        "path": "/tableList",
-        "name": "查询表格",
-        "component": "@/pages/TableList",
-        "icon": "search"
+        path: '/tableList',
+        name: '查询表格',
+        component: '@/pages/TableList',
+        icon: 'search'
       },
       {
-        "path": "/home",
-        "name": "首页-ts文件",
-        "component": "@/pages/TableList",
-        "icon": "home"
+        path: '/home',
+        name: '首页-ts文件',
+        component: '@/pages/TableList',
+        icon: 'home'
       },
       {
-        "path": "/dom",
-        "name": "子项",
-        "icon": "copy",
-        "routes": [
+        path: '/dom',
+        name: '子项',
+        icon: 'copy',
+        routes: [
           {
-            "path": "/dom/courses",
-            "name": "Dashboard",
-            "component": "@/pages/Dashboard"
+            path: '/dom/courses',
+            name: 'Dashboard',
+            component: '@/pages/Dashboard'
           }
         ]
       },
       {
-        "path": "/demo",
-        "name": "demo",
-        "component": "@/pages/Demo",
-        "icon": "component"
+        path: '/demo',
+        name: 'demo',
+        component: '@/pages/Demo',
+        icon: 'component'
       },
       {
-        "path": "/exceptions",
-        "name": "异常",
-        "icon": "warning-o",
-        "routes": [
+        path: '/exceptions',
+        name: '异常',
+        icon: 'warning-o',
+        routes: [
           {
-            "path": "/exceptions/403",
-            "name": "403",
-            "component": "403"
+            path: '/exceptions/403',
+            name: '403',
+            component: '403'
           },
           {
-            "path": "/exceptions/500",
-            "name": "500",
-            "component": "500"
+            path: '/exceptions/500',
+            name: '500',
+            component: '500'
           },
           {
-            "path": "/exceptions/404",
-            "name": "404",
-            "component": "404"
+            path: '/exceptions/404',
+            name: '404',
+            component: '404'
           }
         ]
       },
       {
-        "path": "/403",
-        "name": "403",
-        "hideInMenu": true,
-        "component": "403"
+        path: '/403',
+        name: '403',
+        hideInMenu: true,
+        component: '403'
       },
       {
-        "path": "/500",
-        "name": "500",
-        "hideInMenu": true,
-        "component": "500"
+        path: '/500',
+        name: '500',
+        hideInMenu: true,
+        component: '500'
       },
       {
-        "path": "/404",
-        "name": "404",
-        "hideInMenu": true,
-        "component": "404"
+        path: '/404',
+        name: '404',
+        hideInMenu: true,
+        component: '404'
       },
       {
-        "path": "*",
-        "name": "404",
-        "component": "404"
+        path: '*',
+        name: '404',
+        component: '404'
       }
     ]
   }

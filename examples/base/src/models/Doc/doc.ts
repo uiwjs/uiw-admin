@@ -1,4 +1,4 @@
-import { Dispatch, ModelDefault } from '@uiw-admin/models';
+import { Dispatch, ModelDefault } from '@uiw-admin/models'
 export interface GlobalState {
   test: string;
   [s: string]: any;
@@ -7,20 +7,20 @@ export interface GlobalState {
 const global: ModelDefault = {
   name: 'doc',
   state: {
-    test: 'doc model',
+    test: 'doc model'
   },
   reducers: {
     updateState: (state: GlobalState, payload: GlobalState) => ({
       ...state,
-      ...payload,
-    }),
+      ...payload
+    })
   },
   effects: (dispatch: any) => ({
-    async verify() {
-      const dph = dispatch as Dispatch;
-      dph.global.updateState({ test: '测试2' });
-    },
-  }),
-};
+    async verify () {
+      const dph = dispatch as Dispatch
+      dph.global.updateState({ test: '测试2' })
+    }
+  })
+}
 
-export default global;
+export default global

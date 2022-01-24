@@ -9,4 +9,4 @@ module.exports.authList = [
   '/exceptions/403',
   '/exceptions/404',
   '/exceptions/500',
-];
+]

@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "start": "kkt start",
-    "build": "kkt build"
+    "build": "kkt build",
+    "lint": "eslint \"{src,}/**/*.{ts,tsx,js}\"",
+    "lint:fix": "yarn lint --fix"
   },
   "repository": {
     "type": "git",
