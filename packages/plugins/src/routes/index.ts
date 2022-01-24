@@ -112,7 +112,10 @@ class RoutesWebpackPlugin {
         chokidar.watch(this.cwdConfig, {
           cwd: this.cwd,
         }).on('all', (event, path) => {
-          if (["change", "add", "unlink"].includes(event) && ["config/routes.json", "config/routes.ts", "config/routes.js"].includes(path)) {
+          if (["change", "add", "unlink"].includes(event) &&
+            /config(\\|\/)routes.(js|json|ts)/.test(path)
+            // && ["config/routes.json", "config/routes.ts", "config/routes.js"].includes(path)
+          ) {
             this.JudgeFileType();
           }
         });
