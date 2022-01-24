@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/plugins",
-  "version": "5.0.9",
+  "version": "5.0.10",
   "description": "plugins",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/models#readme",
@@ -41,10 +41,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
+    "@babel/generator": "7.16.8",
     "@babel/parser": "7.16.8",
     "@babel/traverse": "7.16.8",
     "@babel/types": "7.16.8",
-    "@babel/generator": "7.16.8",
     "chokidar": "3.5.3"
   }
 }
