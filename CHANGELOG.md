@@ -10,6 +10,8 @@
   - 🌟 `Upload`： UploadImage组件更名为Upload
   - 🌟 `Upload`： 增加错误提示
   - 🌟 `Upload`： 增加pdf和xlsx文件类型上传
+- @uiw-admin/router-control
+  - `react-redux` 全局状态抽离到 `@uiw-admin/router-control`组件内部
 
 ## 5.0.9
 - @uiw-admin/user-login
