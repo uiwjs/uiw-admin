@@ -58,11 +58,10 @@ const Detail = ({ updateData }: DetailProps) => {
         formType={isView ? 'pure' : 'card'}
         submitRef={baseRef}
         readOnly={isView}
-        readOnlyProps={{ column: 2 }}
         onSubmit={(initial, current) => {
           const errorObj: any = {};
-          if (!current?.lastName) {
-            errorObj.lastName = '名字不能为空';
+          if (!current?.input) {
+            errorObj.input = '名字不能为空';
           }
           if (Object.keys(errorObj).length > 0) {
             const err: any = new Error();
@@ -77,7 +76,12 @@ const Detail = ({ updateData }: DetailProps) => {
         onChange={(initial: any, current: any) =>
           updateData({ queryInfo: { ...queryInfo, ...current } })
         }
-        formDatas={items(queryInfo,isView) as any}
+        formDatas={items(queryInfo, {
+          isView,
+          upload: {
+            onUploadChange: (fileList: any) =>  updateData({ queryInfo: { ...queryInfo, upload: fileList } })
+          }
+        }) as any}
       />
     </ProDrawer>
   );

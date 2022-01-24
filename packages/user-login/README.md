@@ -26,6 +26,7 @@ export interface UserLoginProps {
   footer?: React.ReactNode;
   /** 背景图片 */
   bg?: string;
+  /** 如果存在 children 则 覆盖默认登录框里面内容  */ 
   children?: React.ReactNode;
   /** 项目名称 */
   projectName?: string;
@@ -35,6 +36,10 @@ export interface UserLoginProps {
   btnProps?: Omit<ButtonProps, "ref">;
   /** 请求接口 */
   api?: string;
+  /** 调用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作  */
+  onBefore?: (store: FormValue) => { [s: string]: any } | boolean;
+  /** request 请求的 options 配置参数 */
+  requestConfig?: Options
 }
 ```
 
@@ -50,6 +55,7 @@ const UserLayout = () => {
 
   return <UserLogin
     api="/api/login"
+    onBefore={(value) => ({ a: 12, b: 1221 })}
     btnProps={{ type: "primary" }}
     onSuccess={(data) => {
       if (data && data.token) {

@@ -9,6 +9,12 @@ config
 npm i @uiw-admin/config --save
 ```
 
+## 说明
+
+> `@` 指向 src 目录
+> `@@` 指向 src/.uiw 目录
+
+
 ## define默认值
 
 ```ts

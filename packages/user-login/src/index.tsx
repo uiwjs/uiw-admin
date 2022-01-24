@@ -5,6 +5,7 @@ import DocumentTitle from "@uiw-admin/document-title"
 import { Form, Row, Col, Button, Input, ButtonProps } from 'uiw';
 import useSWR from 'swr'
 import { request } from "@uiw-admin/utils"
+import { Options } from "@uiw-admin/utils/lib/request"
 
 import "./styles/index.css"
 
@@ -33,6 +34,10 @@ export interface UserLoginProps {
   btnProps?: Omit<ButtonProps, "ref">;
   /** 请求接口 */
   api?: string;
+  /** 调用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作  */
+  onBefore?: (store: FormValue) => { [s: string]: any } | boolean;
+  /** request 请求 options 配置参数 */
+  requestConfig?: Options
 }
 
 export default (props: UserLoginProps) => {
@@ -48,11 +53,13 @@ export default (props: UserLoginProps) => {
     projectName,
     onSuccess = () => null,
     btnProps = {},
-    api
+    api,
+    onBefore,
+    requestConfig
   } = props
   const [store, setStore] = React.useState<FormValue>()
   const { isValidating, } = useSWR(store ? [api,
-    { method: 'POST', body: store }] : null,
+    { method: 'POST', body: store, ...(requestConfig || {}) }] : null,
     request,
     {
       revalidateOnFocus: false,
@@ -76,6 +83,16 @@ export default (props: UserLoginProps) => {
                 err.filed = errorObj;
                 throw err;
               } else {
+                if (typeof onBefore === "function") {
+                  const result = onBefore(current)
+                  if (typeof result === "object") {
+                    setStore({ ...current, ...(result || {}) })
+                    return;
+                  }
+                  if (!result) {
+                    return;
+                  }
+                }
                 setStore({ ...current })
               }
             }}

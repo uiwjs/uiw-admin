@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { store } from '@uiw-admin/models';
 import Control from '@uiw-admin/router-control';
 import { SWRConfig } from 'swr';
 import { request } from '@uiw-admin/utils';
@@ -18,11 +16,9 @@ ReactDOM.render(
       provider: () => new Map(),
     }}
   >
-    <Provider store={store}>
-      <Control
-        routeType="hash"
-      />
-    </Provider>
+    <Control
+      routeType="hash"
+    />
   </SWRConfig>,
   document.getElementById('root'),
 );

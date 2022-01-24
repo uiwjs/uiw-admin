@@ -4,7 +4,7 @@
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import { IsModel } from './utils';
+import { IsModel } from './../utils';
 import createRematchTemps, { createTemp } from './temp';
 
 class RematchWebpackPlugin {

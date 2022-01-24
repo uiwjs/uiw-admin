@@ -5,10 +5,14 @@
 npm i @uiw-admin/plugins
 ```
 
-## RematchWebpackPlugin 
+## [RematchWebpackPlugin](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/packages/plugins/src/rematch/index.ts) 
 
 > 自动加载 models
+> [使用方式](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/examples/base/.kktrc.ts#L8-L22)
 
-## RoutesWebpackPlugin 
 
-> json文件 路由转化(必须存在config/routes.json才能进行转化)
+## [RoutesWebpackPlugin](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/packages/plugins/src/routes/index.ts) 
+
+> 路由转化,获取项目根目录下`congfig`文件夹下的`routes.json`或`routes.ts`或`routes.js`文件
+> 优先级  json > ts > js 
+> [使用方式](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/examples/base/.kktrc.ts#L8-L22)
