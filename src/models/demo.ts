@@ -1,5 +1,5 @@
-import { ModelDefault, Dispatch } from '@uiw-admin/models';
-import { selectById } from '../servers/demo';
+import { ModelDefault, Dispatch } from '@uiw-admin/models'
+import { selectById } from '../servers/demo'
 
 const demo: ModelDefault = {
   name: 'demo',
@@ -7,35 +7,35 @@ const demo: ModelDefault = {
     drawerVisible: false,
     tableType: '',
     queryInfo: {},
-    isView: false,
+    isView: false
   },
   reducers: {
     updateState: (state: any, payload: any) => ({
       ...state,
-      ...payload,
-    }),
+      ...payload
+    })
   },
   effects: (dispatch: any) => ({
-    async selectById(payload: any) {
-      const dph = dispatch as Dispatch;
-      const data = await selectById(payload);
+    async selectById (payload: any) {
+      const dph = dispatch as Dispatch
+      const data = await selectById(payload)
       if (data.code === 200) {
         dph.demo.updateState({
           drawerVisible: true,
-          queryInfo: data.data || {},
-        });
+          queryInfo: data.data || {}
+        })
       }
     },
-    clean() {
-      const dph = dispatch as Dispatch;
+    clean () {
+      const dph = dispatch as Dispatch
       dph.demo.updateState({
         drawerVisible: false,
         tableType: '',
         queryInfo: {},
-        isView: false,
-      });
-    },
-  }),
-};
+        isView: false
+      })
+    }
+  })
+}
 
-export default demo;
+export default demo

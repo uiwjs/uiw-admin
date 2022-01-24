@@ -1,17 +1,17 @@
-import { request } from '@uiw-admin/utils';
+import { request } from '@uiw-admin/utils'
 
 // /api/demo/selectById
-function selectById(params: { id: string }) {
+function selectById (params: { id: string }) {
   return request('/api/demo/selectById', {
     method: 'POST',
-    body: { ...params },
-  });
+    body: { ...params }
+  })
 }
 
-const update = '/api/demo/update';
+const update = '/api/demo/update'
 
-const insert = '/api/demo/insert';
+const insert = '/api/demo/insert'
 
-const selectPage = '/api/demo/selectPage';
+const selectPage = '/api/demo/selectPage'
 
-export { selectById, update, insert, selectPage };
+export { selectById, update, insert, selectPage }

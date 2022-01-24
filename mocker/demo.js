@@ -1,6 +1,6 @@
 module.exports.selectPage = function (req, res) {
-  const { pageSize, page } = req.body;
-  const list = [];
+  const { pageSize, page } = req.body
+  const list = []
   for (let i = 0; i < 50; i++) {
     list[i] = {
       id: i + 1,
@@ -8,10 +8,10 @@ module.exports.selectPage = function (req, res) {
       age: '16',
       info: '又名G.E.M.，原名邓诗颖，1991年8月16日生于中国上海，中国香港创作型女歌手',
       edit: '',
-    };
+    }
   }
 
-  var newDataList = list.slice((page - 1) * pageSize, page * pageSize);
+  const newDataList = list.slice((page - 1) * pageSize, page * pageSize)
 
   setTimeout(() => {
     return res.status(200).json({
@@ -21,25 +21,25 @@ module.exports.selectPage = function (req, res) {
         rows: newDataList,
         total: 50,
       },
-    });
-  }, 2000);
-};
+    })
+  }, 2000)
+}
 
 module.exports.insert = function (req, res) {
   return res.status(200).json({
     code: 200,
     message: '新增成功',
     data: {},
-  });
-};
+  })
+}
 
 module.exports.update = function (req, res) {
   return res.status(200).json({
     code: 200,
     message: '编辑成功',
     data: {},
-  });
-};
+  })
+}
 
 module.exports.selectById = function (req, res) {
   return res.status(200).json({
@@ -68,13 +68,13 @@ module.exports.selectById = function (req, res) {
         },
       ],
     },
-  });
-};
+  })
+}
 
 module.exports.upload = function (req, res) {
   return res.status(200).json({
     code: 200,
     message: '获取详情成功',
     uid: '1234',
-  });
-};
+  })
+}

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Button } from 'uiw';
-import { useNavigate } from 'react-router-dom';
-import useSWR, { useSWRConfig } from 'swr';
+import React from 'react'
+import { Button } from 'uiw'
+import { useNavigate } from 'react-router-dom'
+import { useSWRConfig } from 'swr'
 
-const Dashboard = (props: any) => {
-  const navigate = useNavigate();
-  const [state, setState] = React.useState('');
-  const { cache } = useSWRConfig();
+const Dashboard = () => {
+  const navigate = useNavigate()
+  const [state, setState] = React.useState('')
+  const { cache } = useSWRConfig()
 
-  console.log('cache', cache.get('login'));
+  console.log('cache', cache.get('login'))
 
   return (
     <div>
@@ -17,6 +17,6 @@ const Dashboard = (props: any) => {
       <hr />
       <Button onClick={() => navigate('/', { replace: true })}>Logout</Button>
     </div>
-  );
-};
-export default Dashboard;
+  )
+}
+export default Dashboard

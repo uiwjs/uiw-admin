@@ -1,6 +1,6 @@
-const { getData, getCity } = require('./selectPage');
-const { login, verify, logout, reloadAuth } = require('./login');
-const { selectPage, insert, update, selectById, upload } = require('./demo');
+const { getData, getCity } = require('./selectPage')
+const { login, verify, logout, reloadAuth } = require('./login')
+const { selectPage, insert, update, selectById, upload } = require('./demo')
 
 const proxy = {
   'GET /api/user': { id: 1, username: 'kenny', sex: 6 },
@@ -16,6 +16,6 @@ const proxy = {
   'POST /api/demo/insert': insert,
   'POST /api/demo/update': update,
   'POST /api/demo/upload': upload,
-};
+}
 
-module.exports = proxy;
+module.exports = proxy
