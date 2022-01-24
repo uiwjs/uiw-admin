@@ -98,7 +98,7 @@ export const items = (queryInfo: any, attr: any) => [
       accept: ['jpg', 'gif', 'png','pdf','xlsx'],
       onUploadChange: attr.upload.onUploadChange,
       fileList: queryInfo?.upload,
-      maxNumber:3
+      maxNumber:10
     },
     initialValue: queryInfo?.upload,
   },

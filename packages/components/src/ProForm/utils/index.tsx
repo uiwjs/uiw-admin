@@ -1,7 +1,7 @@
 import { FormItemsOptionsProps } from '../type'
 import { formatter } from 'uiw'
 import React from 'react';
-import Upload from '../widgets/UploadComponent'
+import Upload from '../widgets/Upload'
 
 /**
  * 只读模式表单项 value转换

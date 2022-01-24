@@ -16,9 +16,6 @@ export interface ReactUploadPropsType {
   maxNumber?: number;
   accept?: Array<string>;
   maxFileSize?: number;
-  resolutionWidth?: number;
-  resolutionHeight?: number;
-  resolutionType?: ResolutionType;
   onError?: (errors: ErrorsType, files?: FileListType) => void;
   dataURLKey?: string;
   inputProps?: React.HTMLProps<HTMLInputElement>;
@@ -39,5 +36,3 @@ export type ErrorsType = {
   accept?: boolean;
   resolution?: boolean;
 } | null;
-
-export type ResolutionType = 'absolute' | 'less' | 'more' | 'ratio';

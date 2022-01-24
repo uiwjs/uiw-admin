@@ -1,147 +1,87 @@
-import React, { useRef, useState, useCallback, useMemo } from 'react';
-import { openFileDialog, getListFiles, getAcceptTypeString } from './utils';
-import { getErrorValidation } from './validation';
-import {
-  FileListType,
-  ReactUploadPropsType,
-  ErrorsType,
-} from './types';
+import React from 'react';
+import { Modal, Message } from 'uiw'
+import ReactUpload from '../../../Upload';
+import { ReactUploadPropsType, FileListType, ChildrenInterface } from '../../../Upload/types'
+import Card from './card'
+import List from './list'
 
-const DEFAULT_NULL_INDEX = -1
 
-const ReactUpload: React.FC<ReactUploadPropsType> = ({
-  value = [],
-  onChange,
-  onError,
-  children,
-  dataURLKey = 'dataURL',
-  multiple = false,
+export interface UploadCompontneProps extends ReactUploadPropsType {
+  // 上传变化的回调
+  onUploadChange?: (imageList: FileListType) => void;
+  // 图片列表
+  fileList?: FileListType;
+  // 是否只读
+  readOnly?: boolean;
+  // 上传列表的内建样式，支持三种基本样式 list 和 picture-card
+  listType?: "picture-card" | 'list'
+}
+
+export default ({
+  onUploadChange,
+  fileList = [],
+  readOnly = false,
   maxNumber = 3,
-  accept,
-  maxFileSize,
-  resolutionWidth,
-  resolutionHeight,
-  resolutionType,
-  inputProps = {},
-}) => {
-  const inValue = value || [];
-  const inputRef = useRef<HTMLInputElement>(null);
-  const [keyUpdate, setKeyUpdate] = useState<number>(DEFAULT_NULL_INDEX);
-  const [errors, setErrors] = useState<ErrorsType>(null);
+  listType = 'list',
+  ...others
+}: UploadCompontneProps) => {
 
-  const handleClickInput = useCallback(() => openFileDialog(inputRef), [
-    inputRef,
-  ]);
+  const [images, setImages] = React.useState<any>(fileList);
+  const [visible, setVisible] = React.useState(false);
+  const [src, setSrc] = React.useState('');
 
-  const onFileUpload = useCallback((): void => {
-    setKeyUpdate(DEFAULT_NULL_INDEX);
-    handleClickInput();
-  }, [handleClickInput]);
-
-  const onFileRemoveAll = useCallback((): void => {
-    onChange?.([]);
-  }, [onChange]);
-
-  const onFileRemove = (index: number | Array<number>): void => {
-    const updatedList = [...inValue];
-    if (Array.isArray(index)) {
-      index.forEach((i) => {
-        updatedList.splice(i, 1);
-      });
-    } else {
-      updatedList.splice(index, 1);
-    }
-    onChange?.(updatedList);
+  const onChange = (imageList: FileListType, addUpdateIndex: any) => {
+    setImages(imageList);
+    onUploadChange?.(imageList)
   };
 
-  const onFileUpdate = (index: number): void => {
-    setKeyUpdate(index);
-    handleClickInput();
-  };
+  const onUploadView = (src: string, index: number) => {
+    setSrc(src);
+    setVisible(true);
+  }
 
-  const validate = async (fileList: FileListType): Promise<boolean> => {
-    const errorsValidation = await getErrorValidation({
-      fileList,
-      maxFileSize,
-      maxNumber,
-      accept,
-      keyUpdate,
-      resolutionType,
-      resolutionWidth,
-      resolutionHeight,
-      value: inValue,
-    });
-    if (errorsValidation) {
-      setErrors(errorsValidation);
-      onError?.(errorsValidation, fileList);
-      return false;
-    }
-    errors && setErrors(null);
-    return true;
-  };
-
-  const handleChange = async (files: FileList | null) => {
-    if (!files) return;
-    const fileList = await getListFiles(files, dataURLKey);
-    if (!fileList.length) return;
-    const checkValidate = await validate(fileList);
-    if (!checkValidate) return;
-    let updatedFileList: FileListType;
-    const updatedIndexes: number[] = [];
-    if (keyUpdate > DEFAULT_NULL_INDEX) {
-      const [firstFile] = fileList;
-      updatedFileList = [...inValue];
-      updatedFileList[keyUpdate] = firstFile;
-      updatedIndexes.push(keyUpdate);
-    } else if (multiple) {
-      updatedFileList = [...inValue, ...fileList];
-      for (
-        let i = inValue.length as number;
-        i < updatedFileList.length;
-        i += 1
-      ) {
-        updatedIndexes.push(i);
-      }
-    } else {
-      updatedFileList = [fileList[0]];
-      updatedIndexes.push(0);
-    }
-    onChange?.(updatedFileList, updatedIndexes);
-  };
-
-  const onInputChange = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ): Promise<void> => {
-    await handleChange(e.target.files);
-    keyUpdate > DEFAULT_NULL_INDEX && setKeyUpdate(DEFAULT_NULL_INDEX);
-    if (inputRef.current) inputRef.current.value = '';
-  };
-
-  const acceptTypeString = useMemo(() => getAcceptTypeString(accept), [
-    accept,
-  ]);
-
+  const config = {
+    ...others,
+    maxNumber,
+    value: images || [],
+    multiple: true,
+    dataURLKey: "data_url",
+    onChange: onChange,
+  }
   return (
-    <React.Fragment>
-      <input
-        type="file"
-        accept={acceptTypeString}
-        ref={inputRef}
-        multiple={multiple && keyUpdate === DEFAULT_NULL_INDEX}
-        onChange={onInputChange}
-        style={{ display: 'none' }}
-        {...inputProps}
-      />
-      {children?.({
-        imageList: inValue,
-        onFileUpload,
-        onFileRemoveAll,
-        onFileUpdate,
-        onFileRemove,
-        errors,
-      })}
-    </React.Fragment>
-  );
-};
+    <div style={{ flex: 1 }}>
+      <ReactUpload {...config}>
+        {(chidrenProps: ChildrenInterface) => {
 
-export default ReactUpload;
+          const renderChildrenProps = {
+            readOnly,
+            maxNumber,
+            onUploadView,
+            ...chidrenProps
+          }
+
+          return (
+            <React.Fragment>
+              {listType === 'list' ? <List {...renderChildrenProps} /> : <Card {...renderChildrenProps} />}
+              {chidrenProps?.errors && (
+                <div>
+                  {chidrenProps.errors?.maxNumber && <Message type="error" title="文件上传数量已达上限" />}
+                  {chidrenProps.errors?.accept && <Message type="error" title="文件类型错误" />}
+                  {chidrenProps.errors?.maxFileSize && <Message type="error" title="文件大小超过上限" />}
+                </div>
+              )}
+            </React.Fragment>
+          )
+        }}
+      </ReactUpload>
+      <Modal
+        isOpen={visible}
+        onClosed={() => setVisible(false)}
+        width={600}
+        confirmButtonProps={{ style: { display: "none" } }}
+      >
+        <img crossOrigin="anonymous" src={src} alt="" style={{ width: "100%", height: "100%" }} />
+      </Modal>
+    </div>
+  );
+}

@@ -12,7 +12,7 @@ import {
 import Radio from '../../ProTable/widgets/Radio';
 import Select from '../../ProTable/widgets/Select';
 import CheckBox from './CheckBox';
-import Upload from './UploadComponent';
+import Upload from './Upload';
 /**  @@ 指向 /src/.uiw 目录 自定义表单组件列表 */
 // @ts-ignore
 import { customWidgetsList } from '@/widgets';
