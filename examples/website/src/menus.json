@@ -4,6 +4,11 @@
     "path": "/quick-start"
   },
   {
+    "label": "更新日志",
+    "target": "__blank",
+    "path": "https://github.com/uiwjs/uiw-admin/blob/master/CHANGELOG.md"
+  },
+  {
     "divider": true,
     "label": "示例"
   },
