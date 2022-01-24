@@ -1,10 +1,9 @@
 import { ButtonProps, TableColumns, TableProps, FormSubmitProps } from 'uiw';
 import { SWRConfiguration } from 'swr';
-
 export interface ProtableProps extends TableProps {
   table: useTableData;
-  operateButtons?: Array<ButtonProps>;
-  searchBtns?: Array<ButtonProps>;
+  operateButtons?: Array<ButtonProps & { render?: JSX.Element }>;
+  searchBtns?: Array<ButtonProps & { render?: JSX.Element }>;
   columns: FormCol[];
   onBeforeSearch?: (state: FormSubmitProps) => Boolean
 }
@@ -12,21 +11,21 @@ export interface ProtableProps extends TableProps {
 export interface FormCol extends TableColumns {
   props?: {
     widget:
-      | 'input'
-      | 'radio'
-      | 'checkbox'
-      | 'switch'
-      | 'select'
-      | 'textarea'
-      | 'dateInput'
-      | 'timePicker'
-      | 'searchSelect'
-      | 'monthPicker';
+    | 'input'
+    | 'radio'
+    | 'checkbox'
+    | 'switch'
+    | 'select'
+    | 'textarea'
+    | 'dateInput'
+    | 'timePicker'
+    | 'searchSelect'
+    | 'monthPicker';
     [key: string]: any;
   };
 }
 
-export interface BaseFormProps extends Omit<ProtableProps, 'table' | 'operateButtons' > {
+export interface BaseFormProps extends Omit<ProtableProps, 'table' | 'operateButtons'> {
 }
 
 export type Fields = {
@@ -46,7 +45,7 @@ export type Params = {
   ) => {
     [key: string]: any;
   };
-  SWRConfiguration? : SWRConfiguration
+  SWRConfiguration?: SWRConfiguration
 };
 
 export interface useTableData extends Params {

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Button } from 'uiw';
+import { Button, Row } from 'uiw';
 import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
@@ -56,13 +56,15 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
         <BaseForm columns={columns} searchBtns={searchBtns} onBeforeSearch={onBeforeSearch} />
         {/* 操作区域 */}
         {operateButtons.length > 0 && (
-          <div style={{ background: '#fff', padding: 10 }}>
+          <Row gutter={10}>
             {operateButtons.map((btn: any, idx: number) => (
-              <Button key={idx.toString()} style={{ marginRight: 5 }} {...btn}>
-                {btn.label}
-              </Button>
+              btn?.render ? <React.Fragment key={idx.toString()}>{btn.render}</React.Fragment> : (
+                <Button key={idx.toString()} {...btn}>
+                  {btn.label}
+                </Button>
+              )
             ))}
-          </div>
+          </Row>
         )}
         {/* 列表组件 */}
         <Table columns={columns} {...tableProps} />
