@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[31],{8031:function(n,s,a){a.r(s),s.default="@uiw-admin/basic-layouts\n---\n\n## Installation\n\n```bash\nnpm i @uiw-admin/basic-layouts --save\n```"}}]);
-//# sourceMappingURL=31.5aff78ae.chunk.js.map
