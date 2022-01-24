@@ -22,7 +22,7 @@ export interface ReactUploadPropsType {
 }
 
 export interface ChildrenInterface {
-  imageList: FileListType;
+  fileList: FileListType;
   onFileUpload: () => void;
   onFileRemoveAll: () => void;
   errors: ErrorsType;

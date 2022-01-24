@@ -127,7 +127,7 @@ const ReactUpload: React.FC<ReactUploadPropsType> = ({
         {...inputProps}
       />
       {children?.({
-        imageList: inValue,
+        fileList: inValue,
         onFileUpload,
         onFileRemoveAll,
         onFileUpdate,

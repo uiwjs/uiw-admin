@@ -9,7 +9,7 @@ import { Upload } from '@uiw-admin/components'
 import { FileType } from '@uiw-admin/components/lib/Upload/types'
 const Demo = () => {
   const [images, setImages] = React.useState<FileType[]>([]);
-  const onChange = (imageList:FileType[]) => setImages(imageList);
+  const onChange = (fileList:FileType[]) => setImages(fileList);
   return (
       <Upload
         multiple
@@ -19,7 +19,7 @@ const Demo = () => {
         dataURLKey="data_url"
       >
         {({
-          imageList,
+          fileList,
           onFileUpload,
           onFileRemoveAll,
           onFileUpdate,
@@ -28,7 +28,7 @@ const Demo = () => {
           <div>
             <button onClick={onFileUpload}>上传</button>
             <button onClick={onFileRemoveAll}>删除全部</button>
-            {imageList.map((image:FileType, index:number) => (
+            {fileList.map((image:FileType, index:number) => (
               <div key={index} className="image-item">
                 <img src={image['data_url']} alt="" width="100" />
                 <div>
@@ -49,14 +49,14 @@ const Demo = () => {
 interface ReactUploadPropsType {
   // 值
   value: FileType[];
-  // 上传回调
+  // 上传文件改变时的回调
   onChange: (value: FileType[], addUpdatedIndex?: Array<number>) => void;
   children?: (props: ChildrenInterface) => React.ReactNode;
-  // 是否多个
+  // 是否支持上传多个文件
   multiple?: boolean;
   // 上传最大上限
   maxNumber?: number;
-  // 允许上传文件类型（目前支持图片;xlsx;pdf）
+  // 允许上传文件类型（目前支持图片;xlsx;pdf）默认支持所有图片类型文件上传
   accept?: string[];
   // 上传文件大小上限
   maxFileSize?: number;
@@ -70,7 +70,7 @@ interface ReactUploadPropsType {
 
 interface ChildrenInterface {
   // 列表
-  imageList: FileListType;
+  fileList: FileListType;
   // 上传
   onFileUpload: () => void;
   // 删除全部

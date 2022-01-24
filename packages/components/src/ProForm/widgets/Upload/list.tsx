@@ -13,16 +13,16 @@ export default ({
   readOnly,
   maxNumber,
   onUploadView,
-  imageList,
+  fileList,
   onFileUpload,
   onFileRemoveAll,
   onFileUpdate,
   onFileRemove,
 }: ChildrenInterface & ListProps) => {
   // 上传按钮权限
-  const uploadBtn = maxNumber !== imageList.length
+  const uploadBtn = maxNumber !== fileList.length
   // 全部删除按钮权限
-  const deleteAllBtn = imageList.length > 0
+  const deleteAllBtn = fileList.length > 0
   return (
     <List
       header={!readOnly && (
@@ -32,7 +32,7 @@ export default ({
         </div>
       )}
       style={{ marginTop: 10 }}
-      dataSource={imageList}
+      dataSource={fileList}
       renderItem={(image, index) => {
         const type = image?.file?.type
         return (

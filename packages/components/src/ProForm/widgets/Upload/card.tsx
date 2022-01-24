@@ -14,17 +14,17 @@ export default ({
   readOnly,
   maxNumber,
   onUploadView,
-  imageList,
+  fileList,
   onFileUpload,
   onFileRemoveAll,
   onFileUpdate,
   onFileRemove,
 }: ChildrenInterface & CardProps) => {
   // 上传按钮权限
-  const uploadBtn = maxNumber !== imageList.length
+  const uploadBtn = maxNumber !== fileList.length
   return (
     <div className="upload-list-picture-card-row">
-      {imageList.map((image: any, index: number) => {
+      {fileList.map((image: any, index: number) => {
         const type = image?.file?.type
         return (
           <div className="upload-list-picture-card-container" key={index}>

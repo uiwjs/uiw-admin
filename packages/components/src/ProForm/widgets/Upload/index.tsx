@@ -8,7 +8,7 @@ import List from './list'
 
 export interface UploadCompontneProps extends ReactUploadPropsType {
   // 上传变化的回调
-  onUploadChange?: (imageList: FileListType) => void;
+  onUploadChange?: (fileList: FileListType) => void;
   // 图片列表
   fileList?: FileListType;
   // 是否只读
@@ -26,13 +26,13 @@ export default ({
   ...others
 }: UploadCompontneProps) => {
 
-  const [images, setImages] = React.useState<any>(fileList);
+  const [files, setFiles] = React.useState<any>(fileList);
   const [visible, setVisible] = React.useState(false);
   const [src, setSrc] = React.useState('');
 
-  const onChange = (imageList: FileListType, addUpdateIndex: any) => {
-    setImages(imageList);
-    onUploadChange?.(imageList)
+  const onChange = (fileList: FileListType, addUpdateIndex: any) => {
+    setFiles(fileList);
+    onUploadChange?.(fileList)
   };
 
   const onUploadView = (src: string, index: number) => {
@@ -43,7 +43,7 @@ export default ({
   const config = {
     ...others,
     maxNumber,
-    value: images || [],
+    value: files || [],
     multiple: true,
     dataURLKey: "data_url",
     onChange: onChange,
