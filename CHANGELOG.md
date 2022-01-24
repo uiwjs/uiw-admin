@@ -61,5 +61,5 @@
 - @uiw-admin/basic-layouts
   - 🌟 增加`HeaderRightMenu`右侧菜单栏
 - @uiw-admin/plugins
-  - 🌟 增加`dva`插件
+  - 🌟 增加`rematch`插件
   - 🌟 增加`widgets`插件
