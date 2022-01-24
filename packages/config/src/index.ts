@@ -17,8 +17,13 @@ export type ConfFun = (
 ) => Configuration;
 
 export interface ConfigProps {
-  /** 别名 */
-  alias?: { [index: string]: string | false | string[] };
+  /**
+   * 别名
+   * 默认系统内置两个别名
+   * 1. `@` 指向 src 目录
+   * 2. `@@` 指向 src/.uiw 目录
+   */
+  alias?: Record<string, string | false | string[]>;
   /** 插件 */
   plugins?: Configuration['plugins'];
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
