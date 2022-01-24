@@ -16,3 +16,12 @@
  * https://github.com/uiwjs/date-formatter.git 
  * Licensed under the MIT license 
  */
+
+/**! 
+ * @uiw/formatter v1.3.2 
+ * Get a formatted date. 
+ * 
+ * Copyright (c) 2022 Kenny Wang <wowohoo@qq.com> 
+ * https://github.com/uiwjs/date-formatter.git 
+ * Licensed under the MIT license 
+ */
