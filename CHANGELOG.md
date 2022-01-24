@@ -5,6 +5,7 @@
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 5.0.10
+
 - @uiw-admin/plugins
   - 🌟 `RoutesWebpackPlugin` 支持`js`和`ts`文件
   - 🐞 修复 windows路径问题;
@@ -16,28 +17,32 @@
   - `react-redux` 全局状态抽离到 `@uiw-admin/router-control`组件内部
 
 ## 5.0.9
+
 - @uiw-admin/user-login
   - 🌟 新增`onBefore`和`requestConfig`参数
 - @uiw-admin/components
   - 🌟 `UploadImage`：  新增UploadImage上传图片组件(待测试)
   - 🌟 `ProForm`：  编辑与只读模式下增加图片上传功能和图片展示功能
 
-
 ## 5.0.8
+
 - @uiw-admin/components
   - 🌟 `ProForm`：  修复只读模式下dateInput 不支持YYYY-MM-DD HH:mm:ss时间格式 
   - 🌟 `ProForm`：  只读模式下initialValue支持React.ReactNode类型
+
 ## 5.0.7
+
 - @uiw-admin/components
   - 🌟 `ProForm`：  增加只读模式 readOnly&readOnlyPropsreadSpan api 
   - 🌟 `ProForm`：  增加submitRef api,可进行表单提交
   - 🌟 `ProForm`：  增加showSaveButton&showResetButton api,替代原btns api
+
 ## 5.0.6
+
 - @uiw-admin/components
   - 🌟 `ProTable`： btns 重命名为 operateButtons
   - 🌟 `ProTable`： 增加onBeforeSearch回调
   - 🌟 `ProTable`： 增加searchButtons属性配置搜索区域按钮
-  
 - @uiw-admin/plugins
   - 🌟 `RoutesWebpackPlugin` 新增路由加载插件
   
