@@ -11,10 +11,11 @@ export default function ProForm(props: ProFormProps) {
   const { formDatas = [], title = "", formType = 'card', readOnly = false } = props
 
   // 获取表单配置
-  const formfields = useMemo(() => getFormFields(formDatas), [formDatas]);
+  const formfields = useMemo(() => getFormFields(readOnly, formDatas), [formDatas,]);
 
   // 判断表单类型
   const renderForm = useMemo(() => {
+
     const formDomProps = { ...props, formfields }
 
     // 判断是否是详情模式

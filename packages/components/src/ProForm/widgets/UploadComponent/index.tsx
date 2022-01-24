@@ -16,16 +16,15 @@ export interface UploadCompontneProps extends ReactUploadPropsType {
 
 export default ({
   onUploadChange,
-  fileList,
+  fileList = [],
   readOnly = false,
   maxNumber = 3,
   ...others
 }: UploadCompontneProps) => {
-
+  
   const [images, setImages] = React.useState<any>(fileList);
   const [visible, setVisible] = React.useState(false);
   const [src, setSrc] = React.useState('');
-
 
   const onChange = (imageList: FileListType, addUpdateIndex: any) => {
     setImages(imageList);
@@ -42,7 +41,7 @@ export default ({
     errors ? <div>
       {errors.maxNumber && <Message type="error" title="文件上传数量已达上限" />}
       {errors.accept && <Message type="error" title="文件类型错误" />}
-      {errors.maxFileSize && <Message  type="error" title="文件大小超过上限" />}
+      {errors.maxFileSize && <Message type="error" title="文件大小超过上限" />}
       {errors.resolution && <Message type="error" title="超过分辨率上限" />}
     </div> : null
   )
@@ -50,7 +49,7 @@ export default ({
   const config = {
     ...others,
     maxNumber,
-    value: images,
+    value: images || [],
     multiple: true,
     dataURLKey: "data_url",
     onChange: onChange,
@@ -94,7 +93,7 @@ export default ({
                     )}>
                       <div style={{ display: "flex", alignItems: "center" }}>
                         {/* 图片类型才展示图片 */}
-                        {isImageValid(type) && <img src={image['data_url']} alt="" width="5%" />}
+                        {isImageValid(type) && <img crossOrigin="anonymous" src={image['data_url']} alt="" width="5%" />}
                         <span style={{ marginLeft: 10 }}>{image?.file?.name}</span>
                       </div>
                     </List.Item>
@@ -112,7 +111,7 @@ export default ({
         width={600}
         confirmButtonProps={{ style: { display: "none" } }}
       >
-        <img src={src} alt="" style={{ width: "100%", height: "100%" }} />
+        <img crossOrigin="anonymous" src={src} alt="" style={{ width: "100%", height: "100%" }} />
       </Modal>
     </div>
   );

@@ -34,13 +34,15 @@ export const commonWidgetsList: Fields = {
 
 /**
  *
+ * @param readOnly 是否是只读模式 boolean
  * @param formDatas 表单项 FormItemsProps[]
  * @returns fields  Record<string, FormFieldsProps<{}>>
  */
-export function getFormFields(formDatas: any = []) {
+export function getFormFields(readOnly?:boolean,formDatas: any = []) {
   const widgetsList: Fields = commonWidgetsList;
   const fields: Fields = {};
   formDatas.forEach((col: any) => {
+    if(!readOnly) delete col.readSpan
     if (col) {
       const {
         hide = false,
