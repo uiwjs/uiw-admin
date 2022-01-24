@@ -7,6 +7,8 @@ layout-tabs
 npm i @uiw-admin/layout-tabs --save
 ```
 
+> tab 选项卡布局
+
 ## 参数
 
 ```ts

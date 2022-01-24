@@ -24,7 +24,7 @@ export interface RoutersJSON {
   icon?: string;
   /** 重定向  当 index===true生效 */
   redirect?: string;
-  /** 组件 */
+  /** 组件地址 如果是 403/404/500 的页面直接写 403/404/500 就可以了，内部直接做转化*/
   component?:string;
   /** 子集 路由 */
   routes?: RoutersJSON[];

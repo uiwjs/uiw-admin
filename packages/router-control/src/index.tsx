@@ -14,7 +14,8 @@ import {
 } from 'react-router-dom';
 // @ts-ignore
 import RoutePathArr from "@@/routes"
-
+import { Provider } from 'react-redux';
+import { store } from '@uiw-admin/models';
 import { Exceptions403 } from '@uiw-admin/exceptions';
 import { createBrowserHistory } from 'history';
 import { ControllerProps, RoutersProps, } from "./interface"
@@ -146,10 +147,9 @@ export function RouteChild(props: ControllerProps = {}) {
     return [];
   }, [authStr]);
   const roue = React.useMemo(
-    () =>
-      createRoutesFromChildren(
-        getTree(getDeepTreeRoute(RoutePathArr, authList),),
-      ),
+    () => createRoutesFromChildren(
+      getTree(getDeepTreeRoute(RoutePathArr, authList)),
+    ),
     [JSON.stringify(authList)],
   );
   const dom = useRoutes(roue);
@@ -159,27 +159,33 @@ export function RouteChild(props: ControllerProps = {}) {
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routeType, } = props;
-
+  const { routeType } = props;
   // @ts-ignore
-  let base = BASE_NAME || basename;
+  let base = BASE_NAME;
+  const dom = React.useMemo(() => {
+    if (routeType === 'hash') {
+      return (
+        <HashRouter window={window} basename={base}>
+          <RouteChild />
+        </HashRouter>
+      );
+    } else if (routeType === 'browser') {
+      return (
+        <BrowserRouter window={window} basename={base}>
+          <RouteChild />
+        </BrowserRouter>
+      );
+    }
+    return (
+      <HistoryRouter history={history} basename={base}>
+        <RouteChild />
+      </HistoryRouter>
+    );
+  }, [routeType])
 
-  if (routeType === 'hash') {
-    return (
-      <HashRouter window={window} basename={base}>
-        <RouteChild />
-      </HashRouter>
-    );
-  } else if (routeType === 'browser') {
-    return (
-      <BrowserRouter window={window} basename={base}>
-        <RouteChild />
-      </BrowserRouter>
-    );
-  }
-  return (
-    <HistoryRouter history={history} basename={base}>
-      <RouteChild />
-    </HistoryRouter>
-  );
+  return (<Provider store={store}>
+    {dom}
+  </Provider>)
+
+
 }
