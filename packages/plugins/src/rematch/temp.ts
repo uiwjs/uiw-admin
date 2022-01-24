@@ -1,3 +1,4 @@
+
 // 模板
 export default (models: string) => {
   return `
@@ -28,6 +29,7 @@ ${models}
 `;
 };
 
-export const createTemp = (path: string, filename: string) => {
+export const createTemp = (pathUrl: string, filename: string) => {
+  const path = `${pathUrl}`.replace(/\\/g, "/")
   return `createModels(require("${path}").default,"${filename}");\n`;
 };

@@ -1,4 +1,4 @@
-import { Slider } from 'uiw';
+import { Slider } from 'uiw'
 export const customWidgetsList = {
-  slider: Slider,
-};
+  slider: Slider
+}

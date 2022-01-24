@@ -3,13 +3,14 @@
 - bug修复
 - 功能更新
 
-## 5.0.10 (未发版)
+## 5.0.10
 - @uiw-admin/plugins
   - 🌟 `RoutesWebpackPlugin` 支持`js`和`ts`文件
+  - 🐞 修复 windows路径问题;
 - @uiw-admin/components
   - 🌟 `Upload`： UploadImage组件更名为Upload
-  - 🌟 `Upload`： 增加错误提示
   - 🌟 `Upload`： 增加pdf和xlsx文件类型上传
+  - 🌟 `PromForm`： upload增加fileList props `list`和`picture-card`
 - @uiw-admin/router-control
   - `react-redux` 全局状态抽离到 `@uiw-admin/router-control`组件内部
 

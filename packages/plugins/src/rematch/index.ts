@@ -128,7 +128,7 @@ class RematchWebpackPlugin {
     } else {
       // 判断是不是 model  是则更新
       if (isMode) {
-        const arr = this.newPath.split('/');
+        const arr = this.newPath.split(/\\|\//);
         let filename = arr[arr.length - 1].replace(/\.(ts|js)/, '');
         this.oldModel.push({ path: this.newPath, filename });
         this.restCreate();

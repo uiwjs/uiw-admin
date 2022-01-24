@@ -1,4 +1,4 @@
-import { request } from '@uiw-admin/utils';
+import { request } from '@uiw-admin/utils'
 
 export interface Login {
   username: string;
@@ -9,19 +9,19 @@ export interface Login {
  * 提交登录
  * @param {Object} params
  */
-export function login(params: Login) {
+export function login (params: Login) {
   return request('/api/login', {
     method: 'POST',
-    body: { ...params },
-  });
+    body: { ...params }
+  })
 }
 
 /**
  * 刷新权限
  * @param {Object} params
  */
-export function reloadAuth() {
+export function reloadAuth () {
   return request('/api/reloadAuth', {
-    method: 'POST',
-  });
+    method: 'POST'
+  })
 }

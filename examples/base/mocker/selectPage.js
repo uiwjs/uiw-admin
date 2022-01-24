@@ -1,5 +1,5 @@
 module.exports.getData = function (req, res) {
-  const { page, pageSize } = req.body;
+  const { page, pageSize } = req.body
   setTimeout(() => {
     return res.status(200).json({
       code: 1,
@@ -43,14 +43,14 @@ module.exports.getData = function (req, res) {
           info: '1990年11月06日出生于广东省广州市，华语影视男演员、流行乐歌手。',
         },
       ],
-    });
-  }, 1000);
-};
+    })
+  }, 1000)
+}
 
 module.exports.getCity = function (req, res) {
   const search = req.query.val
     ? [{ label: req.query.val, val: req.query.val }]
-    : [];
+    : []
   setTimeout(() => {
     return res.status(200).json({
       code: 1,
@@ -64,6 +64,6 @@ module.exports.getCity = function (req, res) {
           value: '通州',
         },
       ].concat(search),
-    });
-  }, 1000);
-};
+    })
+  }, 1000)
+}
