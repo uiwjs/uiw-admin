@@ -1,7 +1,8 @@
-## 发布周期
+更新日志
+===
+[![](https://img.shields.io/github/release/uiwjs/uiw-admin.svg)](https://github.com/uiwjs/uiw-admin/releases)
 
-- bug修复
-- 功能更新
+严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 5.0.10
 - @uiw-admin/plugins
