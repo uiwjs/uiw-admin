@@ -21,20 +21,23 @@ export default ({
   onFileRemove,
 }: ChildrenInterface & CardProps) => {
   // 上传按钮权限
-  const uploadBtn = maxNumber !== fileList.length
+  const uploadBtn = maxNumber !== fileList.length && !readOnly
+  // 删除按钮权限
+  const deleteBtn = !readOnly
   return (
     <div className="upload-list-picture-card-row">
       {fileList.map((image: any, index: number) => {
         const type = image?.file?.type
+        // 查看按钮权限(需为图片类型)
+        const viewBtn = isImageValid(type) 
         return (
           <div className="upload-list-picture-card-container" key={index}>
             <div className="upload-list-item">
-              {isImageValid(type) && <img onClick={() => !readOnly && onFileUpdate(index)} crossOrigin="anonymous" src={image['data_url']} alt="" width="100%" height="100%" />}
+              {viewBtn && <img onClick={() => !readOnly && onFileUpdate(index)} crossOrigin="anonymous" src={image['data_url']} alt="" width="100%" height="100%" />}
               <div className="upload-list-item-actions">
                 <div className="upload-list-picture-card-row">
-                  {!readOnly && <Icon type="delete" onClick={() => onFileRemove(index)} />}
-                  {/* 图片类型才能查看 */}
-                  {isImageValid(type) && <Icon style={{ marginLeft: 10 }} type="eye-o" onClick={() => onUploadView(image['data_url'], index)} />}
+                  {deleteBtn && <Icon type="delete" onClick={() => onFileRemove(index)} />}
+                  {viewBtn && <Icon style={{ marginLeft: 10 }} type="eye-o" onClick={() => onUploadView(image['data_url'], index)} />}
                 </div>
               </div>
             </div>

@@ -14,7 +14,7 @@ export interface UploadCompontneProps extends ReactUploadPropsType {
   // 是否只读
   readOnly?: boolean;
   // 上传列表的内建样式，支持三种基本样式 list 和 picture-card
-  listType?: "picture-card" | 'list'
+  uploadType?: "picture-card" | 'list'
 }
 
 export default ({
@@ -22,7 +22,7 @@ export default ({
   fileList = [],
   readOnly = false,
   maxNumber = 3,
-  listType = 'list',
+  uploadType = 'list',
   ...others
 }: UploadCompontneProps) => {
 
@@ -62,7 +62,7 @@ export default ({
 
           return (
             <React.Fragment>
-              {listType === 'list' ? <List {...renderChildrenProps} /> : <Card {...renderChildrenProps} />}
+              {uploadType === 'list' ? <List {...renderChildrenProps} /> : <Card {...renderChildrenProps} />}
               {chidrenProps?.errors && (
                 <div>
                   {chidrenProps.errors?.maxNumber && <Message type="error" title="文件上传数量已达上限" />}

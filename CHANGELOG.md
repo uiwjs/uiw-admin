@@ -7,7 +7,7 @@
 ## 5.0.11(未发布)
 - @uiw-admin/components
   - 🌟 `Upload`： 更新Upload文档
-
+  - 🌟 `PromForm`：upload listType更改为uploadType
 ## 5.0.10
 
 - @uiw-admin/plugins
