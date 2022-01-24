@@ -99,7 +99,7 @@ export const items = (queryInfo: any, attr: any) => [
       onUploadChange: attr.upload.onUploadChange,
       fileList: queryInfo?.upload,
       maxNumber: 3,
-      listType:"list",
+      uploadType:"list",
     },
     initialValue: queryInfo?.upload
   }

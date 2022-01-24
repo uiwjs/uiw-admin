@@ -12,6 +12,5 @@ const update = '/api/demo/update'
 
 const insert = '/api/demo/insert'
 
-const selectPage = '/api/demo/selectPage'
 
-export { selectById, update, insert, selectPage }
+export { selectById, update, insert }
