@@ -6,6 +6,7 @@
 ## 5.0.10 (未发版)
 - @uiw-admin/plugins
   - 🌟 `RoutesWebpackPlugin` 支持`js`和`ts`文件
+  - 🐞 修复 windows路径问题;
 - @uiw-admin/components
   - 🌟 `Upload`： UploadImage组件更名为Upload
   - 🌟 `Upload`： 增加错误提示
