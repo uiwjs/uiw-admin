@@ -47,11 +47,31 @@
     "@uiw-admin/config": "5.0.9",
     "@uiw-admin/plugins": "5.0.9",
     "ajv": "8.9.0",
-    "kkt": "7.0.6"
+    "kkt": "7.0.6",
+    "eslint": "7.32.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.2.0",
+    "eslint-plugin-react": "7.28.0",
+    "lint-staged": "12.3.1",
+    "prettier": "2.5.1",
+    "yorkie": "2.0.0"
   },
   "resolutions": {
     "react": "17.0.2",
     "react-dom": "17.0.2"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ],
+    "*.{js,jsx,ts,tsx,less,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
   },
   "eslintConfig": {
     "extends": [
