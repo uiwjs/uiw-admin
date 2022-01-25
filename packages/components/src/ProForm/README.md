@@ -1,10 +1,8 @@
 # 基于uiw-form封装的业务表单
 
 ## 注意
-
-> [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/from)
-> 组件默认集成了Input,Checkbox,Switch,Textarea,DateInput,TimePicker,MonthPicker,SearchSelect,Select,Radio。
-<!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
+- [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/form)
+- 组件默认集成了Input,Checkbox,Switch,Textarea,DateInput,TimePicker,MonthPicker,SearchSelect,Select,Radio。
 
 <!--ProForm-->
 
@@ -52,6 +50,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
+               help:"input不能为空"
              },
              {
               label: 'textarea',
@@ -202,7 +201,7 @@ const Demo = () => {
          readOnly={true}
          title="只读模式"
          // 只读模式下调整 一行的 DescriptionItems 数量,其余参数参考uiw/Descriptions
-         readOnlyProps={{ columns:2 }}
+         readOnlyProps={{ column:2 }}
          formDatas={
            [
              {
@@ -262,7 +261,7 @@ ReactDOM.render(<Demo />, _mount_);
 ```
 
 
-## Porps
+## Porps  继承uiw-Form
 
 | 参数 | 说明	| 类型	| 默认值 |
 | --  | -- | -- | -- |
@@ -281,7 +280,8 @@ ReactDOM.render(<Demo />, _mount_);
 | readOnlyProps | 只读模式 参考Descriptions参数	  |  DescriptionsProps		| {} |
 | customWidgetsList | 可配置自定义组件	  |  { [key: string]: any }		| {} |
 
-## FormItemsProps
+## FormItemsProps 继承uiw-FormItem
+- 继承于uiw-FormItem
 | 参数 | 说明	| 类型	| 默认值 |
 | --  | -- | -- | -- |
 | label| 表单项名称 | string	| - |

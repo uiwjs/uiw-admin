@@ -7,13 +7,15 @@ export const items = (queryInfo: any, attr: any) => [
     widget: 'input',
     initialValue: queryInfo?.input,
     widgetProps: {},
-    required: true
+    required: true,
+    // 提示信息
+    help: '输入框不能为空',
   },
   {
     label: '多行文本输入框',
     key: 'textarea',
     widget: 'textarea',
-    initialValue: queryInfo?.textarea
+    initialValue: queryInfo?.textarea,
   },
   {
     label: '选择器',
@@ -23,15 +25,15 @@ export const items = (queryInfo: any, attr: any) => [
       { value: 1, label: '苹果' },
       { value: 2, label: '西瓜' },
       { value: 3, label: '香蕉' },
-      { value: 4, label: '东北大冻梨' }
+      { value: 4, label: '东北大冻梨' },
     ],
-    initialValue: queryInfo?.select
+    initialValue: queryInfo?.select,
   },
   {
     label: '开关',
     key: 'switch',
     widget: 'switch',
-    initialValue: queryInfo?.switch
+    initialValue: queryInfo?.switch,
   },
   {
     label: '单选框',
@@ -39,9 +41,9 @@ export const items = (queryInfo: any, attr: any) => [
     key: 'radio',
     option: [
       { label: '男', value: 'man' },
-      { label: '女', value: 'girl' }
+      { label: '女', value: 'girl' },
     ],
-    initialValue: queryInfo?.radio
+    initialValue: queryInfo?.radio,
   },
   {
     label: '多选框',
@@ -49,36 +51,42 @@ export const items = (queryInfo: any, attr: any) => [
     key: 'checkbox',
     option: [
       { label: '四川菜', value: 'sichuan' },
-      { label: '湖北菜', value: 'hubei' }
+      { label: '湖北菜', value: 'hubei' },
     ],
-    initialValue: queryInfo?.checkbox
+    initialValue: queryInfo?.checkbox,
   },
   {
     label: '年月日时分秒',
     key: 'dateInputsecond',
     widget: 'dateInput',
     widgetProps: {
-      format: 'YYYY-MM-DD HH:mm:ss'
+      format: 'YYYY-MM-DD HH:mm:ss',
     },
-    initialValue: queryInfo.dateInputsecond && formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond))
+    initialValue:
+      queryInfo.dateInputsecond &&
+      formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond)),
   },
   {
     label: '年月日',
     key: 'dateInput',
     widget: 'dateInput',
-    initialValue: queryInfo.dateInput && formatter('YYYY-MM-DD', new Date(queryInfo.dateInput))
+    initialValue:
+      queryInfo.dateInput &&
+      formatter('YYYY-MM-DD', new Date(queryInfo.dateInput)),
   },
   {
     label: '年月',
     key: 'monthPicker',
     widget: 'monthPicker',
-    initialValue: queryInfo.monthPicker && formatter('YYYY-MM', new Date(queryInfo.monthPicker))
+    initialValue:
+      queryInfo.monthPicker &&
+      formatter('YYYY-MM', new Date(queryInfo.monthPicker)),
   },
   {
     label: '时分秒',
     key: 'timePicker',
     widget: 'timePicker',
-    initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker)
+    initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
   },
   // 只读模式下支持读取React.ReactNode
   {
@@ -86,7 +94,11 @@ export const items = (queryInfo: any, attr: any) => [
     key: 'slider',
     widget: 'slider',
     readSpan: 2,
-    initialValue: attr.isView ? <div>{queryInfo?.slider}</div> : queryInfo?.slider
+    initialValue: attr.isView ? (
+      <div>{queryInfo?.slider}</div>
+    ) : (
+      queryInfo?.slider
+    ),
   },
   {
     label: '上传组件',
@@ -99,8 +111,9 @@ export const items = (queryInfo: any, attr: any) => [
       onUploadChange: attr.upload.onUploadChange,
       fileList: queryInfo?.upload,
       maxNumber: 3,
-      uploadType:"list",
+      uploadType: 'list',
     },
-    initialValue: queryInfo?.upload
-  }
+    initialValue: queryInfo?.upload,
+    hide: true,
+  },
 ]
