@@ -49,7 +49,7 @@ export interface RoutersProps extends Routers {
 
 export type DefaultProps = {
   /** 子集路由 */
-  routes?: RoutersProps[];
+  routes?: Routers[];
   /** 路由 参数 */
   router?: {
     location: Location;
