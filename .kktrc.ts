@@ -5,30 +5,23 @@ import rawModules from '@kkt/raw-modules'
 import scopePluginOptions from '@kkt/scope-plugin-options'
 import pkg from './package.json'
 import defaultConfig from '@uiw-admin/config'
-import {
-  RematchWebpackPlugin, WidgetsWebpackPlugin,
-  RoutesWebpackPlugin
-} from '@uiw-admin/plugins'
+import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
 
 export default defaultConfig({
   define: {
-    VERSION: JSON.stringify(pkg.version)
+    VERSION: JSON.stringify(pkg.version),
     // BASE_NAME: "/uiw"
   },
-  plugins: [
-    new RematchWebpackPlugin(),
-    new WidgetsWebpackPlugin(),
-    new RoutesWebpackPlugin()
-  ],
+  plugins: [new RematchWebpackPlugin(), new RoutesWebpackPlugin()],
   // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
   loader: [
     rawModules,
     {
       loader: scopePluginOptions,
-      options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] }
+      options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] },
     },
-    lessModules
-  ]
+    lessModules,
+  ],
 })
 export const proxySetup = (): MockerAPIOptions => {
   /**
@@ -41,6 +34,6 @@ export const proxySetup = (): MockerAPIOptions => {
     /**
      * https://github.com/jaywcjlove/mocker-api/tree/96c2eb94694571e0e3003e6ad9ce1c809499f577#options
      */
-    option: {}
+    option: {},
   }
 }
