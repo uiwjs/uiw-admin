@@ -1,5 +1,5 @@
 import React from 'react';
-import { Fields } from '../type';
+import { Fields, FormItemsProps } from '../type';
 import {
   Input,
   Switch,
@@ -13,24 +13,6 @@ import Radio from '../../ProTable/widgets/Radio';
 import Select from '../../ProTable/widgets/Select';
 import CheckBox from './CheckBox';
 import Upload from './Upload';
-/**  @@ 指向 /src/.uiw 目录 自定义表单组件列表 */
-// @ts-ignore
-import { customWidgetsList } from '@/widgets';
-
-export const commonWidgetsList: Fields = {
-  input: Input,
-  radio: Radio,
-  checkbox: CheckBox,
-  switch: Switch,
-  select: Select,
-  searchSelect: SearchSelect,
-  textarea: Textarea,
-  dateInput: DateInput,
-  timePicker: TimePicker,
-  monthPicker: MonthPicker,
-  upload:Upload,
-  ...customWidgetsList,
-};
 
 /**
  *
@@ -38,11 +20,28 @@ export const commonWidgetsList: Fields = {
  * @param formDatas 表单项 FormItemsProps[]
  * @returns fields  Record<string, FormFieldsProps<{}>>
  */
-export function getFormFields(readOnly?:boolean,formDatas: any = []) {
-  const widgetsList: Fields = commonWidgetsList;
+export function getFormFields(
+  readOnly?: boolean,
+  formDatas: FormItemsProps[] = [],
+  customWidgetsList: Fields = {},
+) {
+  const widgetsList: Fields = {
+    input: Input,
+    radio: Radio,
+    checkbox: CheckBox,
+    switch: Switch,
+    select: Select,
+    searchSelect: SearchSelect,
+    textarea: Textarea,
+    dateInput: DateInput,
+    timePicker: TimePicker,
+    monthPicker: MonthPicker,
+    upload: Upload,
+    ...customWidgetsList,
+  };
   const fields: Fields = {};
-  formDatas.forEach((col: any) => {
-    if(!readOnly) delete col.readSpan
+  formDatas.forEach((col) => {
+    if (!readOnly) delete col.readSpan;
     if (col) {
       const {
         hide = false,

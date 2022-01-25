@@ -4,6 +4,12 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.0.12(未发版)
+- @uiw-admin/components
+  - 🌟 `PromForm`：增加customWidgetsList prop配置自定义组件
+- @uiw-admin/plugins
+  - 🌟 删除`widgets`插件
+
 ## 5.0.11
 - @uiw-admin/components
   - 🌟 `Upload`： 更新Upload文档

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import { ProDrawer, ProForm } from '@uiw-admin/components'
-import { Notify } from 'uiw'
+import { Notify, Slider } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '@uiw-admin/models'
 import { insert, update } from '../../../servers/demo'
@@ -8,20 +8,22 @@ import { items } from './items'
 import useSWR from 'swr'
 
 interface DetailProps {
-  updateData?: any;
+  updateData?: any
 }
 
 const Detail = ({ updateData }: DetailProps) => {
   const baseRef = useRef<any>()
   const dispatch = useDispatch<Dispatch>()
-  const { demo: { drawerVisible, tableType, queryInfo, isView } } = useSelector((state: RootState) => state)
+  const {
+    demo: { drawerVisible, tableType, queryInfo, isView },
+  } = useSelector((state: RootState) => state)
 
   const onClose = () => dispatch({ type: 'demo/clean' })
 
   const { mutate } = useSWR(
     [
       (tableType === 'add' && insert) || (tableType === 'edit' && update),
-      { method: 'POST', body: queryInfo }
+      { method: 'POST', body: queryInfo },
     ],
     {
       revalidateOnMount: false,
@@ -31,7 +33,7 @@ const Detail = ({ updateData }: DetailProps) => {
           Notify.success({ title: data.message })
           onClose()
         }
-      }
+      },
     }
   )
 
@@ -49,12 +51,14 @@ const Detail = ({ updateData }: DetailProps) => {
           type: 'danger',
           style: { width: 80 },
           show: !isView,
-          onClick: () => baseRef?.current?.click()
-        }
-      ]}
-    >
+          onClick: () => baseRef?.current?.click(),
+        },
+      ]}>
       <ProForm
         title="基础信息"
+        customWidgetsList={{
+          slider: Slider,
+        }}
         formType={isView ? 'pure' : 'card'}
         submitRef={baseRef}
         readOnly={isView}
@@ -76,12 +80,15 @@ const Detail = ({ updateData }: DetailProps) => {
         onChange={(initial: any, current: any) =>
           updateData({ queryInfo: { ...queryInfo, ...current } })
         }
-        formDatas={items(queryInfo, {
-          isView,
-          upload: {
-            onUploadChange: (fileList: any) => updateData({ queryInfo: { ...queryInfo, upload: fileList } })
-          }
-        }) as any}
+        formDatas={
+          items(queryInfo, {
+            isView,
+            upload: {
+              onUploadChange: (fileList: any) =>
+                updateData({ queryInfo: { ...queryInfo, upload: fileList } }),
+            },
+          }) as any
+        }
       />
     </ProDrawer>
   )
