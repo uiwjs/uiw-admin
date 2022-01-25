@@ -42,3 +42,7 @@ interface LayoutTabsProps {
   />
   }
 ```
+
+## 预览
+
+![](https://user-images.githubusercontent.com/49544090/150922472-e8882ecc-298a-4bad-8141-0d640fd167ff.png)
