@@ -6,7 +6,7 @@
   "scripts": {
     "start": "kkt start",
     "build": "kkt build",
-    "lint": "eslint \"{src,}/**/*.{ts,tsx,js}\"",
+    "lint": "eslint \"{src,}/**/*.{ts,tsx,js,jsx}\"",
     "lint:fix": "yarn lint --fix"
   },
   "repository": {
