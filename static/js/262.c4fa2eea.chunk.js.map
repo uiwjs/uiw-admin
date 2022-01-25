@@ -1,1 +1,0 @@
-{"version":3,"file":"static/js/262.c4fa2eea.chunk.js","mappings":"+GAAA","sources":["../../../packages/utils/README.md"],"sourcesContent":["export default \"# `utils`\\n> 公共使用方法\\n\\n## request\\n\\n基于axios封装的请求方法\";"],"names":[],"sourceRoot":""}

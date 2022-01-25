@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[440],{41440:function(n,e,t){t.r(e),e.default="\u8bbe\u7f6e\u9875\u9762\u6807\u9898\n---\n\n## Installation\n\n```bash\nnpm i @uiw-admin/document-title --save\n```\n\n## Basic Usage\n\n```jsx\nimport React from 'react';\nimport DocumentTitle from '@uiw-admin/document-title';\n\n<DocumentTitle title=\"\u9996\u9875\">\n  <h1>Home, sweet home.</h1>\n</DocumentTitle>\n```\n"}}]);
+//# sourceMappingURL=440.609e1d07.chunk.js.map
