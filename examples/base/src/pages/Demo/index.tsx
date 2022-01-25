@@ -13,6 +13,7 @@ const Demo = () => {
       type: 'demo/updateState',
       payload,
     })
+    dispatch.demo.updateState({ a: 1 })
   }
 
   const table = useTable('/api/getData', {

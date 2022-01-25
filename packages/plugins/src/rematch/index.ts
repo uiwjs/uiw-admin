@@ -5,10 +5,16 @@ import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
 import { IsModel } from './../utils';
-import createRematchTemps, { createTemp } from './temp';
+import createRematchTemps, { createModelsTempStr } from './temp';
+export type ModelType = {
+  path: string;
+  filename: string;
+  modelName?: string;
+  isCreateModel: boolean;
+};
 
 class RematchWebpackPlugin {
-  oldModel: { path: string; filename: string }[] = [];
+  oldModel: ModelType[] = [];
   deleteModel: string[] = [];
   field: string = '';
 
@@ -40,10 +46,13 @@ class RematchWebpackPlugin {
           const isDir = stats.isDirectory(); //是文件夹
           if (isFile && isModel && /\.(ts||js)$/.test(filename)) {
             const data = fs.readFileSync(filedir, { encoding: 'utf-8' });
-            if (IsModel(data)) {
+            const { isModels, modelNames, isCreateModel } = IsModel(data);
+            if (isModels) {
               this.oldModel.push({
                 path: filedir,
                 filename: filename.replace(/\.(ts|js)$/, ''),
+                modelName: modelNames,
+                isCreateModel,
               });
             }
           }
@@ -60,11 +69,11 @@ class RematchWebpackPlugin {
 
   // 重新生成
   restCreate = () => {
-    let modelStr = '';
-    this.oldModel.forEach((item) => {
-      const { path, filename } = item;
-      modelStr = modelStr + createTemp(path, filename);
-    });
+    let modelStr = createModelsTempStr(this.oldModel);
+    // this.oldModel.forEach((item) => {
+    //   const { path, filename } = item;
+    //   modelStr = modelStr + createTemp(path, filename);
+    // });
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
@@ -80,7 +89,7 @@ class RematchWebpackPlugin {
 
   // 删除文件的时候
   deleteField = () => {
-    const newModel: { path: string; filename: string }[] = [];
+    const newModel: ModelType[] = [];
     this.oldModel.forEach((item) => {
       const { path } = item;
       const rgx = new RegExp(`^${this.newPath}`);
@@ -110,9 +119,18 @@ class RematchWebpackPlugin {
     // 1. 判断是否已经存在
     // 如果已经存在着直接更新
     let isMode = false;
+    let modelName;
+    let isCreateModel = false;
     // 先判断路径是否存在models 和ts|js 结尾
     if (/\.(ts|js)$/.test(this.newPath) && /models/.test(this.newPath)) {
-      isMode = IsModel(fs.readFileSync(this.newPath, { encoding: 'utf-8' }));
+      const {
+        isModels,
+        modelNames,
+        isCreateModel: isCreate,
+      } = IsModel(fs.readFileSync(this.newPath, { encoding: 'utf-8' }));
+      modelName = modelNames;
+      isMode = isModels;
+      isCreateModel = isCreate;
     }
     const newFile = this.oldModel.find((item) => item.path === this.newPath);
     if (newFile) {
@@ -130,7 +148,12 @@ class RematchWebpackPlugin {
       if (isMode) {
         const arr = this.newPath.split(/\\|\//);
         let filename = arr[arr.length - 1].replace(/\.(ts|js)/, '');
-        this.oldModel.push({ path: this.newPath, filename });
+        this.oldModel.push({
+          path: this.newPath,
+          filename,
+          modelName,
+          isCreateModel,
+        });
         this.restCreate();
       }
     }
