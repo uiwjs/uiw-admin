@@ -7,7 +7,14 @@ import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 
 const ProTabel: React.FC<ProtableProps> = (props) => {
-  const { table, columns, operateButtons = [], searchBtns, onBeforeSearch, ...tableProps } = props;
+  const {
+    table,
+    columns,
+    operateButtons = [],
+    searchBtns,
+    onBeforeSearch,
+    ...tableProps
+  } = props;
   const {
     key,
     data,
@@ -19,7 +26,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     searchValues,
     loading,
     onSearch,
-    SWRConfiguration
+    SWRConfiguration,
   } = table;
 
   const store = useMemo(
@@ -45,7 +52,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       query,
       JSON.stringify(searchValues),
       onSearch,
-      SWRConfiguration
+      SWRConfiguration,
     ],
   );
 
@@ -53,18 +60,26 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     <StoreCtx.Provider value={store}>
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
-        <BaseForm columns={columns} searchBtns={searchBtns} onBeforeSearch={onBeforeSearch} />
+        <BaseForm
+          columns={columns}
+          searchBtns={searchBtns}
+          onBeforeSearch={onBeforeSearch}
+        />
         {/* 操作区域 */}
         {operateButtons.length > 0 && (
-          <Row gutter={10}>
-            {operateButtons.map((btn: any, idx: number) => (
-              btn?.render ? <React.Fragment key={idx.toString()}>{btn.render}</React.Fragment> : (
+          <div style={{ background: '#fff', padding: 10 }}>
+            {operateButtons.map((btn: any, idx: number) =>
+              btn?.render ? (
+                <React.Fragment key={idx.toString()}>
+                  {btn.render}
+                </React.Fragment>
+              ) : (
                 <Button key={idx.toString()} {...btn}>
                   {btn.label}
                 </Button>
-              )
-            ))}
-          </Row>
+              ),
+            )}
+          </div>
         )}
         {/* 列表组件 */}
         <Table columns={columns} {...tableProps} />

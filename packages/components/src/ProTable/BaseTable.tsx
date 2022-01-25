@@ -16,7 +16,11 @@ interface BaseTableProps {
   columns: TableColumns[];
 }
 
-const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  }) => {
+const BaseTable: React.FC<BaseTableProps> = ({
+  style,
+  columns,
+  ...tableProps
+}) => {
   const [pageIndex, setPageIndex] = useState(1);
 
   const [prevData, setPrevData] = useState({
@@ -26,7 +30,14 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  })
 
   const store = useStore();
 
-  let { formatData, updateStore, query, key, searchValues, SWRConfiguration = {} } = store as any;
+  let {
+    formatData,
+    updateStore,
+    query,
+    key,
+    searchValues,
+    SWRConfiguration = {},
+  } = store as any;
 
   // 表单默认值
   const defaultValues = useMemo(() => {
@@ -66,19 +77,22 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  })
     {
       // revalidateOnMount: false,
       revalidateOnFocus: false,
-      ...SWRConfiguration
+      ...SWRConfiguration,
     },
   );
 
   // 查询
   const onSearch = useCallback(async () => {
-    setPageIndex(1)
+    setPageIndex(1);
   }, [setPageIndex]);
 
   // 分页
-  const onPageChange = useCallback((page) => {
-    setPageIndex(page);
-  }, [setPageIndex]);
+  const onPageChange = useCallback(
+    (page) => {
+      setPageIndex(page);
+    },
+    [setPageIndex],
+  );
 
   useEffect(() => {
     // 获取表单默认值
@@ -93,7 +107,7 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  })
       data: data?.data,
       total: data?.total,
       loading: !data || isValidating,
-      onSearch
+      onSearch,
     };
 
     if (!isFirstMountRef.current) {
@@ -109,7 +123,7 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  })
     if (data) {
       setPrevData(data);
     }
-  }, [JSON.stringify(data), isValidating,  JSON.stringify(columns)]);
+  }, [JSON.stringify(data), isValidating, JSON.stringify(columns)]);
 
   return (
     <Table
@@ -120,19 +134,21 @@ const BaseTable: React.FC<BaseTableProps> = ({ style, columns, ...tableProps  })
           : data?.data || prevData?.data
       }
       footer={
-        <Pagination
-          current={pageIndex}
-          pageSize={pageSize}
-          total={
-            formatData && data
-              ? formatData(data).total
-              : data?.total || prevData?.total
-          }
-          divider
-          onChange={(page) => {
-            onPageChange(page);
-          }}
-        />
+        data && (
+          <Pagination
+            current={pageIndex}
+            pageSize={pageSize}
+            total={
+              formatData && data
+                ? formatData(data).total
+                : data?.total || prevData?.total
+            }
+            divider
+            onChange={(page) => {
+              onPageChange(page);
+            }}
+          />
+        )
       }
       {...tableProps}
     />
