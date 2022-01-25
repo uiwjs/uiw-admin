@@ -4,6 +4,12 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+
+## 5.1.1(未发版)
+- @uiw-admin/components
+  - 🌟 `PromForm`：更新在线预览文档
+  - 🌟 `PromForm`：增加只读模式下表单项隐藏
+  - 🌟 `ProDrawer`：更新在线预览文档
 ## 5.1.0
 - @uiw-admin/components
   - 🌟 `PromForm`：增加customWidgetsList prop配置自定义组件
