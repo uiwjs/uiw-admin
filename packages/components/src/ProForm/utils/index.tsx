@@ -35,6 +35,7 @@ export function getReadValue(type: string | any, initialValue: any | any[], opti
       readOnly: true,
       fileList: initialValue,
       value: initialValue,
+      uploadType: widgetProps?.uploadType,
       onChange: () => { }
     }
     content = <Upload {...uploadProps} />

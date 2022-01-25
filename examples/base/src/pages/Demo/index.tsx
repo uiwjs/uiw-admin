@@ -1,9 +1,8 @@
 import React from 'react'
-import { Button } from 'uiw'
+import { Button, Dropdown, Menu } from 'uiw'
 import { useDispatch } from 'react-redux'
 import { Dispatch } from '@uiw-admin/models'
 import { ProTable, useTable } from '@uiw-admin/components'
-import { selectPage } from '@/servers/demo'
 import Detail from './Detail'
 
 const Demo = () => {
@@ -12,33 +11,33 @@ const Demo = () => {
   const updateData = (payload: any) => {
     dispatch({
       type: 'demo/updateState',
-      payload
+      payload,
     })
   }
 
-  const table = useTable(selectPage, {
+  const table = useTable('/api/getData', {
     // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
-    formatData: (data: any) => {
+    formatData: (data) => {
       return {
-        total: data.data.total,
-        data: data.data.rows || []
+        total: data.total,
+        data: data.data,
       }
     },
-    // 格式化查询参数 会接收到pageIndex 当前页  pageSize 页码
-    query: (pageIndex: number) => {
-      console.log(pageIndex)
+    // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
+    query: (pageIndex, searchValues) => {
       return {
         page: pageIndex,
-        pageSize: 10
+        pageSize: 10,
+        data: searchValues,
       }
-    }
+    },
   })
 
   // 操作
-  function handleEditTable (type: string, record: any) {
+  function handleEditTable(type: string, record: any) {
     updateData({
       isView: type === 'view',
-      tableType: type
+      tableType: type,
     })
     if (type === 'add') {
       updateData({ drawerVisible: true, queryInfo: {} })
@@ -46,30 +45,50 @@ const Demo = () => {
     if (type === 'edit' || type === 'view') {
       dispatch({
         type: 'demo/selectById',
-        payload: { id: record?.id }
+        payload: { id: record?.id },
       })
     }
   }
 
+  const menu = (
+    <div>
+      <Menu bordered style={{ maxWidth: 200 }}>
+        {[
+          { label: '搜索', value: 'search', onClick: () => table?.onSearch() },
+          {
+            label: '重置',
+            value: 'reset',
+            onClick: () => console.log('点击重置'),
+          },
+        ].map((item, idx) => (
+          <Menu.Item onClick={item?.onClick} key={idx} text={item.label} />
+        ))}
+      </Menu>
+    </div>
+  )
+
   return (
     <React.Fragment>
       <ProTable
+        searchBtns={[
+          {
+            render: (
+              <Dropdown menu={menu} trigger="click" placement="bottomRight">
+                <Button type="primary">自定义下拉</Button>
+              </Dropdown>
+            ),
+          },
+          { label: '点我', onClick: () => null },
+        ]}
         operateButtons={[
           {
             label: '新增',
             type: 'primary',
-            onClick: handleEditTable.bind(this, 'add')
+            onClick: handleEditTable.bind(this, 'add'),
           },
           {
-            label: '导出',
-            type: 'danger',
-            onClick: handleEditTable.bind(this, 'export')
+            render: <Button type="primary">自定义render</Button>,
           },
-          {
-            label: '导入',
-            type: 'dark',
-            onClick: handleEditTable.bind(this, 'import')
-          }
         ]}
         columns={[
           {
@@ -77,13 +96,12 @@ const Demo = () => {
             key: 'name',
             props: {
               widget: 'input',
-              initialValue: 'zzz',
               // 组件属性
               widgetProps: {
                 preIcon: 'user',
-                placeholder: '输入用户名'
-              }
-            }
+                placeholder: '输入用户名',
+              },
+            },
           },
           {
             title: '年龄',
@@ -92,13 +110,13 @@ const Demo = () => {
               widget: 'select',
               option: [
                 { label: '20', value: 20 },
-                { label: '10', value: 10 }
-              ]
-            }
+                { label: '10', value: 10 },
+              ],
+            },
           },
           {
             title: '地址',
-            key: 'info'
+            key: 'info',
           },
           {
             title: '操作',
@@ -109,20 +127,18 @@ const Demo = () => {
                 <Button
                   size="small"
                   type="danger"
-                  onClick={handleEditTable.bind(this, 'edit', rowData)}
-                >
+                  onClick={handleEditTable.bind(this, 'edit', rowData)}>
                   编辑
                 </Button>
                 <Button
                   size="small"
                   type="success"
-                  onClick={handleEditTable.bind(this, 'view', rowData)}
-                >
+                  onClick={handleEditTable.bind(this, 'view', rowData)}>
                   查看
                 </Button>
               </div>
-            )
-          }
+            ),
+          },
         ]}
         table={table}
       />

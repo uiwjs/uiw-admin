@@ -1,28 +1,40 @@
-import React, { useMemo, Fragment } from 'react'
+import React, { useMemo, Fragment } from 'react';
 import { Collapse, Card } from 'uiw';
-import FormDom from './formdom'
-import ReadFormDom from './readform'
-import { getFormFields } from './widgets'
-import { ProFormProps } from './type'
+import FormDom from './formdom';
+import ReadFormDom from './readform';
+import { getFormFields } from './widgets';
+import { ProFormProps } from './type';
 import './style/form-item.less';
 
 export default function ProForm(props: ProFormProps) {
-
-  const { formDatas = [], title = "", formType = 'card', readOnly = false } = props
+  const {
+    formDatas = [],
+    title = '',
+    formType = 'card',
+    readOnly = false,
+    customWidgetsList = {},
+  } = props;
 
   // 获取表单配置
-  const formfields = useMemo(() => getFormFields(readOnly, formDatas), [formDatas,]);
+  const formfields = useMemo(
+    () => getFormFields(readOnly, formDatas, customWidgetsList),
+    [formDatas],
+  );
 
   // 判断表单类型
   const renderForm = useMemo(() => {
-
-    const formDomProps = { ...props, formfields }
+    const formDomProps = { ...props, formfields };
 
     // 判断是否是详情模式
-    const children = readOnly ? <ReadFormDom {...props} /> : <FormDom {...formDomProps} />
+    const children = readOnly ? (
+      <ReadFormDom {...props} />
+    ) : (
+      <FormDom {...formDomProps} />
+    );
     // 非详情模式下渲染标题
-    const renderTitle = !readOnly ? title : null
-    if (formType === 'card') return <Card title={renderTitle}>{children}</Card>
+    const renderTitle = !readOnly ? title : undefined;
+
+    if (formType === 'card') return <Card title={renderTitle}>{children}</Card>;
     if (formType === 'collapse') {
       return (
         <Collapse title={renderTitle} activeKey={['1']}>
@@ -30,11 +42,15 @@ export default function ProForm(props: ProFormProps) {
             {children}
           </Collapse.Panel>
         </Collapse>
-      )
+      );
     }
-    return <Fragment>{renderTitle && <h3>{title}</h3>}{children}</Fragment>
-  }, [formType, formDatas, title])
+    return (
+      <Fragment>
+        {renderTitle && <h3>{title}</h3>}
+        {children}
+      </Fragment>
+    );
+  }, [formType, formDatas, title]);
 
-
-  return renderForm
+  return renderForm;
 }

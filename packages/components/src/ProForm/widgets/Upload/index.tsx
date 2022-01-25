@@ -8,13 +8,13 @@ import List from './list'
 
 export interface UploadCompontneProps extends ReactUploadPropsType {
   // 上传变化的回调
-  onUploadChange?: (imageList: FileListType) => void;
+  onUploadChange?: (fileList: FileListType) => void;
   // 图片列表
   fileList?: FileListType;
   // 是否只读
   readOnly?: boolean;
   // 上传列表的内建样式，支持三种基本样式 list 和 picture-card
-  listType?: "picture-card" | 'list'
+  uploadType?: "picture-card" | 'list'
 }
 
 export default ({
@@ -22,17 +22,17 @@ export default ({
   fileList = [],
   readOnly = false,
   maxNumber = 3,
-  listType = 'list',
+  uploadType = 'list',
   ...others
 }: UploadCompontneProps) => {
 
-  const [images, setImages] = React.useState<any>(fileList);
+  const [files, setFiles] = React.useState<any>(fileList);
   const [visible, setVisible] = React.useState(false);
   const [src, setSrc] = React.useState('');
 
-  const onChange = (imageList: FileListType, addUpdateIndex: any) => {
-    setImages(imageList);
-    onUploadChange?.(imageList)
+  const onChange = (fileList: FileListType, addUpdateIndex: any) => {
+    setFiles(fileList);
+    onUploadChange?.(fileList)
   };
 
   const onUploadView = (src: string, index: number) => {
@@ -43,7 +43,7 @@ export default ({
   const config = {
     ...others,
     maxNumber,
-    value: images || [],
+    value: files || [],
     multiple: true,
     dataURLKey: "data_url",
     onChange: onChange,
@@ -62,7 +62,7 @@ export default ({
 
           return (
             <React.Fragment>
-              {listType === 'list' ? <List {...renderChildrenProps} /> : <Card {...renderChildrenProps} />}
+              {uploadType === 'list' ? <List {...renderChildrenProps} /> : <Card {...renderChildrenProps} />}
               {chidrenProps?.errors && (
                 <div>
                   {chidrenProps.errors?.maxNumber && <Message type="error" title="文件上传数量已达上限" />}
