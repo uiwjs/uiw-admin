@@ -3,17 +3,17 @@ config
 
 > 简化 .kktrc 中配置
 
+## 说明
+
+`@` 指向 src 目录
+
+`@@` 指向 src/.uiw 目录 
+
 ## Installation
 
 ```bash
 npm i @uiw-admin/config --save
 ```
-
-## 说明
-
-> 1. `@` 指向 src 目录
-> 2. `@@` 指向 src/.uiw 目录
-
 
 ## define默认值
 
@@ -59,12 +59,16 @@ export interface ConfigProps {
 
 ```ts
 import defaultConfig from "@uiw-admin/config"
-
+import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
+import lessModules from '@kkt/less-modules'
+import rawModules from '@kkt/raw-modules'
+import scopePluginOptions from '@kkt/scope-plugin-options'
 export default defaultConfig({
   define: {
     VERSION: JSON.stringify(pkg.version),
     // BASE_NAME: "/uiw"
   },
+  plugins: [new RematchWebpackPlugin(), new RoutesWebpackPlugin()],
   // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
   loader: [
     rawModules,

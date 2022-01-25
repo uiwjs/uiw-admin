@@ -41,3 +41,23 @@ export interface AuthBtnProps {
   children: React.ReactNode;
 }
 ```
+
+## 案例
+
+```tsx
+
+import React from "react"
+import { getAuthPath,AuthBtn } from "@uiw-admin/authorized"
+
+const Demos = ()=>{
+  return <div>
+    <AuthBtn path="/dom/save" >
+      子集渲染
+    </AuthBtn>
+    <AuthBtn path="/dom/edit" disabled >
+      子集渲染2
+    </AuthBtn>
+  </div>
+}
+export default Demos
+```

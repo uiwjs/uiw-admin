@@ -1,17 +1,14 @@
 models 状态管理
 ===
+> 1. 简化 @rematch/* 状态管理公共进行初始化;
+> 2. 为了简化 models 书写方式
+> 3. [更多 @rematch/core api](https://rematchjs.org/docs/api-reference)
 
 ## Installation
 
 ```bash
 npm i @uiw-admin/models --save
 ```
-
-## 说明
-
-> 1. 简化 @rematch/* 状态管理公共进行初始化;
-> 2. 为了简化 models 书写方式
-> 3. [更多 @rematch/core api](https://rematchjs.org/docs/api-reference)
 
 ## store  
 

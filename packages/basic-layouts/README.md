@@ -127,6 +127,8 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   );
 }
 export default BasicLayoutScreen;
-
-
 ```
+
+## 预览
+
+![](https://user-images.githubusercontent.com/49544090/150921430-c7c7316a-af30-41b5-873f-1f3d86cc9d03.png)

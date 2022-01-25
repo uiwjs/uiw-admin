@@ -37,6 +37,8 @@ export interface UserLoginProps {
   onBefore?: (store: FormValue) => Record<string, any> | boolean;
   /** request 请求 options 配置参数 */
   requestConfig?: Options;
+  /** 登录按钮位置 按钮组, title 为显示标题 */
+  buttons?: (Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[];
 }
 
 export default (props: UserLoginProps) => {
@@ -55,6 +57,7 @@ export default (props: UserLoginProps) => {
     api,
     onBefore,
     requestConfig,
+    buttons,
   } = props;
   const [store, setStore] = React.useState<FormValue>();
   const { isValidating } = useSWR(
@@ -151,16 +154,31 @@ export default (props: UserLoginProps) => {
                     </Row>
                     <Row>
                       <Col className="btn">
-                        <Button
-                          loading={!!isValidating}
-                          disabled={!canSubmit()}
-                          block
-                          type="dark"
-                          {...btnProps}
-                          htmlType="submit"
-                        >
-                          登录
-                        </Button>
+                        {buttons ? (
+                          buttons.map((item) => {
+                            const { title, ...rest } = item;
+                            return (
+                              <Button
+                                loading={!!isValidating}
+                                disabled={!canSubmit()}
+                                {...rest}
+                              >
+                                {title}
+                              </Button>
+                            );
+                          })
+                        ) : (
+                          <Button
+                            loading={!!isValidating}
+                            disabled={!canSubmit()}
+                            block
+                            type="dark"
+                            {...btnProps}
+                            htmlType="submit"
+                          >
+                            登录
+                          </Button>
+                        )}
                       </Col>
                     </Row>
                   </div>
