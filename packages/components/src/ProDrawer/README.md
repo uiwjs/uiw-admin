@@ -2,9 +2,12 @@
 
 <!--ProDrawer-->
 
-```js
-import { ProDrawer } from '@uiw-admin/components'
+## 基本使用
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
+import { ProDrawer } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
   const [ drawerVisible,setDrawerVisible ] = useState( false )
@@ -12,14 +15,15 @@ const Demo = () => {
     return (
      <div>
        <ProDrawer
-        title="编辑"
+        title="标题"
         visible={drawerVisible}
         onClose={()=>setDrawerVisible(false)}
         width={800}
         buttons={[
-          { label: '取消', onClick: ()=>setDrawerVisible(false) },
+          { label: '取消', type:"primary" , onClick: ()=>setDrawerVisible(false) },
           {
             label: '保存',
+            type:"primary",
             onClick: ()=>{},
             show: !isView,
           },
@@ -31,6 +35,7 @@ const Demo = () => {
      </div>
   );
 }
+ReactDOM.render(<Demo />, _mount_);
 ```
 
 ## 参数

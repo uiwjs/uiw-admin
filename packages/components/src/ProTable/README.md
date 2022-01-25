@@ -5,7 +5,7 @@
 
 ### demo
 
-```js
+```jsx
 
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
