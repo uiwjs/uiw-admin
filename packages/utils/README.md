@@ -1,15 +1,4 @@
-# `utils`
-
-> TODO: description
-
-## Usage
-
-```
-const utils = require('@uiw-admin/utils');
-
-// TODO: DEMONSTRATE API
-```
-
+# `工具`
 
 ## request
 

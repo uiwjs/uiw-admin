@@ -1,6 +1,5 @@
-@uiw-admin/document-title
+设置页面标题
 ---
-> 设置页面标题。
 
 ## Installation
 
