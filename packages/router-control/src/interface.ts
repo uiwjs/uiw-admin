@@ -1,5 +1,6 @@
 import React from 'react';
 import type { RouteObject } from 'react-router-dom';
+import { Location, NavigateFunction, Params } from 'react-router-dom';
 export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
   key?: string;
   /** 默认跳转 */
@@ -23,9 +24,9 @@ export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
 }
 
 // json文件格式
-export interface RoutersJSON extends Omit<RoutesBaseProps, "routes"> {
+export interface RoutersJSON extends Omit<RoutesBaseProps, 'routes'> {
   /** 组件地址 如果是 403/404/500 的页面直接写 403/404/500 就可以了，内部直接做转化*/
-  component?: string
+  component?: string;
   /** 子集 路由 */
   routes?: RoutersJSON[];
 }
@@ -33,8 +34,8 @@ export interface RoutersJSON extends Omit<RoutesBaseProps, "routes"> {
 export interface Routers extends RoutesBaseProps {
   /** 组件 */
   component?:
-  | JSX.Element
-  | React.LazyExoticComponent<(props?: any) => JSX.Element>;
+    | JSX.Element
+    | React.LazyExoticComponent<(props?: any) => JSX.Element>;
   /** 子集 路由 */
   routes?: Routers[];
 }
@@ -47,7 +48,14 @@ export interface RoutersProps extends Routers {
 }
 
 export type DefaultProps = {
-  routes: RoutersProps[];
+  /** 子集路由 */
+  routes?: RoutersProps[];
+  /** 路由 参数 */
+  router?: {
+    location: Location;
+    navigate: NavigateFunction;
+    params: Readonly<Params<string>>;
+  };
 };
 
 export interface ControllerProps {

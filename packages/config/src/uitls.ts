@@ -1,5 +1,5 @@
-export const transformationDefineString = (obj: { [s: string]: any }) => {
-  const result: { [s: string]: string } = {};
+export const transformationDefineString = (obj: Record<string, any>) => {
+  const result: Record<string, any> = {};
   Object.entries(obj).forEach(([key, value]) => {
     result[key] = JSON.stringify(value);
   });

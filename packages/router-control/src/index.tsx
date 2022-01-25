@@ -13,32 +13,31 @@ import {
   Navigate,
 } from 'react-router-dom';
 // @ts-ignore
-import RoutePathArr from "@@/routes"
+import RoutePathArr from '@@/routes';
 import { Provider } from 'react-redux';
 import { store } from '@uiw-admin/models';
 import { Exceptions403 } from '@uiw-admin/exceptions';
 import { createBrowserHistory } from 'history';
-import { ControllerProps, RoutersProps, } from "./interface"
-export * from "./interface"
+import { ControllerProps, RoutersProps } from './interface';
+export * from './interface';
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
-export let navigate: NavigateFunction = () => { };
+export let navigate: NavigateFunction = () => {};
 
 // json文件格式
 export const Loadable =
   (Component: React.LazyExoticComponent<(props?: any) => JSX.Element>) =>
-    (props: any) => {
-      const location = useLocation();
-      const navigate = useNavigate();
-      const params = useParams();
-
-      return (
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <Component {...props} router={{ location, navigate, params }} />
-        </React.Suspense>
-      );
-    };
+  (props: any) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const params = useParams();
+    return (
+      <React.Suspense fallback={<div>Loading...</div>}>
+        <Component {...props} router={{ location, navigate, params }} />
+      </React.Suspense>
+    );
+  };
 
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
@@ -57,7 +56,9 @@ export const getDeepTreeRoute = (
   return routes.map((item) => {
     const itemObj = { ...item };
     // @ts-ignore
-    if (AUTH && itemObj.path &&
+    if (
+      AUTH &&
+      itemObj.path &&
       ![
         '/',
         '*',
@@ -98,15 +99,13 @@ export const getDeepTreeRoute = (
   });
 };
 
-const getTree = (
-  routes: RoutersProps[] = [],
-): JSX.Element[] => {
+const getTree = (routes: RoutersProps[] = []): JSX.Element[] => {
   let list: JSX.Element[] = [];
   routes.forEach((item, ind) => {
     const itemObj = item;
     // 判断是否有子项进行递归处理
     if (item.routes) {
-      itemObj.children = getTree(itemObj.routes,);
+      itemObj.children = getTree(itemObj.routes);
     }
     // 懒加载
     if (!React.isValidElement(itemObj.component) && itemObj.component) {
@@ -147,9 +146,10 @@ export function RouteChild(props: ControllerProps = {}) {
     return [];
   }, [authStr]);
   const roue = React.useMemo(
-    () => createRoutesFromChildren(
-      getTree(getDeepTreeRoute(RoutePathArr, authList)),
-    ),
+    () =>
+      createRoutesFromChildren(
+        getTree(getDeepTreeRoute(RoutePathArr, authList)),
+      ),
     [JSON.stringify(authList)],
   );
   const dom = useRoutes(roue);
@@ -181,11 +181,7 @@ export default function Controller(props: ControllerProps = {}) {
         <RouteChild />
       </HistoryRouter>
     );
-  }, [routeType])
+  }, [routeType]);
 
-  return (<Provider store={store}>
-    {dom}
-  </Provider>)
-
-
+  return <Provider store={store}>{dom}</Provider>;
 }
