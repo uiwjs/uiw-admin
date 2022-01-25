@@ -10,10 +10,10 @@ import useSWR from 'swr'
 // import Auth from "@uiw-admin/authorized"
 
 interface BasicLayoutProps {
-  routes: RoutersProps[];
+  routes: RoutersProps[]
 }
 
-function BasicLayoutScreen (props: BasicLayoutProps = { routes: [] }) {
+function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
@@ -22,9 +22,11 @@ function BasicLayoutScreen (props: BasicLayoutProps = { routes: [] }) {
       if (data && data.code === 200) {
         sessionStorage.setItem('token', data.token)
         sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('auth', JSON.stringify(data.authList || []))
         window.location.reload()
       }
-    }
+    },
   })
 
   const basicLayoutProps = {
@@ -35,13 +37,13 @@ function BasicLayoutScreen (props: BasicLayoutProps = { routes: [] }) {
       {
         title: '欢迎来到uiw',
         icon: 'smile',
-        onClick: () => null
+        onClick: () => null,
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => null
-      }
+        onClick: () => null,
+      },
     ],
     profile: {
       avatar: require('../assets/head.png'),
@@ -51,8 +53,8 @@ function BasicLayoutScreen (props: BasicLayoutProps = { routes: [] }) {
             <Icon type="bell" color="#343a40" style={{ fontSize: 20 }} />
           </Badge>
         </div>
-      )
-    }
+      ),
+    },
   }
 
   // 验证是否登录的方式

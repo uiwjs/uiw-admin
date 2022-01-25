@@ -10,6 +10,7 @@ import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
 export default defaultConfig({
   define: {
     VERSION: JSON.stringify(pkg.version),
+    STORAGE: 'local',
     // BASE_NAME: "/uiw"
   },
   plugins: [new RematchWebpackPlugin(), new RoutesWebpackPlugin()],
