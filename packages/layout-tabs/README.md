@@ -1,13 +1,12 @@
 layout-tabs
 ===
-
+> tab 选项卡布局
 ## Installation
 
 ```bash
 npm i @uiw-admin/layout-tabs --save
 ```
 
-> tab 选项卡布局
 
 ## 参数
 
@@ -42,3 +41,7 @@ interface LayoutTabsProps {
   />
   }
 ```
+
+## 预览
+
+![](https://user-images.githubusercontent.com/49544090/150922472-e8882ecc-298a-4bad-8141-0d640fd167ff.png)

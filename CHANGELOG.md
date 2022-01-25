@@ -10,6 +10,9 @@
   - 🌟 `PromForm`：更新在线预览文档
   - 🌟 `PromForm`：增加只读模式下表单项隐藏
   - 🌟 `ProDrawer`：更新在线预览文档
+- @uiw-admin/user-login
+  - 新增 `buttons` 按钮组参数 
+
 ## 5.1.0
 - @uiw-admin/components
   - 🌟 `PromForm`：增加customWidgetsList prop配置自定义组件
