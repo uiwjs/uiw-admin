@@ -155,10 +155,11 @@ export default (props: UserLoginProps) => {
                     <Row>
                       <Col className="btn">
                         {buttons ? (
-                          buttons.map((item) => {
+                          buttons.map((item, idx) => {
                             const { title, ...rest } = item;
                             return (
                               <Button
+                                key={idx}
                                 loading={!!isValidating}
                                 disabled={!canSubmit()}
                                 {...rest}
