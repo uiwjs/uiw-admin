@@ -1,8 +1,10 @@
 # 基于uiw-form封装的业务表单
 
 ## 注意
-- [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/from)
-- 组件默认集成了Input,Checkbox,Switch,Textarea,DateInput,TimePicker,MonthPicker,SearchSelect,Select,Radio。
+
+> [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/from)
+> 组件默认集成了Input,Checkbox,Switch,Textarea,DateInput,TimePicker,MonthPicker,SearchSelect,Select,Radio。
+<!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 <!--ProForm-->
 
