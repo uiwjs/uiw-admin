@@ -101,6 +101,18 @@ export const items = (queryInfo: any, attr: any) => [
     ),
   },
   {
+    label: 'selectMultiple',
+    key: 'selectMultiple',
+    widget: 'selectMultiple',
+    option: [
+      { value: 1, label: '苹果' },
+      { value: 2, label: '西瓜' },
+      { value: 3, label: '香蕉' },
+      { value: 4, label: '东北大冻梨' },
+    ],
+    initialValue: queryInfo?.selectMultiple,
+  },
+  {
     label: '上传组件',
     key: 'upload',
     widget: 'upload',
@@ -114,6 +126,5 @@ export const items = (queryInfo: any, attr: any) => [
       uploadType: 'list',
     },
     initialValue: queryInfo?.upload,
-    hide: true,
   },
 ]
