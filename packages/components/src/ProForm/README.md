@@ -232,7 +232,6 @@ const Demo = () => {
                 // 年月日时分秒
                 format: 'YYYY-MM-DD HH:mm:ss'
               },
-              readSpan:2,
               initialValue: queryInfo.dateInputsecond && formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond))
             },
             {
@@ -281,7 +280,6 @@ ReactDOM.render(<Demo />, _mount_);
 | customWidgetsList | 可配置自定义组件	  |  { [key: string]: any }		| {} |
 
 ## FormItemsProps 继承uiw-FormItem
-- 继承于uiw-FormItem
 | 参数 | 说明	| 类型	| 默认值 |
 | --  | -- | -- | -- |
 | label| 表单项名称 | string	| - |
