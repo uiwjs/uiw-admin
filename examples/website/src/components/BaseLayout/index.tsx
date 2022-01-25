@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { Layout, Affix } from 'uiw';
 import GitHubCorners from '@uiw/react-github-corners';
 import pkg from 'uiw-admin/package.json';
@@ -31,9 +31,9 @@ export default function Components(props: ComponentsProps) {
               />
             </g>
           </svg>
-          <div className={styles.title}>
+          <Link className={styles.title} to="/">
             uiw admin<sup>{pkg.version}</sup>
-          </div>
+          </Link>
         </Header>
       </Affix>
       <Layout className={styles.layoutWrap}>
