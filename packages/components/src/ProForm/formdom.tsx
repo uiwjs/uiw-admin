@@ -55,19 +55,19 @@ function FormDom({
                 </Button>
               ) : (
                 <Button
-                  {...saveButtonProps}
                   style={{ display: 'none' }}
                   ref={submitRef}
                   disabled={!canSubmit()}
                   htmlType="submit"
+                  {...saveButtonProps}
                 >
                   {saveButtonProps?.label || '提交'}
                 </Button>
               )}
               <Button
-                {...resetButtonProps}
                 style={{ display: showResetButton ? 'flex' : 'none' }}
                 onClick={resetForm}
+                {...resetButtonProps}
               >
                 {resetButtonProps?.label || '重置'}
               </Button>

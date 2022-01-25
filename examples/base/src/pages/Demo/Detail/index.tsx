@@ -62,7 +62,10 @@ const Detail = ({ updateData }: DetailProps) => {
         formType={isView ? 'pure' : 'card'}
         submitRef={baseRef}
         readOnly={isView}
-        onSubmit={(initial, current) => {
+        onSubmit={(
+          initial: Record<string, any>,
+          current: Record<string, any>
+        ) => {
           const errorObj: any = {}
           if (!current?.input) {
             errorObj.input = '名字不能为空'
@@ -75,11 +78,12 @@ const Detail = ({ updateData }: DetailProps) => {
           }
           mutate()
         }}
-        buttonsContainer={{ justifyContent: 'flex-start' }}
         // 更新表单的值
-        onChange={(initial: any, current: any) =>
-          updateData({ queryInfo: { ...queryInfo, ...current } })
-        }
+        onChange={(
+          initial: Record<string, any>,
+          current: Record<string, any>
+        ) => updateData({ queryInfo: { ...queryInfo, ...current } })}
+        buttonsContainer={{ justifyContent: 'flex-start' }}
         formDatas={
           items(queryInfo, {
             isView,

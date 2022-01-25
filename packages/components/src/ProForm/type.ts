@@ -1,5 +1,10 @@
 import React from 'react';
-import { ButtonProps, DescriptionsProps } from 'uiw';
+import {
+  ButtonProps,
+  DescriptionsProps,
+  FormItemProps as UiwFormItemProps,
+  FormProps as UiwFormProps,
+} from 'uiw';
 
 export type Fields = {
   [key: string]: any;
@@ -10,7 +15,8 @@ export interface FormItemsOptionsProps {
   disabled?: boolean;
 }
 
-export interface FormItemsProps {
+export interface FormItemsProps
+  extends Omit<UiwFormItemProps<any>, 'initialValue' | 'validator'> {
   /** 表单元素标题 */
   label?: string;
   /** 表单元素字段名称 */
@@ -32,7 +38,11 @@ export interface FormItemsProps {
   required?: boolean;
 }
 
-export interface ProFormProps {
+export interface ProFormProps
+  extends Omit<
+    UiwFormProps<any>,
+    'fields' | 'children' | 'onSubmit' | 'onChange'
+  > {
   formDatas?: FormItemsProps[];
   onSubmit?: (
     initial: Record<string, any>,
