@@ -24,6 +24,8 @@ export const defaultDefine = {
   AUTH: JSON.stringify(true),
   /** 路由 跳转前缀 默认 "/" */
   BASE_NAME: JSON.stringify("/"),
+  /** 本地存储使用 localStorage 还是  sessionStorage  可选值 local | session */
+  STORAGE: JSON.stringify("session")
 }
 ```
 

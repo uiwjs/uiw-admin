@@ -4,7 +4,10 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-
+## 5.1.2(未发版)
+-  @uiw-admin/config
+   -  新增一个默认 `define` 的 `STORAGE` 属性,本地存储使用localStorage或sessionStorage ,默认 "session",可选值  local | session
+ 
 ## 5.1.1
 - @uiw-admin/components
   - 🌟 `PromForm`：更新在线预览文档

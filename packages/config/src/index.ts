@@ -9,7 +9,10 @@ export const defaultDefine = {
   AUTH: JSON.stringify(true),
   /** 路由 跳转前缀 默认 "/" */
   BASE_NAME: JSON.stringify('/'),
+  /** 本地存储使用 localStorage 还是  sessionStorage  */
+  STORAGE: JSON.stringify('session'), // local | session
 };
+
 export type ConfFun = (
   conf: Configuration,
   evn: string,
