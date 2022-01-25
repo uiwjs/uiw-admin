@@ -1,4 +1,4 @@
-authorized
+权限组件
 ===
 
 ## Installation
@@ -7,7 +7,7 @@ authorized
 npm i @uiw-admin/authorized --save
 ```
 
-## AuthPage默认导出组件
+## AuthPage 页面权限组件
 
 ```ts
 interface AuthorizedProps {
