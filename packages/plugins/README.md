@@ -11,13 +11,6 @@ npm i @uiw-admin/plugins
 > 2. 自动加载 models
 > 3. [使用方式](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/examples/base/.kktrc.ts#L8-L22)
 
-
-## WidgetsWebpackPlugin 
-
-> 1. [WidgetsWebpackPlugin](https://github.com/uiwjs/uiw-admin/blob/28f197b78537821c5dbc2e296884abf33adf9e39/packages/plugins/src/widgets/index.ts)
-> 2. 判断表单中引用公共组件地址是否存在，不存在自动生成一个文件
-> 4. [使用方式](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/examples/base/.kktrc.ts#L8-L22)
-> 
 ## RoutesWebpackPlugin 
 
 > 1. [RoutesWebpackPlugin](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/packages/plugins/src/routes/index.ts) 
