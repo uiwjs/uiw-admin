@@ -1,16 +1,16 @@
 ## ProTable
 
-集成搜索表单，table的列表组件
+集成搜索表单的Table组件，用于一般页面的查询搜索。
 
 
 ### demo
 
-```js
-
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
-export default function Demo() {
+function Demo() {
   const table = useTable('/api/getData', {
     // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
     formatData: (data) => {
@@ -20,7 +20,7 @@ export default function Demo() {
       };
     },
     // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
-    query: (pageIndex: number, searchValues: any) => {
+    query: (pageIndex, searchValues) => {
       return {
         page: pageIndex,
         pageSize: 10,
@@ -46,10 +46,10 @@ export default function Demo() {
       //   { label: '点我', onClick: () => null},
       // ]}
       onBeforeSearch={({ initial, current }) => {
-        const errorObj: any = {};
+        const errorObj = {};
         if (!current.name) errorObj.name = '名字不能为空！';
         if (Object.keys(errorObj).length > 0) {
-          const err: any = new Error();
+          const err = new Error();
           err.filed = errorObj;
           throw err;
         }
@@ -146,6 +146,7 @@ export default function Demo() {
   );
 }
 
+ReactDOM.render(<Demo />, _mount_);
 
 ```
 
@@ -199,5 +200,3 @@ export default function Demo() {
 | data | 接口请求数据	| Array	| - |
 | total | 数据总数	| Number		| - |
 | searchValues | 表单值	| Object		| - |
-
-别的值咱不需要使用
