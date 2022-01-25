@@ -39,7 +39,9 @@ export interface UserLoginProps {
   /** 调用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作  */
   onBefore?: (store: FormValue) => { [s: string]: any } | boolean;
   /** request 请求的 options 配置参数 */
-  requestConfig?: Options
+  requestConfig?: Options;
+    /** 登录按钮位置 按钮组, title 为显示标题 */
+  buttons?: (Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]
 }
 ```
 
@@ -52,8 +54,19 @@ import { useNavigate, } from 'react-router-dom';
 import { Notify } from "uiw"
 const UserLayout = () => {
   const navigate = useNavigate()
-
   return <UserLogin
+   buttons={[
+       {
+         title: "登录",
+         htmlType: "submit",
+         type: 'primary',
+         style: { width: "45%" }
+       },
+       {
+         title: "注册",
+         style: { width: "45%" }
+       },
+     ]}
     api="/api/login"
     onBefore={(value) => ({ a: 12, b: 1221 })}
     btnProps={{ type: "primary" }}
@@ -70,10 +83,13 @@ const UserLayout = () => {
 }
 export default UserLayout;
 
-
 ```
 
-## 预览
+## 默认预览
 
 ![](https://user-images.githubusercontent.com/49544090/150922771-8a5fa5dc-8d82-4d3c-80ac-b61dcb5eb920.png)
 
+
+## 自定义按钮预览
+
+![](https://user-images.githubusercontent.com/49544090/150929179-4854ca6c-25c8-4703-acee-9c7855821b8a.png)
