@@ -27,13 +27,13 @@ export interface ConfigProps {
   /** 插件 */
   plugins?: Configuration['plugins'];
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: { [s: string]: any };
+  define?: Record<string, any>;
   /** 其他 工具 */
   loader?: (
     | ConfFun
     | {
         loader?: ConfFun;
-        options?: LoaderConfOptions | undefined | { [s: string]: any };
+        options?: LoaderConfOptions | undefined | Record<string, any>;
       }
   )[];
   /** 项目前缀 */

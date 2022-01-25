@@ -33,14 +33,19 @@ export const defaultDefine = {
 export type ConfFun = (conf: Configuration, evn: string, options?: LoaderConfOptions | undefined) => Configuration
 
 export interface ConfigProps {
-  /** 别名 */
-  alias?: { [s: string]: string },
+   /**
+   * 别名
+   * 默认系统内置两个别名
+   * 1. `@` 指向 src 目录
+   * 2. `@@` 指向 src/.uiw 目录
+   */
+  alias?: Record<string, string | false | string[]>,
   /** 插件 */
   plugins?: Configuration["plugins"],
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: { [s: string]: any },
+  define?: Record<string, any>,
   /** 其他 工具 */
-  loader?: (ConfFun | { loader?: ConfFun, options?: LoaderConfOptions | undefined | { [s: string]: any } })[]
+  loader?: (ConfFun | { loader?: ConfFun, options?: LoaderConfOptions | undefined | Record<string, any>)[]
   /** 项目前缀 */
   publicPath?: string;
   /** 更多的 自定义  配置 */
