@@ -1,6 +1,6 @@
-layout-tabs
+tab 选项卡布局
 ===
-> tab 选项卡布局
+
 ## Installation
 
 ```bash

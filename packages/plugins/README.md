@@ -1,4 +1,4 @@
-@uiw-admin/plugins
+插件
 ===
 
 ```bash

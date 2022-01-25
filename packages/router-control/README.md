@@ -1,6 +1,5 @@
-router-control
+路由控制
 ===
-> 路由控制
 
 ## Installation
 
