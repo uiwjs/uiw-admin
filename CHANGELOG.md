@@ -16,7 +16,7 @@
   - 🌟 feat:新增`saveField`参数
 - @uiw-admin/components
   - 🌟 `PromForm`：增加SelectMultiple下拉多选组件
-  - 🌟 `PromTable`：增加列表选择框功能
+  - 🌟 `ProTable`：增加列表选择框功能
   
 ## 5.1.2-alpha.1
 

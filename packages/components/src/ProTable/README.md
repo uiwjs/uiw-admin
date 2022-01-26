@@ -226,9 +226,9 @@ ReactDOM.render(<Demo />, _mount_);
 | data          | 接口请求数据	   | Array	      | - |
 | total         | 数据总数	      | Number		    | - |
 | searchValues  | 表单值	        | Object		    | - |
-| rowSelection  | 选择框属性	    | UseSelections	 | - |
+| selection  | 选择框属性	    | UseSelections	 | - |
 
-### rowSelection
+### selection
 
 | 参数              | 说明               | 类型                    |    默认值 |
 |-------------------|--------------------|-------------------------| -------- |
