@@ -9,7 +9,7 @@ import { Options } from '@uiw-admin/utils/lib/request';
 
 import './styles/index.css';
 
-type FormValue = { username?: string; password?: string };
+export type FormValue = { username?: string; password?: string };
 
 export interface UserLoginProps {
   /** 卡片框的位置 */

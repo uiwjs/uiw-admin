@@ -21,7 +21,7 @@ const UserLayout = () => {
       ]}
       api="/api/login"
       btnProps={{ type: 'primary' }}
-      onBefore={() => ({ a: 12, b: 1221 })}
+      onBefore={(store) => ({ a: 12, b: 1221, ...store })}
       onSuccess={(data) => {
         if (data && data.token) {
           sessionStorage.setItem('token', data.token)
