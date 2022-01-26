@@ -21,6 +21,10 @@ const UserLayout = () => {
       ]}
       api="/api/login"
       btnProps={{ type: 'primary' }}
+      saveField={{
+        userName: 'username',
+        passWord: 'password',
+      }}
       onBefore={(store) => ({ a: 12, b: 1221, ...store })}
       onSuccess={(data) => {
         if (data && data.token) {
