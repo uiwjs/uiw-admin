@@ -87,7 +87,7 @@ jobs:
     - name: Generate Contributors Images
       uses: jaywcjlove/github-action-contributors@main
       with:
-        filter-author: renovate\[bot\]
+        filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
         output: ./examples/website/build/CONTRIBUTORS.svg
         avatarSize: 36
 
