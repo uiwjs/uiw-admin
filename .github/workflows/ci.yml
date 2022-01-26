@@ -84,6 +84,13 @@ jobs:
         publish_branch: heroku
         publish_dir: ./examples/base
 
+    - name: Generate Contributors Images
+      uses: jaywcjlove/github-action-contributors@main
+      with:
+        filter-author: renovate\[bot\]
+        output: ./examples/website/build/CONTRIBUTORS.svg
+        avatarSize: 36
+
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
