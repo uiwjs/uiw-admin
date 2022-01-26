@@ -83,13 +83,11 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
         // 搜索前校验
-        if (onBeforeSearch && onBeforeSearch({initial, current})) {
+        if (onBeforeSearch && onBeforeSearch({ initial, current })) {
           onFormSearch({ initial, current });
         } else {
           onFormSearch({ initial, current });
         }
-        
-        
       }}
       onSubmitError={(error) => {
         if (error.filed) {
@@ -113,14 +111,26 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                 .map((value, index) => (
                   <Col key={index.toString()} fixed style={{ width: '20%' }} />
                 ))}
-              <Col align="middle" style={{textAlign: 'right', marginRight: 14}}>
+              <Col
+                align="middle"
+                style={{ textAlign: 'right', marginRight: 14 }}
+              >
                 {searchBtns ? (
-                  searchBtns.map((btn: any, idx) => (
-                    btn?.render ? <React.Fragment key={idx.toString()}>{btn.render}</React.Fragment> :
-                    <Button key={idx.toString()} style={{marginRight: 5}} {...btn}>
-                      {btn.label}
-                    </Button>
-                  ))
+                  searchBtns.map((btn: any, idx) =>
+                    btn?.render ? (
+                      <React.Fragment key={idx.toString()}>
+                        {btn.render}
+                      </React.Fragment>
+                    ) : (
+                      <Button
+                        key={idx.toString()}
+                        style={{ marginRight: 5 }}
+                        {...btn}
+                      >
+                        {btn.label}
+                      </Button>
+                    ),
+                  )
                 ) : (
                   <Button type="primary" htmlType="submit">
                     查询
