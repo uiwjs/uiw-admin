@@ -101,6 +101,22 @@ export const items = (queryInfo: any, attr: any) => [
     ),
   },
   {
+    label: 'selectMultiple',
+    key: 'selectMultiple',
+    widget: 'selectMultiple',
+    option: attr.selectMultiple.option,
+    widgetProps: {
+      onSearch: attr.selectMultiple.onSearch,
+      onClear: (value: any) => console.log('clearvalue', value),
+      onChange: (value: any) => console.log('changevalue', value),
+      onSelect: (value: any) => console.log('selectvalue', value),
+      loading: attr.selectMultiple.loading,
+      allowClear: true,
+      showSearch: true,
+    },
+    initialValue: queryInfo?.selectMultiple,
+  },
+  {
     label: '上传组件',
     key: 'upload',
     widget: 'upload',
@@ -114,6 +130,5 @@ export const items = (queryInfo: any, attr: any) => [
       uploadType: 'list',
     },
     initialValue: queryInfo?.upload,
-    hide: true,
   },
 ]

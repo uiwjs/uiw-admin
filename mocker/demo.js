@@ -40,6 +40,10 @@ module.exports.selectById = function (req, res) {
           },
         },
       ],
+      selectMultiple: [
+        { value: 1, label: '苹果' },
+        { value: 2, label: '西瓜' },
+      ],
     },
   })
 }

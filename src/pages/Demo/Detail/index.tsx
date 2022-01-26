@@ -14,6 +14,8 @@ interface DetailProps {
 const Detail = ({ updateData }: DetailProps) => {
   const baseRef = useRef<any>()
   const dispatch = useDispatch<Dispatch>()
+  const [option, setOption] = React.useState<any>([])
+  const [loading, setLoading] = React.useState(false)
   const {
     demo: { drawerVisible, tableType, queryInfo, isView },
   } = useSelector((state: RootState) => state)
@@ -36,6 +38,22 @@ const Detail = ({ updateData }: DetailProps) => {
       },
     }
   )
+
+  // 模拟搜索
+  const handleSearch = (type: 'selectMultiple') => {
+    if (type === 'selectMultiple') {
+      setLoading(true)
+      setTimeout(() => {
+        setOption([
+          { value: 1, label: '苹果' },
+          { value: 2, label: '西瓜' },
+          { value: 3, label: '香蕉' },
+          { value: 4, label: '东北大冻梨' },
+        ])
+        setLoading(false)
+      }, 2000)
+    }
+  }
 
   return (
     <ProDrawer
@@ -90,6 +108,11 @@ const Detail = ({ updateData }: DetailProps) => {
             upload: {
               onUploadChange: (fileList: any) =>
                 updateData({ queryInfo: { ...queryInfo, upload: fileList } }),
+            },
+            selectMultiple: {
+              onSearch: handleSearch.bind(this, 'selectMultiple'),
+              loading: loading,
+              option: option,
             },
           }) as any
         }
