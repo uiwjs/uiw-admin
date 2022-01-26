@@ -98,7 +98,7 @@ function SelectMultiple(
         <Menu
           style={{
             minHeight: 25,
-            maxHeight: 280,
+            maxHeight: 150,
             overflowY: 'scroll',
             width: 200,
           }}
@@ -133,12 +133,17 @@ function SelectMultiple(
         <div
           style={{
             padding: 10,
+            height: 70,
             width: 200,
             display: 'flex',
+            flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
+            fontSize: 12,
+            color: '#888',
           }}
         >
+          <Icon type="file-unknown" style={{ fontSize: 20 }} />
           暂无数据
         </div>
       </Loader>
@@ -185,7 +190,9 @@ function SelectMultiple(
             type={renderSelectIcon()}
             spin={loading}
             onClick={
-              renderSelectIcon() === 'close' && handleInput.bind(this, 'clean')
+              renderSelectIcon() === 'close'
+                ? handleInput.bind(this, 'clean')
+                : undefined
             }
           />
         }
