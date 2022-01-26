@@ -1,24 +1,58 @@
 import React, { useState } from 'react';
-import { Input, Popover, Menu, Icon } from 'uiw';
+import { Input, Popover, Menu, Icon, Loader } from 'uiw';
 import { FormItemsOptionsProps } from '../../type';
 
 export interface SelectMultipleProps {
+  // 下拉项集合
   option?: FormItemsOptionsProps[];
-  onChange?: (selected: FormItemsOptionsProps[]) => void;
+  // 变化回调 返回所有选中的项
+  onChange?: (selectedList?: FormItemsOptionsProps[]) => void;
+  // 选中后回调 返回当前选中的项
+  onSelect?: (selected?: FormItemsOptionsProps | null) => void;
+  // 搜索回调
+  onSearch?: (name?: string) => void;
+  // 失去焦点回调
+  onBlur?: () => void;
+  // 删除后毁掉
+  onClear?: (selectedList?: FormItemsOptionsProps[]) => void;
+  // 值
   value?: FormItemsOptionsProps[];
-  // onSearch?: (v: string) => void;
-  // placeholder?: string;
-  // defaultValue?: string | Number;
+  // 是否展示删除
+  allowClear?: boolean;
+  loading?: boolean;
+  disabled?: boolean;
+  placeholder?: string;
+  // 无数据展示
+  noContent?: React.ReactNode;
+  // 是否允许搜索
+  showSearch?: boolean;
 }
 
-function SelectMultiple({
-  option = [],
-  onChange,
-  value = [],
-  ...others
-}: SelectMultipleProps) {
+function SelectMultiple(
+  this: import('../../type').Fields,
+  {
+    option = [],
+    onChange,
+    onSelect,
+    onSearch,
+    onBlur,
+    onClear,
+    value = [],
+    loading = true,
+    disabled = false,
+    placeholder,
+    allowClear = false,
+    noContent,
+    showSearch = false,
+  }: SelectMultipleProps,
+) {
+  // 选中的集合
   const [selectedItems, setSelectedItems] =
     useState<FormItemsOptionsProps[]>(value);
+  // 搜索内容
+  const [searchValue, setSearchValue] = useState('');
+  // 是否是搜索状态
+  const [isSearch, setIsSearch] = useState(false);
 
   // 选择下拉项
   const handleOnChange = (selected: FormItemsOptionsProps) => {
@@ -31,35 +65,45 @@ function SelectMultiple({
     }
     setSelectedItems(selKeys);
     onChange?.(selKeys);
+    onSelect?.(selected);
   };
 
-  const resetSelectedValue = () => {
-    setSelectedItems([]);
-    onChange?.([]);
+  const handleInput = (
+    type: 'blur' | 'search' | 'clean',
+    { target }: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (type === 'search') {
+      setIsSearch(true);
+      setSearchValue(target.value);
+      onSearch?.(target.value);
+    }
+    if (type === 'blur') {
+      setSearchValue('');
+      setIsSearch(false);
+      onBlur?.();
+    }
+    if (type === 'clean') {
+      setSearchValue('');
+      setSelectedItems([]);
+      setIsSearch(false);
+      onClear?.([]);
+    }
   };
-
-  // input的value值
-  const inputValue = React.useMemo(() => {
-    const content =
-      (selectedItems &&
-        selectedItems.length > 0 &&
-        selectedItems.map((item) => item.label)) ||
-      [];
-    return content.join(';');
-  }, [selectedItems]);
 
   const contentShow = () => {
-    return (
-      <Menu
-        style={{
-          minHeight: 25,
-          maxHeight: 280,
-          overflowY: 'scroll',
-          width: 200,
-        }}
-      >
-        {option &&
-          option.map((opt: FormItemsOptionsProps, idx) => {
+    const optionNotEmpty = option && option.length > 0;
+    // 有数据
+    if (optionNotEmpty) {
+      return (
+        <Menu
+          style={{
+            minHeight: 25,
+            maxHeight: 280,
+            overflowY: 'scroll',
+            width: 200,
+          }}
+        >
+          {option.map((opt: FormItemsOptionsProps, idx) => {
             const active: boolean =
               selectedItems &&
               selectedItems.findIndex((item) => item.value === opt.value) !==
@@ -70,16 +114,57 @@ function SelectMultiple({
                 active={active}
                 key={opt.value}
                 text={opt.label}
+                disabled={opt.disabled}
                 onClick={(e: any) => {
+                  setIsSearch(false);
                   e.preventDefault();
                   handleOnChange(opt);
                 }}
               />
             );
           })}
-      </Menu>
+        </Menu>
+      );
+    }
+    return noContent ? (
+      noContent
+    ) : (
+      <Loader loading={loading} color="black">
+        <div
+          style={{
+            padding: 10,
+            width: 200,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          暂无数据
+        </div>
+      </Loader>
     );
   };
+
+  // input的value值
+  const inputValue = React.useMemo(() => {
+    const content =
+      (selectedItems &&
+        selectedItems.length > 0 &&
+        selectedItems.map((item) => item.label)) ||
+      [];
+    return isSearch ? searchValue : content.join(';');
+  }, [selectedItems, searchValue, isSearch]);
+
+  // 渲染icon
+  function renderSelectIcon() {
+    if (!isSearch && allowClear && selectedItems.length > 0) {
+      return 'close';
+    }
+    if (isSearch && loading) {
+      return 'loading';
+    }
+    return 'search';
+  }
 
   return (
     <Popover
@@ -89,14 +174,19 @@ function SelectMultiple({
       visibleArrow={false}
     >
       <Input
-        style={{ overflowX: 'scroll' }}
-        readOnly={true}
+        readOnly={!showSearch}
+        disabled={disabled}
+        placeholder={placeholder}
         value={inputValue}
+        onChange={(e) => handleInput('search', e)}
+        onBlur={(e) => handleInput('blur', e)}
         addonAfter={
           <Icon
-            type="close"
-            style={{ color: '#a5a5a5', fontSize: 16 }}
-            onClick={resetSelectedValue}
+            type={renderSelectIcon()}
+            spin={loading}
+            onClick={
+              renderSelectIcon() === 'close' && handleInput.bind(this, 'clean')
+            }
           />
         }
       />
