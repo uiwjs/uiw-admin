@@ -12,6 +12,8 @@
 - @uiw-admin/plugins 
   - 🐞 fix:修复多删除引入的 `createModel` 方法
   - 🐞 fix:修复 `RematchWebpackPlugin` 生成的 `models` 类型问题
+- @uiw-admin/user-login 
+  - 🌟 feat:新增`saveField`参数
   
 ## 5.1.2-alpha.1
 
