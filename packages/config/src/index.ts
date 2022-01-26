@@ -30,7 +30,7 @@ export interface ConfigProps {
   /** 插件 */
   plugins?: Configuration['plugins'];
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: Record<string, any>;
+  define?: Record<string, any> & Partial<typeof defaultDefine>;
   /** 其他 工具 */
   loader?: (
     | ConfFun
