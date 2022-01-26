@@ -17,7 +17,6 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
   } = props;
   const {
     key,
-    data,
     reset,
     refersh,
     updateStore,
@@ -27,6 +26,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     loading,
     onSearch,
     SWRConfiguration,
+    selection,
   } = table;
 
   const store = useMemo(
@@ -41,19 +41,9 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       searchValues,
       onSearch,
       SWRConfiguration,
+      selection,
     }),
-    [
-      JSON.stringify(data),
-      reset,
-      refersh,
-      key,
-      updateStore,
-      formatData,
-      query,
-      JSON.stringify(searchValues),
-      onSearch,
-      SWRConfiguration,
-    ],
+    [JSON.stringify(table)],
   );
 
   return (

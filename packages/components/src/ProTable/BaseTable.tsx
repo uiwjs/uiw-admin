@@ -6,19 +6,16 @@ import React, {
   useMemo,
 } from 'react';
 import useSWR from 'swr';
-import { Table, Pagination, TableColumns } from 'uiw';
+import { Table, Pagination, Checkbox, Radio } from 'uiw';
 import { request } from '@uiw-admin/utils';
 import { useStore } from './hooks';
-import { Fields } from './types';
-
-interface BaseTableProps {
-  style?: React.CSSProperties;
-  columns: TableColumns[];
-}
+import { Fields, BaseTableProps, FormCol } from './types';
+import useSelections from '../hooks/useSelections';
 
 const BaseTable: React.FC<BaseTableProps> = ({
   style,
   columns,
+  rowSelection = {},
   ...tableProps
 }) => {
   const [pageIndex, setPageIndex] = useState(1);
@@ -39,6 +36,10 @@ const BaseTable: React.FC<BaseTableProps> = ({
     SWRConfiguration = {},
   } = store as any;
 
+  const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
+
+  const isCheckbox = type === 'checkbox';
+
   // 表单默认值
   const defaultValues = useMemo(() => {
     const defaultSearchValues: Fields = {};
@@ -51,6 +52,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
     return defaultSearchValues;
   }, [JSON.stringify(columns)]);
+
   // 是否首次调取数据
   const isFirstMountRef = useRef(false);
   // 格式化接口查询参数
@@ -75,10 +77,20 @@ const BaseTable: React.FC<BaseTableProps> = ({
     [key, { method: 'POST', body: formatQuery() }],
     request,
     {
-      // revalidateOnMount: false,
       revalidateOnFocus: false,
       ...SWRConfiguration,
     },
+  );
+
+  // table数据
+  const tableData =
+    formatData && data ? formatData(data).data : data?.data || prevData?.data;
+
+  const selection = useSelections<any>(
+    // 设置枚举值
+    selectKey ? tableData.map((itm: any) => itm[selectKey]) : tableData,
+    defaultSelected,
+    type === 'radio',
   );
 
   // 查询
@@ -95,6 +107,10 @@ const BaseTable: React.FC<BaseTableProps> = ({
   );
 
   useEffect(() => {
+    updateStore({ selection });
+  }, [JSON.stringify(selection)]);
+
+  useEffect(() => {
     // 获取表单默认值
     const defaultSearchValues: Fields = {};
     columns.forEach((col) => {
@@ -108,6 +124,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
       total: data?.total,
       loading: !data || isValidating,
       onSearch,
+      selection,
     };
 
     if (!isFirstMountRef.current) {
@@ -125,14 +142,51 @@ const BaseTable: React.FC<BaseTableProps> = ({
     }
   }, [JSON.stringify(data), isValidating, JSON.stringify(columns)]);
 
+  const selectionCol = [
+    {
+      title: isCheckbox
+        ? () => {
+            return (
+              <Checkbox
+                checked={selection.allSelected as any}
+                onClick={() => {
+                  selection.toggleAll();
+                }}
+              />
+            );
+          }
+        : null,
+      key: 'checked',
+      render: (
+        text: any,
+        key: any,
+        rowData: { [x: string]: any; checked: boolean | undefined },
+      ) => {
+        if (!selectKey) return null;
+        return isCheckbox ? (
+          <Checkbox
+            checked={selection.isSelected(rowData[selectKey])}
+            onClick={() => {
+              selection.toggle(rowData[selectKey]);
+            }}
+          />
+        ) : (
+          <Radio
+            onChange={() => {
+              selection.toggle(rowData[selectKey]);
+            }}
+            checked={selection.isSelected(rowData[selectKey])}
+          />
+        );
+      },
+    },
+  ] as FormCol;
+
   return (
     <Table
-      columns={columns}
-      data={
-        formatData && data
-          ? formatData(data).data
-          : data?.data || prevData?.data
-      }
+      // 判断是否添加选择框
+      columns={selectKey ? selectionCol.concat(columns) : columns}
+      data={tableData}
       footer={
         data && (
           <Pagination

@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { ProTable, useTable } from '@uiw-admin/components'
 import { useCity } from '../../queries'
 
-export default function Demo () {
+export default function Demo() {
   const table = useTable('/api/getData', {
     // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
     formatData: (data) => {
       return {
         total: data.total,
-        data: data.data
+        data: data.data,
       }
     },
     // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
@@ -16,9 +16,9 @@ export default function Demo () {
       return {
         page: pageIndex,
         pageSize: 10,
-        data: searchValues
+        data: searchValues,
       }
-    }
+    },
     // swr options
     // SWRConfiguration: {
     //   revalidateOnFocus: false
@@ -36,7 +36,15 @@ export default function Demo () {
   return (
     <ProTable
       // 操作栏按钮
-      operateButtons={[{ label: '新增', type: 'primary' }]}
+      operateButtons={[
+        { label: '新增', type: 'primary' },
+        {
+          label: '全部取消',
+          onClick: () => {
+            table.selection.unSelectAll()
+          },
+        },
+      ]}
       // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
       // searchButtons={[
       //   { label: '搜索', type: 'primary',  htmlType: 'submit',  onClick: () => {
@@ -55,6 +63,14 @@ export default function Demo () {
         }
         return true
       }}
+      rowSelection={{
+        // 多选 checkbox 单选radio
+        type: 'checkbox',
+        // 选中的键名 column里的key
+        selectKey: 'name',
+        // 默认值
+        defaultSelected: ['邓紫棋'],
+      }}
       columns={[
         {
           title: '名字',
@@ -65,9 +81,9 @@ export default function Demo () {
             // 组件属性
             widgetProps: {
               preIcon: 'user',
-              placeholder: '输入用户名'
-            }
-          }
+              placeholder: '输入用户名',
+            },
+          },
         },
         {
           title: '年龄',
@@ -77,9 +93,9 @@ export default function Demo () {
             widget: 'select',
             option: [
               { label: '20', value: 20 },
-              { label: '10', value: 10 }
-            ]
-          }
+              { label: '10', value: 10 },
+            ],
+          },
         },
         {
           title: '地址',
@@ -87,43 +103,43 @@ export default function Demo () {
           props: {
             label: '详细地址',
             key: 'detailAddress',
-            widget: 'textarea'
-          }
+            widget: 'textarea',
+          },
         },
         {
           title: 'Switch',
           key: 'Switch',
           props: {
-            widget: 'switch'
-          }
+            widget: 'switch',
+          },
         },
         {
           title: 'timePicker',
           key: 'timePicker',
           props: {
-            widget: 'timePicker'
-          }
+            widget: 'timePicker',
+          },
         },
         {
           title: 'timePicker',
           key: 'timePicker1',
           props: {
-            widget: 'timePicker'
-          }
+            widget: 'timePicker',
+          },
         },
         {
           title: 'MonthPicker',
           key: 'MonthPicker',
           props: {
-            widget: 'monthPicker'
-          }
+            widget: 'monthPicker',
+          },
         },
         {
           title: 'DateInput',
           key: 'DateInput',
           props: {
-            widget: 'dateInput'
-          }
+            widget: 'dateInput',
+          },
         },
         {
           title: 'Radio',
@@ -132,9 +148,9 @@ export default function Demo () {
             widget: 'radio',
             option: [
               { label: '男', value: 'man' },
-              { label: '女', value: 'girl' }
-            ]
-          }
+              { label: '女', value: 'girl' },
+            ],
+          },
         },
         {
           title: '家乡',
@@ -148,10 +164,10 @@ export default function Demo () {
               showSearch: true,
               loading: isLoading,
               option: city,
-              onSearch: handleSearch
-            }
-          }
-        }
+              onSearch: handleSearch,
+            },
+          },
+        },
       ]}
     />
   )

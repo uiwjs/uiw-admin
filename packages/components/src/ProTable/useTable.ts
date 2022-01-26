@@ -9,13 +9,25 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     total: 1,
     // 当前table数据源
     data: [],
-    // 选中的行
-    selectChecked: [],
-    selectCheckedRows: [],
     // 表单值
     searchValues: {},
     // 加载状态
     loading: false,
+    // 选择框属性
+    selection: {
+      selected: [],
+      noneSelected: false,
+      allSelected: false,
+      partiallySelected: false,
+      setSelected: () => null,
+      isSelected: () => null,
+      select: () => null,
+      unSelect: () => null,
+      toggle: () => null,
+      selectAll: () => null,
+      unSelectAll: () => null,
+      toggleAll: () => null,
+    },
   });
   // 更新store
   const updateStore = (datas: stateParams) => {

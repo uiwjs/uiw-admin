@@ -152,13 +152,25 @@ ReactDOM.render(<Demo />, _mount_);
 
 ## Porps
 
-| 参数 | 说明	| 类型	| 默认值 |
-| --  | -- | -- | -- |
-| columns | 与uiw table colunms用法一致 必传	| ColumnProps[]		| [] |
+| 参数            | 说明	        | 类型	        | 默认值         |
+| -------------  | ------------- | ------------- |--------------- |
+| columns        | 与uiw table colunms用法一致 必传	| ColumnProps[]		| [] |
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render	| `Array<ButtonProps & { render?: JSX.Element }>`			| [] |
-| searchBtns | 搜索栏按钮集合，属性与uiw button一致并支持自定义render	| `Array<ButtonProps & { render?: JSX.Element }>`		| [] |
-| table | useTable返回值	| Object 必传		|  |
+| searchBtns    | 搜索栏按钮集合，属性与uiw button一致并支持自定义render	| `Array<ButtonProps & { render?: JSX.Element }>`		| [] |
+| table         | useTable返回值	| Object 必传		|  |
 | onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询	| ({initial, current}) => Boolean 	|  |
+| rowSelection  | 选择框配置	| RowSelection 	|  - |
+
+### rowSelection
+
+
+| 参数           | 说明	          | 类型	        |   默认值           |
+| -------------  | ------------- | ------------- | ------------- |
+| checkbox      | 选择框类型	   | checkbox         | 	 radio   |  checkbox |
+| selectKey         | 选择框的键名，必填,对应的column里的key	      | String		    | - |
+| defaultSelected  | 选中默认值        | []		    | - |
+
+
 
 其余属性与uiw Table一致
 
@@ -195,8 +207,26 @@ ReactDOM.render(<Demo />, _mount_);
 
 ### response
 
-| 参数 | 说明	| 类型	| 默认值 |
-| --  | -- | -- | -- |
-| data | 接口请求数据	| Array	| - |
-| total | 数据总数	| Number		| - |
-| searchValues | 表单值	| Object		| - |
+| 参数           | 说明	          | 类型	        | 默认值           |
+| -------------  | ------------- | ------------- | ------------- |
+| data          | 接口请求数据	   | Array	      | - |
+| total         | 数据总数	      | Number		    | - |
+| searchValues  | 表单值	        | Object		    | - |
+| rowSelection  | 选择框属性	    | UseSelections	 | - |
+
+### rowSelection
+
+| 参数              | 说明               | 类型                    |    默认值 |
+|-------------------|--------------------|-------------------------| -------- |
+| selected          | 已经选择的元素     | array                 | - |
+| allSelected       | 是否全选           | boolean               | - |
+| noneSelected      | 是否一个都没有选择 | boolean               | - |
+| partiallySelected | 是否半选           | boolean               | - |
+| isSelected        | 是否被选择         | (value: T) => boolean | - |
+| setSelected       | 设置选择的元素     | (value: T[]) => void   | - |
+| select            | 选择元素           | (value: T) => void    | - |
+| unSelect          | 取消选择元素       | (value: T) => void    | - |
+| toggle            | 反选元素           | (value: T) => void    | - |
+| selectAll         | 选择全部元素       | () => void            | - |
+| unSelectAll       | 取消选择全部元素   | () => void            | - |
+| toggleAll         | 反选全部元素       | () => void            | - |
