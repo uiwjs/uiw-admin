@@ -42,6 +42,13 @@ export interface UserLoginProps {
   requestConfig?: Options;
     /** 登录按钮位置 按钮组, title 为显示标题 */
   buttons?: (Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]
+   /** 默认输入框保存字段  */
+  saveField?: {
+    /** 登录账号 默认值 username*/
+    userName?: string,
+    /** 密码 默认值 password */
+    passWord?: string
+  }
 }
 ```
 
@@ -68,6 +75,10 @@ const UserLayout = () => {
        },
      ]}
     api="/api/login"
+    saveField={{
+      userName: "username",
+      passWord: "password"
+    }}
     onBefore={(value) => ({ a: 12, b: 1221 })}
     btnProps={{ type: "primary" }}
     onSuccess={(data) => {

@@ -9,14 +9,21 @@ export const defaultDefine = {
   AUTH: JSON.stringify(true),
   /** 路由 跳转前缀 默认 "/" */
   BASE_NAME: JSON.stringify('/'),
+  /** 本地存储使用 localStorage 还是  sessionStorage  */
+  STORAGE: JSON.stringify('session'), // local | session
+  /** 版本  */
+  VERSION: JSON.stringify(
+    require(path.resolve(process.cwd(), './package.json')).version || '0',
+  ),
 };
+
 export type ConfFun = (
   conf: Configuration,
   evn: string,
   options?: LoaderConfOptions | undefined,
 ) => Configuration;
 
-export interface ConfigProps {
+export interface ConfigProps extends Omit<Configuration, 'plugins'> {
   /**
    * 别名
    * 默认系统内置两个别名
@@ -25,9 +32,11 @@ export interface ConfigProps {
    */
   alias?: Record<string, string | false | string[]>;
   /** 插件 */
-  plugins?: Configuration['plugins'];
+  plugins?:
+    | Configuration['plugins']
+    | ([string, Record<string, any>] | string)[];
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: Record<string, any>;
+  define?: Record<string, any> & Partial<typeof defaultDefine>;
   /** 其他 工具 */
   loader?: (
     | ConfFun
@@ -35,6 +44,8 @@ export interface ConfigProps {
         loader?: ConfFun;
         options?: LoaderConfOptions | undefined | Record<string, any>;
       }
+    | string
+    | [string, Record<string, any>]
   )[];
   /** 项目前缀 */
   publicPath?: string;
@@ -49,28 +60,53 @@ export default (props: ConfigProps) => {
     plugins,
     alias,
     define,
-    loader: ConfFunArr,
+    loader: LoaderConfig,
     moreConfig,
     publicPath = './',
     output,
+    ...rest
   } = props || {};
+
   return (conf: Configuration, env: string, options: LoaderConfOptions) => {
-    if (ConfFunArr) {
-      ConfFunArr.forEach((fun) => {
-        if (typeof fun === 'function') {
-          conf = fun(conf, env, { ...(options || {}) });
+    // laoder
+    if (LoaderConfig) {
+      LoaderConfig.forEach((fun) => {
+        if (typeof fun === 'string') {
+          conf = require(fun)(conf, env, options);
+        } else if (Array.isArray(fun)) {
+          const [paths, rest] = fun;
+          conf = require(paths)(conf, env, { ...options, ...rest });
+        } else if (typeof fun === 'function') {
+          conf = fun(conf, env, options);
         } else if (fun && fun.loader) {
           const { loader, options: curOpt } = fun;
           conf = loader(conf, env, { ...(options || {}), ...(curOpt || {}) });
         }
       });
     }
+    // plugin
+    const plugin: Configuration['plugins'] = [];
+    if (Array.isArray(plugins)) {
+      plugins.forEach((pathArr) => {
+        if (typeof pathArr === 'string') {
+          const Cls = require(pathArr);
+          plugin.push(new Cls());
+        } else if (Array.isArray(pathArr)) {
+          const [paths, rest] = pathArr;
+          const Cls = require(paths);
+          plugin.push(new Cls(rest));
+        } else {
+          plugin.push(pathArr);
+        }
+      });
+    }
+
     conf.plugins!.push(
       new webpack.DefinePlugin({
         ...defaultDefine,
         ...transformationDefineString(define || {}),
       }),
-      ...(plugins || []),
+      ...plugin,
     );
 
     conf.resolve = {
@@ -92,8 +128,8 @@ export default (props: ConfigProps) => {
       };
     }
     if (moreConfig) {
-      return moreConfig(conf, env, options);
+      return moreConfig({ ...conf, ...rest }, env, options);
     }
-    return conf;
+    return { ...conf, ...rest };
   };
 };

@@ -42,7 +42,11 @@ export const Loadable =
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
   // 本地 存储 token
-  const token = sessionStorage.getItem('token');
+  let token = sessionStorage.getItem('token');
+  // @ts-ignore
+  if (STORAGE === 'local') {
+    token = localStorage.getItem('token');
+  }
   if (!token) {
     return <Navigate to="/login" replace />;
   }
@@ -138,7 +142,11 @@ const getTree = (routes: RoutersProps[] = []): JSX.Element[] => {
 
 export function RouteChild(props: ControllerProps = {}) {
   // 这边取权限校验值
-  const authStr = sessionStorage.getItem('auth');
+  let authStr = sessionStorage.getItem('auth');
+  // @ts-ignore
+  if (STORAGE === 'local') {
+    authStr = localStorage.getItem('auth');
+  }
   let authList: string[] = React.useMemo(() => {
     if (authStr) {
       return JSON.parse(authStr);

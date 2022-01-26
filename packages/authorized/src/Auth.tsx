@@ -4,7 +4,12 @@ export const getAuthPath = (path?: string): boolean => {
   // @ts-ignore
   if (AUTH) {
     let authList: string[] = [];
-    const authStr = sessionStorage.getItem('auth');
+
+    let authStr = sessionStorage.getItem('auth');
+    // @ts-ignore
+    if (STORAGE === 'local') {
+      authStr = localStorage.getItem('auth');
+    }
     if (authStr) {
       authList = JSON.parse(authStr);
     }

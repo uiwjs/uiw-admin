@@ -24,6 +24,8 @@ export const defaultDefine = {
   AUTH: JSON.stringify(true),
   /** 路由 跳转前缀 默认 "/" */
   BASE_NAME: JSON.stringify("/"),
+  /** 本地存储使用 localStorage 还是  sessionStorage  可选值 local | session */
+  STORAGE: JSON.stringify("session")
 }
 ```
 
@@ -39,23 +41,46 @@ export interface ConfigProps {
    * 1. `@` 指向 src 目录
    * 2. `@@` 指向 src/.uiw 目录
    */
-  alias?: Record<string, string | false | string[]>,
+  alias?: Record<string, string | false | string[]>;
   /** 插件 */
-  plugins?: Configuration["plugins"],
+  plugins?: Configuration['plugins'] | ([string, Record<string, any>] | string)[];
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: Record<string, any>,
+  define?: Record<string, any> & Partial<typeof defaultDefine>;
   /** 其他 工具 */
-  loader?: (ConfFun | { loader?: ConfFun, options?: LoaderConfOptions | undefined | Record<string, any>)[]
+  loader?: (
+    | ConfFun
+    | {
+      loader?: ConfFun;
+      options?: LoaderConfOptions | undefined | Record<string, any>;
+    } | string | [string, Record<string, any>]
+  )[];
   /** 项目前缀 */
   publicPath?: string;
   /** 更多的 自定义  配置 */
   moreConfig?: ConfFun;
   /** 输出 */
-  output?: Omit<Configuration["output"], "publicPath">
+  output?: Omit<Configuration['output'], 'publicPath'>;
 }
 ```
 
-## 案例
+## plugins 参数说明
+
+1. 使用的先行条件--插件需要默认导出是一个类,符合`webpack` 的 `plugins`规范,
+2. 一维数组时,直接把字符串当成包名进行加载，使用`require`进行引入后直接`new`
+3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后`new`的时候把 第二项当成参数进行传递到包内部 
+4. `webpack` 原始的 [`plugins`](https://webpack.docschina.org/concepts/plugins/#usage) 类型
+
+## loader 参数说明
+
+1. 使用的先行条件--需要默认导出是一个函数方法,返回类型为`webpack.Configuration `的函数
+2. 一维数组时,直接把字符串当成包名进行加载，使用`require`进行引入后直接方法调用
+3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后调用的时候把 第二项当成参数进行传递到包内部 
+
+## ！！！注意
+
+使用`plugins`和`loader`时,请选安装对应包
+
+## 原始案例
 
 ```ts
 import defaultConfig from "@uiw-admin/config"
@@ -74,6 +99,23 @@ export default defaultConfig({
     rawModules,
     { loader: scopePluginOptions, options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] } },
     lessModules
+  ],
+})
+```
+
+## 新案例
+
+```ts
+import defaultConfig from "@uiw-admin/config"
+export default defaultConfig({
+   define: {
+    STORAGE: 'local',
+  },
+  plugins: ["@uiw-admin/plugins-rematch", "@uiw-admin/plugins-routes"],
+  loader: [
+    "@kkt/raw-modules",
+    ["@kkt/scope-plugin-options", { "allowedFiles": "./README.md" }],
+    "@kkt/less-modules",
   ],
 })
 ```

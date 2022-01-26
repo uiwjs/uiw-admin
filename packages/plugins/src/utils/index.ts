@@ -1,8 +1,8 @@
 import { parse } from '@babel/parser';
 import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
-import generate from "@babel/generator"
-import { RoutersProps } from "./interface"
+import generate from '@babel/generator';
+import { RoutersProps } from './interface';
 
 type NodeFun =
   | t.Expression
@@ -35,12 +35,14 @@ function getTSNode(node: any) {
 }
 
 export const IsModel = (content: string) => {
-  let isModel = false;
+  let isModels = false;
+  let modelNames;
+  let isCreateModel = false;
   const ast = parse(content, {
     // 在严格模式下解析并允许模块声明
     sourceType: 'module',
     plugins: [
-      "jsx",
+      'jsx',
       'typescript',
       'classProperties',
       'dynamicImport',
@@ -60,6 +62,11 @@ export const IsModel = (content: string) => {
       node = getTSNode(node);
       node = getVarInit(node, path);
       node = getTSNode(node);
+      if (t.isCallExpression(node) && node.arguments) {
+        node = node.arguments[0] as NodeFun;
+        isCreateModel = true;
+      }
+
       // 如果 node 是一个对象
       // 并且 子集存在 state reducers, subscriptions, effects, name 则是一个 model 返回true
       if (
@@ -74,18 +81,28 @@ export const IsModel = (content: string) => {
           ].includes((property as any).key.name);
         })
       ) {
-        isModel = true;
+        isModels = true;
+        const modeObj = node.properties.find(
+          (property) => (property as any).key.name === 'name',
+        );
+        if (t.isObjectProperty(modeObj) && t.isStringLiteral(modeObj.value)) {
+          modelNames = modeObj.value.value;
+        }
       }
     },
   });
-  return isModel;
+  return {
+    isModels,
+    modelNames,
+    isCreateModel,
+  };
 };
 
 // 转换成对象
 export const stringToJson = (str: string) => {
-  const json = (new Function("return " + str))();
+  const json = new Function('return ' + str)();
   return json;
-}
+};
 // ts/js 文件获取里面的 默认导出内容
 export const getJSONData = (content: string) => {
   let isJSON = false;
@@ -94,7 +111,7 @@ export const getJSONData = (content: string) => {
     // 在严格模式下解析并允许模块声明
     sourceType: 'module',
     plugins: [
-      "jsx",
+      'jsx',
       'typescript',
       'classProperties',
       'dynamicImport',
@@ -122,12 +139,11 @@ export const getJSONData = (content: string) => {
           // 输出中包含注释
           comments: false,
           jsescOption: {
-            quotes: "double",
-            json: true
+            quotes: 'double',
+            json: true,
           },
-        }).code
-        jsonArr = stringToJson(code)
-
+        }).code;
+        jsonArr = stringToJson(code);
       }
     },
   });
