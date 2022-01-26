@@ -1,29 +1,20 @@
 import path from 'path'
 import { MockerAPIOptions } from 'kkt'
-import lessModules from '@kkt/less-modules'
-import rawModules from '@kkt/raw-modules'
-import scopePluginOptions from '@kkt/scope-plugin-options'
-import pkg from './package.json'
 import defaultConfig from '@uiw-admin/config'
 import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
-
 export default defaultConfig({
   define: {
-    VERSION: JSON.stringify(pkg.version),
     STORAGE: 'local',
-    // BASE_NAME: "/uiw"
   },
+  // plugins: ['@uiw-admin/plugins-rematch', '@uiw-admin/plugins-routes'],
   plugins: [new RematchWebpackPlugin(), new RoutesWebpackPlugin()],
-  // publicPath: process.env.NODE_ENV === "development" ? "/" : "/uiw/",
   loader: [
-    rawModules,
-    {
-      loader: scopePluginOptions,
-      options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] },
-    },
-    lessModules,
+    '@kkt/raw-modules',
+    ['@kkt/scope-plugin-options', { allowedFiles: './README.md' }],
+    '@kkt/less-modules',
   ],
 })
+
 export const proxySetup = (): MockerAPIOptions => {
   /**
    * mocker-api that creates mocks for REST APIs.

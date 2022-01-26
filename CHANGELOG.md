@@ -8,9 +8,14 @@
 
 - @uiw-admin/config
   - 🌟 新增一个默认 `define` 的 `STORAGE` 属性,本地存储使用localStorage或sessionStorage ,默认 "session",可选值  local | session
+  - 🌟 `plugins`和`loader`进行兼容处理,可以直接`require`引入,[案例](https://uiwjs.github.io/uiw-admin/#/config)
 - @uiw-admin/plugins 
   - 🐞 fix:修复多删除引入的 `createModel` 方法
   - 🐞 fix:修复 `RematchWebpackPlugin` 生成的 `models` 类型问题
+- @uiw-admin/user-login 
+  - 🌟 feat:新增`saveField`参数
+- @uiw-admin/components
+  - 🌟 `PromForm`：增加SelectMultiple下拉多选组件
   
 ## 5.1.2-alpha.1
 

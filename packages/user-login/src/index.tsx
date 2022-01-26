@@ -9,7 +9,7 @@ import { Options } from '@uiw-admin/utils/lib/request';
 
 import './styles/index.css';
 
-type FormValue = { username?: string; password?: string };
+export type FormValue = { username?: string; password?: string };
 
 export interface UserLoginProps {
   /** 卡片框的位置 */
@@ -39,6 +39,13 @@ export interface UserLoginProps {
   requestConfig?: Options;
   /** 登录按钮位置 按钮组, title 为显示标题 */
   buttons?: (Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[];
+  /** 默认输入框保存字段 */
+  saveField?: {
+    /** 登录账号 */
+    userName?: string;
+    /** 密码 */
+    passWord?: string;
+  };
 }
 
 export default (props: UserLoginProps) => {
@@ -58,7 +65,10 @@ export default (props: UserLoginProps) => {
     onBefore,
     requestConfig,
     buttons,
+    saveField,
   } = props;
+  const { userName = 'username', passWord = 'password' } = saveField || {};
+
   const [store, setStore] = React.useState<FormValue>();
   const { isValidating } = useSWR(
     store
@@ -89,8 +99,8 @@ export default (props: UserLoginProps) => {
               resetOnSubmit={false}
               onSubmit={({ current }) => {
                 const errorObj: any = {};
-                if (!current.username) errorObj.username = '账号不能为空！';
-                if (!current.password) errorObj.password = '密码不能为空！';
+                if (!current[userName]) errorObj[userName] = '账号不能为空！';
+                if (!current[passWord]) errorObj[passWord] = '密码不能为空！';
                 if (Object.keys(errorObj).length > 0) {
                   const err: any = new Error();
                   err.filed = errorObj;
@@ -116,7 +126,7 @@ export default (props: UserLoginProps) => {
                 return null;
               }}
               fields={{
-                username: {
+                [userName]: {
                   label: '账号',
                   labelFor: 'username',
                   children: (
@@ -128,7 +138,7 @@ export default (props: UserLoginProps) => {
                     />
                   ),
                 },
-                password: {
+                [passWord]: {
                   label: '密码',
                   labelFor: 'password',
                   children: (
@@ -147,10 +157,10 @@ export default (props: UserLoginProps) => {
                 return (
                   <div>
                     <Row>
-                      <Col>{fields.username}</Col>
+                      <Col>{fields[userName]}</Col>
                     </Row>
                     <Row>
-                      <Col>{fields.password}</Col>
+                      <Col>{fields[passWord]}</Col>
                     </Row>
                     <Row>
                       <Col className="btn">

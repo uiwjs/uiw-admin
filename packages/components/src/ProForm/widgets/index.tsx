@@ -12,6 +12,7 @@ import {
 import Radio from '../../ProTable/widgets/Radio';
 import Select from '../../ProTable/widgets/Select';
 import CheckBox from './CheckBox';
+import SelectMultiple from './SelectMultiple';
 import Upload from './Upload';
 
 /**
@@ -32,6 +33,7 @@ export function getFormFields(
     switch: Switch,
     select: Select,
     searchSelect: SearchSelect,
+    selectMultiple: SelectMultiple,
     textarea: Textarea,
     dateInput: DateInput,
     timePicker: TimePicker,
