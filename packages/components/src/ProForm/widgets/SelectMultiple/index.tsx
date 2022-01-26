@@ -26,6 +26,8 @@ export interface SelectMultipleProps {
   noContent?: React.ReactNode;
   // 是否允许搜索
   showSearch?: boolean;
+  // 上传最大上限
+  maxCount?: number;
 }
 
 function SelectMultiple(
@@ -40,10 +42,11 @@ function SelectMultiple(
     value = [],
     loading = true,
     disabled = false,
-    placeholder,
+    placeholder = '请选择',
     allowClear = false,
     noContent,
     showSearch = false,
+    maxCount = 3,
   }: SelectMultipleProps,
 ) {
   // 选中的集合
@@ -54,11 +57,14 @@ function SelectMultiple(
   // 是否是搜索状态
   const [isSearch, setIsSearch] = useState(false);
 
+  // 是否已达上限
+  const isMax = selectedItems.length === maxCount;
+
   // 选择下拉项
   const handleOnChange = (selected: FormItemsOptionsProps) => {
     let selKeys = [...selectedItems];
     const findKey = selKeys.find((v) => v.value === selected.value);
-    if (!findKey) {
+    if (!findKey && !isMax) {
       selKeys.push(selected);
     } else {
       selKeys = selKeys.filter((ele) => ele.value !== selected.value);
