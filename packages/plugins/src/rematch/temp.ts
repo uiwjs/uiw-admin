@@ -7,12 +7,14 @@ export interface TempProps {
 // 模板
 export default (str: TempProps) => {
   return `
+// @ts-ignore
 import {
   init,
   Models,
   Model,
   RematchRootState,
   RematchDispatch,
+  createModel,
 } from '@rematch/core';
 import loading, { ExtraModelsFromLoading } from '@rematch/loading';
 ${str.importStr}
