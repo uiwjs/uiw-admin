@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/layout-tabs",
-  "version": "5.1.2-alpha.1",
+  "version": "5.1.2",
   "description": "layout tabs",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/layout-tabs#readme",
@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.16.7",
-    "@uiw-admin/router-control": "5.1.2-alpha.1"
+    "@uiw-admin/router-control": "5.1.2"
   },
   "devDependencies": {
     "@types/react": "17.0.38",
