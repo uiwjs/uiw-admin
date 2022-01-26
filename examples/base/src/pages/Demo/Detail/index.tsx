@@ -49,6 +49,9 @@ const Detail = ({ updateData }: DetailProps) => {
           { value: 2, label: '西瓜' },
           { value: 3, label: '香蕉' },
           { value: 4, label: '东北大冻梨' },
+          { value: 5, label: '香蕉' },
+          { value: 6, label: '葡萄' },
+          { value: 6, label: '哈密瓜' },
         ])
         setLoading(false)
       }, 2000)
