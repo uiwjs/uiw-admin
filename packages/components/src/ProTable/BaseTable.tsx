@@ -10,7 +10,7 @@ import { Table, Pagination, Checkbox, Radio } from 'uiw';
 import { request } from '@uiw-admin/utils';
 import { useStore } from './hooks';
 import { Fields, BaseTableProps, FormCol } from './types';
-import useSelections from '../hooks/useSelections';
+import useSelections from './useSelections';
 
 const BaseTable: React.FC<BaseTableProps> = ({
   style,
@@ -88,7 +88,11 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
   const selection = useSelections<any>(
     // 设置枚举值
-    selectKey ? tableData.map((itm: any) => itm[selectKey]) : tableData,
+    selectKey
+      ? tableData
+        ? tableData.map((itm: any) => itm[selectKey])
+        : []
+      : tableData,
     defaultSelected,
     type === 'radio',
   );

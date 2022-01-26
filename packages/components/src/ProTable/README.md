@@ -37,6 +37,12 @@ function Demo() {
     <ProTable
       operateButtons={[
         { label: '新增', type: 'primary' },
+        {
+          label: '全部取消',
+          onClick: () => {
+            table.selection.unSelectAll()
+          },
+        },
       ]}
       // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
       // searchBtns={[
@@ -45,6 +51,14 @@ function Demo() {
       //   }},
       //   { label: '点我', onClick: () => null},
       // ]}
+      rowSelection={{
+        // 多选 checkbox 单选radio
+        type: 'checkbox',
+        // 选中的键名 column里的key
+        selectKey: 'name',
+        // 默认值
+        defaultSelected: ['邓紫棋'],
+      }}
       onBeforeSearch={({ initial, current }) => {
         const errorObj = {};
         if (!current.name) errorObj.name = '名字不能为空！';
@@ -167,7 +181,7 @@ ReactDOM.render(<Demo />, _mount_);
 | 参数           | 说明	          | 类型	        |   默认值           |
 | -------------  | ------------- | ------------- | ------------- |
 | checkbox      | 选择框类型	   | checkbox         | 	 radio   |  checkbox |
-| selectKey         | 选择框的键名，必填,对应的column里的key	      | String		    | - |
+| selectKey         | 选择框的键名，必填,对应的column里的key。	      | String		    | - |
 | defaultSelected  | 选中默认值        | []		    | - |
 
 
