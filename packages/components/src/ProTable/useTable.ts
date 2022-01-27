@@ -5,6 +5,8 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   const { formatData, query, SWRConfiguration } = params;
 
   const [state, setState] = useState<any>({
+    // 当前页码
+    pageIndex: 1,
     // 总页数
     total: 1,
     // 当前table数据源

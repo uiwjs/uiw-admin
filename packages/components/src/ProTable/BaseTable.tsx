@@ -16,6 +16,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   style,
   columns,
   rowSelection = {},
+  onPageChange: pageChange,
   ...tableProps
 }) => {
   const [pageIndex, setPageIndex] = useState(1);
@@ -105,14 +106,17 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // 分页
   const onPageChange = useCallback(
     (page) => {
+      if (pageChange) {
+        pageChange(page);
+      }
       setPageIndex(page);
     },
-    [setPageIndex],
+    [setPageIndex, pageChange],
   );
 
-  useEffect(() => {
-    updateStore({ selection });
-  }, [JSON.stringify(selection)]);
+  // useEffect(() => {
+  //   updateStore({ selection });
+  // }, [JSON.stringify(selection)]);
 
   useEffect(() => {
     // 获取表单默认值
@@ -129,6 +133,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
       loading: !data || isValidating,
       onSearch,
       selection,
+      pageIndex,
     };
 
     if (!isFirstMountRef.current) {
@@ -144,7 +149,13 @@ const BaseTable: React.FC<BaseTableProps> = ({
     if (data) {
       setPrevData(data);
     }
-  }, [JSON.stringify(data), isValidating, JSON.stringify(columns)]);
+  }, [
+    JSON.stringify(data),
+    isValidating,
+    JSON.stringify(columns),
+    pageIndex,
+    JSON.stringify(selection),
+  ]);
 
   const selectionCol = [
     {

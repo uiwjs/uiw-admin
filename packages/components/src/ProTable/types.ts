@@ -1,6 +1,6 @@
 import { ButtonProps, TableColumns, TableProps, FormSubmitProps } from 'uiw';
 import { SWRConfiguration } from 'swr';
-import { UseSelections } from '../hooks/useSelections';
+import { UseSelections } from './useSelections';
 
 type SelectionType = 'checkbox' | 'radio';
 
@@ -17,6 +17,7 @@ export interface ProtableProps extends TableProps {
   columns: FormCol[];
   onBeforeSearch?: (state: FormSubmitProps) => Boolean;
   rowSelection?: RowSelection;
+  onPageChange?: (page: number) => void;
 }
 
 export interface FormCol extends TableColumns {
@@ -36,10 +37,11 @@ export interface FormCol extends TableColumns {
   };
 }
 
-export interface BaseTableProps {
+export interface BaseTableProps extends TableProps {
   style?: React.CSSProperties;
   columns: TableColumns[];
   rowSelection?: RowSelection;
+  onPageChange?: (page: number) => void;
 }
 
 export interface BaseFormProps
@@ -67,9 +69,10 @@ export type Params = {
   SWRConfiguration?: SWRConfiguration;
 };
 
-export interface useTableData<T> extends Params {
+export interface useTableData extends Params {
   data: Record<string, string | number | JSX.Element>[];
   total: number;
+  pageIndex: number;
   key: string;
   reset: () => void;
   refersh: () => void;

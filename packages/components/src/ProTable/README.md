@@ -59,6 +59,10 @@ function Demo() {
         // 默认值
         defaultSelected: ['邓紫棋'],
       }}
+        // 取消全部选择
+      onPageChange={() => {
+        table.selection.unSelectAll()
+      }}
       onBeforeSearch={({ initial, current }) => {
         const errorObj = {};
         if (!current.name) errorObj.name = '名字不能为空！';
@@ -172,6 +176,7 @@ ReactDOM.render(<Demo />, _mount_);
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render	| `Array<ButtonProps & { render?: JSX.Element }>`			| [] |
 | searchBtns    | 搜索栏按钮集合，属性与uiw button一致并支持自定义render	| `Array<ButtonProps & { render?: JSX.Element }>`		| [] |
 | table         | useTable返回值	| Object 必传		|  |
+| onPageChange         | 分页回调	| （page: number） => void		|      -      |
 | onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询	| ({initial, current}) => Boolean 	|  |
 | rowSelection  | 选择框配置	| RowSelection 	|  - |
 
@@ -216,7 +221,7 @@ ReactDOM.render(<Demo />, _mount_);
 | --  | -- | -- | -- |
 | formatData | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式	| (data) => {total: 10, data: []}	| - |
 | query | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据	|  (pageIndex: number, searchValues: any)	=> {page:  pageIndex, pageSize: 10, searchValues}	| {} |
-| SWRConfiguration | swr配置	| SWRConfiguration	| {} |
+| SWRConfiguration | swr配置	| SWRConfiguration	| {revalidateOnFocus: false} |
 
 
 ### response

@@ -21,7 +21,9 @@ export default function Demo() {
     },
     // swr options
     // SWRConfiguration: {
-    //   revalidateOnFocus: false
+    //   onSuccess: (data) => {
+    //     console.log(data);
+    //   }
     // }
   })
 
@@ -70,6 +72,10 @@ export default function Demo() {
         selectKey: 'name',
         // 默认值
         defaultSelected: ['邓紫棋'],
+      }}
+      // 取消全部选择
+      onPageChange={() => {
+        table.selection.unSelectAll()
       }}
       columns={[
         {
