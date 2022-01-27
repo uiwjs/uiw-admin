@@ -9,7 +9,7 @@ UIW Admin Project
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/antdpro/antdp/tree/master/examples/antdp-base?embed=1&hideNavigation=0&hidedevtools=0)
 
 
-直接下载实例，本地预览: [`uiw-admin.zip`](https://uiwjs.github.io/uiw-admin/uiw-admin.zip)
+直接下载实例，本地预览: [`uiw-admin-ts.zip`](https://uiwjs.github.io/uiw-admin/uiw-admin-ts.zip) [`uiw-admin-js.zip`](https://uiwjs.github.io/uiw-admin/uiw-admin-js.zip)
 
 
 ## Packages
