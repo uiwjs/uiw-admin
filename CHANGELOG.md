@@ -4,6 +4,12 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.0
+- @uiw-admin/components
+  - 🌟 `ProTable`：增加分页取消反选功能
+  - 🌟 `ProTable`：`useTable` 返回 `pageIndex`当前分页
+
+
 ## 5.1.2
 
 - @uiw-admin/config
