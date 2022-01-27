@@ -232,6 +232,7 @@ ReactDOM.render(<Demo />, _mount_);
 | total         | 数据总数	      | Number		    | - |
 | searchValues  | 表单值	        | Object		    | - |
 | selection  | 选择框属性	    | UseSelections	 | - |
+| pageIndex  | 当前分页	    | Number	 | 1 |
 
 ### selection
 
