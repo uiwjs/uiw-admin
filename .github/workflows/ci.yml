@@ -56,16 +56,25 @@ jobs:
 
           ${{ steps.changelog.outputs.changelog }}
 
+    - run: yarn run build:js
+
     - run: yarn run build:website
       env:
         CI: false
 
     - run: npm run www:build
     
-    - name: Compress uiw-admin Example.
-      run: zip -r -y uiw-admin.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc"
+    - name: Compress uiw-admin-ts Example.
+      run: zip -r -y uiw-admin-ts.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc"
       working-directory: examples/base
-    - run: cp -rp ./examples/base/uiw-admin.zip ./examples/website/build
+
+    - name: Compress uiw-admin-js Example.
+      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc"
+      working-directory: examples/basejs
+      
+    - run: cp -rp ./examples/base/uiw-admin-ts.zip ./examples/website/build
+    - run: cp -rp ./examples/basejs/uiw-admin-js.zip ./examples/website/build
+
 
     - name: Heroku -> Setting
       working-directory: examples/base
