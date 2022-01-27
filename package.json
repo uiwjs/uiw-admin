@@ -40,7 +40,7 @@
     "build:js": "npm run build:base:js && npm run copy && npm run build:kktrc",
     "build:base:js": "lerna exec --scope @examples/base -- tsbb build --disable-babel-option --no-esm --cjs ./../basejs/src",
     "build:kktrc": "node ./bin/config",
-    "copy": "rsync -avP --exclude={node_modules,.kktrc.ts,tsconfig.json,src,build,dist} ./examples/base/ examples/basejs",
+    "copy": "rsync -avP --exclude={'node_modules','.kktrc.ts','tsconfig.json','src','build','dist'} ./examples/base/ examples/basejs",
     "----------": "-------------",
     "www": "lerna exec --scope website -- npm run start",
     "www:build": "lerna exec --scope website -- npm run build",

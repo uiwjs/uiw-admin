@@ -69,7 +69,8 @@ jobs:
       working-directory: examples/base
 
     - name: Compress uiw-admin-js Example.
-      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc"
+      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts"
+
       working-directory: examples/basejs
       
     - run: cp -rp ./examples/base/uiw-admin-ts.zip ./examples/website/build
