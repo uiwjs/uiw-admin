@@ -23,6 +23,13 @@ export type ConfFun = (
   options?: LoaderConfOptions | undefined,
 ) => Configuration;
 
+export type PluginsType = (
+  | ((this: webpack.Compiler, compiler: webpack.Compiler) => void)
+  | webpack.WebpackPluginInstance
+  | [string, Record<string, any>]
+  | string
+)[];
+
 export interface ConfigProps extends Omit<Configuration, 'plugins'> {
   /**
    * 别名
@@ -32,9 +39,7 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
    */
   alias?: Record<string, string | false | string[]>;
   /** 插件 */
-  plugins?:
-    | Configuration['plugins']
-    | ([string, Record<string, any>] | string)[];
+  plugins?: PluginsType;
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
   define?: Record<string, any> & Partial<typeof defaultDefine>;
   /** 其他 工具 */
@@ -67,10 +72,23 @@ export default (props: ConfigProps) => {
     ...rest
   } = props || {};
 
+  const newPlugins: PluginsType = (plugins || []).concat([
+    '@uiw-admin/plugins/lib/rematch',
+    '@uiw-admin/plugins/lib/routes',
+  ]);
+  const newLoader: ConfigProps['loader'] = (LoaderConfig || []).concat([
+    '@kkt/raw-modules',
+    [
+      '@kkt/scope-plugin-options',
+      { allowedFiles: path.resolve(process.cwd(), 'README.md') },
+    ],
+    '@kkt/less-modules',
+  ]);
+
   return (conf: Configuration, env: string, options: LoaderConfOptions) => {
     // laoder
-    if (LoaderConfig) {
-      LoaderConfig.forEach((fun) => {
+    if (newLoader) {
+      newLoader.forEach((fun) => {
         if (typeof fun === 'string') {
           conf = require(fun)(conf, env, options);
         } else if (Array.isArray(fun)) {
@@ -86,8 +104,8 @@ export default (props: ConfigProps) => {
     }
     // plugin
     const plugin: Configuration['plugins'] = [];
-    if (Array.isArray(plugins)) {
-      plugins.forEach((pathArr) => {
+    if (Array.isArray(newPlugins)) {
+      newPlugins.forEach((pathArr) => {
         if (typeof pathArr === 'string') {
           const Cls = require(pathArr);
           plugin.push(new Cls());

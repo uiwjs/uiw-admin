@@ -9,6 +9,8 @@ config
 
 `@@` 指向 src/.uiw 目录 
 
+默认引用包 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options`
+
 ## Installation
 
 ```bash
@@ -26,6 +28,10 @@ export const defaultDefine = {
   BASE_NAME: JSON.stringify("/"),
   /** 本地存储使用 localStorage 还是  sessionStorage  可选值 local | session */
   STORAGE: JSON.stringify("session")
+  /** 版本  */
+  VERSION: JSON.stringify(
+    require(path.resolve(process.cwd(), './package.json')).version || '0',
+  ),
 }
 ```
 
@@ -33,9 +39,8 @@ export const defaultDefine = {
 
 ```ts
 export type ConfFun = (conf: Configuration, evn: string, options?: LoaderConfOptions | undefined) => Configuration
-
-export interface ConfigProps {
-   /**
+export interface ConfigProps extends Omit<Configuration, 'plugins'> {
+  /**
    * 别名
    * 默认系统内置两个别名
    * 1. `@` 指向 src 目录
@@ -43,16 +48,20 @@ export interface ConfigProps {
    */
   alias?: Record<string, string | false | string[]>;
   /** 插件 */
-  plugins?: Configuration['plugins'] | ([string, Record<string, any>] | string)[];
+  plugins?:
+    | Configuration['plugins']
+    | ([string, Record<string, any>] | string)[];
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
   define?: Record<string, any> & Partial<typeof defaultDefine>;
   /** 其他 工具 */
   loader?: (
     | ConfFun
     | {
-      loader?: ConfFun;
-      options?: LoaderConfOptions | undefined | Record<string, any>;
-    } | string | [string, Record<string, any>]
+        loader?: ConfFun;
+        options?: LoaderConfOptions | undefined | Record<string, any>;
+      }
+    | string
+    | [string, Record<string, any>]
   )[];
   /** 项目前缀 */
   publicPath?: string;

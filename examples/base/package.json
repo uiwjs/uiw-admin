@@ -39,15 +39,11 @@
     "uiw": "4.9.10"
   },
   "devDependencies": {
-    "@kkt/less-modules": "7.0.6",
-    "@kkt/raw-modules": "7.0.6",
-    "@kkt/scope-plugin-options": "7.0.6",
     "@types/classnames": "2.3.1",
     "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
     "@types/react-redux": "7.1.21",
     "@uiw-admin/config": "5.2.1",
-    "@uiw-admin/plugins": "5.2.1",
     "ajv": "8.9.0",
     "eslint": "7.32.0",
     "eslint-config-standard": "16.0.3",

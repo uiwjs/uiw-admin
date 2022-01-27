@@ -1,18 +1,11 @@
 import path from 'path'
 import { MockerAPIOptions } from 'kkt'
 import defaultConfig from '@uiw-admin/config'
-import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
+// import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
 export default defaultConfig({
   define: {
     STORAGE: 'local',
   },
-  // plugins: ['@uiw-admin/plugins-rematch', '@uiw-admin/plugins-routes'],
-  plugins: [new RematchWebpackPlugin(), new RoutesWebpackPlugin()],
-  loader: [
-    '@kkt/raw-modules',
-    ['@kkt/scope-plugin-options', { allowedFiles: './README.md' }],
-    '@kkt/less-modules',
-  ],
 })
 
 export const proxySetup = (): MockerAPIOptions => {
