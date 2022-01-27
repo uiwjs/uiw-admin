@@ -3,7 +3,7 @@ UIW Admin Project
 
 一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [kkt](https://github.com/kktjs/kkt) 的初始级别项目，集成路由、Redux、选项卡等特性。
 
-### Open in CodeSandbox
+## Open in CodeSandbox
 
 [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/antdpro/antdp/tree/master/examples/antdp-base?embed=1&hideNavigation=0&hidedevtools=0)
@@ -12,7 +12,7 @@ UIW Admin Project
 直接下载实例，本地预览: [`uiw-admin.zip`](https://uiwjs.github.io/uiw-admin/uiw-admin.zip)
 
 
-### Packages
+## Packages
 
 This git repository is a repo built using Lerna. It contains several packages:
 
@@ -28,9 +28,9 @@ This git repository is a repo built using Lerna. It contains several packages:
 | [`@uiw-admin/config`](https://www.npmjs.com/package/@uiw-admin/config)         | [![npm](https://img.shields.io/npm/v/@uiw-admin/config.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/config)         |  简化kkt配置   |
 | [`@uiw-admin/plugins`](https://www.npmjs.com/package/@uiw-admin/plugins)         | [![npm](https://img.shields.io/npm/v/@uiw-admin/plugins.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/plugins)         |  kkt插件  |
 
-### Development
+## Development
 
-使用yarn workspaces管理nodemodules
+使用 [`yarn workspaces`](https://classic.yarnpkg.com/en/docs/workspaces) 管理 `node_modules`
 
 ```bash
 $ yarn install # Install dependencies
@@ -40,10 +40,15 @@ $ npm run start # Run example website
 ```
 
 
-### 贡献者
+## 贡献者
 
-感谢所有的贡献者,欢迎开发者为开源项目贡献力量。
+感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
 
 <a href="https://github.com/uiwjs/uiw-admin/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=uiwjs/uiw-admin" alt="contributors" />
+  <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
 </a>
+
+
+## License
+
+Licensed under the MIT License.

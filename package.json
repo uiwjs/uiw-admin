@@ -77,7 +77,7 @@
     "lerna": "4.0.0",
     "lint-staged": "12.1.5",
     "prettier": "2.5.1",
-    "tsbb": "3.5.4"
+    "tsbb": "3.5.5"
   },
   "resolutions": {
     "mini-css-extract-plugin": "2.4.7",

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Button, Row } from 'uiw';
+import { Button } from 'uiw';
 import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
@@ -27,6 +27,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     onSearch,
     SWRConfiguration,
     selection,
+    pageIndex,
   } = table;
 
   const store = useMemo(
@@ -42,6 +43,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       onSearch,
       SWRConfiguration,
       selection,
+      pageIndex,
     }),
     [JSON.stringify(table)],
   );
