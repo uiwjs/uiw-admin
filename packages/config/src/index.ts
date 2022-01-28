@@ -75,6 +75,7 @@ export default (props: ConfigProps) => {
   const newPlugins: PluginsType = (plugins || []).concat([
     '@uiw-admin/plugins/lib/rematch',
     '@uiw-admin/plugins/lib/routes',
+    // '@uiw-admin/plugins/lib/maps',
   ]);
   const newLoader: ConfigProps['loader'] = (LoaderConfig || []).concat([
     '@kkt/raw-modules',
