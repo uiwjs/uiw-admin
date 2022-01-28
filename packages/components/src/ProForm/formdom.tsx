@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
 import { ProFormProps } from './type';
+import { useStore } from './hooks/store';
 import './style/form-item.less';
 
 function FormDom({
@@ -8,7 +9,6 @@ function FormDom({
   onSubmit,
   onChange,
   buttonsContainer,
-  submitRef,
   showSaveButton = false,
   showResetButton = false,
   saveButtonProps,
@@ -16,6 +16,8 @@ function FormDom({
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
 }) {
+  const store = useStore();
+  const { clickRef } = store as any;
   return (
     <Form
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
@@ -47,7 +49,7 @@ function FormDom({
               {showSaveButton ? (
                 <Button
                   {...saveButtonProps}
-                  ref={submitRef}
+                  ref={clickRef}
                   disabled={!canSubmit()}
                   htmlType="submit"
                 >
@@ -56,7 +58,7 @@ function FormDom({
               ) : (
                 <Button
                   style={{ display: 'none' }}
-                  ref={submitRef}
+                  ref={clickRef}
                   disabled={!canSubmit()}
                   htmlType="submit"
                   {...saveButtonProps}

@@ -52,7 +52,6 @@ export interface ProFormProps
     initial: Record<string, any>,
     current: Record<string, any>,
   ) => void;
-  submitRef?: any;
   buttonsContainer?: React.CSSProperties;
   title?: string;
   formType?: 'collapse' | 'card' | 'pure';
@@ -66,4 +65,10 @@ export interface ProFormProps
   readOnlyProps?: DescriptionsProps;
   /** 自定义组件 */
   customWidgetsList?: Fields;
+  form: UseFormProps;
+}
+
+export interface UseFormProps {
+  clickRef: any;
+  submitvalidate: () => void;
 }

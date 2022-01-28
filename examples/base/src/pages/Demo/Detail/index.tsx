@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import { ProDrawer, ProForm } from '@uiw-admin/components'
+import React from 'react'
+import { ProDrawer, ProForm, useForm } from '@uiw-admin/components'
 import { Notify, Slider } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '@uiw-admin/models'
@@ -12,7 +12,6 @@ interface DetailProps {
 }
 
 const Detail = ({ updateData }: DetailProps) => {
-  const baseRef = useRef<any>()
   const dispatch = useDispatch<Dispatch>()
   const [option, setOption] = React.useState<any>([])
   const [loading, setLoading] = React.useState(false)
@@ -20,6 +19,7 @@ const Detail = ({ updateData }: DetailProps) => {
     demo: { drawerVisible, tableType, queryInfo, isView },
   } = useSelector((state: RootState) => state)
 
+  const form = useForm()
   const onClose = () => dispatch({ type: 'demo/clean' })
 
   const { mutate } = useSWR(
@@ -72,16 +72,16 @@ const Detail = ({ updateData }: DetailProps) => {
           type: 'danger',
           style: { width: 80 },
           show: !isView,
-          onClick: () => baseRef?.current?.click(),
+          onClick: () => form.submitvalidate(),
         },
       ]}>
       <ProForm
+        form={form}
         title="基础信息"
         customWidgetsList={{
           slider: Slider,
         }}
         formType={isView ? 'pure' : 'card'}
-        submitRef={baseRef}
         readOnly={isView}
         onSubmit={(
           initial: Record<string, any>,
