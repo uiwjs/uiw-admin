@@ -1,11 +1,14 @@
 import path from 'path'
 import { MockerAPIOptions } from 'kkt'
 import defaultConfig from '@uiw-admin/config'
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 // import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
 export default defaultConfig({
   define: {
     STORAGE: 'local',
   },
+  // plugins: [new BundleAnalyzerPlugin()]
 })
 
 export const proxySetup = (): MockerAPIOptions => {
