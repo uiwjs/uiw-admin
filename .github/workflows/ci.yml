@@ -66,12 +66,12 @@ jobs:
     - run: npm run www:build
     
     - name: Compress uiw-admin-ts Example.
-      run: zip -r -y uiw-admin-ts.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".uiw"
+      run: zip -r -y uiw-admin-ts.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".uiw/*"
 
       working-directory: examples/base
 
     - name: Compress uiw-admin-js Example.
-      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts" -x ".uiw"
+      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts" -x ".uiw/*"
       working-directory: examples/basejs
 
     - run: mkdir -p examples/website/build/zip
