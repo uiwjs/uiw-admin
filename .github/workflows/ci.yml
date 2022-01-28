@@ -106,7 +106,7 @@ jobs:
         </head>
         <body>
         <table class="header"> <tbody> <tr> <td>
-          <h1>ANTDP Example Zip Files<sup>v$VERSION_NUMBER</sup></h1>
+          <h1>uiw-admin Example Zip Files<sup>v$VERSION_NUMBER</sup></h1>
         </td> </tr> </tbody> </table>
         <table class="list">
           <tbody>
