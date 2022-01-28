@@ -32,7 +32,6 @@ const transform = async (paths) => {
 const fieldMap = async () => {
   const fieldArr = (await getFields()) || [];
   fieldArr.forEach((item) => {
-    console.log();
     if (item.ext && /ts|tsx/.test(item.ext)) {
       transform(item.path);
     } else {
