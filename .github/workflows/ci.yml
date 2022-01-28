@@ -85,7 +85,7 @@ jobs:
     - run: npm i coverage-badges-cli markdown-to-html-cli -g
     - run: coverage-badges
       working-directory: create-uiw-admin
-      
+
     - run: markdown-to-html --output coverage/index.html --favicon https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png
       working-directory: create-uiw-admin
 
@@ -155,6 +155,13 @@ jobs:
         #   "stack": "heroku-20"
         # }
         # EOF
+
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_branch: coverage
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./create-uiw-admin/coverage
 
     - name: Deploy to heroku.com
       uses: peaceiris/actions-gh-pages@v3

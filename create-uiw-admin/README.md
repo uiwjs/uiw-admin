@@ -9,7 +9,7 @@
   <a href="https://github.com/uiwjs/uiw-admin/actions/workflows/ci.yml">
     <img alt="Build & Deploy" src="https://github.com/uiwjs/uiw-admin/actions/workflows/ci.yml/badge.svg">
   </a>
-  <a href="https://uiwjs.github.io//uiw-admin/create-uiw-admin/lcov-report/">
+  <a href="https://uiwjs.github.io/uiw-admin/create-uiw-admin/lcov-report/">
     <img alt="Coverage Status" src="https://uiwjs.github.io/uiw-admin/create-uiw-admin/badges.svg">
   </a>
   <a href="https://www.npmjs.com/package/create-uiw-admin">
