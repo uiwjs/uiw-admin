@@ -69,7 +69,8 @@ jobs:
       working-directory: examples/base
 
     - name: Compress uiw-admin-js Example.
-      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts"
+      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts" -x ".uiw
+"
       working-directory: examples/basejs
 
     - run: mkdir -p examples/website/build/zip
@@ -121,8 +122,8 @@ jobs:
         </table>
         <div class="links">
           <a target="__blank" href="https://github.com/uiwjs/uiw-admin">GitHub</a> ·
-          <a target="__blank" href="https://github.com/uiwjs/create-uiw-admin/issues">Feedback</a> ·
-          <a target="__blank" href="https://github.com/uiwjs/create-uiw-admin">Create TSBB Project</a> ·
+          <a target="__blank" href="https://github.com/uiwjs/uiw-admin/create-uiw-admin/issues">Feedback</a> ·
+          <a target="__blank" href="https://github.com/uiwjs/uiw-admin/create-uiw-admin">Create TSBB Project</a> ·
           <a target="__blank" href="https://github.com/uiwjs/uiw-admin">uiw-admin</a>
         </div>
         <div class="footer">
