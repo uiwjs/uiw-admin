@@ -16,7 +16,7 @@ interface BasicLayoutProps {
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
   const layouts = useLayouts()
-  const { updateStore } = layouts
+  const { closeMenu } = layouts
 
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
@@ -40,12 +40,12 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       {
         title: '欢迎来到uiw',
         icon: 'smile',
-        onClick: () => updateStore({ headerRightvisible: false }),
+        onClick: () => closeMenu(),
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => updateStore({ headerRightvisible: false }),
+        onClick: () => closeMenu(),
       },
     ],
     profile: {

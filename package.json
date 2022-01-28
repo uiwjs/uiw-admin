@@ -30,6 +30,8 @@
     "-----config-----": "----------",
     "build:config": "lerna exec --scope @uiw-admin/models -- tsbb build",
     "watch:config": "lerna exec --scope @uiw-admin/models -- tsbb watch",
+    "-----create-uiw-admin-----": "----------",
+    "build:create": "lerna exec --scope create-uiw-admin -- npm run build",
     "-----------": "--------------",
     "build:utils": "lerna exec --scope @uiw-admin/utils -- tsbb build",
     "watch:utils": "lerna exec --scope @uiw-admin/utils -- tsbb watch",
@@ -88,7 +90,8 @@
   "workspaces": {
     "packages": [
       "packages/*",
-      "examples/*"
+      "examples/*",
+      "create-uiw-admin"
     ],
     "nohoist": []
   }

@@ -1,0 +1,52 @@
+{
+  "name": "create-uiw-admin",
+  "version": "1.0.1",
+  "description": "Creates a antdp application using the command line.",
+  "homepage": "https://uiwjs.github.io/uiw-admin",
+  "author": "Kenny Wong <wowohoo@qq.com> (https://github.com/jaywcjlove)",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uiwjs/uiw-admin/create-uiw-admin"
+  },
+  "bin": {
+    "create-uiw-admin": "lib/cli.js"
+  },
+  "scripts": {
+    "build": "tsbb build --disable-babel --file-names src/cli.ts",
+    "watch": "tsbb watch --disable-babel --file-names src/cli.ts",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,md,json}'",
+    "coverage": "tsbb test --coverage --detectOpenHandles",
+    "test": "tsbb test --detectOpenHandles"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/*.{ts,tsx}"
+    ]
+  },
+  "keywords": [
+    "tsbb",
+    "create-tsbb",
+    "react",
+    "redux",
+    "rematch",
+    "uiw",
+    "redux-saga",
+    "framework",
+    "frontend"
+  ],
+  "devDependencies": {
+    "pretty-quick": "3.1.2",
+    "prettier": "2.4.1",
+    "husky": "7.0.4",
+    "tsbb": "3.4.4"
+  },
+  "dependencies": {
+    "create-kkt": "3.0.0"
+  }
+}
