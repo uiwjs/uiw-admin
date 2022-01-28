@@ -9,6 +9,7 @@ yarn-debug.log*
 yarn-error.log*
 package-lock.json
 yarn.lock
+baseJS
 
 *.lerna_backup
 .DS_Store

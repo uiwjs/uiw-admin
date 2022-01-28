@@ -56,7 +56,7 @@ export const createModelsTempStr = (
   let models = '';
   modelArr.forEach((item) => {
     const { path, filename, modelName, isCreateModel } = item;
-    const pathUrls = path.replace(/\.(js|ts)/, '');
+    const pathUrls = `${path}`.replace(/\\/g, '/').replace(/\.(js|ts)/, '');
     const names = modelName || filename;
     importStr = importStr + `import ${names} from "${pathUrls}";\n`;
     if (isCreateModel) {
