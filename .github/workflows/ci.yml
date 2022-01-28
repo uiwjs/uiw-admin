@@ -90,7 +90,7 @@ jobs:
       working-directory: create-uiw-admin
 
     - run: mkdir -p examples/website/build/coverage
-    - run: cp -rp ./create-uiw-admin/coverage ./examples/website/build/coverage
+    - run: cp -rp ./create-uiw-admin/coverage/* ./examples/website/build/coverage/
 
     - name: Add Download Page
       working-directory: examples/website/build/zip
