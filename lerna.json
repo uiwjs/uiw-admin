@@ -1,5 +1,5 @@
 {
-  "packages": ["packages/*", "examples/*"],
+  "packages": ["packages/*", "examples/*", "create-uiw-admin"],
   "version": "5.2.2",
   "command": {
     "create": {
