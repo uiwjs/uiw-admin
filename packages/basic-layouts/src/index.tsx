@@ -1,4 +1,10 @@
-import React, { useMemo, Fragment, useState } from 'react';
+import React, {
+  useMemo,
+  Fragment,
+  useState,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
@@ -24,8 +30,11 @@ export type BasicLayoutProps = {
   footer?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode;
-} & HeaderRightProps;
-export default function BasicLayout(props: BasicLayoutProps) {
+} & Omit<HeaderRightProps, 'headerRightvisible' | 'setHeaderRightvisible'>;
+function BasicLayout(
+  props: BasicLayoutProps,
+  ref: React.Ref<unknown> | undefined,
+) {
   const {
     routes = [],
     footer,
@@ -36,6 +45,7 @@ export default function BasicLayout(props: BasicLayoutProps) {
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
+  const [headerRightvisible, setHeaderRightvisible] = useState<boolean>(false);
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
 
@@ -64,10 +74,17 @@ export default function BasicLayout(props: BasicLayoutProps) {
           onReloadAuth={onReloadAuth}
           profile={profile}
           menus={menus}
+          headerRightvisible={headerRightvisible}
+          setHeaderRightvisible={setHeaderRightvisible}
         />
       </div>
     );
-  }, [profile, menus]);
+  }, [profile, menus, headerRightvisible]);
+
+  useImperativeHandle(ref, () => ({
+    // 关闭右上角菜单
+    closeMenu: () => setHeaderRightvisible(false),
+  }));
 
   return (
     <Fragment>
@@ -106,3 +123,5 @@ export default function BasicLayout(props: BasicLayoutProps) {
     </Fragment>
   );
 }
+
+export default forwardRef(BasicLayout);

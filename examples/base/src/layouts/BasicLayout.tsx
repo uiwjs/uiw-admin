@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import BasicLayout from '@uiw-admin/basic-layouts'
 import { Outlet } from 'react-router-dom'
 import { RoutersProps } from '@uiw-admin/router-control'
@@ -15,6 +15,7 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
+  const baseRef = useRef({} as any)
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
@@ -37,12 +38,12 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       {
         title: '欢迎来到uiw',
         icon: 'smile',
-        onClick: () => null,
+        onClick: () => baseRef?.current?.closeMenu(),
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => null,
+        onClick: () => baseRef?.current?.closeMenu(),
       },
     ],
     profile: {
@@ -69,7 +70,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   //   </Auth>
   // )
   return (
-    <BasicLayout {...basicLayoutProps} {...props}>
+    <BasicLayout ref={baseRef} {...basicLayoutProps} {...props}>
       <Outlet />
       {/* <LayoutTabs routes={routes || []} /> */}
     </BasicLayout>
