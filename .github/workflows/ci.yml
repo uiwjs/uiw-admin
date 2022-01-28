@@ -89,6 +89,9 @@ jobs:
     - run: markdown-to-html --output coverage/index.html --favicon https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png
       working-directory: create-uiw-admin
 
+    - run: mkdir -p examples/website/build/coverage
+    - run: cp -rp ./create-uiw-admin/coverage ./examples/website/build/coverage
+
     - name: Add Download Page
       working-directory: examples/website/build/zip
       run: |
@@ -155,13 +158,6 @@ jobs:
         #   "stack": "heroku-20"
         # }
         # EOF
-
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        publish_branch: coverage
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./create-uiw-admin/coverage
 
     - name: Deploy to heroku.com
       uses: peaceiris/actions-gh-pages@v3
