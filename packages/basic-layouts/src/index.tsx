@@ -1,10 +1,4 @@
-import React, {
-  useMemo,
-  Fragment,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from 'react';
+import React, { useMemo, Fragment, useState } from 'react';
 import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
@@ -18,6 +12,7 @@ import { getMenu, BreadcrumbMap } from './utils';
 import BodyContent from './Content';
 import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';
+import { UseLayoutsProps } from './useLayouts';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -30,11 +25,9 @@ export type BasicLayoutProps = {
   footer?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode;
-} & Omit<HeaderRightProps, 'headerRightvisible' | 'setHeaderRightvisible'>;
-function BasicLayout(
-  props: BasicLayoutProps,
-  ref: React.Ref<unknown> | undefined,
-) {
+  layouts?: UseLayoutsProps;
+} & HeaderRightProps;
+function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
     footer,
@@ -42,10 +35,11 @@ function BasicLayout(
     profile = {},
     menus = [],
     onReloadAuth,
+    layouts,
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
-  const [headerRightvisible, setHeaderRightvisible] = useState<boolean>(false);
+
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
 
@@ -74,17 +68,11 @@ function BasicLayout(
           onReloadAuth={onReloadAuth}
           profile={profile}
           menus={menus}
-          headerRightvisible={headerRightvisible}
-          setHeaderRightvisible={setHeaderRightvisible}
+          layouts={layouts}
         />
       </div>
     );
-  }, [profile, menus, headerRightvisible]);
-
-  useImperativeHandle(ref, () => ({
-    // 关闭右上角菜单
-    closeMenu: () => setHeaderRightvisible(false),
-  }));
+  }, [profile, menus, JSON.stringify(layouts)]);
 
   return (
     <Fragment>
@@ -124,4 +112,6 @@ function BasicLayout(
   );
 }
 
-export default forwardRef(BasicLayout);
+export default BasicLayout;
+
+export { default as useLayouts } from './useLayouts';

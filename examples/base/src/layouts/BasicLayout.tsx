@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import BasicLayout from '@uiw-admin/basic-layouts'
+import React from 'react'
+import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
 import { Outlet } from 'react-router-dom'
 import { RoutersProps } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
@@ -15,7 +15,9 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props
-  const baseRef = useRef({} as any)
+  const layouts = useLayouts()
+  const { updateStore } = layouts
+
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
@@ -38,12 +40,12 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       {
         title: '欢迎来到uiw',
         icon: 'smile',
-        onClick: () => baseRef?.current?.closeMenu(),
+        onClick: () => updateStore({ headerRightvisible: false }),
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => baseRef?.current?.closeMenu(),
+        onClick: () => updateStore({ headerRightvisible: false }),
       },
     ],
     profile: {
@@ -56,6 +58,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
         </div>
       ),
     },
+    layouts,
   }
 
   // 验证是否登录的方式
@@ -70,7 +73,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   //   </Auth>
   // )
   return (
-    <BasicLayout ref={baseRef} {...basicLayoutProps} {...props}>
+    <BasicLayout {...basicLayoutProps} {...props}>
       <Outlet />
       {/* <LayoutTabs routes={routes || []} /> */}
     </BasicLayout>
