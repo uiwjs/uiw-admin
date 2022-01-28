@@ -14,7 +14,6 @@ interface BasicLayoutProps {
 }
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
-  const { routes } = props
   const layouts = useLayouts()
 
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
@@ -33,7 +32,6 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
 
   const basicLayoutProps = {
     onReloadAuth: async () => mutate(),
-    routes: routes,
     // 修改密码以及其他操作在项目中进行
     menus: [
       {
@@ -58,6 +56,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       ),
     },
     layouts,
+    ...props,
   }
 
   // 验证是否登录的方式
@@ -72,7 +71,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   //   </Auth>
   // )
   return (
-    <BasicLayout {...basicLayoutProps} {...props}>
+    <BasicLayout {...basicLayoutProps}>
       <Outlet />
       {/* <LayoutTabs routes={routes || []} /> */}
     </BasicLayout>

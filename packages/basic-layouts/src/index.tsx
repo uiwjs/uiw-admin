@@ -12,7 +12,6 @@ import { getMenu, BreadcrumbMap } from './utils';
 import BodyContent from './Content';
 import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';
-import { UseLayoutsProps } from './useLayouts';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -25,13 +24,13 @@ export type BasicLayoutProps = {
   footer?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode;
-  layouts?: UseLayoutsProps;
 } & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
     footer,
     projectName = 'UIW Admin',
+    // 右侧菜单参数HeaderRightProps
     profile = {},
     menus = [],
     onReloadAuth,

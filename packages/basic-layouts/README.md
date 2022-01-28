@@ -29,7 +29,7 @@ export interface HeaderRightProps {
   /**
    * 菜单
    */
-  menus?: Array<HeaderMenuItemsProps>;
+  menus?: HeaderMenuItemsProps[];
   /**
    * avatar 头像
    * userName 用户名
@@ -42,8 +42,7 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
-  headerRightvisible: boolean;
-  setHeaderRightvisible: React.Dispatch<React.SetStateAction<boolean>>
+  layouts:UseLayoutsProps
 }
 
 export interface HeaderMenuItemsProps {
@@ -57,6 +56,15 @@ export interface HeaderMenuItemsProps {
   divider?: boolean;
   /** 自定义渲染 */ 
   render?: React.ReactNode;
+}
+
+export interface Params  {
+  headerRightvisible: boolean
+}
+export interface UseLayoutsProps {
+  headerRightvisible: boolean;
+  closeMenu: () => void;
+  updateStore: (datas: Params) => void;
 }
 
 ```

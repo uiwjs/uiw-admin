@@ -28,14 +28,16 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
-  layouts?: UseLayoutsProps;
+  layouts: UseLayoutsProps;
 }
 
-export default function HeaderRightMenu(props: HeaderRightProps) {
+export default function HeaderRightMenu({
+  menus = [],
+  profile = {},
+  onReloadAuth,
+  layouts: { headerRightvisible, updateStore },
+}: HeaderRightProps) {
   const navigate = useNavigate();
-  const { menus = [], profile = {}, onReloadAuth, layouts } = props;
-
-  const { headerRightvisible, updateStore } = layouts as UseLayoutsProps;
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
     {

@@ -1,11 +1,20 @@
 import { useState } from 'react';
 
+export interface Params {
+  headerRightvisible: boolean;
+}
+export interface UseLayoutsProps {
+  headerRightvisible: boolean;
+  closeMenu: () => void;
+  updateStore: (datas: Params) => void;
+}
+
 const useLayouts = () => {
-  const [state, setState] = useState<{ headerRightvisible?: boolean }>({
+  const [state, setState] = useState<Params>({
     headerRightvisible: false,
   });
   // 更新store
-  const updateStore = (datas: { headerRightvisible?: boolean }) => {
+  const updateStore = (datas: Params) => {
     setState({
       ...state,
       ...datas,
@@ -21,11 +30,5 @@ const useLayouts = () => {
     ...state,
   };
 };
-
-export interface UseLayoutsProps {
-  headerRightvisible: boolean;
-  closeMenu: () => void;
-  updateStore: (datas: { headerRightvisible?: boolean }) => void;
-}
 
 export default useLayouts;
