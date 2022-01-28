@@ -27,12 +27,19 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
+  headerRightvisible: boolean;
+  setHeaderRightvisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function HeaderRightMenu(props: HeaderRightProps) {
   const navigate = useNavigate();
-
-  const { menus = [], profile = {}, onReloadAuth } = props;
+  const {
+    menus = [],
+    profile = {},
+    onReloadAuth,
+    headerRightvisible,
+    setHeaderRightvisible,
+  } = props;
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
     {
@@ -94,7 +101,13 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
   return (
     <div className="uiw-global-header-menu">
       <span className="uiw-global-header-menu">
-        <Popover trigger="click" placement="bottomRight" content={menuView}>
+        <Popover
+          isOpen={headerRightvisible}
+          onVisibleChange={(visible) => setHeaderRightvisible(visible)}
+          trigger="click"
+          placement="bottomRight"
+          content={menuView}
+        >
           {profile?.avatar ? (
             <img src={profile.avatar} />
           ) : (

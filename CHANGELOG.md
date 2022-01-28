@@ -4,6 +4,9 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.1
+- @uiw-admin/basic-layouts
+  - 🌟 `basic-layouts`：增加右上角菜单关闭功能
 ## 5.2.0
 - @uiw-admin/components
   - 🌟 `ProTable`：增加分页取消反选功能

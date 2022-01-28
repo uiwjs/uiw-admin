@@ -22,7 +22,7 @@ export type BasicLayoutProps = {
   /** 子集路由 */ 
   routes?: RoutersProps[];
   children?: React.ReactNode;
-} & HeaderRightProps;
+} & Omit<HeaderRightProps, 'headerRightvisible' | 'setHeaderRightvisible'>;
 
 
 export interface HeaderRightProps {
@@ -42,6 +42,8 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
+  headerRightvisible: boolean;
+  setHeaderRightvisible: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export interface HeaderMenuItemsProps {
@@ -64,7 +66,7 @@ export interface HeaderMenuItemsProps {
 
 ```tsx
 
-import React from 'react';
+import React, { useRef } from 'react';
 import BasicLayout from '@uiw-admin/basic-layouts';
 import { Outlet } from 'react-router-dom';
 import { RoutersProps } from '@uiw-admin/router-control';
@@ -77,6 +79,7 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props;
+  const baseRef = useRef({} as any)
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
@@ -97,12 +100,12 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       {
         title: '欢迎来到uiw',
         icon: 'smile',
-        onClick: () => {},
+        onClick: () => baseRef?.current?.closeMenu(),
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => {},
+        onClick: () => baseRef?.current?.closeMenu(),
       },
     ],
     profile: {
@@ -117,7 +120,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     },
   };
   return (
-    <BasicLayout {...basicLayoutProps} {...props}>
+    <BasicLayout ref={baseRef} {...basicLayoutProps} {...props}>
       <Outlet />
     </BasicLayout>
   );
