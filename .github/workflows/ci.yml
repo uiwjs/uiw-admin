@@ -79,6 +79,16 @@ jobs:
     - run: cp -rp ./examples/base/uiw-admin-ts.zip ./examples/website/build/zip/
     - run: cp -rp ./examples/basejs/uiw-admin-js.zip ./examples/website/build/zip/
 
+    - run: npm run coverage
+      working-directory: create-uiw-admin
+
+    - run: npm i coverage-badges-cli markdown-to-html-cli -g
+    - run: coverage-badges
+      working-directory: create-uiw-admin
+      
+    - run: markdown-to-html --output coverage/index.html --favicon https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png
+      working-directory: create-uiw-admin
+
     - name: Add Download Page
       working-directory: examples/website/build/zip
       run: |

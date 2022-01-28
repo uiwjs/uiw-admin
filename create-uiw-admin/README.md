@@ -9,8 +9,8 @@
   <a href="https://github.com/uiwjs/uiw-admin/actions/workflows/ci.yml">
     <img alt="Build & Deploy" src="https://github.com/uiwjs/uiw-admin/actions/workflows/ci.yml/badge.svg">
   </a>
-  <a href="https://uiwjs.github.io/create-uiw-admin/lcov-report/">
-    <img alt="Coverage Status" src="https://uiwjs.github.io/create-uiw-admin/badges.svg">
+  <a href="https://uiwjs.github.io//uiw-admin/create-uiw-admin/lcov-report/">
+    <img alt="Coverage Status" src="https://uiwjs.github.io/uiw-admin/create-uiw-admin/badges.svg">
   </a>
   <a href="https://www.npmjs.com/package/create-uiw-admin">
     <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/create-uiw-admin.svg?style=flat">
@@ -29,9 +29,9 @@ Creates a [`uiw-admin`](https://github.com/uiwjs/uiw-admin) application using th
 
 ```shell
 # npm 6.x
-$ npm init uiw-admin my-app --example antdp-base
+$ npm init uiw-admin my-app --example uiw-admin-ts
 # npm 7+, extra double-dash is needed:
-$ npm init uiw-admin my-app -- --example antdp-base
+$ npm init uiw-admin my-app -- --example uiw-admin-ts
 
 $ yarn create uiw-admin [appName]
 # or npm
