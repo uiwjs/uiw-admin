@@ -12,11 +12,12 @@
 ```jsx
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
-import { ProForm } from '@uiw-admin/components'
+import { ProForm,useForm } from '@uiw-admin/components'
 import { Button,Notify,Slider } from 'uiw'
 const Demo = () => {
    const [option, setOption] = React.useState([])
    const [loading, setLoading] = React.useState(false)
+   const form = useForm()
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
     if (type === 'selectMultiple') {
@@ -37,6 +38,7 @@ const Demo = () => {
   }
     return (
        <ProForm
+        form={form}
          // 表单类型
          formType="collapse"
          title="基本使用(与uiw/form使用保持一致)"
@@ -170,8 +172,8 @@ ReactDOM.render(<Demo />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
-import React, { useState,useRef,useForm } from 'react';
-import { ProForm } from '@uiw-admin/components'
+import React, { useState,useRef } from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
 import { Button,Notify } from 'uiw'
 const Demo = () => {
 
@@ -218,7 +220,7 @@ ReactDOM.render(<Demo />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
-import { ProForm } from '@uiw-admin/components'
+import { ProForm,useForm } from '@uiw-admin/components'
 import { formatter } from 'uiw'
 import React, { useState } from 'react';
 const Demo = () => {
@@ -232,8 +234,10 @@ const Demo = () => {
     timePicker: '2021-1-21 23:59:59',
     selectMultiple:[{label:"周政",value:"周政"}]
   })
+  const form = useForm()
     return (
        <ProForm
+        form={form}
          // 表单类型
          formType="pure"
          readOnly={true}
