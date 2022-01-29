@@ -1,6 +1,6 @@
 {
   "name": "create-uiw-admin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Creates a antdp application using the command line.",
   "homepage": "https://uiwjs.github.io/uiw-admin",
   "author": "Kenny Wong <wowohoo@qq.com> (https://github.com/jaywcjlove)",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/uiwjs/uiw-admin/create-uiw-admin"
+    "url": "https://github.com/uiwjs/uiw-admin"
   },
   "bin": {
     "create-uiw-admin": "lib/cli.js"
