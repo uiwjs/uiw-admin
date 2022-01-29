@@ -170,17 +170,17 @@ ReactDOM.render(<Demo />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef,useForm } from 'react';
 import { ProForm } from '@uiw-admin/components'
 import { Button,Notify } from 'uiw'
 const Demo = () => {
 
-  const submitRef = useRef()
+  const form = useForm()
 
     return (
      <div>
        <ProForm
-         submitRef={submitRef}
+         form={form}
          title="通过submitRef进行表单提交"
          formType="card"
          onSubmit={(initial, current) => {
@@ -207,7 +207,7 @@ const Demo = () => {
              },
           ]}
        />
-       <Button style={{ marginTop:10,width:80 }} type="primary" onClick={()=>submitRef?.current?.click()}>保存</Button>
+       <Button style={{ marginTop:10,width:80 }} type="primary" onClick={()=>form.submitvalidate()}>保存</Button>
     </div>
   );
 }
@@ -319,7 +319,7 @@ ReactDOM.render(<Demo />, _mount_);
 | buttonsContainer  | buttons容器样式(可调整button布局)	| React.CSSProperties		| - |
 | title | 标题	  | string		| - |
 | formType | 表单类型	  | 'collapse' 或 'card' 或 'pure'		| 'card' |
-| submitRef | 获取表单提交事件ref	  |  any		| - |
+| form | useForm返回值,替换原有submitRef作用可进行表单验证	  |  Object 必传		| - |
 | readOnly | 是否是只读模式模式	  |  boolean		| false |
 | readOnlyProps | 只读模式 参考Descriptions参数	  |  DescriptionsProps		| {} |
 | customWidgetsList | 可配置自定义组件	  |  { [key: string]: any }		| {} |

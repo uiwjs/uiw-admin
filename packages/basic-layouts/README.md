@@ -29,7 +29,7 @@ export interface HeaderRightProps {
   /**
    * 菜单
    */
-  menus?: Array<HeaderMenuItemsProps>;
+  menus?: HeaderMenuItemsProps[];
   /**
    * avatar 头像
    * userName 用户名
@@ -42,8 +42,7 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
-  headerRightvisible: boolean;
-  setHeaderRightvisible: React.Dispatch<React.SetStateAction<boolean>>
+  layouts:UseLayoutsProps
 }
 
 export interface HeaderMenuItemsProps {
@@ -59,6 +58,15 @@ export interface HeaderMenuItemsProps {
   render?: React.ReactNode;
 }
 
+export interface Params  {
+  headerRightvisible: boolean
+}
+export interface UseLayoutsProps {
+  headerRightvisible: boolean;
+  closeMenu: () => void;
+  updateStore: (datas: Params) => void;
+}
+
 ```
 
 
@@ -66,8 +74,8 @@ export interface HeaderMenuItemsProps {
 
 ```tsx
 
-import React, { useRef } from 'react';
-import BasicLayout from '@uiw-admin/basic-layouts';
+import React from 'react';
+import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
 import { Outlet } from 'react-router-dom';
 import { RoutersProps } from '@uiw-admin/router-control';
 import { Badge, Icon } from 'uiw';
@@ -79,7 +87,10 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const { routes } = props;
-  const baseRef = useRef({} as any)
+
+  const layouts = useLayouts()
+  const { closeMenu } = layouts
+
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
@@ -100,12 +111,12 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       {
         title: '欢迎来到uiw',
         icon: 'smile',
-        onClick: () => baseRef?.current?.closeMenu(),
+        onClick: () => closeMenu(),
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => baseRef?.current?.closeMenu(),
+        onClick: () => closeMenu(),
       },
     ],
     profile: {

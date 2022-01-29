@@ -4,6 +4,14 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.3
+- @uiw-admin/basic-layouts
+ - 🌟 `basic-layouts`：增加`layouts` props,增加`useLayouts` hook
+ - 🌟 `basic-layouts`：优化右上角menu关闭功能,通过useLayouts
+ - 🌟 `basic-layouts`：优化组件路径
+- @uiw-admin/components
+ - 🌟 `ProForm`：增加`useForm`hook,增加`form`api
+ - 🌟 `ProForm`：删除`submitRef` api
 ## 5.2.1
 - @uiw-admin/basic-layouts
   - 🌟 `basic-layouts`：增加右上角菜单关闭功能

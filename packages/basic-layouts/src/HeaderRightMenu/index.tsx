@@ -1,6 +1,7 @@
 import React from 'react';
 import { Menu, Avatar, Popover } from 'uiw';
 import { useNavigate } from 'react-router-dom';
+import { UseLayoutsProps } from '../useLayouts';
 import './index.css';
 
 export interface HeaderMenuItemsProps {
@@ -27,19 +28,16 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
-  headerRightvisible: boolean;
-  setHeaderRightvisible: React.Dispatch<React.SetStateAction<boolean>>;
+  layouts: UseLayoutsProps;
 }
 
-export default function HeaderRightMenu(props: HeaderRightProps) {
+export default function HeaderRightMenu({
+  menus = [],
+  profile = {},
+  onReloadAuth,
+  layouts: { headerRightvisible, updateStore },
+}: HeaderRightProps) {
   const navigate = useNavigate();
-  const {
-    menus = [],
-    profile = {},
-    onReloadAuth,
-    headerRightvisible,
-    setHeaderRightvisible,
-  } = props;
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
     {
@@ -103,7 +101,9 @@ export default function HeaderRightMenu(props: HeaderRightProps) {
       <span className="uiw-global-header-menu">
         <Popover
           isOpen={headerRightvisible}
-          onVisibleChange={(visible) => setHeaderRightvisible(visible)}
+          onVisibleChange={(visible) =>
+            updateStore({ headerRightvisible: visible })
+          }
           trigger="click"
           placement="bottomRight"
           content={menuView}
