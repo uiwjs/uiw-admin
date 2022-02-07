@@ -72,6 +72,7 @@
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
+    "webpack-bundle-analyzer": "4.5.0",
     "@babel/preset-typescript": "7.15.0",
     "@babel/core": "7.16.7",
     "husky": "7.0.4",
