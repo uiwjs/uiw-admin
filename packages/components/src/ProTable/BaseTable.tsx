@@ -99,9 +99,15 @@ const BaseTable: React.FC<BaseTableProps> = ({
   );
 
   // 查询
-  const onSearch = useCallback(async () => {
+  const onSearch = () => {
     setPageIndex(1);
-  }, [setPageIndex]);
+    updateStore({
+      searchValues: {
+        ...searchValues,
+        swr_Rest_Time: new Date().getTime(),
+      },
+    });
+  };
 
   // 分页
   const onPageChange = useCallback(
