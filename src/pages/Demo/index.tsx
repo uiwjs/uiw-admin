@@ -143,7 +143,7 @@ const Demo = () => {
         ]}
         table={table}
       />
-      <Detail updateData={updateData} />
+      <Detail updateData={updateData} onSearch={table.onSearch} />
     </React.Fragment>
   )
 }
