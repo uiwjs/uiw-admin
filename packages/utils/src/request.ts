@@ -37,11 +37,13 @@ export interface Options extends AxiosRequestConfig {
 export default function request(url: string, options: Options = {}) {
   const method = options.method || 'GET';
   const { body } = options;
-  const { swr_Rest_Time, ...rest } = body || {};
+  const { data } = body;
+  // 删除swr_Rest_Time
+  data?.swr_Rest_Time && delete data.swr_Rest_Time;
   const newOptions: Options = {
     url,
     method,
-    data: { ...rest },
+    data: { ...body },
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       Accept: 'application/json',
@@ -49,7 +51,7 @@ export default function request(url: string, options: Options = {}) {
   };
 
   if (/(GET)/.test(method)) {
-    newOptions.url = splitUrl(url, { ...rest });
+    newOptions.url = splitUrl(url, { ...body });
     delete newOptions.body;
   }
 

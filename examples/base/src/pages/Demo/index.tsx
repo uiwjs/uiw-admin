@@ -72,14 +72,14 @@ const Demo = () => {
     <React.Fragment>
       <ProTable
         searchBtns={[
+          { label: '搜索', type: 'primary', htmlType: 'submit' },
           {
             render: (
               <Dropdown menu={menu} trigger="click" placement="bottomRight">
-                <Button type="primary">自定义下拉</Button>
+                <Button type="danger">搜索render</Button>
               </Dropdown>
             ),
           },
-          { label: '点我', onClick: () => null },
         ]}
         operateButtons={[
           {
@@ -88,7 +88,7 @@ const Demo = () => {
             onClick: handleEditTable.bind(this, 'add'),
           },
           {
-            render: <Button type="primary">自定义render</Button>,
+            render: <Button type="danger">操作render</Button>,
           },
         ]}
         columns={[
