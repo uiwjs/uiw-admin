@@ -55,7 +55,7 @@ const Demo = () => {
     <div>
       <Menu bordered style={{ maxWidth: 200 }}>
         {[
-          { label: '搜索', value: 'search', onClick: () => table?.onSearch() },
+          { label: '搜索1', value: 'search', onClick: () => table?.onSearch() },
           {
             label: '重置',
             value: 'reset',
