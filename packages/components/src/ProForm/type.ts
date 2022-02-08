@@ -65,7 +65,7 @@ export interface ProFormProps
   readOnlyProps?: DescriptionsProps;
   /** 自定义组件 */
   customWidgetsList?: Fields;
-  form: UseFormProps;
+  form?: UseFormProps;
 }
 
 export interface UseFormProps {
