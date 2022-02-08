@@ -9,7 +9,11 @@ import { Options } from '@uiw-admin/utils/lib/request';
 
 import './styles/index.css';
 
-export type FormValue = { username?: string; password?: string };
+export type FormValue = {
+  username?: string;
+  password?: string;
+  swr_Rest_Time?: number | string;
+};
 
 export interface UserLoginProps {
   /** 卡片框的位置 */
@@ -109,14 +113,18 @@ export default (props: UserLoginProps) => {
                   if (typeof onBefore === 'function') {
                     const result = onBefore(current);
                     if (typeof result === 'object') {
-                      setStore({ ...current, ...(result || {}) });
+                      setStore({
+                        ...current,
+                        ...(result || {}),
+                        swr_Rest_Time: new Date().getTime(),
+                      });
                       return;
                     }
                     if (!result) {
                       return;
                     }
                   }
-                  setStore({ ...current });
+                  setStore({ ...current, swr_Rest_Time: new Date().getTime() });
                 }
               }}
               onSubmitError={(error: any) => {

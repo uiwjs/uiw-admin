@@ -23,7 +23,8 @@ const codeMessage = {
 };
 
 export interface Options extends AxiosRequestConfig {
-  body?: any;
+  /** swr_Rest_Time 用于重新触发事件使用 */
+  body?: any & { swr_Rest_Time?: number | string };
 }
 
 /**
@@ -35,10 +36,12 @@ export interface Options extends AxiosRequestConfig {
  */
 export default function request(url: string, options: Options = {}) {
   const method = options.method || 'GET';
+  const { body } = options;
+  const { swr_Rest_Time, ...rest } = body || {};
   const newOptions: Options = {
     url,
     method,
-    data: options.body,
+    data: { ...rest },
     headers: {
       'Content-Type': 'application/json; charset=utf-8',
       Accept: 'application/json',
@@ -46,7 +49,7 @@ export default function request(url: string, options: Options = {}) {
   };
 
   if (/(GET)/.test(method)) {
-    newOptions.url = splitUrl(url, { ...options.body });
+    newOptions.url = splitUrl(url, { ...rest });
     delete newOptions.body;
   }
 

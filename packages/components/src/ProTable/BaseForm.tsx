@@ -65,6 +65,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       searchValues: {
         ...initial,
         ...current,
+        swr_Rest_Time: new Date().getTime(),
       },
     });
     onSearch(current);

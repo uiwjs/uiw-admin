@@ -11,21 +11,6 @@ class MapsWebpackPlugin {
         const jsons = stats.toJson();
         Log(jsons);
         callBack && callBack();
-        // console.log("children", jsons.children)
-        // console.log("assetsByChunkName", jsons.assetsByChunkName)
-        // console.log("assets", jsons.assets)
-        // console.log("filteredAssets", jsons.filteredAssets)
-        // console.log("chunks", jsons.chunks)
-        // console.log("modules", jsons.modules)
-        // console.log("filteredModules", jsons.filteredModules)
-        // console.log("entrypoints", jsons.entrypoints)
-        // console.log("namedChunkGroups", jsons.namedChunkGroups)
-
-        // const statsFilepath = path.resolve(compiler.outputPath, "stats.json");
-        // await fs.promises.mkdir(path.dirname(statsFilepath), { recursive: true });
-        // const reslr = await writeStats(stats.toJson(), statsFilepath);
-        // console.log("reslr--->", reslr)
-        // console.log(path.dirname(statsFilepath))
       },
     );
   }

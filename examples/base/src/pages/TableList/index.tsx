@@ -13,10 +13,12 @@ export default function Demo() {
     },
     // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
     query: (pageIndex, searchValues) => {
+      const { swr_Rest_Time, ...rest } = searchValues
       return {
         page: pageIndex,
         pageSize: 10,
-        data: searchValues,
+        swr_Rest_Time,
+        data: { ...rest },
       }
     },
     // swr options
