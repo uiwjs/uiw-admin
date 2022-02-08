@@ -41,11 +41,9 @@ export function getReadValue(
       formatter(widgetProps?.format || 'YYYY-MM-DD', new Date(initialValue));
   } else if (type === 'upload') {
     const uploadProps = {
-      readOnly: true,
-      fileList: initialValue,
+      readonly: true,
       value: initialValue,
       uploadType: widgetProps?.uploadType,
-      onChange: () => {},
     };
     content = <Upload {...uploadProps} />;
   } else if (type === 'selectMultiple') {

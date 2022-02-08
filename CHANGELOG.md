@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.5(未发版)
+- package.json
+ - 🌟 `uiw`：升级 `v4.10.3`
+- @uiw-admin/components
+ - 🌟 `ProForm`：增加`Upload`组件
 ## 5.2.3
 - @uiw-admin/basic-layouts
  - 🌟 `basic-layouts`：增加`layouts` props,增加`useLayouts` hook
