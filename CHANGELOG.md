@@ -4,7 +4,7 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.2.5
+## 5.2.6
 - @uiw-admin/components
  - 🐞 修复 `ProTable` 表格 `onSearch` 事件不监听表单变化  
 ## 5.2.5
