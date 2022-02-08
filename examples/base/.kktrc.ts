@@ -5,6 +5,7 @@ import defaultConfig from '@uiw-admin/config'
 // import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
 export default defaultConfig({
   define: {
+    AUTH: false,
     STORAGE: 'local',
   },
 })
