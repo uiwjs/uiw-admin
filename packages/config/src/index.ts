@@ -3,8 +3,18 @@ import { LoaderConfOptions } from 'kkt';
 import path from 'path';
 import { transformationDefineString } from './uitls';
 
+type DefaultDefineType = {
+  /** 权限校验  默认 true */
+  AUTH?: string | boolean;
+  /** 路由 跳转前缀 默认 "/" */
+  BASE_NAME?: string;
+  /** 本地存储使用 localStorage 还是  sessionStorage  */
+  STORAGE?: string;
+  /** 版本  */
+  VERSION?: string;
+};
 /** 全局默认公共参数  */
-export const defaultDefine = {
+export const defaultDefine: DefaultDefineType = {
   /** 权限校验  默认 true */
   AUTH: JSON.stringify(true),
   /** 路由 跳转前缀 默认 "/" */
@@ -41,7 +51,7 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
   /** 插件 */
   plugins?: PluginsType;
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: Record<string, any> & Partial<typeof defaultDefine>;
+  define?: Record<string, any> & DefaultDefineType;
   /** 其他 工具 */
   loader?: (
     | ConfFun

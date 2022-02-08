@@ -28,15 +28,17 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
-  layouts: UseLayoutsProps;
+  layouts?: UseLayoutsProps;
 }
 
 export default function HeaderRightMenu({
   menus = [],
   profile = {},
   onReloadAuth,
-  layouts: { headerRightvisible, updateStore },
+  layouts,
 }: HeaderRightProps) {
+  const { headerRightvisible, updateStore } = layouts || {};
+
   const navigate = useNavigate();
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
@@ -100,9 +102,9 @@ export default function HeaderRightMenu({
     <div className="uiw-global-header-menu">
       <span className="uiw-global-header-menu">
         <Popover
-          isOpen={headerRightvisible}
+          isOpen={!!headerRightvisible}
           onVisibleChange={(visible) =>
-            updateStore({ headerRightvisible: visible })
+            updateStore?.({ headerRightvisible: visible })
           }
           trigger="click"
           placement="bottomRight"
