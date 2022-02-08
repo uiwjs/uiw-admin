@@ -108,10 +108,6 @@ const Detail = ({ updateData }: DetailProps) => {
         formDatas={
           items(queryInfo, {
             isView,
-            upload: {
-              onUploadChange: (fileList: any) =>
-                updateData({ queryInfo: { ...queryInfo, upload: fileList } }),
-            },
             selectMultiple: {
               onSearch: handleSearch.bind(this, 'selectMultiple'),
               loading: loading,

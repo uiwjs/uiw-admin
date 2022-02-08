@@ -48,12 +48,17 @@ export default function Demo() {
         },
       ]}
       // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
-      // searchButtons={[
-      //   { label: '搜索', type: 'primary',  htmlType: 'submit',  onClick: () => {
-      //     table.onSearch()
-      //   }},
-      //   { label: '点我', onClick: () => null},
-      // ]}
+      searchBtns={[
+        {
+          label: '搜索',
+          type: 'primary',
+          htmlType: 'submit',
+          onClick: () => {
+            table.onSearch()
+          },
+        },
+        { label: '点我', onClick: () => null },
+      ]}
       table={table}
       onBeforeSearch={({ current }) => {
         const errorObj: any = {}
@@ -127,13 +132,6 @@ export default function Demo() {
           },
         },
         {
-          title: 'timePicker',
-          key: 'timePicker1',
-          props: {
-            widget: 'timePicker',
-          },
-        },
-        {
           title: 'MonthPicker',
           key: 'MonthPicker',
           props: {
@@ -145,6 +143,13 @@ export default function Demo() {
           key: 'DateInput',
           props: {
             widget: 'dateInput',
+          },
+        },
+        {
+          title: 'timePicker',
+          key: 'timePicker1',
+          props: {
+            widget: 'timePicker',
           },
         },
         {
