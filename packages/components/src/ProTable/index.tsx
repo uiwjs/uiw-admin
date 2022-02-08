@@ -7,6 +7,8 @@ import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 
 const ProTabel: React.FC<ProtableProps> = (props) => {
+  // 监听表单变化的值
+  const updateSearchValueRef = React.useRef({});
   const {
     table,
     columns,
@@ -49,7 +51,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
   );
 
   return (
-    <StoreCtx.Provider value={store}>
+    <StoreCtx.Provider value={{ ...store, updateSearchValueRef }}>
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
         <BaseForm

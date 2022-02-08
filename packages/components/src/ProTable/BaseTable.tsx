@@ -50,7 +50,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
         defaultSearchValues[name] = col.props.initialValue;
       }
     });
-
+    (store as any).updateSearchValueRef.current = defaultSearchValues || {};
     return defaultSearchValues;
   }, [JSON.stringify(columns)]);
 
@@ -101,9 +101,10 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // 查询
   const onSearch = () => {
     setPageIndex(1);
+    // 更新searchValues,触发请求接口
     updateStore({
       searchValues: {
-        ...searchValues,
+        ...(store as any).updateSearchValueRef.current,
         swr_Rest_Time: new Date().getTime(),
       },
     });
