@@ -32,12 +32,8 @@ module.exports.selectById = function (req, res) {
       slider: 90,
       upload: [
         {
-          data_url:
-            'https://img1.baidu.com/it/u=793269991,2224346596&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500',
-          file: {
-            name: '周政.png',
-            type: 'application/jpg',
-          },
+          dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4',
+          name: 'uiw.png',
         },
       ],
       selectMultiple: [
