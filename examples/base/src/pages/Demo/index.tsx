@@ -71,6 +71,7 @@ const Demo = () => {
   return (
     <React.Fragment>
       <ProTable
+        // style={{textAlign}}
         scroll={{ x: 1280 }}
         searchBtns={[
           { label: '搜索', type: 'primary', htmlType: 'submit' },
@@ -96,6 +97,7 @@ const Demo = () => {
           {
             title: '姓名',
             key: 'name',
+            align: 'center',
             props: {
               widget: 'input',
               // 组件属性
@@ -108,6 +110,7 @@ const Demo = () => {
           {
             title: '年龄',
             key: 'age',
+            align: 'center',
             props: {
               widget: 'select',
               option: [
@@ -119,13 +122,20 @@ const Demo = () => {
           {
             title: '地址',
             key: 'info',
+            align: 'center',
           },
           {
             title: '操作',
             key: 'edit',
+            align: 'center',
             width: 98,
             render: (text: any, key: any, rowData: any) => (
-              <div>
+              <div
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  display: 'flex',
+                }}>
                 <Button
                   size="small"
                   type="danger"

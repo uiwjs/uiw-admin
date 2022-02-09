@@ -9,6 +9,7 @@
 - @uiw-admin/components
   - 🐞`ProDrawer`:修复文档报错
   - 🐞`ProTable`: 增加 `scroll` api
+  - 🐞`ProTable`: FormCol 增加 `align`设置列的对齐方式 api
 - @uiw-admin/utils
   - 🐞 修复`request`请求参数问题
   

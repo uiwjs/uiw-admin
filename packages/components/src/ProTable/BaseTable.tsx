@@ -43,6 +43,31 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
   const isCheckbox = type === 'checkbox';
 
+  // columns列和标题是否居中
+  const defaultColumns = useMemo(() => {
+    const columnsCenter = {
+      alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex',
+    };
+    return columns.map((item) => {
+      const { align = 'left' } = item;
+      return {
+        ...item,
+        style: { textAlign: align },
+        render: item?.render
+          ? item.render
+          : (text: string) => (
+              <span
+                style={align === 'center' ? columnsCenter : { float: align }}
+              >
+                {text}
+              </span>
+            ),
+      };
+    });
+  }, [columns]);
+
   // 表单默认值
   const defaultValues = useMemo(() => {
     const defaultSearchValues: Fields = {};
@@ -206,7 +231,9 @@ const BaseTable: React.FC<BaseTableProps> = ({
       <div style={{ width: x || '100%' }}>
         <Table
           // 判断是否添加选择框
-          columns={selectKey ? selectionCol.concat(columns) : columns}
+          columns={
+            selectKey ? selectionCol.concat(defaultColumns) : defaultColumns
+          }
           data={tableData}
           footer={
             data && (
