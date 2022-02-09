@@ -14,7 +14,7 @@ config
 ## Installation
 
 ```bash
-npm i @uiw-admin/config --save
+npm i @uiw-admin/config -D
 ```
 
 ## define默认值
