@@ -179,6 +179,7 @@ ReactDOM.render(<Demo />, _mount_);
 | onPageChange         | 分页回调	| （page: number） => void		|      -      |
 | onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询	| ({initial, current}) => Boolean 	|  |
 | rowSelection  | 选择框配置	| RowSelection 	|  - |
+| scroll  | 滚动	| ScrollProps 	|  - |
 
 ### rowSelection
 
@@ -189,6 +190,13 @@ ReactDOM.render(<Demo />, _mount_);
 | selectKey         | 选择框的键名，必填,对应的column里的key。	      | String		    | - |
 | defaultSelected  | 选中默认值        | []		    | - |
 
+
+### ScrollProps
+
+
+| 参数           | 说明	          | 类型	        |   默认值           |
+| -------------  | ------------- | ------------- | ------------- |
+| x      | x轴宽度	   | number         | 	- |
 
 
 其余属性与uiw Table一致
