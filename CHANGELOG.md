@@ -4,9 +4,10 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.2.8(未发版)
+## 5.2.8
 - @uiw-admin/components
  - 🐞`ProDrawer`:buttons新增`path`和`disabled`api,按钮增加权限功能
+ - 🐞`ProTable`: 修复查询分页报错
 ## 5.2.7
 - @uiw-admin/components
  - 🐞`ProForm`:`form`api修改为非必填
