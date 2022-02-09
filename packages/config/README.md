@@ -176,5 +176,3 @@ export default defaultConfig({
 ## License
 
 Licensed under the MIT License.
-
-
