@@ -71,8 +71,8 @@ export const defaultDefine = {
 配置别名，对引用路径进行映射。
 
 ```ts
-import defaultConfig from "@uiw-admin/config"
-export default defaultConfig({
+import config from "@uiw-admin/config"
+export default config({
   alias: {
     foo: '/tmp/a/b/foo',
   },
@@ -80,25 +80,27 @@ export default defaultConfig({
 })
 ```
 
+内置了以下别名：
+
 - `@`，项目 `src` 目录
 - `@@`，临时目录，通常是 `src/.uiw` 目录
 
 ## plugins 参数说明
 
-1. 使用的先行条件--插件需要默认导出是一个class类,符合`webpack` 的 `plugins`规范,
-2. 一维数组时,直接把字符串当成包名进行加载，使用`require`进行引入后直接`new`
+1. 使用的先行条件--插件需要默认导出是一个 class 类，符合`webpack` 的 `plugins`规范，
+2. 一维数组时，直接把字符串当成包名进行加载，使用`require`进行引入后直接`new`
 3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后`new`的时候把 第二项当成参数进行传递到包内部 
 4. `webpack` 原始的 [`plugins`](https://webpack.docschina.org/concepts/plugins/#usage) 类型
 
 ## loader 参数说明
 
 1. 使用的先行条件--需要默认导出是一个函数方法,返回类型为`webpack.Configuration `的函数
-2. 一维数组时,直接把字符串当成包名进行加载，使用`require`进行引入后直接方法调用
+2. 一维数组时，直接把字符串当成包名进行加载，使用`require`进行引入后直接方法调用
 3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后调用的时候把 第二项当成参数进行传递到包内部 
 
 ## 配置案例
 
-注意：使用 `plugins` 和 `loader` 时，请选安装对应包
+⚠️ 注意：使用自定义 `plugins` 和 `loader` 时，请安装对应包。官方默认的 `@uiw-admin/plugins-**` 和 `loader` (`@kkt/*`) 不需要安装。
 
 ### ~~旧的配置案例~~
 
