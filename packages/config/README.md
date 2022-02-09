@@ -3,13 +3,6 @@
 
 简化 `.kktrc` 配置，默认集成 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options` 依赖包。
 
-## 说明
-
-`@` 指向 src 目录
-`@@` 指向 src/.uiw 目录 
-
-默认引用包 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options`
-
 ## Installation
 
 ```bash
@@ -143,8 +136,22 @@ export default defaultConfig({
   plugins: ["@uiw-admin/plugins-rematch", "@uiw-admin/plugins-routes"],
   loader: [
     "@kkt/raw-modules",
-    ["@kkt/scope-plugin-options", { "allowedFiles": "./README.md" }],
     "@kkt/less-modules",
+    ["@kkt/scope-plugin-options", { "allowedFiles": "./README.md" }],
   ],
 })
 ```
+
+## 贡献者
+
+感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
+
+<a href="https://github.com/uiwjs/uiw-admin/graphs/contributors">
+  <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
+</a>
+
+## License
+
+Licensed under the MIT License.
+
+
