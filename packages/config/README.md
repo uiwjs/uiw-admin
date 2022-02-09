@@ -1,12 +1,11 @@
-config
+@uiw-admin/config
 ===
 
-> 简化 .kktrc 中配置
+简化 `.kktrc` 配置，默认集成 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options` 依赖包。
 
 ## 说明
 
 `@` 指向 src 目录
-
 `@@` 指向 src/.uiw 目录 
 
 默认引用包 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options`
@@ -15,24 +14,6 @@ config
 
 ```bash
 npm i @uiw-admin/config -D
-```
-
-## define默认值
-
-```ts
-/** 全局默认公共参数  */
-export const defaultDefine = {
-  /** 权限校验  默认 true */
-  AUTH: JSON.stringify(true),
-  /** 路由 跳转前缀 默认 "/" */
-  BASE_NAME: JSON.stringify("/"),
-  /** 本地存储使用 localStorage 还是  sessionStorage  可选值 local | session */
-  STORAGE: JSON.stringify("session")
-  /** 版本  */
-  VERSION: JSON.stringify(
-    require(path.resolve(process.cwd(), './package.json')).version || '0',
-  ),
-}
 ```
 
 ## 参数
@@ -72,6 +53,43 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
 }
 ```
 
+## define
+
+用于提供给代码中可用的变量。下面是自带默认值：
+
+```ts
+/** 全局默认公共参数  */
+export const defaultDefine = {
+  /** 权限校验  默认 true */
+  AUTH: JSON.stringify(true),
+  /** 路由 跳转前缀 默认 "/" */
+  BASE_NAME: JSON.stringify("/"),
+  /** 本地存储使用 localStorage 还是  sessionStorage  可选值 local | session */
+  STORAGE: JSON.stringify("session")
+  /** 版本  */
+  VERSION: JSON.stringify(
+    require(path.resolve(process.cwd(), './package.json')).version || '0',
+  ),
+}
+```
+
+## alias
+
+配置别名，对引用路径进行映射。
+
+```ts
+import defaultConfig from "@uiw-admin/config"
+export default defaultConfig({
+  alias: {
+    foo: '/tmp/a/b/foo',
+  },
+  //  ...
+})
+```
+
+- `@`，项目 `src` 目录
+- `@@`，临时目录，通常是 `src/.umi` 目录
+
 ## plugins 参数说明
 
 1. 使用的先行条件--插件需要默认导出是一个class类,符合`webpack` 的 `plugins`规范,
@@ -85,11 +103,13 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
 2. 一维数组时,直接把字符串当成包名进行加载，使用`require`进行引入后直接方法调用
 3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后调用的时候把 第二项当成参数进行传递到包内部 
 
-## ！！！注意
+## 配置案例
 
-使用`plugins`和`loader`时,请选安装对应包
+注意：使用 `plugins` 和 `loader` 时，请选安装对应包
 
-## 原始案例
+### ~~旧的配置案例~~
+
+不推荐旧的配置案例，使用新的配置案例，它将变得更简单。
 
 ```ts
 import defaultConfig from "@uiw-admin/config"
@@ -112,12 +132,12 @@ export default defaultConfig({
 })
 ```
 
-## 新案例
+### 新配置案例（推荐）
 
 ```ts
 import defaultConfig from "@uiw-admin/config"
 export default defaultConfig({
-   define: {
+  define: {
     STORAGE: 'local',
   },
   plugins: ["@uiw-admin/plugins-rematch", "@uiw-admin/plugins-routes"],
