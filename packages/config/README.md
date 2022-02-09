@@ -39,10 +39,15 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
   )[];
   /** 项目前缀 */
   publicPath?: string;
-  /** 更多的 自定义  配置 */
+  /**
+   * 提供回调函数，更改 webpack 的最终配置。
+   * @deprecated 推荐使用 `overrideWebpack`
+   */
   moreConfig?: ConfFun;
+  /** 提供回调函数，更改 webpack 的最终配置。 */
+  overrideWebpack?: ConfFun;
   /** 输出 */
-  output?: Omit<Configuration['output'], 'publicPath'>;
+  output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
 }
 ```
 

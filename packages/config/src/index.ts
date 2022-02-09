@@ -3,7 +3,7 @@ import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import path from 'path';
 import { transformationDefineString } from './uitls';
 
-type DefaultDefineType = {
+export type DefaultDefineType = {
   /** 权限校验  默认 true */
   AUTH?: string | boolean;
   /** 路由 跳转前缀 默认 "/" */
@@ -13,6 +13,7 @@ type DefaultDefineType = {
   /** 版本  */
   VERSION?: string;
 };
+
 /** 全局默认公共参数  */
 export const defaultDefine: DefaultDefineType = {
   /** 权限校验  默认 true */
@@ -64,8 +65,13 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   )[];
   /** 项目前缀 */
   publicPath?: string;
-  /** 更多的 自定义  配置 */
+  /**
+   * 提供回调函数，更改 webpack 的最终配置。
+   * @deprecated 推荐使用 `overrideWebpackConf`
+   */
   moreConfig?: ConfFun;
+  /** 提供回调函数，更改 webpack 的最终配置。 */
+  overrideWebpack?: ConfFun;
   /** 输出 */
   output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
 }
@@ -76,6 +82,7 @@ export default (props: ConfigProps) => {
     alias,
     define,
     loader: LoaderConfig,
+    overrideWebpack,
     moreConfig,
     publicPath = './',
     output,
@@ -101,7 +108,7 @@ export default (props: ConfigProps) => {
     env: string,
     options: LoaderConfOptions,
   ) => {
-    // laoder
+    // kkt plugin => laoder
     if (newLoader) {
       newLoader.forEach((fun) => {
         if (typeof fun === 'string') {
@@ -117,7 +124,7 @@ export default (props: ConfigProps) => {
         }
       });
     }
-    // plugin
+    // webpack plugin
     const plugin: WebpackConfiguration['plugins'] = [];
     if (Array.isArray(newPlugins)) {
       newPlugins.forEach((pathArr) => {
@@ -160,8 +167,13 @@ export default (props: ConfigProps) => {
         ...(output || {}),
       };
     }
+    // 冗余 API moreConfig, 未来在 v8 版本删除
+    // ==========================
     if (moreConfig) {
       return moreConfig({ ...conf, ...rest }, env, options);
+    }
+    if (overrideWebpack) {
+      return overrideWebpack({ ...conf, ...rest }, env, options);
     }
     return { ...conf, ...rest };
   };
