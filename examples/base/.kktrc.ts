@@ -5,7 +5,7 @@ import express from 'express'
 
 export default defaultConfig({
   define: {
-    AUTH: false,
+    // AUTH: false,
     STORAGE: 'local',
   },
   // 第一种

@@ -1,3 +1,6 @@
+/**
+ * 转换 examples/base下除src目录下所有ts文件为js文件
+ * */
 const path = require('path');
 const fs = require('fs');
 const FS = require('fs-extra');

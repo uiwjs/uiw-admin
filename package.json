@@ -9,6 +9,9 @@
   "scripts": {
     "initi": "npm run clean && npm install",
     "prepare": "husky install",
+    "-----authorized-----": "----------",
+    "build:authorized": "lerna exec --scope @uiw-admin/authorized -- tsbb build",
+    "watch:authorized": "lerna exec --scope @uiw-admin/authorized -- tsbb watch",
     "-----layout-----": "----------",
     "build:layout:ui": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb build",
     "watch:layout:ui": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb watch",

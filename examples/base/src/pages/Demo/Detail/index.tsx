@@ -76,6 +76,12 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
           show: !isView,
           onClick: () => form.submitvalidate(),
         },
+        {
+          label: '取消',
+          type: 'primary',
+          style: { width: 80 },
+          path: '/demo/cancel',
+        },
       ]}>
       <ProForm
         form={form}

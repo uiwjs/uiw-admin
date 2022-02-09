@@ -74,7 +74,7 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
 
 ## plugins 参数说明
 
-1. 使用的先行条件--插件需要默认导出是一个类,符合`webpack` 的 `plugins`规范,
+1. 使用的先行条件--插件需要默认导出是一个class类,符合`webpack` 的 `plugins`规范,
 2. 一维数组时,直接把字符串当成包名进行加载，使用`require`进行引入后直接`new`
 3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后`new`的时候把 第二项当成参数进行传递到包内部 
 4. `webpack` 原始的 [`plugins`](https://webpack.docschina.org/concepts/plugins/#usage) 类型
