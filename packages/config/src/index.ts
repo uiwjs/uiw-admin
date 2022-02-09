@@ -1,5 +1,5 @@
-import webpack, { Configuration } from 'webpack';
-import { LoaderConfOptions } from 'kkt';
+import webpack from 'webpack';
+import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import path from 'path';
 import { transformationDefineString } from './uitls';
 
@@ -28,10 +28,10 @@ export const defaultDefine: DefaultDefineType = {
 };
 
 export type ConfFun = (
-  conf: Configuration,
+  conf: WebpackConfiguration,
   evn: string,
   options?: LoaderConfOptions | undefined,
-) => Configuration;
+) => WebpackConfiguration;
 
 export type PluginsType = (
   | ((this: webpack.Compiler, compiler: webpack.Compiler) => void)
@@ -40,7 +40,7 @@ export type PluginsType = (
   | string
 )[];
 
-export interface ConfigProps extends Omit<Configuration, 'plugins'> {
+export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
    * 别名
    * 默认系统内置两个别名
@@ -67,7 +67,7 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
   /** 更多的 自定义  配置 */
   moreConfig?: ConfFun;
   /** 输出 */
-  output?: Omit<Configuration['output'], 'publicPath'>;
+  output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
 }
 
 export default (props: ConfigProps) => {
@@ -96,7 +96,11 @@ export default (props: ConfigProps) => {
     '@kkt/less-modules',
   ]);
 
-  return (conf: Configuration, env: string, options: LoaderConfOptions) => {
+  return (
+    conf: WebpackConfiguration,
+    env: string,
+    options: LoaderConfOptions,
+  ) => {
     // laoder
     if (newLoader) {
       newLoader.forEach((fun) => {
@@ -114,7 +118,7 @@ export default (props: ConfigProps) => {
       });
     }
     // plugin
-    const plugin: Configuration['plugins'] = [];
+    const plugin: WebpackConfiguration['plugins'] = [];
     if (Array.isArray(newPlugins)) {
       newPlugins.forEach((pathArr) => {
         if (typeof pathArr === 'string') {
