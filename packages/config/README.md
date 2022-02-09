@@ -12,8 +12,36 @@ npm i @uiw-admin/config -D
 ## 参数
 
 ```ts
-export type ConfFun = (conf: Configuration, evn: string, options?: LoaderConfOptions | undefined) => Configuration
-export interface ConfigProps extends Omit<Configuration, 'plugins'> {
+export type ConfFun = (conf: WebpackConfiguration, evn: string, options?: LoaderConfOptions | undefined) => WebpackConfiguration
+
+export type PluginsType = (
+  | ((this: webpack.Compiler, compiler: webpack.Compiler) => void)
+  | webpack.WebpackPluginInstance
+  | [string, Record<string, any>]
+  | string
+)[];
+
+export type KKTPlugins = (
+  | ConfFun
+  | {
+    loader?: ConfFun;
+    options?: LoaderConfOptions | undefined | Record<string, any>;
+  }
+  | string
+  | [string, Record<string, any>]
+)[]
+export type DefaultDefineType = {
+  /** 权限校验  默认 true */
+  AUTH?: string | boolean;
+  /** 路由 跳转前缀 默认 "/" */
+  BASE_NAME?: string;
+  /** 本地存储使用 localStorage 还是  sessionStorage  */
+  STORAGE?: string;
+  /** 版本  */
+  VERSION?: string;
+};
+
+export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
    * 别名
    * 默认系统内置两个别名
@@ -22,21 +50,16 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
    */
   alias?: Record<string, string | false | string[]>;
   /** 插件 */
-  plugins?:
-    | Configuration['plugins']
-    | ([string, Record<string, any>] | string)[];
+  plugins?:PluginsType;
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: Record<string, any> & Partial<typeof defaultDefine>;
-  /** 其他 工具 */
-  loader?: (
-    | ConfFun
-    | {
-        loader?: ConfFun;
-        options?: LoaderConfOptions | undefined | Record<string, any>;
-      }
-    | string
-    | [string, Record<string, any>]
-  )[];
+  define?: Record<string, any> & DefaultDefineType;
+   /**
+    * kkt plugin 
+    * @deprecated 推荐使用 `kktPlugins`
+    */
+  loader?:KKTPlugins;
+   /**  kkt plugin  */
+  kktPlugins?: KKTPlugins;
   /** 项目前缀 */
   publicPath?: string;
   /**
@@ -49,6 +72,23 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
   /** 输出 */
   output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
 }
+```
+
+## kktPlugins 
+
+[`KKT`](https://github.com/kktjs/kkt) 的 plugin
+
+```ts
+import defaultConfig, { WebpackConfiguration } from "@uiw-admin/config";
+
+export default defaultConfig({
+  // ....
+   kktPlugins: [
+    rawModules,
+    { loader: scopePluginOptions, options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] } },
+    lessModules
+  ],
+})
 ```
 
 ## overrideWebpack
@@ -113,11 +153,31 @@ export default config({
 3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后`new`的时候把 第二项当成参数进行传递到包内部 
 4. `webpack` 原始的 [`plugins`](https://webpack.docschina.org/concepts/plugins/#usage) 类型
 
-## loader 参数说明
+```ts
+class DemoWebpackPlugin {
+  constructor(){
+    // ...
+  }
+  apply(compiler: webpack.Compiler) {
+    compiler.hooks.afterPlugins.tap("DemoWebpackPlugin", () => {
+      // ...
+    })
+  }
+}
+```
+
+## kktPlugins(旧loader) 参数说明
 
 1. 使用的先行条件--需要默认导出是一个函数方法,返回类型为`webpack.Configuration `的函数
 2. 一维数组时，直接把字符串当成包名进行加载，使用`require`进行引入后直接方法调用
 3. 二维数组时，直接把数组第一项当成包进行加载，使用`require`进行引入后调用的时候把 第二项当成参数进行传递到包内部 
+
+```ts
+export default (conf: Configuration, env: string, options = {} as ReactLibraryOptions): Configuration => {
+  conf.output = { ...conf.output, publicPath: './' };
+  return conf
+};
+```
 
 ## 配置案例
 

@@ -43,6 +43,16 @@ export type PluginsType = (
   | string
 )[];
 
+export type KKTPlugins = (
+  | ConfFun
+  | {
+      loader?: ConfFun;
+      options?: LoaderConfOptions | undefined | Record<string, any>;
+    }
+  | string
+  | [string, Record<string, any>]
+)[];
+
 export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   /**
    * 别名
@@ -55,16 +65,13 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   plugins?: PluginsType;
   /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
   define?: Record<string, any> & DefaultDefineType;
-  /** 其他 工具 */
-  loader?: (
-    | ConfFun
-    | {
-        loader?: ConfFun;
-        options?: LoaderConfOptions | undefined | Record<string, any>;
-      }
-    | string
-    | [string, Record<string, any>]
-  )[];
+  /**
+   * kkt plugin
+   * @deprecated 推荐使用 `kktPlugins`
+   */
+  loader?: KKTPlugins;
+  /**  kkt plugin  */
+  kktPlugins?: KKTPlugins;
   /** 项目前缀 */
   publicPath?: string;
   /**
@@ -84,6 +91,7 @@ export default (props: ConfigProps) => {
     alias,
     define,
     loader: LoaderConfig,
+    kktPlugins,
     overrideWebpack,
     moreConfig,
     publicPath = './',
@@ -96,14 +104,18 @@ export default (props: ConfigProps) => {
     '@uiw-admin/plugins/lib/routes',
     // '@uiw-admin/plugins/lib/maps',
   ]);
-  const newLoader: ConfigProps['loader'] = (LoaderConfig || []).concat([
-    '@kkt/raw-modules',
-    [
-      '@kkt/scope-plugin-options',
-      { allowedFiles: path.resolve(process.cwd(), 'README.md') },
-    ],
-    '@kkt/less-modules',
-  ]);
+  // 冗余 API loader, 未来在 v8 版本删除
+  // ==========================
+  const newLoader: ConfigProps['kktPlugins'] = (LoaderConfig || [])
+    .concat(kktPlugins || [])
+    .concat([
+      '@kkt/raw-modules',
+      [
+        '@kkt/scope-plugin-options',
+        { allowedFiles: path.resolve(process.cwd(), 'README.md') },
+      ],
+      '@kkt/less-modules',
+    ]);
 
   return (
     conf: WebpackConfiguration,
