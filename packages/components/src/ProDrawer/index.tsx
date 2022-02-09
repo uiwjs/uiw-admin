@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { Drawer, Button, DrawerProps, ButtonProps } from 'uiw';
+import { AuthBtn, AuthBtnProps } from '@uiw-admin/authorized';
 
 /**
  * ProDrawer 组件继承于https://uiwjs.github.io/#/components/drawer
@@ -15,6 +16,8 @@ import { Drawer, Button, DrawerProps, ButtonProps } from 'uiw';
 interface ButtonItemsProps extends ButtonProps {
   label?: string;
   show?: boolean;
+  path?: string;
+  disabled?: boolean;
 }
 
 interface ProDrawerProps extends DrawerProps {
@@ -25,6 +28,18 @@ interface ProDrawerProps extends DrawerProps {
   buttons?: Array<ButtonItemsProps>;
   children?: React.ReactNode;
 }
+
+// button权限
+function BtnAuth({ path, children, ...others }: AuthBtnProps) {
+  if (path)
+    return (
+      <AuthBtn path={path} {...others}>
+        {children}
+      </AuthBtn>
+    );
+  return <>{children}</>;
+}
+
 function ProDrawer(props: ProDrawerProps) {
   const {
     visible,
@@ -43,11 +58,14 @@ function ProDrawer(props: ProDrawerProps) {
       size={width}
       bodyStyle={{ padding: '0 10px 45px 10px' }}
       footer={buttons.map(
-        ({ label = '', show = true, ...others }: any, idx) =>
+        (
+          { label = '', show = true, path, disabled = false, ...others }: any,
+          idx,
+        ) =>
           show && (
-            <Button key={idx} {...others}>
-              {label}
-            </Button>
+            <BtnAuth key={idx} path={path} disabled={disabled}>
+              <Button {...others}>{label}</Button>
+            </BtnAuth>
           ),
       )}
       {...others}
