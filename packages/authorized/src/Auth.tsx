@@ -25,7 +25,7 @@ export interface AuthBtnProps {
   path?: string;
   /** 禁用 状态 展示   适用于 存在 disabled 属性的组件  */
   disabled?: boolean;
-  children: React.ReactNode;
+  children: JSX.Element;
 }
 export const AuthBtn = (props: AuthBtnProps) => {
   const { path, disabled, children } = props;
@@ -35,7 +35,7 @@ export const AuthBtn = (props: AuthBtnProps) => {
     if (fig) {
       return children;
     } else if (disabled && React.isValidElement(children)) {
-      return React.cloneElement(children, { disabled });
+      return React.cloneElement(children, { disabled } as any);
     }
     return <React.Fragment />;
   }

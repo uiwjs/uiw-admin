@@ -17,6 +17,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   columns,
   rowSelection = {},
   onPageChange: pageChange,
+  scroll = {},
   ...tableProps
 }) => {
   const [pageIndex, setPageIndex] = useState(1);
@@ -38,6 +39,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   } = store as any;
 
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
+  const { x } = scroll;
 
   const isCheckbox = type === 'checkbox';
 
@@ -86,9 +88,8 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // table数据
   const tableData =
     formatData && data ? formatData(data).data : data?.data || prevData?.data;
-
   const selection = useSelections<any>(
-    // 设置枚举值
+    // 有枚举值的话  设置枚举值
     selectKey
       ? tableData
         ? tableData.map((itm: any) => itm[selectKey])
@@ -121,10 +122,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
     [setPageIndex, pageChange],
   );
 
-  // useEffect(() => {
-  //   updateStore({ selection });
-  // }, [JSON.stringify(selection)]);
-
   useEffect(() => {
     // 获取表单默认值
     const defaultSearchValues: Fields = {};
@@ -154,7 +151,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
     // 上一次请求数据
     if (data) {
-      setPrevData(data);
+      setPrevData(formatData ? formatData(data) : data);
     }
   }, [
     JSON.stringify(data),
@@ -205,29 +202,33 @@ const BaseTable: React.FC<BaseTableProps> = ({
   ] as FormCol;
 
   return (
-    <Table
-      // 判断是否添加选择框
-      columns={selectKey ? selectionCol.concat(columns) : columns}
-      data={tableData}
-      footer={
-        data && (
-          <Pagination
-            current={pageIndex}
-            pageSize={pageSize}
-            total={
-              formatData && data
-                ? formatData(data).total
-                : data?.total || prevData?.total
-            }
-            divider
-            onChange={(page) => {
-              onPageChange(page);
-            }}
-          />
-        )
-      }
-      {...tableProps}
-    />
+    <div style={{ overflow: x ? 'scroll' : 'hidden' }}>
+      <div style={{ width: x || '100%' }}>
+        <Table
+          // 判断是否添加选择框
+          columns={selectKey ? selectionCol.concat(columns) : columns}
+          data={tableData}
+          footer={
+            data && (
+              <Pagination
+                current={pageIndex}
+                pageSize={pageSize}
+                total={
+                  formatData && data
+                    ? formatData(data).total
+                    : data?.total || prevData?.total
+                }
+                divider
+                onChange={(page) => {
+                  onPageChange(page);
+                }}
+              />
+            )
+          }
+          {...tableProps}
+        />
+      </div>
+    </div>
   );
 };
 

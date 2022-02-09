@@ -25,7 +25,7 @@ const Demo = () => {
             label: '保存',
             type:"primary",
             onClick: ()=>{},
-            show: !isView,
+            show: !isView
           },
         ]}
       >
@@ -57,7 +57,9 @@ ReactDOM.render(<Demo />, _mount_);
 
 | 参数       | 说明                                                   | 类型                     | 默认值 |
 | :--------- | :--------------------------------------------------- | :------------------------| :----- |
-| label      | 按钮文本   | string                   |   ''   |
+| label      | 按钮文本   | string                   |   -   |
 | show      | 	是否展示按钮       | boolean	 |  true
+| path      | 	权限       | string	 |  - |
+| disabled      | 	是否禁用       | boolean	 |  false |
 
 

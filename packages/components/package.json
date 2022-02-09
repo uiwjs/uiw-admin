@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/components",
-  "version": "5.2.7",
+  "version": "5.2.8",
   "description": "业务组件集合",
   "author": "xingyuefeng <15262870437@163.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin#readme",
@@ -45,9 +45,10 @@
   },
   "dependencies": {
     "@babel/runtime": "7.16.7",
-    "@uiw-admin/document-title": "5.2.7",
-    "@uiw-admin/router-control": "5.2.7",
-    "@uiw-admin/utils": "5.2.7",
+    "@uiw-admin/authorized": "5.2.8",
+    "@uiw-admin/document-title": "5.2.8",
+    "@uiw-admin/router-control": "5.2.8",
+    "@uiw-admin/utils": "5.2.8",
     "classnames": "2.3.1"
   },
   "devDependencies": {
