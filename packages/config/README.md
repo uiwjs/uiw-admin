@@ -51,6 +51,22 @@ export interface ConfigProps extends Omit<Configuration, 'plugins'> {
 }
 ```
 
+## overrideWebpack
+
+通过 [`KKT`](https://github.com/kktjs/kkt) 的 API 修改 webpack 配置。
+
+```ts
+import defaultConfig, { WebpackConfiguration } from "@uiw-admin/config";
+
+export default defaultConfig({
+  // ....
+  overrideWebpack: (conf: WebpackConfiguration) => {
+    conf.output = { ...conf.output, publicPath: './' };
+    return conf
+  }
+})
+```
+
 ## define
 
 用于提供给代码中可用的变量。下面是自带默认值：

@@ -3,6 +3,8 @@ import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import path from 'path';
 import { transformationDefineString } from './uitls';
 
+export * from 'kkt';
+
 export type DefaultDefineType = {
   /** 权限校验  默认 true */
   AUTH?: string | boolean;
