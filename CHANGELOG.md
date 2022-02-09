@@ -4,43 +4,58 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.2.9(未发版)
+## 5.2.9
+
 - @uiw-admin/components
- - 🐞`ProDrawer`:修复文档报错
- - 🐞`ProTable`: 增加 `scroll` api
+  - 🐞`ProDrawer`:修复文档报错
+  - 🐞`ProTable`: 增加 `scroll` api
+- @uiw-admin/utils
+  - 🐞 修复`request`请求参数问题
+  
 ## 5.2.8
+
 - @uiw-admin/components
- - 🐞`ProDrawer`:buttons新增`path`和`disabled`api,按钮增加权限功能
- - 🐞`ProTable`: 修复查询分页报错
+  - 🐞`ProDrawer`:buttons新增`path`和`disabled`api,按钮增加权限功能
+  - 🐞`ProTable`: 修复查询分页报错
+
 ## 5.2.7
+
 - @uiw-admin/components
- - 🐞`ProForm`:`form`api修改为非必填
+  - 🐞`ProForm`:`form`api修改为非必填
 - @uiw-admin/config
- - 🐞 修复继承类型
+  - 🐞 修复继承类型
 - 升级[kkt](https://github.com/kktjs/kkt/releases/tag/v7.1.0)版本, 
 
 ## 5.2.6
+
 - @uiw-admin/components
- - 🐞 修复 `ProTable` 表格 `onSearch` 事件不监听表单变化  
+  - 🐞 修复 `ProTable` 表格 `onSearch` 事件不监听表单变化  
 
 ## 5.2.5
+
 - package.json
- - 🌟 `uiw`：升级 `v4.10.3`
+  - 🌟 `uiw`：升级 `v4.10.3`
 - @uiw-admin/components
- - 🌟 `ProForm`：增加`Upload`组件
- - 🐞 修改 `ProTable` 表格 `onSearch` 事件  
+  - 🌟 `ProForm`：增加`Upload`组件
+  - 🐞 修改 `ProTable` 表格 `onSearch` 事件  
+
 ## 5.2.3
+
 - @uiw-admin/basic-layouts
- - 🌟 `basic-layouts`：增加`layouts` props,增加`useLayouts` hook
- - 🌟 `basic-layouts`：优化右上角menu关闭功能,通过useLayouts
- - 🌟 `basic-layouts`：优化组件路径
+  - 🌟 `basic-layouts`：增加`layouts` props,增加`useLayouts` hook
+  - 🌟 `basic-layouts`：优化右上角menu关闭功能,通过useLayouts
+  - 🌟 `basic-layouts`：优化组件路径
 - @uiw-admin/components
- - 🌟 `ProForm`：增加`useForm`hook,增加`form`api
- - 🌟 `ProForm`：删除`submitRef` api
+  - 🌟 `ProForm`：增加`useForm`hook,增加`form`api
+  - 🌟 `ProForm`：删除`submitRef` api
+
 ## 5.2.1
+
 - @uiw-admin/basic-layouts
   - 🌟 `basic-layouts`：增加右上角菜单关闭功能
+
 ## 5.2.0
+
 - @uiw-admin/components
   - 🌟 `ProTable`：增加分页取消反选功能
   - 🌟 `ProTable`：`useTable` 返回 `pageIndex`当前分页
