@@ -27,6 +27,9 @@
     "-----models-----": "----------",
     "build:models": "lerna exec --scope @uiw-admin/models -- tsbb build",
     "watch:models": "lerna exec --scope @uiw-admin/models -- tsbb watch",
+    "-----plugins-----": "----------",
+    "build:plugins": "lerna exec --scope @uiw-admin/plugins -- tsbb build --no-esm",
+    "watch:plugins": "lerna exec --scope @uiw-admin/plugins -- tsbb watch",
     "-----config-----": "----------",
     "build:config": "lerna exec --scope @uiw-admin/models -- tsbb build",
     "watch:config": "lerna exec --scope @uiw-admin/models -- tsbb watch",
@@ -79,7 +82,7 @@
     "lerna": "4.0.0",
     "lint-staged": "12.1.5",
     "prettier": "2.5.1",
-    "tsbb": "3.5.5"
+    "tsbb": "~3.5.6"
   },
   "resolutions": {
     "mini-css-extract-plugin": "2.4.7",
