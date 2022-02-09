@@ -81,7 +81,7 @@ export default defaultConfig({
 ```
 
 - `@`，项目 `src` 目录
-- `@@`，临时目录，通常是 `src/.umi` 目录
+- `@@`，临时目录，通常是 `src/.uiw` 目录
 
 ## plugins 参数说明
 
