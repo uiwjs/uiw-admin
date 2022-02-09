@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/basic-layouts",
-  "version": "5.2.8",
+  "version": "5.2.9",
   "description": "Basic Layouts",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/basic-layouts#readme",
@@ -44,8 +44,8 @@
   },
   "dependencies": {
     "@babel/runtime": "7.16.7",
-    "@uiw-admin/document-title": "5.2.8",
-    "@uiw-admin/router-control": "5.2.8",
+    "@uiw-admin/document-title": "5.2.9",
+    "@uiw-admin/router-control": "5.2.9",
     "classnames": "2.3.1"
   },
   "devDependencies": {
