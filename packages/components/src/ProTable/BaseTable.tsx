@@ -86,9 +86,8 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // table数据
   const tableData =
     formatData && data ? formatData(data).data : data?.data || prevData?.data;
-
   const selection = useSelections<any>(
-    // 设置枚举值
+    // 有枚举值的话  设置枚举值
     selectKey
       ? tableData
         ? tableData.map((itm: any) => itm[selectKey])
@@ -121,10 +120,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
     [setPageIndex, pageChange],
   );
 
-  // useEffect(() => {
-  //   updateStore({ selection });
-  // }, [JSON.stringify(selection)]);
-
   useEffect(() => {
     // 获取表单默认值
     const defaultSearchValues: Fields = {};
@@ -154,7 +149,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
     // 上一次请求数据
     if (data) {
-      setPrevData(data);
+      setPrevData(formatData ? formatData(data) : data);
     }
   }, [
     JSON.stringify(data),
