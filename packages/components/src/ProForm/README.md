@@ -327,6 +327,9 @@ ReactDOM.render(<Demo />, _mount_);
 | readOnly | 是否是只读模式模式	  |  boolean		| false |
 | readOnlyProps | 只读模式 参考Descriptions参数	  |  DescriptionsProps		| {} |
 | customWidgetsList | 可配置自定义组件	  |  { [key: string]: any }		| {} |
+| cardProps | uiw`Card` API	  |  CardProps		| {} |
+| collapseProps | uiw`Collapse` API	  |  CollapseProps		| {} |
+| collapsePanelProps | uiw`Collapse.Panel` API	  |  CollapsePanelProps		| {} |
 
 ## FormItemsProps 继承uiw-FormItem
 | 参数 | 说明	| 类型	| 默认值 |
