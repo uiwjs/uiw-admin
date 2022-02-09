@@ -25,8 +25,7 @@ const Demo = () => {
             label: '保存',
             type:"primary",
             onClick: ()=>{},
-            show: !isView,
-            path:"/demo/add"
+            show: !isView
           },
         ]}
       >

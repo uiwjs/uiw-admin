@@ -17,6 +17,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   columns,
   rowSelection = {},
   onPageChange: pageChange,
+  scroll,
   ...tableProps
 }) => {
   const [pageIndex, setPageIndex] = useState(1);
@@ -205,29 +206,33 @@ const BaseTable: React.FC<BaseTableProps> = ({
   ] as FormCol;
 
   return (
-    <Table
-      // 判断是否添加选择框
-      columns={selectKey ? selectionCol.concat(columns) : columns}
-      data={tableData}
-      footer={
-        data && (
-          <Pagination
-            current={pageIndex}
-            pageSize={pageSize}
-            total={
-              formatData && data
-                ? formatData(data).total
-                : data?.total || prevData?.total
-            }
-            divider
-            onChange={(page) => {
-              onPageChange(page);
-            }}
-          />
-        )
-      }
-      {...tableProps}
-    />
+    <div style={{ overflow: scroll?.x ? 'scroll' : 'hidden' }}>
+      <div style={{ width: scroll?.x || '100%' }}>
+        <Table
+          // 判断是否添加选择框
+          columns={selectKey ? selectionCol.concat(columns) : columns}
+          data={tableData}
+          footer={
+            data && (
+              <Pagination
+                current={pageIndex}
+                pageSize={pageSize}
+                total={
+                  formatData && data
+                    ? formatData(data).total
+                    : data?.total || prevData?.total
+                }
+                divider
+                onChange={(page) => {
+                  onPageChange(page);
+                }}
+              />
+            )
+          }
+          {...tableProps}
+        />
+      </div>
+    </div>
   );
 };
 
