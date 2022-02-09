@@ -11,7 +11,7 @@ type RowSelection = {
 };
 
 type ScrollProps = {
-  x?: number;
+  x?: string | number;
 };
 
 export interface ProtableProps extends TableProps {
@@ -40,6 +40,7 @@ export interface FormCol extends TableColumns {
       | 'monthPicker';
     [key: string]: any;
   };
+  align?: 'center' | 'left' | 'right';
 }
 
 export interface BaseTableProps extends TableProps {

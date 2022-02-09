@@ -8,6 +8,7 @@
 - @uiw-admin/components
  - 🐞`ProDrawer`:修复文档报错
  - 🐞`ProTable`: 增加 `scroll` api
+ - 🐞`ProTable`: FormCol 增加 `align`设置列的对齐方式 api
 ## 5.2.8
 - @uiw-admin/components
  - 🐞`ProDrawer`:buttons新增`path`和`disabled`api,按钮增加权限功能

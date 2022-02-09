@@ -172,7 +172,7 @@ ReactDOM.render(<Demo />, _mount_);
 
 | 参数            | 说明	        | 类型	        | 默认值         |
 | -------------  | ------------- | ------------- |--------------- |
-| columns        | 与uiw table colunms用法一致 必传	| ColumnProps[]		| [] |
+| columns        | 与uiw table colunms用法一致 必传	| FormCol[]		| [] |
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render	| `Array<ButtonProps & { render?: JSX.Element }>`			| [] |
 | searchBtns    | 搜索栏按钮集合，属性与uiw button一致并支持自定义render	| `Array<ButtonProps & { render?: JSX.Element }>`		| [] |
 | table         | useTable返回值	| Object 必传		|  |
@@ -196,7 +196,7 @@ ReactDOM.render(<Demo />, _mount_);
 
 | 参数           | 说明	          | 类型	        |   默认值           |
 | -------------  | ------------- | ------------- | ------------- |
-| x      | x轴宽度	   | number         | 	- |
+| x      | x轴宽度	   | string 或 number         | 	- |
 
 
 其余属性与uiw Table一致
