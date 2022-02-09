@@ -89,6 +89,9 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         customWidgetsList={{
           slider: Slider,
         }}
+        cardProps={{
+          noHover: true,
+        }}
         formType={isView ? 'pure' : 'card'}
         readOnly={isView}
         onSubmit={(

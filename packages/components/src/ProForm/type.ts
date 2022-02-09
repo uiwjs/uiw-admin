@@ -4,6 +4,9 @@ import {
   DescriptionsProps,
   FormItemProps as UiwFormItemProps,
   FormProps as UiwFormProps,
+  CardProps,
+  CollapseProps,
+  CollapsePanelProps,
 } from 'uiw';
 
 export type Fields = {
@@ -66,6 +69,9 @@ export interface ProFormProps
   /** 自定义组件 */
   customWidgetsList?: Fields;
   form?: UseFormProps;
+  cardProps?: CardProps;
+  collapseProps?: CollapseProps;
+  collapsePanelProps?: CollapsePanelProps;
 }
 
 export interface UseFormProps {
