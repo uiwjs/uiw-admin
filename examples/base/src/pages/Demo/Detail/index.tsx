@@ -9,9 +9,10 @@ import useSWR from 'swr'
 
 interface DetailProps {
   updateData?: any
+  onSearch?: () => void
 }
 
-const Detail = ({ updateData }: DetailProps) => {
+const Detail = ({ updateData, onSearch }: DetailProps) => {
   const dispatch = useDispatch<Dispatch>()
   const [option, setOption] = React.useState<any>([])
   const [loading, setLoading] = React.useState(false)
@@ -34,6 +35,7 @@ const Detail = ({ updateData }: DetailProps) => {
         if (data && data.code === 200) {
           Notify.success({ title: data.message })
           onClose()
+          onSearch?.()
         }
       },
     }

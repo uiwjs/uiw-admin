@@ -23,7 +23,7 @@ export default function ProForm(props: ProFormProps) {
     [formDatas],
   );
 
-  const { submitvalidate, clickRef } = form;
+  const { submitvalidate, clickRef } = form || {};
 
   const store = useMemo(
     () => ({
