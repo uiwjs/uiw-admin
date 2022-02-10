@@ -19,8 +19,21 @@ ReactDOM.render(<Demo />, _mount_);
 ```
 
 ## Props
-| 参数 | 说明	| 类型	| 默认值 |
-| --  | -- | -- | -- |
-| loading | 页面加载状态	| Boolean	| false |
+| 参数    | 说明         | 类型    | 默认值 |
+| ------- | ------------ | ------- | ------ |
+| loading | 页面加载状态 | Boolean | false  |
 
 > 其余参数与[Uiw Loader](https://uiwjs.github.io/#/components/loader)相同
+
+
+## 贡献者
+
+感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
+
+<a href="https://github.com/uiwjs/uiw-admin/graphs/contributors">
+  <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
+</a>
+
+## License
+
+Licensed under the MIT License.

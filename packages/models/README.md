@@ -1,5 +1,6 @@
 models 状态管理
 ===
+
 > 1. 简化 @rematch/* 状态管理公共进行初始化;
 > 2. 为了简化 models 书写方式
 > 3. [更多 @rematch/core api](https://rematchjs.org/docs/api-reference)
@@ -23,7 +24,6 @@ npm i @uiw-admin/models --save
 > 把单个 `model` 添加进 `store` 中的 `models`
 
 ```ts
-
 import { createModels } from "@uiw-admin/models"
 
 const demoModel = {
@@ -48,5 +48,16 @@ const demoModel = {
 // 把 model 添加 store 的 models 中 
 //  "demo" 为 demoModel 中name 有可能不写的问题
 createModels(demoModel,"demo")
-
 ```
+
+## 贡献者
+
+感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
+
+<a href="https://github.com/uiwjs/uiw-admin/graphs/contributors">
+  <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
+</a>
+
+## License
+
+Licensed under the MIT License.

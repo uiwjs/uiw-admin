@@ -10,6 +10,10 @@ type RowSelection = {
   defaultSelected?: any[];
 };
 
+type ScrollProps = {
+  x?: string | number;
+};
+
 export interface ProtableProps extends TableProps {
   table: useTableData;
   operateButtons?: Array<ButtonProps & { render?: JSX.Element }>;
@@ -18,6 +22,7 @@ export interface ProtableProps extends TableProps {
   onBeforeSearch?: (state: FormSubmitProps) => Boolean;
   rowSelection?: RowSelection;
   onPageChange?: (page: number) => void;
+  scroll?: ScrollProps;
 }
 
 export interface FormCol extends TableColumns {
@@ -35,6 +40,7 @@ export interface FormCol extends TableColumns {
       | 'monthPicker';
     [key: string]: any;
   };
+  align?: 'center' | 'left' | 'right';
 }
 
 export interface BaseTableProps extends TableProps {
@@ -42,6 +48,7 @@ export interface BaseTableProps extends TableProps {
   columns: TableColumns[];
   rowSelection?: RowSelection;
   onPageChange?: (page: number) => void;
+  scroll?: ScrollProps;
 }
 
 export interface BaseFormProps

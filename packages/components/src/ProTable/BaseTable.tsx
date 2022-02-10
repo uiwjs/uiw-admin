@@ -17,6 +17,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   columns,
   rowSelection = {},
   onPageChange: pageChange,
+  scroll = {},
   ...tableProps
 }) => {
   const [pageIndex, setPageIndex] = useState(1);
@@ -37,8 +38,34 @@ const BaseTable: React.FC<BaseTableProps> = ({
     SWRConfiguration = {},
   } = store as any;
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
+  const { x } = scroll;
 
   const isCheckbox = type === 'checkbox';
+
+  // columns列和标题是否居中
+  const defaultColumns = useMemo(() => {
+    const columnsCenter = {
+      alignItems: 'center',
+      justifyContent: 'center',
+      display: 'flex',
+    };
+    return columns.map((item) => {
+      const { align = 'left' } = item;
+      return {
+        ...item,
+        style: { textAlign: align },
+        render: item?.render
+          ? item.render
+          : (text: string) => (
+              <span
+                style={align === 'center' ? columnsCenter : { float: align }}
+              >
+                {text}
+              </span>
+            ),
+      };
+    });
+  }, [columns]);
 
   // 表单默认值
   const defaultValues = useMemo(() => {
@@ -195,29 +222,35 @@ const BaseTable: React.FC<BaseTableProps> = ({
   ] as FormCol;
 
   return (
-    <Table
-      // 判断是否添加选择框
-      columns={selectKey ? selectionCol.concat(columns) : columns}
-      data={tableData}
-      footer={
-        data && (
-          <Pagination
-            current={pageIndex}
-            pageSize={pageSize}
-            total={
-              formatData && data
-                ? formatData(data).total
-                : data?.total || prevData?.total
-            }
-            divider
-            onChange={(page) => {
-              onPageChange(page);
-            }}
-          />
-        )
-      }
-      {...tableProps}
-    />
+    <div style={{ overflow: x ? 'scroll' : 'hidden' }}>
+      <div style={{ width: x || '100%' }}>
+        <Table
+          // 判断是否添加选择框
+          columns={
+            selectKey ? selectionCol.concat(defaultColumns) : defaultColumns
+          }
+          data={tableData}
+          footer={
+            data && (
+              <Pagination
+                current={pageIndex}
+                pageSize={pageSize}
+                total={
+                  formatData && data
+                    ? formatData(data).total
+                    : data?.total || prevData?.total
+                }
+                divider
+                onChange={(page) => {
+                  onPageChange(page);
+                }}
+              />
+            )
+          }
+          {...tableProps}
+        />
+      </div>
+    </div>
   );
 };
 

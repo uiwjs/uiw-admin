@@ -45,3 +45,16 @@ interface LayoutTabsProps {
 ## 预览
 
 ![](https://user-images.githubusercontent.com/49544090/150922472-e8882ecc-298a-4bad-8141-0d640fd167ff.png)
+
+
+## 贡献者
+
+感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
+
+<a href="https://github.com/uiwjs/uiw-admin/graphs/contributors">
+  <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
+</a>
+
+## License
+
+Licensed under the MIT License.

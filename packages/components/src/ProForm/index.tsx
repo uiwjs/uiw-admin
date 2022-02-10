@@ -15,6 +15,9 @@ export default function ProForm(props: ProFormProps) {
     readOnly = false,
     customWidgetsList = {},
     form,
+    cardProps = {},
+    collapseProps = {},
+    collapsePanelProps = {},
   } = props;
 
   // 获取表单配置
@@ -46,11 +49,15 @@ export default function ProForm(props: ProFormProps) {
 
   // 判断渲染的form类型
   if (formType === 'card') {
-    children = <Card title={renderTitle}>{child}</Card>;
+    children = (
+      <Card title={renderTitle} {...cardProps}>
+        {child}
+      </Card>
+    );
   } else if (formType === 'collapse') {
     children = (
-      <Collapse title={renderTitle} activeKey={['1']}>
-        <Collapse.Panel header={title} key={'1'}>
+      <Collapse title={renderTitle} activeKey={['1']} {...collapseProps}>
+        <Collapse.Panel header={title} key={'1'} {...collapsePanelProps}>
           {child}
         </Collapse.Panel>
       </Collapse>
