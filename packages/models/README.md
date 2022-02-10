@@ -1,4 +1,4 @@
-整合 models
+整合 models 数据流
 ===
 
   1. 简化 @rematch/* 状态管理公共进行初始化;
@@ -28,6 +28,7 @@ npm i @uiw-admin/models --save
 
   1. src/models 下的文件
   2. src/pages 下，子目录中 models 目录下的文件
+  3. src/pages 下，子目录中 models.ts 文件
 
 ```txt
 
@@ -35,6 +36,7 @@ src
   models/a.ts
   pages
     foo/models/b.ts
+    test/models.ts
 
 ```
 

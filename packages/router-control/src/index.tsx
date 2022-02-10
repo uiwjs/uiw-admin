@@ -96,8 +96,8 @@ export const getDeepTreeRoute = (
       itemObj.hideInMenu = true;
     }
     // 默认有权限的就是有权限
-    if (item.isAuth) {
-      itemObj.isAuth = true;
+    if (Reflect.has(item, 'isAuth')) {
+      itemObj.isAuth = item.isAuth;
     }
     return { ...itemObj };
   });
