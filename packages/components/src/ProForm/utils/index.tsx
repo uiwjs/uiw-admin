@@ -67,3 +67,7 @@ export function getReadValue(
   }
   return content;
 }
+
+export const onClickFormBtn = (inputRef: any): void => {
+  if (inputRef.current) inputRef.current.click();
+};

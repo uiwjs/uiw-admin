@@ -24,6 +24,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
   const form2 = useForm()
   const onClose = () => dispatch({ type: 'demo/clean' })
 
+  // eslint-disable-next-line no-unused-vars
   const { mutate } = useSWR(
     [
       (tableType === 'add' && insert) || (tableType === 'edit' && update),
@@ -60,6 +61,19 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
       }, 2000)
     }
   }
+  const handleSave = async () => {
+    // 触发验证
+    await form?.submitvalidate()
+    await form2?.submitvalidate()
+    // 获取错误信息
+    const errors = form.formRef.current?.errors || {}
+    const errors2 = form2.formRef.current?.errors || {}
+
+    if (errors && Object.keys(errors).length > 0) return
+    if (errors2 && Object.keys(errors2).length > 0) return
+
+    mutate()
+  }
 
   return (
     <ProDrawer
@@ -75,15 +89,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
           type: 'danger',
           style: { width: 80 },
           show: !isView,
-          onClick: () => {
-            form.submitvalidate()
-            form2.submitvalidate()
-            const params: any = queryInfo
-            if (!params?.input || !params?.input2) {
-              return
-            }
-            mutate()
-          },
+          onClick: handleSave,
         },
         {
           label: '取消',

@@ -233,7 +233,7 @@ const Demo = () => {
   const form = useForm()
   const form2 = useForm()
 
-    return (
+  return (
      <div>
        <ProForm
          form={form}
@@ -293,13 +293,17 @@ const Demo = () => {
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
-        onClick={()=>{
-         form.submitvalidate();
-         form2.submitvalidate();
-         if (!queryInfo?.input || !queryInfo?.input2) {
-           return
-         }
-         // 调用请求接口
+        onClick={ async ()=>{
+          // 触发验证
+          await form?.submitvalidate()
+          await form2?.submitvalidate()
+          // 获取错误信息
+          const errors =  form.formRef.current?.errors || {}
+          const errors2 = form2.formRef.current?.errors || {}
+
+          if(errors && Object.keys(errors).length > 0 ) return
+          if(errors2 && Object.keys(errors2).length > 0 ) return
+          // 调用请求接口
        }}>
         保存
       </Button>
@@ -452,7 +456,6 @@ ReactDOM.render(<Demo />, _mount_);
 | label    | 名称     | string(必传值)           | -      |
 | value    | key      | string 或 number(必传值) | -      |
 | disabled | 是否禁用 | boolean                  | -      |
-
 
 
 ## 贡献者

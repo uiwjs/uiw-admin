@@ -76,5 +76,9 @@ export interface ProFormProps
 
 export interface UseFormProps {
   clickRef: any;
+  formRef: {
+    [key: string]: any;
+  };
   submitvalidate: () => void;
+  resetForm: () => void;
 }

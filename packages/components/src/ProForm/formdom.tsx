@@ -11,13 +11,14 @@ function FormDom({
   buttonsContainer,
   showSaveButton = false,
   showResetButton = false,
-  saveButtonProps,
-  resetButtonProps,
+  saveButtonProps = {},
+  resetButtonProps = {},
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
 }) {
   const store = useStore();
-  const { clickRef } = store as any;
+  const { clickRef, formRef } = store as any;
+
   return (
     <Form
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
@@ -33,6 +34,13 @@ function FormDom({
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
+        const { errors } = state;
+        formRef.current = {
+          errors: errors,
+          resetForm: resetForm,
+          canSubmit: canSubmit,
+          fields: fields,
+        };
         return (
           <React.Fragment>
             <Row gutter={10}>
@@ -46,32 +54,22 @@ function FormDom({
               })}
             </Row>
             <div className="w-form-item-center" style={{ ...buttonsContainer }}>
-              {showSaveButton ? (
-                <Button
-                  {...saveButtonProps}
-                  ref={clickRef}
-                  disabled={!canSubmit()}
-                  htmlType="submit"
-                >
-                  {saveButtonProps?.label || '提交'}
-                </Button>
-              ) : (
-                <Button
-                  style={{ display: 'none' }}
-                  ref={clickRef}
-                  disabled={!canSubmit()}
-                  htmlType="submit"
-                  {...saveButtonProps}
-                >
-                  {saveButtonProps?.label || '提交'}
-                </Button>
-              )}
+              <Button
+                {...saveButtonProps}
+                style={{ display: showSaveButton ? 'flex' : 'none' }}
+                ref={clickRef}
+                disabled={!canSubmit()}
+                htmlType="submit"
+                {...saveButtonProps}
+              >
+                {saveButtonProps.label || '提交'}
+              </Button>
               <Button
                 style={{ display: showResetButton ? 'flex' : 'none' }}
                 onClick={resetForm}
                 {...resetButtonProps}
               >
-                {resetButtonProps?.label || '重置'}
+                {resetButtonProps.label || '重置'}
               </Button>
             </div>
           </React.Fragment>
