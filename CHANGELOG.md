@@ -9,6 +9,9 @@
 - @uiw-admin/components
   - 🐞`ProTable`: 修复分页错误
 
+- @uiw-admin/utils
+  - 🌟 `request`新增一个`headers`token参数
+
 ## 5.2.11
 
 - @uiw-admin/utils

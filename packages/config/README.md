@@ -2,6 +2,7 @@
 ===
 
 简化 `.kktrc` 配置，默认集成 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options` 依赖包。
+其他配置查询[`kkt`](https://github.com/kktjs/kkt)
 
 ## Installation
 

@@ -80,6 +80,16 @@ export default function request(url: string, options: Options = {}) {
     delete newOptions.body;
   }
 
+  // 加载 token
+  let token = sessionStorage.getItem('token') || localStorage.getItem('token');
+
+  if (token) {
+    newOptions.headers = {
+      ...(newOptions.headers || {}),
+      token,
+    };
+  }
+
   return axios
     .request(newOptions)
     .then((response) => {
