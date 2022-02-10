@@ -40,6 +40,7 @@ module.exports.selectById = function (req, res) {
         { value: 1, label: '苹果' },
         { value: 2, label: '西瓜' },
       ],
+      rate: 4,
     },
   })
 }
