@@ -121,7 +121,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
       ? tableData
         ? tableData.map((itm: any) => itm[selectKey])
         : []
-      : tableData,
+      : [],
     defaultSelected,
     type === 'radio',
   );
