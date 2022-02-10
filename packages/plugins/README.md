@@ -15,3 +15,17 @@ npm i @uiw-admin/plugins -D
 > 1. 路由转化,获取项目根目录下`congfig`文件夹下的`routes.json`或`routes.ts`或`routes.js`文件
 > 2. 优先级  json > ts > js 
 > 3. [使用方式](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/examples/base/.kktrc.ts#L8-L22)
+
+
+
+## 贡献者
+
+感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
+
+<a href="https://github.com/uiwjs/uiw-admin/graphs/contributors">
+  <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
+</a>
+
+## License
+
+Licensed under the MIT License.

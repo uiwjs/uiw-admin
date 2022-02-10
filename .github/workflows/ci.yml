@@ -183,7 +183,7 @@ jobs:
         publish_dir: ./examples/website/build
 
     - run: npm install @jsdevtools/npm-publish -g
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/Exceptions/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/exceptions/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/authorized/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/basic-layouts/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/components/package.json

@@ -35,7 +35,7 @@ const widgets = {
 const BaseForm: React.FC<BaseFormProps> = (props) => {
   const store = useStore();
 
-  let { updateStore, onSearch, updateSearchValueRef } = store as any;
+  let { updateStore, onSearch } = store as any;
 
   const { columns, searchBtns, onBeforeSearch } = props;
   // 获取表单配置
@@ -65,7 +65,6 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       searchValues: {
         ...initial,
         ...current,
-        swr_Rest_Time: new Date().getTime(),
       },
     });
     onSearch(current);
@@ -98,10 +97,12 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       }}
       // 更新表单的值
       onChange={({ initial, current }) => {
-        updateSearchValueRef.current = {
-          ...initial,
-          ...current,
-        };
+        updateStore({
+          searchValues: {
+            ...initial,
+            ...current,
+          },
+        });
       }}
       fields={getFormFields}
     >

@@ -311,45 +311,58 @@ ReactDOM.render(<Demo />, _mount_);
 
 ## Porps  继承uiw-Form
 
-| 参数 | 说明	| 类型	| 默认值 |
-| --  | -- | -- | -- |
-| formDatas | 表单项集合	| FormItemsProps[]		| [] |
-| onSubmit | 提交表单回调 需配合btns，继承uiw/form submit	| (initial: `Record<string, any>`, current: `Record<string, any>`) => void		| - |
-| onChange | 表单值变化回调，继承uiw/form onChange	| (initial: `Record<string, any>`, current: `Record<string, any>`) => void	| - |
-| showSaveButton | 展示提交按钮	|  boolean		| false |
-| showResetButton | 展示重置按钮	|  boolean		| false |
-| saveButtonProps | 提交按钮api;继承于uiw/button	|  boolean		| false |
-| resetButtonProps | 重置按钮api;继承于uiw/button	|  boolean		| false |
-| buttonsContainer  | buttons容器样式(可调整button布局)	| React.CSSProperties		| - |
-| title | 标题	  | string		| - |
-| formType | 表单类型	  | 'collapse' 或 'card' 或 'pure'		| 'card' |
-| form | useForm返回值,替换原有submitRef作用可进行表单验证	  |  Object 必传		| - |
-| readOnly | 是否是只读模式模式	  |  boolean		| false |
-| readOnlyProps | 只读模式 参考Descriptions参数	  |  DescriptionsProps		| {} |
-| customWidgetsList | 可配置自定义组件	  |  { [key: string]: any }		| {} |
-| cardProps | uiw`Card` API	  |  CardProps		| {} |
-| collapseProps | uiw`Collapse` API	  |  CollapseProps		| {} |
-| collapsePanelProps | uiw`Collapse.Panel` API	  |  CollapsePanelProps		| {} |
+| 参数               | 说明                                              | 类型                                                                     | 默认值 |
+| ------------------ | ------------------------------------------------- | ------------------------------------------------------------------------ | ------ |
+| formDatas          | 表单项集合                                        | FormItemsProps[]                                                         | []     |
+| onSubmit           | 提交表单回调 需配合btns，继承uiw/form submit      | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
+| onChange           | 表单值变化回调，继承uiw/form onChange             | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
+| showSaveButton     | 展示提交按钮                                      | boolean                                                                  | false  |
+| showResetButton    | 展示重置按钮                                      | boolean                                                                  | false  |
+| saveButtonProps    | 提交按钮api;继承于uiw/button                      | boolean                                                                  | false  |
+| resetButtonProps   | 重置按钮api;继承于uiw/button                      | boolean                                                                  | false  |
+| buttonsContainer   | buttons容器样式(可调整button布局)                 | React.CSSProperties                                                      | -      |
+| title              | 标题                                              | string                                                                   | -      |
+| formType           | 表单类型                                          | 'collapse' 或 'card' 或 'pure'                                           | 'card' |
+| form               | useForm返回值,替换原有submitRef作用可进行表单验证 | Object 必传                                                              | -      |
+| readOnly           | 是否是只读模式模式                                | boolean                                                                  | false  |
+| readOnlyProps      | 只读模式 参考Descriptions参数                     | DescriptionsProps                                                        | {}     |
+| customWidgetsList  | 可配置自定义组件                                  | { [key: string]: any }                                                   | {}     |
+| cardProps          | uiw`Card` API                                     | CardProps                                                                | {}     |
+| collapseProps      | uiw`Collapse` API                                 | CollapseProps                                                            | {}     |
+| collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
 
 ## FormItemsProps 继承uiw-FormItem
-| 参数 | 说明	| 类型	| 默认值 |
-| --  | -- | -- | -- |
-| label| 表单项名称 | string	| - |
-| key| 表单项key| string	| - |
-| widget| 表单项类型| sring	| - |
-| initialValue| 表单项值，可以是默认值| any 或 any[]	| - |
-| option| 数据化选项内容, type为 radio、checkbox、select 生效| FormItemsOptionsProps[]| - |
-| widgetProps| 表单组件其余参数,参考uiw表单组件| any|- |
-| hide| 是否显示| boolean| true |
-| span| 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统| string| '8' |
-| readSpan| 只读模式下包含列的数量 参考Descriptions.Item| number | 1 |
-| required| 是否必填| boolean | - |
+| 参数         | 说明                                                          | 类型                    | 默认值 |
+| ------------ | ------------------------------------------------------------- | ----------------------- | ------ |
+| label        | 表单项名称                                                    | string                  | -      |
+| key          | 表单项key                                                     | string                  | -      |
+| widget       | 表单项类型                                                    | sring                   | -      |
+| initialValue | 表单项值，可以是默认值                                        | any 或 any[]            | -      |
+| option       | 数据化选项内容, type为 radio、checkbox、select 生效           | FormItemsOptionsProps[] | -      |
+| widgetProps  | 表单组件其余参数,参考uiw表单组件                              | any                     | -      |
+| hide         | 是否显示                                                      | boolean                 | true   |
+| span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
+| readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
+| required     | 是否必填                                                      | boolean                 | -      |
 
 
 ## FormItemsOptionsProps
-| 参数 | 说明	| 类型	| 默认值 |
-| --  | -- | -- | -- |
-| label| 名称 | string(必传值)	| - |
-| value| key | string 或 number(必传值)	| - |
-| disabled| 是否禁用 | boolean	| - |
+| 参数     | 说明     | 类型                     | 默认值 |
+| -------- | -------- | ------------------------ | ------ |
+| label    | 名称     | string(必传值)           | -      |
+| value    | key      | string 或 number(必传值) | -      |
+| disabled | 是否禁用 | boolean                  | -      |
 
+
+
+## 贡献者
+
+感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
+
+<a href="https://github.com/uiwjs/uiw-admin/graphs/contributors">
+  <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
+</a>
+
+## License
+
+Licensed under the MIT License.
