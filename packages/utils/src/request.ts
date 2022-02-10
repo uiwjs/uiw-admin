@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 // import history from '../routes/history';
 import { splitUrl } from './utils';
-
+import qs from 'qs';
 // Get the current location.
 // const location = history.location;
 const codeMessage = {
@@ -25,6 +25,8 @@ const codeMessage = {
 export interface Options extends AxiosRequestConfig {
   /** swr_Rest_Time 用于重新触发事件使用 */
   body?: any & { swr_Rest_Time?: number | string };
+  /** 数据格式  **/
+  requestType?: 'form' | 'json' | 'urlencoded';
 }
 
 /**
@@ -36,7 +38,7 @@ export interface Options extends AxiosRequestConfig {
  */
 export default function request(url: string, options: Options = {}) {
   const method = options.method || 'GET';
-  const { body, headers, ...rest } = options;
+  const { body, headers, requestType = 'json', ...rest } = options;
   const { data } = body;
   // 删除swr_Rest_Time
   data?.swr_Rest_Time && delete data.swr_Rest_Time;
@@ -45,12 +47,33 @@ export default function request(url: string, options: Options = {}) {
     url,
     method,
     data: { ...body },
-    headers: {
+  };
+
+  if (requestType === 'json') {
+    newOptions.headers = {
       'Content-Type': 'application/json; charset=utf-8',
       Accept: 'application/json',
       ...(headers || {}),
-    },
-  };
+    };
+    newOptions.data = JSON.stringify(body);
+  } else if (requestType === 'form') {
+    const newFormData = new FormData();
+    Object.entries(body || {}).forEach(([key, value]: [string, any]) => {
+      newFormData.append(key, value);
+    });
+    newOptions.headers = {
+      Accept: 'application/json',
+      ...(headers || {}),
+    };
+    newOptions.data = newFormData;
+  } else if (requestType === 'urlencoded') {
+    newOptions.headers = {
+      'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+      Accept: 'application/json',
+      ...(headers || {}),
+    };
+    newOptions.data = qs.stringify(body, { arrayFormat: 'repeat' });
+  }
 
   if (/(GET)/.test(method)) {
     newOptions.url = splitUrl(url, { ...body });

@@ -15,6 +15,6 @@ export interface RoutersProps {
   routes?: RoutersProps[];
   /** 是否隐藏菜单 */
   hideInMenu?: boolean;
-  /** 用于路由校验权限 */
+  /** 用于路由校验权限  */
   isAuth?: boolean;
 }

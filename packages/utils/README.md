@@ -4,6 +4,27 @@
 
 基于axios封装的请求方法
 
+```ts
+
+export interface Options extends AxiosRequestConfig {
+  /** swr_Rest_Time 用于重新触发事件使用 */
+  body?: any & { swr_Rest_Time?: number | string };
+  /** 数据格式  **/
+  requestType?: "form" | "json" | "urlencoded"
+}
+type request = (url:string,options?:Options)=>Promise<any>
+
+```
+
+```ts
+import { request } from "@uiw-admin/utils"
+
+request("/api/foo")
+
+request("/api/foo",{ method:"POST" })
+
+```
+
 ## 贡献者
 
 感谢所有的贡献者，欢迎开发者为开源项目贡献力量。

@@ -31,11 +31,9 @@ export interface RoutersJSON {
   component?:string;
   /** 子集 路由 */
   routes?: RoutersJSON[];
-  /** 加载 model 的文件路径 , ts 结尾的文件 */
-  models?: string[];
   /** 是否隐藏菜单 */
   hideInMenu?: boolean;
-  /** 用于路由校验权限 */
+  /** 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准 */
   isAuth?: boolean;
 }
 

@@ -1,0 +1,328 @@
+info  2022-02-10T03:00:10.810 thread-0  blockvault_client_plug:35     plugin_initialize    ] initializing blockvault_client plugin
+info  2022-02-10T03:00:10.810 thread-0  chain_plugin.cpp:709          plugin_initialize    ] initializing chain plugin
+info  2022-02-10T03:00:10.811 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'BLOCKCHAIN_PARAMETERS' (with digest of '5443fcf88330c586bc0e5f3dee10e7f63c76c00249c87fe4fbf7f38c082006b4') is enabled with preactivation required
+info  2022-02-10T03:00:10.811 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'BLOCKCHAIN_PARAMETERS' (with digest of '5443fcf88330c586bc0e5f3dee10e7f63c76c00249c87fe4fbf7f38c082006b4') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-BLOCKCHAIN_PARAMETERS.json
+info  2022-02-10T03:00:10.811 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'CONFIGURABLE_WASM_LIMITS' (with digest of 'bf61537fd21c61a60e542a5d66c3f6a78da0589336868307f94a82bccea84e88') is enabled with preactivation required
+info  2022-02-10T03:00:10.811 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'CONFIGURABLE_WASM_LIMITS' (with digest of 'bf61537fd21c61a60e542a5d66c3f6a78da0589336868307f94a82bccea84e88') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-CONFIGURABLE_WASM_LIMITS.json
+info  2022-02-10T03:00:10.811 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'KV_DATABASE' (with digest of '825ee6288fb1373eab1b5187ec2f04f6eacb39cb3a97f356a07c91622dd61d16') is enabled with preactivation required
+info  2022-02-10T03:00:10.812 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'KV_DATABASE' (with digest of '825ee6288fb1373eab1b5187ec2f04f6eacb39cb3a97f356a07c91622dd61d16') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-KV_DATABASE.json
+info  2022-02-10T03:00:10.812 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ACTION_RETURN_VALUE' (with digest of 'c3a6138c5061cf291310887c0b5c71fcaffeab90d5deb50d3b9e687cead45071') is enabled with preactivation required
+info  2022-02-10T03:00:10.812 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'ACTION_RETURN_VALUE' (with digest of 'c3a6138c5061cf291310887c0b5c71fcaffeab90d5deb50d3b9e687cead45071') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-ACTION_RETURN_VALUE.json
+info  2022-02-10T03:00:10.812 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'WTMSIG_BLOCK_SIGNATURES' (with digest of '299dcb6af692324b899b39f16d5a530a33062804e41f09dc97e9f156b4476707') is enabled with preactivation required
+info  2022-02-10T03:00:10.812 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'WTMSIG_BLOCK_SIGNATURES' (with digest of '299dcb6af692324b899b39f16d5a530a33062804e41f09dc97e9f156b4476707') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-WTMSIG_BLOCK_SIGNATURES.json
+info  2022-02-10T03:00:10.813 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'WEBAUTHN_KEY' (with digest of '4fca8bd82bbd181e714e283f83e1b45d95ca5af40fb89ad3977b653c448f78c2') is enabled with preactivation required
+info  2022-02-10T03:00:10.813 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'WEBAUTHN_KEY' (with digest of '4fca8bd82bbd181e714e283f83e1b45d95ca5af40fb89ad3977b653c448f78c2') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-WEBAUTHN_KEY.json
+info  2022-02-10T03:00:10.813 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'RAM_RESTRICTIONS' (with digest of '4e7bf348da00a945489b2a681749eb56f5de00b900014e137ddae39f48f69d67') is enabled with preactivation required
+info  2022-02-10T03:00:10.814 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'RAM_RESTRICTIONS' (with digest of '4e7bf348da00a945489b2a681749eb56f5de00b900014e137ddae39f48f69d67') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-RAM_RESTRICTIONS.json
+info  2022-02-10T03:00:10.814 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'GET_SENDER' (with digest of 'f0af56d2c5a48d60a4a5b5c903edfb7db3a736a94ed589d0b797df33ff9d3e1d') is enabled with preactivation required
+info  2022-02-10T03:00:10.814 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'GET_SENDER' (with digest of 'f0af56d2c5a48d60a4a5b5c903edfb7db3a736a94ed589d0b797df33ff9d3e1d') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-GET_SENDER.json
+info  2022-02-10T03:00:10.814 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'FORWARD_SETCODE' (with digest of '2652f5f96006294109b3dd0bbde63693f55324af452b799ee137a81a905eed25') is enabled with preactivation required
+info  2022-02-10T03:00:10.815 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'FORWARD_SETCODE' (with digest of '2652f5f96006294109b3dd0bbde63693f55324af452b799ee137a81a905eed25') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-FORWARD_SETCODE.json
+info  2022-02-10T03:00:10.815 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ONLY_BILL_FIRST_AUTHORIZER' (with digest of '8ba52fe7a3956c5cd3a656a3174b931d3bb2abb45578befc59f283ecd816a405') is enabled with preactivation required
+info  2022-02-10T03:00:10.815 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'ONLY_BILL_FIRST_AUTHORIZER' (with digest of '8ba52fe7a3956c5cd3a656a3174b931d3bb2abb45578befc59f283ecd816a405') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-ONLY_BILL_FIRST_AUTHORIZER.json
+info  2022-02-10T03:00:10.815 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'RESTRICT_ACTION_TO_SELF' (with digest of 'ad9e3d8f650687709fd68f4b90b41f7d825a365b02c23a636cef88ac2ac00c43') is enabled with preactivation required
+info  2022-02-10T03:00:10.816 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'RESTRICT_ACTION_TO_SELF' (with digest of 'ad9e3d8f650687709fd68f4b90b41f7d825a365b02c23a636cef88ac2ac00c43') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-RESTRICT_ACTION_TO_SELF.json
+info  2022-02-10T03:00:10.816 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'DISALLOW_EMPTY_PRODUCER_SCHEDULE' (with digest of '68dcaa34c0517d19666e6b33add67351d8c5f69e999ca1e37931bc410a297428') is enabled with preactivation required
+info  2022-02-10T03:00:10.816 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'DISALLOW_EMPTY_PRODUCER_SCHEDULE' (with digest of '68dcaa34c0517d19666e6b33add67351d8c5f69e999ca1e37931bc410a297428') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-DISALLOW_EMPTY_PRODUCER_SCHEDULE.json
+info  2022-02-10T03:00:10.816 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'FIX_LINKAUTH_RESTRICTION' (with digest of 'e0fb64b1085cc5538970158d05a009c24e276fb94e1a0bf6a528b48fbc4ff526') is enabled with preactivation required
+info  2022-02-10T03:00:10.816 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'FIX_LINKAUTH_RESTRICTION' (with digest of 'e0fb64b1085cc5538970158d05a009c24e276fb94e1a0bf6a528b48fbc4ff526') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-FIX_LINKAUTH_RESTRICTION.json
+info  2022-02-10T03:00:10.816 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'REPLACE_DEFERRED' (with digest of 'ef43112c6543b88db2283a2e077278c315ae2c84719a8b25f25cc88565fbea99') is enabled with preactivation required
+info  2022-02-10T03:00:10.817 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'REPLACE_DEFERRED' (with digest of 'ef43112c6543b88db2283a2e077278c315ae2c84719a8b25f25cc88565fbea99') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-REPLACE_DEFERRED.json
+info  2022-02-10T03:00:10.817 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'NO_DUPLICATE_DEFERRED_ID' (with digest of '4a90c00d55454dc5b059055ca213579c6ea856967712a56017487886a4d4cc0f') is enabled with preactivation required
+info  2022-02-10T03:00:10.817 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'NO_DUPLICATE_DEFERRED_ID' (with digest of '4a90c00d55454dc5b059055ca213579c6ea856967712a56017487886a4d4cc0f') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-NO_DUPLICATE_DEFERRED_ID.json
+info  2022-02-10T03:00:10.817 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ONLY_LINK_TO_EXISTING_PERMISSION' (with digest of '1a99a59d87e06e09ec5b028a9cbb7749b4a5ad8819004365d02dc4379a8b7241') is enabled with preactivation required
+info  2022-02-10T03:00:10.817 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'ONLY_LINK_TO_EXISTING_PERMISSION' (with digest of '1a99a59d87e06e09ec5b028a9cbb7749b4a5ad8819004365d02dc4379a8b7241') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-ONLY_LINK_TO_EXISTING_PERMISSION.json
+info  2022-02-10T03:00:10.818 thread-0  chain_plugin.cpp:540          operator()           ] Support for builtin protocol feature 'PREACTIVATE_FEATURE' (with digest of '0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd') is enabled without activation restrictions
+info  2022-02-10T03:00:10.818 thread-0  chain_plugin.cpp:637          operator()           ] Saved default specification for builtin protocol feature 'PREACTIVATE_FEATURE' (with digest of '0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd') to: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/protocol_features/BUILTIN-PREACTIVATE_FEATURE.json
+info  2022-02-10T03:00:10.819 thread-0  chain_plugin.cpp:1156         plugin_initialize    ] Starting fresh blockchain state using default genesis state.
+info  2022-02-10T03:00:11.283 thread-0  platform_timer_accurac:62     compute_and_print_ti ] Checktime timer accuracy: min:3us max:3053us mean:245us stddev:613us
+warn  2022-02-10T03:00:11.283 thread-0  platform_timer_accurac:64     compute_and_print_ti ] Checktime timer accuracy on this platform and hardware combination is poor; accuracy of subjective transaction deadline enforcement will suffer
+info  2022-02-10T03:00:11.284 thread-0  producer_plugin.cpp:871       plugin_initialize    ] Subjective CPU billing disabled
+info  2022-02-10T03:00:11.284 thread-0  http_plugin.cpp:798           plugin_initialize    ] configured http to listen on 127.0.0.1:8888
+warn  2022-02-10T03:00:11.284 thread-0  history_plugin.cpp:318        plugin_initialize    ] --filter-on * enabled. This can fill shared_mem, causing nodeos to stop.
+info  2022-02-10T03:00:11.284 thread-0  resource_monitor_plugi:67     plugin_initialize    ] Monitoring interval set to 2
+info  2022-02-10T03:00:11.284 thread-0  resource_monitor_plugi:73     plugin_initialize    ] Space usage threshold set to 90
+info  2022-02-10T03:00:11.284 thread-0  resource_monitor_plugi:82     plugin_initialize    ] Shutdown flag when threshold exceeded set to true
+info  2022-02-10T03:00:11.284 thread-0  resource_monitor_plugi:89     plugin_initialize    ] Warning interval set to 30
+info  2022-02-10T03:00:11.284 thread-0  main.cpp:138                  main                 ] nodeos version v2.1.0 v2.1.0-26a4d285d0be1052d962149e431eb81500782991
+info  2022-02-10T03:00:11.284 thread-0  main.cpp:139                  main                 ] nodeos using configuration file /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/config.ini
+info  2022-02-10T03:00:11.284 thread-0  main.cpp:140                  main                 ] nodeos data directory is /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data
+warn  2022-02-10T03:00:11.284 thread-0  controller.cpp:539            startup              ] No existing chain state or fork database. Initializing fresh blockchain state and resetting fork database.
+warn  2022-02-10T03:00:11.284 thread-0  controller.cpp:397            initialize_blockchai ] Initializing new blockchain with genesis state
+info  2022-02-10T03:00:11.291 thread-0  combined_database.cpp:248     check_backing_store_ ] using chainbase for backing store
+info  2022-02-10T03:00:11.291 thread-0  chain_plugin.cpp:1355         plugin_startup       ] starting chain in read/write mode
+info  2022-02-10T03:00:11.291 thread-0  chain_plugin.cpp:1360         plugin_startup       ] Blockchain started; head block is #1, genesis timestamp is 2018-06-01T12:00:00.000
+info  2022-02-10T03:00:11.291 thread-0  producer_plugin.cpp:960       plugin_startup       ] producer plugin:  plugin_startup() begin
+info  2022-02-10T03:00:11.291 thread-0  producer_plugin.cpp:985       plugin_startup       ] Launching block production for 1 producers at 2022-02-10T03:00:11.291.
+info  2022-02-10T03:00:11.292 thread-0  producer_plugin.cpp:996       plugin_startup       ] producer plugin:  plugin_startup() end
+info  2022-02-10T03:00:11.292 thread-0  producer_api_plugin.cp:87     plugin_startup       ] starting producer_api_plugin
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/add_greylist_accounts
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/create_snapshot
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_account_ram_corrections
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_greylist
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_integrity_hash
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_runtime_options
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_scheduled_protocol_feature_activations
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_supported_protocol_features
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_whitelist_blacklist
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/pause
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/paused
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/remove_greylist_accounts
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/resume
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/schedule_protocol_feature_activations
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/set_whitelist_blacklist
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/update_runtime_options
+info  2022-02-10T03:00:11.292 thread-0  chain_api_plugin.cpp:98       plugin_startup       ] starting chain_api_plugin
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_info
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/abi_bin_to_json
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/abi_json_to_bin
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_abi
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_account
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_activated_protocol_features
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block_header_state
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block_info
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_code
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_code_hash
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_currency_balance
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_currency_stats
+info  2022-02-10T03:00:11.292 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_kv_table_rows
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_producer_schedule
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_producers
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_raw_abi
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_raw_code_and_abi
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_required_keys
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_scheduled_transactions
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_table_by_scope
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_table_rows
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_transaction_id
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_block
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_transaction
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_transactions
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/send_transaction
+info  2022-02-10T03:00:11.293 thread-0  history_api_plugin.cpp:34     plugin_startup       ] starting history_api_plugin
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_actions
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_controlled_accounts
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_key_accounts
+info  2022-02-10T03:00:11.293 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_transaction
+info  2022-02-10T03:00:11.293 thread-0  net_plugin.cpp:3782           plugin_startup       ] my node_id is d20f79d7ad0891ba338eb71dd467ed1f83e298f7387a78b309199109404d8643
+info  2022-02-10T03:00:11.293 thread-0  net_plugin.cpp:3836           plugin_startup       ] starting listener, max clients is 25
+info  2022-02-10T03:00:11.293 thread-0  resource_monitor_plugi:94     plugin_startup       ] Creating and starting monitor thread
+info  2022-02-10T03:00:11.293 thread-0  file_space_handler.hpp:112    add_file_system      ] /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data/blocks's file system monitored. shutdown_available: 25068557510, capacity: 250685575168, threshold: 90
+warn  2022-02-10T03:00:11.294 thread-1  file_space_handler.hpp:62     is_threshold_exceede ] Space usage warning: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data/blocks's file system exceeded threshold 90%, available: 14982111232, Capacity: 250685575168, shutdown_available: 25068557510
+warn  2022-02-10T03:00:11.294 thread-1  file_space_handler.hpp:117    space_monitor_loop   ] Shutting down
+info  2022-02-10T03:00:11.294 thread-0  http_plugin.cpp:877           operator()           ] start listening for http requests
+info  2022-02-10T03:00:11.294 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/node/get_supported_apis
+info  2022-02-10T03:00:11.294 thread-0  resource_monitor_plugi:122    plugin_shutdown      ] shutdown...
+info  2022-02-10T03:00:11.294 thread-0  resource_monitor_plugi:129    plugin_shutdown      ] exit shutdown
+info  2022-02-10T03:00:11.294 thread-0  net_plugin.cpp:3882           plugin_shutdown      ] shutdown..
+info  2022-02-10T03:00:11.294 thread-0  net_plugin.cpp:3899           plugin_shutdown      ] close 0 connections
+info  2022-02-10T03:00:11.294 thread-0  net_plugin.cpp:3919           plugin_shutdown      ] exit shutdown
+info  2022-02-10T03:00:11.306 thread-0  main.cpp:179                  main                 ] nodeos successfully exiting
+info  2022-02-10T03:05:32.206 thread-0  blockvault_client_plug:35     plugin_initialize    ] initializing blockvault_client plugin
+info  2022-02-10T03:05:32.208 thread-0  chain_plugin.cpp:709          plugin_initialize    ] initializing chain plugin
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:540          operator()           ] Support for builtin protocol feature 'PREACTIVATE_FEATURE' (with digest of '0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd') is enabled without activation restrictions
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ONLY_LINK_TO_EXISTING_PERMISSION' (with digest of '1a99a59d87e06e09ec5b028a9cbb7749b4a5ad8819004365d02dc4379a8b7241') is enabled with preactivation required
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'FORWARD_SETCODE' (with digest of '2652f5f96006294109b3dd0bbde63693f55324af452b799ee137a81a905eed25') is enabled with preactivation required
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'WTMSIG_BLOCK_SIGNATURES' (with digest of '299dcb6af692324b899b39f16d5a530a33062804e41f09dc97e9f156b4476707') is enabled with preactivation required
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'REPLACE_DEFERRED' (with digest of 'ef43112c6543b88db2283a2e077278c315ae2c84719a8b25f25cc88565fbea99') is enabled with preactivation required
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'NO_DUPLICATE_DEFERRED_ID' (with digest of '4a90c00d55454dc5b059055ca213579c6ea856967712a56017487886a4d4cc0f') is enabled with preactivation required
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'RAM_RESTRICTIONS' (with digest of '4e7bf348da00a945489b2a681749eb56f5de00b900014e137ddae39f48f69d67') is enabled with preactivation required
+info  2022-02-10T03:05:32.217 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'WEBAUTHN_KEY' (with digest of '4fca8bd82bbd181e714e283f83e1b45d95ca5af40fb89ad3977b653c448f78c2') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'BLOCKCHAIN_PARAMETERS' (with digest of '5443fcf88330c586bc0e5f3dee10e7f63c76c00249c87fe4fbf7f38c082006b4') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'DISALLOW_EMPTY_PRODUCER_SCHEDULE' (with digest of '68dcaa34c0517d19666e6b33add67351d8c5f69e999ca1e37931bc410a297428') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'KV_DATABASE' (with digest of '825ee6288fb1373eab1b5187ec2f04f6eacb39cb3a97f356a07c91622dd61d16') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ONLY_BILL_FIRST_AUTHORIZER' (with digest of '8ba52fe7a3956c5cd3a656a3174b931d3bb2abb45578befc59f283ecd816a405') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'RESTRICT_ACTION_TO_SELF' (with digest of 'ad9e3d8f650687709fd68f4b90b41f7d825a365b02c23a636cef88ac2ac00c43') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'CONFIGURABLE_WASM_LIMITS' (with digest of 'bf61537fd21c61a60e542a5d66c3f6a78da0589336868307f94a82bccea84e88') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ACTION_RETURN_VALUE' (with digest of 'c3a6138c5061cf291310887c0b5c71fcaffeab90d5deb50d3b9e687cead45071') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'FIX_LINKAUTH_RESTRICTION' (with digest of 'e0fb64b1085cc5538970158d05a009c24e276fb94e1a0bf6a528b48fbc4ff526') is enabled with preactivation required
+info  2022-02-10T03:05:32.218 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'GET_SENDER' (with digest of 'f0af56d2c5a48d60a4a5b5c903edfb7db3a736a94ed589d0b797df33ff9d3e1d') is enabled with preactivation required
+info  2022-02-10T03:05:32.227 thread-0  block_log.cpp:611             block_log_impl       ] Log is nonempty
+info  2022-02-10T03:05:32.227 thread-0  block_log.cpp:622             block_log_impl       ] Index is nonempty
+info  2022-02-10T03:05:32.227 thread-0  block_log.cpp:636             block_log_impl       ] Irreversible blocks was not corrupted.
+info  2022-02-10T03:05:32.711 thread-0  platform_timer_accurac:62     compute_and_print_ti ] Checktime timer accuracy: min:3us max:6429us mean:65us stddev:314us
+warn  2022-02-10T03:05:32.711 thread-0  platform_timer_accurac:64     compute_and_print_ti ] Checktime timer accuracy on this platform and hardware combination is poor; accuracy of subjective transaction deadline enforcement will suffer
+info  2022-02-10T03:05:32.720 thread-0  producer_plugin.cpp:871       plugin_initialize    ] Subjective CPU billing disabled
+info  2022-02-10T03:05:32.720 thread-0  http_plugin.cpp:798           plugin_initialize    ] configured http to listen on 127.0.0.1:8888
+warn  2022-02-10T03:05:32.720 thread-0  history_plugin.cpp:318        plugin_initialize    ] --filter-on * enabled. This can fill shared_mem, causing nodeos to stop.
+info  2022-02-10T03:05:32.721 thread-0  resource_monitor_plugi:67     plugin_initialize    ] Monitoring interval set to 2
+info  2022-02-10T03:05:32.721 thread-0  resource_monitor_plugi:73     plugin_initialize    ] Space usage threshold set to 90
+info  2022-02-10T03:05:32.721 thread-0  resource_monitor_plugi:82     plugin_initialize    ] Shutdown flag when threshold exceeded set to true
+info  2022-02-10T03:05:32.721 thread-0  resource_monitor_plugi:89     plugin_initialize    ] Warning interval set to 30
+info  2022-02-10T03:05:32.721 thread-0  main.cpp:138                  main                 ] nodeos version v2.1.0 v2.1.0-26a4d285d0be1052d962149e431eb81500782991
+info  2022-02-10T03:05:32.721 thread-0  main.cpp:139                  main                 ] nodeos using configuration file /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/config.ini
+info  2022-02-10T03:05:32.721 thread-0  main.cpp:140                  main                 ] nodeos data directory is /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data
+info  2022-02-10T03:05:32.722 thread-0  combined_database.cpp:248     check_backing_store_ ] using chainbase for backing store
+info  2022-02-10T03:05:32.722 thread-0  chain_plugin.cpp:1355         plugin_startup       ] starting chain in read/write mode
+info  2022-02-10T03:05:32.722 thread-0  chain_plugin.cpp:1363         plugin_startup       ] Blockchain started; head block is #1
+info  2022-02-10T03:05:32.722 thread-0  producer_plugin.cpp:960       plugin_startup       ] producer plugin:  plugin_startup() begin
+info  2022-02-10T03:05:32.722 thread-0  producer_plugin.cpp:985       plugin_startup       ] Launching block production for 1 producers at 2022-02-10T03:05:32.722.
+info  2022-02-10T03:05:32.725 thread-0  producer_plugin.cpp:996       plugin_startup       ] producer plugin:  plugin_startup() end
+info  2022-02-10T03:05:32.725 thread-0  producer_api_plugin.cp:87     plugin_startup       ] starting producer_api_plugin
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/add_greylist_accounts
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/create_snapshot
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_account_ram_corrections
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_greylist
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_integrity_hash
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_runtime_options
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_scheduled_protocol_feature_activations
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_supported_protocol_features
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_whitelist_blacklist
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/pause
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/paused
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/remove_greylist_accounts
+info  2022-02-10T03:05:32.725 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/resume
+info  2022-02-10T03:05:32.726 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/schedule_protocol_feature_activations
+info  2022-02-10T03:05:32.726 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/set_whitelist_blacklist
+info  2022-02-10T03:05:32.726 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/update_runtime_options
+info  2022-02-10T03:05:32.726 thread-0  chain_api_plugin.cpp:98       plugin_startup       ] starting chain_api_plugin
+info  2022-02-10T03:05:32.726 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_info
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/abi_bin_to_json
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/abi_json_to_bin
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_abi
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_account
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_activated_protocol_features
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block_header_state
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block_info
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_code
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_code_hash
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_currency_balance
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_currency_stats
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_kv_table_rows
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_producer_schedule
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_producers
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_raw_abi
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_raw_code_and_abi
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_required_keys
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_scheduled_transactions
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_table_by_scope
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_table_rows
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_transaction_id
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_block
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_transaction
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_transactions
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/send_transaction
+info  2022-02-10T03:05:32.727 thread-0  history_api_plugin.cpp:34     plugin_startup       ] starting history_api_plugin
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_actions
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_controlled_accounts
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_key_accounts
+info  2022-02-10T03:05:32.727 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_transaction
+info  2022-02-10T03:05:32.727 thread-0  net_plugin.cpp:3782           plugin_startup       ] my node_id is c210f54703dced8b3f48760778425c05929aad3fab2da4a684dc5cad743bf33b
+info  2022-02-10T03:05:32.728 thread-0  net_plugin.cpp:3836           plugin_startup       ] starting listener, max clients is 25
+info  2022-02-10T03:05:32.730 thread-0  resource_monitor_plugi:94     plugin_startup       ] Creating and starting monitor thread
+info  2022-02-10T03:05:32.730 thread-0  file_space_handler.hpp:112    add_file_system      ] /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data/blocks's file system monitored. shutdown_available: 25068557510, capacity: 250685575168, threshold: 90
+warn  2022-02-10T03:05:32.730 thread-1  file_space_handler.hpp:62     is_threshold_exceede ] Space usage warning: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data/blocks's file system exceeded threshold 90%, available: 14973841408, Capacity: 250685575168, shutdown_available: 25068557510
+warn  2022-02-10T03:05:32.730 thread-1  file_space_handler.hpp:117    space_monitor_loop   ] Shutting down
+info  2022-02-10T03:05:32.731 thread-0  http_plugin.cpp:877           operator()           ] start listening for http requests
+info  2022-02-10T03:05:32.732 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/node/get_supported_apis
+info  2022-02-10T03:05:32.732 thread-0  resource_monitor_plugi:122    plugin_shutdown      ] shutdown...
+info  2022-02-10T03:05:32.732 thread-0  resource_monitor_plugi:129    plugin_shutdown      ] exit shutdown
+info  2022-02-10T03:05:32.732 thread-0  net_plugin.cpp:3882           plugin_shutdown      ] shutdown..
+info  2022-02-10T03:05:32.732 thread-0  net_plugin.cpp:3899           plugin_shutdown      ] close 0 connections
+info  2022-02-10T03:05:32.732 thread-0  net_plugin.cpp:3919           plugin_shutdown      ] exit shutdown
+info  2022-02-10T03:05:32.735 thread-0  main.cpp:179                  main                 ] nodeos successfully exiting
+info  2022-02-10T03:15:09.054 thread-0  blockvault_client_plug:35     plugin_initialize    ] initializing blockvault_client plugin
+info  2022-02-10T03:15:09.054 thread-0  chain_plugin.cpp:709          plugin_initialize    ] initializing chain plugin
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:540          operator()           ] Support for builtin protocol feature 'PREACTIVATE_FEATURE' (with digest of '0ec7e080177b2c02b278d5088611686b49d739925a92d9bfcacd7fc6b74053bd') is enabled without activation restrictions
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ONLY_LINK_TO_EXISTING_PERMISSION' (with digest of '1a99a59d87e06e09ec5b028a9cbb7749b4a5ad8819004365d02dc4379a8b7241') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'FORWARD_SETCODE' (with digest of '2652f5f96006294109b3dd0bbde63693f55324af452b799ee137a81a905eed25') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'WTMSIG_BLOCK_SIGNATURES' (with digest of '299dcb6af692324b899b39f16d5a530a33062804e41f09dc97e9f156b4476707') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'REPLACE_DEFERRED' (with digest of 'ef43112c6543b88db2283a2e077278c315ae2c84719a8b25f25cc88565fbea99') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'NO_DUPLICATE_DEFERRED_ID' (with digest of '4a90c00d55454dc5b059055ca213579c6ea856967712a56017487886a4d4cc0f') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'RAM_RESTRICTIONS' (with digest of '4e7bf348da00a945489b2a681749eb56f5de00b900014e137ddae39f48f69d67') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'WEBAUTHN_KEY' (with digest of '4fca8bd82bbd181e714e283f83e1b45d95ca5af40fb89ad3977b653c448f78c2') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'BLOCKCHAIN_PARAMETERS' (with digest of '5443fcf88330c586bc0e5f3dee10e7f63c76c00249c87fe4fbf7f38c082006b4') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'DISALLOW_EMPTY_PRODUCER_SCHEDULE' (with digest of '68dcaa34c0517d19666e6b33add67351d8c5f69e999ca1e37931bc410a297428') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'KV_DATABASE' (with digest of '825ee6288fb1373eab1b5187ec2f04f6eacb39cb3a97f356a07c91622dd61d16') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ONLY_BILL_FIRST_AUTHORIZER' (with digest of '8ba52fe7a3956c5cd3a656a3174b931d3bb2abb45578befc59f283ecd816a405') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'RESTRICT_ACTION_TO_SELF' (with digest of 'ad9e3d8f650687709fd68f4b90b41f7d825a365b02c23a636cef88ac2ac00c43') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'CONFIGURABLE_WASM_LIMITS' (with digest of 'bf61537fd21c61a60e542a5d66c3f6a78da0589336868307f94a82bccea84e88') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'ACTION_RETURN_VALUE' (with digest of 'c3a6138c5061cf291310887c0b5c71fcaffeab90d5deb50d3b9e687cead45071') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'FIX_LINKAUTH_RESTRICTION' (with digest of 'e0fb64b1085cc5538970158d05a009c24e276fb94e1a0bf6a528b48fbc4ff526') is enabled with preactivation required
+info  2022-02-10T03:15:09.061 thread-0  chain_plugin.cpp:527          operator()           ] Support for builtin protocol feature 'GET_SENDER' (with digest of 'f0af56d2c5a48d60a4a5b5c903edfb7db3a736a94ed589d0b797df33ff9d3e1d') is enabled with preactivation required
+info  2022-02-10T03:15:09.069 thread-0  block_log.cpp:611             block_log_impl       ] Log is nonempty
+info  2022-02-10T03:15:09.069 thread-0  block_log.cpp:622             block_log_impl       ] Index is nonempty
+info  2022-02-10T03:15:09.069 thread-0  block_log.cpp:636             block_log_impl       ] Irreversible blocks was not corrupted.
+info  2022-02-10T03:15:09.523 thread-0  platform_timer_accurac:62     compute_and_print_ti ] Checktime timer accuracy: min:3us max:138us mean:35us stddev:28us
+info  2022-02-10T03:15:09.531 thread-0  producer_plugin.cpp:871       plugin_initialize    ] Subjective CPU billing disabled
+info  2022-02-10T03:15:09.532 thread-0  http_plugin.cpp:798           plugin_initialize    ] configured http to listen on 127.0.0.1:8888
+warn  2022-02-10T03:15:09.532 thread-0  history_plugin.cpp:318        plugin_initialize    ] --filter-on * enabled. This can fill shared_mem, causing nodeos to stop.
+info  2022-02-10T03:15:09.533 thread-0  resource_monitor_plugi:67     plugin_initialize    ] Monitoring interval set to 2
+info  2022-02-10T03:15:09.533 thread-0  resource_monitor_plugi:73     plugin_initialize    ] Space usage threshold set to 90
+info  2022-02-10T03:15:09.533 thread-0  resource_monitor_plugi:82     plugin_initialize    ] Shutdown flag when threshold exceeded set to true
+info  2022-02-10T03:15:09.533 thread-0  resource_monitor_plugi:89     plugin_initialize    ] Warning interval set to 30
+info  2022-02-10T03:15:09.533 thread-0  main.cpp:138                  main                 ] nodeos version v2.1.0 v2.1.0-26a4d285d0be1052d962149e431eb81500782991
+info  2022-02-10T03:15:09.533 thread-0  main.cpp:139                  main                 ] nodeos using configuration file /Users/xingyuefeng/Library/Application Support/eosio/nodeos/config/config.ini
+info  2022-02-10T03:15:09.533 thread-0  main.cpp:140                  main                 ] nodeos data directory is /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data
+info  2022-02-10T03:15:09.534 thread-0  combined_database.cpp:248     check_backing_store_ ] using chainbase for backing store
+info  2022-02-10T03:15:09.534 thread-0  chain_plugin.cpp:1355         plugin_startup       ] starting chain in read/write mode
+info  2022-02-10T03:15:09.534 thread-0  chain_plugin.cpp:1363         plugin_startup       ] Blockchain started; head block is #1
+info  2022-02-10T03:15:09.534 thread-0  producer_plugin.cpp:960       plugin_startup       ] producer plugin:  plugin_startup() begin
+info  2022-02-10T03:15:09.534 thread-0  producer_plugin.cpp:985       plugin_startup       ] Launching block production for 1 producers at 2022-02-10T03:15:09.534.
+info  2022-02-10T03:15:09.538 thread-0  producer_plugin.cpp:996       plugin_startup       ] producer plugin:  plugin_startup() end
+info  2022-02-10T03:15:09.538 thread-0  producer_api_plugin.cp:87     plugin_startup       ] starting producer_api_plugin
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/add_greylist_accounts
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/create_snapshot
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_account_ram_corrections
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_greylist
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_integrity_hash
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_runtime_options
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_scheduled_protocol_feature_activations
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_supported_protocol_features
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/get_whitelist_blacklist
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/pause
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/paused
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/remove_greylist_accounts
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/resume
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/schedule_protocol_feature_activations
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/set_whitelist_blacklist
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/producer/update_runtime_options
+info  2022-02-10T03:15:09.539 thread-0  chain_api_plugin.cpp:98       plugin_startup       ] starting chain_api_plugin
+info  2022-02-10T03:15:09.539 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_info
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/abi_bin_to_json
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/abi_json_to_bin
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_abi
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_account
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_activated_protocol_features
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block_header_state
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_block_info
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_code
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_code_hash
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_currency_balance
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_currency_stats
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_kv_table_rows
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_producer_schedule
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_producers
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_raw_abi
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_raw_code_and_abi
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_required_keys
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_scheduled_transactions
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_table_by_scope
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_table_rows
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/get_transaction_id
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_block
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_transaction
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/push_transactions
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/chain/send_transaction
+info  2022-02-10T03:15:09.540 thread-0  history_api_plugin.cpp:34     plugin_startup       ] starting history_api_plugin
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_actions
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_controlled_accounts
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_key_accounts
+info  2022-02-10T03:15:09.540 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/history/get_transaction
+info  2022-02-10T03:15:09.540 thread-0  net_plugin.cpp:3782           plugin_startup       ] my node_id is 09be52f6afea7a09dc34ef4378830ebdc9feedc6171e79b3b6824db50ec575ee
+info  2022-02-10T03:15:09.540 thread-0  net_plugin.cpp:3836           plugin_startup       ] starting listener, max clients is 25
+info  2022-02-10T03:15:09.543 thread-0  resource_monitor_plugi:94     plugin_startup       ] Creating and starting monitor thread
+info  2022-02-10T03:15:09.543 thread-0  file_space_handler.hpp:112    add_file_system      ] /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data/blocks's file system monitored. shutdown_available: 25068557510, capacity: 250685575168, threshold: 90
+warn  2022-02-10T03:15:09.543 thread-1  file_space_handler.hpp:62     is_threshold_exceede ] Space usage warning: /Users/xingyuefeng/Library/Application Support/eosio/nodeos/data/blocks's file system exceeded threshold 90%, available: 14957654016, Capacity: 250685575168, shutdown_available: 25068557510
+warn  2022-02-10T03:15:09.543 thread-1  file_space_handler.hpp:117    space_monitor_loop   ] Shutting down
+info  2022-02-10T03:15:09.543 thread-0  http_plugin.cpp:877           operator()           ] start listening for http requests
+info  2022-02-10T03:15:09.544 thread-0  http_plugin.cpp:983           add_handler          ] add api url: /v1/node/get_supported_apis
+info  2022-02-10T03:15:09.544 thread-0  resource_monitor_plugi:122    plugin_shutdown      ] shutdown...
+info  2022-02-10T03:15:09.544 thread-0  resource_monitor_plugi:129    plugin_shutdown      ] exit shutdown
+info  2022-02-10T03:15:09.544 thread-0  net_plugin.cpp:3882           plugin_shutdown      ] shutdown..
+info  2022-02-10T03:15:09.544 thread-0  net_plugin.cpp:3899           plugin_shutdown      ] close 0 connections
+info  2022-02-10T03:15:09.544 thread-0  net_plugin.cpp:3919           plugin_shutdown      ] exit shutdown
+info  2022-02-10T03:15:09.547 thread-0  main.cpp:179                  main                 ] nodeos successfully exiting
