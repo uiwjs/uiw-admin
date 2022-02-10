@@ -44,25 +44,16 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
   // columns列和标题是否居中
   const defaultColumns = useMemo(() => {
-    const columnsCenter = {
-      alignItems: 'center',
-      justifyContent: 'center',
-      display: 'flex',
-    };
     return columns.map((item) => {
-      const { align = 'left' } = item;
+      const { align = 'left', render } = item;
       return {
         ...item,
+        // 标题样式
         style: { textAlign: align },
-        render: item?.render
-          ? item.render
-          : (text: string) => (
-              <span
-                style={align === 'center' ? columnsCenter : { float: align }}
-              >
-                {text}
-              </span>
-            ),
+        // 列内容
+        render: render
+          ? render
+          : (text: string) => <div style={{ textAlign: align }}>{text}</div>,
       };
     });
   }, [columns]);
