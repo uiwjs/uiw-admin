@@ -36,7 +36,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
     searchValues,
     SWRConfiguration = {},
   } = store as any;
-
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
 
   const isCheckbox = type === 'checkbox';
@@ -50,7 +49,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
         defaultSearchValues[name] = col.props.initialValue;
       }
     });
-    (store as any).updateSearchValueRef.current = defaultSearchValues || {};
     return defaultSearchValues;
   }, [JSON.stringify(columns)]);
 
@@ -73,15 +71,19 @@ const BaseTable: React.FC<BaseTableProps> = ({
   }, [pageIndex, JSON.stringify(defaultValues), JSON.stringify(searchValues)]);
 
   const pageSize = formatQuery().pageSize || 10;
-
-  const { data, isValidating } = useSWR(
+  const { data, isValidating, mutate } = useSWR(
     [key, { method: 'POST', body: formatQuery() }],
     request,
     {
       revalidateOnFocus: false,
+      revalidateOnMount: false,
       ...SWRConfiguration,
     },
   );
+
+  useEffect(() => {
+    mutate(false);
+  }, [mutate]);
 
   // table数据
   const tableData =
@@ -98,24 +100,18 @@ const BaseTable: React.FC<BaseTableProps> = ({
   );
 
   // 查询
-  const onSearch = () => {
-    setPageIndex(1);
-    // 更新searchValues,触发请求接口
-    updateStore({
-      searchValues: {
-        ...(store as any).updateSearchValueRef.current,
-        swr_Rest_Time: new Date().getTime(),
-      },
-    });
+  const onSearch = async () => {
+    await setPageIndex(1);
+    mutate(false);
   };
-
   // 分页
   const onPageChange = useCallback(
-    (page) => {
+    async (page) => {
       if (pageChange) {
         pageChange(page);
       }
-      setPageIndex(page);
+      await setPageIndex(page);
+      mutate(false);
     },
     [setPageIndex, pageChange],
   );
@@ -132,7 +128,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
     const stores: any = {
       data: data?.data,
       total: data?.total,
-      loading: !data || isValidating,
+      loading: isValidating,
       onSearch,
       selection,
       pageIndex,
@@ -141,7 +137,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
     if (!isFirstMountRef.current) {
       isFirstMountRef.current = true;
       // 默认表单值
-
       stores.searchValues = defaultSearchValues;
     }
 
