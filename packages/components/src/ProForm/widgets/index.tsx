@@ -8,6 +8,7 @@ import {
   TimePicker,
   MonthPicker,
   SearchSelect,
+  Rate,
 } from 'uiw';
 import Radio from '../../ProTable/widgets/Radio';
 import Select from '../../ProTable/widgets/Select';
@@ -39,6 +40,7 @@ export function getFormFields(
     timePicker: TimePicker,
     monthPicker: MonthPicker,
     upload: Upload,
+    rate: Rate,
     ...customWidgetsList,
   };
   const fields: Fields = {};

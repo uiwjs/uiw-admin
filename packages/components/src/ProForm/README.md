@@ -2,7 +2,7 @@
 
 ## 注意
 > [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/form),
- 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,`MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`。
+ 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,`MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`。
 <!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 <!--ProForm-->
@@ -151,7 +151,12 @@ const Demo = () => {
                 allowClear: true,
                 showSearch: true,
                 maxCount:2
+              },
             },
+            {
+              label: '评分',
+              key: 'rate',
+              widget: 'rate',
             },
             // 只读模式下支持读取React.ReactNode
             {
@@ -168,7 +173,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 通过submitRef进行表单提交
+### 通过form api进行表单提交
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -183,7 +188,7 @@ const Demo = () => {
      <div>
        <ProForm
          form={form}
-         title="通过submitRef进行表单提交"
+         title="通过form api进行表单提交"
          formType="card"
          onSubmit={(initial, current) => {
           const errorObj = {};
@@ -232,7 +237,8 @@ const Demo = () => {
     dateInput: '2021-1-21',
     monthPicker: '2021-1-21',
     timePicker: '2021-1-21 23:59:59',
-    selectMultiple:[{label:"周政",value:"周政"}]
+    selectMultiple:[{label:"周政",value:"周政"}],
+    rate:2
   })
   const form = useForm()
     return (
@@ -300,7 +306,13 @@ const Demo = () => {
               widget: 'selectMultiple',
               option:[{label:"周政",value:"周政"}],
               initialValue:queryInfo.selectMultiple || []
-            }
+            },
+            {
+              label: '评分',
+              key: 'rate',
+              widget: 'rate',
+              initialValue:queryInfo.rate
+            },
            ]}
        />
   );

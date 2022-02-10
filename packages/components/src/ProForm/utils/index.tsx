@@ -1,5 +1,5 @@
 import { FormItemsOptionsProps } from '../type';
-import { formatter } from 'uiw';
+import { formatter, Rate } from 'uiw';
 import React from 'react';
 import Upload from '../widgets/Upload';
 
@@ -53,6 +53,9 @@ export function getReadValue(
         initialValue.map((item: FormItemsOptionsProps) => item.label)) ||
       [];
     content = contentList.join(';');
+  } else if (type === 'rate') {
+    console.log('initialValue', initialValue);
+    content = <Rate value={initialValue} readOnly />;
   } else {
     // initialValue 支持 string number 或者 自定义
     content =
