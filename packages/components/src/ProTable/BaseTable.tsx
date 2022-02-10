@@ -112,7 +112,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
       ? tableData
         ? tableData.map((itm: any) => itm[selectKey])
         : []
-      : tableData,
+      : [],
     defaultSelected,
     type === 'radio',
   );
@@ -221,6 +221,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
           }
           data={tableData}
           footer={
+            tableData &&
             tableData.length > 0 && (
               <Pagination
                 current={pageIndex}
