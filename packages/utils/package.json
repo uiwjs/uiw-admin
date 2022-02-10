@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/utils",
-  "version": "5.2.10",
+  "version": "5.2.11",
   "description": "> TODO: description",
   "author": "xingyuefeng <15262870437@163.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin#readme",
@@ -8,8 +8,7 @@
   "main": "lib/index.js",
   "module": "esm/index.js",
   "directories": {
-    "lib": "lib",
-    "test": "__tests__"
+    "lib": "lib"
   },
   "files": [
     "esm",
@@ -27,6 +26,7 @@
     "url": "https://github.com/uiwjs/uiw-admin/issues"
   },
   "dependencies": {
-    "axios": "0.24.0"
+    "axios": "0.24.0",
+    "qs": "6.10.3"
   }
 }

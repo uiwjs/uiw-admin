@@ -2,6 +2,7 @@ import React from 'react'
 import { Button } from 'uiw'
 import { useNavigate } from 'react-router-dom'
 import { useSWRConfig } from 'swr'
+import { request } from '@uiw-admin/utils'
 
 const Dashboard = () => {
   const navigate = useNavigate()
@@ -9,6 +10,16 @@ const Dashboard = () => {
   const { cache } = useSWRConfig()
 
   console.log('cache', cache.get('login'))
+
+  React.useEffect(() => {
+    request('/api', {
+      method: 'POST',
+      requestType: 'urlencoded',
+      body: {
+        a: 1,
+      },
+    })
+  }, [])
 
   return (
     <div>

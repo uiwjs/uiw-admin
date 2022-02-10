@@ -1,9 +1,11 @@
-models 状态管理
+整合 models
 ===
 
-> 1. 简化 @rematch/* 状态管理公共进行初始化;
-> 2. 为了简化 models 书写方式
-> 3. [更多 @rematch/core api](https://rematchjs.org/docs/api-reference)
+  1. 简化 @rematch/* 状态管理公共进行初始化;
+  2. 约定是到 model 组织方式，不用手动注册 model
+  3. 文件名即 name，model 内如果没有声明 name，会以文件名作为 name
+  4. 内置 @rematch/loading，直接 loading 字段使用即可
+  5. [更多 @rematch/core api](https://rematchjs.org/docs/api-reference)
 
 ## Installation
 
@@ -19,23 +21,78 @@ npm i @uiw-admin/models --save
 
 > 更新状态方法
 
-## createModels 
 
-> 把单个 `model` 添加进 `store` 中的 `models`
+## 约定式的 model 组织方式
+
+符合以下规则的文件会被认为是 model 文件，
+
+  1. src/models 下的文件
+  2. src/pages 下，子目录中 models 目录下的文件
+
+```txt
+
+src
+  models/a.ts
+  pages
+    foo/models/b.ts
+
+```
+
+## model 校验
 
 ```ts
-import { createModels } from "@uiw-admin/models"
+import { createModel } from '@rematch/core'
+import { RootModel ，ModelDefault} from '@uiw-admin/models'
 
-const demoModel = {
-  name: "demo",
+//------- createModel 方式 ------ 
+// 通过
+export default createModel()({name:"foo"})
+export default createModel()({reducers:"foo"})
+
+// ts 类型方式 通过
+export default createModel<RootModel>()({name:"foo"})
+export default createModel<RootModel>()({reducers:"foo"})
+
+// 通过
+const models = createModel()({reducers:"foo"})
+export default models
+
+
+//----- 直接一个对象的方式 ---- 不建议使用 ------
+
+// 通过
+export default { name: 'foo' };
+export default { reducers: 'foo' };
+
+// 通过
+const model = { name: 'foo' };
+export default model;
+
+// ts 类型方式 通过
+const model: ModelDefault = { name: 'foo' };
+export default model;
+
+```
+
+
+## 类型
+
+通过 @uiw-admin/models 导出类型：`FullModel`，`Store`，`AddModel`，`Dispatch`，`RootState`，`ModelDefault`，`RootModel`。
+
+## model 用例
+
+```ts
+import { RootModel } from '@uiw-admin/models'
+import { createModel } from '@rematch/core'
+import { selectById } from '../servers/demo'
+
+const demo = createModel<RootModel>()({
+  name: 'demo',
   state: {
     drawerVisible: false,
-    current: 1,
-    pageSize: 20,
-    dataSource: [],
-    total: 0,
-    filter: {},
-    tableType: ''
+    tableType: '',
+    queryInfo: {},
+    isView: false,
   },
   reducers: {
     updateState: (state: any, payload: any) => ({
@@ -43,11 +100,61 @@ const demoModel = {
       ...payload,
     }),
   },
-  effects: (dispatch: any) => ({}),
+  effects: (dispatch) => ({
+    async selectById(payload: any) {
+      const dph = dispatch
+      const data = await selectById(payload)
+      if (data.code === 200) {
+        dph.demo.updateState({
+          drawerVisible: true,
+          queryInfo: data.data || {},
+        })
+      }
+    },
+    clean() {
+      const dph = dispatch
+      dph.demo.updateState({
+        drawerVisible: false,
+        tableType: '',
+        queryInfo: {},
+        isView: false,
+      })
+    },
+  }),
+})
+export default demo
+
+
+```
+
+
+## page 用例
+
+```tsx
+import React from 'react'
+import { useDispatch,useSelector } from 'react-redux'
+import { Dispatch } from '@uiw-admin/models'
+import { RootState } from '@uiw-admin/models'
+
+const Demo = () => {
+  const dispatch = useDispatch<Dispatch>()
+  // 获取 models 中所有的状态
+  const store = useSelector( (state: RootState) => state )
+  const updateData = (payload: any) => {
+    dispatch({
+      type: 'demo/updateState',
+      payload,
+    })
+    dispatch.demo.updateState({ a: 1 })
+  }
+  return (
+    <React.Fragment>
+      <button onClick={()=>updateData({c:12})} >点击</button>
+    </React.Fragment>
+  )
 }
-// 把 model 添加 store 的 models 中 
-//  "demo" 为 demoModel 中name 有可能不写的问题
-createModels(demoModel,"demo")
+export default Demo
+
 ```
 
 ## 贡献者

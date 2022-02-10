@@ -5,7 +5,14 @@
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
 
+
+## 5.2.11
+
+- @uiw-admin/utils
+  - 🌟 `request`新增一个`requestType`参数
+
 ## 5.2.10
+
 - @uiw-admin/components
   - 🐞`ProForm`:增加`cardProps` `collapseProps` `collapsePanelProps` api 可配置card collapse参数
 
@@ -16,6 +23,7 @@
   - 🐞`ProTable`: 修复loading一直存在问题
 - @uiw-admin/utils
   - 🐞 修复`request`请求参数问题
+  
 ## 5.2.9
 
 - @uiw-admin/components
