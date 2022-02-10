@@ -230,6 +230,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
           }
           data={tableData}
           footer={
+            tableData &&
             tableData.length > 0 && (
               <Pagination
                 current={pageIndex}
