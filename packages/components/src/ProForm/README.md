@@ -221,6 +221,94 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
+### 多表单同时进行提交
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState,useRef } from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { Button,Notify } from 'uiw'
+const Demo = () => {
+  const [ queryInfo,setInfo ] = useState({})
+  const form = useForm()
+  const form2 = useForm()
+
+    return (
+     <div>
+       <ProForm
+         form={form}
+         title="表单一"
+         formType="card"
+         onChange={( initial, current) => setInfo({ ...queryInfo, ...current })}
+         onSubmit={(initial, current) => {
+          const errorObj = {};
+          if (!current?.input) {
+            errorObj.input = 'input不能为空';
+          }
+          if (Object.keys(errorObj).length > 0) {
+            const err = new Error();
+            err.filed = errorObj;
+            throw err;
+          }
+        }}
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24"
+             },
+          ]}
+       />
+        <div style={{ marginTop:15 }} />
+        <ProForm
+         form={form2}
+         title="表单二"
+         formType="card"
+         onChange={( initial, current) => setInfo({ ...queryInfo, ...current })}
+         onSubmit={(initial, current) => {
+          const errorObj = {};
+          if (!current?.input2) {
+            errorObj.input2 = 'input不能为空';
+          }
+          if (Object.keys(errorObj).length > 0) {
+            const err = new Error();
+            err.filed = errorObj;
+            throw err;
+          }
+        }}
+         formDatas={ [
+             {
+               label: 'input2',
+               key: 'input2',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24"
+             },
+          ]}
+       />
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=>{
+         form.submitvalidate();
+         form2.submitvalidate();
+         if (!queryInfo?.input || !queryInfo?.input2) {
+           return
+         }
+         // 调用请求接口
+       }}>
+        保存
+      </Button>
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
 ### 只读模式
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
