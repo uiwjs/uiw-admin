@@ -117,6 +117,13 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue: queryInfo?.selectMultiple,
   },
   {
+    label: '评分',
+    key: 'rate',
+    widget: 'rate',
+    readSpan: 2,
+    initialValue: queryInfo?.rate,
+  },
+  {
     label: '上传组件',
     key: 'upload',
     widget: 'upload',
