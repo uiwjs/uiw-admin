@@ -133,8 +133,17 @@ export const items = (queryInfo: any, attr: any) => [
       uploadType: 'card',
       multiple: true,
       maxNumber: 2,
-      readonly: attr.isView,
     },
     initialValue: queryInfo?.upload,
+  },
+]
+
+export const items2 = (queryInfo: any) => [
+  {
+    label: '输入框',
+    key: 'input2',
+    widget: 'input',
+    initialValue: queryInfo?.input2,
+    widgetProps: {},
   },
 ]

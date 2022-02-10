@@ -4,7 +4,7 @@ import { Notify, Slider } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '@uiw-admin/models'
 import { insert, update } from '../../../servers/demo'
-import { items } from './items'
+import { items, items2 } from './items'
 import useSWR from 'swr'
 
 interface DetailProps {
@@ -17,10 +17,11 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
   const [option, setOption] = React.useState<any>([])
   const [loading, setLoading] = React.useState(false)
   const {
-    demo: { drawerVisible, tableType, queryInfo, isView },
+    demo: { drawerVisible, tableType, queryInfo = {}, isView },
   } = useSelector((state: RootState) => state)
 
   const form = useForm()
+  const form2 = useForm()
   const onClose = () => dispatch({ type: 'demo/clean' })
 
   const { mutate } = useSWR(
@@ -74,7 +75,15 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
           type: 'danger',
           style: { width: 80 },
           show: !isView,
-          onClick: () => form.submitvalidate(),
+          onClick: () => {
+            form.submitvalidate()
+            form2.submitvalidate()
+            const params: any = queryInfo
+            if (!params?.input || !params?.input2) {
+              return
+            }
+            mutate()
+          },
         },
         {
           label: '取消',
@@ -100,15 +109,13 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         ) => {
           const errorObj: any = {}
           if (!current?.input) {
-            errorObj.input = '名字不能为空'
+            errorObj.input = 'input不能为空'
           }
           if (Object.keys(errorObj).length > 0) {
             const err: any = new Error()
             err.filed = errorObj
-            Notify.error({ title: '提交失败！' })
             throw err
           }
-          mutate()
         }}
         // 更新表单的值
         onChange={(
@@ -126,6 +133,40 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
             },
           }) as any
         }
+      />
+      <div style={{ marginTop: 10 }} />
+      <ProForm
+        form={form2}
+        title="个人信息"
+        customWidgetsList={{
+          slider: Slider,
+        }}
+        cardProps={{
+          noHover: true,
+        }}
+        formType={isView ? 'pure' : 'card'}
+        readOnly={isView}
+        onSubmit={(
+          initial: Record<string, any>,
+          current: Record<string, any>
+        ) => {
+          const errorObj: any = {}
+          if (!current?.input2) {
+            errorObj.input2 = 'input2不能为空'
+          }
+          if (Object.keys(errorObj).length > 0) {
+            const err: any = new Error()
+            err.filed = errorObj
+            throw err
+          }
+        }}
+        // 更新表单的值
+        onChange={(
+          initial: Record<string, any>,
+          current: Record<string, any>
+        ) => updateData({ queryInfo: { ...queryInfo, ...current } })}
+        buttonsContainer={{ justifyContent: 'flex-start' }}
+        formDatas={items2(queryInfo) as any}
       />
     </ProDrawer>
   )

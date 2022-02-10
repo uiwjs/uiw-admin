@@ -41,6 +41,7 @@ module.exports.selectById = function (req, res) {
         { value: 2, label: '西瓜' },
       ],
       rate: 4,
+      input2: '送心',
     },
   })
 }
