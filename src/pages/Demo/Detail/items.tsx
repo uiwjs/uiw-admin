@@ -7,7 +7,6 @@ export const items = (queryInfo: any, attr: any) => [
     widget: 'input',
     initialValue: queryInfo?.input,
     widgetProps: {},
-    required: true,
     // 提示信息
     help: '输入框不能为空',
   },
