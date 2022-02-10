@@ -39,7 +39,7 @@ export default function Demo() {
     <ProTable
       // 操作栏按钮
       operateButtons={[
-        { label: '新增', type: 'primary' },
+        { label: '自定义查询', type: 'primary' },
         {
           label: '全部取消',
           onClick: () => {
@@ -53,11 +53,13 @@ export default function Demo() {
           label: '搜索',
           type: 'primary',
           htmlType: 'submit',
+        },
+        {
+          label: '自定义查询',
           onClick: () => {
             table.onSearch()
           },
         },
-        { label: '点我', onClick: () => null },
       ]}
       table={table}
       onBeforeSearch={({ current }) => {
