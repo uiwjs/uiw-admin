@@ -35,8 +35,9 @@ function Demo() {
 
   return (
     <ProTable
+         // 操作栏按钮
       operateButtons={[
-        { label: '新增', type: 'primary' },
+        { label: '自定义查询', type: 'primary' },
         {
           label: '全部取消',
           onClick: () => {
