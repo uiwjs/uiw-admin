@@ -51,7 +51,7 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   alias?: Record<string, string | false | string[]>;
   /** 插件 */
   plugins?:PluginsType;
-  /** 默认全局变量 define ， 注意：对象的属性值会经过一次 JSON.stringify 转换   */
+  /** 默认全局变量 define ， 📢 注意：对象的属性值会经过一次 JSON.stringify 转换   */
   define?: Record<string, any> & DefaultDefineType;
    /**
     * kkt plugin 
@@ -166,7 +166,7 @@ class DemoWebpackPlugin {
 }
 ```
 
-## kktPlugins(旧loader) 参数说明
+## kktPlugins (~~旧loader~~) 参数说明
 
 1. 使用的先行条件--需要默认导出是一个函数方法,返回类型为`webpack.Configuration `的函数
 2. 一维数组时，直接把字符串当成包名进行加载，使用`require`进行引入后直接方法调用
@@ -217,7 +217,7 @@ export default defaultConfig({
     STORAGE: 'local',
   },
   plugins: ["@uiw-admin/plugins-rematch", "@uiw-admin/plugins-routes"],
-  loader: [
+  kktPlugins: [
     "@kkt/raw-modules",
     "@kkt/less-modules",
     ["@kkt/scope-plugin-options", { "allowedFiles": "./README.md" }],

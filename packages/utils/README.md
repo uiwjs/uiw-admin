@@ -12,8 +12,16 @@ export interface Options extends AxiosRequestConfig {
   /** 数据格式  **/
   requestType?: "form" | "json" | "urlencoded"
 }
-
 type request = (url:string,options?:Options)=>Promise<any>
+
+```
+
+```ts
+import { request } from "@uiw-admin/utils"
+
+request("/api/foo")
+
+request("/api/foo",{ method:"POST" })
 
 ```
 

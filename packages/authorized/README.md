@@ -19,12 +19,32 @@ interface AuthorizedProps {
 }
 ```
 
+```tsx
+import AuthPage  from "@uiw-admin/authorized"
+
+export default ()=>{
+
+  return <AuthPage authority={false} redirectPath="/login">展示</AuthPage>
+
+}
+
+```
+
 ## getAuthPath
 
 > 判断是否有权限
 
 ```ts
+
 type getAuthPath = (path?: string)=>boolean 
+
+```
+
+```ts
+import {getAuthPath}  from "@uiw-admin/authorized"
+
+const isAuth = getAuthPath("/api/path")
+
 ```
 
 

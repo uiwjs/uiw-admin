@@ -125,7 +125,7 @@ export const items = (queryInfo: any, attr: any) => [
     widgetProps: {
       uploadType: 'card',
       multiple: true,
-      maxNumber: 3,
+      maxNumber: 2,
       readonly: attr.isView,
     },
     initialValue: queryInfo?.upload,
