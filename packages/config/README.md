@@ -84,10 +84,10 @@ import defaultConfig, { WebpackConfiguration } from "@uiw-admin/config";
 
 export default defaultConfig({
   // ....
-   kktPlugins: [
-    rawModules,
-    { loader: scopePluginOptions, options: { allowedFiles: [path.resolve(process.cwd(), 'README.md')] } },
-    lessModules
+  kktPlugins: [
+    "@kkt/raw-modules",
+    "@kkt/less-modules",
+    ["@kkt/scope-plugin-options", { "allowedFiles": "./README.md" }],
   ],
 })
 ```
