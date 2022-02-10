@@ -220,7 +220,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
       },
     },
   ] as FormCol;
-
   return (
     <div style={{ overflow: x ? 'scroll' : 'hidden' }}>
       <div style={{ width: x || '100%' }}>
@@ -231,7 +230,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
           }
           data={tableData}
           footer={
-            data && (
+            tableData.length > 0 && (
               <Pagination
                 current={pageIndex}
                 pageSize={pageSize}
