@@ -187,6 +187,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
           }
         : null,
       key: 'checked',
+      width: 35,
       render: (
         text: any,
         key: any,
