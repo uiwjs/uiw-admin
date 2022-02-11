@@ -1,16 +1,14 @@
 import { request } from '@uiw-admin/utils'
 
-// /api/demo/selectById
-function selectById (params: { id: string }) {
+function selectById(params: { id: string }) {
   return request('/api/demo/selectById', {
     method: 'POST',
-    body: { ...params }
+    body: { ...params },
   })
 }
 
 const update = '/api/demo/update'
 
 const insert = '/api/demo/insert'
-
 
 export { selectById, update, insert }
