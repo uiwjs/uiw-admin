@@ -8,6 +8,7 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue: queryInfo?.input,
     widgetProps: {},
     rulers: [
+      { required: true, message: '请输入' },
       { pattern: new RegExp(/[1][3][0-9]{9}$/), message: '请输入正确手机号' },
     ],
   },
@@ -37,12 +38,14 @@ export const items = (queryInfo: any, attr: any) => [
       { value: 4, label: '东北大冻梨' },
     ],
     initialValue: queryInfo?.select,
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '开关',
     key: 'switch',
     widget: 'switch',
     initialValue: queryInfo?.switch,
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '单选框',
@@ -53,6 +56,7 @@ export const items = (queryInfo: any, attr: any) => [
       { label: '女', value: 'girl' },
     ],
     initialValue: queryInfo?.radio,
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '多选框',
@@ -63,6 +67,7 @@ export const items = (queryInfo: any, attr: any) => [
       { label: '湖北菜', value: 'hubei' },
     ],
     initialValue: queryInfo?.checkbox,
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月日时分秒',
@@ -74,6 +79,7 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue:
       queryInfo.dateInputsecond &&
       formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond)),
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月日',
@@ -82,6 +88,7 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue:
       queryInfo.dateInput &&
       formatter('YYYY-MM-DD', new Date(queryInfo.dateInput)),
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月',
@@ -90,12 +97,14 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue:
       queryInfo.monthPicker &&
       formatter('YYYY-MM', new Date(queryInfo.monthPicker)),
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '时分秒',
     key: 'timePicker',
     widget: 'timePicker',
     initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
+    rulers: [{ required: true, message: '请选择' }],
   },
   // 只读模式下支持读取React.ReactNode
   {
@@ -108,6 +117,7 @@ export const items = (queryInfo: any, attr: any) => [
     ) : (
       queryInfo?.slider
     ),
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: 'selectMultiple',
@@ -124,6 +134,7 @@ export const items = (queryInfo: any, attr: any) => [
       showSearch: true,
     },
     initialValue: queryInfo?.selectMultiple,
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '评分',
@@ -131,6 +142,7 @@ export const items = (queryInfo: any, attr: any) => [
     widget: 'rate',
     readSpan: 2,
     initialValue: queryInfo?.rate,
+    rulers: [{ required: true, message: '请选择' }],
   },
   {
     label: '上传组件',
@@ -144,6 +156,7 @@ export const items = (queryInfo: any, attr: any) => [
       maxNumber: 2,
     },
     initialValue: queryInfo?.upload,
+    rulers: [{ required: true, message: '请上传' }],
   },
 ]
 
