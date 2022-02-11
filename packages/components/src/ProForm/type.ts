@@ -39,6 +39,8 @@ export interface FormItemsProps
   readSpan?: number;
   /** 是否必填 */
   required?: boolean;
+  // 验证规则
+  rulers?: RulersProps[];
 }
 
 export interface ProFormProps
@@ -82,4 +84,10 @@ export interface UseFormProps {
   submitvalidate: () => void;
   resetForm: () => void;
   getFormValues: () => void;
+}
+
+export interface RulersProps {
+  message?: string;
+  pattern?: RegExp;
+  validator?: (value: any | any[]) => boolean;
 }

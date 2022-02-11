@@ -1,4 +1,4 @@
-import { FormItemsOptionsProps } from '../type';
+import { FormItemsOptionsProps, RulersProps } from '../type';
 import { formatter, Rate } from 'uiw';
 import React from 'react';
 import Upload from '../widgets/Upload';
@@ -67,3 +67,31 @@ export function getReadValue(
   }
   return content;
 }
+
+interface FromValidateProps {
+  key: string;
+  rulers?: RulersProps[];
+  value?: any[] | any;
+}
+
+/**
+ * form表单提交验证
+ * @param rulers FromValidateProps[]
+ * @returns { [key: string]: string }
+ */
+export const fromValidate = (rulers: FromValidateProps[] = []) => {
+  let errorObj: { [key: string]: string } = {};
+  rulers.forEach(({ rulers, key, value }) => {
+    if (rulers && rulers.length > 0) {
+      rulers.forEach(({ validator = null, message = '', pattern = null }) => {
+        const fieldvalue = value || '';
+        if (validator && !validator(fieldvalue)) {
+          errorObj[key] = message;
+        } else if (pattern && !pattern.test(value)) {
+          errorObj[key] = message;
+        }
+      });
+    }
+  });
+  return errorObj;
+};

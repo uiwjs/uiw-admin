@@ -190,18 +190,6 @@ const Demo = () => {
          form={form}
          title="通过form api进行表单提交"
          formType="card"
-         onSubmit={(initial, current) => {
-          const errorObj = {};
-          if (!current?.input) {
-            errorObj.input = 'input不能为空';
-          }
-          if (Object.keys(errorObj).length > 0) {
-            const err = new Error();
-            err.filed = errorObj;
-            throw err;
-          }
-          // 调用请求接口
-        }}
          formDatas={ [
              {
                label: 'input',
@@ -209,7 +197,10 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               span:"24"
+               span:"24",
+               rulers: [
+                { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
+               ]
              },
           ]}
        />
@@ -248,28 +239,14 @@ import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
-  const [ queryInfo,setInfo ] = useState({})
   const form = useForm()
   const form2 = useForm()
-
   return (
      <div>
        <ProForm
          form={form}
          title="表单一"
          formType="card"
-         onChange={( initial, current) => setInfo({ ...queryInfo, ...current })}
-         onSubmit={(initial, current) => {
-          const errorObj = {};
-          if (!current?.input) {
-            errorObj.input = 'input不能为空';
-          }
-          if (Object.keys(errorObj).length > 0) {
-            const err = new Error();
-            err.filed = errorObj;
-            throw err;
-          }
-        }}
          formDatas={ [
              {
                label: 'input',
@@ -277,7 +254,10 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               span:"24"
+               span:"24",
+               rulers: [
+                { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
+               ]
              },
           ]}
        />
@@ -286,18 +266,6 @@ const Demo = () => {
          form={form2}
          title="表单二"
          formType="card"
-         onChange={( initial, current) => setInfo({ ...queryInfo, ...current })}
-         onSubmit={(initial, current) => {
-          const errorObj = {};
-          if (!current?.input2) {
-            errorObj.input2 = 'input不能为空';
-          }
-          if (Object.keys(errorObj).length > 0) {
-            const err = new Error();
-            err.filed = errorObj;
-            throw err;
-          }
-        }}
          formDatas={ [
              {
                label: 'input2',
@@ -305,7 +273,16 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               span:"24"
+               span:"24",
+               rulers: [
+                { 
+                  validator: (value = '') => {
+                    if(!value) return false
+                    return true
+                  },
+                  message: "请输入"
+                },
+               ]
              },
           ]}
        />
@@ -322,6 +299,11 @@ const Demo = () => {
 
           if(errors && Object.keys(errors).length > 0 ) return
           if(errors2 && Object.keys(errors2).length > 0 ) return
+          // 获取表单值
+          const value = form.getFormValues()
+          const value2 = form2.getFormValues()
+          const params = {...value,...value2}
+          console.log("params",params)
           // 调用请求接口
        }}>
         保存
@@ -467,6 +449,7 @@ ReactDOM.render(<Demo />, _mount_);
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
 | required     | 是否必填                                                      | boolean                 | -      |
+| rulers     | 验证规则                                                      | RulersProps[]                 | -      |
 
 
 ## FormItemsOptionsProps
@@ -484,6 +467,13 @@ ReactDOM.render(<Demo />, _mount_);
 | submitvalidate | 表单验证 | ()=>void | - | 
 | resetForm | 重置表单 | ()=>void | - |  
 | getFormValues | 获取表单值 | ()=>void | - |      
+
+## RulersProps
+| 参数     | 说明     | 类型                     | 默认值 |
+| -------- | -------- | ------------------------ | ------ |
+| message    | 验证提示消息     | string           | -      |
+| pattern    | 验证正则      | RegExp | -      |
+| validator | 自定义验证规则 | (value: any | any[]) => boolean | - | 
 
 ## 贡献者
 
