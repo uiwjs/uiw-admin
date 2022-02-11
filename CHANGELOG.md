@@ -8,6 +8,8 @@
 - @uiw-admin/components
   - 🐞`ProForm`: 新增Rate组件
   - 🐞`ProForm`: `form` api增加resetForm 和 formRef 和 getFormValues返回值
+- @uiw-admin/utils
+  - 🌟 `request`修复`body`参数问题
 
 ## 5.2.12
 - @uiw-admin/components

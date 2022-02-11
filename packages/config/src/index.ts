@@ -102,7 +102,6 @@ export default (props: ConfigProps) => {
   const newPlugins: PluginsType = (plugins || []).concat([
     '@uiw-admin/plugins/lib/rematch',
     '@uiw-admin/plugins/lib/routes',
-    // '@uiw-admin/plugins/lib/maps',
   ]);
   // 冗余 API loader, 未来在 v8 版本删除
   // ==========================

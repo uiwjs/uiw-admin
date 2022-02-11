@@ -45,7 +45,7 @@ export default function request(url: string, options: Options = {}) {
     ...rest,
     url,
     method,
-    data: { ...body },
+    data: body,
   };
 
   if (requestType === 'json') {
@@ -54,7 +54,7 @@ export default function request(url: string, options: Options = {}) {
       Accept: 'application/json',
       ...(headers || {}),
     };
-    newOptions.data = JSON.stringify(body);
+    newOptions.data = JSON.stringify(body || {});
   } else if (requestType === 'form') {
     const newFormData = new FormData();
     Object.entries(body || {}).forEach(([key, value]: [string, any]) => {
@@ -71,7 +71,7 @@ export default function request(url: string, options: Options = {}) {
       Accept: 'application/json',
       ...(headers || {}),
     };
-    newOptions.data = qs.stringify(body, { arrayFormat: 'repeat' });
+    newOptions.data = qs.stringify(body || {}, { arrayFormat: 'repeat' });
   }
 
   if (/(GET)/.test(method)) {
