@@ -65,6 +65,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
     // 触发验证
     await form?.submitvalidate()
     await form2?.submitvalidate()
+
     // 获取错误信息
     const errors = form.formRef.current?.errors || {}
     const errors2 = form2.formRef.current?.errors || {}
