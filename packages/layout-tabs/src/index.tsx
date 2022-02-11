@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tabs } from 'uiw';
+import { Tabs, Icon } from 'uiw';
 import { RoutersProps } from '@uiw-admin/router-control';
 import { getRoutesList, getRender } from './utils';
 import { matchPath } from 'react-router';
@@ -22,13 +22,6 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   const Current = getRender(routeListData, location) as RoutersProps;
 
   React.useEffect(() => {
-    /** 在这边加路由权限 控制就好了 */
-    // isAuth 这边加这个属性
-    // 1. 如果加了这个属性 说明  跳转需求进行权限校验
-    // 2. 如果没加这个属性 说明  跳转不用权限校验
-    // 3. 加了这个属性为 false 说明 这个路由是没权限的，需要跳转403页面
-    // 4. 加了这个属性为 true 说明 这个路由是有权限的，跳转正常页面
-    // 5. 如果也没有页面 直接 跳转404页面
     if (!Current) {
       // 没找到跳转
       navigate('/404');
@@ -59,6 +52,48 @@ const LayoutTabs = (props: LayoutTabsProps) => {
     setPathArr(() => [...tabData]);
   }, [location.search]);
 
+  const onDelete = (
+    event: React.MouseEvent<'span', MouseEvent>,
+    index: number,
+    item: RoutersProps,
+  ) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const lg = pathArr.length - 1;
+    // 判断当前是第几个 index
+    // 默认删除当前项 展示后一项
+    // 当后一项不存在时 取前一项
+    // 当前后项都不存在则不进行删除
+    // 如果删除的项不是当前打开项，不做跳转
+    const match = matchPath({ path: item.path as string }, location.pathname);
+    if (!match) {
+      setPathArr((arr) => arr.filter((_, ind) => ind !== index));
+      return;
+    }
+    let isUpdate = false;
+    let tabs;
+    if (lg > index && match) {
+      // 后一项存在
+      tabs = pathArr.find((_, ind) => ind === index + 1);
+      isUpdate = true;
+    } else if (lg === index && index > 0 && match) {
+      // 前一项存在
+      tabs = pathArr.find((_, ind) => ind === index - 1);
+      isUpdate = true;
+    } else if (match) {
+      isUpdate = true;
+    }
+    if (isUpdate) {
+      setPathArr((arr) => arr.filter((_, ind) => ind !== index));
+    }
+    if (tabs) {
+      navigate(`${tabs.path}${tabs.location.search}`, {
+        state: tabs.location.state,
+        replace: true,
+      });
+    }
+  };
+
   return (
     <div className="uiw-layout-tabs-warp">
       <Tabs
@@ -74,12 +109,37 @@ const LayoutTabs = (props: LayoutTabsProps) => {
           }
         }}
       >
-        {pathArr.map((item) => {
-          return <Tabs.Pane key={item.location.pathname} label={item.name} />;
+        {pathArr.map((item, index) => {
+          return (
+            <Tabs.Pane
+              key={item.location.pathname}
+              label={
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  {item.name}
+                  {pathArr.length > 1 ? (
+                    <Icon
+                      type="close"
+                      tagName="span"
+                      style={{ marginLeft: 10 }}
+                      onClick={(event) => onDelete(event, index, item)}
+                    />
+                  ) : (
+                    <React.Fragment />
+                  )}
+                </div>
+              }
+            />
+          );
         })}
       </Tabs>
       <div className="uiw-layout-tabs-body">
-        {pathArr.map((item, index) => {
+        {pathArr.map((item) => {
           const match = matchPath(
             { path: item.path as string },
             location.pathname,
