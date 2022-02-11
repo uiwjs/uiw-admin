@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/config",
-  "version": "5.2.12",
+  "version": "5.2.13",
   "description": "config 全局配置",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/models#readme",
@@ -44,7 +44,7 @@
     "@kkt/less-modules": "7.0.6",
     "@kkt/raw-modules": "7.0.6",
     "@kkt/scope-plugin-options": "7.0.6",
-    "@uiw-admin/plugins": "5.2.12"
+    "@uiw-admin/plugins": "5.2.13"
   },
   "devDependencies": {
     "kkt": "7.1.0"
