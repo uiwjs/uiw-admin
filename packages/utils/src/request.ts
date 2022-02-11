@@ -46,7 +46,7 @@ export default function request(url: string, options: Options = {}) {
     ...rest,
     url,
     method,
-    data: { ...(body || {}) },
+    data: body,
   };
 
   if (requestType === 'json') {
