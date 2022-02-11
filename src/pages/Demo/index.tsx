@@ -13,7 +13,6 @@ const Demo = () => {
       type: 'demo/updateState',
       payload,
     })
-    dispatch.demo.updateState({ a: 1 })
   }
 
   const table = useTable('/api/getData', {
@@ -35,7 +34,7 @@ const Demo = () => {
   })
 
   // 操作
-  function handleEditTable(type: string, record: any) {
+  function handleEditTable(type: string, record: Record<string, any>) {
     updateData({
       isView: type === 'view',
       tableType: type,

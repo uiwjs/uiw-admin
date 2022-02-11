@@ -2,19 +2,29 @@ import React from 'react'
 import { formatter } from 'uiw'
 export const items = (queryInfo: any, attr: any) => [
   {
-    label: '输入框',
+    label: '司机手机号',
     key: 'input',
     widget: 'input',
     initialValue: queryInfo?.input,
     widgetProps: {},
-    // 提示信息
-    help: '输入框不能为空',
+    rulers: [
+      { pattern: new RegExp(/[1][3][0-9]{9}$/), message: '请输入正确手机号' },
+    ],
   },
   {
     label: '多行文本输入框',
     key: 'textarea',
     widget: 'textarea',
     initialValue: queryInfo?.textarea,
+    rulers: [
+      {
+        validator: (value: any | any[] = '') => {
+          if (!value) return false
+          return true
+        },
+        message: '请输入值',
+      },
+    ],
   },
   {
     label: '选择器',
@@ -139,10 +149,13 @@ export const items = (queryInfo: any, attr: any) => [
 
 export const items2 = (queryInfo: any) => [
   {
-    label: '输入框',
+    label: '手机号',
     key: 'input2',
     widget: 'input',
     initialValue: queryInfo?.input2,
     widgetProps: {},
+    rulers: [
+      { pattern: new RegExp(/[1][3][0-9]{9}$/), message: '请输入正确手机号' },
+    ],
   },
 ]

@@ -73,7 +73,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
     if (errors && Object.keys(errors).length > 0) return
     if (errors2 && Object.keys(errors2).length > 0) return
 
-    mutate()
+    // mutate()
   }
 
   return (
@@ -110,20 +110,6 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         }}
         formType={isView ? 'pure' : 'card'}
         readOnly={isView}
-        onSubmit={(
-          initial: Record<string, any>,
-          current: Record<string, any>
-        ) => {
-          const errorObj: any = {}
-          if (!current?.input) {
-            errorObj.input = 'input不能为空'
-          }
-          if (Object.keys(errorObj).length > 0) {
-            const err: any = new Error()
-            err.filed = errorObj
-            throw err
-          }
-        }}
         // 更新表单的值
         onChange={(
           initial: Record<string, any>,
@@ -153,25 +139,13 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         }}
         formType={isView ? 'pure' : 'card'}
         readOnly={isView}
-        onSubmit={(
-          initial: Record<string, any>,
-          current: Record<string, any>
-        ) => {
-          const errorObj: any = {}
-          if (!current?.input2) {
-            errorObj.input2 = 'input2不能为空'
-          }
-          if (Object.keys(errorObj).length > 0) {
-            const err: any = new Error()
-            err.filed = errorObj
-            throw err
-          }
-        }}
         // 更新表单的值
         onChange={(
           initial: Record<string, any>,
           current: Record<string, any>
-        ) => updateData({ queryInfo: { ...queryInfo, ...current } })}
+        ) => {
+          updateData({ queryInfo: { ...queryInfo, ...current } })
+        }}
         buttonsContainer={{ justifyContent: 'flex-start' }}
         formDatas={items2(queryInfo) as any}
       />
