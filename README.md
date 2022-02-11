@@ -65,10 +65,7 @@ npm start
 │   │   └── login
 │   │       ├── index.module.less
 │   │       └── index.tsx
-│   ├── queries
-│   │   └── index.ts
 │   ├── react-app-env.d.ts
 │   └── servers 放置api文件的地方，文件名已后端接口模块名命名，不以路由命名
-│       ├── demo.ts
-│       └── login.ts
+│       └── index.ts
 └── tsconfig.json
