@@ -81,4 +81,5 @@ export interface UseFormProps {
   };
   submitvalidate: () => void;
   resetForm: () => void;
+  getFormValues: () => void;
 }

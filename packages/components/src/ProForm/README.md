@@ -12,12 +12,12 @@
 ```jsx
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
-import { ProForm,useForm } from '@uiw-admin/components'
+import { ProForm } from '@uiw-admin/components'
 import { Button,Notify,Slider } from 'uiw'
 const Demo = () => {
    const [option, setOption] = React.useState([])
    const [loading, setLoading] = React.useState(false)
-   const form = useForm()
+  //  const form = useForm()
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
     if (type === 'selectMultiple') {
@@ -38,7 +38,7 @@ const Demo = () => {
   }
     return (
        <ProForm
-        form={form}
+        // form={form}
          // 表单类型
          formType="collapse"
          title="基本使用(与uiw/form使用保持一致)"
@@ -179,7 +179,7 @@ ReactDOM.render(<Demo />, _mount_);
 import ReactDOM from 'react-dom';
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
-import { Button,Notify } from 'uiw'
+import { Button } from 'uiw'
 const Demo = () => {
 
   const form = useForm()
@@ -198,7 +198,6 @@ const Demo = () => {
           if (Object.keys(errorObj).length > 0) {
             const err = new Error();
             err.filed = errorObj;
-            Notify.error({ title: '提交失败！' });
             throw err;
           }
           // 调用请求接口
@@ -214,7 +213,27 @@ const Demo = () => {
              },
           ]}
        />
-       <Button style={{ marginTop:10,width:80 }} type="primary" onClick={()=>form.submitvalidate()}>保存</Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=>{
+          // 触发验证
+          form.submitvalidate();
+          // 获取错误信息
+          const errors =  form.formRef.current?.errors || {}
+          if(errors && Object.keys(errors).length > 0 ) return
+         // 调用请求接口
+       }}
+       >
+        保存
+      </Button>
+      <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=> form.resetForm() }
+       >
+        重置
+      </Button>
     </div>
   );
 }
@@ -227,7 +246,7 @@ ReactDOM.render(<Demo />, _mount_);
 import ReactDOM from 'react-dom';
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
-import { Button,Notify } from 'uiw'
+import { Button } from 'uiw'
 const Demo = () => {
   const [ queryInfo,setInfo ] = useState({})
   const form = useForm()
@@ -427,7 +446,7 @@ ReactDOM.render(<Demo />, _mount_);
 | buttonsContainer   | buttons容器样式(可调整button布局)                 | React.CSSProperties                                                      | -      |
 | title              | 标题                                              | string                                                                   | -      |
 | formType           | 表单类型                                          | 'collapse' 或 'card' 或 'pure'                                           | 'card' |
-| form               | useForm返回值,替换原有submitRef作用可进行表单验证 | Object 必传                                                              | -      |
+| form               | useForm返回值,替换原有submitRef作用可进行表单验证 | UseFormProps 必传                                                              | -      |
 | readOnly           | 是否是只读模式模式                                | boolean                                                                  | false  |
 | readOnlyProps      | 只读模式 参考Descriptions参数                     | DescriptionsProps                                                        | {}     |
 | customWidgetsList  | 可配置自定义组件                                  | { [key: string]: any }                                                   | {}     |
@@ -457,6 +476,14 @@ ReactDOM.render(<Demo />, _mount_);
 | value    | key      | string 或 number(必传值) | -      |
 | disabled | 是否禁用 | boolean                  | -      |
 
+## UseFormProps
+| 参数     | 说明     | 类型                     | 默认值 |
+| -------- | -------- | ------------------------ | ------ |
+| clickRef    | 提交按钮点击ref     | any           | -      |
+| formRef    | 表单事件和值集合ref      | { [key: string]: any } | -      |
+| submitvalidate | 表单验证 | ()=>void | - | 
+| resetForm | 重置表单 | ()=>void | - |  
+| getFormValues | 获取表单值 | ()=>void | - |      
 
 ## 贡献者
 

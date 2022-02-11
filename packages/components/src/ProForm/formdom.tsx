@@ -34,13 +34,16 @@ function FormDom({
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
-        const { errors } = state;
-        formRef.current = {
-          errors: errors,
-          resetForm: resetForm,
-          canSubmit: canSubmit,
-          fields: fields,
-        };
+        const { errors, current } = state;
+        if (formRef) {
+          formRef.current = {
+            errors: errors,
+            resetForm: resetForm,
+            canSubmit: canSubmit,
+            current: current || {},
+            fields: fields,
+          };
+        }
         return (
           <React.Fragment>
             <Row gutter={10}>
