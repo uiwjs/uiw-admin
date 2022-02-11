@@ -7,7 +7,7 @@
 ## 5.2.13(未发版)
 - @uiw-admin/components
   - 🐞`ProForm`: 新增Rate组件
-  - 🐞`ProForm`: `form` api增加resetForm 和 formRef返回值
+  - 🐞`ProForm`: `form` api增加resetForm 和 formRef 和 getFormValues返回值
 
 ## 5.2.12
 - @uiw-admin/components
