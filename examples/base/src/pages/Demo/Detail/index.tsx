@@ -73,7 +73,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
     if (errors && Object.keys(errors).length > 0) return
     if (errors2 && Object.keys(errors2).length > 0) return
 
-    // mutate()
+    mutate()
   }
 
   return (

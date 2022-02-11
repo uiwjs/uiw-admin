@@ -256,6 +256,7 @@ const Demo = () => {
                widgetProps: {},
                span:"24",
                rulers: [
+                { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
              },
@@ -474,6 +475,7 @@ ReactDOM.render(<Demo />, _mount_);
 | message    | 验证提示消息     | string           | -      |
 | pattern    | 验证正则      | RegExp | -      |
 | validator | 自定义验证规则 | (value: any | any[]) => boolean | - | 
+| required | 是否必填 | boolean | - | 
 
 ## 贡献者
 

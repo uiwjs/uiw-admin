@@ -90,4 +90,5 @@ export interface RulersProps {
   message?: string;
   pattern?: RegExp;
   validator?: (value: any | any[]) => boolean;
+  required?: boolean;
 }

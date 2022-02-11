@@ -74,6 +74,28 @@ interface FromValidateProps {
   value?: any[] | any;
 }
 
+//判断是否是arrary
+function isArray(obj: any | any[]) {
+  return Object.prototype.toString.call(obj) == '[object Array]';
+}
+
+//判断是否object
+function isObject(obj: any | any[]) {
+  return Object.prototype.toString.call(obj) == '[object Object]';
+}
+
+//判断是否是string 或 number
+function isNumberOrString(obj: any) {
+  return typeof obj === 'string' || typeof obj === 'number';
+}
+// 判断对象是否为空
+function isObjectEmpty(obj: any) {
+  for (let _key in obj) {
+    return false;
+  }
+  return true;
+}
+
 /**
  * form表单提交验证
  * @param rulers FromValidateProps[]
@@ -83,14 +105,34 @@ export const fromValidate = (rulers: FromValidateProps[] = []) => {
   let errorObj: { [key: string]: string } = {};
   rulers.forEach(({ rulers, key, value }) => {
     if (rulers && rulers.length > 0) {
-      rulers.forEach(({ validator = null, message = '', pattern = null }) => {
-        const fieldvalue = value || '';
-        if (validator && !validator(fieldvalue)) {
-          errorObj[key] = message;
-        } else if (pattern && !pattern.test(value)) {
-          errorObj[key] = message;
-        }
-      });
+      rulers.forEach(
+        ({ validator = null, message = '', required, pattern = null }) => {
+          // 必填 && object && 为空
+          if (required && isObject(value) && (isObjectEmpty(value) || !value)) {
+            errorObj[key] = message;
+            // 必填 && arrary && 为空
+          } else if (
+            required &&
+            isArray(value) &&
+            (value.length === 0 || !value)
+          ) {
+            errorObj[key] = message;
+            // 必填 && string或number && 为空
+          } else if (required && isNumberOrString(value) && !value) {
+            errorObj[key] = message;
+            // 自定义验证规则
+          } else if (validator && !validator(value)) {
+            errorObj[key] = message;
+            // 正则判断
+          } else if (
+            isNumberOrString(value) &&
+            pattern &&
+            !pattern.test(value)
+          ) {
+            errorObj[key] = message;
+          }
+        },
+      );
     }
   });
   return errorObj;
