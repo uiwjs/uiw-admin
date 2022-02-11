@@ -4,6 +4,13 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+
+## 5.2.14(未发版)
+- @uiw-admin/components
+  - 🐞`ProForm`: 增加rulers验证
+- @uiw-admin/basic-layouts
+  - 🌟 退出清空token
+
 ## 5.2.13
 - @uiw-admin/components
   - 🐞`ProForm`: 新增Rate组件
