@@ -12,6 +12,7 @@ const Loadable = (Component: any) => (props: any) =>
 
 // const Home = Loadable(lazy(() => import('./pages/home')));
 const Example = Loadable(lazy(() => import('./pages/example')));
+const CreateUiwAdmin = Loadable(lazy(() => import('./pages/create-uiw-admin')));
 const Authorized = Loadable(lazy(() => import('./pages/authorized')));
 const QuickStart = Loadable(lazy(() => import('./pages/quick-start')));
 const BasicLayouts = Loadable(lazy(() => import('./pages/basic-layouts')));
@@ -40,6 +41,7 @@ export const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { index: true, element: <QuickStart /> },
+      { path: '/create-uiw-admin', element: <CreateUiwAdmin /> },
       { path: '/quick-start', element: <QuickStart /> },
       { path: '/authorized', element: <Authorized /> },
       { path: '/basic-layouts', element: <BasicLayouts /> },

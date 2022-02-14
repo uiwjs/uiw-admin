@@ -4,6 +4,10 @@
     "path": "/quick-start"
   },
   {
+    "label": "create-uiw-admin",
+    "path": "/create-uiw-admin"
+  },
+  {
     "label": "更新日志",
     "target": "__blank",
     "path": "https://github.com/uiwjs/uiw-admin/blob/master/CHANGELOG.md"
