@@ -5,7 +5,7 @@ import { ControllerProps } from './interface';
 // @ts-ignore
 import routeModels from '@@/routeMapModels.json';
 /**  加载 model  */
-export const useLoad = (props: {
+export const useLoadModels = (props: {
   path?: string;
   addModels?: ControllerProps['addModels'];
 }) => {
