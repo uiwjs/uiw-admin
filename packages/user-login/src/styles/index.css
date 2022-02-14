@@ -33,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: calc(10%);
 }
 .uiw-loayout-login-warp .uiw-loayout-login-body .w-form {
   flex: 1;
