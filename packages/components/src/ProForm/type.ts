@@ -86,6 +86,15 @@ export interface UseFormProps {
   getErrors: () => void;
 }
 
+export interface FormRefProps {
+  submitvalidate: () => void;
+  resetForm: () => void;
+  getFieldValues: () => void;
+  errors?: {
+    [key: string]: any;
+  };
+}
+
 export interface RulersProps {
   message?: string;
   pattern?: RegExp;
