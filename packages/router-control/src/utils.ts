@@ -11,7 +11,7 @@ export const useLoad = (props: {
 }) => {
   const { addModels, path } = props;
   const [load, setLoad] = React.useState(true);
-  const addModel = (path: string) => {
+  const addModel = async (path: string) => {
     // @ts-ignore
     if (BINDPAGR) {
       try {
@@ -33,6 +33,8 @@ export const useLoad = (props: {
   React.useMemo(() => {
     if (addModels && path) {
       addModel(path);
+    } else {
+      setLoad(false);
     }
   }, []);
   return load;
