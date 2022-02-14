@@ -15,7 +15,10 @@ ReactDOM.render(
       },
       provider: () => new Map(),
     }}>
-    <Control routeType="hash" addModels={(path) => import(`${path}`)} />
+    <Control
+      routeType="hash"
+      // addModels={(path) => import(`${path}`)}
+    />
   </SWRConfig>,
   document.getElementById('root')
 )
