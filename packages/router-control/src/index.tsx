@@ -14,8 +14,6 @@ import {
 } from 'react-router-dom';
 // @ts-ignore
 import RoutePathArr from '@@/routes';
-// @ts-ignore
-import routeModels from '@@/routeMapModels.json';
 import { Provider } from 'react-redux';
 import { store } from '@uiw-admin/models';
 import { Exceptions403 } from '@uiw-admin/exceptions';
