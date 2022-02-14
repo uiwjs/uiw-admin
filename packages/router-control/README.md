@@ -46,6 +46,15 @@ export interface ControllerProps {
 
 ```
 
+## routeType
+
+路由模式："history" | "hash" | "browser"，  默认 history 
+
+## addModels
+
+加载 model 方法，(解决import引用地址问题报错)
+
+
 ## routes.json 文件案例
 
 > `@` 指向 src 目录

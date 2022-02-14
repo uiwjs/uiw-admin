@@ -7,6 +7,8 @@ import webpack from 'webpack';
 import { IsModel } from './../utils';
 import createRematchTemps, { createModelsTempStr } from './temp';
 import { ModelType } from './../utils/interface';
+import chokidar from 'chokidar';
+
 export type { ModelType };
 class RematchWebpackPlugin {
   oldModel: ModelType[] = [];
@@ -95,12 +97,12 @@ class RematchWebpackPlugin {
   };
 
   // 删除文件的时候
-  deleteField = () => {
+  deleteField = (newPath: string) => {
     const newModel: ModelType[] = [];
     this.oldModel.forEach((item) => {
       const { path } = item;
-      const rgx = new RegExp(`^${this.newPath}`);
-      if (rgx.test(path) || this.newPath === path) {
+      const rgx = new RegExp(`^${newPath}`);
+      if (rgx.test(path) || newPath === path) {
         this.deleteModel.push(path);
       } else {
         newModel.push(item);
@@ -114,8 +116,8 @@ class RematchWebpackPlugin {
     }
   };
   // 文件变更时
-  existenceField = () => {
-    const stats = fs.statSync(this.newPath);
+  existenceField = (newPath: string) => {
+    const stats = fs.statSync(newPath);
     if (!stats) {
       return;
     }
@@ -129,29 +131,27 @@ class RematchWebpackPlugin {
     let modelName: undefined;
     let isCreateModel = false;
     // 先判断路径是否存在models 和ts|js 结尾
-    if (/\.(ts|js)$/.test(this.newPath) && /models/.test(this.newPath)) {
+    if (/\.(ts|js)$/.test(newPath) && /models/.test(newPath)) {
       const {
         isModels,
         modelNames,
         isCreateModel: isCreate,
-      } = IsModel(fs.readFileSync(this.newPath, { encoding: 'utf-8' }));
+      } = IsModel(fs.readFileSync(newPath, { encoding: 'utf-8' }));
       modelName = modelNames;
       isMode = isModels;
       isCreateModel = isCreate;
     }
-    const newFile = this.oldModel.find((item) => item.path === this.newPath);
+    const newFile = this.oldModel.find((item) => item.path === newPath);
     if (newFile) {
       // 进行判断是否还是 model
       if (!isMode) {
-        this.deleteModel.push(this.newPath);
+        this.deleteModel.push(newPath);
         // 过滤出不是 一个 model 文件的项
-        this.oldModel = this.oldModel.filter(
-          (item) => item.path !== this.newPath,
-        );
+        this.oldModel = this.oldModel.filter((item) => item.path !== newPath);
       } else {
         // 更新内容 重新生成
         this.oldModel = this.oldModel.map((item) => {
-          if (item.path === this.newPath) {
+          if (item.path === newPath) {
             return {
               ...item,
               name: modelName || item.name,
@@ -165,7 +165,7 @@ class RematchWebpackPlugin {
     } else {
       // 判断是不是 model  是则更新
       if (isMode) {
-        const pathUrls = `${this.newPath}`.replace(/\\/g, '/');
+        const pathUrls = `${newPath}`.replace(/\\/g, '/');
         const arr = pathUrls.split(/\\|\//);
         let filename = arr[arr.length - 1].replace(/\.(ts|js)$/, '');
         const location = pathUrls.replace(/\/models.*$/, '');
@@ -184,32 +184,43 @@ class RematchWebpackPlugin {
     }
   };
   // 校验文件
-  checkField = () => {
+  checkField = (newPath: string) => {
     // 校验文件是否存在
-    const iss = fs.existsSync(this.newPath);
+    const iss = fs.existsSync(newPath);
     if (iss) {
       //存在
-      this.existenceField();
+      this.existenceField(newPath);
     } else {
       // 不存在
-      this.deleteField();
+      this.deleteField(newPath);
     }
   };
 
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('RematchWebpackPlugin', (...res) => {
       if (process.env.NODE_ENV === 'development') {
-        const watcher = fs.watch(path.resolve(process.cwd(), 'src'), {
-          recursive: true,
-        });
-
-        watcher.on('change', (type, filename) => {
-          if (typeof filename === 'string') {
-            this.field = filename as string;
-            this.newPath = path.resolve(process.cwd(), 'src', this.field);
-            this.checkField();
-          }
-        });
+        chokidar
+          .watch(path.resolve(process.cwd(), 'src'), {
+            cwd: path.resolve(process.cwd(), 'src'),
+          })
+          .on('all', (event, pathName) => {
+            if (
+              ['change', 'add', 'unlink'].includes(event) &&
+              /(models\/|models\.(ts|js))/.test(pathName)
+            ) {
+              this.checkField(path.resolve(process.cwd(), 'src', pathName));
+            }
+          });
+        // const watcher = fs.watch(path.resolve(process.cwd(), 'src'), {
+        //   recursive: true,
+        // });
+        // watcher.on('change', (type, filename) => {
+        //   if (typeof filename === 'string') {
+        //     this.field = filename as string;
+        //     this.newPath = path.resolve(process.cwd(), 'src', this.field);
+        //     this.checkField();
+        //   }
+        // });
       }
     });
   }
