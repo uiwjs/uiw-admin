@@ -154,6 +154,10 @@ export const items = (queryInfo: any, attr: any) => [
       uploadType: 'card',
       multiple: true,
       maxNumber: 2,
+      showFileIcon: {
+        showPreviewIcon: true,
+        showRemoveIcon: !attr.isView,
+      },
     },
     initialValue: queryInfo?.upload,
     rulers: [{ required: true, message: '请上传' }],
