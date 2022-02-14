@@ -17,13 +17,11 @@ class RematchWebpackPlugin {
   uiw = '';
   lazyLoad: boolean = false;
   newPath = '';
-  bindPage: boolean = false;
 
-  constructor(props?: { lazyLoad?: boolean; bindPage?: boolean }) {
+  constructor(props?: { lazyLoad?: boolean }) {
     this.src = path.resolve(process.cwd(), 'src');
     this.uiw = path.resolve(process.cwd(), 'src/.uiw');
     this.lazyLoad = !!props?.lazyLoad;
-    this.bindPage = !!props?.bindPage;
 
     this.getPathDeep(this.src);
     this.restCreate();
@@ -74,11 +72,7 @@ class RematchWebpackPlugin {
 
   // 重新生成
   restCreate = () => {
-    let modelStr = createModelsTempStr(
-      this.oldModel,
-      this.lazyLoad,
-      this.bindPage,
-    );
+    let modelStr = createModelsTempStr(this.oldModel, this.lazyLoad);
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
@@ -88,7 +82,7 @@ class RematchWebpackPlugin {
       createRematchTemps(modelStr),
       { flag: 'w+', encoding: 'utf-8' },
     );
-    if (this.bindPage) {
+    if (this.lazyLoad) {
       const newModels = this.oldModel.filter(
         (item) => item.location !== this.src,
       );

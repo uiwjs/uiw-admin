@@ -9,8 +9,7 @@ export default defaultConfig({
     STORAGE: 'local',
   },
   // rematch: {
-  //   lazyLoad: false,
-  //   bindPage: true
+  //   lazyLoad: true,
   // },
   // 第一种
   proxySetup: (app: express.Application): MockerAPIOptions => {

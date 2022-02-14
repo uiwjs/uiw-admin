@@ -76,17 +76,13 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   rematch?: {
     /** 懒加载  */
     lazyLoad?: boolean,
-    /** 是否绑定到页面 */
-    bindPage?: boolean
   },
 }
 ```
 
 ## rematch 
 
-> 1. 参数 `lazyLoad`  `boolean` 类型 ，默认 `false`，所有的`model`文件懒加载
-> 2. 参数 `bindPage`  `boolean` 类型 ，默认 `false`，把`pages`下的所有`model`默认绑定到每个路径的根目录对应的路由中
-> 3. 📢 `lazyLoad` 和 `bindPage` 都设置 `true`，并且使用 `import`引入，浏览器控制台会报错(使用require引入不报错或不设置`lazyLoad`属性) 。
+> 1. 参数 `lazyLoad`  `boolean` 类型 ，默认 `false`，为 `true` 时 `pages`文件夹下所有的`model`文件懒加载
 
 ```ts
 import defaultConfig from "@uiw-admin/config";
@@ -95,15 +91,14 @@ export default defaultConfig({
   // ....
   rematch:{
     lazyLoad:true,
-    bindPage:true
   }
 })
 
 ```
 
-### bindPage
+### lazyLoad
 
-设置 `bindPage` 后 `model` 绑定路由关系，去除`/models/b.ts`或`/models.ts` 路径，匹配路由配置文件中的 `component` 属性值
+设置 `lazyLoad` 后 `model` 绑定路由关系，去除后面的`/models/*`或`/models.ts` 路径，匹配路由配置文件中的 `component` 属性值
 
 ```txt
 
@@ -128,7 +123,7 @@ src
 
 ```
 
-设置 `bindPage` 属性需要在项目入口文件加属性
+设置 `lazyLoad` 属性需要在项目入口文件加属性
 
 ```diff
 import React from 'react'

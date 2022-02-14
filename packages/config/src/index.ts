@@ -87,8 +87,6 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   rematch?: {
     /** 懒加载  */
     lazyLoad?: boolean;
-    /** 是否绑定到页面 */
-    bindPage?: boolean;
   };
 }
 
@@ -166,7 +164,7 @@ export default (props: ConfigProps) => {
       new webpack.DefinePlugin({
         ...defaultDefine,
         ...transformationDefineString(define || {}),
-        BINDPAGR: JSON.stringify(!!rematch?.bindPage),
+        BINDPAGR: JSON.stringify(!!rematch?.lazyLoad),
       }),
       ...plugin,
     );
