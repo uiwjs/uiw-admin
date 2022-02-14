@@ -83,12 +83,9 @@ class RematchWebpackPlugin {
       { flag: 'w+', encoding: 'utf-8' },
     );
     if (this.lazyLoad) {
-      const newModels = this.oldModel.filter(
-        (item) => item.location !== this.src,
-      );
       fs.writeFileSync(
         path.resolve(process.cwd(), 'src/.uiw/modelsMap.json'),
-        JSON.stringify(newModels, (_, value) => value, 2),
+        JSON.stringify(this.oldModel, (_, value) => value, 2),
         { flag: 'w+', encoding: 'utf-8' },
       );
     }

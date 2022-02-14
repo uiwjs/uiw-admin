@@ -4,10 +4,13 @@ import { useDispatch } from 'react-redux'
 import { Dispatch } from '@uiw-admin/models'
 import { ProTable, useTable } from '@uiw-admin/components'
 import Detail from './Detail'
+import { RootState } from '@uiw-admin/models'
+import { useSelector } from 'react-redux'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
-
+  const stores = useSelector((state: RootState) => state)
+  console.log(stores)
   const updateData = (payload: any) => {
     dispatch({
       type: 'demo/updateState',

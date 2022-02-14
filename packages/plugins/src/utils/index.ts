@@ -208,6 +208,12 @@ export const getRouteMapModels = (
 ) => {
   const routeModels: RouteModels = {};
   const newRoutes = getRoutesList(routes);
+  let rootPath = path.join(process.cwd(), 'src');
+  const rootPathModels = modelsData
+    .filter((item) => rootPath === item.location)
+    .map((ites) => ({ path: `${ites.srcPath}`, name: ites.name }));
+  routeModels['/'] = rootPathModels || [];
+
   newRoutes.forEach((item) => {
     const { path, component } = item;
     const modelsArr = modelsData

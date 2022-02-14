@@ -2,13 +2,15 @@ import React from 'react'
 import { Button } from 'uiw'
 import { useNavigate } from 'react-router-dom'
 import { useSWRConfig } from 'swr'
-import { RootState } from '@uiw-admin/models'
-
-import { useSelector } from 'react-redux'
+import { Dispatch, RootState } from '@uiw-admin/models'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Dashboard = () => {
   const navigate = useNavigate()
-  const [state, setState] = React.useState('')
+  // const [state, setState] = React.useState('')
+
+  const dispatch = useDispatch<Dispatch>()
+
   const { cache } = useSWRConfig()
   const stores = useSelector((state: RootState) => state)
   console.log(stores)
@@ -17,7 +19,17 @@ const Dashboard = () => {
   return (
     <div>
       Dashboard
-      <input value={state} onChange={(event) => setState(event.target.value)} />
+      <input
+        value={stores.docDs.test}
+        onChange={(event) => {
+          dispatch({
+            type: 'docDs/updateState',
+            payload: {
+              test: event.target.value,
+            },
+          })
+        }}
+      />
       <hr />
       <Button onClick={() => navigate('/', { replace: true })}>Logout</Button>
     </div>
