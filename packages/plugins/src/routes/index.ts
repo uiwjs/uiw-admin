@@ -31,16 +31,16 @@ class RoutesWebpackPlugin {
   modelsMapJson = '';
   // models 获取 src/.uiw/modelsMap.json 数据
   modelsMapData = [];
-  bindPage: boolean = false;
+  lazyLoad: boolean = false;
 
-  constructor(props?: { bindPage?: boolean }) {
+  constructor(props?: { lazyLoad?: boolean }) {
     // 必须要存在这个文件 优先级  json > ts > js
     this.jsonFilePath = path.resolve(process.cwd(), 'config/routes.json');
     this.modelsMapJson = path.resolve(process.cwd(), 'src/.uiw/modelsMap.json');
     this.jsFilePath = path.resolve(process.cwd(), 'config/routes.js');
     this.tsFilePath = path.resolve(process.cwd(), 'config/routes.ts');
     this.uiw = path.resolve(process.cwd(), 'src/.uiw');
-    this.bindPage = !!props?.bindPage;
+    this.lazyLoad = !!props?.lazyLoad;
 
     // ----
     this.cwdConfig = path.resolve(process.cwd(), 'config');
@@ -129,7 +129,7 @@ class RoutesWebpackPlugin {
   };
 
   readModelsMapJSON() {
-    if (!this.bindPage) {
+    if (!this.lazyLoad) {
       return;
     }
     if (fs.existsSync(this.modelsMapJson)) {
@@ -146,7 +146,7 @@ class RoutesWebpackPlugin {
   }
 
   createRouteMapModels() {
-    if (!this.bindPage) {
+    if (!this.lazyLoad) {
       fs.writeFileSync(
         path.resolve(process.cwd(), 'src/.uiw/routeMapModels.json'),
         `{}`,

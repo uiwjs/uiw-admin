@@ -22,9 +22,9 @@ import {
 } from '@rematch/core';
 import loading, { ExtraModelsFromLoading } from '@rematch/loading';
 ${str.importStr}
-${!str.lazyLoad ? str.createModelsStr : ''}
+${str.createModelsStr}
 export const models = {
-  ${!str.lazyLoad ? str.models : ''}
+  ${str.models}
 }
 export interface RootModel extends Models<RootModel> {
   ${str.typeModels}
@@ -36,19 +36,6 @@ export const store = init<RootModel, FullModel>({
   plugins: [loading()],
 });
 
-${
-  str.lazyLoad
-    ? `
-const getStore = async () => {
-  ${str.lazyModelsStr}
-  ${str.addModelStr}
-  return store
-}
-getStore()
-
-`
-    : ''
-}
 export const { dispatch, addModel } = store;
 export type Store = typeof store;
 export type AddModel = typeof addModel;
@@ -67,7 +54,6 @@ export const createModelsTempStr = (
     isCreateModel: boolean;
   }[],
   lazyLoad: boolean,
-  bindPage: boolean,
 ) => {
   let importStr = '';
   let lazyModelsStr = '';
@@ -83,11 +69,10 @@ export const createModelsTempStr = (
     const names = modelName || filename;
     importStr =
       importStr + `import ${names}Model${index} from "${pathUrls}";\n`;
-    if ((bindPage && Reg.test(item.path)) || !bindPage) {
+    if ((lazyLoad && Reg.test(item.path)) || !lazyLoad) {
       lazyModelsStr =
         lazyModelsStr +
         `const ${names}Model${index} = (await import("${pathUrls}")).default;\n`;
-
       if (isCreateModel) {
         addModelStr =
           addModelStr +
