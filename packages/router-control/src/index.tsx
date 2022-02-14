@@ -20,7 +20,7 @@ import { Exceptions403 } from '@uiw-admin/exceptions';
 import { createBrowserHistory } from 'history';
 import { ControllerProps, RoutersProps } from './interface';
 export * from './interface';
-import { useLoad } from './utils';
+import { useLoadModels } from './utils';
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
@@ -35,7 +35,7 @@ export const Loadable = (
     const location = useLocation();
     const navigate = useNavigate();
     const params = useParams();
-    const load = useLoad({ path, addModels });
+    const load = useLoadModels({ path, addModels });
 
     if (load) {
       return <div>Loading...</div>;
@@ -183,7 +183,7 @@ export function RouteChild(props: ControllerProps = {}) {
 
 export default function Controller(props: ControllerProps = {}) {
   const { routeType, addModels } = props;
-  const load = useLoad({ path: '/', addModels });
+  const load = useLoadModels({ path: '/', addModels });
   // @ts-ignore
   let base = BASE_NAME;
   const dom = React.useMemo(() => {

@@ -5,7 +5,7 @@
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
 
-## 5.2.14(未发版)
+## 5.2.14
 
 - @uiw-admin/components
   - 🐞`ProForm`: 增加rulers验证
@@ -18,7 +18,7 @@
   - 🌟 新增 `rematch` 属性 
 - @uiw-admin/plugins 
   - 🌟 动态生成路由映射`model`文件
-
+  - 🐞 `rematch` 监听文件变化问题
 
 ## 5.2.13
 
