@@ -22,9 +22,9 @@ import {
 } from '@rematch/core';
 import loading, { ExtraModelsFromLoading } from '@rematch/loading';
 ${str.importStr}
-${str.createModelsStr}
+${!str.lazyLoad ? str.createModelsStr : ''}
 export const models = {
-  ${str.models}
+  ${!str.lazyLoad ? str.models : ''}
 }
 export interface RootModel extends Models<RootModel> {
   ${str.typeModels}

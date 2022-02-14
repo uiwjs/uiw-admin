@@ -22,6 +22,7 @@ import { Exceptions403 } from '@uiw-admin/exceptions';
 import { createBrowserHistory } from 'history';
 import { ControllerProps, RoutersProps } from './interface';
 export * from './interface';
+import { useLoad } from './utils';
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
@@ -36,27 +37,11 @@ export const Loadable = (
     const location = useLocation();
     const navigate = useNavigate();
     const params = useParams();
+    const load = useLoad({ path, addModels });
 
-    const addModel = (path: string) => {
-      // @ts-ignore
-      if (BINDPAGR) {
-        // @ts-ignore
-        const modelArr = routeModels[path] || [];
-        if (addModels) {
-          modelArr.forEach(async (item: { path: string; name: string }) => {
-            const model = (await addModels(item.path)).default;
-            store.addModel({ name: item.name, ...model });
-          });
-        }
-      }
-    };
-
-    React.useMemo(() => {
-      if (path && addModels) {
-        addModel(path);
-      }
-    }, []);
-
+    if (load) {
+      return <div>Loading...</div>;
+    }
     return (
       <React.Suspense fallback={<div>Loading...</div>}>
         <Component {...props} router={{ location, navigate, params }} />
@@ -199,7 +184,8 @@ export function RouteChild(props: ControllerProps = {}) {
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routeType } = props;
+  const { routeType, addModels } = props;
+  const load = useLoad({ path: '/', addModels });
   // @ts-ignore
   let base = BASE_NAME;
   const dom = React.useMemo(() => {
@@ -222,6 +208,10 @@ export default function Controller(props: ControllerProps = {}) {
       </HistoryRouter>
     );
   }, [routeType]);
+
+  if (load) {
+    return <div>Loading...</div>;
+  }
 
   return <Provider store={store}>{dom}</Provider>;
 }
