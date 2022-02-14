@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Form, Button, Col, Row, FormFieldsProps, FormRefType } from 'uiw';
+import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
 import { ProFormProps } from './type';
 import { useStore } from './hooks/store';
 import { fromValidate } from './utils';
@@ -24,12 +24,12 @@ function FormDom({
   const { formRef } = store as any;
 
   useEffect(() => {
-    if (formRef && baseRef) {
+    if (formRef.current) {
       formRef.current = {
         ...formRef.current,
-        submitvalidate: baseRef?.current.onSubmit,
-        resetForm: baseRef?.current.resetForm,
-        getFieldValues: baseRef?.current.getFieldValues,
+        submitvalidate: baseRef.current?.onSubmit,
+        resetForm: baseRef.current?.resetForm,
+        getFieldValues: baseRef.current?.getFieldValues,
       };
     }
   }, [baseRef.current]);
