@@ -16,6 +16,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
   const dispatch = useDispatch<Dispatch>()
   const [option, setOption] = React.useState<any>([])
   const [loading, setLoading] = React.useState(false)
+
   const {
     demo: { drawerVisible, tableType, queryInfo = {}, isView },
   } = useSelector((state: RootState) => state)
