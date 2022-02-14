@@ -83,6 +83,7 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
 ## rematch 
 
 > 1. 参数 `lazyLoad`  `boolean` 类型 ，默认 `false`，为 `true` 时 `pages`文件夹下所有的`model`文件懒加载
+> 2. `src/models/* `下文件默认直接加载
 
 ```ts
 import defaultConfig from "@uiw-admin/config";
