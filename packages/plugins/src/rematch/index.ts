@@ -126,7 +126,7 @@ class RematchWebpackPlugin {
     // 1. 判断是否已经存在
     // 如果已经存在着直接更新
     let isMode = false;
-    let modelName;
+    let modelName: undefined;
     let isCreateModel = false;
     // 先判断路径是否存在models 和ts|js 结尾
     if (/\.(ts|js)$/.test(this.newPath) && /models/.test(this.newPath)) {
@@ -148,6 +148,18 @@ class RematchWebpackPlugin {
         this.oldModel = this.oldModel.filter(
           (item) => item.path !== this.newPath,
         );
+      } else {
+        // 更新内容 重新生成
+        this.oldModel = this.oldModel.map((item) => {
+          if (item.path === this.newPath) {
+            return {
+              ...item,
+              name: modelName || item.name,
+              modelName,
+            };
+          }
+          return { ...item };
+        });
       }
       this.restCreate();
     } else {
