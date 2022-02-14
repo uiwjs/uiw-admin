@@ -17,7 +17,6 @@ import { Button,Notify,Slider } from 'uiw'
 const Demo = () => {
    const [option, setOption] = React.useState([])
    const [loading, setLoading] = React.useState(false)
-  //  const form = useForm()
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
     if (type === 'selectMultiple') {
@@ -38,7 +37,6 @@ const Demo = () => {
   }
     return (
        <ProForm
-        // form={form}
          // 表单类型
          formType="collapse"
          title="基本使用(与uiw/form使用保持一致)"
@@ -166,6 +164,23 @@ const Demo = () => {
               readSpan: 2,
               span:"24"
             },
+            {
+              label: '上传组件',
+              key: 'upload',
+              widget: 'upload',
+              span: '24',
+              readSpan: 3,
+              widgetProps: {
+                uploadType: 'card',
+                multiple: true,
+                maxNumber: 2,
+              showFileIcon: {
+                showPreviewIcon: true,
+                showRemoveIcon: true,
+              },
+            },
+              rulers: [{ required: true, message: '请上传' }],
+            },
           ]}
        />
   )
@@ -211,7 +226,7 @@ const Demo = () => {
           // 触发验证
           form.submitvalidate();
           // 获取错误信息
-          const errors =  form.formRef.current?.errors || {}
+          const errors = form.getErrors()
           if(errors && Object.keys(errors).length > 0 ) return
          // 调用请求接口
        }}
@@ -295,14 +310,14 @@ const Demo = () => {
           await form?.submitvalidate()
           await form2?.submitvalidate()
           // 获取错误信息
-          const errors =  form.formRef.current?.errors || {}
-          const errors2 = form2.formRef.current?.errors || {}
+          const errors =  form.getErrors()
+          const errors2 = form2.getErrors()
 
           if(errors && Object.keys(errors).length > 0 ) return
           if(errors2 && Object.keys(errors2).length > 0 ) return
           // 获取表单值
-          const value = form.getFormValues()
-          const value2 = form2.getFormValues()
+          const value = form.getFieldValues()
+          const value2 = form2.getFieldValues()
           const params = {...value,...value2}
           console.log("params",params)
           // 调用请求接口
@@ -402,10 +417,24 @@ const Demo = () => {
               initialValue:queryInfo.selectMultiple || []
             },
             {
-              label: '评分',
+              label: 'rate',
               key: 'rate',
               widget: 'rate',
               initialValue:queryInfo.rate
+            },
+            {
+              label: 'upload',
+              key: 'upload',
+              widget: 'upload',
+              widgetProps:{
+                uploadType: 'card',
+              },
+              initialValue: [
+                {
+                  dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4',
+                  name: 'uiw.png',
+                },
+              ]
             },
            ]}
        />
@@ -463,11 +492,11 @@ ReactDOM.render(<Demo />, _mount_);
 ## UseFormProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
-| clickRef    | 提交按钮点击ref     | any           | -      |
 | formRef    | 表单事件和值集合ref      | { [key: string]: any } | -      |
 | submitvalidate | 表单验证 | ()=>void | - | 
 | resetForm | 重置表单 | ()=>void | - |  
-| getFormValues | 获取表单值 | ()=>void | - |      
+| getFieldValues | 获取表单值 | ()=>void | - |  
+| getErrors | 获取表单错误 | ()=>void | - |      
 
 ## RulersProps
 | 参数     | 说明     | 类型                     | 默认值 |

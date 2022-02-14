@@ -9,6 +9,9 @@
 
 - @uiw-admin/components
   - 🐞`ProForm`: 增加rulers验证
+  - 🐞`ProForm`: `useFormProps`删除clickRef & 新增getErrors获取错误信息 & getFormValues更名getFieldValues(与uiw保持一致)
+  - 完善upload组件
+
 - @uiw-admin/basic-layouts
   - 🌟 退出清空token
 - @uiw-admin/config 

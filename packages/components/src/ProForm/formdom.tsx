@@ -1,5 +1,5 @@
-import React from 'react';
-import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
+import React, { useRef, useEffect } from 'react';
+import { Form, Button, Col, Row, FormFieldsProps, FormRefType } from 'uiw';
 import { ProFormProps } from './type';
 import { useStore } from './hooks/store';
 import { fromValidate } from './utils';
@@ -18,11 +18,25 @@ function FormDom({
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
 }) {
+  const baseRef = useRef<any>();
   const store = useStore();
-  const { clickRef, formRef } = store as any;
+
+  const { formRef } = store as any;
+
+  useEffect(() => {
+    if (formRef && baseRef) {
+      formRef.current = {
+        ...formRef.current,
+        submitvalidate: baseRef?.current.onSubmit,
+        resetForm: baseRef?.current.resetForm,
+        getFieldValues: baseRef?.current.getFieldValues,
+      };
+    }
+  }, [baseRef.current]);
 
   return (
     <Form
+      ref={baseRef}
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
@@ -57,14 +71,11 @@ function FormDom({
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
-        const { errors, current } = state;
+        const { errors } = state;
         if (formRef) {
           formRef.current = {
+            ...formRef.current,
             errors: errors,
-            resetForm: resetForm,
-            canSubmit: canSubmit,
-            current: current || {},
-            fields: fields,
           };
         }
         return (
@@ -81,9 +92,7 @@ function FormDom({
             </Row>
             <div className="w-form-item-center" style={{ ...buttonsContainer }}>
               <Button
-                {...saveButtonProps}
                 style={{ display: showSaveButton ? 'flex' : 'none' }}
-                ref={clickRef}
                 disabled={!canSubmit()}
                 htmlType="submit"
                 {...saveButtonProps}
