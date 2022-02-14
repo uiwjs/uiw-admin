@@ -40,6 +40,8 @@ export interface RoutersJSON {
 export interface ControllerProps {
   /** 路由模式   默认 history  */
   routeType?: "history" | "hash" | "browser";
+  /** 加载 model 方法，(解决import引用地址问题报错) */ 
+  addModels?: (path: string) => Promise<{ default: any }>;
 }
 
 ```
@@ -117,6 +119,7 @@ export default ()=>{
   return (
     <Control
       routeType="hash"
+       // addModels={(path) => import(`${path}`)}
     />
   )
 }
