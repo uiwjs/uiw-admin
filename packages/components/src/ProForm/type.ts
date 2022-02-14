@@ -62,7 +62,7 @@ export interface ProFormProps
   formType?: 'collapse' | 'card' | 'pure';
   showSaveButton?: boolean;
   showResetButton?: boolean;
-  saveButtonProps?: ButtonProps;
+  saveButtonProps?: ButtonProps | any;
   resetButtonProps?: ButtonProps | any;
   /** 是否是只读模式模式 */
   readOnly?: boolean;
@@ -77,13 +77,13 @@ export interface ProFormProps
 }
 
 export interface UseFormProps {
-  clickRef: any;
   formRef: {
     [key: string]: any;
   };
   submitvalidate: () => void;
   resetForm: () => void;
-  getFormValues: () => void;
+  getFieldValues: () => void;
+  getErrors: () => void;
 }
 
 export interface RulersProps {
