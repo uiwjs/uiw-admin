@@ -27,8 +27,8 @@
   min-height: 250px;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -1px 0px 5px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  /* border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff; */
   padding: 20px;
   display: flex;
   align-items: center;
