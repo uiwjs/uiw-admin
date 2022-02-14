@@ -1,8 +1,12 @@
+import path from 'path';
 export interface TempProps {
   lazyModelsStr: string;
   importStr: string;
   addModelStr: string;
   typeModels: string;
+  createModelsStr: string;
+  models: string;
+  lazyLoad: boolean;
 }
 // 模板
 export default (str: TempProps) => {
@@ -18,25 +22,33 @@ import {
 } from '@rematch/core';
 import loading, { ExtraModelsFromLoading } from '@rematch/loading';
 ${str.importStr}
-
+${!str.lazyLoad ? str.createModelsStr : ''}
+export const models = {
+  ${!str.lazyLoad ? str.models : ''}
+}
 export interface RootModel extends Models<RootModel> {
   ${str.typeModels}
 }
 export type FullModel = ExtraModelsFromLoading<RootModel>
 
 export const store = init<RootModel, FullModel>({
-  models:{},
+  models,
   plugins: [loading()],
 });
 
+${
+  str.lazyLoad
+    ? `
 const getStore = async () => {
   ${str.lazyModelsStr}
   ${str.addModelStr}
   return store
 }
-
 getStore()
 
+`
+    : ''
+}
 export const { dispatch, addModel } = store;
 export type Store = typeof store;
 export type AddModel = typeof addModel;
@@ -47,19 +59,6 @@ export type ModelDefault<T = any> = Model<RootModel, T>;
 `;
 };
 
-// const models = createModel<RootModel>()(model)
-// addModel({ name, ...models })
-
-// const docModel = (await import("/Users/lusun/GitHub/uiw-admin/examples/base/src/models/Doc/doc")).default
-// const demoModel = (await import("/Users/lusun/GitHub/uiw-admin/examples/base/src/models/demo")).default
-// const globalModel = (await import("/Users/lusun/GitHub/uiw-admin/examples/base/src/models/global")).default
-// const homeModel = (await import("/Users/lusun/GitHub/uiw-admin/examples/base/src/models/home")).default
-// const loginModel = (await import("/Users/lusun/GitHub/uiw-admin/examples/base/src/models/login")).default
-// store.addModel({ name: "doc", ...docModel })
-// store.addModel({ name: "demo", ...demoModel })
-// store.addModel({ name: "global", ...globalModel })
-// store.addModel({ name: "home", ...homeModel })
-// store.addModel({ name: "login", ...loginModel })
 export const createModelsTempStr = (
   modelArr: {
     path: string;
@@ -67,36 +66,54 @@ export const createModelsTempStr = (
     modelName?: string;
     isCreateModel: boolean;
   }[],
+  lazyLoad: boolean,
+  bindPage: boolean,
 ) => {
   let importStr = '';
   let lazyModelsStr = '';
   let typeModels = '';
   let addModelStr = '';
-  // let models = '';
-  modelArr.forEach((item) => {
-    const { path, filename, modelName, isCreateModel } = item;
-    const pathUrls = `${path}`.replace(/\\/g, '/').replace(/\.(js|ts)/, '');
+  let createModelsStr = '';
+  let models = '';
+  const Reg = new RegExp(`^${path.resolve(process.cwd(), 'src/models/')}`);
+
+  modelArr.forEach((item, index) => {
+    const { path: paths, filename, modelName, isCreateModel } = item;
+    const pathUrls = `${paths}`.replace(/\\/g, '/').replace(/\.(js|ts)/, '');
     const names = modelName || filename;
-    importStr = importStr + `import ${names}Model from "${pathUrls}";\n`;
-    lazyModelsStr =
-      lazyModelsStr +
-      `const ${names}Model = (await import("${pathUrls}")).default;\n`;
-    if (isCreateModel) {
-      addModelStr =
-        addModelStr +
-        `store.addModel({ name: "${names}", ...${names}Model });\n`;
-    } else {
-      addModelStr =
-        addModelStr +
-        `store.addModel({ name: "${names}", ...createModel<RootModel>()(${names}Model) });\n`;
+    importStr =
+      importStr + `import ${names}Model${index} from "${pathUrls}";\n`;
+    if ((bindPage && Reg.test(item.path)) || !bindPage) {
+      lazyModelsStr =
+        lazyModelsStr +
+        `const ${names}Model${index} = (await import("${pathUrls}")).default;\n`;
+
+      if (isCreateModel) {
+        addModelStr =
+          addModelStr +
+          `store.addModel({ name: "${names}", ...${names}Model${index} });\n`;
+        createModelsStr =
+          createModelsStr + `const ${names}Model = ${names}Model${index};\n`;
+      } else {
+        addModelStr =
+          addModelStr +
+          `store.addModel({ name: "${names}", ...createModel<RootModel>()(${names}Model${index}) });\n`;
+        createModelsStr =
+          createModelsStr +
+          `const ${names}Model = createModel<RootModel>()(${names}Model${index});\n`;
+      }
+      models = models + `${names}:${names}Model,\n`;
     }
-    typeModels = typeModels + ` ${names}:typeof  ${names}Model,\n`;
+    typeModels = typeModels + ` ${names}:typeof  ${names}Model${index},\n`;
   });
   return {
     importStr,
     lazyModelsStr,
     typeModels,
     addModelStr,
+    models,
+    lazyLoad,
+    createModelsStr,
   };
 };
 

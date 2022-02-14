@@ -2,8 +2,9 @@ import { parse } from '@babel/parser';
 import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
-import { RoutersProps } from './interface';
-
+import { RoutersProps, ModelType, RouteModels } from './interface';
+import path from 'path';
+import fs from 'fs';
 type NodeFun =
   | t.Expression
   | t.FunctionDeclaration
@@ -151,4 +152,76 @@ export const getJSONData = (content: string) => {
     isJSON,
     jsonArr,
   };
+};
+
+// 判断 路由的 component 路径指向是文件还是目录  如果是文件则去除最后一项 变成目录
+// 拼接项目 path.resolve(process.cwd(), 'src') 地址 进行判断数据
+// 最后生成 一个路由映射 model 文件 路径 的json文件
+/**
+ * @description 生成的映射json文件格式
+ * {
+ *  path:[
+ *    {name:"",path:"....path"}
+ *  ]
+ * }
+ * */
+/** 把数组扁平化   */
+export const getRoutesList = (
+  data: RoutersProps[] = [],
+  list: RoutersProps[] = [],
+) => {
+  data.forEach((item) => {
+    if (item.routes) {
+      getRoutesList(item.routes, list);
+    } else {
+      const { component } = item;
+      // item
+      if (
+        typeof component === 'string' &&
+        !['404', '500', '403', '*'].includes(component)
+      ) {
+        // 地址拼接
+        const pathStr = component.replace(/^@/, '');
+        // 判断 地址是文件还是目录
+        let newPath = path.join(process.cwd(), 'src', pathStr);
+        if (fs.existsSync(newPath)) {
+          const stats = fs.statSync(newPath);
+          if (stats && stats.isFile()) {
+            const pathArr = newPath.split('/');
+            pathArr.pop();
+            newPath = pathArr.join('/');
+          }
+        }
+        list.push({
+          ...item,
+          component: newPath,
+        });
+      }
+    }
+  });
+  return list;
+};
+
+export const getRouteMapModels = (
+  routes: RoutersProps[],
+  modelsData: ModelType[],
+) => {
+  const routeModels: RouteModels = {};
+  const newRoutes = getRoutesList(routes);
+  newRoutes.forEach((item) => {
+    const { path, component } = item;
+    const modelsArr = modelsData
+      .filter((ite) => ite.location === component)
+      .map((ites) => ({ path: `${ites.srcPath}`, name: ites.name }));
+    if (path && modelsArr) {
+      if (routeModels[path]) {
+        routeModels[path].push(...modelsArr);
+      } else {
+        routeModels[path] = modelsArr;
+      }
+    } else if (path) {
+      routeModels[path] = [];
+    }
+  });
+  return routeModels;
 };

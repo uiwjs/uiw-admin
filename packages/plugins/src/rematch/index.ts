@@ -6,13 +6,8 @@ import path from 'path';
 import webpack from 'webpack';
 import { IsModel } from './../utils';
 import createRematchTemps, { createModelsTempStr } from './temp';
-export type ModelType = {
-  path: string;
-  filename: string;
-  modelName?: string;
-  isCreateModel: boolean;
-};
-
+import { ModelType } from './../utils/interface';
+export type { ModelType };
 class RematchWebpackPlugin {
   oldModel: ModelType[] = [];
   deleteModel: string[] = [];
@@ -20,12 +15,16 @@ class RematchWebpackPlugin {
 
   src = '';
   uiw = '';
-
+  lazyLoad: boolean = false;
   newPath = '';
+  bindPage: boolean = false;
 
-  constructor() {
+  constructor(props?: { lazyLoad?: boolean; bindPage?: boolean }) {
     this.src = path.resolve(process.cwd(), 'src');
     this.uiw = path.resolve(process.cwd(), 'src/.uiw');
+    this.lazyLoad = !!props?.lazyLoad;
+    this.bindPage = !!props?.bindPage;
+
     this.getPathDeep(this.src);
     this.restCreate();
   }
@@ -47,12 +46,18 @@ class RematchWebpackPlugin {
           if (isFile && isModel && /\.(ts||js)$/.test(filename)) {
             const data = fs.readFileSync(filedir, { encoding: 'utf-8' });
             const { isModels, modelNames, isCreateModel } = IsModel(data);
+            const pathUrls = `${filedir}`.replace(/\\/g, '/');
+            const location = pathUrls.replace(/\/models.*$/, '');
+            const srcPath = pathUrls.replace(new RegExp(this.src), '.');
             if (isModels) {
               this.oldModel.push({
-                path: filedir,
+                path: pathUrls,
                 filename: filename.replace(/\.(ts|js)$/, ''),
                 modelName: modelNames,
                 isCreateModel,
+                location,
+                name: modelNames || filename,
+                srcPath,
               });
             }
           }
@@ -69,11 +74,11 @@ class RematchWebpackPlugin {
 
   // 重新生成
   restCreate = () => {
-    let modelStr = createModelsTempStr(this.oldModel);
-    // this.oldModel.forEach((item) => {
-    //   const { path, filename } = item;
-    //   modelStr = modelStr + createTemp(path, filename);
-    // });
+    let modelStr = createModelsTempStr(
+      this.oldModel,
+      this.lazyLoad,
+      this.bindPage,
+    );
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
@@ -83,6 +88,17 @@ class RematchWebpackPlugin {
       createRematchTemps(modelStr),
       { flag: 'w+', encoding: 'utf-8' },
     );
+    if (this.bindPage) {
+      const newModels = this.oldModel.filter(
+        (item) => item.location !== this.src,
+      );
+      fs.writeFileSync(
+        path.resolve(process.cwd(), 'src/.uiw/modelsMap.json'),
+        JSON.stringify(newModels, (_, value) => value, 2),
+        { flag: 'w+', encoding: 'utf-8' },
+      );
+    }
+
     this.field = '';
     this.deleteModel = [];
   };
@@ -146,13 +162,19 @@ class RematchWebpackPlugin {
     } else {
       // 判断是不是 model  是则更新
       if (isMode) {
-        const arr = this.newPath.split(/\\|\//);
-        let filename = arr[arr.length - 1].replace(/\.(ts|js)/, '');
+        const pathUrls = `${this.newPath}`.replace(/\\/g, '/');
+        const arr = pathUrls.split(/\\|\//);
+        let filename = arr[arr.length - 1].replace(/\.(ts|js)$/, '');
+        const location = pathUrls.replace(/\/models.*$/, '');
+        const srcPath = pathUrls.replace(new RegExp(this.src), '.');
         this.oldModel.push({
-          path: this.newPath,
+          path: pathUrls,
           filename,
           modelName,
           isCreateModel,
+          location,
+          name: modelName || filename,
+          srcPath,
         });
         this.restCreate();
       }
@@ -177,6 +199,7 @@ class RematchWebpackPlugin {
         const watcher = fs.watch(path.resolve(process.cwd(), 'src'), {
           recursive: true,
         });
+
         watcher.on('change', (type, filename) => {
           if (typeof filename === 'string') {
             this.field = filename as string;

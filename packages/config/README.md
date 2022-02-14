@@ -72,8 +72,86 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   overrideWebpack?: ConfFun;
   /** 输出 */
   output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
+   /**  rematch 配置  */
+  rematch?: {
+    /** 懒加载  */
+    lazyLoad?: boolean,
+    /** 是否绑定到页面 */
+    bindPage?: boolean
+  },
 }
 ```
+
+## rematch 
+
+> 1. 参数 `lazyLoad`  `boolean` 类型 ，默认 `false`，所有的`model`文件懒加载
+> 2. 参数 `bindPage`  `boolean` 类型 ，默认 `false`，把`pages`下的所有`model`默认绑定到每个路径的根目录对应的路由中
+> 3. 📢 `lazyLoad` 和 `bindPage` 都设置 `true`，并且使用 `import`引入，浏览器控制台会报错(使用require引入不报错或不设置`lazyLoad`属性) 。
+
+```ts
+import defaultConfig from "@uiw-admin/config";
+
+export default defaultConfig({
+  // ....
+  rematch:{
+    lazyLoad:true,
+    bindPage:true
+  }
+})
+
+```
+
+### bindPage
+
+设置 `bindPage` 后 `model` 绑定路由关系，去除`/models/b.ts`或`/models.ts` 路径，匹配路由配置文件中的 `component` 属性值
+
+```txt
+
+src
+  pages
+    foo/models/b.ts   绑定到  path === "/foo"
+    test/models.ts  绑定到  path === "/test"
+
+// config/routes.json
+[
+  {
+    "path": "/foo",
+    "name": "查询表格",
+    "component": "@/pages/foo",
+  },
+  {
+    "path": "/test",
+    "name": "表格2",
+    "component": "@/pages/test"
+  },
+]
+
+```
+
+设置 `bindPage` 属性需要在项目入口文件加属性
+
+```diff
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Control from '@uiw-admin/router-control'
+import '@uiw/reset.css'
+import './index.css'
+
+ReactDOM.render(
+  // ....
+    <Control
+      routeType="hash"
++      addModels={(path) => import(`${path}`)} // 或者使用 require 引入
+    />
+  ,
+  document.getElementById('root')
+)
+
+
+```
+
+
+
 
 ## kktPlugins 
 
