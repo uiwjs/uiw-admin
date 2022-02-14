@@ -1,6 +1,5 @@
 import React from 'react';
-import { FileInput, Icon, Modal, Button } from 'uiw';
-import { FileUploadProps } from '@uiw/react-file-input/esm/types';
+import { FileInput, Icon, Modal, Button, FileInputListProps } from 'uiw';
 
 const Upload = ({
   uploadType,
@@ -8,7 +7,7 @@ const Upload = ({
   readonly = false,
   maxNumber,
   ...others
-}: FileUploadProps) => {
+}: FileInputListProps) => {
   const [visible, setVisible] = React.useState(false);
   const [src, setSrc] = React.useState('');
 
