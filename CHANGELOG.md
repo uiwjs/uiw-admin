@@ -6,12 +6,19 @@
 
 
 ## 5.2.14(未发版)
+
 - @uiw-admin/components
   - 🐞`ProForm`: 增加rulers验证
 - @uiw-admin/basic-layouts
   - 🌟 退出清空token
+- @uiw-admin/config 
+  - 🌟 新增 `rematch` 属性 
+- @uiw-admin/plugins 
+  - 🌟 动态生成路由映射`model`文件
+
 
 ## 5.2.13
+
 - @uiw-admin/components
   - 🐞`ProForm`: 新增Rate组件
   - 🐞`ProForm`: `form` api增加resetForm 和 formRef 和 getFormValues返回值
@@ -19,6 +26,7 @@
   - 🌟 `request`修复`body`参数问题
 
 ## 5.2.12
+
 - @uiw-admin/components
   - 🐞`ProTable`: 修复分页错误
 
