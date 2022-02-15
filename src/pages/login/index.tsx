@@ -15,8 +15,6 @@ const Login = () => {
   const loading = useSelector(
     (state: RootState) => state.loading.effects.login.submit
   )
-  const state = useSelector((state: RootState) => state)
-  console.log(state)
 
   const [store, setStore] = React.useState<any>()
 
@@ -26,8 +24,8 @@ const Login = () => {
           '/api/login',
           {
             method: 'POST',
-            body: { username: 'admin', password: 'admin' }
-          }
+            body: { username: 'admin', password: 'admin' },
+          },
         ]
       : null
   )
@@ -61,7 +59,7 @@ const Login = () => {
             } else {
               setStore({
                 username: current.username,
-                password: current.password
+                password: current.password,
               })
             }
             // dispatch.login.submit({
@@ -86,7 +84,7 @@ const Login = () => {
                   id="username"
                   placeholder="用户名: admin"
                 />
-              )
+              ),
             },
             password: {
               labelClassName: 'fieldLabel',
@@ -100,7 +98,7 @@ const Login = () => {
                   type="password"
                   placeholder="密码: admin"
                 />
-              )
+              ),
             },
             terms: {
               style: { margin: 0 },
@@ -109,10 +107,9 @@ const Login = () => {
                 <Checkbox disabled={!!loading} value="1">
                   已阅读并同意
                 </Checkbox>
-              )
-            }
-          }}
-        >
+              ),
+            },
+          }}>
           {({ fields, canSubmit }) => {
             return (
               <>
@@ -135,8 +132,7 @@ const Login = () => {
                       disabled={!canSubmit()}
                       block
                       type="dark"
-                      htmlType="submit"
-                    >
+                      htmlType="submit">
                       登录
                     </Button>
                   </Col>
