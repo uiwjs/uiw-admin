@@ -1,6 +1,6 @@
 ## ProTable
 
-集成搜索表单的Table组件，用于一般页面的查询搜索。
+集成搜索表单的Table组件，用于一般页面的查询搜索。 **依赖于uiw v4.10.7以上版本**
 
 
 ### demo
@@ -45,13 +45,22 @@ function Demo() {
           },
         },
       ]}
-      // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
-      // searchBtns={[
-      //   { label: '搜索', type: 'primary',  htmlType: 'submit',  onClick: () => {
-      //     table.onSearch()
-      //   }},
-      //   { label: '点我', onClick: () => null},
-      // ]}
+       // 搜索栏按钮
+      searchBtns={[
+        {
+          label: '搜索',
+          type: 'primary',
+          onClick: () => {
+            table.onSearch()
+          },
+        },
+        {
+          label: '重置',
+          onClick: () => {
+            table.onReset()
+          },
+        },
+      ]}
       rowSelection={{
         // 多选 checkbox 单选radio
         type: 'checkbox',
@@ -242,6 +251,9 @@ ReactDOM.render(<Demo />, _mount_);
 | searchValues | 表单值       | Object        | -      |
 | selection    | 选择框属性   | UseSelections | -      |
 | pageIndex    | 当前分页     | Number        | 1      |
+| onRefersh    | 刷新分页数据  | () => void        | -      |
+| onReset      | 重置表单，查询数据  | () => void         | -      |
+| onSearch     | 查询数据             | () => void         | -     |
 
 ### selection
 

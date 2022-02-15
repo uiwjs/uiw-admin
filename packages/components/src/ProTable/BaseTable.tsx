@@ -39,7 +39,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
   } = store as any;
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
   const { x } = scroll;
-
   const isCheckbox = type === 'checkbox';
 
   // columns列和标题是否居中
@@ -89,6 +88,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   }, [pageIndex, JSON.stringify(defaultValues), JSON.stringify(searchValues)]);
 
   const pageSize = formatQuery().pageSize || 10;
+  // 调接口
   const { data, isValidating, mutate } = useSWR(
     [key, { method: 'POST', body: formatQuery() }],
     request,
@@ -100,6 +100,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   );
 
   useEffect(() => {
+    // 第一次加载
     mutate(false);
   }, [mutate]);
 
@@ -116,12 +117,12 @@ const BaseTable: React.FC<BaseTableProps> = ({
     defaultSelected,
     type === 'radio',
   );
-
   // 查询
-  const onSearch = async () => {
-    await setPageIndex(1);
-    mutate(false);
-  };
+  // const onSearch = async () => {
+  //   await setPageIndex(1);
+  //   form.current.onSubmit()
+  //   mutate(false);
+  // };
   // 分页
   const onPageChange = useCallback(
     async (page) => {
@@ -133,7 +134,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
     },
     [setPageIndex, pageChange],
   );
-
   useEffect(() => {
     // 获取表单默认值
     const defaultSearchValues: Fields = {};
@@ -147,9 +147,11 @@ const BaseTable: React.FC<BaseTableProps> = ({
       data: data?.data,
       total: data?.total,
       loading: isValidating,
-      onSearch,
+      // onSearch,
       selection,
       pageIndex,
+      setPageIndex,
+      mutate,
     };
 
     if (!isFirstMountRef.current) {
@@ -157,7 +159,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
       // 默认表单值
       stores.searchValues = defaultSearchValues;
     }
-
     updateStore(stores);
 
     // 上一次请求数据
@@ -170,6 +171,8 @@ const BaseTable: React.FC<BaseTableProps> = ({
     JSON.stringify(columns),
     pageIndex,
     JSON.stringify(selection),
+    setPageIndex,
+    mutate,
   ]);
 
   const selectionCol = [

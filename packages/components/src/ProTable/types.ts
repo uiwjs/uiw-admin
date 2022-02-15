@@ -1,5 +1,5 @@
 import { ButtonProps, TableColumns, TableProps, FormSubmitProps } from 'uiw';
-import { SWRConfiguration } from 'swr';
+import { SWRConfiguration, MutatorOptions } from 'swr';
 import { UseSelections } from './useSelections';
 
 type SelectionType = 'checkbox' | 'radio';
@@ -81,8 +81,8 @@ export interface useTableData extends Params {
   total: number;
   pageIndex: number;
   key: string;
-  reset: () => void;
-  refersh: () => void;
+  onReset: () => void;
+  onRefersh: () => void;
   onSearch: () => void;
   updateStore: (p: stateParams) => void;
   searchValues: {
@@ -90,9 +90,16 @@ export interface useTableData extends Params {
   };
   loading: boolean;
   selection: UseSelections<any>;
+  form: unknown;
+  updateForm: (p: stateParams) => void;
+  setPageIndex: (p: number) => void;
+  mutate: (data?: any, opts?: boolean | MutatorOptions | undefined) => void;
 }
 
 export type stateParams = {
   data?: Record<string, string | number | JSX.Element>[];
   total?: number;
+  form?: {
+    [key: string]: any;
+  };
 };

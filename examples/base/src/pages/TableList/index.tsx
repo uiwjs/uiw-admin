@@ -34,7 +34,6 @@ export default function Demo() {
   const handleSearch = (val: string) => {
     setVal(val)
   }
-
   return (
     <ProTable
       // 操作栏按钮
@@ -47,17 +46,19 @@ export default function Demo() {
           },
         },
       ]}
-      // 自定义搜索栏按钮, 覆盖原本的search按钮 如要执行查询操作 需要按钮 htmlType: 'submit'
+      // 搜索栏按钮
       searchBtns={[
         {
           label: '搜索',
           type: 'primary',
-          htmlType: 'submit',
-        },
-        {
-          label: '自定义查询',
           onClick: () => {
             table.onSearch()
+          },
+        },
+        {
+          label: '重置',
+          onClick: () => {
+            table.onReset()
           },
         },
       ]}

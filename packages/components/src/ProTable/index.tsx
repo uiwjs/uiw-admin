@@ -17,8 +17,8 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
   } = props;
   const {
     key,
-    reset,
-    refersh,
+    onReset,
+    onRefersh,
     updateStore,
     formatData,
     query,
@@ -28,13 +28,16 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     SWRConfiguration,
     selection,
     pageIndex,
+    form,
+    updateForm,
+    setPageIndex,
+    mutate,
   } = table;
-
   const store = useMemo(
     () => ({
       data: [],
-      reset,
-      refersh,
+      onReset,
+      onRefersh,
       key,
       updateStore,
       formatData,
@@ -44,10 +47,13 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       SWRConfiguration,
       selection,
       pageIndex,
+      form,
+      updateForm,
+      setPageIndex,
+      mutate,
     }),
     [JSON.stringify(table)],
   );
-
   return (
     <StoreCtx.Provider value={{ ...store }}>
       <Skeleton loading={loading}>
