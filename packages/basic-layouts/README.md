@@ -71,6 +71,17 @@ export interface UseLayoutsProps {
 
 ```
 
+### headerLayout
+
+> 头部布局，类型："top" | "default" ，默认：default
+
+### headerBackground
+
+> 头部背景色，类型：string，默认值："#fff"
+
+### headerFontColor
+
+> 头部字体颜色，类型：string ，默认值："#000"
 
 ## 案例
 
