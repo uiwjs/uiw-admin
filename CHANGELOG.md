@@ -5,8 +5,11 @@
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
 ## 5.2.15
+
 - @uiw-admin/components
   - 🐞`ProTable`: 修复重置刷新api为空的问题，完善表单验证
+  
+
 ## 5.2.14
 
 - @uiw-admin/components
