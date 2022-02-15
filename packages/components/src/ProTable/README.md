@@ -251,9 +251,9 @@ ReactDOM.render(<Demo />, _mount_);
 | searchValues | 表单值       | Object        | -      |
 | selection    | 选择框属性   | UseSelections | -      |
 | pageIndex    | 当前分页     | Number        | 1      |
-| onRefersh    | 刷新分页数据  | Number        | 1      |
-| onReset      | 重置表单，查询数据  | Number        | 1      |
-| onSearch     | 查询数据             | Number        | 1      |
+| onRefersh    | 刷新分页数据  | () => void        | -      |
+| onReset      | 重置表单，查询数据  | () => void         | -      |
+| onSearch     | 查询数据             | () => void         | -     |
 
 ### selection
 
