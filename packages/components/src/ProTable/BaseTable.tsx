@@ -36,7 +36,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
     key,
     searchValues,
     SWRConfiguration = {},
-    form,
   } = store as any;
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
   const { x } = scroll;
