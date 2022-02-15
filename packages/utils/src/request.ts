@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 // import history from '../routes/history';
 import { splitUrl } from './utils';
+import { getCookie } from './cookies';
 import qs from 'qs';
 // Get the current location.
 // const location = history.location;
@@ -80,7 +81,10 @@ export default function request(url: string, options: Options = {}) {
   }
 
   // 加载 token
-  let token = sessionStorage.getItem('token') || localStorage.getItem('token');
+  let token =
+    sessionStorage.getItem('token') ||
+    localStorage.getItem('token') ||
+    getCookie('token');
 
   if (token) {
     newOptions.headers = {

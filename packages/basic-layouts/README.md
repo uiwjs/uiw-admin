@@ -22,14 +22,28 @@ export type BasicLayoutProps = {
   /** 子集路由 */ 
   routes?: RoutersProps[];
   children?: React.ReactNode;
-} & Omit<HeaderRightProps, 'headerRightvisible' | 'setHeaderRightvisible'>;
+  /** 头部 布局 */
+  headerLayout?: "top" | "default",
+  /** 头部背景色 */
+  headerBackground?: string,
+  /** 头部字体颜色 */
+  headerFontColor?: string;
+} & HeaderRightProps;
 
+
+export interface HeaderMenuItemsProps {
+  title: React.ReactNode;
+  icon: JSX.Element | string | false | null;
+  onClick?: () => void;
+  divider?: boolean;
+  render?: React.ReactNode;
+}
 
 export interface HeaderRightProps {
   /**
    * 菜单
    */
-  menus?: HeaderMenuItemsProps[];
+  menus?: Array<HeaderMenuItemsProps>;
   /**
    * avatar 头像
    * userName 用户名
@@ -42,25 +56,13 @@ export interface HeaderRightProps {
   };
   // 重新加载权限
   onReloadAuth: () => void;
-  layouts:UseLayoutsProps
+  layouts?: UseLayoutsProps;
 }
 
-export interface HeaderMenuItemsProps {
-  /** 标题 */ 
-  title: React.ReactNode;
-  /** 图标 */ 
-  icon: JSX.Element | string | false | null;
-  /**  点击事件 */ 
-  onClick?: () => void;
-  /** 分割线 */ 
-  divider?: boolean;
-  /** 自定义渲染 */ 
-  render?: React.ReactNode;
+export interface Params {
+  headerRightvisible: boolean;
 }
 
-export interface Params  {
-  headerRightvisible: boolean
-}
 export interface UseLayoutsProps {
   headerRightvisible: boolean;
   closeMenu: () => void;
@@ -69,6 +71,17 @@ export interface UseLayoutsProps {
 
 ```
 
+### headerLayout
+
+> 头部布局，类型："top" | "default" ，默认：default
+
+### headerBackground
+
+> 头部背景色，类型：string，默认值："#fff"
+
+### headerFontColor
+
+> 头部字体颜色，类型：string ，默认值："#000"
 
 ## 案例
 

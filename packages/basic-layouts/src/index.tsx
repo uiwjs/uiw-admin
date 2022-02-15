@@ -12,6 +12,9 @@ import { getMenu, BreadcrumbMap } from './utils';
 import BodyContent from './Content';
 import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';
+import { Icon } from 'uiw';
+
+import { MainContext } from './hook';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -24,6 +27,12 @@ export type BasicLayoutProps = {
   footer?: React.ReactElement;
   routes?: RoutersProps[];
   children?: React.ReactNode;
+  /** 头部 布局 */
+  headerLayout?: 'top' | 'default';
+  /** 头部背景色 */
+  headerBackground?: string;
+  /** 头部字体颜色 */
+  headerFontColor?: string;
 } & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
@@ -35,6 +44,9 @@ function BasicLayout(props: BasicLayoutProps) {
     menus = [],
     onReloadAuth,
     layouts,
+    headerLayout = 'default',
+    headerBackground = '#fff',
+    headerFontColor = '#000',
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -73,40 +85,74 @@ function BasicLayout(props: BasicLayoutProps) {
     );
   }, [profile, menus, JSON.stringify(layouts)]);
 
+  const header = (
+    <Header
+      className={'uiw-admin-global-header'}
+      style={{ background: headerBackground, color: headerFontColor }}
+    >
+      <div style={{ display: 'flex' }}>
+        {headerLayout === 'top' && (
+          <div style={{ minWidth: 200 }}>
+            <LogoHeader
+              collapsed={false}
+              projectName={projectName}
+              logo={props.logo}
+            />
+          </div>
+        )}
+        <div>
+          <Button
+            basic
+            icon={
+              <Icon
+                type={collapsed ? 'menu-unfold' : 'menu-fold'}
+                color={headerFontColor}
+              />
+            }
+            // icon={collapsed ? 'menu-unfold' : 'menu-fold'}
+            style={{ fontSize: 12, marginRight: 20 }}
+            onClick={() => setCollapsed(!collapsed)}
+          />
+          <Bread routeMap={mapRoute} />
+        </div>
+      </div>
+      {renderHeaderRightMenu}
+    </Header>
+  );
+
   return (
     <Fragment>
-      <DocumentTitle title={projectName || ''} />
-      <Layout hasSider style={{ height: '100%' }}>
-        <Sider
-          collapsed={collapsed}
-          className={classnames('uiw-admin-global-sider-menu', {})}
-        >
-          <LogoHeader
-            collapsed={collapsed}
-            projectName={projectName}
-            logo={props.logo}
-          />
-          {Menus}
-        </Sider>
-        <Layout>
-          <Header className="uiw-admin-global-header">
-            <div>
-              <Button
-                basic
-                icon={collapsed ? 'menu-unfold' : 'menu-fold'}
-                style={{ fontSize: 12, marginRight: 20 }}
-                onClick={() => setCollapsed(!collapsed)}
-              />
-              <Bread routeMap={mapRoute} />
-            </div>
-            {renderHeaderRightMenu}
-          </Header>
-          <Content className="uiw-admin-global-content">
-            <BodyContent>{props.children}</BodyContent>
-          </Content>
-          {/* {footerView} */}
+      <MainContext.Provider
+        value={{ headerLayout, headerBackground, headerFontColor }}
+      >
+        <DocumentTitle title={projectName || ''} />
+        <Layout style={{ height: '100%' }}>
+          {headerLayout === 'top' && header}
+          <Layout>
+            <Sider
+              collapsed={collapsed}
+              className={classnames('uiw-admin-global-sider-menu', {})}
+            >
+              {headerLayout === 'default' ? (
+                <LogoHeader
+                  collapsed={collapsed}
+                  projectName={projectName}
+                  logo={props.logo}
+                />
+              ) : (
+                <div style={{ marginTop: 10 }} />
+              )}
+              {Menus}
+            </Sider>
+            <Layout>
+              {headerLayout === 'default' && header}
+              <Content className="uiw-admin-global-content">
+                <BodyContent>{props.children}</BodyContent>
+              </Content>
+            </Layout>
+          </Layout>
         </Layout>
-      </Layout>
+      </MainContext.Provider>
     </Fragment>
   );
 }

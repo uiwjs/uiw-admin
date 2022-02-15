@@ -4,9 +4,9 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-
-## 5.2.15
-
+## 5.2.15(未发版)
+- @uiw-admin/layout
+  - 🌟 新增 `headerLayout`、`headerBackground`、`headerFontColor` 参数，用于头部布局
 - @uiw-admin/components
   - 🐞`ProForm`: rulers更名rules
   - 🐞`ProForm`: useForm增加`formList`返回多表单验证列表

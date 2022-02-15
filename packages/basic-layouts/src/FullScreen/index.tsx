@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Icon } from 'uiw';
+import { useMain } from './../hook';
 
 /**
  * 当前是否全屏
@@ -53,6 +54,7 @@ export default () => {
       el.msExitFullscreen();
     }
   }
+  const { headerFontColor } = useMain();
   const handle = () => {
     if (!isFullScreen() && fullscreen) {
       setFullscreen(false);
@@ -72,7 +74,10 @@ export default () => {
         onClick={() => setFullscreen(!fullscreen)}
         style={{ fontSize: 18, marginRight: 15, cursor: 'pointer' }}
       >
-        <Icon type={fullscreen ? 'shrink' : 'arrows-alt'} />
+        <Icon
+          type={fullscreen ? 'shrink' : 'arrows-alt'}
+          color={headerFontColor}
+        />
       </span>
     ),
     [fullscreen],
