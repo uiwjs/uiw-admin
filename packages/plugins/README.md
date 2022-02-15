@@ -9,6 +9,11 @@ npm i @uiw-admin/plugins -D
 
 > 1. 自动加载 models
 
+### lazyLoad
+
+> 1. 类型：`boolean`  ，默认 `false`，
+
+
 ```ts
 //kktrc.ts
 import defaultConfig from "@uiw-admin/config"
