@@ -1,4 +1,4 @@
-import { FormItemsOptionsProps, RulersProps } from '../type';
+import { FormItemsOptionsProps, rulesProps } from '../type';
 import { formatter, Rate } from 'uiw';
 import React from 'react';
 import Upload from '../widgets/Upload';
@@ -75,7 +75,7 @@ export function getReadValue(
 
 interface FromValidateProps {
   key: string;
-  rulers?: RulersProps[];
+  rules?: rulesProps[];
   value?: any[] | any;
 }
 
@@ -103,14 +103,14 @@ function isObjectEmpty(obj: any) {
 
 /**
  * form表单提交验证
- * @param rulers FromValidateProps[]
+ * @param rules FromValidateProps[]
  * @returns { [key: string]: string }
  */
-export const fromValidate = (rulers: FromValidateProps[] = []) => {
+export const fromValidate = (rules: FromValidateProps[] = []) => {
   let errorObj: { [key: string]: string } = {};
-  rulers.forEach(({ rulers, key, value }) => {
-    if (rulers && rulers.length > 0) {
-      rulers.forEach(
+  rules.forEach(({ rules, key, value }) => {
+    if (rules && rules.length > 0) {
+      rules.forEach(
         ({ validator = null, message = '', required, pattern = null }) => {
           // 必填 && object && 为空
           if (required && isObject(value) && (isObjectEmpty(value) || !value)) {

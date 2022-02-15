@@ -40,7 +40,7 @@ export interface FormItemsProps
   /** 是否必填 */
   required?: boolean;
   // 验证规则
-  rulers?: RulersProps[];
+  rules?: rulesProps[];
 }
 
 export interface ProFormProps
@@ -70,32 +70,34 @@ export interface ProFormProps
   readOnlyProps?: DescriptionsProps;
   /** 自定义组件 */
   customWidgetsList?: Fields;
-  form?: UseFormProps;
+  form?: UseFormProps | any;
   cardProps?: CardProps;
   collapseProps?: CollapseProps;
   collapsePanelProps?: CollapsePanelProps;
+  type?: 'string' | 'array';
 }
 
 export interface UseFormProps {
-  formRef: {
-    [key: string]: any;
-  };
   submitvalidate: () => void;
-  resetForm: () => void;
-  getFieldValues: () => void;
+  resetForm?: () => void;
+  getFieldValues?: () => void;
   getErrors: () => void;
+  formList: { current?: FormListProps }[];
+  setFormList: (p: { current?: FormListProps }[]) => void;
+  setFormInstance: (p: any) => void;
+  setErrors: (p: { [key: string]: any }) => void;
 }
 
-export interface FormRefProps {
-  submitvalidate: () => void;
+export interface FormListProps {
+  onSubmit: () => void;
   resetForm: () => void;
   getFieldValues: () => void;
-  errors?: {
-    [key: string]: any;
-  };
+  // errors?: {
+  //   [key: string]: any;
+  // };
 }
 
-export interface RulersProps {
+export interface rulesProps {
   message?: string;
   pattern?: RegExp;
   validator?: (value: any | any[]) => boolean;

@@ -15,24 +15,30 @@ function FormDom({
   showResetButton = false,
   saveButtonProps = {},
   resetButtonProps = {},
+  type,
+  form,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
 }) {
   const baseRef = useRef<any>();
   const store = useStore();
 
-  const { formRef } = store as any;
+  const { setErrors, setFormInstance, formList, setFormList } = store as any;
 
+  // 普通表单
+  useEffect(() => setFormInstance?.(baseRef), [baseRef]);
+
+  // 处理多表单
   useEffect(() => {
-    if (formRef && baseRef) {
-      formRef.current = {
-        ...formRef.current,
-        submitvalidate: baseRef.current?.onSubmit,
-        resetForm: baseRef.current?.resetForm,
-        getFieldValues: baseRef.current?.getFieldValues,
-      };
+    if (baseRef) {
+      if (type === 'array') {
+        const datas = formList;
+        datas.push(baseRef);
+        setFormList?.([...datas]);
+      }
+      return () => setFormList?.([]);
     }
-  }, [baseRef.current]);
+  }, [type]);
 
   return (
     <Form
@@ -50,7 +56,7 @@ function FormDom({
               formDatas.map((item) => ({
                 key: item.key,
                 value: current[item.key],
-                rulers: item.rulers,
+                rules: item.rules,
               }))) ||
             [];
           const errorObj = fromValidate(validateList);
@@ -64,6 +70,7 @@ function FormDom({
       onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
         if (error.filed) {
+          setErrors({ ...error.filed });
           return { ...error.filed };
         }
         return null;
@@ -71,13 +78,6 @@ function FormDom({
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
-        const { errors } = state;
-        if (formRef) {
-          formRef.current = {
-            ...formRef.current,
-            errors: errors,
-          };
-        }
         return (
           <React.Fragment>
             <Row gutter={10}>
