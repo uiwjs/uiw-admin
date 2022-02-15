@@ -24,7 +24,7 @@ function FormDom({
   const { formRef } = store as any;
 
   useEffect(() => {
-    if (formRef.current) {
+    if (formRef && baseRef) {
       formRef.current = {
         ...formRef.current,
         submitvalidate: baseRef.current?.onSubmit,
