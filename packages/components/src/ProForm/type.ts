@@ -62,8 +62,8 @@ export interface ProFormProps
   formType?: 'collapse' | 'card' | 'pure';
   showSaveButton?: boolean;
   showResetButton?: boolean;
-  saveButtonProps?: ButtonProps | any;
-  resetButtonProps?: ButtonProps | any;
+  saveButtonProps?: Omit<ButtonProps, 'ref'>;
+  resetButtonProps?: Omit<ButtonProps, 'ref'>;
   /** 是否是只读模式模式 */
   readOnly?: boolean;
   /** 只读模式 参考Descriptions参数 */
