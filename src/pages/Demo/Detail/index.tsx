@@ -68,8 +68,8 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
     await form.submitvalidate()
     await form2.submitvalidate()
     // 获取错误信息
-    const errors = form.getErrors()
-    const errors2 = form2.getErrors()
+    const errors = await form.getErrors()
+    const errors2 = await form2.getErrors()
 
     if (errors && Object.keys(errors).length > 0) return
     if (errors2 && Object.keys(errors2).length > 0) return
