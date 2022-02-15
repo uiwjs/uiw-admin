@@ -164,10 +164,14 @@ export default (props: ConfigProps) => {
       });
     }
 
+    let TOKEN_STORAGE = defaultDefine.STORAGE;
+    if (define && Reflect.has(define, 'STORAGE')) {
+      TOKEN_STORAGE = JSON.stringify(Reflect.get(define, 'STORAGE'));
+    }
     conf.plugins!.push(
       new webpack.DefinePlugin({
         ...defaultDefine,
-        TOKEN_STORAGE: define?.['STORAGE'] || defaultDefine.STORAGE,
+        TOKEN_STORAGE,
         ...transformationDefineString(define || {}),
         BINDPAGR: JSON.stringify(!!rematch?.lazyLoad),
       }),
