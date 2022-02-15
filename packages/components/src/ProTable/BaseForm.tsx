@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import {
   Button,
   Input,
@@ -35,7 +35,9 @@ const widgets = {
 const BaseForm: React.FC<BaseFormProps> = (props) => {
   const store = useStore();
 
-  let { updateStore, onSearch } = store as any;
+  const formRef = useRef<any>();
+
+  let { updateStore, updateForm } = store as any;
 
   const { columns, searchBtns, onBeforeSearch } = props;
   // 获取表单配置
@@ -67,24 +69,28 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
         ...current,
       },
     });
-    onSearch(current);
+    // onSearch();
   };
+  useEffect(() => {
+    // 存储表单组件实例
+    if (formRef.current) {
+      updateForm(formRef);
+    }
+  }, [formRef]);
 
-  // 重置
-
-  // const onReset = (resetForm: () => void) => {
-  //   resetForm();
-  // };
   const itemsLength = Object.keys(getFormFields).length;
   const emptyLength = 4 - (itemsLength % 5);
+
   return (
     <Form
       style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
         // 搜索前校验
-        if (onBeforeSearch && onBeforeSearch({ initial, current })) {
-          onFormSearch({ initial, current });
+        if (onBeforeSearch) {
+          if (onBeforeSearch?.({ initial, current })) {
+            onFormSearch({ initial, current });
+          }
         } else {
           onFormSearch({ initial, current });
         }
@@ -95,15 +101,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
         }
         return null;
       }}
-      // 更新表单的值
-      onChange={({ initial, current }) => {
-        updateStore({
-          searchValues: {
-            ...initial,
-            ...current,
-          },
-        });
-      }}
+      ref={formRef}
       fields={getFormFields}
     >
       {({ fields, state, canSubmit, resetForm }) => {

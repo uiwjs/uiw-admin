@@ -7,8 +7,6 @@ import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 
 const ProTabel: React.FC<ProtableProps> = (props) => {
-  // 监听表单变化的值
-  const updateSearchValueRef = React.useRef({});
   const {
     table,
     columns,
@@ -19,8 +17,8 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
   } = props;
   const {
     key,
-    reset,
-    refersh,
+    onReset,
+    onRefersh,
     updateStore,
     formatData,
     query,
@@ -30,13 +28,16 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     SWRConfiguration,
     selection,
     pageIndex,
+    form,
+    updateForm,
+    setPageIndex,
+    mutate,
   } = table;
-
   const store = useMemo(
     () => ({
       data: [],
-      reset,
-      refersh,
+      onReset,
+      onRefersh,
       key,
       updateStore,
       formatData,
@@ -46,12 +47,15 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       SWRConfiguration,
       selection,
       pageIndex,
+      form,
+      updateForm,
+      setPageIndex,
+      mutate,
     }),
     [JSON.stringify(table)],
   );
-
   return (
-    <StoreCtx.Provider value={{ ...store, updateSearchValueRef }}>
+    <StoreCtx.Provider value={{ ...store }}>
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
         <BaseForm
