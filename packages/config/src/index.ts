@@ -83,6 +83,11 @@ export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
   overrideWebpack?: ConfFun;
   /** 输出 */
   output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
+  /**  rematch 配置  */
+  rematch?: {
+    /** 懒加载  */
+    lazyLoad?: boolean;
+  };
 }
 
 export default (props: ConfigProps) => {
@@ -96,13 +101,13 @@ export default (props: ConfigProps) => {
     moreConfig,
     publicPath = './',
     output,
+    rematch,
     ...rest
   } = props || {};
 
   const newPlugins: PluginsType = (plugins || []).concat([
-    '@uiw-admin/plugins/lib/rematch',
-    '@uiw-admin/plugins/lib/routes',
-    // '@uiw-admin/plugins/lib/maps',
+    ['@uiw-admin/plugins/lib/rematch', rematch || {}],
+    ['@uiw-admin/plugins/lib/routes', rematch || {}],
   ]);
   // 冗余 API loader, 未来在 v8 版本删除
   // ==========================
@@ -159,6 +164,7 @@ export default (props: ConfigProps) => {
       new webpack.DefinePlugin({
         ...defaultDefine,
         ...transformationDefineString(define || {}),
+        BINDPAGR: JSON.stringify(!!rematch?.lazyLoad),
       }),
       ...plugin,
     );

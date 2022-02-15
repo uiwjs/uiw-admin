@@ -4,16 +4,18 @@ import { useDispatch } from 'react-redux'
 import { Dispatch } from '@uiw-admin/models'
 import { ProTable, useTable } from '@uiw-admin/components'
 import Detail from './Detail'
+import { RootState } from '@uiw-admin/models'
+import { useSelector } from 'react-redux'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
-
+  const stores = useSelector((state: RootState) => state)
+  console.log(stores)
   const updateData = (payload: any) => {
     dispatch({
       type: 'demo/updateState',
       payload,
     })
-    dispatch.demo.updateState({ a: 1 })
   }
 
   const table = useTable('/api/getData', {
@@ -35,7 +37,7 @@ const Demo = () => {
   })
 
   // 操作
-  function handleEditTable(type: string, record: any) {
+  function handleEditTable(type: string, record: Record<string, any>) {
     updateData({
       isView: type === 'view',
       tableType: type,

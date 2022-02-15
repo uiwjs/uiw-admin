@@ -13,11 +13,11 @@ ReactDOM.render(
       fetcher: (resource, init) => {
         return request(resource, init)
       },
-      provider: () => new Map()
-    }}
-  >
+      provider: () => new Map(),
+    }}>
     <Control
       routeType="hash"
+      // addModels={(path) => import(`${path}`)}
     />
   </SWRConfig>,
   document.getElementById('root')

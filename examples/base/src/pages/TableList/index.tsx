@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ProTable, useTable } from '@uiw-admin/components'
-import { useCity } from '../../queries'
+import { useCity } from '../../servers'
 
 export default function Demo() {
   const table = useTable('/api/getData', {

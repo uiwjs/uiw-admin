@@ -1,6 +1,7 @@
 import React from 'react';
 import type { RouteObject } from 'react-router-dom';
 import { Location, NavigateFunction, Params } from 'react-router-dom';
+import { Store } from '@uiw-admin/models';
 export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
   key?: string;
   /** 默认跳转 */
@@ -59,4 +60,6 @@ export type DefaultProps = {
 export interface ControllerProps {
   /** 路由模式   默认 history  */
   routeType?: 'history' | 'hash' | 'browser';
+  // addModels?: (modelsArr: { path: string, name: string }[], addModel: Store["addModel"]) => void
+  addModels?: (path: string) => Promise<{ default: any }>;
 }

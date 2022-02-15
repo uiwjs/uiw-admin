@@ -74,10 +74,7 @@ function SelectMultiple(
     onSelect?.(selected);
   };
 
-  const handleInput = (
-    type: 'blur' | 'search' | 'clean',
-    { target }: React.ChangeEvent<HTMLInputElement>,
-  ) => {
+  const handleInput = (type: 'blur' | 'search' | 'clean', { target }: any) => {
     if (type === 'search') {
       setIsSearch(true);
       setSearchValue(target.value);

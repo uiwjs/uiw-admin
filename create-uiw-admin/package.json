@@ -1,6 +1,6 @@
 {
   "name": "create-uiw-admin",
-  "version": "5.2.12",
+  "version": "5.2.13",
   "description": "Creates a antdp application using the command line.",
   "homepage": "https://uiwjs.github.io/uiw-admin",
   "author": "Kenny Wong <wowohoo@qq.com> (https://github.com/jaywcjlove)",

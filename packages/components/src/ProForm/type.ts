@@ -39,6 +39,8 @@ export interface FormItemsProps
   readSpan?: number;
   /** 是否必填 */
   required?: boolean;
+  // 验证规则
+  rulers?: RulersProps[];
 }
 
 export interface ProFormProps
@@ -60,8 +62,8 @@ export interface ProFormProps
   formType?: 'collapse' | 'card' | 'pure';
   showSaveButton?: boolean;
   showResetButton?: boolean;
-  saveButtonProps?: ButtonProps;
-  resetButtonProps?: ButtonProps | any;
+  saveButtonProps?: Omit<ButtonProps, 'ref'>;
+  resetButtonProps?: Omit<ButtonProps, 'ref'>;
   /** 是否是只读模式模式 */
   readOnly?: boolean;
   /** 只读模式 参考Descriptions参数 */
@@ -75,6 +77,27 @@ export interface ProFormProps
 }
 
 export interface UseFormProps {
-  clickRef: any;
+  formRef: {
+    [key: string]: any;
+  };
   submitvalidate: () => void;
+  resetForm: () => void;
+  getFieldValues: () => void;
+  getErrors: () => void;
+}
+
+export interface FormRefProps {
+  submitvalidate: () => void;
+  resetForm: () => void;
+  getFieldValues: () => void;
+  errors?: {
+    [key: string]: any;
+  };
+}
+
+export interface RulersProps {
+  message?: string;
+  pattern?: RegExp;
+  validator?: (value: any | any[]) => boolean;
+  required?: boolean;
 }

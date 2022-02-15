@@ -12,12 +12,11 @@
 ```jsx
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
-import { ProForm,useForm } from '@uiw-admin/components'
+import { ProForm } from '@uiw-admin/components'
 import { Button,Notify,Slider } from 'uiw'
 const Demo = () => {
    const [option, setOption] = React.useState([])
    const [loading, setLoading] = React.useState(false)
-   const form = useForm()
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
     if (type === 'selectMultiple') {
@@ -38,7 +37,6 @@ const Demo = () => {
   }
     return (
        <ProForm
-        form={form}
          // 表单类型
          formType="collapse"
          title="基本使用(与uiw/form使用保持一致)"
@@ -166,6 +164,23 @@ const Demo = () => {
               readSpan: 2,
               span:"24"
             },
+            {
+              label: '上传组件',
+              key: 'upload',
+              widget: 'upload',
+              span: '24',
+              readSpan: 3,
+              widgetProps: {
+                uploadType: 'card',
+                multiple: true,
+                maxNumber: 2,
+              showFileIcon: {
+                showPreviewIcon: true,
+                showRemoveIcon: true,
+              },
+            },
+              rulers: [{ required: true, message: '请上传' }],
+            },
           ]}
        />
   )
@@ -179,7 +194,7 @@ ReactDOM.render(<Demo />, _mount_);
 import ReactDOM from 'react-dom';
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
-import { Button,Notify } from 'uiw'
+import { Button } from 'uiw'
 const Demo = () => {
 
   const form = useForm()
@@ -190,19 +205,6 @@ const Demo = () => {
          form={form}
          title="通过form api进行表单提交"
          formType="card"
-         onSubmit={(initial, current) => {
-          const errorObj = {};
-          if (!current?.input) {
-            errorObj.input = 'input不能为空';
-          }
-          if (Object.keys(errorObj).length > 0) {
-            const err = new Error();
-            err.filed = errorObj;
-            Notify.error({ title: '提交失败！' });
-            throw err;
-          }
-          // 调用请求接口
-        }}
          formDatas={ [
              {
                label: 'input',
@@ -210,11 +212,118 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               span:"24"
+               span:"24",
+               rulers: [
+                { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
+               ]
              },
           ]}
        />
-       <Button style={{ marginTop:10,width:80 }} type="primary" onClick={()=>form.submitvalidate()}>保存</Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=>{
+          // 触发验证
+          form.submitvalidate();
+          // 获取错误信息
+          const errors = form.getErrors()
+          if(errors && Object.keys(errors).length > 0 ) return
+         // 调用请求接口
+       }}
+       >
+        保存
+      </Button>
+      <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=> form.resetForm() }
+       >
+        重置
+      </Button>
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+### 多表单同时进行提交
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState,useRef } from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { Button } from 'uiw'
+const Demo = () => {
+  const form = useForm()
+  const form2 = useForm()
+  return (
+     <div>
+       <ProForm
+         form={form}
+         title="表单一"
+         formType="card"
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+               rulers: [
+                { required: true, message: '请输入' },
+                { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
+               ]
+             },
+          ]}
+       />
+        <div style={{ marginTop:15 }} />
+        <ProForm
+         form={form2}
+         title="表单二"
+         formType="card"
+         formDatas={ [
+             {
+               label: 'input2',
+               key: 'input2',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+               rulers: [
+                { 
+                  validator: (value = '') => {
+                    if(!value) return false
+                    return true
+                  },
+                  message: "请输入"
+                },
+               ]
+             },
+          ]}
+       />
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={ async ()=>{
+          // 触发验证
+          await form?.submitvalidate()
+          await form2?.submitvalidate()
+          // 获取错误信息
+          const errors =  form.getErrors()
+          const errors2 = form2.getErrors()
+
+          if(errors && Object.keys(errors).length > 0 ) return
+          if(errors2 && Object.keys(errors2).length > 0 ) return
+          // 获取表单值
+          const value = form.getFieldValues()
+          const value2 = form2.getFieldValues()
+          const params = {...value,...value2}
+          console.log("params",params)
+          // 调用请求接口
+       }}>
+        保存
+      </Button>
     </div>
   );
 }
@@ -308,10 +417,24 @@ const Demo = () => {
               initialValue:queryInfo.selectMultiple || []
             },
             {
-              label: '评分',
+              label: 'rate',
               key: 'rate',
               widget: 'rate',
               initialValue:queryInfo.rate
+            },
+            {
+              label: 'upload',
+              key: 'upload',
+              widget: 'upload',
+              widgetProps:{
+                uploadType: 'card',
+              },
+              initialValue: [
+                {
+                  dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4',
+                  name: 'uiw.png',
+                },
+              ]
             },
            ]}
        />
@@ -335,7 +458,7 @@ ReactDOM.render(<Demo />, _mount_);
 | buttonsContainer   | buttons容器样式(可调整button布局)                 | React.CSSProperties                                                      | -      |
 | title              | 标题                                              | string                                                                   | -      |
 | formType           | 表单类型                                          | 'collapse' 或 'card' 或 'pure'                                           | 'card' |
-| form               | useForm返回值,替换原有submitRef作用可进行表单验证 | Object 必传                                                              | -      |
+| form               | useForm返回值,替换原有submitRef作用可进行表单验证 | UseFormProps 必传                                                              | -      |
 | readOnly           | 是否是只读模式模式                                | boolean                                                                  | false  |
 | readOnlyProps      | 只读模式 参考Descriptions参数                     | DescriptionsProps                                                        | {}     |
 | customWidgetsList  | 可配置自定义组件                                  | { [key: string]: any }                                                   | {}     |
@@ -356,6 +479,7 @@ ReactDOM.render(<Demo />, _mount_);
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
 | required     | 是否必填                                                      | boolean                 | -      |
+| rulers     | 验证规则                                                      | RulersProps[]                 | -      |
 
 
 ## FormItemsOptionsProps
@@ -365,7 +489,22 @@ ReactDOM.render(<Demo />, _mount_);
 | value    | key      | string 或 number(必传值) | -      |
 | disabled | 是否禁用 | boolean                  | -      |
 
+## UseFormProps
+| 参数     | 说明     | 类型                     | 默认值 |
+| -------- | -------- | ------------------------ | ------ |
+| formRef    | 表单事件和值集合ref      | { [key: string]: any } | -      |
+| submitvalidate | 表单验证 | ()=>void | - | 
+| resetForm | 重置表单 | ()=>void | - |  
+| getFieldValues | 获取表单值 | ()=>void | - |  
+| getErrors | 获取表单错误 | ()=>void | - |      
 
+## RulersProps
+| 参数     | 说明     | 类型                     | 默认值 |
+| -------- | -------- | ------------------------ | ------ |
+| message    | 验证提示消息     | string           | -      |
+| pattern    | 验证正则      | RegExp | -      |
+| validator | 自定义验证规则 | (value: any | any[]) => boolean | - | 
+| required | 是否必填 | boolean | - | 
 
 ## 贡献者
 

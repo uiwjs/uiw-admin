@@ -39,14 +39,13 @@ export interface Options extends AxiosRequestConfig {
 export default function request(url: string, options: Options = {}) {
   const method = options.method || 'GET';
   const { body, headers, requestType = 'json', ...rest } = options;
-  const { data } = body;
   // 删除swr_Rest_Time
-  data?.swr_Rest_Time && delete data.swr_Rest_Time;
+  body?.swr_Rest_Time && delete body.swr_Rest_Time;
   const newOptions: Options = {
     ...rest,
     url,
     method,
-    data: { ...body },
+    data: body,
   };
 
   if (requestType === 'json') {
@@ -55,7 +54,7 @@ export default function request(url: string, options: Options = {}) {
       Accept: 'application/json',
       ...(headers || {}),
     };
-    newOptions.data = JSON.stringify(body);
+    newOptions.data = JSON.stringify(body || {});
   } else if (requestType === 'form') {
     const newFormData = new FormData();
     Object.entries(body || {}).forEach(([key, value]: [string, any]) => {
@@ -72,7 +71,7 @@ export default function request(url: string, options: Options = {}) {
       Accept: 'application/json',
       ...(headers || {}),
     };
-    newOptions.data = qs.stringify(body, { arrayFormat: 'repeat' });
+    newOptions.data = qs.stringify(body || {}, { arrayFormat: 'repeat' });
   }
 
   if (/(GET)/.test(method)) {

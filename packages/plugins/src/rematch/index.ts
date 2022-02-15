@@ -6,13 +6,10 @@ import path from 'path';
 import webpack from 'webpack';
 import { IsModel } from './../utils';
 import createRematchTemps, { createModelsTempStr } from './temp';
-export type ModelType = {
-  path: string;
-  filename: string;
-  modelName?: string;
-  isCreateModel: boolean;
-};
+import { ModelType } from './../utils/interface';
+import chokidar from 'chokidar';
 
+export type { ModelType };
 class RematchWebpackPlugin {
   oldModel: ModelType[] = [];
   deleteModel: string[] = [];
@@ -20,12 +17,14 @@ class RematchWebpackPlugin {
 
   src = '';
   uiw = '';
-
+  lazyLoad: boolean = false;
   newPath = '';
 
-  constructor() {
+  constructor(props?: { lazyLoad?: boolean }) {
     this.src = path.resolve(process.cwd(), 'src');
     this.uiw = path.resolve(process.cwd(), 'src/.uiw');
+    this.lazyLoad = !!props?.lazyLoad;
+
     this.getPathDeep(this.src);
     this.restCreate();
   }
@@ -47,12 +46,18 @@ class RematchWebpackPlugin {
           if (isFile && isModel && /\.(ts||js)$/.test(filename)) {
             const data = fs.readFileSync(filedir, { encoding: 'utf-8' });
             const { isModels, modelNames, isCreateModel } = IsModel(data);
+            const pathUrls = `${filedir}`.replace(/\\/g, '/');
+            const location = pathUrls.replace(/\/models.*$/, '');
+            const srcPath = pathUrls.replace(new RegExp(this.src), '.');
             if (isModels) {
               this.oldModel.push({
-                path: filedir,
+                path: pathUrls,
                 filename: filename.replace(/\.(ts|js)$/, ''),
                 modelName: modelNames,
                 isCreateModel,
+                location,
+                name: modelNames || filename,
+                srcPath,
               });
             }
           }
@@ -69,11 +74,7 @@ class RematchWebpackPlugin {
 
   // 重新生成
   restCreate = () => {
-    let modelStr = createModelsTempStr(this.oldModel);
-    // this.oldModel.forEach((item) => {
-    //   const { path, filename } = item;
-    //   modelStr = modelStr + createTemp(path, filename);
-    // });
+    let modelStr = createModelsTempStr(this.oldModel, this.lazyLoad);
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
@@ -83,17 +84,25 @@ class RematchWebpackPlugin {
       createRematchTemps(modelStr),
       { flag: 'w+', encoding: 'utf-8' },
     );
+    if (this.lazyLoad) {
+      fs.writeFileSync(
+        path.resolve(process.cwd(), 'src/.uiw/modelsMap.json'),
+        JSON.stringify(this.oldModel, (_, value) => value, 2),
+        { flag: 'w+', encoding: 'utf-8' },
+      );
+    }
+
     this.field = '';
     this.deleteModel = [];
   };
 
   // 删除文件的时候
-  deleteField = () => {
+  deleteField = (newPath: string) => {
     const newModel: ModelType[] = [];
     this.oldModel.forEach((item) => {
       const { path } = item;
-      const rgx = new RegExp(`^${this.newPath}`);
-      if (rgx.test(path) || this.newPath === path) {
+      const rgx = new RegExp(`^${newPath}`);
+      if (rgx.test(path) || newPath === path) {
         this.deleteModel.push(path);
       } else {
         newModel.push(item);
@@ -107,8 +116,8 @@ class RematchWebpackPlugin {
     }
   };
   // 文件变更时
-  existenceField = () => {
-    const stats = fs.statSync(this.newPath);
+  existenceField = (newPath: string) => {
+    const stats = fs.statSync(newPath);
     if (!stats) {
       return;
     }
@@ -119,71 +128,99 @@ class RematchWebpackPlugin {
     // 1. 判断是否已经存在
     // 如果已经存在着直接更新
     let isMode = false;
-    let modelName;
+    let modelName: undefined;
     let isCreateModel = false;
     // 先判断路径是否存在models 和ts|js 结尾
-    if (/\.(ts|js)$/.test(this.newPath) && /models/.test(this.newPath)) {
+    if (/\.(ts|js)$/.test(newPath) && /models/.test(newPath)) {
       const {
         isModels,
         modelNames,
         isCreateModel: isCreate,
-      } = IsModel(fs.readFileSync(this.newPath, { encoding: 'utf-8' }));
+      } = IsModel(fs.readFileSync(newPath, { encoding: 'utf-8' }));
       modelName = modelNames;
       isMode = isModels;
       isCreateModel = isCreate;
     }
-    const newFile = this.oldModel.find((item) => item.path === this.newPath);
+    const newFile = this.oldModel.find((item) => item.path === newPath);
     if (newFile) {
       // 进行判断是否还是 model
       if (!isMode) {
-        this.deleteModel.push(this.newPath);
+        this.deleteModel.push(newPath);
         // 过滤出不是 一个 model 文件的项
-        this.oldModel = this.oldModel.filter(
-          (item) => item.path !== this.newPath,
-        );
+        this.oldModel = this.oldModel.filter((item) => item.path !== newPath);
+      } else {
+        // 更新内容 重新生成
+        this.oldModel = this.oldModel.map((item) => {
+          if (item.path === newPath) {
+            return {
+              ...item,
+              name: modelName || item.name,
+              modelName,
+            };
+          }
+          return { ...item };
+        });
       }
       this.restCreate();
     } else {
       // 判断是不是 model  是则更新
       if (isMode) {
-        const arr = this.newPath.split(/\\|\//);
-        let filename = arr[arr.length - 1].replace(/\.(ts|js)/, '');
+        const pathUrls = `${newPath}`.replace(/\\/g, '/');
+        const arr = pathUrls.split(/\\|\//);
+        let filename = arr[arr.length - 1].replace(/\.(ts|js)$/, '');
+        const location = pathUrls.replace(/\/models.*$/, '');
+        const srcPath = pathUrls.replace(new RegExp(this.src), '.');
         this.oldModel.push({
-          path: this.newPath,
+          path: pathUrls,
           filename,
           modelName,
           isCreateModel,
+          location,
+          name: modelName || filename,
+          srcPath,
         });
         this.restCreate();
       }
     }
   };
   // 校验文件
-  checkField = () => {
+  checkField = (newPath: string) => {
     // 校验文件是否存在
-    const iss = fs.existsSync(this.newPath);
+    const iss = fs.existsSync(newPath);
     if (iss) {
       //存在
-      this.existenceField();
+      this.existenceField(newPath);
     } else {
       // 不存在
-      this.deleteField();
+      this.deleteField(newPath);
     }
   };
 
   apply(compiler: webpack.Compiler) {
     compiler.hooks.afterPlugins.tap('RematchWebpackPlugin', (...res) => {
       if (process.env.NODE_ENV === 'development') {
-        const watcher = fs.watch(path.resolve(process.cwd(), 'src'), {
-          recursive: true,
-        });
-        watcher.on('change', (type, filename) => {
-          if (typeof filename === 'string') {
-            this.field = filename as string;
-            this.newPath = path.resolve(process.cwd(), 'src', this.field);
-            this.checkField();
-          }
-        });
+        chokidar
+          .watch(path.resolve(process.cwd(), 'src'), {
+            cwd: path.resolve(process.cwd(), 'src'),
+          })
+          .on('all', (event, pathName) => {
+            if (
+              ['change', 'add', 'unlink'].includes(event) &&
+              /(models\/|models\.(ts|js))/.test(pathName)
+            ) {
+              this.checkField(path.resolve(process.cwd(), 'src', pathName));
+            }
+          });
+        // const watcher = fs.watch(path.resolve(process.cwd(), 'src'), {
+        //   recursive: true,
+        // });
+        // watcher.on('change', (type, filename) => {
+        //   if (typeof filename === 'string') {
+        //     this.field = filename as string;
+        //     this.newPath = path.resolve(process.cwd(), 'src', this.field);
+        //     this.checkField();
+        //   }
+        // });
       }
     });
   }

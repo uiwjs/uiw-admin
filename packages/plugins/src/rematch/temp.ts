@@ -1,8 +1,12 @@
+import path from 'path';
 export interface TempProps {
-  models: string;
+  lazyModelsStr: string;
   importStr: string;
-  createModelsStr: string;
+  addModelStr: string;
   typeModels: string;
+  createModelsStr: string;
+  models: string;
+  lazyLoad: boolean;
 }
 // 模板
 export default (str: TempProps) => {
@@ -18,9 +22,9 @@ import {
 } from '@rematch/core';
 import loading, { ExtraModelsFromLoading } from '@rematch/loading';
 ${str.importStr}
-${str.createModelsStr}
+${!str.lazyLoad ? str.createModelsStr : ''}
 export const models = {
-  ${str.models}
+  ${!str.lazyLoad ? str.models : ''}
 }
 export interface RootModel extends Models<RootModel> {
   ${str.typeModels}
@@ -49,31 +53,52 @@ export const createModelsTempStr = (
     modelName?: string;
     isCreateModel: boolean;
   }[],
+  lazyLoad: boolean,
 ) => {
   let importStr = '';
-  let createModelsStr = '';
+  let lazyModelsStr = '';
   let typeModels = '';
+  let addModelStr = '';
+  let createModelsStr = '';
   let models = '';
-  modelArr.forEach((item) => {
-    const { path, filename, modelName, isCreateModel } = item;
-    const pathUrls = `${path}`.replace(/\\/g, '/').replace(/\.(js|ts)/, '');
+  const Reg = new RegExp(`^${path.resolve(process.cwd(), 'src/models/')}`);
+
+  modelArr.forEach((item, index) => {
+    const { path: paths, filename, modelName, isCreateModel } = item;
+    const pathUrls = `${paths}`.replace(/\\/g, '/').replace(/\.(js|ts)/, '');
     const names = modelName || filename;
-    importStr = importStr + `import ${names} from "${pathUrls}";\n`;
-    if (isCreateModel) {
-      createModelsStr = createModelsStr + `const ${names}Model = ${names};\n`;
-    } else {
-      createModelsStr =
-        createModelsStr +
-        `const ${names}Model = createModel<RootModel>()(${names});\n`;
+    importStr =
+      importStr + `import ${names}Model${index} from "${pathUrls}";\n`;
+    if ((lazyLoad && Reg.test(item.path)) || !lazyLoad) {
+      lazyModelsStr =
+        lazyModelsStr +
+        `const ${names}Model${index} = (await import("${pathUrls}")).default;\n`;
+      if (isCreateModel) {
+        addModelStr =
+          addModelStr +
+          `store.addModel({ name: "${names}", ...${names}Model${index} });\n`;
+        createModelsStr =
+          createModelsStr + `const ${names}Model = ${names}Model${index};\n`;
+      } else {
+        addModelStr =
+          addModelStr +
+          `store.addModel({ name: "${names}", ...createModel<RootModel>()(${names}Model${index}) });\n`;
+        createModelsStr =
+          createModelsStr +
+          `const ${names}Model = createModel<RootModel>()(${names}Model${index});\n`;
+      }
+      models = models + `${names}:${names}Model,\n`;
     }
-    typeModels = typeModels + ` ${names}:typeof  ${names}Model,\n`;
-    models = models + ` ${names}:${names}Model,\n`;
+    typeModels = typeModels + ` ${names}:typeof  ${names}Model${index},\n`;
   });
   return {
     importStr,
-    createModelsStr,
+    lazyModelsStr,
     typeModels,
+    addModelStr,
     models,
+    lazyLoad,
+    createModelsStr,
   };
 };
 

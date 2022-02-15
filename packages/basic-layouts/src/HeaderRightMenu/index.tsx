@@ -65,7 +65,13 @@ export default function HeaderRightMenu({
     {
       title: '退出登录',
       icon: 'logout',
-      onClick: () => navigate('/login', { replace: true }),
+      onClick: () => {
+        navigate('/login', { replace: true });
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('auth');
+        localStorage.removeItem('token');
+        localStorage.removeItem('auth');
+      },
     },
   ];
 

@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/router-control",
-  "version": "5.2.12",
+  "version": "5.2.13",
   "description": "router-control",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/router-control#readme",
@@ -46,8 +46,8 @@
     "@babel/runtime": "7.16.7",
     "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
-    "@uiw-admin/exceptions": "5.2.12",
-    "@uiw-admin/models": "5.2.12",
+    "@uiw-admin/exceptions": "5.2.13",
+    "@uiw-admin/models": "5.2.13",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "7.2.6",

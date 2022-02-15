@@ -20,24 +20,33 @@ import { Exceptions403 } from '@uiw-admin/exceptions';
 import { createBrowserHistory } from 'history';
 import { ControllerProps, RoutersProps } from './interface';
 export * from './interface';
+import { useLoadModels } from './utils';
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
 export let navigate: NavigateFunction = () => {};
 
-// json文件格式
-export const Loadable =
-  (Component: React.LazyExoticComponent<(props?: any) => JSX.Element>) =>
-  (props: any) => {
+export const Loadable = (
+  Component: React.LazyExoticComponent<(props?: any) => JSX.Element>,
+  path?: string,
+  addModels?: ControllerProps['addModels'],
+) => {
+  return (props: any) => {
     const location = useLocation();
     const navigate = useNavigate();
     const params = useParams();
+    const load = useLoadModels({ path, addModels });
+
+    if (load) {
+      return <div>Loading...</div>;
+    }
     return (
       <React.Suspense fallback={<div>Loading...</div>}>
         <Component {...props} router={{ location, navigate, params }} />
       </React.Suspense>
     );
   };
+};
 
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
@@ -52,6 +61,7 @@ export const AuthLayout = (props: any) => {
   }
   return props.children;
 };
+
 /** 递归路由 判断是否有权限  */
 export const getDeepTreeRoute = (
   routes: RoutersProps[],
@@ -103,18 +113,23 @@ export const getDeepTreeRoute = (
   });
 };
 
-const getTree = (routes: RoutersProps[] = []): JSX.Element[] => {
+const getTree = (
+  routes: RoutersProps[] = [],
+  addModels: ControllerProps['addModels'],
+): JSX.Element[] => {
   let list: JSX.Element[] = [];
   routes.forEach((item, ind) => {
     const itemObj = item;
     // 判断是否有子项进行递归处理
     if (item.routes) {
-      itemObj.children = getTree(itemObj.routes);
+      itemObj.children = getTree(itemObj.routes, addModels);
     }
     // 懒加载
     if (!React.isValidElement(itemObj.component) && itemObj.component) {
       const Com = Loadable(
         item.component as React.LazyExoticComponent<() => JSX.Element>,
+        item.path,
+        addModels,
       );
       itemObj.element = <Com />;
     }
@@ -156,7 +171,7 @@ export function RouteChild(props: ControllerProps = {}) {
   const roue = React.useMemo(
     () =>
       createRoutesFromChildren(
-        getTree(getDeepTreeRoute(RoutePathArr, authList)),
+        getTree(getDeepTreeRoute(RoutePathArr, authList), props.addModels),
       ),
     [JSON.stringify(authList)],
   );
@@ -167,29 +182,34 @@ export function RouteChild(props: ControllerProps = {}) {
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routeType } = props;
+  const { routeType, addModels } = props;
+  const load = useLoadModels({ path: '/', addModels });
   // @ts-ignore
   let base = BASE_NAME;
   const dom = React.useMemo(() => {
     if (routeType === 'hash') {
       return (
         <HashRouter window={window} basename={base}>
-          <RouteChild />
+          <RouteChild addModels={props.addModels} />
         </HashRouter>
       );
     } else if (routeType === 'browser') {
       return (
         <BrowserRouter window={window} basename={base}>
-          <RouteChild />
+          <RouteChild addModels={props.addModels} />
         </BrowserRouter>
       );
     }
     return (
       <HistoryRouter history={history} basename={base}>
-        <RouteChild />
+        <RouteChild addModels={props.addModels} />
       </HistoryRouter>
     );
   }, [routeType]);
+
+  if (load) {
+    return <div>Loading...</div>;
+  }
 
   return <Provider store={store}>{dom}</Provider>;
 }
