@@ -85,7 +85,9 @@ export interface UseFormProps {
   formList: { current?: FormListProps }[];
   setFormList: (p: { current?: FormListProps }[]) => void;
   setFormInstance: (p: any) => void;
-  setErrors: (p: { [key: string]: any }) => void;
+  errorsRef?: {
+    [key: string]: any;
+  };
 }
 
 export interface FormListProps {

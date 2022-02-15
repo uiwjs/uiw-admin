@@ -23,7 +23,7 @@ function FormDom({
   const baseRef = useRef<any>();
   const store = useStore();
 
-  const { setErrors, setFormInstance, formList, setFormList } = store as any;
+  const { errorsRef, setFormInstance, formList, setFormList } = store as any;
 
   // 普通表单
   useEffect(() => setFormInstance?.(baseRef), [baseRef]);
@@ -70,7 +70,7 @@ function FormDom({
       onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
         if (error.filed) {
-          setErrors({ ...error.filed });
+          errorsRef.current = { ...error.filed };
           return { ...error.filed };
         }
         return null;
