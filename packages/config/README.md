@@ -37,9 +37,11 @@ export type DefaultDefineType = {
   /** 路由 跳转前缀 默认 "/" */
   BASE_NAME?: string;
   /** 本地存储使用 localStorage 还是  sessionStorage  */
-  STORAGE?: string;
+  STORAGE?:  "local" | "session" | string;;
   /** 版本  */
   VERSION?: string;
+ /** token 存储方式 默认与 `STORAGE` 值相同 */
+  TOKEN_STORAGE?: "local" | "session" | "cookie" | string
 };
 
 export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
@@ -145,9 +147,6 @@ ReactDOM.render(
 
 ```
 
-
-
-
 ## kktPlugins 
 
 [`KKT`](https://github.com/kktjs/kkt) 的 plugin
@@ -198,6 +197,8 @@ export const defaultDefine = {
   VERSION: JSON.stringify(
     require(path.resolve(process.cwd(), './package.json')).version || '0',
   ),
+   /** toekn 存储方式  ,默认与 `STORAGE` 值相同 **/
+  TOKEN_STORAGE: JSON.stringify("session")
 }
 ```
 

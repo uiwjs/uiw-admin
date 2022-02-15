@@ -47,6 +47,7 @@
     "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
     "@uiw-admin/exceptions": "5.2.13",
+    "@uiw-admin/utils": "5.2.13",
     "@uiw-admin/models": "5.2.13",
     "react": "17.0.2",
     "react-dom": "17.0.2",

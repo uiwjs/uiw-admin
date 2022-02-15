@@ -21,6 +21,7 @@ import { createBrowserHistory } from 'history';
 import { ControllerProps, RoutersProps } from './interface';
 export * from './interface';
 import { useLoadModels } from './utils';
+import { getCookie } from '@uiw-admin/utils';
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
@@ -53,8 +54,12 @@ export const AuthLayout = (props: any) => {
   // 本地 存储 token
   let token = sessionStorage.getItem('token');
   // @ts-ignore
-  if (STORAGE === 'local') {
+  if (TOKEN_STORAGE === 'local') {
     token = localStorage.getItem('token');
+  }
+  // @ts-ignore
+  if (TOKEN_STORAGE === 'cookie') {
+    token = getCookie('token');
   }
   if (!token) {
     return <Navigate to="/login" replace />;
