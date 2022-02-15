@@ -4,11 +4,7 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.2.15
 
-- @uiw-admin/components
-  - 🐞`ProTable`: 修复重置刷新api为空的问题，完善表单验证
-  
 
 ## 5.2.14
 
@@ -16,6 +12,7 @@
   - 🐞`ProForm`: 增加rulers验证
   - 🐞`ProForm`: `useFormProps`删除clickRef & 新增getErrors获取错误信息 & getFormValues更名getFieldValues(与uiw保持一致)
   - 完善upload组件
+  - 🐞`ProTable`: 修复重置刷新api为空的问题，完善表单验证
 
 - @uiw-admin/basic-layouts
   - 🌟 退出清空token
