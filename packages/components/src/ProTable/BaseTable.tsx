@@ -221,7 +221,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
         <Table
           // 判断是否添加选择框
           columns={
-            selectKey ? selectionCol.concat(defaultColumns) : defaultColumns
+            selectKey ? selectionCol.concat(defaultColumns()) : defaultColumns()
           }
           data={tableData}
           footer={
