@@ -16,6 +16,8 @@ export type DefaultDefineType = {
   VERSION?: string;
   /** token 存储方式 */
   TOKEN_STORAGE?: 'local' | 'session' | 'cookie' | string;
+  /** token 存储字段 ,默认 token  **/
+  TOKEN_NAME?: string;
 };
 
 /** 全局默认公共参数  */
@@ -31,6 +33,8 @@ export const defaultDefine: DefaultDefineType = {
     require(path.resolve(process.cwd(), './package.json')).version || '0',
   /** toekn 存储方式 **/
   TOKEN_STORAGE: 'session',
+  /** token 存储字段 **/
+  TOKEN_NAME: 'token',
 };
 
 export type ConfFun = (

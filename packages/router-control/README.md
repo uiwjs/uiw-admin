@@ -42,6 +42,8 @@ export interface ControllerProps {
   routeType?: "history" | "hash" | "browser";
   /** 加载 model 方法，(解决import引用地址问题报错) */ 
   addModels?: (path: string) => Promise<{ default: any }>;
+  /** 是否自动校验 "/" 路由  token 是否存在   */
+  isAutoAuth?: boolean;
 }
 
 ```
