@@ -41,7 +41,9 @@ export type DefaultDefineType = {
   /** 版本  */
   VERSION?: string;
  /** token 存储方式 默认与 `STORAGE` 值相同 */
-  TOKEN_STORAGE?: "local" | "session" | "cookie" | string
+  TOKEN_STORAGE?: "local" | "session" | "cookie" | string;
+  /** token 存储字段 ,默认 token  **/
+  TOKEN_NAME: string;
 };
 
 export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
@@ -197,6 +199,8 @@ export const defaultDefine = {
   VERSION: require(path.resolve(process.cwd(), './package.json')).version || '0',
   /** toekn 存储方式 ,默认与 `STORAGE` 值相同  **/
   TOKEN_STORAGE: 'session',
+    /** token 存储字段 ,默认 token  **/
+  TOKEN_NAME: "token";
 }
 ```
 

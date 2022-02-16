@@ -81,10 +81,7 @@ export default function request(url: string, options: Options = {}) {
   }
 
   // 加载 token
-  let token =
-    sessionStorage.getItem('token') ||
-    localStorage.getItem('token') ||
-    getCookie('token');
+  let token = sessionStorage.getItem('token') || localStorage.getItem('token');
 
   if (token) {
     newOptions.headers = {

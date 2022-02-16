@@ -62,4 +62,6 @@ export interface ControllerProps {
   routeType?: 'history' | 'hash' | 'browser';
   // addModels?: (modelsArr: { path: string, name: string }[], addModel: Store["addModel"]) => void
   addModels?: (path: string) => Promise<{ default: any }>;
+  /** 是否自动校验 "/" 路由  token 是否存在,   */
+  isAutoAuth?: boolean;
 }

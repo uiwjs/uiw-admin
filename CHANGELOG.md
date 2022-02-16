@@ -4,17 +4,28 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.17
+
+- @uiw-admin/config
+  - 🌟`define`: 新增 `TOKEN_NAME`参数，token 存储字段
+- @uiw-admin/router-control
+  - 🌟`isAutoAuth`: 是否自动校验 token，默认 true
 
 ## 5.2.16
+
 - @uiw-admin/components
   - 🐞`ProTable`: 修复columns不渲染问题
   - 🐞`ProForm`: useForm增加`formList`更改为`formStateList`
+
+
 ## 5.2.15
+
 - @uiw-admin/layout
   - 🌟 新增 `headerLayout`、`headerBackground`、`headerFontColor` 参数，用于头部布局
 - @uiw-admin/components
   - 🐞`ProForm`: rulers更名rules
   - 🐞`ProForm`: useForm增加`formList`返回多表单验证列表
+  
 ## 5.2.14
 
 - @uiw-admin/components
