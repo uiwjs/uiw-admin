@@ -226,7 +226,7 @@ const Demo = () => {
           // 触发验证
           await form.submitvalidate();
           // 获取错误信息
-          const errors = form.getErrors()
+          const errors = await form.getErrors()
           if(errors && Object.keys(errors).length > 0 ) return
          // 调用请求接口
        }}
@@ -311,14 +311,13 @@ const Demo = () => {
           await form?.submitvalidate()
           await form2?.submitvalidate()
           // 获取错误信息
-          const errors =  form.getErrors()
-          const errors2 = form2.getErrors()
+          const errors = await form.getErrors()
+          const errors2 = await form2.getErrors()
 
           if(errors && Object.keys(errors).length > 0 ) return
           if(errors2 && Object.keys(errors2).length > 0 ) return
           // 获取表单值
           const value = form.getFieldValues?.()
-          console.log("form",form)
           const value2 = form2.getFieldValues?.()
           const params = {...value,...value2}
           console.log("params",params)
@@ -531,6 +530,7 @@ ReactDOM.render(<Demo />, _mount_);
 | formDatas          | 表单项集合                                        | FormItemsProps[]                                                         | []     |
 | onSubmit           | 提交表单回调 需配合btns，继承uiw/form submit      | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
 | onChange           | 表单值变化回调，继承uiw/form onChange             | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
+| onSubmitError           | 调用 onSubmit 抛出的任何错误。从字段名称返回对象映射。 继承uiw/form onSubmitError             | (error:`any`) => void |  -     |
 | showSaveButton     | 展示提交按钮                                      | boolean                                                                  | false  |
 | showResetButton    | 展示重置按钮                                      | boolean                                                                  | false  |
 | saveButtonProps    | 提交按钮api;继承于uiw/button                      | boolean                                                                  | false  |

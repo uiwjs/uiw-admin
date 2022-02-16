@@ -43,11 +43,7 @@ export interface FormItemsProps
   rules?: rulesProps[];
 }
 
-export interface ProFormProps
-  extends Omit<
-    UiwFormProps<any>,
-    'fields' | 'children' | 'onSubmit' | 'onChange'
-  > {
+export interface ProFormProps {
   formDatas?: FormItemsProps[];
   onSubmit?: (
     initial: Record<string, any>,
@@ -57,6 +53,11 @@ export interface ProFormProps
     initial: Record<string, any>,
     current: Record<string, any>,
   ) => void;
+  // afterSubmit?: (
+  //   initial: Record<string, any>,
+  //   current: Record<string, any>,
+  // ) => void;
+  onSubmitError?: (error: any) => void;
   buttonsContainer?: React.CSSProperties;
   title?: string;
   formType?: 'collapse' | 'card' | 'pure';

@@ -10,13 +10,14 @@ function FormDom({
   formfields,
   onSubmit,
   onChange,
+  onSubmitError,
+  // afterSubmit,
   buttonsContainer,
   showSaveButton = false,
   showResetButton = false,
   saveButtonProps = {},
   resetButtonProps = {},
   type,
-  form,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
 }) {
@@ -28,7 +29,7 @@ function FormDom({
 
   // 普通表单
   useEffect(() => setFormState?.(baseRef), [baseRef]);
-
+  console.log('baseRef', baseRef);
   // 处理多表单
   useEffect(() => {
     if (baseRef) {
@@ -70,15 +71,20 @@ function FormDom({
       }}
       onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
-        if (error.filed) {
-          errorsRef.current = { ...error.filed };
-          return { ...error.filed };
+        if (onSubmitError) {
+          onSubmitError?.(error);
+        } else {
+          return error.filed ? { ...error.filed } : null;
         }
-        return null;
       }}
+      // afterSubmit={({ initial, current }:any)=>console.log('current',current,'initial',initial)}
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
+        const { errors } = state;
+        if (errorsRef) {
+          errorsRef.current = { ...errors };
+        }
         return (
           <React.Fragment>
             <Row gutter={10}>
