@@ -279,6 +279,7 @@ const Demo = () => {
        />
         <div style={{ marginTop:15 }} />
         <ProForm
+         formType="pure"
          form={form2}
          title="表单二"
          formType="card"
@@ -337,38 +338,52 @@ ReactDOM.render(<Demo />, _mount_);
 import ReactDOM from 'react-dom';
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
-import { Button } from 'uiw'
+import { Button,Card } from 'uiw'
 const Demo = () => {
   const form = useForm()
-  const datas = [
-   [
-      {
-        label: '司机手机号',
-        key: 'phone',
-        widget: 'input',
-        rules: [{ required: true, message: '请输入' }],
-      },
-    ],
-    [
-      {
-        label: '司机手机号',
-        key: 'phone',
-        widget: 'input',
-        rules: [{ required: true, message: '请输入' }],
-      },
-    ]
-  ]
+  const [items,setItems] = useState([])
+  const handleAddFormItems = (type,idx)=>{
+    const datas = items
+    if(type==='add'){
+       items.push([
+        {
+          label: '司机手机号',
+          key: 'phone',
+          widget: 'input',
+          rules: [{ required: true, message: '请输入' }],
+        },
+      ])
+    }
+    if(type==='delete'){
+      datas.splice(idx,1)
+    }
+    setItems([...datas])
+  }
+
+  const handleSave = ()=>{
+     // 表单验证
+     form.formStateList.forEach(item => item?.current?.onSubmit())
+     // 获取值
+     const params = (form.formStateList.map(value => ({ ...value?.current?.getFieldValues() }))) || [];
+     console.log('params', params)
+     // 调用请求接口
+  }
+
   return (
      <div>
-      {
-        datas.map((item, idx) => {
+      {items.map((item, idx) => {
           return (
-            <ProForm
+           <Card 
+            title={`表单${idx + 1}`} 
+            key={idx} 
+            style={{ marginBottom:10 }} 
+            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
+             <ProForm
+              // 表单类型
+              formType="pure"
               type="array"
               form={form}
-              key={idx}
               style={{ marginBottom: 10 }}
-              title={`表单${idx + 1}`}
               cardProps={{
                 noHover: true,
               }}
@@ -376,24 +391,19 @@ const Demo = () => {
               buttonsContainer={{ justifyContent: 'flex-start' }}
               formDatas={item}
             />
+          </Card>
           )
-        })
-      }
+        })}
+       <Button 
+        style={{ marginTop:10,width:80 }}  
+        type="primary"  
+        onClick={handleAddFormItems.bind(this,'add')}>
+         新增
+        </Button>
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
-        onClick={ async ()=>{
-          // 表单验证
-          form.formStateList.forEach(item => item?.current?.onSubmit())
-          const errors = form.getErrors()
-          // 获取错误信息
-          if (errors) {
-            return;
-          }
-          const params = (form.formStateList.map(value => ({ ...value?.current?.getFieldValues() }))) || [];
-          console.log('params', params)
-          // 调用请求接口
-       }}>
+        onClick={handleSave.bind(this)}>
         保存
       </Button>
     </div>
@@ -425,8 +435,6 @@ const Demo = () => {
     return (
        <ProForm
         form={form}
-         // 表单类型
-         formType="pure"
          readOnly={true}
          title="只读模式"
          // 只读模式下调整 一行的 DescriptionItems 数量,其余参数参考uiw/Descriptions
