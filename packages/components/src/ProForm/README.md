@@ -331,7 +331,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 表单数组进行提交
+### 表单数组进行提交(获取errors仍有问题待测试)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -384,13 +384,13 @@ const Demo = () => {
         type="primary" 
         onClick={ async ()=>{
           // 表单验证
-          form.formList.forEach(item => item?.current?.onSubmit())
+          form.formStateList.forEach(item => item?.current?.onSubmit())
           const errors = form.getErrors()
           // 获取错误信息
           if (errors) {
             return;
           }
-          const params = (form.formList.map(value => ({ ...value?.current?.getFieldValues() }))) || [];
+          const params = (form.formStateList.map(value => ({ ...value?.current?.getFieldValues() }))) || [];
           console.log('params', params)
           // 调用请求接口
        }}>
@@ -567,7 +567,7 @@ ReactDOM.render(<Demo />, _mount_);
 | resetForm | 重置表单 | ()=>void | - |  
 | getFieldValues | 获取表单值 | ()=>void | - |  
 | getErrors | 获取表单错误 | ()=>void | - |  
-| formList | 数组表单实例集合 | any[] | [] |      
+| formStateList | 数组表单实例集合 | any[] | [] |      
 
 ## rulesProps
 | 参数     | 说明     | 类型                     | 默认值 |

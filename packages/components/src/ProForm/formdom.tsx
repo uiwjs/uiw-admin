@@ -23,20 +23,21 @@ function FormDom({
   const baseRef = useRef<any>();
   const store = useStore();
 
-  const { errorsRef, setFormInstance, formList, setFormList } = store as any;
+  const { errorsRef, setFormState, formStateList, setFormStateList } =
+    store as any;
 
   // 普通表单
-  useEffect(() => setFormInstance?.(baseRef), [baseRef]);
+  useEffect(() => setFormState?.(baseRef), [baseRef]);
 
   // 处理多表单
   useEffect(() => {
     if (baseRef) {
       if (type === 'array') {
-        const datas = formList;
+        const datas = formStateList;
         datas.push(baseRef);
-        setFormList?.([...datas]);
+        setFormStateList?.([...datas]);
       }
-      return () => setFormList?.([]);
+      return () => setFormStateList?.([]);
     }
   }, [type]);
 
