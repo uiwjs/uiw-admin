@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+
+## 5.2.16
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复columns不渲染问题
+  - 🐞`ProForm`: useForm增加`formList`更改为`formStateList`
 ## 5.2.15
 - @uiw-admin/layout
   - 🌟 新增 `headerLayout`、`headerBackground`、`headerFontColor` 参数，用于头部布局
