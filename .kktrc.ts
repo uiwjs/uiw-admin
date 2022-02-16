@@ -7,6 +7,8 @@ export default defaultConfig({
   define: {
     // AUTH: false,
     STORAGE: 'local',
+    // TOKEN_STORAGE: "cookie",
+    // TOKEN_NAME: "存储字段"
   },
   // rematch: {
   //   lazyLoad: true,
