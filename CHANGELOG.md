@@ -10,6 +10,8 @@
   - 🌟`define`: 新增 `TOKEN_NAME`参数，token 存储字段
 - @uiw-admin/router-control
   - 🌟`isAutoAuth`: 是否自动校验 token，默认 true
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复columns不渲染问题
 
 ## 5.2.16
 
