@@ -188,7 +188,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 通过form api进行表单提交
+### 通过form api进行表单(提交,重置,设置)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -226,7 +226,7 @@ const Demo = () => {
           // 触发验证
           await form.submitvalidate();
           // 获取错误信息
-          const errors = await form.getErrors()
+          const errors = form.getError()
           if(errors && Object.keys(errors).length > 0 ) return
          // 调用请求接口
        }}
@@ -239,6 +239,13 @@ const Demo = () => {
         onClick={()=> form.resetForm() }
        >
         重置
+      </Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=> form.setFields({input:'1234'}) }
+       >
+        设置
       </Button>
     </div>
   );
@@ -311,8 +318,8 @@ const Demo = () => {
           await form?.submitvalidate()
           await form2?.submitvalidate()
           // 获取错误信息
-          const errors = await form.getErrors()
-          const errors2 = await form2.getErrors()
+          const errors = form.getError()
+          const errors2 = form2.getError()
 
           if(errors && Object.keys(errors).length > 0 ) return
           if(errors2 && Object.keys(errors2).length > 0 ) return
@@ -330,87 +337,6 @@ const Demo = () => {
 }
 ReactDOM.render(<Demo />, _mount_);
 ```
-
-### 表单数组进行提交(获取errors仍有问题待测试)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
-import React, { useState,useRef } from 'react';
-import { ProForm,useForm } from '@uiw-admin/components'
-import { Button,Card } from 'uiw'
-const Demo = () => {
-  const form = useForm()
-  const [items,setItems] = useState([])
-  const handleAddFormItems = (type,idx)=>{
-    const datas = items
-    if(type==='add'){
-       items.push([
-        {
-          label: '司机手机号',
-          key: 'phone',
-          widget: 'input',
-          rules: [{ required: true, message: '请输入' }],
-        },
-      ])
-    }
-    if(type==='delete'){
-      datas.splice(idx,1)
-    }
-    setItems([...datas])
-  }
-
-  const handleSave = ()=>{
-     // 表单验证
-     form.formStateList.forEach(item => item?.current?.onSubmit())
-     // 获取值
-     const params = (form.formStateList.map(value => ({ ...value?.current?.getFieldValues() }))) || [];
-     console.log('params', params)
-     // 调用请求接口
-  }
-
-  return (
-     <div>
-      {items.map((item, idx) => {
-          return (
-           <Card 
-            title={`表单${idx + 1}`} 
-            key={idx} 
-            style={{ marginBottom:10 }} 
-            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
-             <ProForm
-              // 表单类型
-              formType="pure"
-              type="array"
-              form={form}
-              style={{ marginBottom: 10 }}
-              cardProps={{
-                noHover: true,
-              }}
-              // 更新表单的值
-              buttonsContainer={{ justifyContent: 'flex-start' }}
-              formDatas={item}
-            />
-          </Card>
-          )
-        })}
-       <Button 
-        style={{ marginTop:10,width:80 }}  
-        type="primary"  
-        onClick={handleAddFormItems.bind(this,'add')}>
-         新增
-        </Button>
-       <Button 
-        style={{ marginTop:10,width:80 }} 
-        type="primary" 
-        onClick={handleSave.bind(this)}>
-        保存
-      </Button>
-    </div>
-  );
-}
-ReactDOM.render(<Demo />, _mount_);
-```
-
 ### 只读模式
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
@@ -572,10 +498,11 @@ ReactDOM.render(<Demo />, _mount_);
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | submitvalidate | 表单验证 | ()=>void | - | 
-| resetForm | 重置表单 | ()=>void | - |  
+| resetForm | 重置表单值 | ()=>void | - | 
+| onSubmit | 表单提交 | ()=>void | - |   
 | getFieldValues | 获取表单值 | ()=>void | - |  
-| getErrors | 获取表单错误 | ()=>void | - |  
-| formStateList | 数组表单实例集合 | any[] | [] |      
+| getError | 获取表单错误 | ()=>void | - |  
+| setFields | 设置表单的值 | ()=>void | [] |      
 
 ## rulesProps
 | 参数     | 说明     | 类型                     | 默认值 |

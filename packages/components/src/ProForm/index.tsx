@@ -26,15 +26,11 @@ export default function ProForm(props: ProFormProps) {
     [formDatas],
   );
 
-  const { errorsRef, setFormState, formStateList, setFormStateList } =
-    form || {};
+  const { setFormState } = form || {};
 
   const store = useMemo(
     () => ({
       setFormState,
-      errorsRef,
-      formStateList,
-      setFormStateList,
     }),
     [form],
   );

@@ -3,7 +3,7 @@ import {
   ButtonProps,
   DescriptionsProps,
   FormItemProps as UiwFormItemProps,
-  FormProps as UiwFormProps,
+  // FormProps as UiwFormProps,
   CardProps,
   CollapseProps,
   CollapsePanelProps,
@@ -75,24 +75,15 @@ export interface ProFormProps {
   cardProps?: CardProps;
   collapseProps?: CollapseProps;
   collapsePanelProps?: CollapsePanelProps;
-  type?: 'string' | 'array';
 }
 
 export interface UseFormProps {
   submitvalidate: () => void;
+  onSubmit: () => void;
   resetForm?: () => void;
   getFieldValues?: () => void;
-  getErrors: () => void;
-  formStateList: { current?: FormListProps }[];
-}
-
-export interface FormListProps {
-  onSubmit: () => void;
-  resetForm: () => void;
-  getFieldValues: () => void;
-  // errors?: {
-  //   [key: string]: any;
-  // };
+  getError: () => void;
+  setFields: () => void;
 }
 
 export interface rulesProps {

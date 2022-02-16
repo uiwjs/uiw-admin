@@ -17,30 +17,16 @@ function FormDom({
   showResetButton = false,
   saveButtonProps = {},
   resetButtonProps = {},
-  type,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
 }) {
   const baseRef = useRef<any>();
   const store = useStore();
 
-  const { errorsRef, setFormState, formStateList, setFormStateList } =
-    store as any;
+  const { setFormState } = store as any;
 
   // 普通表单
   useEffect(() => setFormState?.(baseRef), [baseRef]);
-  console.log('baseRef', baseRef);
-  // 处理多表单
-  useEffect(() => {
-    if (baseRef) {
-      if (type === 'array') {
-        const datas = formStateList;
-        datas.push(baseRef);
-        setFormStateList?.([...datas]);
-      }
-      return () => setFormStateList?.([]);
-    }
-  }, [type]);
 
   return (
     <Form
@@ -81,10 +67,6 @@ function FormDom({
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
-        const { errors } = state;
-        if (errorsRef) {
-          errorsRef.current = { ...errors };
-        }
         return (
           <React.Fragment>
             <Row gutter={10}>

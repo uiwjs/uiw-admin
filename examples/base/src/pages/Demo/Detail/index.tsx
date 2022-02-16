@@ -67,10 +67,12 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
     // 触发验证
     await form.submitvalidate()
     await form2.submitvalidate()
-    // 获取错误信息
-    const errors = await form.getErrors()
-    const errors2 = await form2.getErrors()
 
+    // 获取错误信息
+    const errors = form.getError()
+    const errors2 = form2.getError()
+
+    console.log('errors', errors, 'errors2', errors2)
     if (errors && Object.keys(errors).length > 0) return
     if (errors2 && Object.keys(errors2).length > 0) return
 
