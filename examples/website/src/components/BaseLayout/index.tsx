@@ -37,10 +37,10 @@ export default function Components(props: ComponentsProps) {
         </Header>
       </Affix>
       <Layout className={styles.layoutWrap}>
-        <Sider width={260} className={styles.layoutSider}>
-          <SiderMenu style={{ width: 260, height: 'calc(100vh - 53px)' }} />
+        <Sider width={220} className={styles.layoutSider}>
+          <SiderMenu style={{ width: 220, height: 'calc(100vh - 53px)' }} />
         </Sider>
-        <Content style={{ padding: 20 }} className={styles.layoutContent}>
+        <Content>
           <Outlet />
         </Content>
       </Layout>
