@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import { useRoutes, BrowserRouter } from 'react-router-dom';
+import { useRoutes, HashRouter } from 'react-router-dom';
 import '@uiw/reset.css';
 import { routes } from './router';
 import './index.less';
@@ -7,8 +7,8 @@ import './index.less';
 const App = () => useRoutes(routes);
 
 ReactDOM.render(
-  <BrowserRouter>
+  <HashRouter>
     <App />
-  </BrowserRouter>,
+  </HashRouter>,
   document.getElementById('root'),
 );
