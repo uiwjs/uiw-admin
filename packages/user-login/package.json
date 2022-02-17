@@ -41,7 +41,7 @@
     "@babel/runtime": ">=7.10.0",
     "react": ">=17.x",
     "react-dom": ">=17.x",
-    "uiw": ">=4.1.2"
+    "uiw": ">=4.11.0"
   },
   "dependencies": {
     "@uiw-admin/document-title": "5.2.18",

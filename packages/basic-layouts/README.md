@@ -87,7 +87,7 @@ export interface UseLayoutsProps {
 
 ## menuHide 
 
-> 隐藏菜单展示
+> 隐藏菜单展示，类型：boolen，默认：`false`
  
 ## 案例
 

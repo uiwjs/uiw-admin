@@ -122,7 +122,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                 align="middle"
                 style={{ textAlign: 'right', marginRight: 14 }}
               >
-                {searchBtns ? (
+                {searchBtns &&
                   searchBtns.map((btn: any, idx) =>
                     btn?.render ? (
                       <React.Fragment key={idx.toString()}>
@@ -137,12 +137,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                         {btn.label}
                       </Button>
                     ),
-                  )
-                ) : (
-                  <Button type="primary" htmlType="submit">
-                    查询
-                  </Button>
-                )}
+                  )}
               </Col>
             </Row>
           </div>
