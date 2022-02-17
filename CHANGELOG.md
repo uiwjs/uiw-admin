@@ -4,7 +4,7 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.2.18(未发版)
+## 5.2.18
 - @uiw-admin/components
   - 🐞`ProForm`: getErrors更名getError与uiw保持一致
   - 🌟`ProForm`: useForm返回新增setFields

@@ -19,7 +19,11 @@ export function getReadValue(
   widgetProps: any,
 ) {
   let content: string | number | React.ReactNode = '';
-  if (type === 'radio' || type === 'searchSelect' || type === 'select') {
+  if (
+    type === 'radio' ||
+    (type === 'searchSelect' && widgetProps?.mode !== 'multiple') ||
+    type === 'select'
+  ) {
     let value =
       option.filter(
         (itm: FormItemsOptionsProps) => itm.value === initialValue,
@@ -58,6 +62,10 @@ export function getReadValue(
         initialValue.map((item: FormItemsOptionsProps) => item.label)) ||
       [];
     content = contentList.join(';');
+  } else if (type === 'searchSelect' && widgetProps?.mode === 'multiple') {
+    for (const itm of option as any) {
+      if (initialValue.includes(itm.value)) content += `${itm.label}`;
+    }
   } else if (type === 'rate') {
     content = <Rate value={initialValue} readOnly />;
   } else {
