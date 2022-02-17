@@ -15,22 +15,21 @@ import React, { useState } from 'react';
 import { ProForm } from '@uiw-admin/components'
 import { Button,Notify,Slider } from 'uiw'
 const Demo = () => {
-   const [option, setOption] = React.useState([])
+   const [option] = React.useState([
+    { value: 1, label: '苹果' },
+    { value: 2, label: '西瓜' },
+    { value: 3, label: '香蕉' },
+    { value: 4, label: '东北大冻梨' },
+    { value: 5, label: '香蕉' },
+    { value: 6, label: '葡萄' },
+    { value: 6, label: '哈密瓜' },
+   ])
    const [loading, setLoading] = React.useState(false)
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
-    if (type === 'selectMultiple') {
+    if (type === 'searchSelect') {
       setLoading(true)
       setTimeout(() => {
-        setOption([
-          { value: 1, label: '苹果' },
-          { value: 2, label: '西瓜' },
-          { value: 3, label: '香蕉' },
-          { value: 4, label: '东北大冻梨' },
-          { value: 5, label: '香蕉' },
-          { value: 6, label: '葡萄' },
-          { value: 6, label: '哈密瓜' },
-        ])
         setLoading(false)
       }, 2000)
     }
@@ -136,19 +135,19 @@ const Demo = () => {
               widget: 'timePicker',
             },
             {
-              label: 'selectMultiple',
-              key: 'selectMultiple',
-              widget: 'selectMultiple',
+              label: 'searchSelect',
+              key: 'searchSelect',
+              widget: 'searchSelect',
               option: option,
               widgetProps: {
-                onSearch: handleSearch.bind(this,'selectMultiple'),
-                onClear: (value) => console.log('clearvalue', value),
+                mode:"multiple",
+                onSearch: handleSearch.bind(this,'searchSelect'),
                 onChange: (value) => console.log('changevalue', value),
                 onSelect: (value) => console.log('selectvalue', value),
                 loading: loading,
                 allowClear: true,
                 showSearch: true,
-                maxCount:2
+                style:{ width:"100%" }
               },
             },
             {
@@ -353,7 +352,7 @@ const Demo = () => {
     dateInput: '2021-1-21',
     monthPicker: '2021-1-21',
     timePicker: '2021-1-21 23:59:59',
-    selectMultiple:[{label:"周政",value:"周政"}],
+    searchSelect:["周政"],
     rate:2
   })
   const form = useForm()
@@ -415,11 +414,11 @@ const Demo = () => {
               initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker)
             },
             {
-              label: 'selectMultiple',
-              key: 'selectMultiple',
-              widget: 'selectMultiple',
+              label: 'searchSelect',
+              key: 'searchSelect',
+              widget: 'searchSelect',
               option:[{label:"周政",value:"周政"}],
-              initialValue:queryInfo.selectMultiple || []
+              initialValue:queryInfo.searchSelect || []
             },
             {
               label: 'rate',
@@ -564,7 +563,7 @@ ReactDOM.render(<Demo />, _mount_);
 | cardProps          | uiw`Card` API                                     | CardProps                                                                | {}     |
 | collapseProps      | uiw`Collapse` API                                 | CollapseProps                                                            | {}     |
 | collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
-| type     | 表单是数组表单(array)                                                      | srting或array                 | -      |
+
 ## FormItemsProps 继承uiw-FormItem
 | 参数         | 说明                                                          | 类型                    | 默认值 |
 | ------------ | ------------------------------------------------------------- | ----------------------- | ------ |
