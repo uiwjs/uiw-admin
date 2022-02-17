@@ -35,16 +35,15 @@ function ProForm(props: ProFormProps, ref: any) {
   useImperativeHandle(ref, () => {
     // 表单验证(同时兼容老api submitvalidate和新api onSubmit )
     const submitvalidate = () =>
-      formInstanceRef?.current?.current?.onSubmit() || null;
-    const onSubmit = () =>
-      formInstanceRef?.current?.current?.onSubmit() || null;
+      formInstanceRef.current?.current?.onSubmit() || null;
+    const onSubmit = () => formInstanceRef.current?.current?.onSubmit() || null;
     // 获取表单的值
     const getFieldValues = () =>
-      formInstanceRef?.current?.current?.getFieldValues() || {};
+      formInstanceRef.current?.current?.getFieldValues() || {};
     // 获取表单错误信息
     const getError = () => formInstanceRef?.current?.current?.getError() || {};
     return {
-      ...formInstanceRef.current,
+      ...formInstanceRef.current?.current,
       submitvalidate,
       onSubmit,
       getFieldValues,

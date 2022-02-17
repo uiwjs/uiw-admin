@@ -123,11 +123,17 @@ const Demo = () => {
               label: '年月日',
               key: 'dateInput',
               widget: 'dateInput',
+              widgetProps: {
+                format: 'YYYY-MM-DD'
+              },
             },
             {
               label: '年月',
               key: 'monthPicker',
               widget: 'monthPicker',
+               widgetProps: {
+                format: 'YYYY-MM'
+              },
             },
             {
               label: '时分秒',
@@ -191,7 +197,7 @@ ReactDOM.render(<Demo />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
-import React, { useState,useRef } from 'react';
+import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
@@ -256,7 +262,7 @@ ReactDOM.render(<Demo />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
-import React, { useState,useRef } from 'react';
+import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
@@ -350,8 +356,8 @@ const Demo = () => {
     select:"周政",
     dateInputsecond: '2021-1-21 23:59:59',
     dateInput: '2021-1-21',
-    monthPicker: '2021-1-21',
-    timePicker: '2021-1-21 23:59:59',
+    monthPicker: '2021-1',
+    timePicker: '2021-1-21 22:59:59',
     searchSelect:["周政"],
     rate:2
   })
@@ -393,19 +399,27 @@ const Demo = () => {
                 // 年月日时分秒
                 format: 'YYYY-MM-DD HH:mm:ss'
               },
-              initialValue: queryInfo.dateInputsecond && formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond))
+              initialValue: queryInfo?.dateInputsecond
             },
             {
               label: 'dateInput',
               key: 'dateInput',
               widget: 'dateInput',
-              initialValue: queryInfo.dateInput && formatter('YYYY-MM-DD', new Date(queryInfo.dateInput))
+              widgetProps: {
+                // 年月日
+                format: 'YYYY-MM-DD'
+              },
+              initialValue: queryInfo?.dateInput
             },
             {
               label: 'monthPicker',
               key: 'monthPicker',
               widget: 'monthPicker',
-              initialValue: queryInfo.monthPicker && formatter('YYYY-MM', new Date(queryInfo.monthPicker))
+              widgetProps: {
+                // 年月
+                format: 'YYYY-MM'
+              },
+              initialValue: queryInfo?.monthPicker
             },
             {
               label: 'timePicker',
@@ -487,7 +501,7 @@ const Demo = () => {
             style={{ marginBottom:10 }} 
             extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
              <ProForm
-              ref={(e) => (formRefList.current[idx] = e)}
+              ref={(e) =>(formRefList.current[idx] = e)}
               // 表单类型
               formType="pure"
               type="array"

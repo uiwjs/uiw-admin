@@ -27,12 +27,12 @@ function FormDom({
 
   const { setFormState } = store as any;
 
-  // 普通表单
+  // 通过store获取表单实例
+  useEffect(() => setFormState?.(baseRef), [baseRef]);
+
+  // 通过ref获取表单实例
   useEffect(() => {
-    setFormState?.(baseRef);
-    if (formInstanceRef) {
-      formInstanceRef.current = baseRef;
-    }
+    formInstanceRef.current = baseRef;
   }, [baseRef]);
 
   return (
