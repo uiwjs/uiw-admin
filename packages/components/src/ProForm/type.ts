@@ -84,6 +84,15 @@ export interface UseFormProps {
   getFieldValues?: () => void;
   getError: () => void;
   setFields: () => void;
+  setFormState: (p: UseFormStateProps) => void;
+}
+
+export interface UseFormStateProps {
+  onSubmit: () => void;
+  getFieldValues: () => void;
+  resetForm: () => void;
+  getError: () => void;
+  setFields: () => void;
 }
 
 export interface rulesProps {

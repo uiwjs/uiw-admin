@@ -1,16 +1,9 @@
 import { useState } from 'react';
-
-interface StateProps {
-  onSubmit: () => void;
-  getFieldValues: () => void;
-  resetForm: () => void;
-  getError: () => void;
-  setFields: () => void;
-}
+import { UseFormStateProps } from '../type';
 
 const useForm = () => {
-  // form(srting)表单实例
-  const [formState, setFormState] = useState<{ current: StateProps }>();
+  // form表单实例
+  const [formState, setFormState] = useState<{ current: UseFormStateProps }>();
 
   // 表单验证(同时兼容老api submitvalidate和新api onSubmit )
   const submitvalidate = () => formState?.current?.onSubmit() || null;

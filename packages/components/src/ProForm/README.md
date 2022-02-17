@@ -448,6 +448,99 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
+### 表单数组进行提交(获取errors仍有问题待测试)
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState,useRef } from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { Button,Card } from 'uiw'
+const Demo = () => {
+  const form = useForm()
+  const formRefList = useRef([])
+  const [items,setItems] = useState([])
+  // 过滤删除为null的ref
+  const formList = formRefList?.current.filter(n => n) || []
+
+  const handleAddFormItems = (type,idx)=>{
+    if(type==='add'){
+       items.push([
+        {
+          label: '司机手机号',
+          key: 'phone',
+          widget: 'input',
+        },
+      ])
+    }
+    if(type==='delete'){
+      items.splice(idx,1)
+    }
+    setItems([...items])
+  }
+
+  return (
+     <div>
+      {items.map((item, idx) => {
+          return (
+           <Card 
+            title={`表单${idx + 1}`} 
+            key={idx} 
+            style={{ marginBottom:10 }} 
+            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
+             <ProForm
+              ref={(e) => (formRefList.current[idx] = e)}
+              // 表单类型
+              formType="pure"
+              type="array"
+              form={form}
+              style={{ marginBottom: 10 }}
+              cardProps={{
+                noHover: true,
+              }}
+              // 更新表单的值
+              buttonsContainer={{ justifyContent: 'flex-start' }}
+              formDatas={item}
+              // 提交后验证
+              onSubmit={(initial, current) => {
+                const errorObj = {};
+                if (!current?.phone) {
+                  errorObj.phone = 'input不能为空';
+                }
+                if (Object.keys(errorObj).length > 0) {
+                const err = new Error();
+                err.filed = errorObj;
+                throw err;
+              }
+              // 获取值
+              const params = (formList.map(value => ({ ...value?.getFieldValues() }))) || [];
+              console.log('params', params)
+              // 调用请求接口
+            }}
+            />
+          </Card>
+          )
+        })}
+       <Button 
+        style={{ marginTop:10,width:80 }}  
+        type="primary"  
+        onClick={handleAddFormItems.bind(this,'add')}>
+         新增
+        </Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=>{
+          // 触发验证
+          formList.forEach(item => item.submitvalidate())
+        }}>
+        保存
+      </Button>
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
 
 ## Porps  继承uiw-Form
 

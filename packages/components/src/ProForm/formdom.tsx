@@ -17,8 +17,10 @@ function FormDom({
   showResetButton = false,
   saveButtonProps = {},
   resetButtonProps = {},
+  formInstanceRef,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
+  formInstanceRef: any;
 }) {
   const baseRef = useRef<any>();
   const store = useStore();
@@ -26,7 +28,12 @@ function FormDom({
   const { setFormState } = store as any;
 
   // 普通表单
-  useEffect(() => setFormState?.(baseRef), [baseRef]);
+  useEffect(() => {
+    setFormState?.(baseRef);
+    if (formInstanceRef) {
+      formInstanceRef.current = baseRef;
+    }
+  }, [baseRef]);
 
   return (
     <Form

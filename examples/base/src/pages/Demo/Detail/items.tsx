@@ -99,13 +99,13 @@ export const items = (queryInfo: any, attr: any) => [
       formatter('YYYY-MM', new Date(queryInfo.monthPicker)),
     rules: [{ required: true, message: '请选择' }],
   },
-  // {
-  //   label: '时分秒',
-  //   key: 'timePicker',
-  //   widget: 'timePicker',
-  //   initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
-  //   rules: [{ required: true, message: '请选择' }],
-  // },
+  {
+    label: '时分秒',
+    key: 'timePicker',
+    widget: 'timePicker',
+    initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
+    rules: [{ required: true, message: '请选择' }],
+  },
   // 只读模式下支持读取React.ReactNode
   {
     label: '自定义组件',
