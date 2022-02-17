@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatter } from 'uiw'
+
 export const items = (queryInfo: any, attr: any) => [
   {
     label: '司机手机号',
@@ -76,27 +76,24 @@ export const items = (queryInfo: any, attr: any) => [
     widgetProps: {
       format: 'YYYY-MM-DD HH:mm:ss',
     },
-    initialValue:
-      queryInfo.dateInputsecond &&
-      formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond)),
+    initialValue: queryInfo?.dateInputsecond,
     rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月日',
     key: 'dateInput',
     widget: 'dateInput',
-    initialValue:
-      queryInfo.dateInput &&
-      formatter('YYYY-MM-DD', new Date(queryInfo.dateInput)),
+    widgetProps: {
+      format: 'YYYY-MM-DD',
+    },
+    initialValue: queryInfo.dateInput,
     rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月',
     key: 'monthPicker',
     widget: 'monthPicker',
-    initialValue:
-      queryInfo.monthPicker &&
-      formatter('YYYY-MM', new Date(queryInfo.monthPicker)),
+    initialValue: queryInfo?.monthPicker,
     rules: [{ required: true, message: '请选择' }],
   },
   {
