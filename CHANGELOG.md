@@ -10,7 +10,7 @@
   - 🌟`ProForm`: useForm返回新增setFields
   - 🌟`ProForm`: 增加ref,可通过ref获取form实例方法
 - @uiw-admin/basic-layout
-  - 🌟`新增 `menuHide` 参数，用于隐藏菜单
+  - 🌟 新增 `menuHide` 参数，用于隐藏菜单
 
 
 ## 5.2.17
