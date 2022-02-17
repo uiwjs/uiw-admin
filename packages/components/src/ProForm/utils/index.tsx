@@ -59,7 +59,6 @@ export function getReadValue(
       [];
     content = contentList.join(';');
   } else if (type === 'rate') {
-    console.log('initialValue', initialValue);
     content = <Rate value={initialValue} readOnly />;
   } else {
     // initialValue 支持 string number 或者 自定义

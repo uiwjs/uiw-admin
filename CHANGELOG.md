@@ -8,6 +8,7 @@
 - @uiw-admin/components
   - 🐞`ProForm`: getErrors更名getError与uiw保持一致
   - 🌟`ProForm`: useForm返回新增setFields
+  - 🌟`ProForm`: 增加ref,可通过ref获取form实例方法
 ## 5.2.17
 
 - @uiw-admin/config
