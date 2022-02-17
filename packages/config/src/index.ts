@@ -11,23 +11,30 @@ export type DefaultDefineType = {
   /** 路由 跳转前缀 默认 "/" */
   BASE_NAME?: string;
   /** 本地存储使用 localStorage 还是  sessionStorage  */
-  STORAGE?: string;
+  STORAGE?: 'local' | 'session' | string;
   /** 版本  */
   VERSION?: string;
+  /** token 存储方式 */
+  TOKEN_STORAGE?: 'local' | 'session' | 'cookie' | string;
+  /** token 存储字段 ,默认 token  **/
+  TOKEN_NAME?: string;
 };
 
 /** 全局默认公共参数  */
 export const defaultDefine: DefaultDefineType = {
   /** 权限校验  默认 true */
-  AUTH: JSON.stringify(true),
+  AUTH: true,
   /** 路由 跳转前缀 默认 "/" */
-  BASE_NAME: JSON.stringify('/'),
+  BASE_NAME: '/',
   /** 本地存储使用 localStorage 还是  sessionStorage  */
-  STORAGE: JSON.stringify('session'), // local | session
+  STORAGE: 'session', // local | session
   /** 版本  */
-  VERSION: JSON.stringify(
+  VERSION:
     require(path.resolve(process.cwd(), './package.json')).version || '0',
-  ),
+  /** toekn 存储方式 **/
+  TOKEN_STORAGE: 'session',
+  /** token 存储字段 **/
+  TOKEN_NAME: 'token',
 };
 
 export type ConfFun = (
@@ -160,10 +167,12 @@ export default (props: ConfigProps) => {
       });
     }
 
+    if (define && Reflect.has(define, 'STORAGE')) {
+      defaultDefine.TOKEN_STORAGE = Reflect.get(define, 'STORAGE');
+    }
     conf.plugins!.push(
       new webpack.DefinePlugin({
-        ...defaultDefine,
-        ...transformationDefineString(define || {}),
+        ...transformationDefineString({ ...defaultDefine, ...(define || {}) }),
         BINDPAGR: JSON.stringify(!!rematch?.lazyLoad),
       }),
       ...plugin,

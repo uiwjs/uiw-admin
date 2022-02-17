@@ -73,8 +73,6 @@ const Demo = () => {
   return (
     <React.Fragment>
       <ProTable
-        // style={{textAlign}}
-        scroll={{ x: 1280 }}
         searchBtns={[
           { label: '搜索', type: 'primary', htmlType: 'submit' },
           {

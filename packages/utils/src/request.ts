@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 // import history from '../routes/history';
 import { splitUrl } from './utils';
+import { getCookie } from './cookies';
 import qs from 'qs';
 // Get the current location.
 // const location = history.location;

@@ -36,10 +36,7 @@ module.exports.selectById = function (req, res) {
           name: 'uiw.png',
         },
       ],
-      selectMultiple: [
-        { value: 1, label: '苹果' },
-        { value: 2, label: '西瓜' },
-      ],
+      searchSelect: [1, 2],
       rate: 4,
       input2: '送心',
     },

@@ -2,7 +2,7 @@
 
 ## 注意
 > [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/form),
- 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,`MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`。
+ 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,`MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
 <!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 <!--ProForm-->
@@ -15,22 +15,21 @@ import React, { useState } from 'react';
 import { ProForm } from '@uiw-admin/components'
 import { Button,Notify,Slider } from 'uiw'
 const Demo = () => {
-   const [option, setOption] = React.useState([])
+   const [option] = React.useState([
+    { value: 1, label: '苹果' },
+    { value: 2, label: '西瓜' },
+    { value: 3, label: '香蕉' },
+    { value: 4, label: '东北大冻梨' },
+    { value: 5, label: '香蕉' },
+    { value: 6, label: '葡萄' },
+    { value: 6, label: '哈密瓜' },
+   ])
    const [loading, setLoading] = React.useState(false)
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
-    if (type === 'selectMultiple') {
+    if (type === 'searchSelect') {
       setLoading(true)
       setTimeout(() => {
-        setOption([
-          { value: 1, label: '苹果' },
-          { value: 2, label: '西瓜' },
-          { value: 3, label: '香蕉' },
-          { value: 4, label: '东北大冻梨' },
-          { value: 5, label: '香蕉' },
-          { value: 6, label: '葡萄' },
-          { value: 6, label: '哈密瓜' },
-        ])
         setLoading(false)
       }, 2000)
     }
@@ -136,19 +135,19 @@ const Demo = () => {
               widget: 'timePicker',
             },
             {
-              label: 'selectMultiple',
-              key: 'selectMultiple',
-              widget: 'selectMultiple',
+              label: 'searchSelect',
+              key: 'searchSelect',
+              widget: 'searchSelect',
               option: option,
               widgetProps: {
-                onSearch: handleSearch.bind(this,'selectMultiple'),
-                onClear: (value) => console.log('clearvalue', value),
+                mode:"multiple",
+                onSearch: handleSearch.bind(this,'searchSelect'),
                 onChange: (value) => console.log('changevalue', value),
                 onSelect: (value) => console.log('selectvalue', value),
                 loading: loading,
                 allowClear: true,
                 showSearch: true,
-                maxCount:2
+                style:{ width:"100%" }
               },
             },
             {
@@ -179,7 +178,7 @@ const Demo = () => {
                 showRemoveIcon: true,
               },
             },
-              rulers: [{ required: true, message: '请上传' }],
+              rules: [{ required: true, message: '请上传' }],
             },
           ]}
        />
@@ -188,7 +187,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 通过form api进行表单提交
+### 通过form api进行表单(提交,重置,设置)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -213,7 +212,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               rulers: [
+               rules: [
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
              },
@@ -222,11 +221,11 @@ const Demo = () => {
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
-        onClick={()=>{
+        onClick={async()=>{
           // 触发验证
-          form.submitvalidate();
+          await form.submitvalidate();
           // 获取错误信息
-          const errors = form.getErrors()
+          const errors = form.getError()
           if(errors && Object.keys(errors).length > 0 ) return
          // 调用请求接口
        }}
@@ -239,6 +238,13 @@ const Demo = () => {
         onClick={()=> form.resetForm() }
        >
         重置
+      </Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=> form.setFields({input:'1234'}) }
+       >
+        设置
       </Button>
     </div>
   );
@@ -270,7 +276,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               rulers: [
+               rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
@@ -279,6 +285,7 @@ const Demo = () => {
        />
         <div style={{ marginTop:15 }} />
         <ProForm
+         formType="pure"
          form={form2}
          title="表单二"
          formType="card"
@@ -290,7 +297,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               rulers: [
+               rules: [
                 { 
                   validator: (value = '') => {
                     if(!value) return false
@@ -310,26 +317,25 @@ const Demo = () => {
           await form?.submitvalidate()
           await form2?.submitvalidate()
           // 获取错误信息
-          const errors =  form.getErrors()
-          const errors2 = form2.getErrors()
+          const errors = form.getError()
+          const errors2 = form2.getError()
 
           if(errors && Object.keys(errors).length > 0 ) return
           if(errors2 && Object.keys(errors2).length > 0 ) return
           // 获取表单值
-          const value = form.getFieldValues()
-          const value2 = form2.getFieldValues()
+          const value = form.getFieldValues?.()
+          const value2 = form2.getFieldValues?.()
           const params = {...value,...value2}
           console.log("params",params)
           // 调用请求接口
        }}>
-        保存
+         保存
       </Button>
     </div>
   );
 }
 ReactDOM.render(<Demo />, _mount_);
 ```
-
 ### 只读模式
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
@@ -346,15 +352,13 @@ const Demo = () => {
     dateInput: '2021-1-21',
     monthPicker: '2021-1-21',
     timePicker: '2021-1-21 23:59:59',
-    selectMultiple:[{label:"周政",value:"周政"}],
+    searchSelect:["周政"],
     rate:2
   })
   const form = useForm()
     return (
        <ProForm
         form={form}
-         // 表单类型
-         formType="pure"
          readOnly={true}
          title="只读模式"
          // 只读模式下调整 一行的 DescriptionItems 数量,其余参数参考uiw/Descriptions
@@ -410,11 +414,11 @@ const Demo = () => {
               initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker)
             },
             {
-              label: 'selectMultiple',
-              key: 'selectMultiple',
-              widget: 'selectMultiple',
+              label: 'searchSelect',
+              key: 'searchSelect',
+              widget: 'searchSelect',
               option:[{label:"周政",value:"周政"}],
-              initialValue:queryInfo.selectMultiple || []
+              initialValue:queryInfo.searchSelect || []
             },
             {
               label: 'rate',
@@ -443,6 +447,99 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
+### 表单数组进行提交(获取errors仍有问题待测试)
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState,useRef } from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { Button,Card } from 'uiw'
+const Demo = () => {
+  const form = useForm()
+  const formRefList = useRef([])
+  const [items,setItems] = useState([])
+  // 过滤删除为null的ref
+  const formList = formRefList?.current.filter(n => n) || []
+
+  const handleAddFormItems = (type,idx)=>{
+    if(type==='add'){
+       items.push([
+        {
+          label: '司机手机号',
+          key: 'phone',
+          widget: 'input',
+        },
+      ])
+    }
+    if(type==='delete'){
+      items.splice(idx,1)
+    }
+    setItems([...items])
+  }
+
+  return (
+     <div>
+      {items.map((item, idx) => {
+          return (
+           <Card 
+            title={`表单${idx + 1}`} 
+            key={idx} 
+            style={{ marginBottom:10 }} 
+            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
+             <ProForm
+              ref={(e) => (formRefList.current[idx] = e)}
+              // 表单类型
+              formType="pure"
+              type="array"
+              form={form}
+              style={{ marginBottom: 10 }}
+              cardProps={{
+                noHover: true,
+              }}
+              // 更新表单的值
+              buttonsContainer={{ justifyContent: 'flex-start' }}
+              formDatas={item}
+              // 提交后验证
+              onSubmit={(initial, current) => {
+                const errorObj = {};
+                if (!current?.phone) {
+                  errorObj.phone = 'input不能为空';
+                }
+                if (Object.keys(errorObj).length > 0) {
+                const err = new Error();
+                err.filed = errorObj;
+                throw err;
+              }
+              // 获取值
+              const params = (formList.map(value => ({ ...value?.getFieldValues() }))) || [];
+              console.log('params', params)
+              // 调用请求接口
+            }}
+            />
+          </Card>
+          )
+        })}
+       <Button 
+        style={{ marginTop:10,width:80 }}  
+        type="primary"  
+        onClick={handleAddFormItems.bind(this,'add')}>
+         新增
+        </Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=>{
+          // 触发验证
+          formList.forEach(item => item.submitvalidate())
+        }}>
+        保存
+      </Button>
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
 
 ## Props  继承uiw-Form
 
@@ -451,6 +548,7 @@ ReactDOM.render(<Demo />, _mount_);
 | formDatas          | 表单项集合                                        | FormItemsProps[]                                                         | []     |
 | onSubmit           | 提交表单回调 需配合btns，继承uiw/form submit      | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
 | onChange           | 表单值变化回调，继承uiw/form onChange             | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
+| onSubmitError           | 调用 onSubmit 抛出的任何错误。从字段名称返回对象映射。 继承uiw/form onSubmitError             | (error:`any`) => void |  -     |
 | showSaveButton     | 展示提交按钮                                      | boolean                                                                  | false  |
 | showResetButton    | 展示重置按钮                                      | boolean                                                                  | false  |
 | saveButtonProps    | 提交按钮api;继承于uiw/button                      | boolean                                                                  | false  |
@@ -473,14 +571,13 @@ ReactDOM.render(<Demo />, _mount_);
 | key          | 表单项key                                                     | string                  | -      |
 | widget       | 表单项类型                                                    | sring                   | -      |
 | initialValue | 表单项值，可以是默认值                                        | any 或 any[]            | -      |
-| option       | 数据化选项内容, type为 radio、checkbox、select 生效           | FormItemsOptionsProps[] | -      |
+| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | FormItemsOptionsProps[] | -      |
 | widgetProps  | 表单组件其余参数,参考uiw表单组件                              | any                     | -      |
 | hide         | 是否显示                                                      | boolean                 | true   |
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
 | required     | 是否必填                                                      | boolean                 | -      |
-| rulers     | 验证规则                                                      | RulersProps[]                 | -      |
-
+| rules     | 验证规则                                                      | rulesProps[]                 | -      |
 
 ## FormItemsOptionsProps
 | 参数     | 说明     | 类型                     | 默认值 |
@@ -492,13 +589,14 @@ ReactDOM.render(<Demo />, _mount_);
 ## UseFormProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
-| formRef    | 表单事件和值集合ref      | { [key: string]: any } | -      |
 | submitvalidate | 表单验证 | ()=>void | - | 
-| resetForm | 重置表单 | ()=>void | - |  
+| resetForm | 重置表单值 | ()=>void | - | 
+| onSubmit | 表单提交 | ()=>void | - |   
 | getFieldValues | 获取表单值 | ()=>void | - |  
-| getErrors | 获取表单错误 | ()=>void | - |      
+| getError | 获取表单错误 | ()=>void | - |  
+| setFields | 设置表单的值 | ()=>void | [] |      
 
-## RulersProps
+## rulesProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | message    | 验证提示消息     | string           | -      |

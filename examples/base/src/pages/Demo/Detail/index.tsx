@@ -12,9 +12,19 @@ interface DetailProps {
   onSearch?: () => void
 }
 
+const selectOption = [
+  { value: 1, label: '苹果' },
+  { value: 2, label: '西瓜' },
+  { value: 3, label: '香蕉' },
+  { value: 4, label: '东北大冻梨' },
+  { value: 5, label: '香蕉' },
+  { value: 6, label: '葡萄' },
+  { value: 6, label: '哈密瓜' },
+]
+
 const Detail = ({ updateData, onSearch }: DetailProps) => {
   const dispatch = useDispatch<Dispatch>()
-  const [option, setOption] = React.useState<any>([])
+  const [option] = React.useState<any>(selectOption)
   const [loading, setLoading] = React.useState(false)
 
   const {
@@ -23,9 +33,9 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
 
   const form = useForm()
   const form2 = useForm()
+
   const onClose = () => dispatch({ type: 'demo/clean' })
 
-  // eslint-disable-next-line no-unused-vars
   const { mutate } = useSWR(
     [
       (tableType === 'add' && insert) || (tableType === 'edit' && update),
@@ -45,33 +55,26 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
   )
 
   // 模拟搜索
-  const handleSearch = (type: 'selectMultiple') => {
-    if (type === 'selectMultiple') {
+  const handleSearch = (type: 'searchSelect') => {
+    if (type === 'searchSelect') {
       setLoading(true)
       setTimeout(() => {
-        setOption([
-          { value: 1, label: '苹果' },
-          { value: 2, label: '西瓜' },
-          { value: 3, label: '香蕉' },
-          { value: 4, label: '东北大冻梨' },
-          { value: 5, label: '香蕉' },
-          { value: 6, label: '葡萄' },
-          { value: 6, label: '哈密瓜' },
-        ])
         setLoading(false)
       }, 2000)
     }
   }
   const handleSave = async () => {
     // 触发验证
-    await form?.submitvalidate()
-    await form2?.submitvalidate()
+    await form.submitvalidate()
+    await form2.submitvalidate()
+
     // 获取错误信息
-    const errors = form.getErrors()
-    const errors2 = form2.getErrors()
+    const errors = form.getError()
+    const errors2 = form2.getError()
 
     if (errors && Object.keys(errors).length > 0) return
     if (errors2 && Object.keys(errors2).length > 0) return
+    // 调用接口
     mutate()
   }
 
@@ -118,8 +121,8 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         formDatas={
           items(queryInfo, {
             isView,
-            selectMultiple: {
-              onSearch: handleSearch.bind(this, 'selectMultiple'),
+            searchSelect: {
+              onSearch: handleSearch.bind(this, 'searchSelect'),
               loading: loading,
               option: option,
             },
@@ -148,6 +151,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         buttonsContainer={{ justifyContent: 'flex-start' }}
         formDatas={items2(queryInfo) as any}
       />
+      <div style={{ marginTop: 10 }} />
     </ProDrawer>
   )
 }

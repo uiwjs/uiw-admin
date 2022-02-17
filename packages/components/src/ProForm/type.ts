@@ -3,7 +3,7 @@ import {
   ButtonProps,
   DescriptionsProps,
   FormItemProps as UiwFormItemProps,
-  FormProps as UiwFormProps,
+  // FormProps as UiwFormProps,
   CardProps,
   CollapseProps,
   CollapsePanelProps,
@@ -40,14 +40,10 @@ export interface FormItemsProps
   /** 是否必填 */
   required?: boolean;
   // 验证规则
-  rulers?: RulersProps[];
+  rules?: rulesProps[];
 }
 
-export interface ProFormProps
-  extends Omit<
-    UiwFormProps<any>,
-    'fields' | 'children' | 'onSubmit' | 'onChange'
-  > {
+export interface ProFormProps {
   formDatas?: FormItemsProps[];
   onSubmit?: (
     initial: Record<string, any>,
@@ -57,6 +53,11 @@ export interface ProFormProps
     initial: Record<string, any>,
     current: Record<string, any>,
   ) => void;
+  // afterSubmit?: (
+  //   initial: Record<string, any>,
+  //   current: Record<string, any>,
+  // ) => void;
+  onSubmitError?: (error: any) => void;
   buttonsContainer?: React.CSSProperties;
   title?: string;
   formType?: 'collapse' | 'card' | 'pure';
@@ -70,32 +71,31 @@ export interface ProFormProps
   readOnlyProps?: DescriptionsProps;
   /** 自定义组件 */
   customWidgetsList?: Fields;
-  form?: UseFormProps;
+  form?: UseFormProps | any;
   cardProps?: CardProps;
   collapseProps?: CollapseProps;
   collapsePanelProps?: CollapsePanelProps;
 }
 
 export interface UseFormProps {
-  formRef: {
-    [key: string]: any;
-  };
   submitvalidate: () => void;
-  resetForm: () => void;
-  getFieldValues: () => void;
-  getErrors: () => void;
+  onSubmit: () => void;
+  resetForm?: () => void;
+  getFieldValues?: () => void;
+  getError: () => void;
+  setFields: () => void;
+  setFormState: (p: UseFormStateProps) => void;
 }
 
-export interface FormRefProps {
-  submitvalidate: () => void;
-  resetForm: () => void;
+export interface UseFormStateProps {
+  onSubmit: () => void;
   getFieldValues: () => void;
-  errors?: {
-    [key: string]: any;
-  };
+  resetForm: () => void;
+  getError: () => void;
+  setFields: () => void;
 }
 
-export interface RulersProps {
+export interface rulesProps {
   message?: string;
   pattern?: RegExp;
   validator?: (value: any | any[]) => boolean;

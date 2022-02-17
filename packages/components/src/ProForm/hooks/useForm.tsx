@@ -1,24 +1,26 @@
-import { useRef } from 'react';
-import { FormRefProps } from '../type';
+import { useState } from 'react';
+import { UseFormStateProps } from '../type';
 
 const useForm = () => {
-  const formRef = useRef<FormRefProps>();
+  // form表单实例
+  const [formState, setFormState] = useState<{ current: UseFormStateProps }>();
 
-  // 触发验证表单
-  const submitvalidate = () => formRef.current?.submitvalidate() || null;
-  // 重置表单
-  const resetForm = () => formRef.current?.resetForm() || null;
-  // 获取表单值
-  const getFieldValues = () => formRef.current?.getFieldValues() || null;
-  // 获取错误信息
-  const getErrors = () => formRef.current?.errors || {};
+  // 表单验证(同时兼容老api submitvalidate和新api onSubmit )
+  const submitvalidate = () => formState?.current?.onSubmit() || null;
+  const onSubmit = () => formState?.current?.onSubmit() || null;
+  // 获取表单的值
+  const getFieldValues = () => formState?.current?.getFieldValues() || {};
+  // 获取表单错误信息
+  const getError = () => formState?.current?.getError() || {};
 
   return {
-    formRef,
+    ...formState?.current,
     submitvalidate,
-    resetForm,
+    onSubmit,
+    getError,
     getFieldValues,
-    getErrors,
+    // --------------
+    setFormState,
   };
 };
 

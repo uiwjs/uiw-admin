@@ -7,7 +7,7 @@ export const items = (queryInfo: any, attr: any) => [
     widget: 'input',
     initialValue: queryInfo?.input,
     widgetProps: {},
-    rulers: [
+    rules: [
       { required: true, message: '请输入' },
       { pattern: new RegExp(/[1][3][0-9]{9}$/), message: '请输入正确手机号' },
     ],
@@ -17,7 +17,7 @@ export const items = (queryInfo: any, attr: any) => [
     key: 'textarea',
     widget: 'textarea',
     initialValue: queryInfo?.textarea,
-    rulers: [
+    rules: [
       {
         validator: (value: any | any[] = '') => {
           if (!value) return false
@@ -38,14 +38,14 @@ export const items = (queryInfo: any, attr: any) => [
       { value: 4, label: '东北大冻梨' },
     ],
     initialValue: queryInfo?.select,
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '开关',
     key: 'switch',
     widget: 'switch',
     initialValue: queryInfo?.switch,
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '单选框',
@@ -56,7 +56,7 @@ export const items = (queryInfo: any, attr: any) => [
       { label: '女', value: 'girl' },
     ],
     initialValue: queryInfo?.radio,
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '多选框',
@@ -67,7 +67,7 @@ export const items = (queryInfo: any, attr: any) => [
       { label: '湖北菜', value: 'hubei' },
     ],
     initialValue: queryInfo?.checkbox,
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月日时分秒',
@@ -79,7 +79,7 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue:
       queryInfo.dateInputsecond &&
       formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond)),
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月日',
@@ -88,7 +88,7 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue:
       queryInfo.dateInput &&
       formatter('YYYY-MM-DD', new Date(queryInfo.dateInput)),
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '年月',
@@ -97,14 +97,14 @@ export const items = (queryInfo: any, attr: any) => [
     initialValue:
       queryInfo.monthPicker &&
       formatter('YYYY-MM', new Date(queryInfo.monthPicker)),
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '时分秒',
     key: 'timePicker',
     widget: 'timePicker',
     initialValue: queryInfo.timePicker && new Date(queryInfo.timePicker),
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   // 只读模式下支持读取React.ReactNode
   {
@@ -117,24 +117,25 @@ export const items = (queryInfo: any, attr: any) => [
     ) : (
       queryInfo?.slider
     ),
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
-    label: 'selectMultiple',
-    key: 'selectMultiple',
-    widget: 'selectMultiple',
-    option: attr.selectMultiple.option,
+    label: 'searchSelect',
+    key: 'searchSelect',
+    widget: 'searchSelect',
+    option: attr.searchSelect.option,
     widgetProps: {
-      onSearch: attr.selectMultiple.onSearch,
-      onClear: (value: any) => console.log('clearvalue', value),
+      mode: 'multiple',
+      onSearch: attr.searchSelect.onSearch,
       onChange: (value: any) => console.log('changevalue', value),
       onSelect: (value: any) => console.log('selectvalue', value),
-      loading: attr.selectMultiple.loading,
+      loading: attr.searchSelect.loading,
       allowClear: true,
       showSearch: true,
+      style: { width: '100%' },
     },
-    initialValue: queryInfo?.selectMultiple,
-    rulers: [{ required: true, message: '请选择' }],
+    initialValue: [1, 2, 3],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '评分',
@@ -142,7 +143,7 @@ export const items = (queryInfo: any, attr: any) => [
     widget: 'rate',
     readSpan: 2,
     initialValue: queryInfo?.rate,
-    rulers: [{ required: true, message: '请选择' }],
+    rules: [{ required: true, message: '请选择' }],
   },
   {
     label: '上传组件',
@@ -160,7 +161,7 @@ export const items = (queryInfo: any, attr: any) => [
       },
     },
     initialValue: queryInfo?.upload,
-    rulers: [{ required: true, message: '请上传' }],
+    rules: [{ required: true, message: '请上传' }],
   },
 ]
 
@@ -171,7 +172,7 @@ export const items2 = (queryInfo: any) => [
     widget: 'input',
     initialValue: queryInfo?.input2,
     widgetProps: {},
-    rulers: [
+    rules: [
       { pattern: new RegExp(/[1][3][0-9]{9}$/), message: '请输入正确手机号' },
     ],
   },

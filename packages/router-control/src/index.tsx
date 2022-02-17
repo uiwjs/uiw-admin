@@ -21,6 +21,7 @@ import { createBrowserHistory } from 'history';
 import { ControllerProps, RoutersProps } from './interface';
 export * from './interface';
 import { useLoadModels } from './utils';
+import { getCookie } from '@uiw-admin/utils';
 
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
@@ -50,11 +51,17 @@ export const Loadable = (
 
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
-  // 本地 存储 token
-  let token = sessionStorage.getItem('token');
   // @ts-ignore
-  if (STORAGE === 'local') {
-    token = localStorage.getItem('token');
+  let tokenName = TOKEN_NAME;
+  // 本地 存储 token
+  let token = sessionStorage.getItem(tokenName);
+  // @ts-ignore
+  if (TOKEN_STORAGE === 'local') {
+    token = localStorage.getItem(tokenName);
+  }
+  // @ts-ignore
+  if (TOKEN_STORAGE === 'cookie') {
+    token = getCookie(tokenName);
   }
   if (!token) {
     return <Navigate to="/login" replace />;
@@ -116,13 +123,14 @@ export const getDeepTreeRoute = (
 const getTree = (
   routes: RoutersProps[] = [],
   addModels: ControllerProps['addModels'],
+  isAutoAuth: boolean,
 ): JSX.Element[] => {
   let list: JSX.Element[] = [];
   routes.forEach((item, ind) => {
     const itemObj = item;
     // 判断是否有子项进行递归处理
     if (item.routes) {
-      itemObj.children = getTree(itemObj.routes, addModels);
+      itemObj.children = getTree(itemObj.routes, addModels, isAutoAuth);
     }
     // 懒加载
     if (!React.isValidElement(itemObj.component) && itemObj.component) {
@@ -147,7 +155,7 @@ const getTree = (
     if (itemObj.index && itemObj.redirect) {
       itemObj.element = <Navigate to={itemObj.redirect} />;
     }
-    if (itemObj.element && itemObj.path === '/') {
+    if (itemObj.element && itemObj.path === '/' && isAutoAuth) {
       itemObj.element = <AuthLayout>{itemObj.element}</AuthLayout>;
     }
     list.push(<Route key={ind} {...itemObj} />);
@@ -171,7 +179,11 @@ export function RouteChild(props: ControllerProps = {}) {
   const roue = React.useMemo(
     () =>
       createRoutesFromChildren(
-        getTree(getDeepTreeRoute(RoutePathArr, authList), props.addModels),
+        getTree(
+          getDeepTreeRoute(RoutePathArr, authList),
+          props.addModels,
+          !!props.isAutoAuth,
+        ),
       ),
     [JSON.stringify(authList)],
   );
@@ -182,7 +194,7 @@ export function RouteChild(props: ControllerProps = {}) {
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routeType, addModels } = props;
+  const { routeType, addModels, isAutoAuth = true } = props;
   const load = useLoadModels({ path: '/', addModels });
   // @ts-ignore
   let base = BASE_NAME;
@@ -190,19 +202,19 @@ export default function Controller(props: ControllerProps = {}) {
     if (routeType === 'hash') {
       return (
         <HashRouter window={window} basename={base}>
-          <RouteChild addModels={props.addModels} />
+          <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
         </HashRouter>
       );
     } else if (routeType === 'browser') {
       return (
         <BrowserRouter window={window} basename={base}>
-          <RouteChild addModels={props.addModels} />
+          <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
         </BrowserRouter>
       );
     }
     return (
       <HistoryRouter history={history} basename={base}>
-        <RouteChild addModels={props.addModels} />
+        <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
       </HistoryRouter>
     );
   }, [routeType]);

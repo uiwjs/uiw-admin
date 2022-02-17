@@ -10,29 +10,30 @@ function FormDom({
   formfields,
   onSubmit,
   onChange,
+  onSubmitError,
+  // afterSubmit,
   buttonsContainer,
   showSaveButton = false,
   showResetButton = false,
   saveButtonProps = {},
   resetButtonProps = {},
+  formInstanceRef,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
+  formInstanceRef: any;
 }) {
   const baseRef = useRef<any>();
   const store = useStore();
 
-  const { formRef } = store as any;
+  const { setFormState } = store as any;
 
+  // 普通表单
   useEffect(() => {
-    if (formRef && baseRef) {
-      formRef.current = {
-        ...formRef.current,
-        submitvalidate: baseRef.current?.onSubmit,
-        resetForm: baseRef.current?.resetForm,
-        getFieldValues: baseRef.current?.getFieldValues,
-      };
+    setFormState?.(baseRef);
+    if (formInstanceRef) {
+      formInstanceRef.current = baseRef;
     }
-  }, [baseRef.current]);
+  }, [baseRef]);
 
   return (
     <Form
@@ -50,7 +51,7 @@ function FormDom({
               formDatas.map((item) => ({
                 key: item.key,
                 value: current[item.key],
-                rulers: item.rulers,
+                rules: item.rules,
               }))) ||
             [];
           const errorObj = fromValidate(validateList);
@@ -63,21 +64,16 @@ function FormDom({
       }}
       onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
-        if (error.filed) {
-          return { ...error.filed };
+        if (onSubmitError) {
+          onSubmitError?.(error);
+        } else {
+          return error.filed ? { ...error.filed } : null;
         }
-        return null;
       }}
+      // afterSubmit={({ initial, current }:any)=>console.log('current',current,'initial',initial)}
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {
-        const { errors } = state;
-        if (formRef) {
-          formRef.current = {
-            ...formRef.current,
-            errors: errors,
-          };
-        }
         return (
           <React.Fragment>
             <Row gutter={10}>

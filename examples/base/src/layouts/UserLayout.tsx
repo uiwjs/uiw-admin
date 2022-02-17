@@ -1,5 +1,6 @@
 import React from 'react'
 import UserLogin from '@uiw-admin/user-login'
+import { setCookie } from '@uiw-admin/utils'
 import { useNavigate } from 'react-router-dom'
 import { Notify } from 'uiw'
 const UserLayout = () => {
@@ -28,6 +29,7 @@ const UserLayout = () => {
       onBefore={(store) => ({ a: 12, b: 1221, ...store })}
       onSuccess={(data) => {
         if (data && data.token) {
+          setCookie('token', data.token)
           sessionStorage.setItem('token', data.token)
           sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
           localStorage.setItem('token', data.token)

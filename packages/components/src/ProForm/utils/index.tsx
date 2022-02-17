@@ -1,4 +1,4 @@
-import { FormItemsOptionsProps, RulersProps } from '../type';
+import { FormItemsOptionsProps, rulesProps } from '../type';
 import { formatter, Rate } from 'uiw';
 import React from 'react';
 import Upload from '../widgets/Upload';
@@ -19,7 +19,11 @@ export function getReadValue(
   widgetProps: any,
 ) {
   let content: string | number | React.ReactNode = '';
-  if (type === 'radio' || type === 'searchSelect' || type === 'select') {
+  if (
+    type === 'radio' ||
+    (type === 'searchSelect' && widgetProps?.mode !== 'multiple') ||
+    type === 'select'
+  ) {
     let value =
       option.filter(
         (itm: FormItemsOptionsProps) => itm.value === initialValue,
@@ -58,8 +62,11 @@ export function getReadValue(
         initialValue.map((item: FormItemsOptionsProps) => item.label)) ||
       [];
     content = contentList.join(';');
+  } else if (type === 'searchSelect' && widgetProps?.mode === 'multiple') {
+    for (const itm of option as any) {
+      if (initialValue.includes(itm.value)) content += `${itm.label}`;
+    }
   } else if (type === 'rate') {
-    console.log('initialValue', initialValue);
     content = <Rate value={initialValue} readOnly />;
   } else {
     // initialValue 支持 string number 或者 自定义
@@ -75,7 +82,7 @@ export function getReadValue(
 
 interface FromValidateProps {
   key: string;
-  rulers?: RulersProps[];
+  rules?: rulesProps[];
   value?: any[] | any;
 }
 
@@ -103,14 +110,14 @@ function isObjectEmpty(obj: any) {
 
 /**
  * form表单提交验证
- * @param rulers FromValidateProps[]
+ * @param rules FromValidateProps[]
  * @returns { [key: string]: string }
  */
-export const fromValidate = (rulers: FromValidateProps[] = []) => {
+export const fromValidate = (rules: FromValidateProps[] = []) => {
   let errorObj: { [key: string]: string } = {};
-  rulers.forEach(({ rulers, key, value }) => {
-    if (rulers && rulers.length > 0) {
-      rulers.forEach(
+  rules.forEach(({ rules, key, value }) => {
+    if (rules && rules.length > 0) {
+      rules.forEach(
         ({ validator = null, message = '', required, pattern = null }) => {
           // 必填 && object && 为空
           if (required && isObject(value) && (isObjectEmpty(value) || !value)) {

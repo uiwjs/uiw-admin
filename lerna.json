@@ -1,6 +1,6 @@
 {
   "packages": ["packages/*", "examples/*", "create-uiw-admin"],
-  "version": "5.2.14",
+  "version": "5.2.18",
   "command": {
     "create": {
       "license": "MIT"

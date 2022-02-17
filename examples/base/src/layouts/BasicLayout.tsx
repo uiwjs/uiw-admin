@@ -1,5 +1,8 @@
 import React from 'react'
-import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
+import BasicLayout, {
+  useLayouts,
+  BasicLayoutProps as BasicLayoutType,
+} from '@uiw-admin/basic-layouts'
 import { Outlet } from 'react-router-dom'
 import { RoutersProps } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
@@ -30,7 +33,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     },
   })
 
-  const basicLayoutProps = {
+  const basicLayoutProps: BasicLayoutType = {
     onReloadAuth: async () => mutate(),
     // 修改密码以及其他操作在项目中进行
     menus: [
@@ -50,13 +53,20 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       menuLeft: (
         <div style={{ marginRight: 15 }}>
           <Badge count={66}>
-            <Icon type="bell" color="#343a40" style={{ fontSize: 20 }} />
+            <Icon
+              type="bell"
+              // color="#fff"
+              style={{ fontSize: 20 }}
+            />
           </Badge>
         </div>
       ),
     },
     layouts,
     ...props,
+    headerLayout: 'top',
+    headerBackground: '#343a40',
+    headerFontColor: '#fff',
   }
 
   // 验证是否登录的方式

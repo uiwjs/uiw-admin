@@ -4,12 +4,43 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.18
+- @uiw-admin/components
+  - 🐞`ProForm`: getErrors更名getError与uiw保持一致
+  - 🌟`ProForm`: useForm返回新增setFields
+  - 🌟`ProForm`: 增加ref,可通过ref获取form实例方法
+- @uiw-admin/basic-layout
+  - 🌟 新增 `menuHide` 参数，用于隐藏菜单
 
 
+## 5.2.17
+
+- @uiw-admin/config
+  - 🌟`define`: 新增 `TOKEN_NAME`参数，token 存储字段
+- @uiw-admin/router-control
+  - 🌟`isAutoAuth`: 是否自动校验 token，默认 true
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复columns不渲染问题
+
+## 5.2.16
+
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复columns不渲染问题
+  - 🐞`ProForm`: useForm增加`formList`更改为`formStateList`
+
+
+## 5.2.15
+
+- @uiw-admin/layout
+  - 🌟 新增 `headerLayout`、`headerBackground`、`headerFontColor` 参数，用于头部布局
+- @uiw-admin/components
+  - 🐞`ProForm`: rulers更名rules
+  - 🐞`ProForm`: useForm增加`formList`返回多表单验证列表
+  
 ## 5.2.14
 
 - @uiw-admin/components
-  - 🐞`ProForm`: 增加rulers验证
+  - 🐞`ProForm`: 增加rules验证
   - 🐞`ProForm`: `useFormProps`删除clickRef & 新增getErrors获取错误信息 & getFormValues更名getFieldValues(与uiw保持一致)
   - 完善upload组件
   - 🐞`ProTable`: 修复重置刷新api为空的问题，完善表单验证

@@ -42,7 +42,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   const isCheckbox = type === 'checkbox';
 
   // columns列和标题是否居中
-  const defaultColumns = useMemo(() => {
+  const defaultColumns = () => {
     return columns.map((item) => {
       const { align = 'left', render } = item;
       return {
@@ -55,7 +55,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
           : (text: string) => <div style={{ textAlign: align }}>{text}</div>,
       };
     });
-  }, [columns]);
+  };
 
   // 表单默认值
   const defaultValues = useMemo(() => {
@@ -221,7 +221,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
         <Table
           // 判断是否添加选择框
           columns={
-            selectKey ? selectionCol.concat(defaultColumns) : defaultColumns
+            selectKey ? selectionCol.concat(defaultColumns()) : defaultColumns()
           }
           data={tableData}
           footer={
