@@ -28,6 +28,8 @@ export type BasicLayoutProps = {
   headerBackground?: string,
   /** 头部字体颜色 */
   headerFontColor?: string;
+    /** 菜单隐藏 */
+  menuHide?: boolean;
 } & HeaderRightProps;
 
 
@@ -83,6 +85,10 @@ export interface UseLayoutsProps {
 
 > 头部字体颜色，类型：string ，默认值："#000"
 
+## menuHide 
+
+> 隐藏菜单展示
+ 
 ## 案例
 
 ```tsx

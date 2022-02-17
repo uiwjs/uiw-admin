@@ -33,6 +33,8 @@ export type BasicLayoutProps = {
   headerBackground?: string;
   /** 头部字体颜色 */
   headerFontColor?: string;
+  /** 菜单隐藏 */
+  menuHide?: boolean;
 } & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
@@ -47,6 +49,7 @@ function BasicLayout(props: BasicLayoutProps) {
     headerLayout = 'default',
     headerBackground = '#fff',
     headerFontColor = '#000',
+    menuHide,
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -100,21 +103,23 @@ function BasicLayout(props: BasicLayoutProps) {
             />
           </div>
         )}
-        <div>
-          <Button
-            basic
-            icon={
-              <Icon
-                type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                color={headerFontColor}
-              />
-            }
-            // icon={collapsed ? 'menu-unfold' : 'menu-fold'}
-            style={{ fontSize: 12, marginRight: 20 }}
-            onClick={() => setCollapsed(!collapsed)}
-          />
-          <Bread routeMap={mapRoute} />
-        </div>
+        {!menuHide && (
+          <div>
+            <Button
+              basic
+              icon={
+                <Icon
+                  type={collapsed ? 'menu-unfold' : 'menu-fold'}
+                  color={headerFontColor}
+                />
+              }
+              // icon={collapsed ? 'menu-unfold' : 'menu-fold'}
+              style={{ fontSize: 12, marginRight: 20 }}
+              onClick={() => setCollapsed(!collapsed)}
+            />
+            <Bread routeMap={mapRoute} />
+          </div>
+        )}
       </div>
       {renderHeaderRightMenu}
     </Header>
@@ -129,21 +134,23 @@ function BasicLayout(props: BasicLayoutProps) {
         <Layout style={{ height: '100%' }}>
           {headerLayout === 'top' && header}
           <Layout>
-            <Sider
-              collapsed={collapsed}
-              className={classnames('uiw-admin-global-sider-menu', {})}
-            >
-              {headerLayout === 'default' ? (
-                <LogoHeader
-                  collapsed={collapsed}
-                  projectName={projectName}
-                  logo={props.logo}
-                />
-              ) : (
-                <div style={{ marginTop: 10 }} />
-              )}
-              {Menus}
-            </Sider>
+            {!menuHide && (
+              <Sider
+                collapsed={collapsed}
+                className={classnames('uiw-admin-global-sider-menu', {})}
+              >
+                {headerLayout === 'default' ? (
+                  <LogoHeader
+                    collapsed={collapsed}
+                    projectName={projectName}
+                    logo={props.logo}
+                  />
+                ) : (
+                  <div style={{ marginTop: 10 }} />
+                )}
+                {Menus}
+              </Sider>
+            )}
             <Layout>
               {headerLayout === 'default' && header}
               <Content className="uiw-admin-global-content">
