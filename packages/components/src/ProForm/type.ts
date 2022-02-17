@@ -12,7 +12,7 @@ import {
 export type Fields = {
   [key: string]: any;
 };
-export interface FormItemsOptionsProps {
+export interface FormOptionsProps {
   label: string;
   value: string | number;
   disabled?: boolean;
@@ -29,7 +29,7 @@ export interface FormItemsProps
   /** 表单元素值，可以是默认值 */
   initialValue?: any | any[];
   /** 数据化选项内容, type为 radio、checkbox、select 生效 */
-  option?: FormItemsOptionsProps[];
+  option?: FormOptionsProps[];
   widgetProps?: any;
   /** 是否显示 */
   hide?: boolean;

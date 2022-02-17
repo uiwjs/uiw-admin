@@ -1,13 +1,15 @@
-# 基于uiw-form封装的业务表单
+# ProForm
 
 ## 注意
 > [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/form),
- 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,`MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
+ 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,
+ `MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
 <!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 <!--ProForm-->
 
-### 基本使用(与uiw/form使用保持一致)
+### 基本使用
+> 与uiw/form使用保持一致
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -193,7 +195,8 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 通过form api进行表单(提交,重置,设置)
+### 通过form props
+> (提交,重置,设置)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -258,7 +261,8 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 多表单同时进行提交
+### 多个表单
+
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -461,7 +465,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 表单数组进行提交(获取errors仍有问题待测试)
+### 动态添加表单
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -555,7 +559,8 @@ ReactDOM.render(<Demo />, _mount_);
 ```
 
 
-## Props  继承uiw-Form
+## Props
+> 继承uiw-Form
 
 | 参数               | 说明                                              | 类型                                                                     | 默认值 |
 | ------------------ | ------------------------------------------------- | ------------------------------------------------------------------------ | ------ |
@@ -578,14 +583,16 @@ ReactDOM.render(<Demo />, _mount_);
 | collapseProps      | uiw`Collapse` API                                 | CollapseProps                                                            | {}     |
 | collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
 
-## FormItemsProps 继承uiw-FormItem
+## FormItemsProps
+> 继承uiw-FormItem
+
 | 参数         | 说明                                                          | 类型                    | 默认值 |
 | ------------ | ------------------------------------------------------------- | ----------------------- | ------ |
 | label        | 表单项名称                                                    | string                  | -      |
 | key          | 表单项key                                                     | string                  | -      |
 | widget       | 表单项类型                                                    | sring                   | -      |
 | initialValue | 表单项值，可以是默认值                                        | any 或 any[]            | -      |
-| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | FormItemsOptionsProps[] | -      |
+| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | FormOptionsProps[] | -      |
 | widgetProps  | 表单组件其余参数,参考uiw表单组件                              | any                     | -      |
 | hide         | 是否显示                                                      | boolean                 | true   |
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
@@ -593,7 +600,7 @@ ReactDOM.render(<Demo />, _mount_);
 | required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | rulesProps[]                 | -      |
 
-## FormItemsOptionsProps
+## FormOptionsProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | label    | 名称     | string(必传值)           | -      |
