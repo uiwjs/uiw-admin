@@ -44,7 +44,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
       ...datas,
     });
   };
-
+  console.log('form--->', form);
   // 更新form
   const updateForm = (form: any) => {
     setForm(form);
@@ -64,8 +64,9 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   };
   // 点击查询
   const onSearch = async () => {
-    const isNoError = await form.current.onSubmit();
-    if (isNoError) {
+    await form.current.onSubmit();
+    const isNoError = form.current.getError();
+    if (Object.keys(isNoError).length === 0) {
       await state.setPageIndex(1);
       state.mutate(false);
     }
