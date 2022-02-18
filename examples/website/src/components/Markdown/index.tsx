@@ -126,7 +126,7 @@ export default class Markdown extends Component<MarkdownProps, MarkdownState> {
             />
           </Col>
           <Col fixed style={{ width: 150 }}>
-            <NavBar markdown={this.state.mdStr} />
+            <NavBar markdown={this.state.mdStr} routerType="hash" />
           </Col>
         </Row>
         <Footer editorUrl={this.editorUrl} />
