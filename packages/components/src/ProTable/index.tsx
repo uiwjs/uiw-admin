@@ -58,13 +58,16 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     <StoreCtx.Provider value={{ ...store }}>
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
-        <BaseForm
-          columns={columns}
-          searchBtns={searchBtns}
-          onBeforeSearch={onBeforeSearch}
-        />
+        {searchBtns && searchBtns.length > 0 && (
+          <BaseForm
+            columns={columns}
+            searchBtns={searchBtns}
+            onBeforeSearch={onBeforeSearch}
+          />
+        )}
+
         {/* 操作区域 */}
-        {operateButtons.length > 0 && (
+        {operateButtons && operateButtons.length > 0 && (
           <div style={{ background: '#fff', padding: 10 }}>
             {operateButtons.map((btn: any, idx: number) =>
               btn?.render ? (
