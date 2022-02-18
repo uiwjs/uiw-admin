@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.19
+
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复重置表单无效的问题，优化无查询数据布局
+
 ## 5.2.18
 - @uiw-admin/components
   - 🐞`ProForm`: getErrors更名getError与uiw保持一致
