@@ -13,7 +13,7 @@ import { AuthBtn, AuthBtnProps } from '@uiw-admin/authorized';
  * @returns
  */
 
-interface ButtonItemsProps extends ButtonProps {
+interface ButtonsProps extends ButtonProps {
   label?: string;
   show?: boolean;
   path?: string;
@@ -25,7 +25,7 @@ interface ProDrawerProps extends DrawerProps {
   title?: string;
   onClose?: any;
   width?: number;
-  buttons?: Array<ButtonItemsProps>;
+  buttons?: Array<ButtonsProps>;
   children?: React.ReactNode;
 }
 

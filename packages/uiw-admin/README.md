@@ -39,6 +39,51 @@ $ npm run build
 $ npm run start # Run example website
 ```
 
+
+Creates a [`uiw-admin`](https://github.com/uiwjs/uiw-admin) application using the command line.
+
+## Usage
+
+```shell
+# npm 6.x
+$ npm init uiw-admin my-app --example uiw-admin-ts
+# npm 7+, extra double-dash is needed:
+$ npm init uiw-admin my-app -- --example uiw-admin-ts
+
+$ yarn create uiw-admin [appName]
+# or npm
+$ npm create uiw-admin my-app
+# or npx
+$ npx create-uiw-admin my-app
+```
+
+## Command Help
+
+Below is a help of commands you might find useful. The example download is from https://uiwjs.github.io/uiw-admin/zip/
+
+```bash
+Usage: create-uiw-admin <app-name> [options] [--help|h]
+
+Options:
+
+  --version, -v   Show version number
+  --help, -h      Displays help information.
+  --output, -o    Output directory.
+  --example, -e   Example from: https://uiwjs.github.io/uiw-admin/zip/, default: "uiw-admin-ts"
+  --path, -p      Specify the download target git address.
+                    default: "https://uiwjs.github.io/uiw-admin/zip/"
+
+Example:
+
+  yarn create uiw-admin appName
+  npx create-uiw-admin my-app
+  npm create uiw-admin my-app
+  npm create uiw-admin my-app -f
+  npm create uiw-admin my-app -p https://uiwjs.github.io/uiw-admin/zip/
+
+Copyright 2021
+```
+
 ## 贡献者
 
 感谢所有的贡献者，欢迎开发者为开源项目贡献力量。

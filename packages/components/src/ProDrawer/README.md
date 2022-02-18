@@ -38,7 +38,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-## 参数
+## Props
 
 #### 基础参数
 [继承于uiw,请参考Drawer其余参数](https://uiwjs.github.io/#/components/drawer)
@@ -46,13 +46,13 @@ ReactDOM.render(<Demo />, _mount_);
 | 参数    | 说明     | 类型           | 默认值 |
 | :------ | :------- | :------------- | :----- |
 | visible | 显示隐藏 | boolean        | -      |
-| title   | 标题     | string         | ''     |
+| title   | 标题     | string         | -     |
 | onClose | 关闭事件 | ()=>void       | null   |
 | width   | Drawer宽 | number         | 1000   |
-| buttons | 按钮集合 | buttonsColumns | []     |
+| buttons | 按钮集合 | ButtonsProps[] | []     |
 
 
-#### buttonsColumns参数
+#### ButtonsProps
 [继承于uiw,请参考Button其余参数](https://uiwjs.github.io/#/components/button)
 
 | 参数     | 说明         | 类型    | 默认值 |

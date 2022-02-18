@@ -27,7 +27,7 @@ module.exports.selectById = function (req, res) {
       checkbox: ['sichuan', 'hubei'],
       dateInputsecond: '2021-1-21 23:59:59',
       dateInput: '2021-1-21',
-      monthPicker: '2021-1-21',
+      monthPicker: '2021-1',
       timePicker: '2021-1-21 23:59:59',
       slider: 90,
       upload: [

@@ -1,13 +1,15 @@
-# 基于uiw-form封装的业务表单
+# ProForm
 
 ## 注意
 > [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/form),
- 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,`MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
+ 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,
+ `MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
 <!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 <!--ProForm-->
 
-### 基本使用(与uiw/form使用保持一致)
+### 基本使用
+> 与uiw/form使用保持一致
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -123,11 +125,17 @@ const Demo = () => {
               label: '年月日',
               key: 'dateInput',
               widget: 'dateInput',
+              widgetProps: {
+                format: 'YYYY-MM-DD'
+              },
             },
             {
               label: '年月',
               key: 'monthPicker',
               widget: 'monthPicker',
+               widgetProps: {
+                format: 'YYYY-MM'
+              },
             },
             {
               label: '时分秒',
@@ -187,11 +195,12 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 通过form api进行表单(提交,重置,设置)
+### 通过form props
+> (提交,重置,设置)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
-import React, { useState,useRef } from 'react';
+import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
@@ -252,11 +261,12 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 多表单同时进行提交
+### 多个表单
+
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
-import React, { useState,useRef } from 'react';
+import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
@@ -350,8 +360,8 @@ const Demo = () => {
     select:"周政",
     dateInputsecond: '2021-1-21 23:59:59',
     dateInput: '2021-1-21',
-    monthPicker: '2021-1-21',
-    timePicker: '2021-1-21 23:59:59',
+    monthPicker: '2021-1',
+    timePicker: '2021-1-21 22:59:59',
     searchSelect:["周政"],
     rate:2
   })
@@ -393,19 +403,27 @@ const Demo = () => {
                 // 年月日时分秒
                 format: 'YYYY-MM-DD HH:mm:ss'
               },
-              initialValue: queryInfo.dateInputsecond && formatter('YYYY-MM-DD HH:mm:ss', new Date(queryInfo.dateInputsecond))
+              initialValue: queryInfo?.dateInputsecond
             },
             {
               label: 'dateInput',
               key: 'dateInput',
               widget: 'dateInput',
-              initialValue: queryInfo.dateInput && formatter('YYYY-MM-DD', new Date(queryInfo.dateInput))
+              widgetProps: {
+                // 年月日
+                format: 'YYYY-MM-DD'
+              },
+              initialValue: queryInfo?.dateInput
             },
             {
               label: 'monthPicker',
               key: 'monthPicker',
               widget: 'monthPicker',
-              initialValue: queryInfo.monthPicker && formatter('YYYY-MM', new Date(queryInfo.monthPicker))
+              widgetProps: {
+                // 年月
+                format: 'YYYY-MM'
+              },
+              initialValue: queryInfo?.monthPicker
             },
             {
               label: 'timePicker',
@@ -447,7 +465,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 表单数组进行提交(获取errors仍有问题待测试)
+### 动态添加表单
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -487,7 +505,7 @@ const Demo = () => {
             style={{ marginBottom:10 }} 
             extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
              <ProForm
-              ref={(e) => (formRefList.current[idx] = e)}
+              ref={(e) =>(formRefList.current[idx] = e)}
               // 表单类型
               formType="pure"
               type="array"
@@ -541,7 +559,8 @@ ReactDOM.render(<Demo />, _mount_);
 ```
 
 
-## Props  继承uiw-Form
+## Props
+> 继承uiw-Form
 
 | 参数               | 说明                                              | 类型                                                                     | 默认值 |
 | ------------------ | ------------------------------------------------- | ------------------------------------------------------------------------ | ------ |
@@ -564,14 +583,16 @@ ReactDOM.render(<Demo />, _mount_);
 | collapseProps      | uiw`Collapse` API                                 | CollapseProps                                                            | {}     |
 | collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
 
-## FormItemsProps 继承uiw-FormItem
+## FormItemsProps
+> 继承uiw-FormItem
+
 | 参数         | 说明                                                          | 类型                    | 默认值 |
 | ------------ | ------------------------------------------------------------- | ----------------------- | ------ |
 | label        | 表单项名称                                                    | string                  | -      |
 | key          | 表单项key                                                     | string                  | -      |
 | widget       | 表单项类型                                                    | sring                   | -      |
 | initialValue | 表单项值，可以是默认值                                        | any 或 any[]            | -      |
-| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | FormItemsOptionsProps[] | -      |
+| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | FormOptionsProps[] | -      |
 | widgetProps  | 表单组件其余参数,参考uiw表单组件                              | any                     | -      |
 | hide         | 是否显示                                                      | boolean                 | true   |
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
@@ -579,7 +600,7 @@ ReactDOM.render(<Demo />, _mount_);
 | required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | rulesProps[]                 | -      |
 
-## FormItemsOptionsProps
+## FormOptionsProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | label    | 名称     | string(必传值)           | -      |
