@@ -13,6 +13,8 @@ interface NavBarProps {
   markdown: string;
   // markdown页面距离顶部边距
   headingTopOffset?: number;
+  // 路由加载形式 哈希或者 h5
+  routerType: 'hash' | 'bower';
 }
 
 interface NavDataItem {
@@ -49,7 +51,7 @@ const trimArrZero = (arr: any) => {
 };
 
 const NavBar: React.FC<NavBarProps> = (props) => {
-  const { markdown, headingTopOffset = 100 } = props;
+  const { markdown, headingTopOffset = 100, routerType = 'bower' } = props;
 
   const [currentListNo, setCurrentListNo] = useState<number>(0);
 
@@ -183,17 +185,25 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   const scrollToTarget = (dataId: string) => {
     const target = document.querySelector(`#${dataId}`) as HTMLElement;
     if (target && typeof target.offsetTop === 'number') {
-      // headingTopOffset
       safeScrollTo(window, target.offsetTop - headingTopOffset, 0);
     }
   };
 
   const updateHash = (dataId: string) => {
-    window.history.replaceState(
-      {},
-      '',
-      `${window.location.pathname}${window.location.search}#${dataId}`,
-    );
+    let navHref = window.location.href;
+    let href = '';
+    if (routerType === 'bower') {
+      href = `${window.location.pathname}${window.location.search}#${dataId}`;
+    } else {
+      if (navHref.includes('?title=')) {
+        const idx = navHref.indexOf('?title=');
+        const pureHash = navHref.slice(0, idx);
+        href = `${pureHash}?title=${dataId}`;
+      } else {
+        href = `${navHref}?title=${dataId}`;
+      }
+    }
+    window.history.replaceState({}, '', href);
   };
 
   const winScroll = throttle(() => {
@@ -213,15 +223,23 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     const curHeading = newHeadingList.find(
       (h) => h.distanceToTop === minDistance,
     );
-
     if (!curHeading) return;
 
+    updateHash(curHeading.dataId.toLowerCase().replace(' ', '-'));
     setCurrentListNo(curHeading.listNo);
   }, 200);
 
   const initNav = () => {
     if (window.location.hash) {
-      scrollToTarget(window.location.hash.replace('#', ''));
+      if (routerType === 'bower') {
+        scrollToTarget(window.location.hash.replace('#', ''));
+      } else {
+        const idx = window.location.href.indexOf('?title=');
+        if (idx > -1) {
+          const title = window.location.href.slice(idx + 7);
+          scrollToTarget(title);
+        }
+      }
     }
   };
 

@@ -186,7 +186,7 @@ ReactDOM.render(<Demo />, _mount_);
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | searchBtns     | 搜索栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | table          | useTable返回值                                         | Object 必传                                     |        |
-| onPageChange   | 分页回调                                               | （page: number） => void                        | -      |
+| onPageChange   | 分页回调             |（page: number） => void                        | -      |
 | onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询 | ({initial, current}) => Boolean                 |        |
 | rowSelection   | 选择框配置                                             | RowSelection                                    | -      |
 | scroll         | 滚动                                                   | ScrollProps                                     | -      |
