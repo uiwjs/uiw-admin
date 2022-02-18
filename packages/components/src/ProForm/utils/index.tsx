@@ -1,4 +1,4 @@
-import { FormOptionsProps, rulesProps } from '../type';
+import { FormOptionsProps, RulesProps } from '../type';
 import { formatter, Rate } from 'uiw';
 import React from 'react';
 import Upload from '../widgets/Upload';
@@ -81,7 +81,7 @@ export function getReadValue(
 
 interface FromValidateProps {
   key: string;
-  rules?: rulesProps[];
+  rules?: RulesProps[];
   value?: any[] | any;
 }
 

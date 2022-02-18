@@ -713,7 +713,7 @@ ReactDOM.render(<Demo />, _mount_);
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
 | required     | 是否必填                                                      | boolean                 | -      |
-| rules     | 验证规则                                                      | rulesProps[]                 | -      |
+| rules     | 验证规则                                                      | RulesProps[]                 | -      |
 
 ## FormOptionsProps
 | 参数     | 说明     | 类型                     | 默认值 |
@@ -733,7 +733,7 @@ ReactDOM.render(<Demo />, _mount_);
 | setFields | 设置表单的值 | ()=>void | [] |      
 | validateFieldsAndGetValue | 验证并获取值 | ()=>Promise<any> | [] |   
 
-## rulesProps
+## RulesProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | message    | 验证提示消息     | string           | -      |
