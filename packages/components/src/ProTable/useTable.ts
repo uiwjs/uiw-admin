@@ -44,7 +44,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
       ...datas,
     });
   };
-  console.log('form--->', form);
+
   // 更新form
   const updateForm = (form: any) => {
     setForm(form);
@@ -52,11 +52,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   // 重置
   const onReset = async () => {
     await form.current.resetForm();
-    const isNoError = await form.current.onSubmit();
-    if (isNoError) {
-      await state.setPageIndex(1);
-      state.mutate(false);
-    }
+    onSearch();
   };
   // 刷新当前页数据
   const onRefersh = async () => {
