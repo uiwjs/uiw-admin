@@ -17,6 +17,7 @@ import React, { useState } from 'react';
 import { ProForm } from '@uiw-admin/components'
 import { Button,Notify,Slider } from 'uiw'
 const Demo = () => {
+  const [state,setState] = React.useState({})
    const [option] = React.useState([
     { value: 1, label: '苹果' },
     { value: 2, label: '西瓜' },
@@ -37,6 +38,7 @@ const Demo = () => {
     }
   }
     return (
+    <>
        <ProForm
          // 表单类型
          formType="collapse"
@@ -61,10 +63,9 @@ const Demo = () => {
             Notify.error({ title: '提交失败！' });
             throw err;
           }
+          setState(current)
           // 调用请求接口
         }}
-         // 表单值变化 
-         onChange={(initial, current) => {}}
          formDatas={[
              {
                label: 'input',
@@ -190,6 +191,8 @@ const Demo = () => {
             },
           ]}
        />
+      <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
+    </>
   )
 }
 ReactDOM.render(<Demo />, _mount_);
@@ -204,7 +207,7 @@ import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
-
+  const [state,setState] = React.useState({})
   const form = useForm()
 
     return (
@@ -227,6 +230,7 @@ const Demo = () => {
              },
           ]}
        />
+        <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
@@ -236,6 +240,8 @@ const Demo = () => {
           // 获取错误信息
           const errors = form.getError()
           if(errors && Object.keys(errors).length > 0 ) return
+          const value = form.getFieldValues?.()
+          setState(value)
          // 调用请求接口
        }}
        >
@@ -244,14 +250,20 @@ const Demo = () => {
       <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
-        onClick={()=> form.resetForm() }
+        onClick={()=>{
+          form.resetForm()
+          setState({})
+        }}
        >
         重置
       </Button>
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
-        onClick={()=> form.setFields({input:'1234'}) }
+        onClick={()=> {
+          form.setFields({input:'1234'})
+          setState({input:'1234'})
+        } }
        >
         设置
       </Button>
@@ -262,7 +274,7 @@ ReactDOM.render(<Demo />, _mount_);
 ```
 
 ### 多个表单
-
+> 基础提交
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -270,8 +282,10 @@ import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
+  const [state,setState] = React.useState({})
   const form = useForm()
   const form2 = useForm()
+
   return (
      <div>
        <ProForm
@@ -319,6 +333,7 @@ const Demo = () => {
              },
           ]}
        />
+       <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
@@ -336,10 +351,192 @@ const Demo = () => {
           const value = form.getFieldValues?.()
           const value2 = form2.getFieldValues?.()
           const params = {...value,...value2}
-          console.log("params",params)
+          setState(params)
           // 调用请求接口
        }}>
          保存
+      </Button>
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+> promise提交
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { Button } from 'uiw'
+const Demo = () => {
+  const [state,setState] = React.useState({})
+  const form = useForm()
+  const form2 = useForm()
+
+  const asyncAwaitFormList = (arr=[]) => {
+    return (
+      arr && arr.length>0 &&  Promise.all(arr).then((vals) =>{
+        return vals
+      })
+    )
+  };
+
+  return (
+     <div>
+       <ProForm
+         form={form}
+         title="表单一"
+         formType="card"
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+               rules: [
+                { required: true, message: '请输入' },
+                { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
+               ]
+             },
+          ]}
+       />
+        <div style={{ marginTop:15 }} />
+        <ProForm
+         formType="pure"
+         form={form2}
+         title="表单二"
+         formType="card"
+         formDatas={ [
+             {
+               label: 'input2',
+               key: 'input2',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+               rules: [
+                { 
+                  validator: (value = '') => {
+                    if(!value) return false
+                    return true
+                  },
+                  message: "请输入"
+                },
+               ]
+             },
+          ]}
+       />
+        <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={ async ()=>{
+          // 触发验证获取值
+          const values = await asyncAwaitFormList([form?.validateFieldsAndGetValue(),form2?.validateFieldsAndGetValue()])
+          let obj = {};
+          values.forEach((item) => Object.assign(obj, item));
+          setState(obj)
+          // 调用请求接口
+       }}>
+         保存
+      </Button>
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+### 动态添加表单
+> uiw/form方式提交
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState,useRef } from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { Button,Card } from 'uiw'
+const Demo = () => {
+  const form = useForm()
+  const formRefList = useRef([])
+  const [state,setState] = React.useState([])
+  const [items,setItems] = useState([])
+  // 过滤删除为null的ref
+  const formList = formRefList?.current.filter(n => n) || []
+
+  const handleAddFormItems = (type,idx)=>{
+    if(type==='add'){
+       items.push([
+        {
+          label: '司机手机号',
+          key: 'phone',
+          widget: 'input',
+          initialValue: '',
+        },
+      ])
+    }
+    if(type==='delete'){
+      items.splice(idx,1)
+      formList[idx].setFields({phone:''})
+    }
+    setItems([...items])
+  }
+
+  return (
+     <div>
+      {items.map((item, idx) => {
+          return (
+           <Card 
+            title={`表单${idx + 1}`} 
+            key={idx} 
+            style={{ marginBottom:10 }} 
+            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
+             <ProForm
+              ref={(e) =>(formRefList.current[idx] = e)}
+              // 表单类型
+              formType="pure"
+              form={form}
+              cardProps={{
+                noHover: true,
+              }}
+              // 更新表单的值
+              buttonsContainer={{ justifyContent: 'flex-start' }}
+              formDatas={item}
+              // 提交后验证
+              onSubmit={(initial, current) => {
+                const errorObj = {};
+                if (!current?.phone) {
+                  errorObj.phone = 'input不能为空';
+                }
+                if (Object.keys(errorObj).length > 0) {
+                const err = new Error();
+                err.filed = errorObj;
+                throw err;
+              }
+              // 获取值
+              const params = (formList.map(value => ({ ...value?.getFieldValues() }))) || [];
+              setState(params)
+              // 调用请求接口
+            }}
+            />
+          </Card>
+          )
+        })}
+         <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
+       <Button 
+        style={{ marginTop:10,width:80 }}  
+        type="primary"  
+        onClick={handleAddFormItems.bind(this,'add')}>
+         新增
+        </Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={()=>{
+          // 触发验证
+          formList.forEach(item => item.submitvalidate())
+        }}>
+        保存
       </Button>
     </div>
   );
@@ -465,100 +662,6 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 动态添加表单
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
-import React, { useState,useRef } from 'react';
-import { ProForm,useForm } from '@uiw-admin/components'
-import { Button,Card } from 'uiw'
-const Demo = () => {
-  const form = useForm()
-  const formRefList = useRef([])
-  const [items,setItems] = useState([])
-  // 过滤删除为null的ref
-  const formList = formRefList?.current.filter(n => n) || []
-
-  const handleAddFormItems = (type,idx)=>{
-    if(type==='add'){
-       items.push([
-        {
-          label: '司机手机号',
-          key: 'phone',
-          widget: 'input',
-        },
-      ])
-    }
-    if(type==='delete'){
-      items.splice(idx,1)
-    }
-    setItems([...items])
-  }
-
-  return (
-     <div>
-      {items.map((item, idx) => {
-          return (
-           <Card 
-            title={`表单${idx + 1}`} 
-            key={idx} 
-            style={{ marginBottom:10 }} 
-            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
-             <ProForm
-              ref={(e) =>(formRefList.current[idx] = e)}
-              // 表单类型
-              formType="pure"
-              type="array"
-              form={form}
-              style={{ marginBottom: 10 }}
-              cardProps={{
-                noHover: true,
-              }}
-              // 更新表单的值
-              buttonsContainer={{ justifyContent: 'flex-start' }}
-              formDatas={item}
-              // 提交后验证
-              onSubmit={(initial, current) => {
-                const errorObj = {};
-                if (!current?.phone) {
-                  errorObj.phone = 'input不能为空';
-                }
-                if (Object.keys(errorObj).length > 0) {
-                const err = new Error();
-                err.filed = errorObj;
-                throw err;
-              }
-              // 获取值
-              const params = (formList.map(value => ({ ...value?.getFieldValues() }))) || [];
-              console.log('params', params)
-              // 调用请求接口
-            }}
-            />
-          </Card>
-          )
-        })}
-       <Button 
-        style={{ marginTop:10,width:80 }}  
-        type="primary"  
-        onClick={handleAddFormItems.bind(this,'add')}>
-         新增
-        </Button>
-       <Button 
-        style={{ marginTop:10,width:80 }} 
-        type="primary" 
-        onClick={()=>{
-          // 触发验证
-          formList.forEach(item => item.submitvalidate())
-        }}>
-        保存
-      </Button>
-    </div>
-  );
-}
-ReactDOM.render(<Demo />, _mount_);
-```
-
-
 ## Props
 > 继承uiw-Form
 
@@ -616,6 +719,7 @@ ReactDOM.render(<Demo />, _mount_);
 | getFieldValues | 获取表单值 | ()=>void | - |  
 | getError | 获取表单错误 | ()=>void | - |  
 | setFields | 设置表单的值 | ()=>void | [] |      
+| validateFieldsAndGetValue | 验证并获取值 | ()=>Promise<any> | [] |   
 
 ## rulesProps
 | 参数     | 说明     | 类型                     | 默认值 |

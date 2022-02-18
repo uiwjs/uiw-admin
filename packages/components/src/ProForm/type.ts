@@ -93,6 +93,7 @@ export interface UseFormStateProps {
   resetForm: () => void;
   getError: () => void;
   setFields: () => void;
+  validateFieldsAndGetValue: () => Promise<any>;
 }
 
 export interface rulesProps {

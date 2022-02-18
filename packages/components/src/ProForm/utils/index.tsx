@@ -86,21 +86,21 @@ interface FromValidateProps {
 }
 
 //判断是否是arrary
-function isArray(obj: any | any[]) {
+export function isArray(obj: any | any[]) {
   return Object.prototype.toString.call(obj) == '[object Array]';
 }
 
 //判断是否object
-function isObject(obj: any | any[]) {
+export function isObject(obj: any | any[]) {
   return Object.prototype.toString.call(obj) == '[object Object]';
 }
 
 //判断是否是string 或 number
-function isNumberOrString(obj: any) {
+export function isNumberOrString(obj: any) {
   return typeof obj === 'string' || typeof obj === 'number';
 }
 // 判断对象是否为空
-function isObjectEmpty(obj: any) {
+export function isObjectEmpty(obj: any) {
   for (let _key in obj) {
     return false;
   }
