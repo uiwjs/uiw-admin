@@ -41,7 +41,6 @@ export const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { index: true, element: <QuickStart /> },
-      { path: '/create-uiw-admin', element: <CreateUiwAdmin /> },
       { path: '/quick-start', element: <QuickStart /> },
       { path: '/authorized', element: <Authorized /> },
       { path: '/basic-layouts', element: <BasicLayouts /> },
