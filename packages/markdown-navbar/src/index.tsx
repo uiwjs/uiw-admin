@@ -223,9 +223,9 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     const curHeading = newHeadingList.find(
       (h) => h.distanceToTop === minDistance,
     );
-
     if (!curHeading) return;
 
+    updateHash(curHeading.dataId.toLowerCase().replace(' ', '-'));
     setCurrentListNo(curHeading.listNo);
   }, 200);
 
