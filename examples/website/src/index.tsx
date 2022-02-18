@@ -1,21 +1,14 @@
 import ReactDOM from 'react-dom';
-import {
-  useRoutes,
-  // HashRouter,
-  unstable_HistoryRouter,
-} from 'react-router-dom';
-import { createBrowserHistory } from 'history';
-
+import { useRoutes, HashRouter } from 'react-router-dom';
 import '@uiw/reset.css';
 import { routes } from './router';
 import './index.less';
-export const HistoryRouter = unstable_HistoryRouter;
-export const history = createBrowserHistory();
+
 const App = () => useRoutes(routes);
 
 ReactDOM.render(
-  <HistoryRouter history={history}>
+  <HashRouter>
     <App />
-  </HistoryRouter>,
+  </HashRouter>,
   document.getElementById('root'),
 );
