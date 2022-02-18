@@ -191,7 +191,9 @@ const Demo = () => {
             },
           ]}
        />
-      <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
+        <div style={{ maxWidth: 200 }}>
+          <pre style={{ padding: '10px 0 0 10px' }}>{JSON.stringify(state, null, 2)}</pre>
+        </div>
     </>
   )
 }
@@ -230,7 +232,6 @@ const Demo = () => {
              },
           ]}
        />
-        <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
@@ -267,6 +268,9 @@ const Demo = () => {
        >
         设置
       </Button>
+      <div style={{ maxWidth: 500 }}>
+        <pre style={{ padding: '10px 0 0 10px' }}>{JSON.stringify(state, null, 2)}</pre>
+      </div>
     </div>
   );
 }
@@ -333,7 +337,6 @@ const Demo = () => {
              },
           ]}
        />
-       <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
@@ -356,6 +359,9 @@ const Demo = () => {
        }}>
          保存
       </Button>
+      <div style={{ maxWidth: 500 }}>
+        <pre style={{ padding: '10px 0 0 10px' }}>{JSON.stringify(state, null, 2)}</pre>
+      </div>
     </div>
   );
 }
@@ -368,7 +374,7 @@ ReactDOM.render(<Demo />, _mount_);
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
-import { Button } from 'uiw'
+import { Button,Row,Col } from 'uiw'
 const Demo = () => {
   const [state,setState] = React.useState({})
   const form = useForm()
@@ -429,7 +435,6 @@ const Demo = () => {
              },
           ]}
        />
-        <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
@@ -443,6 +448,9 @@ const Demo = () => {
        }}>
          保存
       </Button>
+      <div style={{ maxWidth: 500 }}>
+        <pre style={{ padding: '10px 0 0 10px' }}>{JSON.stringify(state, null, 2)}</pre>
+      </div>
     </div>
   );
 }
@@ -490,7 +498,8 @@ const Demo = () => {
             title={`表单${idx + 1}`} 
             key={idx} 
             style={{ marginBottom:10 }} 
-            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}>
+            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}
+            >
              <ProForm
               ref={(e) =>(formRefList.current[idx] = e)}
               // 表单类型
@@ -522,7 +531,6 @@ const Demo = () => {
           </Card>
           )
         })}
-         <div style={{marginTop:10}}>{JSON.stringify(state)}</div>
        <Button 
         style={{ marginTop:10,width:80 }}  
         type="primary"  
@@ -538,6 +546,9 @@ const Demo = () => {
         }}>
         保存
       </Button>
+      <div style={{ maxWidth: 500 }}>
+        <pre style={{ padding: '10px 0 0 10px' }}>{JSON.stringify(state, null, 2)}</pre>
+      </div>
     </div>
   );
 }
@@ -568,6 +579,7 @@ const Demo = () => {
         form={form}
          readOnly={true}
          title="只读模式"
+         formType="pure"
          // 只读模式下调整 一行的 DescriptionItems 数量,其余参数参考uiw/Descriptions
          readOnlyProps={{ column:2 }}
          formDatas={
