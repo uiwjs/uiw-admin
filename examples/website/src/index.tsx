@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import {
   useRoutes,
-  HashRouter,
+  // HashRouter,
   unstable_HistoryRouter,
 } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
