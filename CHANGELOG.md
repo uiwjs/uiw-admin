@@ -8,6 +8,7 @@
 
 - @uiw-admin/components
   - 🐞`ProTable`: 修复重置表单无效的问题，优化无查询数据布局
+  - 🌟`ProForm`: 增加validateFieldsAndGetValue表单验证并获取值
 
 ## 5.2.18
 - @uiw-admin/components
