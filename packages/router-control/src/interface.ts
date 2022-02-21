@@ -1,7 +1,7 @@
 import React from 'react';
 import type { RouteObject } from 'react-router-dom';
 import { Location, NavigateFunction, Params } from 'react-router-dom';
-import { Store } from '@uiw-admin/models';
+
 export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
   key?: string;
   /** 默认跳转 */
@@ -20,6 +20,9 @@ export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
   hideInMenu?: boolean;
   /** 用于路由校验权限 */
   isAuth?: boolean;
+  /** 自定义 跳转 */
+  // navigate?: (navigate: NavigateFunction) => void;
+  navigate?: string;
 }
 
 // json文件格式
