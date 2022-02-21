@@ -7,8 +7,6 @@ import { Icon } from 'uiw';
 // import { CloseOutlined, CopyOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import { CardListProps } from '../../interface';
 
-let window: any;
-
 const CardList: React.FC<CardListProps> = ({
   displayList = [],
   listData,
@@ -112,6 +110,7 @@ const CardList: React.FC<CardListProps> = ({
               };
               if (typeof window[callback] === 'function') {
                 onClick = () => {
+                  // @ts-ignore
                   window[callback]({
                     value: listData,
                     onChange: changeList,

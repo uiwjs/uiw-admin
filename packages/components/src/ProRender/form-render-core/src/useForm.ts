@@ -15,8 +15,6 @@ import {
 } from './utils';
 import { Schema, FormParams, Error } from './interface';
 
-let window: any;
-
 const useForm = (props?: FormParams) => {
   const {
     formData: _formData,
@@ -30,8 +28,10 @@ const useForm = (props?: FormParams) => {
   } = props || {};
 
   const logOnMount =
+    // @ts-ignore
     _logOnMount || (window.FR_LOGGER && window.FR_LOGGER.logOnMount);
   const logOnSubmit =
+    // @ts-ignore
     _logOnSubmit || (window.FR_LOGGER && window.FR_LOGGER.logOnSubmit);
 
   const [renderCount, forceRender] = useState(0);
@@ -296,7 +296,7 @@ const useForm = (props?: FormParams) => {
   };
 
   // TODO: better implementation needed
-  const setErrorFields = (error: Error) => {
+  const setErrorFields = (error: Error[] | any) => {
     let newErrorFields: any = [];
     if (Array.isArray(error)) {
       newErrorFields = [...error, ..._outErrorFields.current];

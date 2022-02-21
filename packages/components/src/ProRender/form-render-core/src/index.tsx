@@ -17,8 +17,6 @@ import './index.css';
 import { mapping as defaultMapping } from './mapping';
 import { noop } from './utils';
 
-let window: any;
-
 const defaultFinish = (data: object, errors: any[]) => {
   console.log('onFinish:', { data, errors });
 };
@@ -322,6 +320,8 @@ const App: React.FC<FRProps> = ({
   const debugFormCss = getParamByName('_debug_form_css');
   // eslint-disable-next-line no-restricted-globals
   const isPre = location.href.indexOf('pre') > -1;
+  // @ts-ignore
+  const descriptor = window.descriptor;
 
   const watchList = Object.keys(watch);
   return (
@@ -346,7 +346,7 @@ const App: React.FC<FRProps> = ({
                 <div>{'errorFields:' + JSON.stringify(form.errorFields)}</div>
                 <div>{'touchedKeys:' + JSON.stringify(form.touchedKeys)}</div>
                 <div>{'allTouched:' + JSON.stringify(form.allTouched)}</div>
-                <div>{'descriptor:' + JSON.stringify(window.descriptor)}</div>
+                <div>{'descriptor:' + JSON.stringify(descriptor)}</div>
                 {/* <textarea
                     style={{ width: 500, height: 300 }}
                     value={'schema:' + JSON.stringify(flatten, null, 2)}

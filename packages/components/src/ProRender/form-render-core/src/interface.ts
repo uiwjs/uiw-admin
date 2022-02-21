@@ -48,7 +48,7 @@ export interface FormInstance {
   isSubmitting: boolean;
   endValidating: () => void;
   endSubmitting: () => void;
-  setErrorFields: (error: Error[]) => void;
+  setErrorFields: (error: Error[] | any) => void;
   removeErrorField: (path: string) => void;
   removeTouched: (path: string) => void;
   changeTouchedKeys: (pathArray: string[]) => void;
