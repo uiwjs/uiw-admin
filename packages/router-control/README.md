@@ -32,6 +32,7 @@ npm i @uiw-admin/router-control --save # yarn add  @uiw-admin/router-control
 | hideInMenu | 否   | `boolean`       | 无        | 是否隐藏菜单                                                                                                     |
 | isAuth     | 否   | `boolean`       | 无        | 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准                                                    |
 | routes     | 否   | `RoutersJSON[]` | 无        | 子集 路由 ,(参数与菜单路由参数一致)                                                                              |
+| navigate   | 否   | `string`        | 无        | 自定义跳转(`"(navigate) => {console.log('navigate', navigate)}"`)                                                |
 
 <!-- ## 参数
 

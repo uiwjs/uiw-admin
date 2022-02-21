@@ -16,7 +16,7 @@
         "name": "查询表格",
         "component": "@/pages/TableList",
         "icon": "search",
-        "navigate": "(navigate) => {console.log('navigate', navigate)}"
+        "navigate": "(navigate) => {navigate('/tableList',{ replace: true })}"
       },
       {
         "path": "/home",
