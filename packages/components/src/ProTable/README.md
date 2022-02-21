@@ -20,17 +20,15 @@ function Demo() {
       };
     },
     // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
-    query: (pageIndex, searchValues) => {
+    query: (pageIndex, pageSize, searchValues) => {
       return {
         page: pageIndex,
-        pageSize: 10,
+        pageSize,
         data: searchValues,
-      };
+      }
     },
      // swr options
-    SWRConfiguration: {
-      revalidateOnFocus: false
-    }
+
   });
 
   return (
@@ -189,7 +187,8 @@ ReactDOM.render(<Demo />, _mount_);
 | onPageChange   | 分页回调             |（page: number） => void                        | -      |
 | onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询 | ({initial, current}) => Boolean                 |        |
 | rowSelection   | 选择框配置                                             | RowSelection                                    | -      |
-| scroll         | 滚动                                                   | ScrollProps                                     | -      |
+| scroll         | 滚动                         | ScrollProps        | -      |
+| paginationProps| 分页属性                      | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)        | -      |
 
 ### rowSelection
 
@@ -222,6 +221,16 @@ ReactDOM.render(<Demo />, _mount_);
 | widgetProps | 组件属性                              | 与uiw对应的组件属性一致                                         | -      |
 | label       | 表单标题，如果不填则集成columns title | String                                                          | -      |
 | key         | 表单name，如果不填则集成columns key   | String                                                          | -      |
+
+### paginationProps
+
+| 参数    | 说明         | 类型   | 默认值 |
+| ------- | ------------ | ------ | ------ |
+| pageSizeOptions | 指定每页可以显示多少条	     | Number[]	 | {}     |
+| pageSize | 每页条数		     | Number | 10     |
+| onShowSizeChange     | pageSize 变化的回调	 | Function(current, pageSize)	 | -      |
+
+其余属性继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)
 
 ## useTable
 

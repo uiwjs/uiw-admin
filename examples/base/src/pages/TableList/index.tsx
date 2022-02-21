@@ -12,19 +12,13 @@ export default function Demo() {
       }
     },
     // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
-    query: (pageIndex, searchValues) => {
+    query: (pageIndex, pageSize, searchValues) => {
       return {
         page: pageIndex,
-        pageSize: 10,
+        pageSize,
         data: searchValues,
       }
     },
-    // swr options
-    // SWRConfiguration: {
-    //   onSuccess: (data) => {
-    //     console.log(data);
-    //   }
-    // }
   })
 
   const [val, setVal] = useState('')
@@ -34,6 +28,7 @@ export default function Demo() {
   const handleSearch = (val: string) => {
     setVal(val)
   }
+
   return (
     <ProTable
       // 操作栏按钮
@@ -84,6 +79,13 @@ export default function Demo() {
       // 取消全部选择
       onPageChange={() => {
         table.selection.unSelectAll()
+      }}
+      paginationProps={{
+        pageSizeOptions: [10, 20, 30],
+        pageSize: 10,
+        onShowSizeChange: (current, pageSize) => {
+          console.log(current, pageSize)
+        },
       }}
       columns={[
         {
