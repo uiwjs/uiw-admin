@@ -67,7 +67,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
     const defaultSearchValues: Fields = {};
     columns.forEach((col) => {
       if (col?.props?.initialValue) {
-        const name = col.key || col.props.key;
+        const name = col.props.key || col.key;
         defaultSearchValues[name] = col.props.initialValue;
       }
       if (Array.isArray(col.props)) {
