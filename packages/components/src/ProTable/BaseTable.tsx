@@ -21,8 +21,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
   paginationProps = {},
   ...tableProps
 }) => {
-  // const { pageSize } = paginationProps
-
   const [pageIndex, setPageIndex] = useState(1);
 
   const [pgSize, setPgSize] = useState(paginationProps?.pageSize || 10);
@@ -41,7 +39,9 @@ const BaseTable: React.FC<BaseTableProps> = ({
     key,
     searchValues,
     SWRConfiguration = {},
+    requestOptions,
   } = store as any;
+
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
   const { x } = scroll;
   const isCheckbox = type === 'checkbox';
@@ -100,8 +100,9 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
   const pageSize = formatQuery().pageSize || 10;
   // 调接口
+
   const { data, isValidating, mutate } = useSWR(
-    [key, { method: 'POST', body: formatQuery() }],
+    [key, { method: 'POST', body: formatQuery(), ...requestOptions }],
     request,
     {
       revalidateOnFocus: false,

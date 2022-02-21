@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Params, useTableData, stateParams } from './types';
 
 const useTable = (key: string, params: Params = {}): useTableData => {
-  const { formatData, query, SWRConfiguration } = params;
+  const { formatData, query, SWRConfiguration, requestOptions } = params;
 
   // 表单组件实例
   const [form, setForm] = useState<any>(null);
@@ -81,6 +81,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     updateStore,
     SWRConfiguration,
     form,
+    requestOptions,
     updateForm,
     ...state,
   };
