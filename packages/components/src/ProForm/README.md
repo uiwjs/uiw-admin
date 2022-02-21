@@ -698,7 +698,7 @@ ReactDOM.render(<Demo />, _mount_);
 | collapseProps      | uiw`Collapse` API                                 | CollapseProps                                                            | {}     |
 | collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
 
-## FormItemsProps
+### FormItemsProps
 > 继承uiw-FormItem
 
 | 参数         | 说明                                                          | 类型                    | 默认值 |
@@ -707,7 +707,7 @@ ReactDOM.render(<Demo />, _mount_);
 | key          | 表单项key                                                     | string                  | -      |
 | widget       | 表单项类型                                                    | sring                   | -      |
 | initialValue | 表单项值，可以是默认值                                        | any 或 any[]            | -      |
-| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | FormOptionsProps[] | -      |
+| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | OptionsProps[] | -      |
 | widgetProps  | 表单组件其余参数,参考uiw表单组件                              | any                     | -      |
 | hide         | 是否显示                                                      | boolean                 | true   |
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
@@ -715,14 +715,24 @@ ReactDOM.render(<Demo />, _mount_);
 | required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | RulesProps[]                 | -      |
 
-## FormOptionsProps
+### RulesProps
+| 参数     | 说明     | 类型                     | 默认值 |
+| -------- | -------- | ------------------------ | ------ |
+| message    | 验证提示消息     | string           | -      |
+| pattern    | 验证正则      | RegExp | -      |
+| validator | 自定义验证规则 | (value: any | any[]) => boolean | - | 
+| required | 是否必填 | boolean | - | 
+
+### OptionsProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | label    | 名称     | string(必传值)           | -      |
 | value    | key      | string 或 number(必传值) | -      |
 | disabled | 是否禁用 | boolean                  | -      |
 
-## UseFormProps
+## useForm
+
+### response
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | submitvalidate | 表单验证 | ()=>void | - | 
@@ -732,14 +742,6 @@ ReactDOM.render(<Demo />, _mount_);
 | getError | 获取表单错误 | ()=>void | - |  
 | setFields | 设置表单的值 | ()=>void | [] |      
 | validateFieldsAndGetValue | 验证并获取值 | ()=>Promise<any> | [] |   
-
-## RulesProps
-| 参数     | 说明     | 类型                     | 默认值 |
-| -------- | -------- | ------------------------ | ------ |
-| message    | 验证提示消息     | string           | -      |
-| pattern    | 验证正则      | RegExp | -      |
-| validator | 自定义验证规则 | (value: any | any[]) => boolean | - | 
-| required | 是否必填 | boolean | - | 
 
 ## 贡献者
 

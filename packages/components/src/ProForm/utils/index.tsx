@@ -1,4 +1,4 @@
-import { FormOptionsProps, RulesProps } from '../type';
+import { OptionsProps, RulesProps } from '../type';
 import { formatter, Rate } from 'uiw';
 import React from 'react';
 import Upload from '../widgets/Upload';
@@ -15,7 +15,7 @@ import Upload from '../widgets/Upload';
 export function getReadValue(
   type: string | any,
   initialValue: any | any[],
-  option: FormOptionsProps[],
+  option: OptionsProps[],
   widgetProps: any,
 ) {
   let content: string | number | React.ReactNode = '';
@@ -25,8 +25,7 @@ export function getReadValue(
     type === 'select'
   ) {
     let value =
-      option.filter((itm: FormOptionsProps) => itm.value === initialValue) ||
-      [];
+      option.filter((itm: OptionsProps) => itm.value === initialValue) || [];
     if (value.length > 0) content = value[0].label;
   } else if (type === 'checkbox') {
     for (const itm of option as any) {
@@ -58,7 +57,7 @@ export function getReadValue(
     const contentList =
       (initialValue &&
         initialValue.length > 0 &&
-        initialValue.map((item: FormOptionsProps) => item.label)) ||
+        initialValue.map((item: OptionsProps) => item.label)) ||
       [];
     content = contentList.join(';');
   } else if (type === 'searchSelect' && widgetProps?.mode === 'multiple') {
