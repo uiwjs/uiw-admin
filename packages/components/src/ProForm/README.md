@@ -485,7 +485,7 @@ const Demo = () => {
     }
     if(type==='delete'){
       items.splice(idx,1)
-      formList[idx].setFields({phone:''})
+      // formList[idx].setFields({phone:''})
     }
     setItems([...items])
   }
