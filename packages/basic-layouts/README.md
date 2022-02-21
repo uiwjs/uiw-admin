@@ -81,7 +81,7 @@ export interface UseLayoutsProps {
 | footer           | 否   | `React.ReactElement`                                                                     |           | 页脚                     |
 | routes           | 否   | `RoutersProps[]`                                                                         |           | 菜单路由数据             |
 | children         | 否   | `React.ReactNode`                                                                        |           | 内容                     |
-| headerLayout     | 否   | `枚举类型："top" | "default"`                                                            | `default` | 头部布局                 |
+| headerLayout     | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
 | headerBackground | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
 | headerFontColor  | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
 | menuHide         | 否   | `boolen`                                                                                 | `false`   | 头部字体颜色             |
