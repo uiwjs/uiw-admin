@@ -18,7 +18,7 @@ UIW Admin Project
 - ⚙️ 集成路由、Redux、选项卡等特性。
 ### 🛡 TypeScript
 
-参考 [在 TypeScript 中使用](https://ant.design/docs/react/use-in-typescript-cn)。
+参考 [使用 TypeScript ](https://www.tslang.cn/)。
 
 ## 🔗 相关依赖
 
