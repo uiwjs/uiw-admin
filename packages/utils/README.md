@@ -1,31 +1,125 @@
-# `工具`
+# `Utils工具`
 
 ## request
 
-基于axios封装的请求方法
+系统的请求基于axios进行了二次封装，参见[axios](https://axios-http.com/)
 
-```ts
+## 方法
+基于restful规范，提供了2个方法：
+- get 获取服务端数据，参数拼接在url上，以 query string 方式发送给后端
+- post 新增数据，参数以body形式发送给后端
 
-export interface Options extends AxiosRequestConfig {
-  /** swr_Rest_Time 用于重新触发事件使用 */
-  body?: any & { swr_Rest_Time?: number | string };
-  /** 数据格式  **/
-  requestType?: "form" | "json" | "urlencoded"
+
+## 参数
+
+| 参数    | 说明     | 类型           | 默认值 |
+| :------ | :------- | :------------- | :----- |
+| url | 请求地址 | string        | -      |
+| options   | 请求配置，即axios的配置，     | Options         | -     |
+
+### Options
+| 参数    | 说明     | 类型           | 默认值 |
+| :------ | :------- | :------------- | :----- |
+| body | 请求传递给后端的参数 | any      | -      |
+| requestType   | 数据格式    | 'form' 或 'json' 或 'urlencoded'        | -     |
+
+## 调用方式
+### ✨配和swr调用
+> 如果已全局配置过swr,可不用传入request
+
+```tsx
+import React from 'react'
+import useSWR from 'swr';
+import { request } from "@uiw-admin/utils"
+
+export default const Index = () => {
+  const [ name ,setName ] = React.useState('')
+  const { mutate } = useSWR(
+    ['/api/selectById',{ method: 'POST', body: {id:1} }],
+    request,
+    {
+      revalidateOnMount: false,
+      revalidateOnFocus: false,
+      onSuccess: (data) => {
+        if (data && data.code === 200) {
+          setName(data.data)
+         }
+      },
+    }
+  )
+
+  React.useEffect(()=>mutate(false),[mutate])
+
+  return <div>{name}</div>
 }
-type request = (url:string,options?:Options)=>Promise<any>
 
 ```
-
+### 在rematch中使用
+> 在servers/index.js中
 ```ts
 import { request } from "@uiw-admin/utils"
 
-request("/api/foo")
+export const selectById  = (params:{id:string}) => request("/api/selectById",{ method:"POST",body: { ...params } })
 
-request("/api/foo",{ method:"POST" })
+```
+> 在model/index.js中
+```ts
+import { RootModel } from '@uiw-admin/models'
+import { createModel } from '@rematch/core'
+import { selectById } from '../servers'
+
+const index = createModel<RootModel>()({
+  name: 'index',
+  state: {
+    name:''
+  },
+  reducers: {
+    updateState: (state: any, payload: any) => ({
+      ...state,
+      ...payload,
+    }),
+  },
+  effects: (dispatch) => ({
+    async selectById(payload: {id:string}) {
+      const dph = dispatch
+      const data = await selectById(payload)
+      if (data.code === 200) {
+        dph.index.dispatch({
+          type:"updateState",
+          payload:{
+            name:data.data || ''
+          }
+        })
+      }
+    },
+  }),
+})
+export default index
 
 ```
 
-## 贡献者
+> 在页面中调用
+```tsx
+import React from 'react'
+import { useDispatch,useSelector } from 'react-redux'
+import { RootState,Dispatch } from '@uiw-admin/models'
+
+export default const Index = () => {
+  const dispatch = useDispatch<Dispatch>()
+  const stores = useSelector((state: RootState) => state) || {}
+  const { index:{ name } } = stores
+  React.useEffect(()=>{
+     dispatch({
+      type: 'index/selectById',
+      payload:{id:1},
+    })
+  },[])
+  return <div>{name}</div>
+}
+
+```
+
+## ❤️贡献者
 
 感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
 
