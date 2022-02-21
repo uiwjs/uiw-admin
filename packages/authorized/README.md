@@ -16,13 +16,9 @@ npm i @uiw-admin/authorized --save # yarn add @uiw-admin/authorized
 
 ```tsx
 import AuthPage  from "@uiw-admin/authorized"
-
 export default ()=>{
-
   return <AuthPage authority={false} redirectPath="/login">展示</AuthPage>
-
 }
-
 ```
 
 ## getAuthPath 方法
@@ -30,16 +26,11 @@ export default ()=>{
 判断是否有权限
 
 ```ts
-
 type getAuthPath = (path?: string)=>boolean 
 
-```
-
-```ts
 import {getAuthPath}  from "@uiw-admin/authorized"
 
 const isAuth = getAuthPath("/api/path")
-
 ```
 
 
@@ -54,7 +45,6 @@ const isAuth = getAuthPath("/api/path")
 | children | 是   | `React.ReactNode` |         | 内容                                            |
 
 ```tsx
-
 import React from "react"
 import { AuthBtn } from "@uiw-admin/authorized"
 
