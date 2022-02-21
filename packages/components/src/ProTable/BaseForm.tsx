@@ -17,7 +17,7 @@ import {
 import Select from './widgets/Select';
 import FormRadio from './widgets/Radio';
 import { useStore } from './hooks';
-import { BaseFormProps, Fields } from './types';
+import { BaseFormProps, Fields, FormProps } from './types';
 
 const widgets = {
   input: Input,
@@ -40,21 +40,36 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
   let { updateStore, updateForm } = store as any;
 
   const { columns, searchBtns, onBeforeSearch } = props;
+
+  const getFields = (formProps: FormProps, title: any) => {
+    const { widgetProps, key, widget, label, initialValue, ...otherProps } =
+      formProps;
+
+    // const name = key || colKey;
+    const Widget = widgets[widget];
+    return {
+      label: label || title,
+      children: <Widget {...widgetProps} />,
+      ...otherProps,
+      initialValue,
+    };
+  };
+
   // 获取表单配置
   const getFormFields = useMemo(() => {
     const fields: Fields = {};
     columns.forEach((col) => {
       if (col.props && Object.keys(col.props).length > 0) {
-        const { widgetProps, key, widget, label, initialValue, ...otherProps } =
-          col.props;
-        const name = key || col.key;
-        const Widget = widgets[widget];
-        fields[name] = {
-          label: label || col.title,
-          children: <Widget {...widgetProps} />,
-          ...otherProps,
-          initialValue,
-        };
+        if (Array.isArray(col.props)) {
+          col.props.forEach((f) => {
+            const name = f.key || col.key;
+            fields[name] = getFields(f, col.title);
+          });
+        } else {
+          const { key } = col.props;
+          const name = key || col.key;
+          fields[name] = getFields(col.props, col.title);
+        }
       }
     });
 

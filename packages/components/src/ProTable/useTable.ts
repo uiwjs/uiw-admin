@@ -62,6 +62,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   const onSearch = async () => {
     await form.current.onSubmit();
     const isNoError = form.current.getError();
+
     if (Object.keys(isNoError).length === 0) {
       await state.setPageIndex(1);
       state.mutate(false);

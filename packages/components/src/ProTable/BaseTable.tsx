@@ -70,6 +70,14 @@ const BaseTable: React.FC<BaseTableProps> = ({
         const name = col.key || col.props.key;
         defaultSearchValues[name] = col.props.initialValue;
       }
+      if (Array.isArray(col.props)) {
+        col.props.forEach((form) => {
+          const name = form.key || col.key;
+          if (form.initialValue) {
+            defaultSearchValues[name] = form.initialValue;
+          }
+        });
+      }
     });
     return defaultSearchValues;
   }, [JSON.stringify(columns)]);
@@ -129,12 +137,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
     defaultSelected,
     type === 'radio',
   );
-  // 查询
-  // const onSearch = async () => {
-  //   await setPageIndex(1);
-  //   form.current.onSubmit()
-  //   mutate(false);
-  // };
+
   // 分页
   const onPageChange = useCallback(
     async (page) => {
@@ -146,13 +149,22 @@ const BaseTable: React.FC<BaseTableProps> = ({
     },
     [setPageIndex, pageChange],
   );
+
   useEffect(() => {
     // 获取表单默认值
     const defaultSearchValues: Fields = {};
     columns.forEach((col) => {
       if (col?.props?.initialValue) {
-        const name = col.key || col.props.key;
+        const name = col.props.key || col.key;
         defaultSearchValues[name] = col.props.initialValue;
+      }
+      if (Array.isArray(col.props)) {
+        col.props.forEach((form) => {
+          const name = form.key || col.key;
+          if (form.initialValue) {
+            defaultSearchValues[name] = form.initialValue;
+          }
+        });
       }
     });
     const stores: any = {
@@ -253,7 +265,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
                   onPageChange(page);
                 }}
                 onShowSizeChange={(current, pageSize) => {
-                  // console.log(pageSize)
                   setPgSize(pageSize);
                   onPageChange(1);
                   paginationProps?.onShowSizeChange?.(current, pageSize);

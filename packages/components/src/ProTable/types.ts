@@ -34,21 +34,23 @@ export interface ProtableProps extends TableProps {
   requestOptions?: Options;
 }
 
+export type FormProps = {
+  widget:
+    | 'input'
+    | 'radio'
+    | 'checkbox'
+    | 'switch'
+    | 'select'
+    | 'textarea'
+    | 'dateInput'
+    | 'timePicker'
+    | 'searchSelect'
+    | 'monthPicker';
+  [key: string]: any;
+};
+
 export interface FormCol extends TableColumns {
-  props?: {
-    widget:
-      | 'input'
-      | 'radio'
-      | 'checkbox'
-      | 'switch'
-      | 'select'
-      | 'textarea'
-      | 'dateInput'
-      | 'timePicker'
-      | 'searchSelect'
-      | 'monthPicker';
-    [key: string]: any;
-  };
+  props?: FormProps | Array<FormProps>;
   align?: 'center' | 'left' | 'right';
 }
 
