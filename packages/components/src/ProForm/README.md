@@ -644,6 +644,9 @@ const Demo = () => {
               label: 'searchSelect',
               key: 'searchSelect',
               widget: 'searchSelect',
+              widgetProps:{
+                mode:"multiple",
+              },
               option:[{label:"周政",value:"周政"}],
               initialValue:queryInfo.searchSelect || []
             },

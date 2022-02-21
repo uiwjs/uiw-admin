@@ -18,10 +18,6 @@ export interface ProFormProps {
     initial: Record<string, any>,
     current: Record<string, any>,
   ) => void;
-  // afterSubmit?: (
-  //   initial: Record<string, any>,
-  //   current: Record<string, any>,
-  // ) => void;
   onSubmitError?: (error: any) => void;
   buttonsContainer?: React.CSSProperties;
   title?: string;
@@ -36,7 +32,7 @@ export interface ProFormProps {
   readOnlyProps?: DescriptionsProps;
   /** 自定义组件 */
   customWidgetsList?: Fields;
-  form?: UseFormProps | any;
+  form?: UseFormProps;
   cardProps?: CardProps;
   collapseProps?: CollapseProps;
   collapsePanelProps?: CollapsePanelProps;
@@ -84,18 +80,18 @@ export type Fields = {
 };
 
 export interface UseFormProps {
-  submitvalidate: () => void;
-  onSubmit: () => void;
+  submitvalidate?: () => void;
+  onSubmit?: (e: React.FormEvent) => any;
   resetForm?: () => void;
   getFieldValues?: () => void;
-  getError: () => void;
-  setFields: () => void;
-  validateFieldsAndGetValue: () => Promise<any>;
-  setFormState: (p: UseFormStateProps) => void;
+  getError?: () => void;
+  setFields?: () => void;
+  validateFieldsAndGetValue?: () => Promise<any>;
+  setFormState?: (p: UseFormStateProps | any) => void;
 }
 
 export interface UseFormStateProps {
-  onSubmit: () => void;
+  onSubmit: () => (e: React.FormEvent) => any;
   getFieldValues: () => void;
   resetForm: () => void;
   getError: () => void;
