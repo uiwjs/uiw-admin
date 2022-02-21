@@ -1,92 +1,40 @@
-@uiw-admin/config
-===
+# kkt配置
 
 简化 `.kktrc` 配置，默认集成 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options` 依赖包。
 其他配置查询[`kkt`](https://github.com/kktjs/kkt)
 
-## Installation
+## 安装
 
 ```bash
-npm i @uiw-admin/config -D
+npm i @uiw-admin/config -D # yarn add @uiw-admin/config
 ```
 
-## 参数
+## 参数说明(ConfigProps)
+
+| 参数             | 必填 | 类型                                                 | 默认值                                   | 说明                                                             |
+| :--------------- | :--- | :--------------------------------------------------- | :--------------------------------------- | :--------------------------------------------------------------- |
+| alias            | 否   | `Record<string, string \| false \| string[]>`        | `@:指向 src 目录，@@:指向 src/.uiw 目录` | 别名                                                             |
+| plugins          | 否   | `PluginsType`                                        |                                          | 插件                                                             |
+| define           | 否   | `Record<string, any> & DefaultDefineType`            |                                          | 默认全局变量，📢 注意：对象的属性值会经过一次 JSON.stringify 转换 |
+| ~~~loader~~~     | 否   | `KKTPlugins`                                         |                                          | kkt plugin，(⚠️将在V6版本中删除)                                  |
+| kktPlugins       | 否   | `KKTPlugins`                                         |                                          | kkt plugin                                                       |
+| publicPath       | 否   | `string`                                             |                                          | 项目前缀                                                         |
+| ~~~moreConfig~~~ | 否   | `ConfFun`                                            |                                          | 提供回调函数，更改 webpack 的最终配置 ，(⚠️将在V6版本中删除)      |
+| overrideWebpack  | 否   | `ConfFun`                                            |                                          | 提供回调函数，更改 webpack 的最终配置 ，                         |
+| output           | 否   | `Omit<WebpackConfiguration['output'], 'publicPath'>` |                                          | 输出                                                             |
+| rematch          | 否   | `{lazyLoad(懒加载)?: boolean}`                       |                                          | `rematch`的`plugin`配置                                          |
+
+继承[kkt](https://github.com/kktjs/kkt)配置
+
+### ConfFun 类型
 
 ```ts
 export type ConfFun = (conf: WebpackConfiguration, evn: string, options?: LoaderConfOptions | undefined) => WebpackConfiguration
-
-export type PluginsType = (
-  | ((this: webpack.Compiler, compiler: webpack.Compiler) => void)
-  | webpack.WebpackPluginInstance
-  | [string, Record<string, any>]
-  | string
-)[];
-
-export type KKTPlugins = (
-  | ConfFun
-  | {
-    loader?: ConfFun;
-    options?: LoaderConfOptions | undefined | Record<string, any>;
-  }
-  | string
-  | [string, Record<string, any>]
-)[]
-export type DefaultDefineType = {
-  /** 权限校验  默认 true */
-  AUTH?: string | boolean;
-  /** 路由 跳转前缀 默认 "/" */
-  BASE_NAME?: string;
-  /** 本地存储使用 localStorage 还是  sessionStorage  */
-  STORAGE?:  "local" | "session" | string;;
-  /** 版本  */
-  VERSION?: string;
- /** token 存储方式 默认与 `STORAGE` 值相同 */
-  TOKEN_STORAGE?: "local" | "session" | "cookie" | string;
-  /** token 存储字段 ,默认 token  **/
-  TOKEN_NAME: string;
-};
-
-export interface ConfigProps extends Omit<WebpackConfiguration, 'plugins'> {
-  /**
-   * 别名
-   * 默认系统内置两个别名
-   * 1. `@` 指向 src 目录
-   * 2. `@@` 指向 src/.uiw 目录
-   */
-  alias?: Record<string, string | false | string[]>;
-  /** 插件 */
-  plugins?:PluginsType;
-  /** 默认全局变量 define ， 📢 注意：对象的属性值会经过一次 JSON.stringify 转换   */
-  define?: Record<string, any> & DefaultDefineType;
-   /**
-    * kkt plugin 
-    * @deprecated 推荐使用 `kktPlugins`
-    */
-  loader?:KKTPlugins;
-   /**  kkt plugin  */
-  kktPlugins?: KKTPlugins;
-  /** 项目前缀 */
-  publicPath?: string;
-  /**
-   * 提供回调函数，更改 webpack 的最终配置。
-   * @deprecated 推荐使用 `overrideWebpack`
-   */
-  moreConfig?: ConfFun;
-  /** 提供回调函数，更改 webpack 的最终配置。 */
-  overrideWebpack?: ConfFun;
-  /** 输出 */
-  output?: Omit<WebpackConfiguration['output'], 'publicPath'>;
-   /**  rematch 配置  */
-  rematch?: {
-    /** 懒加载  */
-    lazyLoad?: boolean,
-  },
-}
 ```
 
 ## rematch 
 
-> 1. 参数 `lazyLoad`  `boolean` 类型 ，默认 `false`
+1. 参数 `lazyLoad`  `boolean` 类型 ，默认 `false`
 
 ```ts
 import defaultConfig from "@uiw-admin/config";
@@ -146,7 +94,6 @@ ReactDOM.render(
   document.getElementById('root')
 )
 
-
 ```
 
 ## kktPlugins 
@@ -186,23 +133,16 @@ export default defaultConfig({
 
 用于提供给代码中可用的变量。下面是自带默认值：
 
-```ts
-/** 全局默认公共参数  */
-export const defaultDefine = {
-  /** 权限校验  默认 true */
-  AUTH: true,
-  /** 路由 跳转前缀 默认 "/" */
-  BASE_NAME: '/',
-  /** 本地存储使用 localStorage 还是  sessionStorage  */
-  STORAGE: 'session', // local | session
-  /** 版本  */
-  VERSION: require(path.resolve(process.cwd(), './package.json')).version || '0',
-  /** toekn 存储方式 ,默认与 `STORAGE` 值相同  **/
-  TOKEN_STORAGE: 'session',
-    /** token 存储字段 ,默认 token  **/
-  TOKEN_NAME: "token";
-}
-```
+### DefaultDefineType 类型
+
+| 参数          | 必填 | 类型                                         | 默认值                                | 说明                                   |
+| :------------ | :--- | :------------------------------------------- | :------------------------------------ | :------------------------------------- |
+| AUTH          | 否   | `string \| boolean`                          | `true`                                | 权限校验                               |
+| BASE_NAME     | 否   | `string`                                     | `"/"`                                 | 路由 跳转前缀                          |
+| STORAGE       | 否   | `枚举类型："local" \| "session" \| string`   | `session`                             | 本地存储使用                           |
+| VERSION       | 否   | `string`                                     | 默认`package.json`中的`version`字段值 | 版本                                   |
+| TOKEN_STORAGE | 否   | `枚举类型："local" \| "session" \| "cookie"` | `session`                             | token 存储方式 默认与 `STORAGE` 值相同 |
+| TOKEN_NAME    | 否   | `string`                                     | `token`                               | token 存储字段                         |
 
 ## alias
 
@@ -223,7 +163,18 @@ export default config({
 - `@`，项目 `src` 目录
 - `@@`，临时目录，通常是 `src/.uiw` 目录
 
-## plugins 参数说明
+## plugins 说明
+
+### PluginsType 类型
+
+```ts
+export type PluginsType = (
+  | ((this: webpack.Compiler, compiler: webpack.Compiler) => void)
+  | webpack.WebpackPluginInstance
+  | [string, Record<string, any>]
+  | string
+)[];
+```
 
 1. 使用的先行条件--插件需要默认导出是一个 class 类，符合`webpack` 的 `plugins`规范，
 2. 一维数组时，直接把字符串当成包名进行加载，使用`require`进行引入后直接`new`
@@ -243,7 +194,21 @@ class DemoWebpackPlugin {
 }
 ```
 
-## kktPlugins (~~旧loader~~) 参数说明
+## kktPlugins (~~旧loader~~) 参数
+
+### KKTPlugins 类型
+
+```ts
+export type KKTPlugins = (
+  | ConfFun
+  | {
+    loader?: ConfFun;
+    options?: LoaderConfOptions | undefined | Record<string, any>;
+  }
+  | string
+  | [string, Record<string, any>]
+)[]
+```
 
 1. 使用的先行条件--需要默认导出是一个函数方法,返回类型为`webpack.Configuration `的函数
 2. 一维数组时，直接把字符串当成包名进行加载，使用`require`进行引入后直接方法调用
