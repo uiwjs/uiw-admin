@@ -1,73 +1,52 @@
-权限组件
-===
+# 权限组件
 
-## Installation
+## 安装
 
 ```bash
-npm i @uiw-admin/authorized --save
+npm i @uiw-admin/authorized --save # yarn add @uiw-admin/authorized
 ```
 
-## AuthPage 页面权限组件
+## 参数说明
 
-```ts
-interface AuthorizedProps {
-  /** 是否已经登录 */ 
-  authority?: boolean;
-  children: JSX.Element;
-  /** 未登录重定向路径 默认 /login */ 
-  redirectPath?: string;
-}
-```
+| 参数         | 必填 | 类型          | 默认值   | 说明             |
+| :----------- | :--- | :------------ | :------- | :--------------- |
+| authority    | 否   | `boolean`     |          | 是否已经登录     |
+| redirectPath | 否   | `string`      | `/login` | 未登录重定向路径 |
+| children     | 是   | `JSX.Element` |          | 是否已经登录     |
 
 ```tsx
 import AuthPage  from "@uiw-admin/authorized"
-
 export default ()=>{
-
   return <AuthPage authority={false} redirectPath="/login">展示</AuthPage>
-
 }
-
 ```
 
-## getAuthPath
+## getAuthPath 方法
 
-> 判断是否有权限
+判断是否有权限
 
 ```ts
-
 type getAuthPath = (path?: string)=>boolean 
 
-```
-
-```ts
 import {getAuthPath}  from "@uiw-admin/authorized"
 
 const isAuth = getAuthPath("/api/path")
-
 ```
 
 
-## AuthBtn 
+## AuthBtn 按钮组件
 
-> 外层嵌套 组件，判断子组件是否有权限展示或使用
+外层嵌套 组件，判断子组件是否有权限展示或使用
 
-```ts
-export interface AuthBtnProps {
-  /** 路径 */
-  path?: string;
-  /** 禁用 状态 展示   适用于 存在 disabled 属性的组件  */
-  disabled?: boolean;
-  children: React.ReactNode;
-}
-```
-
-## 案例
+| 参数     | 必填 | 类型              | 默认值  | 说明                                            |
+| :------- | :--- | :---------------- | :------ | :---------------------------------------------- |
+| path     | 否   | `string`          |         | 路径                                            |
+| disabled | 否   | `boolean`         | `false` | 禁用 状态 展示(适用于 存在 disabled 属性的组件) |
+| children | 是   | `React.ReactNode` |         | 内容                                            |
 
 ```tsx
-
 import React from "react"
-import { getAuthPath,AuthBtn } from "@uiw-admin/authorized"
+import { AuthBtn } from "@uiw-admin/authorized"
 
 const Demos = ()=>{
   return <div>
