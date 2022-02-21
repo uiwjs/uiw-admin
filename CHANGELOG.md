@@ -4,6 +4,12 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.21
+
+- @uiw-admin/components
+  - 🌟 `ProTable`: 增加分页属性配置，增加多筛选表单配置
+  - 🌟 `useTable`: 增加axios属性配置
+
 ## 5.2.20
 
 - @uiw-admin/basic-layout

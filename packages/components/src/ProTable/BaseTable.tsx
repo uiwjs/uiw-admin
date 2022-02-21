@@ -21,8 +21,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
   paginationProps = {},
   ...tableProps
 }) => {
-  // const { pageSize } = paginationProps
-
   const [pageIndex, setPageIndex] = useState(1);
 
   const [pgSize, setPgSize] = useState(paginationProps?.pageSize || 10);
@@ -41,7 +39,9 @@ const BaseTable: React.FC<BaseTableProps> = ({
     key,
     searchValues,
     SWRConfiguration = {},
+    requestOptions,
   } = store as any;
+
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
   const { x } = scroll;
   const isCheckbox = type === 'checkbox';
@@ -67,8 +67,16 @@ const BaseTable: React.FC<BaseTableProps> = ({
     const defaultSearchValues: Fields = {};
     columns.forEach((col) => {
       if (col?.props?.initialValue) {
-        const name = col.key || col.props.key;
+        const name = col.props.key || col.key;
         defaultSearchValues[name] = col.props.initialValue;
+      }
+      if (Array.isArray(col.props)) {
+        col.props.forEach((form) => {
+          const name = form.key || col.key;
+          if (form.initialValue) {
+            defaultSearchValues[name] = form.initialValue;
+          }
+        });
       }
     });
     return defaultSearchValues;
@@ -100,8 +108,9 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
   const pageSize = formatQuery().pageSize || 10;
   // 调接口
+
   const { data, isValidating, mutate } = useSWR(
-    [key, { method: 'POST', body: formatQuery() }],
+    [key, { method: 'POST', body: formatQuery(), ...requestOptions }],
     request,
     {
       revalidateOnFocus: false,
@@ -128,12 +137,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
     defaultSelected,
     type === 'radio',
   );
-  // 查询
-  // const onSearch = async () => {
-  //   await setPageIndex(1);
-  //   form.current.onSubmit()
-  //   mutate(false);
-  // };
+
   // 分页
   const onPageChange = useCallback(
     async (page) => {
@@ -145,13 +149,22 @@ const BaseTable: React.FC<BaseTableProps> = ({
     },
     [setPageIndex, pageChange],
   );
+
   useEffect(() => {
     // 获取表单默认值
     const defaultSearchValues: Fields = {};
     columns.forEach((col) => {
       if (col?.props?.initialValue) {
-        const name = col.key || col.props.key;
+        const name = col.props.key || col.key;
         defaultSearchValues[name] = col.props.initialValue;
+      }
+      if (Array.isArray(col.props)) {
+        col.props.forEach((form) => {
+          const name = form.key || col.key;
+          if (form.initialValue) {
+            defaultSearchValues[name] = form.initialValue;
+          }
+        });
       }
     });
     const stores: any = {
@@ -252,7 +265,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
                   onPageChange(page);
                 }}
                 onShowSizeChange={(current, pageSize) => {
-                  // console.log(pageSize)
                   setPgSize(pageSize);
                   onPageChange(1);
                   paginationProps?.onShowSizeChange?.(current, pageSize);

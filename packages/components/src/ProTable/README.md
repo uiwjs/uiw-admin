@@ -215,12 +215,41 @@ ReactDOM.render(<Demo />, _mount_);
 配置搜索表单
 
 
+
 | 参数        | 说明                                  | 类型                                                            | 默认值 |
 | ----------- | ------------------------------------- | --------------------------------------------------------------- | ------ |
 | widget      | 表单组件                              | 支持例子中的组件, 组件名与uiw表单组件名字一致，只是首字母小写了 | -      |
 | widgetProps | 组件属性                              | 与uiw对应的组件属性一致                                         | -      |
 | label       | 表单标题，如果不填则集成columns title | String                                                          | -      |
-| key         | 表单name，如果不填则集成columns key   | String                                                          | -      |
+| key         | 表单name，如果不填则集成columns key   | String       | -      |
+
+ props可以是个对象属性值是以上参数，也可以是个数组方便处理筛选条件大于列表展示的情况
+
+```js
+<!-- 对象 -->
+props: {
+  widget: 'input',
+  initialValue: 'zzz',
+  widgetProps: {
+    preIcon: 'user',
+    placeholder: '输入用户名',
+  }
+}
+
+  <!-- 数组 -->
+props: [
+  {
+    widget: 'input',
+    initialValue: 'zzz',
+    key: 'name'
+  },
+  {
+    widget: 'input',
+    initialValue: 'a',
+  },
+],
+
+```
 
 ### paginationProps
 
@@ -241,6 +270,7 @@ ReactDOM.render(<Demo />, _mount_);
 | ------- | ------------ | ------ | ------ |
 | key     | 接口请求地址 | string | -      |
 | options | 配置集合     | object | {}     |
+| requestOptions | request参数，继承自[axios config](https://axios-http.com/docs/req_config)     | object | {}     |
 
 ### options
 
