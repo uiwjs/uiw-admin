@@ -8,41 +8,6 @@ import {
   CollapseProps,
   CollapsePanelProps,
 } from 'uiw';
-
-export type Fields = {
-  [key: string]: any;
-};
-export interface FormOptionsProps {
-  label: string;
-  value: string | number;
-  disabled?: boolean;
-}
-
-export interface FormItemsProps
-  extends Omit<UiwFormItemProps<any>, 'initialValue' | 'validator'> {
-  /** 表单元素标题 */
-  label?: string;
-  /** 表单元素字段名称 */
-  key: string;
-  /** 表单元素类型 */
-  widget: string;
-  /** 表单元素值，可以是默认值 */
-  initialValue?: any | any[];
-  /** 数据化选项内容, type为 radio、checkbox、select 生效 */
-  option?: FormOptionsProps[];
-  widgetProps?: any;
-  /** 是否显示 */
-  hide?: boolean;
-  /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
-  span?: string;
-  /** 只读模式下包含列的数量 参考Descriptions.Item	*/
-  readSpan?: number;
-  /** 是否必填 */
-  required?: boolean;
-  // 验证规则
-  rules?: RulesProps[];
-}
-
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
   onSubmit?: (
@@ -53,10 +18,6 @@ export interface ProFormProps {
     initial: Record<string, any>,
     current: Record<string, any>,
   ) => void;
-  // afterSubmit?: (
-  //   initial: Record<string, any>,
-  //   current: Record<string, any>,
-  // ) => void;
   onSubmitError?: (error: any) => void;
   buttonsContainer?: React.CSSProperties;
   title?: string;
@@ -71,29 +32,40 @@ export interface ProFormProps {
   readOnlyProps?: DescriptionsProps;
   /** 自定义组件 */
   customWidgetsList?: Fields;
-  form?: UseFormProps | any;
+  form?: UseFormProps;
   cardProps?: CardProps;
   collapseProps?: CollapseProps;
   collapsePanelProps?: CollapsePanelProps;
 }
-
-export interface UseFormProps {
-  submitvalidate: () => void;
-  onSubmit: () => void;
-  resetForm?: () => void;
-  getFieldValues?: () => void;
-  getError: () => void;
-  setFields: () => void;
-  setFormState: (p: UseFormStateProps) => void;
+export interface FormItemsProps
+  extends Omit<UiwFormItemProps<any>, 'initialValue' | 'validator'> {
+  /** 表单元素标题 */
+  label?: string;
+  /** 表单元素字段名称 */
+  key: string;
+  /** 表单元素类型 */
+  widget: string;
+  /** 表单元素值，可以是默认值 */
+  initialValue?: any | any[];
+  /** 数据化选项内容, type为 radio、checkbox、select 生效 */
+  option?: OptionsProps[];
+  widgetProps?: any;
+  /** 是否显示 */
+  hide?: boolean;
+  /** 可以通过指定 24 列中每列的宽度来创建基本网格系统 默认8 */
+  span?: string;
+  /** 只读模式下包含列的数量 参考Descriptions.Item	*/
+  readSpan?: number;
+  /** 是否必填 */
+  required?: boolean;
+  // 验证规则
+  rules?: RulesProps[];
 }
 
-export interface UseFormStateProps {
-  onSubmit: () => void;
-  getFieldValues: () => void;
-  resetForm: () => void;
-  getError: () => void;
-  setFields: () => void;
-  validateFieldsAndGetValue: () => Promise<any>;
+export interface OptionsProps {
+  label: string;
+  value: string | number;
+  disabled?: boolean;
 }
 
 export interface RulesProps {
@@ -101,4 +73,27 @@ export interface RulesProps {
   pattern?: RegExp;
   validator?: (value: any | any[]) => boolean;
   required?: boolean;
+}
+
+export type Fields = {
+  [key: string]: any;
+};
+
+export interface UseFormProps {
+  submitvalidate?: () => void;
+  onSubmit?: (e: React.FormEvent) => any;
+  resetForm?: () => void;
+  getFieldValues?: () => void;
+  getError?: () => void;
+  setFields?: () => void;
+  validateFieldsAndGetValue?: () => Promise<any>;
+  setFormState?: (p: UseFormStateProps | any) => void;
+}
+
+export interface UseFormStateProps {
+  onSubmit: () => (e: React.FormEvent) => any;
+  getFieldValues: () => void;
+  resetForm: () => void;
+  getError: () => void;
+  setFields: () => void;
 }

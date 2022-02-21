@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { Input, Popover, Menu, Icon, Loader } from 'uiw';
-import { FormOptionsProps } from '../../type';
+import { OptionsProps } from '../../type';
 
 export interface SelectMultipleProps {
   // 下拉项集合
-  option?: FormOptionsProps[];
+  option?: OptionsProps[];
   // 变化回调 返回所有选中的项
-  onChange?: (selectedList?: FormOptionsProps[]) => void;
+  onChange?: (selectedList?: OptionsProps[]) => void;
   // 选中后回调 返回当前选中的项
-  onSelect?: (selected?: FormOptionsProps | null) => void;
+  onSelect?: (selected?: OptionsProps | null) => void;
   // 搜索回调
   onSearch?: (name?: string) => void;
   // 失去焦点回调
   onBlur?: () => void;
   // 删除后毁掉
-  onClear?: (selectedList?: FormOptionsProps[]) => void;
+  onClear?: (selectedList?: OptionsProps[]) => void;
   // 值
-  value?: FormOptionsProps[];
+  value?: OptionsProps[];
   // 是否展示删除
   allowClear?: boolean;
   loading?: boolean;
@@ -50,7 +50,7 @@ function SelectMultiple(
   }: SelectMultipleProps,
 ) {
   // 选中的集合
-  const [selectedItems, setSelectedItems] = useState<FormOptionsProps[]>(value);
+  const [selectedItems, setSelectedItems] = useState<OptionsProps[]>(value);
   // 搜索内容
   const [searchValue, setSearchValue] = useState('');
   // 是否是搜索状态
@@ -60,7 +60,7 @@ function SelectMultiple(
   const isMax = selectedItems.length === maxCount;
 
   // 选择下拉项
-  const handleOnChange = (selected: FormOptionsProps) => {
+  const handleOnChange = (selected: OptionsProps) => {
     let selKeys = [...selectedItems];
     const findKey = selKeys.find((v) => v.value === selected.value);
     if (!findKey && !isMax) {
@@ -105,7 +105,7 @@ function SelectMultiple(
             width: 200,
           }}
         >
-          {option.map((opt: FormOptionsProps, idx) => {
+          {option.map((opt: OptionsProps, idx) => {
             const active: boolean =
               selectedItems &&
               selectedItems.findIndex((item) => item.value === opt.value) !==

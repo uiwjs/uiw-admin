@@ -6,7 +6,7 @@ import { fromValidate } from './utils';
 import './style/form-item.less';
 
 function FormDom({
-  formDatas,
+  formDatas = [],
   formfields,
   onSubmit,
   onChange,
@@ -46,8 +46,7 @@ function FormDom({
           onSubmit?.(initial, current);
         } else {
           const validateList =
-            (formDatas &&
-              formDatas.length > 0 &&
+            (formDatas.length > 0 &&
               formDatas.map((item) => ({
                 key: item.key,
                 value: current[item.key],
@@ -70,7 +69,6 @@ function FormDom({
           return error.filed ? { ...error.filed } : null;
         }
       }}
-      // afterSubmit={({ initial, current }:any)=>console.log('current',current,'initial',initial)}
       fields={formfields}
     >
       {({ fields, state, canSubmit, resetForm }) => {

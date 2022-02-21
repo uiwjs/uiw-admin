@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.20
+
+- @uiw-admin/basic-layout
+  - 🌟 新增 菜单自定义跳转
+
 ## 5.2.19
 
 - @uiw-admin/components
