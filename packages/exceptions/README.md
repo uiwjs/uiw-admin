@@ -1,9 +1,14 @@
-公共异常组件
-===
+# 公共异常组件
 
 > 1. 403 页面
 > 2. 404 页面
 > 3. 500 页面
+
+## 安装
+
+```bash
+  npm i @uiw-admin/exceptions --save # yarn add @uiw-admin/exceptions
+```
 
 ## 403页面预览
 

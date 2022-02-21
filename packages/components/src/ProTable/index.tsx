@@ -33,6 +33,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     updateForm,
     setPageIndex,
     mutate,
+    requestOptions,
   } = table;
   const store = useMemo(
     () => ({
@@ -52,6 +53,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       updateForm,
       setPageIndex,
       mutate,
+      requestOptions,
     }),
     [JSON.stringify(table)],
   );

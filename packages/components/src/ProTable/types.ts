@@ -7,6 +7,7 @@ import {
 } from 'uiw';
 import { SWRConfiguration, MutatorOptions } from 'swr';
 import { UseSelections } from './useSelections';
+import { Options } from '@uiw-admin/utils/src/request';
 
 type SelectionType = 'checkbox' | 'radio';
 
@@ -30,23 +31,26 @@ export interface ProtableProps extends TableProps {
   onPageChange?: (page: number) => void;
   scroll?: ScrollProps;
   paginationProps?: PaginationProps;
+  requestOptions?: Options;
 }
 
+export type FormProps = {
+  widget:
+    | 'input'
+    | 'radio'
+    | 'checkbox'
+    | 'switch'
+    | 'select'
+    | 'textarea'
+    | 'dateInput'
+    | 'timePicker'
+    | 'searchSelect'
+    | 'monthPicker';
+  [key: string]: any;
+};
+
 export interface FormCol extends TableColumns {
-  props?: {
-    widget:
-      | 'input'
-      | 'radio'
-      | 'checkbox'
-      | 'switch'
-      | 'select'
-      | 'textarea'
-      | 'dateInput'
-      | 'timePicker'
-      | 'searchSelect'
-      | 'monthPicker';
-    [key: string]: any;
-  };
+  props?: FormProps | Array<FormProps>;
   align?: 'center' | 'left' | 'right';
 }
 
@@ -82,6 +86,7 @@ export type Params = {
   ) => {
     [key: string]: any;
   };
+  requestOptions?: Options;
   SWRConfiguration?: SWRConfiguration;
 };
 

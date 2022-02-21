@@ -1,12 +1,10 @@
-tab 选项卡布局
-===
+# tab 选项卡布局
 
-## Installation
+## 安装
 
 ```bash
-npm i @uiw-admin/layout-tabs --save
+npm i @uiw-admin/layout-tabs --save # yarn add @uiw-admin/layout-tabs
 ```
-
 
 ## 参数
 

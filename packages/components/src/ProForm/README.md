@@ -1,5 +1,7 @@
 # ProForm
 
+基于[uiw from](https://uiwjs.github.io/#/components/form)封装， 更方便的使用表单。
+
 ## 注意
 > [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/form),
  默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,
