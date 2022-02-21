@@ -40,7 +40,7 @@ export interface FormItemsProps
   /** 是否必填 */
   required?: boolean;
   // 验证规则
-  rules?: rulesProps[];
+  rules?: RulesProps[];
 }
 
 export interface ProFormProps {
@@ -96,7 +96,7 @@ export interface UseFormStateProps {
   validateFieldsAndGetValue: () => Promise<any>;
 }
 
-export interface rulesProps {
+export interface RulesProps {
   message?: string;
   pattern?: RegExp;
   validator?: (value: any | any[]) => boolean;
