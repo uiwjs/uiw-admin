@@ -1,14 +1,13 @@
- 页面整体布局
----
+# 页面整体布局
+
 > 1. [使用方式](https://github.com/uiwjs/uiw-admin/blob/2bd741133b585f5bdd52c3f46cb24474420f1106/examples/base/src/layouts/BasicLayout.tsx)
 
-## Installation
+## 安装
 
 ```bash
-npm i @uiw-admin/basic-layouts --save
+npm i @uiw-admin/basic-layouts --save # yarn add @uiw-admin/basic-layouts
 ```
-
-## 参数
+<!-- ## 参数
 
 ```ts
 
@@ -71,71 +70,81 @@ export interface UseLayoutsProps {
   updateStore: (datas: Params) => void;
 }
 
-```
+``` -->
 
-### headerLayout
+## 参数说明(BasicLayoutProps)
 
-> 头部布局，类型："top" | "default" ，默认：default
+| 参数             | 必填 | 类型                                                                                     | 默认值    | 说明                     |
+| :--------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
+| logo             | 否   | `string`                                                                                 |           | logo图标                 |
+| projectName      | 否   | `string`                                                                                 |           | 项目名称                 |
+| footer           | 否   | `React.ReactElement`                                                                     |           | 页脚                     |
+| routes           | 否   | `RoutersProps[]`                                                                         |           | 菜单路由数据             |
+| children         | 否   | `React.ReactNode`                                                                        |           | 内容                     |
+| headerLayout     | 否   | `枚举类型："top" | "default"`                                                            | `default` | 头部布局                 |
+| headerBackground | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
+| headerFontColor  | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
+| menuHide         | 否   | `boolen`                                                                                 | `false`   | 头部字体颜色             |
+| menus            | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
+| profile          | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
+| onReloadAuth     | 否   | `() => void`                                                                             |           | 重新加载权限             |
+| layouts          | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
 
-### headerBackground
+### 右侧点击头像展示菜单配置参数说明(UseLayoutsProps)
 
-> 头部背景色，类型：string，默认值："#fff"
+| 参数               | 必填 | 类型                                             | 默认值 | 说明 |
+| :----------------- | :--- | :----------------------------------------------- | :----- | :--- |
+| headerRightvisible | 否   | `boolen`                                         |        |      |
+| closeMenu          | 否   | `() => void`                                     |        |      |
+| updateStore        | 否   | `(datas: {headerRightvisible: boolean}) => void` |        |      |
 
-### headerFontColor
-
-> 头部字体颜色，类型：string ，默认值："#000"
-
-## menuHide 
-
-> 隐藏菜单展示，类型：boolen，默认：`false`
- 
 ## 案例
 
 ```tsx
-
-import React from 'react';
-import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
-import { Outlet } from 'react-router-dom';
-import { RoutersProps } from '@uiw-admin/router-control';
-import { Badge, Icon } from 'uiw';
-import useSWR from 'swr';
+import React from 'react'
+import BasicLayout, {
+  useLayouts,
+  BasicLayoutProps as BasicLayoutType,
+} from '@uiw-admin/basic-layouts'
+import { Outlet } from 'react-router-dom'
+import { RoutersProps } from '@uiw-admin/router-control'
+import { Badge, Icon } from 'uiw'
+import useSWR from 'swr'
 
 interface BasicLayoutProps {
-  routes: RoutersProps[];
+  routes: RoutersProps[]
 }
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
-  const { routes } = props;
-
   const layouts = useLayouts()
-  const { closeMenu } = layouts
 
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
     onSuccess: (data) => {
       if (data && data.code === 200) {
-        sessionStorage.setItem('token', data.token);
-        sessionStorage.setItem('auth', JSON.stringify(data.authList || []));
-        window.location.reload();
+        sessionStorage.setItem('token', data.token)
+        sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('auth', JSON.stringify(data.authList || []))
+        window.location.reload()
       }
     },
-  });
+  })
 
-  const basicLayoutProps = {
+  const basicLayoutProps: BasicLayoutType = {
     onReloadAuth: async () => mutate(),
-    routes: routes,
     // 修改密码以及其他操作在项目中进行
     menus: [
       {
         title: '欢迎来到uiw',
         icon: 'smile',
-        onClick: () => closeMenu(),
+        onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => closeMenu(),
+        onClick: () => layouts.closeMenu(),
       },
     ],
     profile: {
@@ -143,19 +152,29 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       menuLeft: (
         <div style={{ marginRight: 15 }}>
           <Badge count={66}>
-            <Icon type="bell" color="#343a40" style={{ fontSize: 20 }} />
+            <Icon
+              type="bell"
+              // color="#fff"
+              style={{ fontSize: 20 }}
+            />
           </Badge>
         </div>
       ),
     },
-  };
+    layouts,
+    ...props,
+    headerLayout: 'top',
+    headerBackground: '#343a40',
+    headerFontColor: '#fff',
+  }
   return (
-    <BasicLayout ref={baseRef} {...basicLayoutProps} {...props}>
+    <BasicLayout {...basicLayoutProps}>
       <Outlet />
     </BasicLayout>
-  );
+  )
 }
-export default BasicLayoutScreen;
+export default BasicLayoutScreen
+
 ```
 
 ## 预览
