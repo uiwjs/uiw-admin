@@ -1,13 +1,12 @@
-登录页面
----
+# 登录页面
 
-## Installation
+## 安装
 
 ```bash
-npm i @uiw-admin/user-login --save
+npm i @uiw-admin/user-login --save  # yarn add  @uiw-admin/user-login
 ```
 
-## 参数
+<!-- ## 参数
 
 ```ts
 
@@ -50,7 +49,28 @@ export interface UserLoginProps {
     passWord?: string
   }
 }
-```
+``` -->
+
+## 参数说明
+
+| 参数          | 必填 | 类型                                                          | 默认值                                      | 说明                                                               |
+| :------------ | :--- | :------------------------------------------------------------ | :------------------------------------------ | :----------------------------------------------------------------- |
+| align         | 否   | `'left' | 'right' | 'center'`                                 | `center`                                    | 卡片框的位置                                                       |
+| footer        | 否   | `React.ReactNode`                                             | undefined                                   | 页脚                                                               |
+| bg            | 否   | `string`                                                      | undefined                                   | 页面背景                                                           |
+| children      | 否   | `React.ReactNode`                                             | undefined                                   | 替换卡片位置内容                                                   |
+| projectName   | 否   | `string`                                                      | `KKT`                                       | 项目名称(页面标题)                                                 |
+| btnProps      | 否   | `Omit<ButtonProps, 'ref'>`                                    | `{}`                                        | 登录按钮 属性                                                      |
+| buttons       | 否   | `(Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]`  | undefined                                   | 登录按钮位置的自定义按钮组, title 为显示标题                       |
+| api           | 是   | `string`                                                      | undefined                                   | 请求接口                                                           |
+| onSuccess     | 是   | `(resp: any, form: (FormValue | undefined)) => void`          | `()=>null`                                  | 登录接口返回                                                       |
+| onBefore      | 否   | `(store: FormValue) => (Record<string, any> | boolean)`       | undefined                                   | 用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作 |
+| requestConfig | 否   | `Options`                                                     | undefined                                   | `request` 请求 `options` 配置参数                                  |
+| saveField     | 否   | `{userName(登录账号字段)?:string,passWord(密码字段)?:string}` | `{userName:"username",passWord:"password"}` | 默认输入框保存字段                                                 |
+| classNameWarp | 否   | `string`                                                      | undefined                                   | 卡片框外层`className`                                              |
+| styleWarp     | 否   | `React.CSSProperties`                                         | undefined                                   | 卡片框外层`style`                                                  |
+| classNameBody | 否   | `string`                                                      | undefined                                   | 卡片框`className`                                                  |
+| styleBody     | 否   | `React.CSSProperties`                                         | undefined                                   | 卡片框`style`                                                      |
 
 ## 案例
 

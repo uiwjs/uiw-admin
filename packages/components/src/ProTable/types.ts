@@ -1,4 +1,10 @@
-import { ButtonProps, TableColumns, TableProps, FormSubmitProps } from 'uiw';
+import {
+  ButtonProps,
+  TableColumns,
+  TableProps,
+  FormSubmitProps,
+  PaginationProps,
+} from 'uiw';
 import { SWRConfiguration, MutatorOptions } from 'swr';
 import { UseSelections } from './useSelections';
 
@@ -23,6 +29,7 @@ export interface ProtableProps extends TableProps {
   rowSelection?: RowSelection;
   onPageChange?: (page: number) => void;
   scroll?: ScrollProps;
+  paginationProps?: PaginationProps;
 }
 
 export interface FormCol extends TableColumns {
@@ -49,6 +56,7 @@ export interface BaseTableProps extends TableProps {
   rowSelection?: RowSelection;
   onPageChange?: (page: number) => void;
   scroll?: ScrollProps;
+  paginationProps?: PaginationProps;
 }
 
 export interface BaseFormProps
@@ -67,6 +75,7 @@ export type Params = {
   formatData?: (res: any) => Result;
   query?: (
     pageIndex: number,
+    pageSize: number,
     searchValues: {
       [key: string]: any;
     },

@@ -13,6 +13,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     operateButtons = [],
     searchBtns,
     onBeforeSearch,
+    paginationProps,
     ...tableProps
   } = props;
   const {
@@ -83,7 +84,11 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
           </div>
         )}
         {/* 列表组件 */}
-        <Table columns={columns} {...tableProps} />
+        <Table
+          columns={columns}
+          {...tableProps}
+          paginationProps={paginationProps}
+        />
       </Skeleton>
     </StoreCtx.Provider>
   );
