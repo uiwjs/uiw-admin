@@ -47,6 +47,8 @@
     "tsbb": "3.4.4"
   },
   "dependencies": {
-    "create-kkt": "3.0.0"
+    "async-validator": "^4.0.7",
+    "create-kkt": "3.0.0",
+    "lodash": "^4.17.21"
   }
 }

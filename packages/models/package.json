@@ -41,6 +41,8 @@
   },
   "dependencies": {
     "@rematch/core": "2.2.0",
-    "@rematch/loading": "2.1.2"
+    "@rematch/loading": "2.1.2",
+    "async-validator": "^4.0.7",
+    "lodash": "^4.17.21"
   }
 }

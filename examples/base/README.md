@@ -51,7 +51,7 @@ npm start
     |       |-- index.module.less
     |       |-- index.tsx
     |-- queries                       利用swr复用接口数据，各个页面都可用
-    |   |-- index.ts
+    |   |-- index.tsx
     |-- routes                        路由配置
     |   |-- router.tsx
     |-- servers                       放置api文件的地方，文件名已后端接口模块名命名，不以路由命名

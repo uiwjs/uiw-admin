@@ -16,5 +16,9 @@
     "access": "public"
   },
   "author": "jaywcjlove",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "async-validator": "^4.0.7",
+    "lodash": "^4.17.21"
+  }
 }

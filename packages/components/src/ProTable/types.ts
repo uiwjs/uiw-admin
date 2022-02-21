@@ -1,3 +1,4 @@
+import React from 'react';
 import { ButtonProps, TableColumns, TableProps, FormSubmitProps } from 'uiw';
 import { SWRConfiguration } from 'swr';
 import { UseSelections } from './useSelections';

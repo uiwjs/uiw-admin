@@ -46,5 +46,9 @@
     "@babel/traverse": "7.16.8",
     "@babel/types": "7.16.8",
     "chokidar": "3.5.3"
+  },
+  "dependencies": {
+    "async-validator": "^4.0.7",
+    "lodash": "^4.17.21"
   }
 }

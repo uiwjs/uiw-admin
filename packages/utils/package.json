@@ -27,6 +27,8 @@
     "url": "https://github.com/uiwjs/uiw-admin/issues"
   },
   "dependencies": {
-    "axios": "0.24.0"
+    "async-validator": "^4.0.7",
+    "axios": "0.24.0",
+    "lodash": "^4.17.21"
   }
 }

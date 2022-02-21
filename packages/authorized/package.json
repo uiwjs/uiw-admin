@@ -46,7 +46,9 @@
   },
   "dependencies": {
     "@babel/runtime": "7.16.7",
-    "@uiw-admin/router-control": "5.2.6"
+    "@uiw-admin/router-control": "5.2.6",
+    "async-validator": "^4.0.7",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/react": "17.0.38",

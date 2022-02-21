@@ -5,3 +5,5 @@ export { default as ProDrawer } from './ProDrawer';
 export { default as ProForm } from './ProForm';
 export { default as Upload } from './Upload';
 export { default as useForm } from './ProForm/hooks/useForm';
+export { default as ProRender } from './ProRender';
+export { default as useRender } from './ProRender/form-render-core/src/useForm';
