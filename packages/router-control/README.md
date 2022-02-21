@@ -1,16 +1,39 @@
-路由控制
-===
+# 菜单路由管理
+
+在项目根目录的`config/routes.json`配置菜单路由
 
 > 1. 进行路由处理转换
 > 2. 进行路由权限处理
 
-## Installation
+## 安装
 
 ```bash
-npm i @uiw-admin/router-control --save
+npm i @uiw-admin/router-control --save # yarn add  @uiw-admin/router-control
 ```
 
-## 参数
+## 路由控制组件参数
+
+| 参数       | 必须 | 类型                                          | 默认值    | 说明                                   |
+| :--------- | :--- | :-------------------------------------------- | :-------- | :------------------------------------- |
+| routeType  | 否   | `"history" | "hash" | "browser"`              | `history` | 路由模式                               |
+| addModels  | 否   | `(path: string) => Promise<{ default: any }>` | undefined |                                        |
+| isAutoAuth | 否   | `boolean`                                     | `history` | 是否自动校验 "/" 的路由 token 是否存在 |
+
+## 菜单路由参数
+
+| 参数       | 必须 | 类型            | 默认值    | 说明                                                                                                             |
+| :--------- | :--- | :-------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
+| index      | 否   | `boolean`       | undefined | 默认跳转(与`redirect`一起使用)                                                                                   |
+| redirect   | 否   | `string`        | undefined | 重定向  当`index===true`生效                                                                                     |
+| path       | 否   | `string`        | undefined | 跳转路由                                                                                                         |
+| name       | 否   | `string`        | undefined | 菜单名称                                                                                                         |
+| icon       | 否   | `string`        | undefined | 菜单图标                                                                                                         |
+| component  | 否   | `string`        | undefined | 渲染组件的路径(如果是`403/404/500`的页面直接写 `403/404/500`,使用`@uiw-admin/plugins`里面的`routes`时会进行转换) |
+| hideInMenu | 否   | `boolean`       | 无        | 是否隐藏菜单                                                                                                     |
+| isAuth     | 否   | `boolean`       | 无        | 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准                                                    |
+| routes     | 否   | `RoutersJSON[]` | 无        | 子集 路由 ,(参数与菜单路由参数一致)                                                                              |
+
+<!-- ## 参数
 
 ```ts
 
@@ -46,16 +69,7 @@ export interface ControllerProps {
   isAutoAuth?: boolean;
 }
 
-```
-
-## routeType
-
-路由模式："history" | "hash" | "browser"，  默认 history 
-
-## addModels
-
-加载 model 方法，(解决import引用地址问题报错)
-
+``` -->
 
 ## routes.json 文件案例
 
@@ -136,7 +150,6 @@ export default ()=>{
 }
 
 ```
-
 
 ## 贡献者
 
