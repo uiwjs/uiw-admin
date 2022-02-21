@@ -18,9 +18,14 @@ const BaseTable: React.FC<BaseTableProps> = ({
   rowSelection = {},
   onPageChange: pageChange,
   scroll = {},
+  paginationProps = {},
   ...tableProps
 }) => {
+  // const { pageSize } = paginationProps
+
   const [pageIndex, setPageIndex] = useState(1);
+
+  const [pgSize, setPgSize] = useState(paginationProps?.pageSize || 10);
 
   const [prevData, setPrevData] = useState({
     data: [],
@@ -76,6 +81,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
     if (query) {
       return query(
         pageIndex,
+        pgSize,
         isFirstMountRef.current === false ? defaultValues : searchValues,
       );
     } else {
@@ -85,7 +91,12 @@ const BaseTable: React.FC<BaseTableProps> = ({
         pageSize: 10,
       };
     }
-  }, [pageIndex, JSON.stringify(defaultValues), JSON.stringify(searchValues)]);
+  }, [
+    pageIndex,
+    JSON.stringify(defaultValues),
+    JSON.stringify(searchValues),
+    pgSize,
+  ]);
 
   const pageSize = formatQuery().pageSize || 10;
   // 调接口
@@ -228,6 +239,8 @@ const BaseTable: React.FC<BaseTableProps> = ({
             tableData &&
             tableData.length > 0 && (
               <Pagination
+                divider
+                {...paginationProps}
                 current={pageIndex}
                 pageSize={pageSize}
                 total={
@@ -235,9 +248,14 @@ const BaseTable: React.FC<BaseTableProps> = ({
                     ? formatData(data).total
                     : data?.total || prevData?.total
                 }
-                divider
                 onChange={(page) => {
                   onPageChange(page);
+                }}
+                onShowSizeChange={(current, pageSize) => {
+                  // console.log(pageSize)
+                  setPgSize(pageSize);
+                  onPageChange(1);
+                  paginationProps?.onShowSizeChange?.(current, pageSize);
                 }}
               />
             )

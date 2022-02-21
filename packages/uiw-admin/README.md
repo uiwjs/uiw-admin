@@ -1,9 +1,8 @@
 UIW Admin Project
 ---
 
-一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [kkt](https://github.com/kktjs/kkt) 的初始级别项目，集成路由、Redux、选项卡等特性。
-
-## Open in CodeSandbox
+一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [kkt](https://github.com/kktjs/kkt) 的初始级别项目。
+## 查看实例
 
 [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/uiwjs/uiw-admin/tree/master/examples/base?embed=1&hideNavigation=0&hidedevtools=0)
@@ -11,10 +10,17 @@ UIW Admin Project
 
 直接下载实例，本地预览: [`uiw-admin-ts.zip`](https://uiwjs.github.io/uiw-admin/zip/uiw-admin-ts.zip) [`uiw-admin-js.zip`](https://uiwjs.github.io/uiw-admin/zip/uiw-admin-js.zip)
 
+## ✨ 特性
 
-## Packages
+- 🌈 企业级中后台产品的交互语言和视觉风格。
+- 📦 开箱即用的高质量 React 后台管理框架。
+- 🛡 使用 TypeScript 开发。
+- ⚙️ 集成路由、Redux、选项卡等特性。
+### 🛡 TypeScript
 
-This git repository is a repo built using Lerna. It contains several packages:
+参考 [使用 TypeScript ](https://www.tslang.cn/)。
+
+## 🔗 相关依赖
 
 | Package                                                                                | Version                                                                                                                                   | Description                                               |
 | -------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
@@ -28,22 +34,9 @@ This git repository is a repo built using Lerna. It contains several packages:
 | [`@uiw-admin/config`](https://www.npmjs.com/package/@uiw-admin/config)                 | [![npm](https://img.shields.io/npm/v/@uiw-admin/config.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/config)                 | 简化 [`kkt`](https://github.com/kktjs/kkt) 配置           |
 | [`@uiw-admin/plugins`](https://www.npmjs.com/package/@uiw-admin/plugins)               | [![npm](https://img.shields.io/npm/v/@uiw-admin/plugins.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/plugins)               | [`kkt`](https://github.com/kktjs/kkt) 插件                |
 
-## Development
 
-使用 [`yarn workspaces`](https://classic.yarnpkg.com/en/docs/workspaces) 管理 `node_modules`
-
-```bash
-$ yarn install # Install dependencies
-$ npm run build
-
-$ npm run start # Run example website
-```
-
-
-Creates a [`uiw-admin`](https://github.com/uiwjs/uiw-admin) application using the command line.
-
-## Usage
-
+##  ⌨️ 快速开始
+> 通过命令创建一个[`uiw-admin`](https://github.com/uiwjs/uiw-admin) 
 ```shell
 # npm 6.x
 $ npm init uiw-admin my-app --example uiw-admin-ts
@@ -56,35 +49,27 @@ $ npm create uiw-admin my-app
 # or npx
 $ npx create-uiw-admin my-app
 ```
+## 📦 开发启动
 
-## Command Help
-
-Below is a help of commands you might find useful. The example download is from https://uiwjs.github.io/uiw-admin/zip/
+> 使用 [`yarn workspaces`](https://classic.yarnpkg.com/en/docs/workspaces) 管理 `node_modules`
 
 ```bash
-Usage: create-uiw-admin <app-name> [options] [--help|h]
+$ cd uiw-admin
 
-Options:
+$ yarn install
 
-  --version, -v   Show version number
-  --help, -h      Displays help information.
-  --output, -o    Output directory.
-  --example, -e   Example from: https://uiwjs.github.io/uiw-admin/zip/, default: "uiw-admin-ts"
-  --path, -p      Specify the download target git address.
-                    default: "https://uiwjs.github.io/uiw-admin/zip/"
+$ yarn start
 
-Example:
-
-  yarn create uiw-admin appName
-  npx create-uiw-admin my-app
-  npm create uiw-admin my-app
-  npm create uiw-admin my-app -f
-  npm create uiw-admin my-app -p https://uiwjs.github.io/uiw-admin/zip/
-
-Copyright 2021
 ```
 
-## 贡献者
+## 🔨 生产构建
+```bash
+$ cd uiw-admin
+
+$ yarn build
+```
+
+##  ❤️ 贡献者
 
 感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
 
@@ -92,7 +77,3 @@ Copyright 2021
   <img src="https://uiwjs.github.io/uiw-admin/CONTRIBUTORS.svg" />
 </a>
 
-
-## License
-
-Licensed under the MIT License.
