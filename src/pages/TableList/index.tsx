@@ -94,6 +94,7 @@ export default function Demo() {
           props: {
             widget: 'input',
             initialValue: 'zzz',
+            key: 'name',
             // 组件属性
             widgetProps: {
               preIcon: 'user',
