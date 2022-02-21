@@ -71,7 +71,7 @@ export interface ControllerProps {
 
 ``` -->
 
-## routes.json 文件案例
+## routes.json案例
 
 > `@` 指向 src 目录
 
