@@ -78,8 +78,70 @@ export interface UserLoginProps {
 | classNameBody | 否   | `string`                                                      |                                             | 卡片框`className`                                                  |
 | styleBody     | 否   | `React.CSSProperties`                                         |                                             | 卡片框`style`                                                      |
 
-## 案例
+## 基本使用
 
+```tsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+const UserLayout = () => {
+  const navigate = useNavigate()
+  return (
+    <UserLogin
+      api="/api/login"
+      // 登陆成功后回调
+      onSuccess={(data) => {
+        if (data && data.token) {
+          sessionStorage.setItem("token", data.token)
+          sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+          navigate("/home", { replace: true })
+        } else {
+         Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+        }
+      }}
+    />
+  )
+}
+export default UserLayout;
+
+```
+## 配置接口参数
+> 我们提供saveField配置登陆参数;onBefore登陆前回调;onSuccess登陆成功后回调。可更好拓展你的业务
+```tsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+const UserLayout = () => {
+  const navigate = useNavigate()
+  return <UserLogin
+    api="/api/login"
+    // 配置登陆参数
+    saveField={{
+      userName: "username",
+      passWord: "password"
+    }}
+    // 调用登陆接口之前,可以通过这个添加额外参数 返回 false 则不进行登录操作
+    onBefore={(value) => ({ a: 12, b: 1221 })}
+    // 登陆成功后回调
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+        navigate("/home", { replace: true })
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+export default UserLayout;
+
+```
+
+## 自定义按钮
+> buttons可进行自定义按钮配置,从而做更多业务拓展(如注册等)
 ```tsx
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
@@ -101,40 +163,8 @@ const UserLayout = () => {
        },
      ]}
     api="/api/login"
-    saveField={{
-      userName: "username",
-      passWord: "password"
-    }}
-    onBefore={(value) => ({ a: 12, b: 1221 })}
     btnProps={{ type: "primary" }}
-    onSuccess={(data) => {
-      if (data && data.token) {
-        sessionStorage.setItem("token", data.token)
-        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
-        navigate("/home", { replace: true })
-      } else {
-        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
-      }
-    }}
-  />
-}
-export default UserLayout;
-
-```
-
-## 案例2
-
-最简化案例
-
-```tsx
-import React from 'react';
-import UserLogin from '@uiw-admin/user-login';
-import { useNavigate, } from 'react-router-dom';
-import { Notify } from "uiw"
-const UserLayout = () => {
-  const navigate = useNavigate()
-  return <UserLogin
-    api="/api/login"
+    // 登陆成功后回调
     onSuccess={(data) => {
       if (data && data.token) {
         sessionStorage.setItem("token", data.token)

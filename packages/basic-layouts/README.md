@@ -75,8 +75,7 @@ export interface UseLayoutsProps {
 }
 
 ``` -->
-
-## 参数说明(BasicLayoutProps)
+## Props
 
 | 参数             | 必填 | 类型                                                                                     | 默认值    | 说明                     |
 | :--------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
@@ -94,16 +93,20 @@ export interface UseLayoutsProps {
 | onReloadAuth     | 否   | `() => void`                                                                             |           | 重新加载权限             |
 | layouts          | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
 
-### 右侧点击头像展示菜单配置参数说明(UseLayoutsProps)
+## useLayouts
 
+### response
 | 参数               | 必填 | 类型                                             | 默认值 | 说明 |
 | :----------------- | :--- | :----------------------------------------------- | :----- | :--- |
 | headerRightvisible | 否   | `boolen`                                         |        |      |
 | closeMenu          | 否   | `() => void`                                     |        |      |
 | updateStore        | 否   | `(datas: {headerRightvisible: boolean}) => void` |        |      |
 
-## 案例
-
+## 基本使用
+>   -  routes 渲染路由菜单
+>   -  headerLayout 配置头部布局
+>   -  headerBackground: 配置头部背景色
+>   -  headerFontColor: 配置头部字体颜色
 ```tsx
 import React from 'react'
 import BasicLayout, {
@@ -112,8 +115,42 @@ import BasicLayout, {
 } from '@uiw-admin/basic-layouts'
 import { Outlet } from 'react-router-dom'
 import { RoutersProps } from '@uiw-admin/router-control'
-import { Badge, Icon } from 'uiw'
-import useSWR from 'swr'
+
+interface BasicLayoutProps {
+  routes: RoutersProps[]
+}
+
+function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+
+  const basicLayoutProps: BasicLayoutType = {
+    ...props,
+    headerLayout: 'top',
+    headerBackground: '#343a40',
+    headerFontColor: '#fff',
+  }
+  return (
+    <BasicLayout {...basicLayoutProps}>
+      <Outlet />
+    </BasicLayout>
+  )
+}
+export default BasicLayoutScreen
+
+```
+
+## 右侧下拉菜单
+>   - menus配置右侧下拉菜单内容;
+>   - profile配置头像以及下拉菜单左侧内容;
+>   - onReloadAuth调用刷新权限接口;
+>   - layouts.closeMenu关闭菜单事件;
+```tsx
+import React from 'react'
+import BasicLayout, {
+  useLayouts,
+  BasicLayoutProps as BasicLayoutType,
+} from '@uiw-admin/basic-layouts'
+import { Outlet } from 'react-router-dom'
+import { RoutersProps } from '@uiw-admin/router-control'
 
 interface BasicLayoutProps {
   routes: RoutersProps[]
@@ -122,54 +159,30 @@ interface BasicLayoutProps {
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const layouts = useLayouts()
 
-  const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
-    revalidateOnMount: false,
-    revalidateOnFocus: false,
-    onSuccess: (data) => {
-      if (data && data.code === 200) {
-        sessionStorage.setItem('token', data.token)
-        sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
-        localStorage.setItem('token', data.token)
-        localStorage.setItem('auth', JSON.stringify(data.authList || []))
-        window.location.reload()
-      }
-    },
-  })
-
   const basicLayoutProps: BasicLayoutType = {
-    onReloadAuth: async () => mutate(),
-    // 修改密码以及其他操作在项目中进行
+    ...props,
+    // 右侧下拉菜单内容
     menus: [
       {
         title: '欢迎来到uiw',
         icon: 'smile',
+        // 调用关闭菜单事件
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
         icon: 'setting',
-        onClick: () => layouts.closeMenu(),
       },
     ],
     profile: {
-      avatar: require('../assets/head.png'),
-      menuLeft: (
-        <div style={{ marginRight: 15 }}>
-          <Badge count={66}>
-            <Icon
-              type="bell"
-              // color="#fff"
-              style={{ fontSize: 20 }}
-            />
-          </Badge>
-        </div>
-      ),
+      // 头像地址
+      avatar: '',
+      // 下拉菜单左侧内容
+      menuLeft:<div style={{ marginRight: 15 }}>可做自定义dom</div>
     },
+    // 调用刷新接口
+    onReloadAuth: () => {},
     layouts,
-    ...props,
-    headerLayout: 'top',
-    headerBackground: '#343a40',
-    headerFontColor: '#fff',
   }
   return (
     <BasicLayout {...basicLayoutProps}>

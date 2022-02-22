@@ -1,6 +1,6 @@
 # ProForm 表单
 
-基于[uiw From](https://uiwjs.github.io/#/components/form)封装。
+基于[uiw Form](https://uiwjs.github.io/#/components/form)封装。
 - [x] 支持原uiw/Form的提交方式并可以更简洁的生成表单
 - [x] 支持多个表单同时提交
 - [x] 支持动态添加表单
