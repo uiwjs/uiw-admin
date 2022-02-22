@@ -13,6 +13,7 @@ const Loadable = (Component: any) => (props: any) =>
 // const Home = Loadable(lazy(() => import('./pages/home')));
 const Example = Loadable(lazy(() => import('./pages/example')));
 const Authorized = Loadable(lazy(() => import('./pages/authorized')));
+const Synopsis = Loadable(lazy(() => import('./pages/synopsis')));
 const QuickStart = Loadable(lazy(() => import('./pages/quick-start')));
 const Proxy = Loadable(lazy(() => import('./pages/proxy')));
 const Mocker = Loadable(lazy(() => import('./pages/mocker')));
@@ -42,6 +43,7 @@ export const routes: RouteObject[] = [
     element: <Layout />,
     children: [
       { index: true, element: <QuickStart /> },
+      { path: 'synopsis', element: <Synopsis /> },
       { path: '/quick-start/*', element: <QuickStart /> },
       { path: '/mocker/*', element: <Mocker /> },
       { path: '/proxy/*', element: <Proxy /> },

@@ -1,7 +1,7 @@
 # mocker
 前后端并行开发，为了方便后端快速开发，不需要等待后端接口，系统提供了mock功能。更多配置请参考[mocker-api](https://github.com/jaywcjlove/mocker-api)
 
-## 编写模拟数据
+## 编写mock
 > 在/mocker/index目录下进行mock数据编写，比如：
 
 ```ts
@@ -54,7 +54,7 @@ module.exports = (noProxy ? {} : delay(proxy, 1000));
   export const selectById  = (params:{id:string}) => request("/api/login/account",{ method:"POST",body: { ...params } }) 
 ```
 
-注：mock功能只有开发模式下开启了，生产模式不会开启mock功能。
+注：mock功能只推荐在开发模式下开启。
 <!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 ## 贡献者
