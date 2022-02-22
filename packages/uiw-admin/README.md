@@ -2,7 +2,7 @@ UIW Admin Project
 ---
 
 一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [kkt](https://github.com/kktjs/kkt) 的初始级别项目。
-## 预览
+## 👀 预览
 
 [![Open in CodeSandbox](https://img.shields.io/badge/Open%20in-CodeSandbox-blue?logo=codesandbox)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/uiwjs/uiw-admin/tree/master/examples/base?embed=1&hideNavigation=0&hidedevtools=0)
@@ -15,7 +15,8 @@ UIW Admin Project
 - 🌈 企业级中后台产品的交互语言和视觉风格。
 - 📦 开箱即用的高质量 React 后台管理框架。
 - 🛡 使用 TypeScript 开发。
-- ⚙️ 集成路由、Redux、选项卡等特性。
+- ⚙️ 集成登陆、Redux、选项卡等特性。
+- 🌴 完备路由，同时支持配置式路由和约定式路由，同时保持功能的完备性，比如动态路由、嵌套路由、权限路由等等。
 
 ## 🔗 相关依赖
 
