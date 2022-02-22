@@ -1,8 +1,40 @@
-# 业务Drawer弹框
+# Drawer 抽屉
+屏幕边缘滑出的浮层面板。
 
+基于[uiw/Drawer](https://uiwjs.github.io/#/components/drawer)和[uiw/Button](https://uiwjs.github.io/#/components/button)封装
+- 1.支持原uiw/Drawer和uiw/Button参数
+- 2.支持快速生成button按钮
+- 3.button按钮的权限控制
+
+## 何时使用
+抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到原任务。
+- 当需要一个附加的面板来控制父窗体内容，这个面板在需要时呼出。比如，控制界面展示样式，往界面中添加内容。
+- 当需要在当前任务流中插入临时任务，创建或预览附加内容。比如展示协议条款，创建子对象。
 <!--ProDrawer-->
 
 ## 基本使用
+> 可通过width控制Drawer宽(默认800)
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
+import { ProDrawer } from '@uiw-admin/components'
+import { Button } from 'uiw'
+const Demo = () => {
+  const [ drawerVisible,setDrawerVisible ] = useState( false )
+    return (
+     <div>
+       <ProDrawer width={1000} visible={drawerVisible} onClose={()=>setDrawerVisible(false)}>
+        <div>基本使用</div>
+       </ProDrawer>
+      <Button type="primary" onClick={()=>setDrawerVisible(true)}>打开弹框(1000px)</Button>
+     </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+## 按钮抽屉
+>通过传递buttons生成按钮,按钮继承了uiw/buttons,我们可以通过show控制按钮显示与隐藏
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -15,21 +47,14 @@ const Demo = () => {
     return (
      <div>
        <ProDrawer
-        title="标题"
         visible={drawerVisible}
         onClose={()=>setDrawerVisible(false)}
-        width={800}
         buttons={[
           { label: '取消', type:"primary" , onClick: ()=>setDrawerVisible(false) },
-          {
-            label: '保存',
-            type:"primary",
-            onClick: ()=>{},
-            show: !isView
-          },
+          { label: '保存',type:"primary",show:false },
         ]}
       >
-        <div>demo</div>
+        <div>集成了Button</div>
       </ProDrawer>
       <Button type="primary" onClick={()=>setDrawerVisible(true)}>打开弹框</Button>
      </div>
@@ -37,6 +62,77 @@ const Demo = () => {
 }
 ReactDOM.render(<Demo />, _mount_);
 ```
+
+## 表单抽屉
+> 配和ProForm使用
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
+import { ProDrawer,ProForm } from '@uiw-admin/components'
+import { Button } from 'uiw'
+const Demo = () => {
+  const [ drawerVisible,setDrawerVisible ] = useState( false )
+  const [ isView,setIsView] = useState( false )
+    return (
+     <div>
+       <ProDrawer 
+          visible={drawerVisible} 
+          onClose={()=>setDrawerVisible(false)}
+          buttons={[{ label: isView?'表单模式':'查看模式', type:"primary" , onClick:()=>setIsView(!isView)}]}
+        >
+         <ProForm
+          readOnly={isView}
+          formType="pure"
+          formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+             },
+          ]}
+       />
+       </ProDrawer>
+      <Button type="primary" onClick={()=>setDrawerVisible(true)}>打开弹框</Button>
+     </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+## 按钮权限
+> 我们可以通过path与登陆时获取的按钮权限菜单进行匹配,从而控制按钮的权限
+```jsx
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProDrawer } from '@uiw-admin/components'
+import { Button } from 'uiw'
+const Demo = () => {
+    return (
+       <ProDrawer
+        visible={drawerVisible}
+        onClose={()=>setDrawerVisible(false)}
+        buttons={[
+          { label: '取消', type:"primary" , onClick: ()=>setDrawerVisible(false) },
+          {
+            label: '保存',
+            type:"primary",
+            onClick: ()=>{},
+            path:"/demo/drawer"
+          },
+        ]}
+      >
+        <div>集成了Button</div>
+      </ProDrawer>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+
 
 ## Props
 
