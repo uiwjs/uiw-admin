@@ -1,5 +1,11 @@
 # tab 选项卡布局
 
+项目打开过的菜单在头部进行tab选项卡展示
+
+## 何时使用
+
+页面菜单需要tab选项卡切换功能时
+
 ## 安装
 
 ```bash
@@ -19,9 +25,10 @@ interface LayoutTabsProps {
 
 ## 案例
 
+单独使用
+
 ```tsx
   import Layout from "@uiw-admin/layout-tabs"
-
   export default ()=>{
   return  <LayoutTabs 
   routes={[
@@ -38,6 +45,29 @@ interface LayoutTabsProps {
   ]} 
   />
   }
+```
+
+## 案例2
+
+配合使用 `BasicLayout` 组件使用
+
+```tsx
+
+import React from 'react'
+import BasicLayout from '@uiw-admin/basic-layouts'
+import { RoutersProps } from '@uiw-admin/router-control'
+import LayoutTabs from "@uiw-admin/layout-tabs"
+interface BasicLayoutProps {
+  routes: RoutersProps[]
+}
+function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+  return (
+    <BasicLayout >
+      <LayoutTabs routes={props.routes || []} /> 
+    </BasicLayout>
+  )
+}
+export default BasicLayoutScreen
 ```
 
 ## 预览

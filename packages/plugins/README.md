@@ -1,5 +1,6 @@
-插件
-===
+# 插件
+
+当前插件一般为内置插件
 
 ```bash
 npm i @uiw-admin/plugins -D
@@ -11,8 +12,7 @@ npm i @uiw-admin/plugins -D
 
 ### lazyLoad
 
-> 1. 类型：`boolean`  ，默认 `false`，
-
+1. 类型：`boolean`  ，默认 `false`，
 
 ```ts
 //kktrc.ts
@@ -54,7 +54,6 @@ export default defaultConfig({
   plugins: [RoutesWebpackPlugin()],
   // 或者 plugins: [@uiw-admin/plugins/lib/routes],
 ```
-
 
 ## 贡献者
 
