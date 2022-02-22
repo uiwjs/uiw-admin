@@ -8,7 +8,7 @@ UIW Admin Project
 [![Open in StackBlitz](https://img.shields.io/badge/Open%20in-StackBlitz-blue?logo=)](https://stackblitz.com/github/uiwjs/uiw-admin/tree/master/examples/base?embed=1&hideNavigation=0&hidedevtools=0)
 
 
-直接下载实例，本地预览: [`uiw-admin-ts.zip`](https://uiwjs.github.io/uiw-admin/zip/uiw-admin-ts.zip) [`uiw-admin-js.zip`](https://uiwjs.github.io/uiw-admin/zip/uiw-admin-js.zip)
+
 
 ## ✨ 特性
 
@@ -33,7 +33,13 @@ UIW Admin Project
 
 
 ##  ⌨️ 快速开始
-> 通过命令创建一个[`uiw-admin`](https://github.com/uiwjs/uiw-admin) 
+
+> 1. 直接下载实例文件
+[`uiw-admin-ts.zip`](https://uiwjs.github.io/uiw-admin/zip/uiw-admin-ts.zip)
+[`uiw-admin-js.zip`](https://uiwjs.github.io/uiw-admin/zip/uiw-admin-js.zip)
+
+> 2. 通过命令创建项目
+
 ```shell
 # npm 6.x
 $ npm init uiw-admin my-app --example uiw-admin-ts
