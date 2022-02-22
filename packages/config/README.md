@@ -18,7 +18,7 @@ npm i @uiw-admin/config -D # yarn add @uiw-admin/config
 | define           | 否   | `Record<string, any> & DefaultDefineType`            |                                          | 默认全局变量，📢 注意：对象的属性值会经过一次 JSON.stringify 转换 |
 | ~~~loader~~~     | 否   | `KKTPlugins`                                         |                                          | kkt plugin，(⚠️将在V6版本中删除)                                  |
 | kktPlugins       | 否   | `KKTPlugins`                                         |                                          | kkt plugin                                                       |
-| publicPath       | 否   | `string`                                             |                                          | 项目前缀                                                         |
+| publicPath       | 否   | `string`                                             | `/`                                      | 项目前缀                                                         |
 | ~~~moreConfig~~~ | 否   | `ConfFun`                                            |                                          | 提供回调函数，更改 webpack 的最终配置 ，(⚠️将在V6版本中删除)      |
 | overrideWebpack  | 否   | `ConfFun`                                            |                                          | 提供回调函数，更改 webpack 的最终配置 ，                         |
 | output           | 否   | `Omit<WebpackConfiguration['output'], 'publicPath'>` |                                          | 输出                                                             |
