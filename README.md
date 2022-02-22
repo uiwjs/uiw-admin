@@ -17,7 +17,7 @@ npm start
 ```
 
 ## 目录结构
-
+```
 .
 ├── README.md
 ├── config
@@ -69,3 +69,4 @@ npm start
 │   └── servers 放置api文件的地方，文件名已后端接口模块名命名，不以路由命名
 │       └── index.ts
 └── tsconfig.json
+```
