@@ -169,6 +169,8 @@ const Demo = () => {
               label: 'textarea',
               key: 'textarea',
               widget: 'textarea',
+              span:6,
+              colProps:{ fixed:true }
              },
              {
               label: 'select',
@@ -808,6 +810,8 @@ ReactDOM.render(<Demo />, _mount_);
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
 | required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | RulesProps[]                 | -      |
+| colProps     | Col参数,参考uiw/Grid                                                | ColProps                | -      |
+
 
 ### RulesProps
 | 参数     | 说明     | 类型                     | 默认值 |

@@ -77,8 +77,9 @@ function FormDom({
             <Row gutter={10}>
               {Object.keys(fields).map((key) => {
                 const colSpan = fields[key]?.props?.span || '8';
+                const colProps = fields[key]?.props?.colProps || {};
                 return (
-                  <Col key={key} span={colSpan}>
+                  <Col {...colProps} key={key} span={colSpan}>
                     {fields[key]}
                   </Col>
                 );

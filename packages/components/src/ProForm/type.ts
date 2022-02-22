@@ -7,6 +7,7 @@ import {
   CardProps,
   CollapseProps,
   CollapsePanelProps,
+  ColProps,
 } from 'uiw';
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
@@ -60,6 +61,7 @@ export interface FormItemsProps
   required?: boolean;
   // 验证规则
   rules?: RulesProps[];
+  colProps?: ColProps;
 }
 
 export interface OptionsProps {
