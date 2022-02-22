@@ -1,10 +1,10 @@
 # ProForm 表单
 
 基于[uiw Form](https://uiwjs.github.io/#/components/form)封装。
-- [x] 支持原uiw/Form的提交方式并可以更简洁的生成表单
-- [x] 支持多个表单同时提交
-- [x] 支持动态添加表单
-- [x] 支持只读模式表单
+- ✅  支持原uiw/Form的提交方式并可以更简洁的生成表单
+- ✅  支持多个表单同时提交
+- ✅  支持动态添加表单
+- ✅  支持只读模式表单
 
 ## 何时使用
 - 用于创建一个实体或收集信息。
@@ -163,7 +163,8 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               help:"input不能为空"
+               help:"input不能为空",
+               required:true,
              },
              {
               label: 'textarea',
@@ -279,7 +280,6 @@ const Demo = () => {
                 showRemoveIcon: true,
               },
             },
-              rules: [{ required: true, message: '请上传' }],
             },
           ]}
        />
@@ -319,6 +319,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
@@ -397,6 +398,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -418,6 +420,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -495,6 +498,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -516,6 +520,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -573,6 +578,7 @@ const Demo = () => {
           key: 'phone',
           widget: 'input',
           initialValue: '',
+          required:true,
         },
       ])
     }

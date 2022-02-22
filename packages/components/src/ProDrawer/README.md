@@ -2,9 +2,9 @@
 屏幕边缘滑出的浮层面板,集成权限button按钮。
 
 基于[uiw/Drawer](https://uiwjs.github.io/#/components/drawer)和[uiw/Button](https://uiwjs.github.io/#/components/button)封装
-- [x] 支持原uiw/Drawer和uiw/Button参数
-- [x] 支持快速生成button按钮
-- [x] button按钮的权限控制
+- ✅  支持原uiw/Drawer和uiw/Button参数
+- ✅  支持快速生成button按钮
+- ✅  button按钮的权限控制
 
 ## 何时使用
 抽屉从父窗体边缘滑入，覆盖住部分父窗体内容。用户在抽屉内操作时不必离开当前任务，操作完成后，可以平滑地回到原任务。
