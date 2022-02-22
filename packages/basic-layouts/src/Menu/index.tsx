@@ -55,6 +55,10 @@ function renderMenuItem(
         {...props}
         onClick={() => {
           if (Reflect.has(item, 'navigate') && item.navigate) {
+            if (typeof item.navigate === 'function') {
+              item.navigate(navigate);
+              return;
+            }
             const Fun = new Function(`return ${item.navigate}`)();
             if (typeof Fun === 'function') {
               Fun(navigate);

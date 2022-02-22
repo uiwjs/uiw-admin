@@ -1,5 +1,4 @@
-整合 models 数据流
-===
+# 整合 models 数据流
 
   1. 简化 @rematch/* 状态管理公共进行初始化;
   2. 约定是到 model 组织方式，不用手动注册 model
@@ -7,7 +6,7 @@
   4. 内置 @rematch/loading，直接 loading 字段使用即可
   5. [更多 @rematch/core api](https://rematchjs.org/docs/api-reference)
 
-## Installation
+## 安装
 
 ```bash
 npm i @uiw-admin/models --save

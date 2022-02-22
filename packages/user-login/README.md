@@ -1,5 +1,11 @@
 # 登录页面
 
+简化项目登录页面，为了多项目登录页面不用重新构建登录页面
+
+## 何时使用
+
+在不重新构建登录页面的时候使用
+
 ## 安装
 
 ```bash
@@ -101,6 +107,34 @@ const UserLayout = () => {
     }}
     onBefore={(value) => ({ a: 12, b: 1221 })}
     btnProps={{ type: "primary" }}
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+        navigate("/home", { replace: true })
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+export default UserLayout;
+
+```
+
+## 案例2
+
+最简化案例
+
+```tsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+const UserLayout = () => {
+  const navigate = useNavigate()
+  return <UserLogin
+    api="/api/login"
     onSuccess={(data) => {
       if (data && data.token) {
         sessionStorage.setItem("token", data.token)

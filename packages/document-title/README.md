@@ -1,23 +1,51 @@
-设置页面标题
----
+# 设置页面标题
 
-## Installation
+简化设置页面标题，建议在项目入口设置
+
+## 何时使用
+
+需要设置页面标题使用
+
+## 安装
 
 ```bash
-npm i @uiw-admin/document-title --save
+npm i @uiw-admin/document-title --save # yarn add @uiw-admin/document-title
 ```
 
-## Basic Usage
+## 案例1
 
 ```jsx
 import React from 'react';
 import DocumentTitle from '@uiw-admin/document-title';
 
-<DocumentTitle title="首页">
-  <h1>Home, sweet home.</h1>
-</DocumentTitle>
+const Home = ()=>{
+  return (
+    <DocumentTitle title="首页">
+      <h1>Home, sweet home.</h1>
+    </DocumentTitle>
+  )
+}
+
+export default Home
+
 ```
 
+## 案例2
+
+```jsx
+import React from 'react';
+import DocumentTitle from '@uiw-admin/document-title';
+
+const Home = ()=>{
+  return (<React.Fragment>
+    <DocumentTitle title="首页" />
+    <h1>Home, sweet home.</h1>
+  </React.Fragment>)
+}
+
+export default Home
+
+```
 
 ## 贡献者
 
