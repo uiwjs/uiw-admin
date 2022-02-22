@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@kkt/less-modules": "7.0.6",
-    "@kkt/raw-modules": "7.0.6",
+    "@kkt/raw-modules": "7.1.1",
     "@kkt/scope-plugin-options": "7.0.6",
     "@uiw-admin/plugins": "5.2.21"
   },
