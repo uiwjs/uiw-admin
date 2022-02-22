@@ -4,14 +4,6 @@
     "path": "/quick-start"
   },
   {
-    "label": "Mock 模拟数据",
-    "path": "/mocker"
-  },
-  {
-    "label": "开发代理",
-    "path": "/proxy"
-  },
-  {
     "label": "更新日志",
     "target": "__blank",
     "path": "https://github.com/uiwjs/uiw-admin/blob/master/CHANGELOG.md"
@@ -26,7 +18,7 @@
   },
   {
     "divider": true,
-    "label": "组件"
+    "label": "业务组件"
   },
   {
     "label": "Components",
@@ -50,7 +42,7 @@
   },
   {
     "divider": true,
-    "label": "依赖"
+    "label": "架构依赖"
   },
   {
     "label": "Authorized",
@@ -95,6 +87,18 @@
   {
     "label": "Utils",
     "path": "/utils"
+  },
+  {
+    "divider": true,
+    "label": "开发"
+  },
+  {
+    "label": "Mock 模拟数据",
+    "path": "/mocker"
+  },
+  {
+    "label": "开发代理",
+    "path": "/proxy"
   },
   {
     "divider": true,
