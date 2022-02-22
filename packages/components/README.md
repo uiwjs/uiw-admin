@@ -6,7 +6,6 @@
 
 ```
 import * from '@uiw-admin/components';
-
 ```
 
 ## 已开发的组件

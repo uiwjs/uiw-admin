@@ -6,7 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 import useSWR from 'swr';
-import { Table, Pagination, Checkbox, Radio } from 'uiw';
+import { Table, Pagination, Checkbox, Radio, Empty } from 'uiw';
 import { request } from '@uiw-admin/utils';
 import { useStore } from './hooks';
 import { Fields, BaseTableProps, FormCol } from './types';
@@ -248,6 +248,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
             selectKey ? selectionCol.concat(defaultColumns()) : defaultColumns()
           }
           data={tableData}
+          empty={<Empty />}
           footer={
             tableData &&
             tableData.length > 0 && (

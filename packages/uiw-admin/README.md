@@ -16,9 +16,6 @@ UIW Admin Project
 - 📦 开箱即用的高质量 React 后台管理框架。
 - 🛡 使用 TypeScript 开发。
 - ⚙️ 集成路由、Redux、选项卡等特性。
-### 🛡 TypeScript
-
-参考 [使用 TypeScript ](https://www.tslang.cn/)。
 
 ## 🔗 相关依赖
 
