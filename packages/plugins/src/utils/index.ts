@@ -164,8 +164,10 @@ export const getJSONData = (content: string) => {
           item.properties.forEach((objItem) => {
             if (
               t.isObjectProperty(objItem) &&
-              t.isStringLiteral(objItem.key) &&
-              objItem.key.value === 'component'
+              ((t.isStringLiteral(objItem.key) &&
+                objItem.key.value === 'component') ||
+                (t.isIdentifier(objItem.key) &&
+                  objItem.key.name === 'component'))
             ) {
               if (t.isStringLiteral(objItem.value)) {
                 const valus = objItem.value.value;
