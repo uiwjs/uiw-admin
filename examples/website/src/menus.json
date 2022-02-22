@@ -1,9 +1,5 @@
 [
   {
-    "label": "简介",
-    "path": "/synopsis"
-  },
-  {
     "label": "快速开始",
     "path": "/quick-start"
   },
