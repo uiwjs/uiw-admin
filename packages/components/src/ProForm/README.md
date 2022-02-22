@@ -1,16 +1,104 @@
-# ProForm
+# ProForm 表单
 
-基于[uiw from](https://uiwjs.github.io/#/components/form)封装， 更方便的使用表单。
+基于[uiw From](https://uiwjs.github.io/#/components/form)封装。
+- [x] 支持原uiw/Form的提交方式并可以更简洁的生成表单
+- [x] 支持多个表单同时提交
+- [x] 支持动态添加表单
+- [x] 支持只读模式表单
 
-## 注意
-> [继承于uiw/form,请参考uiw/from以及表单组件](https://uiwjs.github.io/#/components/form),
- 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,
- `MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
-<!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
+## 何时使用
+- 用于创建一个实体或收集信息。
+- 需要对输入的数据类型进行校验时。
 
 <!--ProForm-->
+## 表单类型
+> 卡片表单类型
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+const Demo = () => {
+    return (
+     <div>
+       <ProForm
+         title="卡片表单"
+         formType="card"
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+             },
+          ]}
+       />
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
 
-### 基本使用
+> 折叠表单类型
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+const Demo = () => {
+    return (
+     <div>
+       <ProForm
+         title="折叠表单"
+         formType="collapse"
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+             },
+          ]}
+       />
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+> 纯表单类型下title将不再展示
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+const Demo = () => {
+    return (
+     <div>
+       <ProForm
+         formType="pure"
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+             },
+          ]}
+       />
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+## 基本使用
 > 与uiw/form使用保持一致
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
@@ -202,8 +290,9 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 通过form props
+## 通过form props
 > (提交,重置,设置)
+> 与uiw/form提交不同,我们也可以通过传递rules进行提交前的表单校验(支持正则,required,回调验证)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -279,8 +368,8 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-### 多个表单
-> 基础提交
+## 多个表单
+> 基础提交,我们提供了submitvalidate;getError;getFieldValues;validateFieldsAndGetValue;setFields;resetForm等表单实例方法
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -370,7 +459,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-> promise提交
+> promise提交(通过validateFieldsAndGetValue方法先验证后获取值)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -458,7 +547,7 @@ const Demo = () => {
 }
 ReactDOM.render(<Demo />, _mount_);
 ```
-### 动态添加表单
+## 动态添加表单
 > uiw/form方式提交
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
@@ -556,7 +645,7 @@ const Demo = () => {
 }
 ReactDOM.render(<Demo />, _mount_);
 ```
-### 只读模式
+## 只读模式
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -747,6 +836,12 @@ ReactDOM.render(<Demo />, _mount_);
 | getError | 获取表单错误 | ()=>void | - |  
 | setFields | 设置表单的值 | ()=>void | [] |      
 | validateFieldsAndGetValue | 验证并获取值 | ()=>Promise<any> | [] |   
+
+## 注意
+> [继承于uiw/Form,请参考uiw/From以及表单组件](https://uiwjs.github.io/#/components/form),
+ 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,
+ `MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
+<!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 ## 贡献者
 
