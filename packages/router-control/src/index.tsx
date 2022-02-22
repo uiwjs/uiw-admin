@@ -201,9 +201,9 @@ export default function Controller(props: ControllerProps = {}) {
   const dom = React.useMemo(() => {
     if (routeType === 'hash') {
       return (
-        <HashRouter window={window} basename={base}>
+        <HistoryRouter history={history} basename={base}>
           <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
-        </HashRouter>
+        </HistoryRouter>
       );
     } else if (routeType === 'browser') {
       return (
@@ -213,9 +213,9 @@ export default function Controller(props: ControllerProps = {}) {
       );
     }
     return (
-      <HistoryRouter history={history} basename={base}>
+      <HashRouter window={window} basename={base}>
         <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
-      </HistoryRouter>
+      </HashRouter>
     );
   }, [routeType]);
 

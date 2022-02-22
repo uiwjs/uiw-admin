@@ -15,9 +15,20 @@ npm i @uiw-admin/router-control --save # yarn add  @uiw-admin/router-control
 
 | 参数       | 必须 | 类型                                          | 默认值    | 说明                                   |
 | :--------- | :--- | :-------------------------------------------- | :-------- | :------------------------------------- |
-| routeType  | 否   | `"history" \| "hash" \| "browser"`            | `history` | 路由模式                               |
+| routeType  | 否   | `"history" \| "hash" \| "browser"`            | `hash`    | 路由模式                               |
 | addModels  | 否   | `(path: string) => Promise<{ default: any }>` | undefined |                                        |
 | isAutoAuth | 否   | `boolean`                                     | `history` | 是否自动校验 "/" 的路由 token 是否存在 |
+
+⚠️注意： `routeType`值为 `history`或`browser` 的时候需要设置 `kktrc` 配置 `publicPath` 值为 `"/"`
+
+```ts
+// kktrc.ts 
+// ...
+export default defaultConfig({
+  publicPath:"/",
+  // ...
+})
+```
 
 ## 菜单路由参数
 

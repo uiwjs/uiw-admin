@@ -106,7 +106,7 @@ export default (props: ConfigProps) => {
     kktPlugins,
     overrideWebpack,
     moreConfig,
-    publicPath = './',
+    publicPath = '/',
     output,
     rematch,
     ...rest
