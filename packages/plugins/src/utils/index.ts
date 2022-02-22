@@ -1,4 +1,4 @@
-import { parse } from '@babel/parser';
+import { parse, ParserOptions } from '@babel/parser';
 import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
@@ -34,6 +34,32 @@ function getTSNode(node: any) {
     return node;
   }
 }
+
+export const getReactLazy = (path: string) => {
+  // ------------------   创建 React.lazy ------------------
+  // 第一步 创建 字符串外层 @/pages/TableList
+  const callOne = t.callExpression(t.import(), [t.stringLiteral(path)]);
+  // 第二步 创建  ArrowFunctionExpression
+  const callTwo = t.arrowFunctionExpression([], callOne);
+
+  const callThree1 = t.memberExpression(
+    t.identifier('React'),
+    t.identifier('lazy'),
+  );
+  // 第三步，value 值
+  const callThree = t.callExpression(callThree1, [callTwo]);
+  // const call4 = t.callExpression(callThree1, [callThree])
+  // const callObj = t.objectProperty(t.identifier("a"), call4)
+  // console.log("callObj", callObj)
+  // ------------------   创建 React.lazy  结束 ------------------
+  return callThree;
+};
+
+export const getJSX = (name: string) => {
+  const one = t.jsxOpeningElement(t.jsxIdentifier(name), [], true);
+  const two = t.jsxElement(one, null, []);
+  return two;
+};
 
 export const IsModel = (content: string) => {
   let isModels = false;
@@ -104,11 +130,13 @@ export const stringToJson = (str: string) => {
   const json = new Function('return ' + str)();
   return json;
 };
+
 // ts/js 文件获取里面的 默认导出内容
 export const getJSONData = (content: string) => {
   let isJSON = false;
   let jsonArr: RoutersProps[] = [];
-  const ast = parse(content, {
+  let jsonCode = '';
+  const option: ParserOptions = {
     // 在严格模式下解析并允许模块声明
     sourceType: 'module',
     plugins: [
@@ -124,8 +152,37 @@ export const getJSONData = (content: string) => {
       'optionalChaining',
       'decorators-legacy',
     ],
-  });
+  };
+  const ast = parse(content, option);
+  const ast2 = parse(content, option);
 
+  traverse(ast2, {
+    ArrayExpression(path) {
+      let elements = path.node.elements;
+      elements.forEach((item) => {
+        if (t.isObjectExpression(item) && item.properties) {
+          item.properties.forEach((objItem) => {
+            if (
+              t.isObjectProperty(objItem) &&
+              t.isStringLiteral(objItem.key) &&
+              objItem.key.value === 'component'
+            ) {
+              if (t.isStringLiteral(objItem.value)) {
+                const valus = objItem.value.value;
+                if (['404', '403', '500'].includes(objItem.value.value)) {
+                  objItem.value = getJSX(`Exceptions${valus}`);
+                } else {
+                  objItem.value = getReactLazy(valus);
+                }
+              }
+            }
+          });
+        }
+      });
+    },
+  });
+  jsonCode = generate(ast2).code;
+  // // 遍历修改 AST
   traverse(ast, {
     ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
       let node = path.node.declaration;
@@ -148,9 +205,11 @@ export const getJSONData = (content: string) => {
       }
     },
   });
+
   return {
     isJSON,
     jsonArr,
+    jsonCode,
   };
 };
 

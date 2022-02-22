@@ -9,6 +9,8 @@ import chokidar from 'chokidar';
 import { getJSONData, stringToJson, getRouteMapModels } from './../utils';
 import { RoutersProps } from './../utils/interface';
 
+type ISTYPE = 'json' | 'ts' | 'js' | false;
+
 class RoutesWebpackPlugin {
   // json 文件地址
   jsonFilePath = '';
@@ -33,6 +35,8 @@ class RoutesWebpackPlugin {
   modelsMapData = [];
   lazyLoad: boolean = false;
 
+  jsonCode: string = '';
+
   constructor(props?: { lazyLoad?: boolean }) {
     // 必须要存在这个文件 优先级  json > ts > js
     this.jsonFilePath = path.resolve(process.cwd(), 'config/routes.json');
@@ -46,8 +50,9 @@ class RoutesWebpackPlugin {
     this.cwdConfig = path.resolve(process.cwd(), 'config');
     this.cwd = path.resolve(process.cwd());
   }
+
   // 生成临时路由
-  createTemps = (strs: string) => {
+  createTemps = (strs: string, isType: ISTYPE) => {
     if (strs === '[]') {
       this.preString = '';
       this.nextString = '';
@@ -58,18 +63,21 @@ class RoutesWebpackPlugin {
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
-    const routeTemp = createTemp(strs);
+    let routeTemp = createTemp(
+      ['js', 'ts'].includes(isType as string) ? this.jsonCode : strs,
+      isType,
+    );
+    // let routeTemp = createTemp(strs);
     fs.writeFileSync(
       path.resolve(process.cwd(), 'src/.uiw/routes.tsx'),
       routeTemp,
       { encoding: 'utf-8', flag: 'w+' },
     );
-
     this.createRouteMapModels();
   };
 
   //  判断上一次和下一次
-  checkPreAndNext = () => {
+  checkPreAndNext = (isType: ISTYPE) => {
     if (this.preString !== this.nextString) {
       //  读取文件数据
       const routerTemp = JSON.stringify(this.routes, getJsonToString, 2)
@@ -78,11 +86,12 @@ class RoutesWebpackPlugin {
         })
         .replace(/\\r\\n/g, '\r\n')
         .replace(/\\n/g, '\r\n');
-      this.createTemps(routerTemp);
+      this.createTemps(routerTemp, isType);
     }
   };
+
   // 获取文件内容
-  getFileContent = (isType: 'json' | 'ts' | 'js' | false) => {
+  getFileContent = (isType: ISTYPE) => {
     if (isType === 'json') {
       this.nextString = fs
         .readFileSync(this.jsonFilePath, { encoding: 'utf-8' })
@@ -91,7 +100,7 @@ class RoutesWebpackPlugin {
       if (this.nextString !== '') {
         this.routes = stringToJson(this.nextString);
         this.nextString = JSON.stringify(this.routes);
-        this.checkPreAndNext();
+        this.checkPreAndNext(isType);
         return;
       }
     } else if (['js', 'ts'].includes(isType as string)) {
@@ -102,20 +111,21 @@ class RoutesWebpackPlugin {
         filePath = this.tsFilePath;
       }
       const content = fs.readFileSync(filePath, { encoding: 'utf-8' });
-      const { isJSON, jsonArr } = getJSONData(content);
+      const { isJSON, jsonArr, jsonCode } = getJSONData(content);
       if (isJSON) {
         this.routes = jsonArr;
+        this.jsonCode = jsonCode || '[]';
         this.nextString = JSON.stringify(jsonArr);
-        this.checkPreAndNext();
+        this.checkPreAndNext(isType);
         return;
       }
     }
-    this.createTemps('[]');
+    this.createTemps('[]', isType);
   };
 
   // 判断文件优先级
   JudgeFileType = () => {
-    let isType: 'json' | 'ts' | 'js' | false = 'json';
+    let isType: ISTYPE = 'json';
     if (fs.existsSync(this.jsonFilePath)) {
       isType = 'json';
     } else if (fs.existsSync(this.tsFilePath)) {
