@@ -154,9 +154,17 @@ export const getJSONData = (content: string) => {
     ],
   };
   const ast = parse(content, option);
-  const ast2 = parse(content, option);
-
-  traverse(ast2, {
+  traverse(ast, {
+    ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
+      let node = path.node.declaration;
+      node = getTSNode(node);
+      node = getVarInit(node, path);
+      node = getTSNode(node);
+      // 如果 node 是一个数组
+      if (t.isArrayExpression(node)) {
+        isJSON = true;
+      }
+    },
     ArrayExpression(path) {
       let elements = path.node.elements;
       elements.forEach((item) => {
@@ -183,31 +191,7 @@ export const getJSONData = (content: string) => {
       });
     },
   });
-  jsonCode = generate(ast2).code;
-  // // 遍历修改 AST
-  traverse(ast, {
-    ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
-      let node = path.node.declaration;
-      node = getTSNode(node);
-      node = getVarInit(node, path);
-      node = getTSNode(node);
-      // 如果 node 是一个数组
-      if (t.isArrayExpression(node)) {
-        isJSON = true;
-        const code = generate(node, {
-          jsonCompatibleStrings: true,
-          // 输出中包含注释
-          comments: false,
-          jsescOption: {
-            quotes: 'double',
-            json: true,
-          },
-        }).code;
-        jsonArr = stringToJson(code);
-      }
-    },
-  });
-
+  jsonCode = generate(ast).code;
   return {
     isJSON,
     jsonArr,
