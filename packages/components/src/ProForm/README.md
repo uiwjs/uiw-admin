@@ -170,8 +170,8 @@ const Demo = () => {
               label: 'textarea',
               key: 'textarea',
               widget: 'textarea',
-              span:6,
-              colProps:{ fixed:true }
+              span:24,
+              colstyle:{ maxWidth:800 }
              },
              {
               label: 'select',
@@ -470,7 +470,7 @@ ReactDOM.render(<Demo />, _mount_);
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
-import { Button,Row,Col } from 'uiw'
+import { Button } from 'uiw'
 const Demo = () => {
   const [state,setState] = React.useState({})
   const form = useForm()
@@ -816,7 +816,7 @@ ReactDOM.render(<Demo />, _mount_);
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
 | required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | RulesProps[]                 | -      |
-| colProps     | Col参数,参考uiw/Grid                                                | ColProps                | -      |
+| colstyle     | Col(uiw/Grid)样式                                         | React.CSSProperties                | -      |
 
 
 ### RulesProps
@@ -837,6 +837,9 @@ ReactDOM.render(<Demo />, _mount_);
 ## useForm
 
 ### response
+> - v5.2.14(~~clickRef~~) 
+> - v5.2.18(~~formStateList~~) (~~setFormStateList~~) (~~errorsRef~~) 
+
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
 | submitvalidate | 表单验证 | ()=>void | - | 
@@ -845,7 +848,7 @@ ReactDOM.render(<Demo />, _mount_);
 | getFieldValues | 获取表单值 | ()=>void | - |  
 | getError | 获取表单错误 | ()=>void | - |  
 | setFields | 设置表单的值 | ()=>void | [] |      
-| validateFieldsAndGetValue | 验证并获取值 | ()=>Promise<any> | [] |   
+| validateFieldsAndGetValue | 验证并获取值 | ()=>Promise`<any>` | [] |   
 
 ## 注意
 > [继承于uiw/Form,请参考uiw/From以及表单组件](https://uiwjs.github.io/#/components/form),
