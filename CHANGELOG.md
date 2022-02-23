@@ -12,6 +12,7 @@
   - 🐞 修改 `publicPath` 默认值为 `"/"`
 - uiw-admin/components
   - 🌟 `ProForm` 增加colstyle api
+  - 🌟 `ProForm` 修复setFields ts类型报错
 
 ## 5.2.21
 

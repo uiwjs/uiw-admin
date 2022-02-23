@@ -7,8 +7,4 @@ function selectById(params: { id: string }) {
   })
 }
 
-const update = '/api/demo/update'
-
-const insert = '/api/demo/insert'
-
-export { selectById, update, insert }
+export { selectById }

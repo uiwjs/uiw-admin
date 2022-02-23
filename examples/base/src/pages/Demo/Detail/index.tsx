@@ -1,11 +1,9 @@
 import React from 'react'
 import { ProDrawer, ProForm, useForm } from '@uiw-admin/components'
-import { Notify, Slider } from 'uiw'
+import { Slider } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '@uiw-admin/models'
-import { insert, update } from '../../../servers/demo'
 import { items, items2 } from './items'
-import useSWR from 'swr'
 
 interface DetailProps {
   updateData?: any
@@ -22,6 +20,7 @@ const selectOption = [
   { value: 6, label: '哈密瓜' },
 ]
 
+// eslint-disable-next-line no-unused-vars
 const Detail = ({ updateData, onSearch }: DetailProps) => {
   const dispatch = useDispatch<Dispatch>()
   const [option] = React.useState<any>(selectOption)
@@ -36,24 +35,6 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
 
   const onClose = () => dispatch({ type: 'demo/clean' })
 
-  const { mutate } = useSWR(
-    [
-      (tableType === 'add' && insert) || (tableType === 'edit' && update),
-      { method: 'POST', body: queryInfo },
-    ],
-    {
-      revalidateOnMount: false,
-      revalidateOnFocus: false,
-      onSuccess: (data) => {
-        if (data && data.code === 200) {
-          Notify.success({ title: data.message })
-          onClose()
-          onSearch?.()
-        }
-      },
-    }
-  )
-
   // 模拟搜索
   const handleSearch = (type: 'searchSelect') => {
     if (type === 'searchSelect') {
@@ -63,6 +44,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
       }, 2000)
     }
   }
+
   const handleSave = async () => {
     // 触发验证
     await form.submitvalidate()
@@ -75,7 +57,6 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
     if (errors && Object.keys(errors).length > 0) return
     if (errors2 && Object.keys(errors2).length > 0) return
     // 调用接口
-    mutate()
   }
 
   return (
