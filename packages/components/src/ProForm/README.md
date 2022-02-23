@@ -1,10 +1,10 @@
 # ProForm 表单
 
-基于[uiw From](https://uiwjs.github.io/#/components/form)封装。
-- [x] 支持原uiw/Form的提交方式并可以更简洁的生成表单
-- [x] 支持多个表单同时提交
-- [x] 支持动态添加表单
-- [x] 支持只读模式表单
+基于[uiw Form](https://uiwjs.github.io/#/components/form)封装。
+- ✅  支持原uiw/Form的提交方式并可以更简洁的生成表单
+- ✅  支持多个表单同时提交
+- ✅  支持动态添加表单
+- ✅  支持只读模式表单
 
 ## 何时使用
 - 用于创建一个实体或收集信息。
@@ -163,12 +163,15 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               help:"input不能为空"
+               help:"input不能为空",
+               required:true,
              },
              {
               label: 'textarea',
               key: 'textarea',
               widget: 'textarea',
+              span:6,
+              colProps:{ fixed:true }
              },
              {
               label: 'select',
@@ -277,7 +280,6 @@ const Demo = () => {
                 showRemoveIcon: true,
               },
             },
-              rules: [{ required: true, message: '请上传' }],
             },
           ]}
        />
@@ -317,6 +319,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
@@ -395,6 +398,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -416,6 +420,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -493,6 +498,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -514,6 +520,7 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
+               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -571,6 +578,7 @@ const Demo = () => {
           key: 'phone',
           widget: 'input',
           initialValue: '',
+          required:true,
         },
       ])
     }
@@ -808,6 +816,8 @@ ReactDOM.render(<Demo />, _mount_);
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
 | required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | RulesProps[]                 | -      |
+| colProps     | Col参数,参考uiw/Grid                                                | ColProps                | -      |
+
 
 ### RulesProps
 | 参数     | 说明     | 类型                     | 默认值 |

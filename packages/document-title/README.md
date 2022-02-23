@@ -20,7 +20,7 @@ import DocumentTitle from '@uiw-admin/document-title';
 
 const Home = ()=>{
   return (
-    <DocumentTitle title="首页">
+    <DocumentTitle title="UIW Admin">
       <h1>Home, sweet home.</h1>
     </DocumentTitle>
   )
@@ -37,8 +37,9 @@ import React from 'react';
 import DocumentTitle from '@uiw-admin/document-title';
 
 const Home = ()=>{
-  return (<React.Fragment>
-    <DocumentTitle title="首页" />
+  return (
+  <React.Fragment>
+    <DocumentTitle title="UIW Admin" />
     <h1>Home, sweet home.</h1>
   </React.Fragment>)
 }
@@ -46,6 +47,10 @@ const Home = ()=>{
 export default Home
 
 ```
+
+## 预览
+
+![](https://user-images.githubusercontent.com/59959718/155087122-475a33bc-a2d4-419b-a192-27d96818ed5c.jpg)
 
 ## 贡献者
 

@@ -1,48 +1,43 @@
 ## ProTable
 
-集成搜索表单的Table组件，用于一般页面的查询搜索。 **依赖于uiw v4.10.7以上版本**
+集成搜索表单的Table组件，用于一般页面的查询搜索。解决业务中**查询条件+Table**的样板代码问题。 **依赖于uiw v4.10.7以上版本**
+
+## 何时使用
+
+当你的表格需要与服务端进行交互，又或者表格有查询条件时使用
 
 
-### demo
+
+### 基础用例
+
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
-function Demo() {
-  const table = useTable('/api/getData', {
+function Demo1() {
+  const table = useTable('https://randomuser.me/api', {
     // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
     formatData: (data) => {
       return {
-        total: data.total,
-        data: data.data,
+        total: 100,
+        data: data.results,
       };
     },
     // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
     query: (pageIndex, pageSize, searchValues) => {
       return {
         page: pageIndex,
-        pageSize,
-        data: searchValues,
+        results: pageSize,
+        ...searchValues,
       }
     },
-     // swr options
-
+    requestOptions: {method: 'GET'}
   });
 
   return (
     <ProTable
-         // 操作栏按钮
-      operateButtons={[
-        { label: '自定义查询', type: 'primary' },
-        {
-          label: '全部取消',
-          onClick: () => {
-            table.selection.unSelectAll()
-          },
-        },
-      ]}
        // 搜索栏按钮
       searchBtns={[
         {
@@ -59,27 +54,9 @@ function Demo() {
           },
         },
       ]}
-      rowSelection={{
-        // 多选 checkbox 单选radio
-        type: 'checkbox',
-        // 选中的键名 column里的key
-        selectKey: 'name',
-        // 默认值
-        defaultSelected: ['邓紫棋'],
-      }}
-        // 取消全部选择
-      onPageChange={() => {
-        table.selection.unSelectAll()
-      }}
-      onBeforeSearch={({ initial, current }) => {
-        const errorObj = {};
-        if (!current.name) errorObj.name = '名字不能为空！';
-        if (Object.keys(errorObj).length > 0) {
-          const err = new Error();
-          err.filed = errorObj;
-          throw err;
-        }
-        return true;
+      paginationProps={{
+        pageSizeOptions: [10,20,30],
+        pageSize: 10,
       }}
       table={table}
       columns={[
@@ -88,83 +65,44 @@ function Demo() {
           key: 'name',
           props: {
             widget: 'input',
-            initialValue: 'zzz',
-            // 组件属性
+            initialValue: '',
             widgetProps: {
               preIcon: 'user',
               placeholder: '输入用户名',
             },
           },
+          render: (text) => {
+            return <div>{text.title}.{text.first}{text.last}</div>
+          }
         },
         {
           title: '年龄',
-          key: 'age',
+          key: 'registered',
           props: {
             widget: 'select',
+            key: 'age',
             option: [
               { label: '20', value: 20 },
               { label: '10', value: 10 },
             ],
           },
+          render: (text) => {
+            return <div>{text.age}</div>
+          }
         },
         {
-          title: '地址',
-          key: 'info',
-          props: {
-            widget: 'textarea',
-          },
+          title: '手机号',
+          key: 'phone',
         },
         {
-          title: 'Switch',
-          key: 'Switch',
+          title: '性别',
+          key: 'gender',
           props: {
-            widget: 'switch',
-          },
-        },
-        {
-          title: 'timePicker',
-          key: 'timePicker',
-          props: {
-            widget: 'timePicker',
-          },
-        },
-        {
-          title: 'MonthPicker',
-          key: 'MonthPicker',
-          props: {
-            widget: 'monthPicker',
-          },
-        },
-        {
-          title: 'DateInput',
-          key: 'DateInput',
-          props: {
-            widget: 'dateInput',
-          },
-        },
-        {
-          title: 'Radio',
-          key: 'Radio',
-          props: {
-            widget: 'radio',
+            widget: 'select',
             option: [
-              { label: '男', value: 'man' },
-              { label: '女', value: 'girl' },
+              { label: 'female', value: 'female' },
+              { label: 'male', value: 'male' },
             ],
-          },
-        },
-        {
-          title: 'SearchSelect',
-          key: 'SearchSelect',
-          props: {
-            widget: 'searchSelect',
-            widgetProps: {
-              option: [
-                { label: 'a', value: 2 },
-                { label: 'aa', value: 3 },
-                { label: 'aaa', value: 4 },
-              ],
-            },
           },
         },
       ]}
@@ -172,9 +110,361 @@ function Demo() {
   );
 }
 
-ReactDOM.render(<Demo />, _mount_);
+ReactDOM.render(<Demo1 />, _mount_);
 
 ```
+
+> 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则集成columns列key
+
+
+```jsx
+<ProTable
+  columns={[
+    // input key 继承 column的key name
+    {
+      title: '名字',
+      key: 'name',
+      props: {
+        widget: 'input',
+        initialValue: '',
+        widgetProps: {
+          preIcon: 'user',
+          placeholder: '输入用户名',
+        },
+      },
+    },
+    // 自定义表单key
+    {
+      title: '年龄',
+      key: 'registered',
+      props: {
+        widget: 'select',
+        key: 'age',
+        option: [
+          { label: '20', value: 20 },
+          { label: '10', value: 10 },
+        ],
+      },
+    },
+  ]}
+
+
+/>
+
+```
+
+### 显示操作栏
+
+> 操作栏区域默认是`Button`按钮，可通过`render`自定义
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import { ProTable, useTable } from '@uiw-admin/components';
+import { Dropdown, Menu, ButtonGroup, Button, Divider, Icon } from 'uiw';
+
+const menu = (
+  <div>
+    <Menu bordered style={{ minWidth: 120 }}>
+      <Menu.Item icon="reload" text="重新加载" />
+      <Menu.Item icon="heart-on" text="另存为" active />
+      <Menu.Item icon="appstore" text="应用商城" />
+      <Menu.Item icon="bar-chart" text="月统计报表" />
+      <Menu.Item icon="setting" text="偏好设置" />
+    </Menu>
+  </div>
+);
+
+function Demo2() {
+const table = useTable('https://randomuser.me/api', {
+    formatData: (data) => {
+      return {
+        total: 100,
+        data: data.results,
+      };
+    },
+    query: (pageIndex, pageSize, searchValues) => {
+      return {
+        page: pageIndex,
+        results: pageSize,
+        pageSize: 10,
+        ...searchValues,
+      }
+    },
+    requestOptions: {method: 'GET'}
+  });
+
+  return (
+    <ProTable
+      // 操作栏按钮
+      operateButtons={[
+        { label: '自定义查询', type: 'primary',  style: {marginRight: 10} },
+        {
+          
+          render: <Dropdown trigger="click" menu={menu} >
+                    <a href='#' onClick={e => e.preventDefault()}>
+                      点击我出现下拉菜单 <Icon type="down" />
+                    </a>
+                  </Dropdown>
+        },
+      ]} 
+      table={table}
+      columns={[
+        {
+          title: '名字',
+          key: 'name',
+          props: {
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {
+              preIcon: 'user',
+              placeholder: '输入用户名',
+            },
+          },
+          render: (text) => {
+            return <div>{text.title}.{text.first}{text.last}</div>
+          }
+        },
+        {
+          title: '年龄',
+          key: 'registered',
+          props: {
+            widget: 'select',
+            key: 'age',
+            option: [
+              { label: '20', value: 20 },
+              { label: '10', value: 10 },
+            ],
+          },
+          render: (text) => {
+            return <div>{text.age}</div>
+          }
+        },
+        {
+          title: '手机号',
+          key: 'phone',
+        },
+        {
+          title: '性别',
+          key: 'gender',
+          props: {
+            widget: 'select',
+            option: [
+              { label: 'female', value: 'female' },
+              { label: 'male', value: 'male' },
+            ],
+          },
+        },
+      ]}
+    />
+  );
+}
+
+ReactDOM.render(<Demo2 />, _mount_);
+
+```
+
+
+### table多选、单选行
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React, { useState } from 'react';
+import { ProTable, useTable } from '@uiw-admin/components';
+
+function Demo3() {
+
+const [isSingle, SetInSingle] = useState(false)
+
+const table = useTable('https://randomuser.me/api', {
+    formatData: (data) => {
+      return {
+        total: 10,
+        data: data.results,
+      };
+    },
+    query: (pageIndex, pageSize, searchValues) => {
+      return {
+        page: pageIndex,
+        results: pageSize,
+        pageSize: 10,
+        ...searchValues,
+      }
+    },
+    requestOptions: {method: 'GET'}
+  });
+
+  return (
+    <>
+      <div style={{whiteSpace: 'break-spaces'}}>选中的值{JSON.stringify(table && table.selection.selected)}</div>
+      <ProTable
+        // 操作栏按钮
+        operateButtons={[
+          { label: '全选', type: 'primary', onClick: () => { table.selection.selectAll() }  },
+          { label: '取消全选', type: 'primary', onClick: () => { table.selection.unSelectAll() }   },
+          { label: '切换', type: 'primary', onClick: () => { table.selection.toggleAll() }   },
+          { label: '单选多选切换', type: 'primary', onClick: () => {
+            table.selection.unSelectAll()
+            SetInSingle(!isSingle)
+          }},
+        ]}
+        table={table}
+        rowSelection={{
+          // 多选 checkbox 单选radio
+          type: isSingle ? 'radio' : 'checkbox',
+          // 选中的键名 column里的key
+          selectKey: 'name',
+          // 默认值
+          defaultSelected: [],
+        }}
+          // 取消全部选择
+        onPageChange={() => {
+          table.selection.unSelectAll()
+        }}
+        columns={[
+          {
+            title: '名字',
+            key: 'name',
+            props: {
+              widget: 'input',
+              initialValue: '',
+              widgetProps: {
+                preIcon: 'user',
+                placeholder: '输入用户名',
+              },
+            },
+            render: (text) => {
+              return <div>{text.title}.{text.first}{text.last}</div>
+            }
+          },
+        ]}
+      />
+    </>
+  );
+}
+
+ReactDOM.render(<Demo3 />, _mount_);
+
+```
+
+
+### table表单验证
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import { ProTable, useTable } from '@uiw-admin/components';
+
+function Demo4() {
+  const table = useTable('https://randomuser.me/api', {
+    // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
+    formatData: (data) => {
+      return {
+        total: 100,
+        data: data.results,
+      };
+    },
+    // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
+    query: (pageIndex, pageSize, searchValues) => {
+      return {
+        page: pageIndex,
+        results: pageSize,
+        ...searchValues,
+      }
+    },
+    requestOptions: {method: 'GET'}
+  });
+
+  return (
+    <ProTable
+       // 搜索栏按钮
+      searchBtns={[
+        {
+          label: '搜索',
+          type: 'primary',
+          onClick: () => {
+            table.onSearch()
+          },
+        },
+        {
+          label: '重置',
+          onClick: () => {
+            table.onReset()
+          },
+        },
+      ]}
+      onBeforeSearch={({ initial, current }) => {
+        const errorObj = {};
+        if (!current.name) errorObj.name = '名字不能为空！';
+        if (!current.age) errorObj.age = '年龄不能为空！';
+        if (!current.gender) errorObj.gender = '性别不能为空！';
+        if (Object.keys(errorObj).length > 0) {
+          const err = new Error();
+          err.filed = errorObj;
+          throw err;
+        }
+        return true;
+      }}
+      paginationProps={{
+        pageSizeOptions: [10,20,30],
+        pageSize: 10,
+      }}
+      table={table}
+      columns={[
+        {
+          title: '名字',
+          key: 'name',
+          props: {
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {
+              preIcon: 'user',
+              placeholder: '输入用户名',
+            },
+          },
+          render: (text) => {
+            return <div>{text.title}.{text.first}{text.last}</div>
+          }
+        },
+        {
+          title: '年龄',
+          key: 'registered',
+          props: {
+            widget: 'select',
+            key: 'age',
+            option: [
+              { label: '20', value: 20 },
+              { label: '10', value: 10 },
+            ],
+          },
+          render: (text) => {
+            return <div>{text.age}</div>
+          }
+        },
+        {
+          title: '手机号',
+          key: 'phone',
+        },
+        {
+          title: '性别',
+          key: 'gender',
+          props: {
+            widget: 'select',
+            option: [
+              { label: 'female', value: 'female' },
+              { label: 'male', value: 'male' },
+            ],
+          },
+        },
+      ]}
+    />
+  );
+}
+
+ReactDOM.render(<Demo4 />, _mount_);
+
+```
+
 
 ## Props
 
@@ -187,8 +477,22 @@ ReactDOM.render(<Demo />, _mount_);
 | onPageChange   | 分页回调             |（page: number） => void                        | -      |
 | onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询 | ({initial, current}) => Boolean                 |        |
 | rowSelection   | 选择框配置                                             | RowSelection                                    | -      |
-| scroll         | 滚动                         | ScrollProps        | -      |
+| scroll         | 设置横向滚动                         | ScrollProps        | -      |
 | paginationProps| 分页属性                      | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)        | -      |
+
+
+### searchBtns
+
+| 参数            | 说明                                     | 类型     | 默认值 |
+| --------------- | ---------------------------------------- | -------- | ------ |
+| label           | 按钮标题                               | string   | - |
+| render          | 不使用button，自定义组件                               | React Component   | - |
+
+其余属性继承[uiw button](https://uiwjs.github.io/#/components/button)
+
+### operateButtons
+
+与`searchBtns`参数一致
 
 ### rowSelection
 
@@ -222,6 +526,24 @@ ReactDOM.render(<Demo />, _mount_);
 | widgetProps | 组件属性                              | 与uiw对应的组件属性一致                                         | -      |
 | label       | 表单标题，如果不填则集成columns title | String                                                          | -      |
 | key         | 表单name，如果不填则集成columns key   | String       | -      |
+
+
+当前支持的widget组件有
+
+```
+
+input
+radio,
+checkbox,
+switch,
+select,
+searchSelect,
+textarea,
+dateInput,
+timePicker,
+monthPicker
+
+```
 
  props可以是个对象属性值是以上参数，也可以是个数组方便处理筛选条件大于列表展示的情况
 
@@ -268,9 +590,9 @@ props: [
 
 | 参数    | 说明         | 类型   | 默认值 |
 | ------- | ------------ | ------ | ------ |
-| key     | 接口请求地址 | string | -      |
+| api     | 接口请求地址 | string | -      |
 | options | 配置集合     | object | {}     |
-| requestOptions | request参数，继承自[axios config](https://axios-http.com/docs/req_config)     | object | {}     |
+
 
 ### options
 
@@ -279,6 +601,7 @@ props: [
 | formatData       | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式 | (data) => {total: 10, data: []}                                                          | -                          |
 | query            | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据   | (pageIndex: number, searchValues: any)	=> {page:  pageIndex, pageSize: 10, searchValues} | {}                         |
 | SWRConfiguration | swr配置                                                           | SWRConfiguration                                                                         | {revalidateOnFocus: false} |
+| requestOptions | request参数，继承自[axios config](https://axios-http.com/docs/req_config)     | object | {}     |
 
 
 ### response

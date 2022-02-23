@@ -6,15 +6,14 @@
 
 ```
 import * from '@uiw-admin/components';
-
 ```
 
 ## 已开发的组件
 
-- [x] ProTable: 集成搜索表单的Table组件，用于一般页面的查询搜索。
-- [x] ProForm: 基于[uiw from](https://uiwjs.github.io/#/components/form)封装， 更方便的使用表单。
-- [x] ProDrawer: 屏幕边缘滑出的浮层面板,集成权限button按钮。
-- [x] Skeleton: 页面骨架组件，用于整个界面的loading效果，也可调整统一边距。
+- ✅  ProTable: 集成搜索表单的Table组件，用于一般页面的查询搜索。
+- ✅  ProForm: 基于[uiw from](https://uiwjs.github.io/#/components/form)封装， 更方便的使用表单。
+- ✅  ProDrawer: 屏幕边缘滑出的浮层面板,集成权限button按钮。
+- ✅  Skeleton: 页面骨架组件，用于整个界面的loading效果，也可调整统一边距。
 
 
 
