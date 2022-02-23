@@ -199,7 +199,7 @@ export default function Controller(props: ControllerProps = {}) {
   // @ts-ignore
   let base = BASE_NAME;
   const dom = React.useMemo(() => {
-    if (routeType === 'hash') {
+    if (routeType === 'history') {
       return (
         <HistoryRouter history={history} basename={base}>
           <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
