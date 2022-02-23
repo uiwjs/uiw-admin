@@ -1,9 +1,13 @@
 // 模板
 export default (routeStr: string, isType: 'ts' | 'js' | 'json' | boolean) => {
+  // from "react"
+  let reactTemp = `import React from "react"`;
   if (['js', 'ts'].includes(isType as string)) {
+    // 1. 判断是否 已经存在  from "react"
+    const isReact = !/\/\/(.+|)import React.+ from "react"/.test(routeStr);
     return `
 // @ts-nocheck
-import React from "react";
+${(!isReact && reactTemp) || ''}
 import {Exceptions404,Exceptions403,Exceptions500 } from "@uiw-admin/exceptions"
 ${routeStr};    
     `;

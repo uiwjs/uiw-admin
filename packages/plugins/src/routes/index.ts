@@ -53,7 +53,7 @@ class RoutesWebpackPlugin {
 
   // 生成临时路由
   createTemps = (strs: string, isType: ISTYPE) => {
-    if (strs === '[]') {
+    if (['[]', 'export default []'].includes(strs)) {
       this.preString = '';
       this.nextString = '';
     } else {
@@ -92,6 +92,7 @@ class RoutesWebpackPlugin {
 
   // 获取文件内容
   getFileContent = (isType: ISTYPE) => {
+    let temps = '[]';
     if (isType === 'json') {
       this.nextString = fs
         .readFileSync(this.jsonFilePath, { encoding: 'utf-8' })
@@ -104,6 +105,7 @@ class RoutesWebpackPlugin {
         return;
       }
     } else if (['js', 'ts'].includes(isType as string)) {
+      temps = 'export default []';
       let filePath = '';
       if (isType === 'js') {
         filePath = this.jsFilePath;
@@ -114,13 +116,14 @@ class RoutesWebpackPlugin {
       const { isJSON, jsonArr, jsonCode } = getJSONData(content);
       if (isJSON) {
         this.routes = jsonArr;
-        this.jsonCode = jsonCode || '[]';
-        this.nextString = JSON.stringify(jsonArr);
+        this.jsonCode = jsonCode || 'export default []';
+        // this.nextString = JSON.stringify(jsonArr);
+        this.nextString = this.jsonCode;
         this.checkPreAndNext(isType);
         return;
       }
     }
-    this.createTemps('[]', isType);
+    this.createTemps(temps, isType);
   };
 
   // 判断文件优先级

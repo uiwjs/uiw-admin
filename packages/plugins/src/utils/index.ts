@@ -184,7 +184,7 @@ export const getJSONData = (content: string) => {
     },
   });
   jsonCode = generate(ast2).code;
-  // // 遍历修改 AST
+  // 遍历修改 AST
   traverse(ast, {
     ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
       let node = path.node.declaration;
@@ -194,16 +194,16 @@ export const getJSONData = (content: string) => {
       // 如果 node 是一个数组
       if (t.isArrayExpression(node)) {
         isJSON = true;
-        const code = generate(node, {
-          jsonCompatibleStrings: true,
-          // 输出中包含注释
-          comments: false,
-          jsescOption: {
-            quotes: 'double',
-            json: true,
-          },
-        }).code;
-        jsonArr = stringToJson(code);
+        // const code = generate(node, {
+        //   jsonCompatibleStrings: true,
+        //   // 输出中包含注释
+        //   comments: false,
+        //   jsescOption: {
+        //     quotes: 'double',
+        //     json: true,
+        //   },
+        // }).code;
+        // jsonArr = stringToJson(code);
       }
     },
   });
