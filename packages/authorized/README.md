@@ -2,20 +2,25 @@
 
 判断组件的权限
 
+## 何时使用
+
+当项目需要根据权限判断组件是否展示
+
 ## 安装
 
 ```bash
 npm i @uiw-admin/authorized --save # yarn add @uiw-admin/authorized
 ```
 
-## 参数说明
+## AuthPage
+> 可用于页面重定向
+### 参数说明
 
 | 参数         | 必填 | 类型          | 默认值   | 说明             |
 | :----------- | :--- | :------------ | :------- | :--------------- |
 | authority    | 否   | `boolean`     |          | 是否已经登录     |
 | redirectPath | 否   | `string`      | `/login` | 未登录重定向路径 |
 | children     | 是   | `JSX.Element` |          | 是否已经登录     |
-
 ```tsx
 import AuthPage  from "@uiw-admin/authorized"
 export default ()=>{
@@ -23,9 +28,9 @@ export default ()=>{
 }
 ```
 
-## getAuthPath 方法
+## getAuthPath
 
-判断是否有权限
+> 判断是否有权限
 
 ```ts
 type getAuthPath = (path?: string)=>boolean 
@@ -36,10 +41,11 @@ const isAuth = getAuthPath("/api/path")
 ```
 
 
-## AuthBtn 按钮组件
+## AuthBtn
 
-外层嵌套 组件，判断子组件是否有权限展示或使用
+> 外层嵌套 组件，判断子组件是否有权限展示或使用
 
+### 参数说明
 | 参数     | 必填 | 类型              | 默认值  | 说明                                            |
 | :------- | :--- | :---------------- | :------ | :---------------------------------------------- |
 | path     | 否   | `string`          |         | 路径                                            |
@@ -51,14 +57,16 @@ import React from "react"
 import { AuthBtn } from "@uiw-admin/authorized"
 
 const Demos = ()=>{
-  return <div>
-    <AuthBtn path="/dom/save" >
-      子集渲染
-    </AuthBtn>
-    <AuthBtn path="/dom/edit" disabled >
-      子集渲染2
-    </AuthBtn>
-  </div>
+  return (
+   <div>
+     <AuthBtn path="/dom/save" >
+       子集渲染
+     </AuthBtn>
+     <AuthBtn path="/dom/edit" disabled >
+       子集渲染2
+     </AuthBtn>
+   </div>
+  )
 }
 export default Demos
 ```

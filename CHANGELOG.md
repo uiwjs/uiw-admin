@@ -11,7 +11,7 @@
 - uiw-admin/config
   - 🐞 修改 `publicPath` 默认值为 `"/"`
 - uiw-admin/components
-  - 🌟 `ProForm` 增加colProps api
+  - 🌟 `ProForm` 增加colstyle api
 
 ## 5.2.21
 
