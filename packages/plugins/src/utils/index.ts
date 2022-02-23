@@ -165,31 +165,50 @@ export const getJSONData = (content: string) => {
         isJSON = true;
       }
     },
-    ArrayExpression(path) {
-      let elements = path.node.elements;
-      elements.forEach((item) => {
-        if (t.isObjectExpression(item) && item.properties) {
-          item.properties.forEach((objItem) => {
-            if (
-              t.isObjectProperty(objItem) &&
-              ((t.isStringLiteral(objItem.key) &&
-                objItem.key.value === 'component') ||
-                (t.isIdentifier(objItem.key) &&
-                  objItem.key.name === 'component'))
-            ) {
-              if (t.isStringLiteral(objItem.value)) {
-                const valus = objItem.value.value;
-                if (['404', '403', '500'].includes(objItem.value.value)) {
-                  objItem.value = getJSX(`Exceptions${valus}`);
-                } else {
-                  objItem.value = getReactLazy(valus);
-                }
-              }
+    ObjectProperty(path) {
+      // 判断父级的父级是否是数组 如果是数组则进行转换
+      if (t.isArrayExpression(path.parentPath.parent)) {
+        const { node } = path;
+        if (
+          (t.isStringLiteral(node.key) && node.key.value === 'component') ||
+          (t.isIdentifier(node.key) && node.key.name === 'component')
+        ) {
+          if (t.isStringLiteral(node.value)) {
+            const valus = node.value.value;
+            if (['404', '403', '500'].includes(node.value.value)) {
+              node.value = getJSX(`Exceptions${valus}`);
+            } else {
+              node.value = getReactLazy(valus);
             }
-          });
+          }
         }
-      });
+      }
     },
+    // ArrayExpression(path) {
+    //   let elements = path.node.elements;
+    //   elements.forEach((item) => {
+    //     if (t.isObjectExpression(item) && item.properties) {
+    //       item.properties.forEach((objItem) => {
+    //         if (
+    //           t.isObjectProperty(objItem) &&
+    //           ((t.isStringLiteral(objItem.key) &&
+    //             objItem.key.value === 'component') ||
+    //             (t.isIdentifier(objItem.key) &&
+    //               objItem.key.name === 'component'))
+    //         ) {
+    //           if (t.isStringLiteral(objItem.value)) {
+    //             const valus = objItem.value.value;
+    //             if (['404', '403', '500'].includes(objItem.value.value)) {
+    //               objItem.value = getJSX(`Exceptions${valus}`);
+    //             } else {
+    //               objItem.value = getReactLazy(valus);
+    //             }
+    //           }
+    //         }
+    //       });
+    //     }
+    //   });
+    // },
   });
   jsonCode = generate(ast).code;
   return {
