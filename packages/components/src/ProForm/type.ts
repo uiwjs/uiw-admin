@@ -7,6 +7,7 @@ import {
   CardProps,
   CollapseProps,
   CollapsePanelProps,
+  FormState,
 } from 'uiw';
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
@@ -86,7 +87,7 @@ export interface UseFormProps {
   resetForm?: () => void;
   getFieldValues?: () => void;
   getError?: () => void;
-  setFields?: () => void;
+  setFields?: (fields: FormState['current']) => void;
   validateFieldsAndGetValue?: () => Promise<any>;
   setFormState?: (p: UseFormStateProps | any) => void;
 }
@@ -96,5 +97,5 @@ export interface UseFormStateProps {
   getFieldValues: () => void;
   resetForm: () => void;
   getError: () => void;
-  setFields: () => void;
+  setFields: (fields: FormState['current']) => void;
 }

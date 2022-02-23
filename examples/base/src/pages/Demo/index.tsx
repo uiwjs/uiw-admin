@@ -38,10 +38,6 @@ const Demo = () => {
 
   // 操作
   function handleEditTable(type: string, record: Record<string, any>) {
-    updateData({
-      isView: type === 'view',
-      tableType: type,
-    })
     if (type === 'add') {
       updateData({ drawerVisible: true, queryInfo: {} })
     }
@@ -51,6 +47,7 @@ const Demo = () => {
         payload: { id: record?.id },
       })
     }
+    updateData({ isView: type === 'view', tableType: type })
   }
 
   const menu = (

@@ -22,7 +22,7 @@ function FormDom({
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
   formInstanceRef: any;
 }) {
-  const baseRef = useRef<any>();
+  const baseRef = useRef(null);
   const store = useStore();
 
   const { setFormState } = store as any;
