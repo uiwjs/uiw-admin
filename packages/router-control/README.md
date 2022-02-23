@@ -88,6 +88,31 @@ export interface ControllerProps {
 
 ``` -->
 
+## 组件提供-路由跳转方法
+
+1. `navigate` 由 `react-router-dom`的`useNavigate` hook 赋值生成
+2. `history` 当 `routeType="history"` 才能使用，[使用方式](https://github.com/remix-run/history/blob/dev/docs/navigation.md)
+
+```ts
+// navigate 使用方式
+navigate("/demo",{/** ... */})
+
+// history 使用方式
+history.push("/demo");
+history.push("/demo?d=12", { some: "state" });
+history.push(
+  {
+    pathname: "/demo",
+    search: "?d=12",
+  },
+  {
+    some: 1212,
+  }
+);
+history.go(-1);
+history.back();
+```
+
 ## routes.json案例
 
 > `@` 指向 src 目录
