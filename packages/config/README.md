@@ -32,7 +32,7 @@ npm i @uiw-admin/config -D # yarn add @uiw-admin/config
 export type ConfFun = (conf: WebpackConfiguration, evn: string, options?: LoaderConfOptions | undefined) => WebpackConfiguration
 ```
 
-## rematch 
+## rematch
 
 1. 参数 `lazyLoad`  `boolean` 类型 ，默认 `false`
 
@@ -50,7 +50,9 @@ export default defaultConfig({
 
 ### lazyLoad
 
-设置 `lazyLoad` 后 `model` 绑定路由关系，去除后面的`/models/*`或`/models.ts` 路径，匹配路由配置文件中的 `component` 属性值
+1. 设置 `lazyLoad` 后 `model` 绑定路由关系，去除后面的`/models/*`或`/models.ts` 路径，匹配路由配置文件中的 `component` 属性值
+2. 把`model`进行懒加载
+⚠️ 注意：如果使用懒加载`model`，则调用`model`时，只能调用已经加载的，否则会报错
 
 ```txt
 
@@ -230,6 +232,7 @@ export default (conf: Configuration, env: string, options = {} as ReactLibraryOp
 不推荐旧的配置案例，使用新的配置案例，它将变得更简单。
 
 ```ts
+
 import defaultConfig from "@uiw-admin/config"
 import { RematchWebpackPlugin, RoutesWebpackPlugin } from '@uiw-admin/plugins'
 import lessModules from '@kkt/less-modules'
@@ -248,6 +251,7 @@ export default defaultConfig({
     lessModules
   ],
 })
+
 ```
 
 ### 新配置案例（推荐）
