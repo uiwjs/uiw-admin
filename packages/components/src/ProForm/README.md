@@ -562,31 +562,65 @@ import ReactDOM from 'react-dom';
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button,Card } from 'uiw'
+
 const Demo = () => {
   const form = useForm()
   const formRefList = useRef([])
-  const [state,setState] = React.useState([])
+  const [state,setState] = useState([])
   const [items,setItems] = useState([])
+  const [option,setOption] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
   // 过滤删除为null的ref
   const formList = formRefList?.current.filter(n => n) || []
 
+  const addItems = (attr)=>[
+     {
+      label: '司机手机号',
+      key: 'phone',
+      widget: 'input',
+      initialValue: '',
+      required:true,
+    },
+    {
+      label: 'searchSelect',
+      key: 'searchSelect',
+      widget: 'searchSelect',
+      option: attr.searchSelect.option,
+      widgetProps: {
+        mode:"multiple",
+        onSearch: attr.searchSelect.onSearch,
+        loading: attr.searchSelect.loading,
+        allowClear: true,
+        showSearch: true,
+        style:{ width:"100%" }
+     },
+    },
+  ]
+
   const handleAddFormItems = (type,idx)=>{
     if(type==='add'){
-       items.push([
-        {
-          label: '司机手机号',
-          key: 'phone',
-          widget: 'input',
-          initialValue: '',
-          required:true,
-        },
-      ])
+       items.push(addItems)
     }
     if(type==='delete'){
       items.splice(idx,1)
-      // formList[idx].setFields({phone:''})
     }
     setItems([...items])
+  }
+
+   // 模拟搜索
+  const handleSearch = ( type = '' , name = '' ) => {
+    if (type === 'searchSelect') {
+      setLoading(true)
+      setOption([
+        { value: 1, label: '苹果' },
+        { value: 2, label: '西瓜' },
+        { value: 3, label: '香蕉' },
+        { value: 4, label: '东北大冻梨' },
+      ])
+      setTimeout(() => {
+        setLoading(false)
+      }, 2000)
+    }
   }
 
   return (
@@ -609,7 +643,13 @@ const Demo = () => {
               }}
               // 更新表单的值
               buttonsContainer={{ justifyContent: 'flex-start' }}
-              formDatas={item}
+              formDatas={item({
+                searchSelect:{
+                  option:option,
+                  onSearch: handleSearch.bind(this,'searchSelect'),
+                  loading:loading
+                }
+              })}
               // 提交后验证
               onSubmit={(initial, current) => {
                 const errorObj = {};
