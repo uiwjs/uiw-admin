@@ -716,6 +716,14 @@ const Demo = () => {
   // 过滤删除为null的ref
   const formList = formRefList?.current.filter(n => n) || []
 
+   const asyncAwaitFormList = (arr=[]) => {
+    return (
+      arr && arr.length>0 &&  Promise.all(arr).then((vals) =>{
+        return vals
+      })
+    )
+  };
+
   const addItems = (attr)=>[
      {
       label: '司机手机号',
@@ -723,6 +731,9 @@ const Demo = () => {
       widget: 'input',
       initialValue: '',
       required:true,
+      rules: [
+        { required: true, message: '请输入' },
+      ]
     },
     {
       label: 'searchSelect',
@@ -766,6 +777,14 @@ const Demo = () => {
     }
   }
 
+  const handleSave = async ()=>{
+    const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
+    const values = await asyncAwaitFormList(validateList)
+    setState(values)
+    console.log("values",values)
+    // 调用接口
+  }
+
   return (
      <div>
       {items.map((item, idx) => {
@@ -793,22 +812,6 @@ const Demo = () => {
                   loading:loading
                 }
               })}
-              // 提交后验证
-              onSubmit={(initial, current) => {
-                const errorObj = {};
-                if (!current?.phone) {
-                  errorObj.phone = 'input不能为空';
-                }
-                if (Object.keys(errorObj).length > 0) {
-                const err = new Error();
-                err.filed = errorObj;
-                throw err;
-              }
-              // 获取值
-              const params = (formList.map(value => ({ ...value?.getFieldValues() }))) || [];
-              setState(params)
-              // 调用请求接口
-            }}
             />
           </Card>
           )
@@ -822,10 +825,7 @@ const Demo = () => {
        <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
-        onClick={()=>{
-          // 触发验证
-          formList.forEach(item => item.submitvalidate())
-        }}>
+        onClick={() => handleSave()}>
         保存
       </Button>
       <div style={{ maxWidth: 500 }}>
