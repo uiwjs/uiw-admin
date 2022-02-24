@@ -11,8 +11,9 @@
 - 需要对输入的数据类型进行校验时。
 
 <!--ProForm-->
-## 表单类型
-> 卡片表单类型
+## 类型
+> 通过formType表单类型
+### 卡片类型
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -41,7 +42,7 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-> 折叠表单类型
+### 折叠类型
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -70,7 +71,8 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-> 纯表单类型下title将不再展示
+### 纯表单类型
+> pure类型下将不再展示title
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -97,6 +99,147 @@ const Demo = () => {
 }
 ReactDOM.render(<Demo />, _mount_);
 ```
+
+## 布局
+### 基本布局
+> 通过span(继承于uiw/Graid/Col)
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+const Demo = () => {
+    return (
+     <div>
+       <ProForm
+         formType="pure"
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"24",
+             },
+               {
+               label: 'input',
+               key: 'input2',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"12",
+             },
+               {
+               label: 'input',
+               key: 'input3',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"12",
+             },
+             {
+               label: 'input',
+               key: 'input4',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"8",
+             },
+             {
+               label: 'input',
+               key: 'input5',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"8",
+             },
+             {
+               label: 'input',
+               key: 'input6',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               span:"8",
+             },
+          ]}
+       />
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+### 只读布局
+> 通过readSpan(继承于uiw/Descriptions.Item)
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+const Demo = () => {
+    return (
+     <div>
+       <ProForm
+         readOnly={true}
+         formType="pure"
+         formDatas={ [
+             {
+               label: 'input',
+               key: 'input',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               readSpan:3,
+             },
+               {
+               label: 'input',
+               key: 'input2',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               readSpan:2,
+             },
+               {
+               label: 'input',
+               key: 'input3',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               readSpan:1,
+             },
+             {
+               label: 'input',
+               key: 'input4',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               readSpan:1,
+             },
+             {
+               label: 'input',
+               key: 'input5',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               readSpan:1
+             },
+             {
+               label: 'input',
+               key: 'input6',
+               widget: 'input',
+               initialValue: '',
+               widgetProps: {},
+               readSpan:1,
+             },
+          ]}
+       />
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+
 
 ## 基本使用
 > 与uiw/form使用保持一致
