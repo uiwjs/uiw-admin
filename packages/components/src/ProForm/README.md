@@ -435,9 +435,10 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-## 通过form props
+## 通过useForm
 > (提交,重置,设置)
-> 与uiw/form提交不同,我们也可以通过传递rules进行提交前的表单校验(支持正则,required,回调验证)
+> - 我们可以通过useForm注册form表单实例进行验证;重置;设置。(submitvalidate;getError;getFieldValues;setFields;resetForm...)
+> - 我们也可以通过传递rules配置验证规则(支持正则,required,回调验证)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -515,7 +516,7 @@ ReactDOM.render(<Demo />, _mount_);
 ```
 
 ## 多个表单
-> 基础提交,我们提供了submitvalidate;getError;getFieldValues;validateFieldsAndGetValue;setFields;resetForm等表单实例方法
+### 基础提交
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -607,7 +608,8 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-> promise提交(通过validateFieldsAndGetValue方法先验证后获取值)
+### promise提交
+> (通过validateFieldsAndGetValue方法先验证后获取值)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
@@ -698,7 +700,145 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 ## 动态添加表单
-> uiw/form方式提交
+### uiw/form提交
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import React, { useState,useRef } from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { Button,Card } from 'uiw'
+
+const Demo = () => {
+  const form = useForm()
+  const formRefList = useRef([])
+  const [state,setState] = useState([])
+  const [items,setItems] = useState([])
+  const [option,setOption] = React.useState([])
+  const [loading, setLoading] = React.useState(false)
+  // 过滤删除为null的ref
+  const formList = formRefList?.current.filter(n => n) || []
+
+   const asyncAwaitFormList = (arr=[]) => {
+    return (
+      arr && arr.length>0 &&  Promise.all(arr).then((vals) =>{
+        return vals
+      })
+    )
+  };
+
+  const addItems = (attr)=>[
+     {
+      label: '司机手机号',
+      key: 'phone',
+      widget: 'input',
+      initialValue: '',
+      required:true,
+      rules: [
+        { required: true, message: '请输入' },
+      ]
+    },
+    {
+      label: 'searchSelect',
+      key: 'searchSelect',
+      widget: 'searchSelect',
+      option: attr.searchSelect.option,
+      widgetProps: {
+        mode:"multiple",
+        onSearch: attr.searchSelect.onSearch,
+        loading: attr.searchSelect.loading,
+        allowClear: true,
+        showSearch: true,
+        style:{ width:"100%" }
+     },
+    },
+  ]
+
+  const handleAddFormItems = (type,idx)=>{
+    if(type==='add'){
+       items.push(addItems)
+    }
+    if(type==='delete'){
+      items.splice(idx,1)
+    }
+    setItems([...items])
+  }
+
+   // 模拟搜索
+  const handleSearch = ( type = '' , name = '' ) => {
+    if (type === 'searchSelect') {
+      setLoading(true)
+      setOption([
+        { value: 1, label: '苹果' },
+        { value: 2, label: '西瓜' },
+        { value: 3, label: '香蕉' },
+        { value: 4, label: '东北大冻梨' },
+      ])
+      setTimeout(() => {
+        setLoading(false)
+      }, 2000)
+    }
+  }
+
+  const handleSave = async ()=>{
+    const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
+    const values = await asyncAwaitFormList(validateList)
+    setState(values)
+    console.log("values",values)
+    // 调用接口
+  }
+
+  return (
+     <div>
+      {items.map((item, idx) => {
+          return (
+           <Card 
+            title={`表单${idx + 1}`} 
+            key={idx} 
+            style={{ marginBottom:10 }} 
+            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}
+            >
+             <ProForm
+              ref={(e) =>(formRefList.current[idx] = e)}
+              // 表单类型
+              formType="pure"
+              form={form}
+              cardProps={{
+                noHover: true,
+              }}
+              // 更新表单的值
+              buttonsContainer={{ justifyContent: 'flex-start' }}
+              formDatas={item({
+                searchSelect:{
+                  option:option,
+                  onSearch: handleSearch.bind(this,'searchSelect'),
+                  loading:loading
+                }
+              })}
+            />
+          </Card>
+          )
+        })}
+       <Button 
+        style={{ marginTop:10,width:80 }}  
+        type="primary"  
+        onClick={handleAddFormItems.bind(this,'add')}>
+         新增
+        </Button>
+       <Button 
+        style={{ marginTop:10,width:80 }} 
+        type="primary" 
+        onClick={() => handleSave()}>
+        保存
+      </Button>
+      <div style={{ maxWidth: 500 }}>
+        <pre style={{ padding: '10px 0 0 10px' }}>{JSON.stringify(state, null, 2)}</pre>
+      </div>
+    </div>
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+### promise提交
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import ReactDOM from 'react-dom';
