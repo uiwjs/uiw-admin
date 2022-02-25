@@ -107,34 +107,43 @@ export interface UseLayoutsProps {
 >   -  headerLayout 配置头部布局
 >   -  headerBackground: 配置头部背景色
 >   -  headerFontColor: 配置头部字体颜色
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```tsx
 import React from 'react'
 import BasicLayout, {
   useLayouts,
-  BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
-import { Outlet } from 'react-router-dom'
-import { RoutersProps } from '@uiw-admin/router-control'
+import { HashRouter } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
 
-interface BasicLayoutProps {
-  routes: RoutersProps[]
-}
-
-function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
-
-  const basicLayoutProps: BasicLayoutType = {
-    ...props,
+function BasicLayoutScreen() {
+  const basicLayoutProps = {
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
   }
   return (
-    <BasicLayout {...basicLayoutProps}>
-      <Outlet />
-    </BasicLayout>
+    <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
+      </BasicLayout>
+    </HashRouter>
   )
 }
-export default BasicLayoutScreen
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 ```
 
@@ -143,24 +152,32 @@ export default BasicLayoutScreen
 >   - profile配置头像以及下拉菜单左侧内容;
 >   - onReloadAuth调用刷新权限接口;
 >   - layouts.closeMenu关闭菜单事件;
-```tsx
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
 import React from 'react'
 import BasicLayout, {
   useLayouts,
-  BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
-import { Outlet } from 'react-router-dom'
-import { RoutersProps } from '@uiw-admin/router-control'
+import { HashRouter ,useRoutes ,Outlet} from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
 
-interface BasicLayoutProps {
-  routes: RoutersProps[]
-}
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
 
-function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+function BasicLayoutScreen() {
   const layouts = useLayouts()
-
-  const basicLayoutProps: BasicLayoutType = {
-    ...props,
+  const basicLayoutProps = {
     // 右侧下拉菜单内容
     menus: [
       {
@@ -184,14 +201,15 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     onReloadAuth: () => {},
     layouts,
   }
-  return (
-    <BasicLayout {...basicLayoutProps}>
-      <Outlet />
-    </BasicLayout>
-  )
-}
-export default BasicLayoutScreen
 
+  return <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
+      </BasicLayout>
+    </HashRouter>
+}
+
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
 ```
 
 ## 预览

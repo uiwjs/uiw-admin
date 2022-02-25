@@ -66,6 +66,8 @@ import React from 'react'
 import BasicLayout from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'
 import LayoutTabs from "@uiw-admin/layout-tabs"
+import { HashRouter } from 'react-router-dom';
+
 const routesArr=[
   {
     path: "/layout-tabs",
