@@ -60,10 +60,15 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   };
   // 点击查询
   const onSearch = async () => {
-    await form.current.onSubmit();
-    const isNoError = form.current.getError();
-
-    if (Object.keys(isNoError).length === 0) {
+    // 需要表单存在
+    if (form) {
+      await form.current.onSubmit();
+      const isNoError = form.current.getError();
+      if (Object.keys(isNoError).length === 0) {
+        await state.setPageIndex(1);
+        state.mutate(false);
+      }
+    } else {
       await state.setPageIndex(1);
       state.mutate(false);
     }
