@@ -62,7 +62,7 @@ export default (props: UserLoginProps) => {
     footer,
     bg = bgDefault,
     children,
-    projectName,
+    projectName = 'UIW Admin',
     onSuccess = () => null,
     btnProps = {},
     api,
@@ -87,11 +87,12 @@ export default (props: UserLoginProps) => {
 
   return (
     <div className="uiw-loayout-login" style={{ background: `url(${bg})` }}>
-      <DocumentTitle title={projectName || 'KKT'} />
+      <DocumentTitle title={projectName} />
       <div
         style={styleWarp}
         className={`uiw-loayout-login-warp ${classNameWarp} uiw-loayout-login-warp-${align}`}
       >
+        <div className="uiw-title">{projectName}</div>
         <div
           className={`uiw-loayout-login-body ${classNameBody}`}
           style={styleBody}
