@@ -86,7 +86,7 @@ const routesArr=[
 function BasicLayoutScreen() {
   return (
      <HashRouter window={window}>
-      <BasicLayout routes={routesArr}  >
+      <BasicLayout routes={routesArr}  isDefaultContentStyle={false}  >
         <LayoutTabs routes={routesArr} /> 
       </BasicLayout>
     </HashRouter>
