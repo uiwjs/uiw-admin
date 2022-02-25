@@ -263,7 +263,7 @@ const Demo = () => {
    const [loading, setLoading] = React.useState(false)
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
-    if (type === 'searchSelect') {
+    if (type === 'searchSelect') {åååå
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
@@ -424,6 +424,38 @@ const Demo = () => {
               },
             },
             },
+            {
+              label: 'searchTree',
+              key: 'searchTree',
+              widget: 'searchTree',
+              span: '24',
+              readSpan: 3,
+              widgetProps:{
+                allowClear:true,
+                onSearch:(searchValue)=>console.log('SearchTree-> SearchTreeOption',searchValue),
+                onChange:(selectedAll, selectd, isChecked)=>console.log('SearchTree-> onChange',selectedAll, selectd, isChecked)
+              },
+              initialValue:[],
+              option:[
+                {
+                  label: '上海市',
+                  key: '1-0-0',
+                  children:[
+                    { label: '黄浦区', key: '1-0-1' },
+                    { label: '卢湾区', key: '1-0-2' },
+                    {
+                      label: '徐汇区',
+                      key: '1-0-3',
+                      children:[
+                        { label: '半淞园路街道', key: '1-1-0' },
+                        { label: '南京东路街道', key: '1-2-0' },
+                        { label: '外滩街道', key: '1-3-0' },
+                      ]
+                    },
+                  ]
+                }
+              ]
+            }
           ]}
        />
         <div style={{ maxWidth: 200 }}>
@@ -1167,10 +1199,10 @@ ReactDOM.render(<Demo />, _mount_);
 | -------- | -------- | ------------------------ | ------ |
 | submitvalidate | 表单验证 | ()=>void | - | 
 | resetForm | 重置表单值 | ()=>void | - | 
-| onSubmit | 表单提交 | ()=>void | - |   
+| onSubmit | 表单提交 | (e: React.FormEvent)=>void | - |   
 | getFieldValues | 获取表单值 | ()=>void | - |  
 | getError | 获取表单错误 | ()=>void | - |  
-| setFields | 设置表单的值 | ()=>void | [] |      
+| setFields | 设置表单的值 | (fields: FormState['current'])=>void | [] |      
 | validateFieldsAndGetValue | 验证并获取值 | ()=>Promise`<any>` | [] |   
 
 ## 注意

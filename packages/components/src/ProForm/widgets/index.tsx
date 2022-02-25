@@ -15,6 +15,7 @@ import Select from '../../ProTable/widgets/Select';
 import CheckBox from './CheckBox';
 import SelectMultiple from './SelectMultiple';
 import Upload from './Upload';
+import SearchTree from './SearchTree';
 
 /**
  *
@@ -41,6 +42,7 @@ export function getFormFields(
     monthPicker: MonthPicker,
     upload: Upload,
     rate: Rate,
+    searchTree: SearchTree,
     ...customWidgetsList,
   };
   const fields: Fields = {};
