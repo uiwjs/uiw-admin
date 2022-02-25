@@ -11,6 +11,7 @@ import {
   HashRouter,
   BrowserRouter,
   Navigate,
+  Router,
 } from 'react-router-dom';
 // @ts-ignore
 import RoutePathArr from '@@/routes';
