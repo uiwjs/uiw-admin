@@ -8,8 +8,9 @@
 
 - @uiw-admin/basic-layout
   - 🌟 新增一个`isDefaultContentStyle`参数，用于判断内容区域是否使用默认样式
-
-
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复没有表单调取onSearch报错
+ 
 ## 5.2.22
 
 - @uiw-admin/plugins
