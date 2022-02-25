@@ -1,5 +1,6 @@
 # `Utils工具`
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/utils.svg?label=@uiw-admin/utils)](https://www.npmjs.com/package/@uiw-admin/utils)
 ## request
 
 系统的请求基于axios进行了二次封装，参见[axios](https://axios-http.com/)

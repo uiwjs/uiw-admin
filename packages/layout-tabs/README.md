@@ -1,5 +1,7 @@
 # tab 选项卡布局
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/layout-tabs.svg?label=@uiw-admin/layout-tabs)](https://www.npmjs.com/package/@uiw-admin/layout-tabs)
+
 项目打开过的菜单在头部进行tab选项卡展示
 
 ## 何时使用

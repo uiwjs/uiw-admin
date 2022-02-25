@@ -1,5 +1,7 @@
 # 页面整体布局
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/basic-layouts.svg?label=@uiw-admin/basic-layouts)](https://www.npmjs.com/package/@uiw-admin/basic-layouts)
+
 项目的整体默认布局组件，一般默认 '/' 路由的组件
 
 ## 何时使用
