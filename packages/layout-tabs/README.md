@@ -1,5 +1,7 @@
 # tab 选项卡布局
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/layout-tabs.svg?label=@uiw-admin/layout-tabs)](https://www.npmjs.com/package/@uiw-admin/layout-tabs)
+
 项目打开过的菜单在头部进行tab选项卡展示
 
 ## 何时使用
@@ -66,6 +68,8 @@ import React from 'react'
 import BasicLayout from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'
 import LayoutTabs from "@uiw-admin/layout-tabs"
+import { HashRouter } from 'react-router-dom';
+
 const routesArr=[
   {
     path: "/layout-tabs",
@@ -82,7 +86,7 @@ const routesArr=[
 function BasicLayoutScreen() {
   return (
      <HashRouter window={window}>
-      <BasicLayout routes={routesArr}  >
+      <BasicLayout routes={routesArr}  isDefaultContentStyle={false}  >
         <LayoutTabs routes={routesArr} /> 
       </BasicLayout>
     </HashRouter>
@@ -90,12 +94,6 @@ function BasicLayoutScreen() {
 }
 ReactDOM.render(<BasicLayoutScreen />, _mount_);
 ```
-
-## 预览
-
-![](https://user-images.githubusercontent.com/49544090/150922472-e8882ecc-298a-4bad-8141-0d640fd167ff.png)
-
-
 ## 贡献者
 
 感谢所有的贡献者，欢迎开发者为开源项目贡献力量。

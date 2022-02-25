@@ -1,5 +1,7 @@
 # 页面整体布局
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/basic-layouts.svg?label=@uiw-admin/basic-layouts)](https://www.npmjs.com/package/@uiw-admin/basic-layouts)
+
 项目的整体默认布局组件，一般默认 '/' 路由的组件
 
 ## 何时使用
@@ -77,21 +79,24 @@ export interface UseLayoutsProps {
 ``` -->
 ## Props
 
-| 参数             | 必填 | 类型                                                                                     | 默认值    | 说明                     |
-| :--------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
-| logo             | 否   | `string`                                                                                 |           | logo图标                 |
-| projectName      | 否   | `string`                                                                                 |           | 项目名称                 |
-| footer           | 否   | `React.ReactElement`                                                                     |           | 页脚                     |
-| routes           | 否   | `RoutersProps[]`                                                                         |           | 菜单路由数据             |
-| children         | 否   | `React.ReactNode`                                                                        |           | 内容                     |
-| headerLayout     | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
-| headerBackground | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
-| headerFontColor  | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
-| menuHide         | 否   | `boolen`                                                                                 | `false`   | 头部字体颜色             |
-| menus            | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
-| profile          | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
-| onReloadAuth     | 否   | `() => void`                                                                             |           | 重新加载权限             |
-| layouts          | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
+| 参数                  | 必填 | 类型                                                                                     | 默认值    | 说明                     |
+| :-------------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
+| logo                  | 否   | `string`                                                                                 |           | logo图标                 |
+| projectName           | 否   | `string`                                                                                 |           | 项目名称                 |
+| footer                | 否   | `React.ReactElement`                                                                     |           | 页脚                     |
+| routes                | 否   | `RoutersProps[]`                                                                         |           | 菜单路由数据             |
+| children              | 否   | `React.ReactNode`                                                                        |           | 内容                     |
+| headerLayout          | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
+| headerBackground      | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
+| headerFontColor       | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
+| menuHide              | 否   | `boolen`                                                                                 | `false`   | 头部字体颜色             |
+| menus                 | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
+| profile               | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
+| onReloadAuth          | 否   | `() => void`                                                                             |           | 重新加载权限             |
+| layouts               | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
+| isDefaultContentStyle | 否   | `boolean`                                                                                | `true`    | 内容区域默认样式展示     |
+
+建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
 
 ## useLayouts
 
@@ -107,34 +112,43 @@ export interface UseLayoutsProps {
 >   -  headerLayout 配置头部布局
 >   -  headerBackground: 配置头部背景色
 >   -  headerFontColor: 配置头部字体颜色
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```tsx
 import React from 'react'
 import BasicLayout, {
   useLayouts,
-  BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
-import { Outlet } from 'react-router-dom'
-import { RoutersProps } from '@uiw-admin/router-control'
+import { HashRouter } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
 
-interface BasicLayoutProps {
-  routes: RoutersProps[]
-}
-
-function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
-
-  const basicLayoutProps: BasicLayoutType = {
-    ...props,
+function BasicLayoutScreen() {
+  const basicLayoutProps = {
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
   }
   return (
-    <BasicLayout {...basicLayoutProps}>
-      <Outlet />
-    </BasicLayout>
+    <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps}  isDefaultContentStyle={false} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
+      </BasicLayout>
+    </HashRouter>
   )
 }
-export default BasicLayoutScreen
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 ```
 
@@ -143,24 +157,32 @@ export default BasicLayoutScreen
 >   - profile配置头像以及下拉菜单左侧内容;
 >   - onReloadAuth调用刷新权限接口;
 >   - layouts.closeMenu关闭菜单事件;
-```tsx
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
 import React from 'react'
 import BasicLayout, {
   useLayouts,
-  BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
-import { Outlet } from 'react-router-dom'
-import { RoutersProps } from '@uiw-admin/router-control'
+import { HashRouter ,useRoutes ,Outlet} from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
 
-interface BasicLayoutProps {
-  routes: RoutersProps[]
-}
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
 
-function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+function BasicLayoutScreen() {
   const layouts = useLayouts()
-
-  const basicLayoutProps: BasicLayoutType = {
-    ...props,
+  const basicLayoutProps = {
     // 右侧下拉菜单内容
     menus: [
       {
@@ -184,20 +206,56 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     onReloadAuth: () => {},
     layouts,
   }
-  return (
-    <BasicLayout {...basicLayoutProps}>
-      <Outlet />
-    </BasicLayout>
-  )
-}
-export default BasicLayoutScreen
 
+  return <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
+      </BasicLayout>
+    </HashRouter>
+}
+
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
 ```
 
-## 预览
+## 内容区域默认样式(isDefaultContentStyle)
 
-![](https://user-images.githubusercontent.com/49544090/150921430-c7c7316a-af30-41b5-873f-1f3d86cc9d03.png)
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react'
+import BasicLayout from '@uiw-admin/basic-layouts'
+import { HashRouter } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
 
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
+
+function BasicLayoutScreen() {
+  return <HashRouter window={window}>
+
+    <div>不设置 isDefaultContentStyle 使用默认值(true)</div>
+    
+      <BasicLayout routes={routerArrs}  >
+        <div style={{background:"#fff"}} >测试 isDefaultContentStyle 值不设置的情况下渲染样式</div>
+      </BasicLayout>
+      <br/>
+      <div>设置 isDefaultContentStyle = false </div>
+       <BasicLayout routes={routerArrs} isDefaultContentStyle={false}  >
+        <div style={{background:"#fff"}} >测试 isDefaultContentStyle 值不设置的情况下渲染样式</div>
+      </BasicLayout>
+    </HashRouter>
+}
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
+```
 
 ## 贡献者
 
