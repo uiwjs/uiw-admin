@@ -1,8 +1,8 @@
 import React from 'react';
 // @ts-ignore
-import bgDefault from './assets/bg.jpeg';
+import bgDefault from './assets/r2g7rm.jpg';
 import DocumentTitle from '@uiw-admin/document-title';
-import { Form, Row, Col, Button, Input, ButtonProps } from 'uiw';
+import { Form, Row, Col, ButtonProps, Button } from 'uiw';
 import useSWR from 'swr';
 import { request } from '@uiw-admin/utils';
 import { Options } from '@uiw-admin/utils/lib/request';
@@ -28,6 +28,7 @@ export interface UserLoginProps {
   footer?: React.ReactNode;
   /** 背景图片 */
   bg?: string;
+  logo?: string;
   children?: React.ReactNode;
   /** 项目名称 */
   projectName?: string;
@@ -61,6 +62,7 @@ export default (props: UserLoginProps) => {
     styleBody = {},
     footer,
     bg = bgDefault,
+    logo = bgDefault,
     children,
     projectName = 'UIW Admin',
     onSuccess = () => null,
@@ -92,11 +94,12 @@ export default (props: UserLoginProps) => {
         style={styleWarp}
         className={`uiw-loayout-login-warp ${classNameWarp} uiw-loayout-login-warp-${align}`}
       >
-        <div className="uiw-title">{projectName}</div>
         <div
           className={`uiw-loayout-login-body ${classNameBody}`}
           style={styleBody}
         >
+          <img className="logo" src={logo} />
+          <span className="uiw-title">{projectName}</span>
           {children ? (
             children
           ) : (
@@ -139,11 +142,11 @@ export default (props: UserLoginProps) => {
                   label: '账号',
                   labelFor: 'username',
                   children: (
-                    <Input
+                    <input
                       disabled={!!isValidating}
-                      preIcon="user"
                       id="username"
                       placeholder="请输入账号"
+                      className="form-field"
                     />
                   ),
                 },
@@ -151,12 +154,12 @@ export default (props: UserLoginProps) => {
                   label: '密码',
                   labelFor: 'password',
                   children: (
-                    <Input
+                    <input
                       disabled={!!isValidating}
-                      preIcon="lock"
                       id="password"
                       type="password"
                       placeholder="请输入密码"
+                      className="form-field"
                     />
                   ),
                 },
@@ -166,49 +169,55 @@ export default (props: UserLoginProps) => {
                 return (
                   <div>
                     <Row>
-                      <Col>{fields[userName]}</Col>
+                      <Col style={{ color: '#555' }}>{fields[userName]}</Col>
                     </Row>
                     <Row>
-                      <Col>{fields[passWord]}</Col>
+                      <Col style={{ color: '#555' }}>{fields[passWord]}</Col>
                     </Row>
-                    <Row>
-                      <Col className="btn">
-                        {buttons ? (
-                          buttons.map((item, idx) => {
-                            const { title, ...rest } = item;
-                            return (
-                              <Button
-                                key={idx}
-                                loading={!!isValidating}
-                                disabled={!canSubmit()}
-                                {...rest}
-                              >
-                                {title}
-                              </Button>
-                            );
-                          })
-                        ) : (
-                          <Button
-                            loading={!!isValidating}
-                            disabled={!canSubmit()}
-                            block
-                            type="dark"
-                            {...btnProps}
-                            htmlType="submit"
-                          >
-                            登录
-                          </Button>
-                        )}
-                      </Col>
-                    </Row>
+                    <div>
+                      {buttons && buttons.length > 0 ? (
+                        buttons.map((item, idx) => {
+                          const { title, ...rest } = item;
+                          return (
+                            <Button
+                              key={idx}
+                              loading={!!isValidating}
+                              disabled={!canSubmit()}
+                              className="btns"
+                              {...rest}
+                            >
+                              {title}
+                            </Button>
+                          );
+                        })
+                      ) : (
+                        <Button
+                          disabled={!canSubmit()}
+                          loading={!!isValidating}
+                          className="btns"
+                          block
+                          style={{ marginTop: 20 }}
+                          {...btnProps}
+                          htmlType="submit"
+                        >
+                          登录
+                        </Button>
+                      )}
+                    </div>
                   </div>
                 );
               }}
             </Form>
           )}
         </div>
+        {footer ? (
+          footer
+        ) : (
+          <div className="copyright-footer">
+            版权所有 copyright &copy; 2022 uiw admin
+          </div>
+        )}
       </div>
-      {footer}
     </div>
   );
 };

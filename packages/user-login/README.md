@@ -63,7 +63,8 @@ export interface UserLoginProps {
 | :------------ | :--- | :------------------------------------------------------------ | :------------------------------------------ | :----------------------------------------------------------------- |
 | align         | 否   | `枚举类型：'left' \| 'right' \| 'center'`                     | `center`                                    | 卡片框的位置                                                       |
 | footer        | 否   | `React.ReactNode`                                             |                                             | 页脚                                                               |
-| bg            | 否   | `string`                                                      |                                             | 页面背景                                                           |
+| bg            | 否   | `string`                                                      |                                             | 页面背
+| logo            | 否   | `string`                                                      |                                             | logo头像           |
 | children      | 否   | `React.ReactNode`                                             |                                             | 替换卡片位置内容                                                   |
 | projectName   | 否   | `string`                                                      | `KKT`                                       | 项目名称(页面标题)                                                 |
 | btnProps      | 否   | `Omit<ButtonProps, 'ref'>`                                    | `{}`                                        | 登录按钮 属性                                                      |
@@ -154,12 +155,9 @@ const UserLayout = () => {
        {
          title: "登录",
          htmlType: "submit",
-         type: 'primary',
-         style: { width: "45%" }
        },
        {
          title: "注册",
-         style: { width: "45%" }
        },
      ]}
     api="/api/login"
