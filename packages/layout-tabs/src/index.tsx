@@ -6,7 +6,7 @@ import { matchPath } from 'react-router';
 import './styles/index.css';
 import { useNavigate, useLocation, Location } from 'react-router-dom';
 
-interface LayoutTabsProps {
+export interface LayoutTabsProps {
   /** 子集路由 */
   routes: RoutersProps[];
 }
