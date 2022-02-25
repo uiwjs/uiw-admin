@@ -3,6 +3,7 @@
 为了方便前期前端快速开发，不需要等待后端接口，系统提供了mock功能。更多配置请参考[mocker-api](https://github.com/jaywcjlove/mocker-api)
 
 ## 编写mock
+
 > 在/mocker/index目录下进行mock数据编写，比如：
 
 ```ts
