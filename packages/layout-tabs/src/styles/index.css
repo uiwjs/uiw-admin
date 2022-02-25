@@ -2,8 +2,9 @@
   height: 100%;
 }
 .uiw-layout-tabs-warp .uiw-layout-tabs-body {
-  padding: 10px;
+  margin: 14px;
   background: #fff;
-  height: 100%;
+  height: calc(100% - 64px);
   overflow: auto;
+  box-sizing: border-box;
 }

@@ -35,6 +35,8 @@ export type BasicLayoutProps = {
   headerFontColor?: string;
   /** 菜单隐藏 */
   menuHide?: boolean;
+  /** 是否使用 内容区域默认样式  */
+  isDefaultContentStyle?: boolean;
 } & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
@@ -50,6 +52,7 @@ function BasicLayout(props: BasicLayoutProps) {
     headerBackground = '#fff',
     headerFontColor = '#000',
     menuHide,
+    isDefaultContentStyle = true,
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -153,9 +156,13 @@ function BasicLayout(props: BasicLayoutProps) {
             )}
             <Layout>
               {headerLayout === 'default' && header}
-              <Content className="uiw-admin-global-content">
-                <BodyContent>{props.children}</BodyContent>
-              </Content>
+              {!isDefaultContentStyle ? (
+                props.children
+              ) : (
+                <Content className="uiw-admin-global-content">
+                  <BodyContent>{props.children}</BodyContent>
+                </Content>
+              )}
             </Layout>
           </Layout>
         </Layout>
