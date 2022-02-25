@@ -21,53 +21,74 @@ interface LayoutTabsProps {
   /** 子集路由 */ 
   routes: RoutersProps[]
 }
+
 ```
 
 ## 案例
 
-单独使用
+单独使用，⚠️ 注意：需要路由包裹
 
-```tsx
-  import Layout from "@uiw-admin/layout-tabs"
-  export default ()=>{
-  return  <LayoutTabs 
-  routes={[
-    {
-        path: "/doc/tableList",
-        name: "查询表格",
-        component: <div>测试</div>,
-    },
-     {
-        path: "/doc/tableList2",
-        name: "查询表格2",
-        component: <div>测试2</div>,
-    }
-  ]} 
-  />
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import LayoutTabs from "@uiw-admin/layout-tabs"
+import { HashRouter } from 'react-router-dom';
+
+const routes=[
+  {
+    path: "/layout-tabs",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/doc/tableList2",
+    name: "查询表格2",
+    element: <div>测试2</div>,
   }
+]
+
+const Demo = ()=>{
+  return (
+    <HashRouter window={window}>
+      <LayoutTabs routes={routes} />
+   </HashRouter>
+  )
+}
+ReactDOM.render(<Demo />, _mount_);
 ```
 
 ## 案例2
 
 配合使用 `BasicLayout` 组件使用
-
-```tsx
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
 
 import React from 'react'
 import BasicLayout from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'
 import LayoutTabs from "@uiw-admin/layout-tabs"
-interface BasicLayoutProps {
-  routes: RoutersProps[]
-}
-function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+const routesArr=[
+  {
+    path: "/layout-tabs",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/basic-layouts",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
+
+function BasicLayoutScreen() {
   return (
-    <BasicLayout >
-      <LayoutTabs routes={props.routes || []} /> 
-    </BasicLayout>
+     <HashRouter window={window}>
+      <BasicLayout routes={routesArr}  >
+        <LayoutTabs routes={routesArr} /> 
+      </BasicLayout>
+    </HashRouter>
   )
 }
-export default BasicLayoutScreen
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
 ```
 
 ## 预览
