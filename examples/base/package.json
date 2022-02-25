@@ -35,7 +35,7 @@
     "react-redux": "7.2.6",
     "react-router-dom": "6.2.1",
     "swr": "^1.1.2",
-    "uiw": "4.12.0"
+    "uiw": "4.11.6"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
@@ -50,7 +50,7 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "5.2.0",
     "eslint-plugin-react": "7.28.0",
-    "kkt": "7.1.0",
+    "kkt": "7.1.5",
     "lint-staged": "12.3.1",
     "prettier": "2.5.1",
     "yorkie": "2.0.0"
@@ -65,6 +65,12 @@
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
