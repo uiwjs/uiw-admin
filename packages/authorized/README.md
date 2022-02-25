@@ -1,5 +1,7 @@
 # 权限组件
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/authorized.svg?label=@uiw-admin/authorized)](https://www.npmjs.com/package/@uiw-admin/authorized)
+
 判断组件的权限
 
 ## 何时使用

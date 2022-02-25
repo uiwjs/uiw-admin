@@ -1,5 +1,7 @@
 # 登录页面
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/user-login.svg?label=@uiw-admin/user-login)](https://www.npmjs.com/package/@uiw-admin/user-login)
+
 简化项目登录页面，为了多项目登录页面不用重新构建登录页面
 
 ## 何时使用

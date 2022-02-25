@@ -1,5 +1,7 @@
 # 菜单路由管理
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/router-control.svg?label=@uiw-admin/router-control)](https://www.npmjs.com/package/@uiw-admin/router-control)
+
 在项目根目录的`config/routes.json`配置菜单路由
 
 > 1. 进行路由处理转换

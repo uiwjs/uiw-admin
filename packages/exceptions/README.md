@@ -1,5 +1,7 @@
 # 公共异常组件
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/exceptions.svg?label=@uiw-admin/exceptions)](https://www.npmjs.com/package/@uiw-admin/exceptions)
+
 > 1. 403 页面
 > 2. 404 页面
 > 3. 500 页面

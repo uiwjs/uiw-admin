@@ -1,5 +1,7 @@
 # 插件
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/plugins.svg?label=@uiw-admin/plugins)](https://www.npmjs.com/package/@uiw-admin/plugins)
+
 当前插件一般为内置插件
 
 ```bash

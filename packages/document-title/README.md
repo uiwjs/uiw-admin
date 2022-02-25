@@ -1,5 +1,8 @@
 # 设置页面标题
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/document-title.svg?label=@uiw-admin/document-title)](https://www.npmjs.com/package/@uiw-admin/document-title)
+
+
 简化设置页面标题，建议在项目入口设置
 
 ## 何时使用

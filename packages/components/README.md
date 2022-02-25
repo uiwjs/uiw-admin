@@ -1,5 +1,7 @@
 # `components`
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/components.svg?label=@uiw-admin/components)](https://www.npmjs.com/package/@uiw-admin/components)
+
 > 业务常用组件
 
 ## Usage

@@ -1,5 +1,7 @@
 # kkt配置
 
+[![npm version](https://img.shields.io/npm/v/@uiw-admin/config.svg?label=@uiw-admin/config)](https://www.npmjs.com/package/@uiw-admin/config)
+
 简化 `.kktrc` 配置，默认集成 `@uiw-admin/plugins`、`@kkt/less-modules`、`@kkt/raw-modules`、`@kkt/scope-plugin-options` 依赖包。
 其他配置查询[`kkt`](https://github.com/kktjs/kkt)
 
