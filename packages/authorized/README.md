@@ -15,7 +15,9 @@ npm i @uiw-admin/authorized --save # yarn add @uiw-admin/authorized
 ```
 
 ## AuthPage
+
 > 可用于页面重定向
+
 ### 参数说明
 
 | 参数         | 必填 | 类型          | 默认值   | 说明             |
@@ -23,11 +25,14 @@ npm i @uiw-admin/authorized --save # yarn add @uiw-admin/authorized
 | authority    | 否   | `boolean`     |          | 是否已经登录     |
 | redirectPath | 否   | `string`      | `/login` | 未登录重定向路径 |
 | children     | 是   | `JSX.Element` |          | 是否已经登录     |
+
 ```tsx
+
 import AuthPage  from "@uiw-admin/authorized"
 export default ()=>{
   return <AuthPage authority={false} redirectPath="/login">展示</AuthPage>
 }
+
 ```
 
 ## getAuthPath
@@ -42,12 +47,12 @@ import {getAuthPath}  from "@uiw-admin/authorized"
 const isAuth = getAuthPath("/api/path")
 ```
 
-
 ## AuthBtn
 
 > 外层嵌套 组件，判断子组件是否有权限展示或使用
 
 ### 参数说明
+
 | 参数     | 必填 | 类型              | 默认值  | 说明                                            |
 | :------- | :--- | :---------------- | :------ | :---------------------------------------------- |
 | path     | 否   | `string`          |         | 路径                                            |

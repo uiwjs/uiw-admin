@@ -101,7 +101,8 @@
     "packages": [
       "packages/*",
       "examples/*",
-      "create-uiw-admin"
+      "create-uiw-admin",
+      "eslint-packages/*"
     ],
     "nohoist": []
   }

@@ -43,8 +43,8 @@ export default function Code({ dependencies, codePen, ...other }: CodeProps) {
               '@uiw/react-baidu-map': 'latest',
             },
             devDependencies: {
-              '@kkt/less-modules': '6.11.0',
-              kkt: '6.11.0',
+              '@kkt/less-modules': '7.1.1',
+              kkt: '7.1.5',
               typescript: '4.3.5',
             },
             license: 'MIT',

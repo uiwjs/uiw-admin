@@ -1,5 +1,10 @@
 {
-  "packages": ["packages/*", "examples/*", "create-uiw-admin"],
+  "packages": [
+    "packages/*",
+    "examples/*",
+    "create-uiw-admin",
+    "eslint-packages/*"
+  ],
   "version": "5.2.23",
   "command": {
     "create": {

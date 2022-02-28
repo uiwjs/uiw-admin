@@ -197,3 +197,4 @@ jobs:
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/user-login/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/utils/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./create-uiw-admin/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./eslint-packages/config/package.json

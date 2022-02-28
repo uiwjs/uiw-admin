@@ -44,12 +44,6 @@
     "@types/react-redux": "7.1.21",
     "@uiw-admin/config": "5.2.23",
     "ajv": "8.9.0",
-    "eslint": "8.9.0",
-    "eslint-config-standard": "16.0.3",
-    "eslint-plugin-import": "2.25.4",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "5.2.0",
-    "eslint-plugin-react": "7.28.0",
     "kkt": "7.1.5",
     "lint-staged": "12.3.1",
     "prettier": "2.5.1",
@@ -69,7 +63,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "uiw-admin"
     ]
   },
   "browserslist": {

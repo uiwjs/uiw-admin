@@ -1,0 +1,29 @@
+{
+  "name": "eslint-config-uiw-admin",
+  "version": "5.2.23",
+  "description": "eslint 配置",
+  "author": "Kenny Wong <wowohoo@qq.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/eslint-packages/config#readme",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "eslint": ">=7.32.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-react": "7.29.0"
+  },
+  "devDependencies": {
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uiwjs/uiw-admin.git"
+  }
+}
