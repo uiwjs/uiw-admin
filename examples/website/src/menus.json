@@ -101,6 +101,10 @@
     "path": "/proxy"
   },
   {
+    "label": "eslint 配置",
+    "path": "/eslint-config"
+  },
+  {
     "divider": true,
     "label": "相关链接"
   },

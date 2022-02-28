@@ -31,6 +31,8 @@ const Protable = Loadable(lazy(() => import('./pages/components/Protable')));
 const ProDrawer = Loadable(lazy(() => import('./pages/components/ProDrawer')));
 const ProForm = Loadable(lazy(() => import('./pages/components/ProForm')));
 const Skeleton = Loadable(lazy(() => import('./pages/components/Skeleton')));
+const EslintConfig = Loadable(lazy(() => import('./pages/eslint-config')));
+// eslint-config
 
 export const routes: RouteObject[] = [
   {
@@ -61,6 +63,7 @@ export const routes: RouteObject[] = [
       { path: '/prodrawer/*', element: <ProDrawer /> },
       { path: '/proform/*', element: <ProForm /> },
       { path: '/skeleton/*', element: <Skeleton /> },
+      { path: '/eslint-config/*', element: <EslintConfig /> },
       { path: '*', element: <NoMatch /> },
     ],
   },
