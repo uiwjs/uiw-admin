@@ -58,7 +58,7 @@ const isAuth = getAuthPath("/api/path")
 | path     | 否   | `string`          |         | 路径                                            |
 | disabled | 否   | `boolean`         | `false` | 禁用 状态 展示(适用于 存在 disabled 属性的组件) |
 | children | 是   | `React.ReactNode` |         | 内容                                            |
-
+<!-- 
 ```tsx
 import React from "react"
 import { AuthBtn } from "@uiw-admin/authorized"
@@ -76,6 +76,38 @@ const Demos = ()=>{
   )
 }
 export default Demos
+``` -->
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+
+window.AUTH = true // 是否开启权限校验
+window.STORAGE = "session" // 本地存储数据方式
+sessionStorage.setItem('auth',JSON.stringify(["/dom/save","/dom/edit"])) // 权限数据
+// 以上数据只能为了能正常渲染设置的变量
+
+import React from "react"
+import { AuthBtn } from "@uiw-admin/authorized"
+
+const Demos = ()=>{
+  return (
+   <div>
+     <AuthBtn path="/dom/save" >
+       子集渲染1
+     </AuthBtn>
+     <AuthBtn path="/dom/edit" disabled >
+       <button>子集渲染2</button>
+     </AuthBtn>
+      <AuthBtn path="/dom/edit1" disabled >
+       <button>子集渲染3</button>
+     </AuthBtn>
+      <AuthBtn path="/dom/edit1"  >
+       <button>子集渲染4</button>
+     </AuthBtn>
+   </div>
+  )
+}
+ReactDOM.render(<Demos />, _mount_);
 ```
 
 ## 贡献者
