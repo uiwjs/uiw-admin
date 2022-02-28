@@ -33,8 +33,6 @@ npm i eslint-config-uiw-admin -D # yarn add eslint-config-uiw-admin -D
 
 `eslint-config-uiw-admin` 您可以通过编辑`.eslintrc.json`文件来覆盖设置。在 [ESLint](https://eslint.org/docs/user-guide/configuring) 网站上了解更多关于配置 ESLint的信息。
 
-继承 `'eslint:recommended'` 和 `'plugin:react/recommended'`
-
 ## 默认规则
 
  1. [no-const-assign](https://eslint.org/docs/rules/no-const-assign#no-const-assign): 'error',
