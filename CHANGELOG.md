@@ -4,6 +4,10 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.24
+
+- @uiw-admin/components
+  - 🐞`ProForm`: 新增searchTree组件
 ## 5.2.23
 
 - @uiw-admin/basic-layout

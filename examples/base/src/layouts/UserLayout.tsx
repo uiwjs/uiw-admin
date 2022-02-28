@@ -18,7 +18,7 @@ const UserLayout = () => {
         },
       ]}
       api="/api/login"
-      btnProps={{ type: 'primary' }}
+      btnProps={{ type: 'dark' }}
       saveField={{
         userName: 'username',
         passWord: 'password',
