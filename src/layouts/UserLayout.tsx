@@ -12,12 +12,9 @@ const UserLayout = () => {
         {
           title: '登录',
           htmlType: 'submit',
-          type: 'primary',
-          style: { width: '45%' },
         },
         {
           title: '注册',
-          style: { width: '45%' },
         },
       ]}
       api="/api/login"
