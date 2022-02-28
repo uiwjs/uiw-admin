@@ -42,7 +42,7 @@
   ],
   "devDependencies": {
     "husky": "7.0.4",
-    "prettier": "2.4.1",
+    "prettier": "2.5.1",
     "pretty-quick": "3.1.2",
     "tsbb": "~3.5.6"
   },
