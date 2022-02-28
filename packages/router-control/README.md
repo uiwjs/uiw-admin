@@ -39,19 +39,49 @@ export default defaultConfig({
 
 ## 菜单路由参数
 
-| 参数       | 必须 | 类型            | 默认值    | 说明                                                                                                             |
-| :--------- | :--- | :-------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
-| index      | 否   | `boolean`       | undefined | 默认跳转(与`redirect`一起使用)                                                                                   |
-| redirect   | 否   | `string`        | undefined | 重定向  当`index===true`生效                                                                                     |
-| path       | 否   | `string`        | undefined | 跳转路由                                                                                                         |
-| name       | 否   | `string`        | undefined | 菜单名称                                                                                                         |
-| icon       | 否   | `string`        | undefined | 菜单图标                                                                                                         |
-| component  | 否   | `string`        | undefined | 渲染组件的路径(如果是`403/404/500`的页面直接写 `403/404/500`,使用`@uiw-admin/plugins`里面的`routes`时会进行转换) |
-| hideInMenu | 否   | `boolean`       | 无        | 是否隐藏菜单                                                                                                     |
-| isAuth     | 否   | `boolean`       | 无        | 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准                                                    |
-| routes     | 否   | `RoutersJSON[]` | 无        | 子集 路由 ,(参数与菜单路由参数一致)                                                                              |
-| navigate   | 否   | `string`        | 无        | 自定义跳转(`"(navigate) => {console.log('navigate', navigate)}"`)                                                |
+| 参数       | 必须 | 类型                         | 默认值    | 说明                                                                                                             |
+| :--------- | :--- | :--------------------------- | :-------- | :--------------------------------------------------------------------------------------------------------------- |
+| index      | 否   | `boolean`                    | undefined | 默认跳转(与`redirect`一起使用)                                                                                   |
+| redirect   | 否   | `string`                     | undefined | 重定向  当`index===true`生效                                                                                     |
+| path       | 否   | `string`                     | undefined | 跳转路由                                                                                                         |
+| name       | 否   | `string`                     | undefined | 菜单名称                                                                                                         |
+| icon       | 否   | `string \| React.React.Node` | undefined | 菜单图标标                                                                                                       |
+| component  | 否   | `string`                     | undefined | 渲染组件的路径(如果是`403/404/500`的页面直接写 `403/404/500`,使用`@uiw-admin/plugins`里面的`routes`时会进行转换) |
+| hideInMenu | 否   | `boolean`                    | 无        | 是否隐藏菜单                                                                                                     |
+| isAuth     | 否   | `boolean`                    | 无        | 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准                                                    |
+| routes     | 否   | `RoutersJSON[]`              | 无        | 子集 路由 ,(参数与菜单路由参数一致)                                                                              |
+| navigate   | 否   | `string`                     | 无        | 自定义跳转(`"(navigate) => {console.log('navigate', navigate)}"`)                                                |
 
+## 自定义菜单图标
+
+注意：使用`js`或`ts`文件才有自定义功能
+
+```js
+// config/routes.js
+
+import { chat } from "@/assets"
+import { Icon } from "uiw"
+import React from "react"
+const routes = [
+  {
+    "path": "/",
+    "component": "@/layouts/BasicLayout",
+    "routes": [
+      {
+        "index": true,
+        "redirect": "/tableList"
+      },
+      {
+        "path": "/tableList",
+        "name": "查询表格",
+        "component": "@/pages/TableList",
+        "icon": <Icon type={chat} />,
+      },
+    ]
+  }
+]
+export default routes
+```
 <!-- ## 参数
 
 ```ts
@@ -66,7 +96,7 @@ export interface RoutersJSON {
   /** 名称 */
   name?: string;
   /**  图标 */
-  icon?: string;
+  icon?: string | React.React.Node;
   /** 重定向  当 index===true生效 */
   redirect?: string;
   /** 组件地址 如果是 403/404/500 的页面直接写 403/404/500 就可以了，内部直接做转化*/

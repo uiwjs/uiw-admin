@@ -11,7 +11,7 @@ export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
   /** 名称 */
   name?: string;
   /**  图标 */
-  icon?: string;
+  icon?: string | React.ReactNode;
   /** 重定向  当 index===true生效 */
   redirect?: string;
   /** 子集 路由 */
