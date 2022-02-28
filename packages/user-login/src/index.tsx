@@ -143,6 +143,7 @@ export default (props: UserLoginProps) => {
                   labelFor: 'username',
                   children: (
                     <input
+                      type="text"
                       disabled={!!isValidating}
                       id="username"
                       placeholder="请输入账号"
@@ -184,6 +185,7 @@ export default (props: UserLoginProps) => {
                               loading={!!isValidating}
                               disabled={!canSubmit()}
                               className="btns"
+                              type="danger"
                               {...rest}
                             >
                               {title}
@@ -197,8 +199,9 @@ export default (props: UserLoginProps) => {
                           className="btns"
                           block
                           style={{ marginTop: 20 }}
-                          {...btnProps}
                           htmlType="submit"
+                          type="dark"
+                          {...btnProps}
                         >
                           登录
                         </Button>
