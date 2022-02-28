@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "@uiw-admin/document-title": "5.2.24",
-    "classnames": "2.3.1"
+    "classnames": "^2.3.1"
   },
   "devDependencies": {
     "@babel/runtime": "7.16.7",
@@ -55,7 +55,7 @@
     "@uiw-admin/utils": "5.2.24",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "swr": "1.1.2",
-    "uiw": "4.12.0"
+    "swr": "^1.1.2",
+    "uiw": "~4.12.0"
   }
 }
