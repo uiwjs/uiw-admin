@@ -30,7 +30,7 @@
 
 .uiw-loayout-login-warp .uiw-loayout-login-body {
   width: 390px;
-  background-color:transparent;
+  background-color: transparent;
   background-color: #fff;
   border-radius: 10px;
   overflow: hidden;
@@ -67,7 +67,6 @@
   text-align: center;
   margin-bottom: 20px;
   padding: 20px;
-
 }
 
 .form-field {
@@ -91,18 +90,19 @@
   border-right-style: solid;
   border-bottom-style: solid;
   border-left-style: solid;
-  border-top-color: #FFFFFF;
-  border-right-color: #FFFFFF;
+  border-top-color: #ffffff;
+  border-right-color: #ffffff;
   border-bottom-color: #666;
-  border-left-color: #FFFFFF;
+  border-left-color: #ffffff;
 }
 
 .form-field:focus {
   transition-delay: 0.6s;
-  border-bottom-color: #dc3545
+  border-bottom-color: #dc3545;
 }
 
 .btns {
+  display: block;
   width: 100%;
   margin-left: 0px !important;
   padding: 15px 10px;
@@ -114,7 +114,6 @@
   font-family: 'Rubik', sans-serif;
   cursor: pointer;
 }
-
 
 .copyright-footer {
   position: absolute;

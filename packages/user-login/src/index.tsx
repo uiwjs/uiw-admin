@@ -2,7 +2,7 @@ import React from 'react';
 // @ts-ignore
 import bgDefault from './assets/r2g7rm.jpg';
 import DocumentTitle from '@uiw-admin/document-title';
-import { Form, Row, Col, ButtonProps, Button } from 'uiw';
+import { Form, Row, Col, ButtonProps, Button, FormFieldsProps } from 'uiw';
 import useSWR from 'swr';
 import { request } from '@uiw-admin/utils';
 import { Options } from '@uiw-admin/utils/lib/request';
@@ -14,6 +14,14 @@ export type FormValue = {
   password?: string;
   swr_Rest_Time?: number | string;
 };
+
+export interface FieldsProps<T = any> extends FormFieldsProps<T> {
+  name: string;
+  verification?: (
+    value: any,
+    current: Record<string, any>,
+  ) => string | boolean | null;
+}
 
 export interface UserLoginProps {
   /** 卡片框的位置 */
@@ -44,13 +52,25 @@ export interface UserLoginProps {
   requestConfig?: Options;
   /** 登录按钮位置 按钮组, title 为显示标题 */
   buttons?: (Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[];
-  /** 默认输入框保存字段 */
+  /**
+   * 默认输入框保存字段
+   * @deprecated 推荐使用 `defaultFieldsConfig`
+   */
   saveField?: {
     /** 登录账号 */
     userName?: string;
     /** 密码 */
     passWord?: string;
   };
+  /** 默认 输入框 属性配置 */
+  defaultFieldsConfig?: {
+    userName?: Partial<FieldsProps>;
+    passWord?: Partial<FieldsProps>;
+  };
+  // 渲染表单配置
+  fields?: FieldsProps[];
+  // 是否使用默认的 fields
+  isDefaultFields?: boolean;
 }
 
 export default (props: UserLoginProps) => {
@@ -72,8 +92,19 @@ export default (props: UserLoginProps) => {
     requestConfig,
     buttons,
     saveField,
+    fields,
+    isDefaultFields = true,
+    defaultFieldsConfig,
   } = props;
-  const { userName = 'username', passWord = 'password' } = saveField || {};
+  let { userName = 'username', passWord = 'password' } = saveField || {};
+  const userNameLabel =
+    ((defaultFieldsConfig || {})['userName'] || {})['label'] || '账号';
+  const passWordLabel =
+    ((defaultFieldsConfig || {})['passWord'] || {})['label'] || '密码';
+  userName =
+    ((defaultFieldsConfig || {})['userName'] || {})['name'] || userName;
+  passWord =
+    ((defaultFieldsConfig || {})['passWord'] || {})['name'] || passWord;
 
   const [store, setStore] = React.useState<FormValue>();
   const { isValidating } = useSWR(
@@ -86,6 +117,50 @@ export default (props: UserLoginProps) => {
       onSuccess: (resp) => onSuccess(resp, store),
     },
   );
+
+  const defaultFields: FieldsProps[] = [
+    {
+      name: userName,
+      label: `${userNameLabel}`,
+      labelFor: userName,
+      required: true,
+      children: (
+        <input
+          type="text"
+          disabled={!!isValidating}
+          id={userName}
+          placeholder={`请输入${userNameLabel}`}
+          className="form-field"
+        />
+      ),
+      ...(defaultFieldsConfig?.userName || {}),
+    },
+    {
+      name: passWord,
+      label: `${passWordLabel}`,
+      labelFor: passWord,
+      required: true,
+      children: (
+        <input
+          disabled={!!isValidating}
+          id={passWord}
+          type="password"
+          placeholder={`请输入${passWordLabel}`}
+          className="form-field"
+        />
+      ),
+      ...(defaultFieldsConfig?.passWord || {}),
+    },
+  ];
+
+  let fieldArr = defaultFields;
+  if (fields && Array.isArray(fields)) {
+    if (isDefaultFields) {
+      fieldArr = defaultFields.concat(fields);
+    } else {
+      fieldArr = fields;
+    }
+  }
 
   return (
     <div className="uiw-loayout-login" style={{ background: `url(${bg})` }}>
@@ -107,8 +182,23 @@ export default (props: UserLoginProps) => {
               resetOnSubmit={false}
               onSubmit={({ current }) => {
                 const errorObj: any = {};
-                if (!current[userName]) errorObj[userName] = '账号不能为空！';
-                if (!current[passWord]) errorObj[passWord] = '密码不能为空！';
+                fieldArr.forEach((item) => {
+                  if (
+                    item.verification &&
+                    typeof item.verification === 'function'
+                  ) {
+                    const result = item.verification(
+                      current[item.name],
+                      current,
+                    );
+                    if (typeof result === 'string' && result) {
+                      errorObj[item.name] = result;
+                    }
+                  } else if (item.required && !current[userName]) {
+                    errorObj[item.name] = `${item.label}不能为空`;
+                  }
+                });
+
                 if (Object.keys(errorObj).length > 0) {
                   const err: any = new Error();
                   err.filed = errorObj;
@@ -137,45 +227,28 @@ export default (props: UserLoginProps) => {
                 }
                 return null;
               }}
-              fields={{
-                [userName]: {
-                  label: '账号',
-                  labelFor: 'username',
-                  children: (
-                    <input
-                      type="text"
-                      disabled={!!isValidating}
-                      id="username"
-                      placeholder="请输入账号"
-                      className="form-field"
-                    />
-                  ),
-                },
-                [passWord]: {
-                  label: '密码',
-                  labelFor: 'password',
-                  children: (
-                    <input
-                      disabled={!!isValidating}
-                      id="password"
-                      type="password"
-                      placeholder="请输入密码"
-                      className="form-field"
-                    />
-                  ),
-                },
-              }}
+              fields={fieldArr.reduce((pre, current) => {
+                if (!current || (current && !current.name)) {
+                  return { ...pre };
+                }
+                const { name, required, labelFor, ...rest } = current;
+                return {
+                  ...pre,
+                  [name]: { labelFor: name || labelFor, ...rest },
+                };
+              }, {})}
             >
               {({ fields, canSubmit }) => {
                 return (
                   <div>
+                    {fieldArr.map((item, index) => {
+                      return (
+                        <Row key={index}>
+                          <Col>{fields[item.name]}</Col>
+                        </Row>
+                      );
+                    })}
                     <Row>
-                      <Col style={{ color: '#555' }}>{fields[userName]}</Col>
-                    </Row>
-                    <Row>
-                      <Col style={{ color: '#555' }}>{fields[passWord]}</Col>
-                    </Row>
-                    <div>
                       {buttons && buttons.length > 0 ? (
                         buttons.map((item, idx) => {
                           const { title, ...rest } = item;
@@ -206,7 +279,7 @@ export default (props: UserLoginProps) => {
                           登录
                         </Button>
                       )}
-                    </div>
+                    </Row>
                   </div>
                 );
               }}

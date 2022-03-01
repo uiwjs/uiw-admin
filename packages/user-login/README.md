@@ -61,44 +61,55 @@ export interface UserLoginProps {
 
 ## 参数说明
 
-| 参数          | 必填 | 类型                                                          | 默认值                                      | 说明                                                               |
-| :------------ | :--- | :------------------------------------------------------------ | :------------------------------------------ | :----------------------------------------------------------------- |
-| align         | 否   | `枚举类型：'left' \| 'right' \| 'center'`                     | `center`                                    | 卡片框的位置                                                       |
-| footer        | 否   | `React.ReactNode`                                             |                                             | 页脚                                                               |
-| bg            | 否   | `string`                                                      |                                             | 页面背
-| logo            | 否   | `string`                                                      |                                             | logo头像           |
-| children      | 否   | `React.ReactNode`                                             |                                             | 替换卡片位置内容                                                   |
-| projectName   | 否   | `string`                                                      | `KKT`                                       | 项目名称(页面标题)                                                 |
-| btnProps      | 否   | `Omit<ButtonProps, 'ref'>`                                    | `{}`                                        | 登录按钮 属性                                                      |
-| buttons       | 否   | `(Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]`  |                                             | 登录按钮位置的自定义按钮组, title 为显示标题                       |
-| api           | 是   | `string`                                                      |                                             | 请求接口                                                           |
-| onSuccess     | 是   | `(resp: any, form: (FormValue \| undefined)) => void`         | `()=>null`                                  | 登录接口返回                                                       |
-| onBefore      | 否   | `(store: FormValue) => (Record<string, any> \| boolean)`      |                                             | 用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作 |
-| requestConfig | 否   | `Options`                                                     |                                             | `request` 请求 `options` 配置参数                                  |
-| saveField     | 否   | `{userName(登录账号字段)?:string,passWord(密码字段)?:string}` | `{userName:"username",passWord:"password"}` | 默认输入框保存字段                                                 |
-| classNameWarp | 否   | `string`                                                      |                                             | 卡片框外层`className`                                              |
-| styleWarp     | 否   | `React.CSSProperties`                                         |                                             | 卡片框外层`style`                                                  |
-| classNameBody | 否   | `string`                                                      |                                             | 卡片框`className`                                                  |
-| styleBody     | 否   | `React.CSSProperties`                                         |                                             | 卡片框`style`                                                      |
+| 参数                | 必填 | 类型                                                                                      | 默认值                                      | 说明                                                               |
+| :------------------ | :--- | :---------------------------------------------------------------------------------------- | :------------------------------------------ | :----------------------------------------------------------------- |
+| api                 | 是   | `string`                                                                                  |                                             | 请求接口                                                           |
+| align               | 否   | `枚举类型：'left' \| 'right' \| 'center'`                                                 | `center`                                    | 卡片框的位置                                                       |
+| footer              | 否   | `React.ReactNode`                                                                         |                                             | 页脚                                                               |
+| bg                  | 否   | `string`                                                                                  |                                             | 页面背                                                             |
+| logo                | 否   | `string`                                                                                  |                                             | logo头像                                                           |
+| children            | 否   | `React.ReactNode`                                                                         |                                             | 替换卡片位置内容                                                   |
+| projectName         | 否   | `string`                                                                                  | `KKT`                                       | 项目名称(页面标题)                                                 |
+| btnProps            | 否   | `Omit<ButtonProps, 'ref'>`                                                                | `{}`                                        | 登录按钮 属性                                                      |
+| buttons             | 否   | `(Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]`                              |                                             | 登录按钮位置的自定义按钮组, title 为显示标题                       |
+| onSuccess           | 是   | `(resp: any, form: (FormValue \| undefined)) => void`                                     | `()=>null`                                  | 登录接口返回                                                       |
+| onBefore            | 否   | `(store: FormValue) => (Record<string, any> \| boolean)`                                  |                                             | 用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作 |
+| requestConfig       | 否   | `Options`                                                                                 |                                             | `request` 请求 `options` 配置参数                                  |
+| saveField           | 否   | `{userName(登录账号字段)?:string,passWord(密码字段)?:string}`                             | `{userName:"username",passWord:"password"}` | 默认输入框保存字段                                                 |
+| defaultFieldsConfig | 否   | `{userName(账户输入框)?:Partial<FieldsProps>,passWord(密码输入框)?:Partial<FieldsProps>}` | ``                                          | 默认输入框保存字段                                                 |
+| fields              | 否   | `FieldsProps[]`                                                                           |                                             | 自定义form表单项                                                   |
+| isDefaultFields     | 否   | `boolean`                                                                                 | `true`                                      | 是否需要默认的输入框渲染                                           |
+| classNameWarp       | 否   | `string`                                                                                  |                                             | 卡片框外层`className`                                              |
+| styleWarp           | 否   | `React.CSSProperties`                                                                     |                                             | 卡片框外层`style`                                                  |
+| classNameBody       | 否   | `string`                                                                                  |                                             | 卡片框`className`                                                  | — |
+| styleBody           | 否   | `React.CSSProperties`                                                                     |                                             | 卡片框`style`                                                      |
+
+```tsx
+export interface FieldsProps<T = any> extends FormFieldsProps<T> {
+  /** 保存字段 */ 
+  name: string;
+  // 验证输入框值   value:输入框的值，current：当前表单的值，返回值为 string 类型时，进行报错提示
+  verification?: (value: any, current: Record<string, any>) => string | boolean | null,
+}
+```
 
 ## 基本使用
 
-```tsx
+`api`：登录请求接口，`onSuccess`：登陆成功后回调
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
-import { useNavigate, } from 'react-router-dom';
 import { Notify } from "uiw"
 const UserLayout = () => {
-  const navigate = useNavigate()
   return (
     <UserLogin
       api="/api/login"
-      // 登陆成功后回调
       onSuccess={(data) => {
         if (data && data.token) {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
-          navigate("/home", { replace: true })
         } else {
          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
         }
@@ -106,18 +117,49 @@ const UserLayout = () => {
     />
   )
 }
-export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
 
 ```
+
+## 添加额外请求参数
+
+`onBefore`：登陆前回调，用于添加额外请求参数。如果返回 `false`， 则不进行登录请求操作
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { Notify } from "uiw"
+const UserLayout = () => {
+  return <UserLogin
+    api="/api/login"
+    onBefore={(value) => ({ a: 12, b: 1221 })}
+    // onBefore={(value) => false}
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+ReactDOM.render(<UserLayout />, _mount_);
+
+```
+
 ## 配置接口参数
-> 我们提供saveField配置登陆参数;onBefore登陆前回调;onSuccess登陆成功后回调。可更好拓展你的业务
-```tsx
+
+`saveField`：配置登陆参数字段，⚠️ 注意：V6版本中删除当前属性。建议使用`defaultFieldsConfig`属性
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
 import { Notify } from "uiw"
 const UserLayout = () => {
-  const navigate = useNavigate()
   return <UserLogin
     api="/api/login"
     // 配置登陆参数
@@ -125,33 +167,177 @@ const UserLayout = () => {
       userName: "username",
       passWord: "password"
     }}
-    // 调用登陆接口之前,可以通过这个添加额外参数 返回 false 则不进行登录操作
-    onBefore={(value) => ({ a: 12, b: 1221 })}
-    // 登陆成功后回调
     onSuccess={(data) => {
       if (data && data.token) {
         sessionStorage.setItem("token", data.token)
         sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
-        navigate("/home", { replace: true })
       } else {
         Notify.error({ title: "错误通知", description: data.message || "请求失败" })
       }
     }}
   />
 }
-export default UserLayout;
-
+ReactDOM.render(<UserLayout />, _mount_);
 ```
 
-## 自定义按钮
-> buttons可进行自定义按钮配置,从而做更多业务拓展(如注册等)
-```tsx
+## 默认输入框属性配置
+
+`defaultFieldsConfig`：默认输入框属性配置
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
 import { Notify } from "uiw"
 const UserLayout = () => {
-  const navigate = useNavigate()
+  return <UserLogin
+    api="/api/login"
+    defaultFieldsConfig={{
+      userName:{label:"手机号",name:"phone"},
+      passWord:{label:"密码"},
+    }}
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+ReactDOM.render(<UserLayout />, _mount_);
+```
+
+## 默认登录按钮属性配置
+
+`btnProps`：默认登录按钮属性配置，自定义的按钮不生效
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
+  return <UserLogin
+    api="/api/login"
+    btnProps={{ type: "primary" }}
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
+```
+
+## 自定义form表单项
+
+`fields`：可进行自定义form表单项
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
+  return <UserLogin
+   fields={[
+      {
+        name: "email",
+        label: "邮箱",
+        labelFor: 'email',
+        children: (
+          <input
+            id={"email"}
+            type="email"
+            placeholder={`请输入邮箱`}
+            className="form-field"
+          />
+        ),
+      }
+     ]}
+    api="/api/login"
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
+```
+
+## 是否需要默认的输入框渲染
+
+`isDefaultFields`：是否需要默认的输入框渲染
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
+  return <UserLogin
+   fields={[
+      {
+        name: "email",
+        label: "邮箱",
+        labelFor: 'email',
+        children: (
+          <input
+            id={"email"}
+            type="email"
+            placeholder={`请输入邮箱`}
+            className="form-field"
+          />
+        ),
+      }
+     ]}
+    isDefaultFields={false}
+    api="/api/login"
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
+```
+
+## 配置渲染输入框
+
+`buttons`：可进行自定义按钮配置,从而做更多业务拓展(如注册等)
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
   return <UserLogin
    buttons={[
        {
@@ -163,31 +349,111 @@ const UserLayout = () => {
        },
      ]}
     api="/api/login"
-    btnProps={{ type: "primary" }}
-    // 登陆成功后回调
     onSuccess={(data) => {
       if (data && data.token) {
         sessionStorage.setItem("token", data.token)
         sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
-        navigate("/home", { replace: true })
       } else {
         Notify.error({ title: "错误通知", description: data.message || "请求失败" })
       }
     }}
   />
 }
-export default UserLayout;
-
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
 ```
 
-## 默认预览
+## 重写登录框渲染
 
-![](https://user-images.githubusercontent.com/49544090/150922771-8a5fa5dc-8d82-4d3c-80ac-b61dcb5eb920.png)
+`children`：登录框进行重写
 
-
-## 自定义按钮预览
-
-![](https://user-images.githubusercontent.com/49544090/150929179-4854ca6c-25c8-4703-acee-9c7855821b8a.png)
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+import { Form, Row, Col,Button } from 'uiw';
+const UserLayout = () => {
+  return <UserLogin>
+  <Form
+      resetOnSubmit={false}
+      onSubmit={({ current }) => {
+        const errorObj = {};
+        if (!current.username) errorObj.username = `账号不能为空！`;
+        if (!current.password) errorObj.password = `密码不能为空！`;
+        if (Object.keys(errorObj).length > 0) {
+          const err = new Error();
+          err.filed = errorObj;
+          throw err;
+        } else {
+          setStore({ ...current});
+        }
+      }}
+      onSubmitError={(error) => {
+        if (error.filed) {
+          return { ...error.filed };
+        }
+        return null;
+      }}
+      fields={{
+        username: {
+          label: `账号`,
+          labelFor: 'username',
+          children: (
+            <input
+              type="text"
+              id="username"
+              placeholder={`请输入账号`}
+              className="form-field"
+            />
+          ),
+        },
+        password: {
+          label: `密码`,
+          labelFor: 'password',
+          children: (
+            <input
+              id="password"
+              type="password"
+              placeholder={`请输入密码`}
+              className="form-field"
+            />
+          ),
+        },
+      }}
+    >
+      {({ fields, canSubmit}) => {
+        return (
+          <div>
+            <Row>
+              <Col style={{ color: '#555' }}>{fields.username}</Col>
+            </Row>
+            <Row>
+              <Col style={{ color: '#555' }}>{fields.password}</Col>
+            </Row>
+            <Row>
+                <Button
+                  disabled={!canSubmit()}
+                  className="btns"
+                  block
+                  style={{ marginTop: 20 }}
+                  htmlType="submit"
+                  type="dark"
+                >
+                  登录
+                </Button>
+            </Row>
+          </div>
+        );
+      }}
+    </Form>
+  
+  </UserLogin>
+}
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
+```
 
 ## 贡献者
 
