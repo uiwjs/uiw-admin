@@ -20,7 +20,7 @@
       },
       {
         "path": "/home",
-        "name": "首页-json文件",
+        "name": "首页",
         "component": "@/pages/TableList",
         "icon": "home"
       },
@@ -38,7 +38,7 @@
       },
       {
         "path": "/demo",
-        "name": "demo",
+        "name": "列表查询/新增demo",
         "component": "@/pages/Demo",
         "icon": "component"
       },

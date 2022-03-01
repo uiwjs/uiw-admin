@@ -15,6 +15,7 @@ const UserLayout = () => {
         },
         {
           title: '注册',
+          type: 'light',
         },
       ]}
       api="/api/login"
