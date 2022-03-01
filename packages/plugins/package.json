@@ -41,10 +41,10 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "devDependencies": {
-    "@babel/generator": "7.16.8",
-    "@babel/parser": "7.16.8",
-    "@babel/traverse": "7.16.8",
-    "@babel/types": "7.16.8",
+    "@babel/generator": "7.17.3",
+    "@babel/parser": "7.17.3",
+    "@babel/traverse": "7.17.3",
+    "@babel/types": "7.17.0",
     "chokidar": "3.5.3",
     "swr": "^1.2.1"
   }
