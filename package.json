@@ -92,7 +92,6 @@
     "webpack-bundle-analyzer": "~4.5.0"
   },
   "resolutions": {
-    "mini-css-extract-plugin": "2.4.7",
     "@babel/core": "7.16.7",
     "@babel/parser": "7.16.8",
     "@babel/traverse": "7.16.8",
