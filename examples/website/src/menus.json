@@ -81,7 +81,7 @@
     "path": "/router-control"
   },
   {
-    "label": "User Login",
+    "label": "登录UserLogin",
     "path": "/user-login"
   },
   {
