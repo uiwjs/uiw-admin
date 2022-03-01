@@ -45,14 +45,14 @@
     "react-dom": ">=17.x"
   },
   "dependencies": {
-    "@babel/runtime": "7.16.7",
+    "@babel/runtime": "~7.16.7",
     "@uiw-admin/router-control": "5.2.25"
   },
   "devDependencies": {
-    "@types/react": "17.0.38",
-    "@types/react-dom": "17.0.11",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "@types/react": "~17.0.39",
+    "@types/react-dom": "~17.0.11",
+    "react": "~17.0.2",
+    "react-dom": "~17.0.2",
     "react-router-dom": "6.2.1"
   }
 }
