@@ -326,7 +326,7 @@ const UserLayout = () => {
 ReactDOM.render(<UserLayout />, _mount_);
 ```
 
-## 配置渲染输入框
+## 使用配置渲染操作按钮
 
 `buttons`：可进行自定义按钮配置,从而做更多业务拓展(如注册等)
 
