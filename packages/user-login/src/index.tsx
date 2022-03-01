@@ -36,10 +36,10 @@ export interface UserLoginProps {
   footer?: React.ReactNode;
   /** 背景图片 */
   bg?: string;
-  logo?: string;
+  logo?: string | null;
   children?: React.ReactNode;
   /** 项目名称 */
-  projectName?: string;
+  projectName?: string | null;
   /** 登录接口返回 */
   onSuccess?: (resp: any, form: FormValue | undefined) => void;
   /** 登录按钮 属性 */
@@ -173,8 +173,8 @@ export default (props: UserLoginProps) => {
           className={`uiw-loayout-login-body ${classNameBody}`}
           style={styleBody}
         >
-          <img className="logo" src={logo} />
-          <span className="uiw-title">{projectName}</span>
+          {logo && <img className="logo" src={logo} />}
+          {projectName && <span className="uiw-title">{projectName}</span>}
           {children ? (
             children
           ) : (
