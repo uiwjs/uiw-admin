@@ -3,7 +3,6 @@
 }
 .uiw-layout-tabs-warp .uiw-layout-tabs-body {
   margin: 14px;
-  background: #fff;
   height: calc(100% - 64px);
   overflow: auto;
   box-sizing: border-box;
