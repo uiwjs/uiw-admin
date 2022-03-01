@@ -5,7 +5,7 @@
     "create-uiw-admin",
     "eslint-packages/*"
   ],
-  "version": "5.2.24",
+  "version": "5.2.25",
   "command": {
     "create": {
       "license": "MIT"
