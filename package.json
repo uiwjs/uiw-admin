@@ -83,6 +83,7 @@
   "dependencies": {
     "@babel/preset-typescript": "~7.16.7",
     "@babel/core": "~7.17.5",
+    "ajv": "^8.9.0",
     "husky": "~7.0.4",
     "lerna": "~4.0.0",
     "lint-staged": "~12.3.4",
@@ -94,8 +95,7 @@
     "@babel/core": "7.16.7",
     "@babel/parser": "7.16.8",
     "@babel/traverse": "7.16.8",
-    "@babel/types": "7.16.8",
-    "ajv": "^8.9.0"
+    "@babel/types": "7.16.8"
   },
   "workspaces": {
     "packages": [
