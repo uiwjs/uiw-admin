@@ -35,6 +35,7 @@
   border-radius: 10px;
   overflow: hidden;
   padding: 55px 33px;
+  overflow: auto;
 }
 
 .uiw-loayout-login-warp .uiw-loayout-login-body .w-form {
