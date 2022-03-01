@@ -48,6 +48,6 @@
     "eslint-config-uiw-admin": "5.2.25"
   },
   "devDependencies": {
-    "kkt": "~7.1.0"
+    "kkt": "~7.1.5"
   }
 }
