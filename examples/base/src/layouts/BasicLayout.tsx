@@ -81,7 +81,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   //   </Auth>
   // )
   return (
-    <BasicLayout {...basicLayoutProps}>
+    <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false}>
       {/* <Outlet /> */}
       <LayoutTabs routes={props.routes || []} />
     </BasicLayout>
