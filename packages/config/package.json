@@ -44,8 +44,8 @@
     "@kkt/less-modules": "~7.1.1",
     "@kkt/raw-modules": "~7.1.1",
     "@kkt/scope-plugin-options": "~7.1.1",
-    "@uiw-admin/plugins": "5.2.25",
-    "eslint-config-uiw-admin": "5.2.25"
+    "@uiw-admin/plugins": "~5.2.25",
+    "eslint-config-uiw-admin": "~5.2.25"
   },
   "devDependencies": {
     "kkt": "~7.1.5"

@@ -423,29 +423,29 @@ export interface UserLoginProps {
 
 ## 参数说明
 
-| 参数   | 必填 | 类型        | 默认值               | 说明              |
-| ------- | ------------ | ------ | ------ | ------ |
-| api                 | 是   | `string`                     |               | 请求接口              |
-| align    | 否   | `枚举类型：'left' \| 'right' \| 'center'`      | `center`     | 卡片框的位置  |
-| footer    | 否   | `React.ReactNode`             |      | 页脚              |
-| bg                  | 否   | `string`  |    | 页面背景图，可以`require('./image.png')`或者是图片链接               |
-| logo | 否   | `string \|''`      |    | logo头像, 值为`null` 不显示logo    |
-| children       | 否   | `React.ReactNode`        |    | 替换卡片位置内容   |
-| projectName    | 否   | `string\|null`    | `UIW Admin`    | 项目名称(页面标题)  如果值为`null`  不显示标题    |
-| btnProps     | 否   | `Omit<ButtonProps, 'ref'>`        | `{}`    | 登录按钮 属性  |
-| buttons   | 否   | `(Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]`    |   | 登录按钮位置的自定义按钮组, title 为显示标题                       |
-| onSuccess  | 是   | `(resp: any, form: (FormValue \| undefined)) => void`   | `()=>null`   | 登录接口返回                                                       |
-| onBefore  | 否   | `(store: FormValue) => (Record<string, any> \| boolean)`   |   | 用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作 |
-| requestConfig  | 否   | `Options`  |  | `request` 请求 `options` 配置参数   |
-| saveField           | 否   | `{userName(登录账号字段)?:string,passWord(密码字段)?:string}`   | `{userName:"username",passWord:"password"}` | 默认输入框保存字段                                                 |
+| 参数                | 必填 | 类型                                                                                      | 默认值                                      | 说明                                                               |
+| ------------------- | ---- | ----------------------------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------------------------------------ |
+| api                 | 是   | `string`                                                                                  |                                             | 请求接口                                                           |
+| align               | 否   | `枚举类型：'left' \| 'right' \| 'center'`                                                 | `center`                                    | 卡片框的位置                                                       |
+| footer              | 否   | `React.ReactNode`                                                                         |                                             | 页脚                                                               |
+| bg                  | 否   | `string`                                                                                  |                                             | 页面背景图，可以`require('./image.png')`或者是图片链接             |
+| logo                | 否   | `string \|''`                                                                             |                                             | logo头像, 值为`null` 不显示logo                                    |
+| children            | 否   | `React.ReactNode`                                                                         |                                             | 替换卡片位置内容                                                   |
+| projectName         | 否   | `string\|null`                                                                            | `UIW Admin`                                 | 项目名称(页面标题)  如果值为`null`  不显示标题                     |
+| btnProps            | 否   | `Omit<ButtonProps, 'ref'>`                                                                | `{}`                                        | 登录按钮 属性                                                      |
+| buttons             | 否   | `(Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]`                              |                                             | 登录按钮位置的自定义按钮组, title 为显示标题                       |
+| onSuccess           | 是   | `(resp: any, form: (FormValue \| undefined)) => void`                                     | `()=>null`                                  | 登录接口返回                                                       |
+| onBefore            | 否   | `(store: FormValue) => (Record<string, any> \| boolean)`                                  |                                             | 用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作 |
+| requestConfig       | 否   | `Options`                                                                                 |                                             | `request` 请求 `options` 配置参数                                  |
+| saveField           | 否   | `{userName(登录账号字段)?:string,passWord(密码字段)?:string}`                             | `{userName:"username",passWord:"password"}` | 默认输入框保存字段                                                 |
 | defaultFieldsConfig | 否   | `{userName(账户输入框)?:Partial<FieldsProps>,passWord(密码输入框)?:Partial<FieldsProps>}` |                                             | 默认输入框保存字段                                                 |
-| fields   | 否   | `FieldsProps[]`     |   | 自定义form表单项         |
-| isDefaultFields     | 否   | `boolean`    | `true`  | 是否需要默认的输入框渲染                                           |
-| classNameWarp       | 否   | `string`      |      | 卡片框外层`className`                                              |
-| styleWarp           | 否   | `React.CSSProperties`    |     | 卡片框外层`style`                                                  |
-| classNameBody       | 否   | `string`      |    | 卡片框`className`                                                  | — |
-| styleBody           | 否   | `React.CSSProperties`      |    | 卡片框`style`    |
-| styleContainer           | 否   | `React.CSSProperties`      |    | 背景框`style` 可再次调整背景图样式    |
+| fields              | 否   | `FieldsProps[]`                                                                           |                                             | 自定义form表单项                                                   |
+| isDefaultFields     | 否   | `boolean`                                                                                 | `true`                                      | 是否需要默认的输入框渲染                                           |
+| classNameWarp       | 否   | `string`                                                                                  |                                             | 卡片框外层`className`                                              |
+| styleWarp           | 否   | `React.CSSProperties`                                                                     |                                             | 卡片框外层`style`                                                  |
+| classNameBody       | 否   | `string`                                                                                  |                                             | 卡片框`className`                                                  | — |
+| styleBody           | 否   | `React.CSSProperties`                                                                     |                                             | 卡片框`style`                                                      |
+| styleContainer      | 否   | `React.CSSProperties`                                                                     |                                             | 背景框`style` 可再次调整背景图样式                                 |
 
 ```tsx
 export interface FieldsProps<T = any> extends FormFieldsProps<T> {
