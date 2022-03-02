@@ -34,7 +34,10 @@ export interface UserLoginProps {
   styleBody?: React.CSSProperties;
   /** 页脚 */
   footer?: React.ReactNode;
-  /** 背景图片 */
+  /**
+   * 背景图片
+   * @deprecated 推荐使用 `styleContainer`
+   */
   bg?: string;
   logo?: string | null;
   children?: React.ReactNode;
@@ -71,6 +74,7 @@ export interface UserLoginProps {
   fields?: FieldsProps[];
   // 是否使用默认的 fields
   isDefaultFields?: boolean;
+  /** 背景框`style` 可再次调整背景图样 */
   styleContainer?: React.CSSProperties;
 }
 

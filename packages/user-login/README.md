@@ -284,6 +284,96 @@ const UserLayout = () => {
 ReactDOM.render(<UserLayout />, _mount_);
 ```
 
+## 自定义背景样式
+
+`styleContainer`：自定义背景样式 ，`bg`：可直接修改背景图片
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
+  return <UserLogin
+    styleContainer={{
+      background:"url(https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ffile05.16sucai.com%2F2015%2F0615%2F0f9320e353671b9b02049dec80a7fde3.jpg&refer=http%3A%2F%2Ffile05.16sucai.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1648782265&t=8e140f1c56df1f31366698c0d695f36f)",
+    }}
+    api="/api/login"
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
+```
+
+## 自定义背景图片
+
+`bg`：可直接修改背景图片，⚠️ 注意：V6版本中删除当前属性。建议使用`styleContainer`
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
+  return <UserLogin
+      bg="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fi-1-lanrentuku.qqxzb-img.com%2F2020%2F11%2F11%2Fef6f5575-ee2f-4113-b471-b8f0becf98c3.jpg%3FimageView2%2F2%2Fw%2F1024&refer=http%3A%2F%2Fi-1-lanrentuku.qqxzb-img.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1648782888&t=33ace74f48bd36f363b577158171abd1"
+    api="/api/login"
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
+```
+
+## 自定义项目名称
+
+`projectName`：自定义项目名称
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
+  return <UserLogin
+    projectName="项目名称"
+    api="/api/login"
+    onSuccess={(data) => {
+      if (data && data.token) {
+        sessionStorage.setItem("token", data.token)
+        sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+      } else {
+        Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+      }
+    }}
+  />
+}
+// export default UserLayout;
+ReactDOM.render(<UserLayout />, _mount_);
+```
+
+
 ## 重写登录框渲染
 
 `children`：登录框进行重写
