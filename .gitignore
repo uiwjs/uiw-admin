@@ -10,6 +10,7 @@ yarn-error.log*
 package-lock.json
 yarn.lock
 baseJS
+basejs
 
 *.lerna_backup
 .DS_Store
