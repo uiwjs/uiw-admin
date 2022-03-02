@@ -71,6 +71,7 @@ export interface UserLoginProps {
   fields?: FieldsProps[];
   // 是否使用默认的 fields
   isDefaultFields?: boolean;
+  styleContainer?: React.CSSProperties;
 }
 
 export default (props: UserLoginProps) => {
@@ -95,6 +96,7 @@ export default (props: UserLoginProps) => {
     fields,
     isDefaultFields = true,
     defaultFieldsConfig,
+    styleContainer = {},
   } = props;
   let { userName = 'username', passWord = 'password' } = saveField || {};
   const userNameLabel =
@@ -163,7 +165,10 @@ export default (props: UserLoginProps) => {
   }
 
   return (
-    <div className="uiw-loayout-login" style={{ background: `url(${bg})` }}>
+    <div
+      className="uiw-loayout-login"
+      style={{ background: `url(${bg})`, ...styleContainer }}
+    >
       <DocumentTitle title={projectName} />
       <div
         style={styleWarp}
