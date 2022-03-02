@@ -9,7 +9,34 @@ export interface TempProps {
   lazyLoad: boolean;
 }
 // 模板
-export default (str: TempProps) => {
+export default (str: TempProps, isTS: boolean) => {
+  if (!isTS) {
+    return `
+import {
+  init,
+  Models,
+  Model,
+  RematchRootState,
+  RematchDispatch,
+  createModel,
+} from '@rematch/core';
+import loading from '@rematch/loading';
+${str.importStr}
+${!str.lazyLoad ? str.createModelsStr : ''}
+export const models = {
+  ${!str.lazyLoad ? str.models : ''}
+}
+
+export const store = init({
+  models,
+  plugins: [loading()],
+});
+
+export const { dispatch, addModel } = store;
+
+`;
+  }
+
   return `
 // @ts-ignore
 import {
@@ -54,6 +81,7 @@ export const createModelsTempStr = (
     isCreateModel: boolean;
   }[],
   lazyLoad: boolean,
+  isTS: boolean,
 ) => {
   let importStr = '';
   let lazyModelsStr = '';
@@ -80,16 +108,27 @@ export const createModelsTempStr = (
         createModelsStr =
           createModelsStr + `const ${names}Model = ${names}Model${index};\n`;
       } else {
-        addModelStr =
-          addModelStr +
-          `store.addModel({ name: "${names}", ...createModel<RootModel>()(${names}Model${index}) });\n`;
-        createModelsStr =
-          createModelsStr +
-          `const ${names}Model = createModel<RootModel>()(${names}Model${index});\n`;
+        if (isTS) {
+          addModelStr =
+            addModelStr +
+            `store.addModel({ name: "${names}", ...createModel<RootModel>()(${names}Model${index}) });\n`;
+          createModelsStr =
+            createModelsStr +
+            `const ${names}Model = createModel<RootModel>()(${names}Model${index});\n`;
+        } else {
+          addModelStr =
+            addModelStr +
+            `store.addModel({ name: "${names}", ...createModel()(${names}Model${index}) });\n`;
+          createModelsStr =
+            createModelsStr +
+            `const ${names}Model = createModel()(${names}Model${index});\n`;
+        }
       }
       models = models + `${names}:${names}Model,\n`;
     }
-    typeModels = typeModels + ` ${names}:typeof  ${names}Model${index},\n`;
+    if (isTS) {
+      typeModels = typeModels + ` ${names}:typeof  ${names}Model${index},\n`;
+    }
   });
   return {
     importStr,

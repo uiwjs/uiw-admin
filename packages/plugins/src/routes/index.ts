@@ -36,6 +36,7 @@ class RoutesWebpackPlugin {
   lazyLoad: boolean = false;
 
   jsonCode: string = '';
+  isTS: boolean = true;
 
   constructor(props?: { lazyLoad?: boolean }) {
     // 必须要存在这个文件 优先级  json > ts > js
@@ -44,6 +45,9 @@ class RoutesWebpackPlugin {
     this.jsFilePath = path.resolve(process.cwd(), 'config/routes.js');
     this.tsFilePath = path.resolve(process.cwd(), 'config/routes.ts');
     this.uiw = path.resolve(process.cwd(), 'src/.uiw');
+
+    this.isTS = fs.existsSync(path.join(process.cwd(), 'tsconfig.json'));
+
     this.lazyLoad = !!props?.lazyLoad;
 
     // ----
@@ -67,9 +71,11 @@ class RoutesWebpackPlugin {
       ['js', 'ts'].includes(isType as string) ? this.jsonCode : strs,
       isType,
     );
-    // let routeTemp = createTemp(strs);
     fs.writeFileSync(
-      path.resolve(process.cwd(), 'src/.uiw/routes.tsx'),
+      path.resolve(
+        process.cwd(),
+        this.isTS ? 'src/.uiw/routes.tsx' : 'src/.uiw/routes.js',
+      ),
       routeTemp,
       { encoding: 'utf-8', flag: 'w+' },
     );

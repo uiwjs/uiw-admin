@@ -19,10 +19,12 @@ class RematchWebpackPlugin {
   uiw = '';
   lazyLoad: boolean = false;
   newPath = '';
+  isTS: boolean = true;
 
   constructor(props?: { lazyLoad?: boolean }) {
     this.src = path.resolve(process.cwd(), 'src');
     this.uiw = path.resolve(process.cwd(), 'src/.uiw');
+    this.isTS = fs.existsSync(path.join(process.cwd(), 'tsconfig.json'));
     this.lazyLoad = !!props?.lazyLoad;
 
     this.getPathDeep(this.src);
@@ -74,14 +76,18 @@ class RematchWebpackPlugin {
 
   // 重新生成
   restCreate = () => {
-    let modelStr = createModelsTempStr(this.oldModel, this.lazyLoad);
+    let modelStr = createModelsTempStr(this.oldModel, this.lazyLoad, this.isTS);
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
+    // path.resolve(process.cwd(), this.isTS ? 'src/.uiw/routes.tsx' : 'src/.uiw/routes.js'),
     // 在项目的 src/.uiw/ 创建 rematch.ts 用于models加载
     fs.writeFileSync(
-      path.resolve(process.cwd(), 'src/.uiw/rematch.ts'),
-      createRematchTemps(modelStr),
+      path.resolve(
+        process.cwd(),
+        this.isTS ? 'src/.uiw/rematch.ts' : 'src/.uiw/rematch.js',
+      ),
+      createRematchTemps(modelStr, this.isTS),
       { flag: 'w+', encoding: 'utf-8' },
     );
     if (this.lazyLoad) {
