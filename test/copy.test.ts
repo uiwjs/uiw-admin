@@ -6,5 +6,4 @@ it('js案例项目生成测试', async () => {
   expect(fs.existsSync(srcDir)).toBeTruthy();
   const fileNames = fs.readdirSync(srcDir);
   expect(fileNames).toContain('index.js');
-  expect(fileNames).toContain('index.js');
 });
