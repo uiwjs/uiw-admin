@@ -56,6 +56,8 @@ jobs:
           ${{ steps.changelog.outputs.changelog }}
     # examples/base 里面的 ts 转换 成 js版本并存储到 examples/basejs
     - run: yarn run build:js
+    - run: yarn run test
+
     # 案例打包 
     - run: yarn run build:website
       env:

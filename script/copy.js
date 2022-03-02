@@ -15,7 +15,7 @@ const PWDOutPut = path.resolve(__dirname, '../examples/basejs/');
 const getFields = async () => {
   const dirToFiles = await recursiveReaddirFiles.default(PWDEntry, {
     exclude:
-      /(node_modules|build|dist|\.d\.ts|\.(test|spec)\.(ts|tsx|js|jsx))$/,
+      /(node_modules|.uiw|build|dist|\.d\.ts|\.(test|spec)\.(ts|tsx|js|jsx))$/,
   });
   return dirToFiles;
 };

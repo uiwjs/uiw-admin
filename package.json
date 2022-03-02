@@ -63,6 +63,7 @@
     "remove:yarn": "lerna exec --scope @uiw-admin/* --scope @example/*  -- rm -rf yarn.lock",
     "remove:lib": "lerna exec --scope @uiw-admin/*  -- rm -rf ./lib",
     "remove:esm": "lerna exec --scope @uiw-admin/*  -- rm -rf ./esm",
+    "test": "tsbb test",
     "tsbb": "tsbb",
     "lerna": "lerna"
   },
@@ -74,6 +75,11 @@
   "lint-staged": {
     "*.{js,jsx,ts,tsx,less,md,json}": [
       "prettier --write"
+    ]
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/*.test.{js,ts}"
     ]
   },
   "author": "jaywcjlove",
