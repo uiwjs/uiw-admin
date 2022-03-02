@@ -263,7 +263,7 @@ const Demo = () => {
    const [loading, setLoading] = React.useState(false)
    // 模拟搜索
   const handleSearch = ( type = '' , name = '' ) => {
-    if (type === 'searchSelect') {åååå
+    if (type === 'searchSelect') {
       setLoading(true)
       setTimeout(() => {
         setLoading(false)
