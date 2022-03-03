@@ -526,6 +526,7 @@ ReactDOM.render(<Demo4 />, _mount_);
 | widgetProps | 组件属性                              | 与uiw对应的组件属性一致                                         | -      |
 | label       | 表单标题，如果不填则集成columns title | String                                                          | -      |
 | key         | 表单name，如果不填则集成columns key   | String       | -      |
+| option      | 组件 是`checkbox`、`select`、`searchSelect`、`searchTree` 使用， 数据源统一叫option   | Array       | -      |
 
 
 当前支持的widget组件有
@@ -542,6 +543,7 @@ textarea,
 dateInput,
 timePicker,
 monthPicker
+searchTree,
 
 ```
 

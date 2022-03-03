@@ -13,9 +13,11 @@ import {
   MonthPicker,
   FormSubmitProps,
   SearchSelect,
+  // TreeChecked
 } from 'uiw';
 import Select from './widgets/Select';
 import FormRadio from './widgets/Radio';
+import SearchTree from './widgets/SearchTree';
 import { useStore } from './hooks';
 import { BaseFormProps, Fields, FormProps } from './types';
 
@@ -30,6 +32,8 @@ const widgets = {
   dateInput: DateInput,
   timePicker: TimePicker,
   monthPicker: MonthPicker,
+  searchTree: SearchTree,
+  // treeChecked: TreeChecked,
 };
 
 const BaseForm: React.FC<BaseFormProps> = (props) => {
@@ -44,8 +48,6 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
   const getFields = (formProps: FormProps, title: any) => {
     const { widgetProps, key, widget, label, initialValue, ...otherProps } =
       formProps;
-
-    // const name = key || colKey;
     const Widget = widgets[widget];
     return {
       label: label || title,
