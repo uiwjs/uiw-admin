@@ -24,6 +24,7 @@
     "@uiw-admin/document-title": "5.2.25",
     "@uiw-admin/exceptions": "5.2.25",
     "@uiw-admin/layout-tabs": "5.2.25",
+    "@uiw-admin/markdown-navbar": "5.2.25",
     "@uiw-admin/models": "5.2.25",
     "@uiw-admin/plugins": "5.2.25",
     "@uiw-admin/router-control": "5.2.25",
