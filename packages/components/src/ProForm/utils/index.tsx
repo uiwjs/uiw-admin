@@ -75,6 +75,12 @@ export function getReadValue(
         ? initialValue
         : '';
   }
+  if (type === 'searchTree') {
+    content = initialValue?.map?.(
+      (it: { key: string; label: string }, index: number) =>
+        index === initialValue.length ? it.label : it.label + ', ',
+    );
+  }
   return content;
 }
 
