@@ -2,6 +2,44 @@ import React from 'react'
 
 export const items = (queryInfo: any, attr: any) => [
   {
+    label: 'searchTree',
+    key: 'searchTree',
+    widget: 'searchTree',
+    span: '24',
+    readSpan: 3,
+    widgetProps: {
+      allowClear: true,
+      // onSearch:(searchValue)=>console.log('SearchTree-> SearchTreeOption',searchValue),
+      // onChange:(selectedAll, selectd, isChecked)=>console.log('SearchTree-> onChange',selectedAll, selectd, isChecked)
+    },
+    initialValue: [
+      { key: '1-0-1', label: '黄浦区' },
+      { key: '1-1-0', label: '半淞园路街道' },
+      { key: '1-2-0', label: '南京东路街道' },
+      { key: '1-3-0', label: '外滩街道' },
+      { key: '1-0-3', label: '徐汇区' },
+    ],
+    option: [
+      {
+        label: '上海市',
+        key: '1-0-0',
+        children: [
+          { label: '黄浦区', key: '1-0-1' },
+          { label: '卢湾区', key: '1-0-2' },
+          {
+            label: '徐汇区',
+            key: '1-0-3',
+            children: [
+              { label: '半淞园路街道', key: '1-1-0' },
+              { label: '南京东路街道', key: '1-2-0' },
+              { label: '外滩街道', key: '1-3-0' },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
     label: '司机手机号',
     key: 'input',
     widget: 'input',
