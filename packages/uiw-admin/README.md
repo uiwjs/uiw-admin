@@ -64,6 +64,8 @@ $ cd uiw-admin
 
 $ yarn install
 
+$ yarn build
+
 $ yarn start
 
 ```
