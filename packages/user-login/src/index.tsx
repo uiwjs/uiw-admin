@@ -297,14 +297,14 @@ export default (props: UserLoginProps) => {
             </Form>
           )}
         </div>
-        {footer ? (
-          footer
-        ) : (
-          <div className="copyright-footer">
-            版权所有 copyright &copy; 2022 uiw admin
-          </div>
-        )}
       </div>
+      {footer ? (
+        footer
+      ) : (
+        <div className="copyright-footer">
+          版权所有 copyright &copy; 2022 uiw admin
+        </div>
+      )}
     </div>
   );
 };
