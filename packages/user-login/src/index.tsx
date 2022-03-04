@@ -264,7 +264,9 @@ export default (props: UserLoginProps) => {
                           return (
                             <Button
                               key={idx}
-                              loading={!!isValidating}
+                              loading={
+                                !!isValidating && item.htmlType === 'submit'
+                              }
                               disabled={!canSubmit()}
                               className="btns"
                               type="danger"
