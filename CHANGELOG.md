@@ -9,7 +9,7 @@
 - 修改登录按钮loading
 - @uiw-admin/components
   - 🐞`ProForm`: 修复ProForm label传入组件属性ts提示错误
-- eslint-config-uiw-admin： 更新eslin配置
+- eslint-config-uiw-admin： 更新eslint配置
 ## 5.2.27
 
 - 修改登录按钮loading
