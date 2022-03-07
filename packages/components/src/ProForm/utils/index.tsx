@@ -78,7 +78,7 @@ export function getReadValue(
   if (type === 'searchTree') {
     content = initialValue?.map?.(
       (it: { key: string; label: string }, index: number) =>
-        index === initialValue.length ? it.label : it.label + ', ',
+        index === initialValue.length - 1 ? it.label : it.label + ', ',
     );
   }
   return content;
