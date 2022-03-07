@@ -1,4 +1,3 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
 import Control from '@uiw-admin/router-control'
 import { SWRConfig } from 'swr'
@@ -9,7 +8,6 @@ import './index.css'
 ReactDOM.render(
   <SWRConfig
     value={{
-      // revalidateOnFocus: false,
       fetcher: (resource, init) => {
         return request(resource, init)
       },

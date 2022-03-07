@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { ProTable, useTable } from '@uiw-admin/components'
 import { useCity } from '../../servers'
 

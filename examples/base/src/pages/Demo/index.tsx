@@ -1,4 +1,3 @@
-import React from 'react'
 import { Button, Dropdown, Menu } from 'uiw'
 import { useDispatch } from 'react-redux'
 import { Dispatch } from '@uiw-admin/models'
@@ -68,7 +67,7 @@ const Demo = () => {
   )
 
   return (
-    <React.Fragment>
+    <>
       <ProTable
         searchBtns={[
           { label: '搜索', type: 'primary', htmlType: 'submit' },
@@ -152,7 +151,7 @@ const Demo = () => {
         table={table}
       />
       <Detail updateData={updateData} onSearch={table.onSearch} />
-    </React.Fragment>
+    </>
   )
 }
 export default Demo

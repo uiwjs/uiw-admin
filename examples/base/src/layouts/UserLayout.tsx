@@ -1,4 +1,3 @@
-import React from 'react'
 import UserLogin from '@uiw-admin/user-login'
 import { setCookie } from '@uiw-admin/utils'
 import { useNavigate } from 'react-router-dom'
