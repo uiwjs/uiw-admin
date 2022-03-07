@@ -41,7 +41,7 @@ export interface ProFormProps {
 export interface FormItemsProps
   extends Omit<UiwFormItemProps<any>, 'initialValue' | 'validator'> {
   /** 表单元素标题 */
-  label?: string;
+  label?: React.ReactNode;
   /** 表单元素字段名称 */
   key: string;
   /** 表单元素类型 */
