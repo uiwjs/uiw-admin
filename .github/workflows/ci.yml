@@ -61,7 +61,7 @@ jobs:
     - run: coverage-badges
       working-directory: create-uiw-admin
     # 生成 coverage 报告
-    - run: markdown-to-html --output coverage/index.html --favicon https://gw.alipayobjects.com/zos/rmsportal/rlpTLlbMzTNYuZGGCVYM.png
+    - run: markdown-to-html --output coverage/index.html --favicon https://raw.githubusercontent.com/uiwjs/uiw/92f189f53312f1177466f48991736f95f86da0a6/src/assets/logo-README.svg
       working-directory: create-uiw-admin
     # examples/website/build 生成 coverage 文件夹 用于报告
     - run: mkdir -p examples/website/build/coverage
