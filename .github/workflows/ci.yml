@@ -44,7 +44,7 @@ jobs:
     
     # 压缩 examples/basejs 生成 js 快捷开发
     - name: Compress uiw-admin-js Example.
-      run: zip -r -y uiw-admin-js.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts" -x ".uiw/*"
+      run: zip -r -y uiw-admin-js.zip . -x tsconfig.json -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts" -x ".uiw/*"
       working-directory: examples/basejs
     
     # examples/website/build 生成 zip 文件夹 用于存储压缩包
