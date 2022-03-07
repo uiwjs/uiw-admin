@@ -4,6 +4,14 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+
+## 5.2.29
+
+- 修改登录按钮loading
+- @uiw-admin/components
+  - 🌟`ProForm`: 修复ProForm label传入组件属性ts提示错误
+  - 🌟`ProTable`: 优化表单按钮布局
+
 ## 5.2.28
 
 - 修改登录按钮loading
