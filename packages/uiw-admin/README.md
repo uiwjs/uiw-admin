@@ -34,6 +34,9 @@ UIW Admin Project
 | [`@uiw-admin/exceptions`](https://www.npmjs.com/package/@uiw-admin/exceptions)         | [![npm](https://img.shields.io/npm/v/@uiw-admin/exceptions.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/exceptions)         | 公共异常组件 |
 | [`@uiw-admin/config`](https://www.npmjs.com/package/@uiw-admin/config)                 | [![npm](https://img.shields.io/npm/v/@uiw-admin/config.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/config)                 | 简化 [`kkt`](https://github.com/kktjs/kkt) 配置           |
 | [`@uiw-admin/plugins`](https://www.npmjs.com/package/@uiw-admin/plugins)               | [![npm](https://img.shields.io/npm/v/@uiw-admin/plugins.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/plugins)               | [`kkt`](https://github.com/kktjs/kkt) 插件                |
+| [`eslint-config-uiw-admin`](https://www.npmjs.com/package/eslint-config-uiw-admin)               | [![npm](https://img.shields.io/npm/v/eslint-config-uiw-admin.svg?maxAge=3600)](https://www.npmjs.com/package/eslint-config-uiw-admin)               | uiw-admin 内置 eslint 规则配置
+
+               |
 
 ##  ⌨️ 快速开始
 
