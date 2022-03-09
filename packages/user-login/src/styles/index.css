@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   /* background-image: url('./../assets/bg.jpeg'); */
+
+  overflow: auto;
 }
 
 .uiw-loayout-login-warp {
@@ -12,7 +14,6 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  overflow: auto;
   flex-direction: column;
 }
 
@@ -29,13 +30,11 @@
 }
 
 .uiw-loayout-login-warp .uiw-loayout-login-body {
-  width: 390px;
+  width: 360px;
   background-color: transparent;
   background-color: #fff;
   border-radius: 10px;
-  overflow: hidden;
-  padding: 55px 33px;
-  overflow: auto;
+  padding: 26px 26px;
 }
 
 .uiw-loayout-login-warp .uiw-loayout-login-body .w-form {
@@ -123,6 +122,5 @@
   left: 0;
   right: 0;
   text-align: center;
-  height: 50px;
-  line-height: 50px;
+  line-height: 30px;
 }
