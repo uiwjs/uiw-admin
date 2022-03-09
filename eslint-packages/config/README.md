@@ -2,6 +2,7 @@
 
 uiw-admin 内置 eslint 规则配置
 
+
 ## 安装
 
 ```bash
@@ -12,24 +13,37 @@ npm i eslint-config-uiw-admin -D # yarn add eslint-config-uiw-admin -D
 
 1. 第一种：项目的根文件夹中创建一个名为`.eslintrc.json`以下内​​容的文件：
 
-    ```js
-    module.exports ={
-      // ...
-      "extends": "uiw-admin"
-    }
-    ```
+```js
+module.exports ={
+// ...
+"extends": "uiw-admin"
+}
+```
+
 
 2. 第二种：项目的`package.json`加入以下内容
 
-    ```json
-    // ...
-    "eslintConfig": {
-        "extends": [
-          "uiw-admin"
-        ]
-      }
-    // ...
-    ```
+```json
+// ...
+"eslintConfig": {
+  "extends": [
+    "uiw-admin"
+  ]
+}
+// ...
+```
+
+> React17以上的版本配合babel可以单独使用 JSX 而无需引入 React
+> https://zh-hans.reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html
+
+## 移除未使用的 React 引入
+
+```
+cd your_project
+npx react-codemod update-react-imports
+
+```
+
 
 `eslint-config-uiw-admin` 您可以通过编辑`.eslintrc.json`文件来覆盖设置。在 [ESLint](https://eslint.org/docs/user-guide/configuring) 网站上了解更多关于配置 ESLint的信息。
 

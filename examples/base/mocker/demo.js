@@ -19,7 +19,7 @@ module.exports.selectById = function (req, res) {
     code: 200,
     message: '获取详情成功',
     data: {
-      input: '周政',
+      input: 'Jason',
       textarea: '蟠龙路',
       select: 4,
       switch: true,
@@ -38,7 +38,7 @@ module.exports.selectById = function (req, res) {
       ],
       searchSelect: [1, 2],
       rate: 4,
-      input2: '送心',
+      input2: '123456789',
     },
   })
 }

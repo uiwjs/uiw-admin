@@ -1017,14 +1017,14 @@ import { formatter } from 'uiw'
 import React, { useState } from 'react';
 const Demo = () => {
   const [ queryInfo ] = useState({
-    input:"周政",
-    textarea:"周政",
-    select:"周政",
+    input:"Jason",
+    textarea:"Jason",
+    select:"Jason",
     dateInputsecond: '2021-1-21 23:59:59',
     dateInput: '2021-1-21',
     monthPicker: '2021-1',
     timePicker: '2021-1-21 22:59:59',
-    searchSelect:["周政"],
+    searchSelect:["Jason"],
     rate:2
   })
   const form = useForm()
@@ -1055,7 +1055,7 @@ const Demo = () => {
                label: 'select',
                key: 'select',
                widget: 'select',
-               option:[{label:"周政",value:"周政"}],
+               option:[{label:"Jason",value:"Jason"}],
                initialValue: queryInfo?.select,
              },
              {
@@ -1101,7 +1101,7 @@ const Demo = () => {
               widgetProps:{
                 mode:"multiple",
               },
-              option:[{label:"周政",value:"周政"}],
+              option:[{label:"Jason",value:"Jason"}],
               initialValue:queryInfo.searchSelect || []
             },
             {

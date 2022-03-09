@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/exceptions",
-  "version": "5.2.28",
+  "version": "5.2.29",
   "description": "异常组件",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/Exceptions#readme",
@@ -40,7 +40,7 @@
   "peerDependencies": {
     "react": ">=17.x",
     "react-dom": ">=17.x",
-    "uiw": ">=4.12.0"
+    "uiw": ">=4.13.0"
   },
   "dependencies": {
     "@babel/runtime": "~7.17.0"

@@ -136,8 +136,12 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                   <Col key={index.toString()} fixed style={{ width: '20%' }} />
                 ))}
               <Col
-                align="middle"
-                style={{ textAlign: 'right', marginRight: 14 }}
+                align="bottom"
+                style={{
+                  textAlign: 'right',
+                  marginRight: 14,
+                  marginBottom: itemsLength % 5 === 0 ? 0 : 10,
+                }}
               >
                 {searchBtns &&
                   searchBtns.map((btn: any, idx) =>
