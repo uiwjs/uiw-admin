@@ -1131,6 +1131,56 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
+
+
+## 自定义表单组件
+
+> 给组件传`value`, `onChange`  一个是值 一个是组件更改数据回调
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import ReactDOM from 'react-dom';
+import { ProForm,useForm } from '@uiw-admin/components'
+import { formatter, Input, Button } from 'uiw'
+import React, { useState } from 'react';
+
+const Inputs = ({value, onChange}) => {
+  return <>
+    <Button>不要输错哦</Button>
+    <Input placeholder="请输入内容"  value={value} onChange={e => { onChange(e.target.value) }}  />
+  </>
+}
+
+const Demo = () => {
+  const [ queryInfo ] = useState({
+    input:"Jason",
+  })
+  const form = useForm()
+    return (
+       <ProForm
+        customWidgetsList={{inputs: Inputs}}
+        form={form}
+         title="只读模式"
+         formType="pure"
+         formDatas={
+           [
+             {
+               label: '自定义组件',
+               key: 'input',
+               widget: 'inputs',
+               // 只读模式下支持读取React.ReactNode
+               initialValue: queryInfo.input,
+             },
+           ]}
+       />
+  );
+}
+ReactDOM.render(<Demo />, _mount_);
+```
+
+```
+
+
 ## Props
 > 继承uiw-Form
 
