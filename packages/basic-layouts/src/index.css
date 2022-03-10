@@ -70,3 +70,7 @@
   height: 100%;
   padding: 14px;
 }
+
+.w-overlay {
+  z-index: 1000;
+}
