@@ -171,6 +171,19 @@ export const items = (queryInfo: any, attr: any) => [
     rules: [{ required: true, message: '请选择' }],
   },
   {
+    label: 'searchSelect2',
+    key: 'searchSelect2',
+    widget: 'searchSelect',
+    // option: attr.searchSelect.option,
+    widgetProps: {
+      labelInValue: true,
+      allowClear: true,
+      showSearch: true,
+    },
+    // initialValue: [1, 2, 3],
+    rules: [{ required: true, message: '请选择' }],
+  },
+  {
     label: '评分',
     key: 'rate',
     widget: 'rate',
