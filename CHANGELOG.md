@@ -13,7 +13,7 @@
   - 🌟`hideUserInfo`: 增加隐藏用户信息属性
 - @uiw-admin/user-login
   - 优化登录样式
-  - 🐞修复'align'属性不起作用问题
+  - 🐞修复`align`属性不起作用问题
 
 
 ## 5.2.29
