@@ -14,11 +14,12 @@
   display: flex;
   align-items: center;
   padding: 20px;
-  flex-direction: column;
+  /* flex-direction: column; */
 }
 
 .uiw-loayout-login-warp-left {
   justify-content: flex-start;
+  padding-left: 60px;
 }
 
 .uiw-loayout-login-warp-center {
@@ -27,6 +28,7 @@
 
 .uiw-loayout-login-warp-right {
   justify-content: flex-end;
+  padding-right: 60px;
 }
 
 .uiw-loayout-login-warp .uiw-loayout-login-body {
