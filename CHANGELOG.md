@@ -4,6 +4,17 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.30
+
+- 修改登录按钮loading
+- @uiw-admin/basic-layouts
+  - 🌟`hideReloadButton`: 增加隐藏刷新权限按钮属性
+  - 🌟`hideLogoutButton`: 增加隐藏退出登录按钮属性
+  - 🌟`hideUserInfo`: 增加隐藏用户信息属性
+- @uiw-admin/user-login
+  - 优化登录样式
+  - 🐞修复'align'属性不起作用问题
+
 
 ## 5.2.29
 
