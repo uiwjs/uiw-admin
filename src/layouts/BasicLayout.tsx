@@ -62,6 +62,9 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
+    // hideReloadButton: true,
+    // hideLogoutButton: true,
+    // hideUserInfo: true
   }
 
   // 验证是否登录的方式
