@@ -13,90 +13,7 @@
 ```bash
 npm i @uiw-admin/basic-layouts --save # yarn add @uiw-admin/basic-layouts
 ```
-<!-- ## 参数
 
-```ts
-
-export type BasicLayoutProps = {
-  logo?: string;
-  projectName?: string;
-  /**
-   * 页脚
-   */
-  footer?: React.ReactElement;
-  /** 子集路由 */ 
-  routes?: RoutersProps[];
-  children?: React.ReactNode;
-  /** 头部 布局 */
-  headerLayout?: "top" | "default",
-  /** 头部背景色 */
-  headerBackground?: string,
-  /** 头部字体颜色 */
-  headerFontColor?: string;
-    /** 菜单隐藏 */
-  menuHide?: boolean;
-} & HeaderRightProps;
-
-
-export interface HeaderMenuItemsProps {
-  title: React.ReactNode;
-  icon: JSX.Element | string | false | null;
-  onClick?: () => void;
-  divider?: boolean;
-  render?: React.ReactNode;
-}
-
-export interface HeaderRightProps {
-  /**
-   * 菜单
-   */
-  menus?: Array<HeaderMenuItemsProps>;
-  /**
-   * avatar 头像
-   * userName 用户名
-   * menuLeft 菜单左侧
-   */
-  profile?: {
-    avatar?: string;
-    userName?: string;
-    menuLeft?: React.ReactElement;
-  };
-  // 重新加载权限
-  onReloadAuth: () => void;
-  layouts?: UseLayoutsProps;
-}
-
-export interface Params {
-  headerRightvisible: boolean;
-}
-
-export interface UseLayoutsProps {
-  headerRightvisible: boolean;
-  closeMenu: () => void;
-  updateStore: (datas: Params) => void;
-}
-
-``` -->
-## Props
-
-| 参数                  | 必填 | 类型                                                                                     | 默认值    | 说明                     |
-| :-------------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
-| logo                  | 否   | `string`                                                                                 |           | logo图标                 |
-| projectName           | 否   | `string`                                                                                 |           | 项目名称                 |
-| footer                | 否   | `React.ReactElement`                                                                     |           | 页脚                     |
-| routes                | 否   | `RoutersProps[]`                                                                         |           | 菜单路由数据             |
-| children              | 否   | `React.ReactNode`                                                                        |           | 内容                     |
-| headerLayout          | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
-| headerBackground      | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
-| headerFontColor       | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
-| menuHide              | 否   | `boolen`                                                                                 | `false`   | 头部字体颜色             |
-| menus                 | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
-| profile               | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
-| onReloadAuth          | 否   | `() => void`                                                                             |           | 重新加载权限             |
-| layouts               | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
-| isDefaultContentStyle | 否   | `boolean`                                                                                | `true`    | 内容区域默认样式展示     |
-
-建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
 
 ## useLayouts
 
@@ -256,6 +173,95 @@ function BasicLayoutScreen() {
 }
 ReactDOM.render(<BasicLayoutScreen />, _mount_);
 ```
+
+
+<!-- ## 参数
+
+```ts
+
+export type BasicLayoutProps = {
+  logo?: string;
+  projectName?: string;
+  /**
+   * 页脚
+   */
+  footer?: React.ReactElement;
+  /** 子集路由 */ 
+  routes?: RoutersProps[];
+  children?: React.ReactNode;
+  /** 头部 布局 */
+  headerLayout?: "top" | "default",
+  /** 头部背景色 */
+  headerBackground?: string,
+  /** 头部字体颜色 */
+  headerFontColor?: string;
+    /** 菜单隐藏 */
+  menuHide?: boolean;
+} & HeaderRightProps;
+
+
+export interface HeaderMenuItemsProps {
+  title: React.ReactNode;
+  icon: JSX.Element | string | false | null;
+  onClick?: () => void;
+  divider?: boolean;
+  render?: React.ReactNode;
+}
+
+export interface HeaderRightProps {
+  /**
+   * 菜单
+   */
+  menus?: Array<HeaderMenuItemsProps>;
+  /**
+   * avatar 头像
+   * userName 用户名
+   * menuLeft 菜单左侧
+   */
+  profile?: {
+    avatar?: string;
+    userName?: string;
+    menuLeft?: React.ReactElement;
+  };
+  // 重新加载权限
+  onReloadAuth: () => void;
+  layouts?: UseLayoutsProps;
+}
+
+export interface Params {
+  headerRightvisible: boolean;
+}
+
+export interface UseLayoutsProps {
+  headerRightvisible: boolean;
+  closeMenu: () => void;
+  updateStore: (datas: Params) => void;
+}
+
+``` -->
+## Props
+
+| 参数                  | 必填 | 类型                                                                                     | 默认值    | 说明                     |
+| :-------------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
+| logo                  | 否   | `string`                                                                                 |           | logo图标                 |
+| projectName           | 否   | `string`                                                                                 |           | 项目名称                 |
+| footer                | 否   | `React.ReactElement`                                                                     |           | 页脚                     |
+| routes                | 否   | `RoutersProps[]`                                                                         |           | 菜单路由数据             |
+| children              | 否   | `React.ReactNode`                                                                        |           | 内容                     |
+| headerLayout          | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
+| headerBackground      | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
+| headerFontColor       | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
+| menuHide              | 否   | `boolen`                                                                                 | `false`   | 头部字体颜色             |
+| menus                 | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
+| profile               | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
+| onReloadAuth          | 否   | `() => void`                                                                             |           | 重新加载权限             |
+| layouts               | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
+| isDefaultContentStyle | 否   | `boolean`                                                                                | `true`    | 内容区域默认样式展示     |
+| hideReloadButton | 隐藏刷新权限按钮 | Boolean | `false` |
+| hideLogoutButton | 隐藏退出登录按钮 | Boolean | `false` |
+| hideUserInfo | 隐藏用户信息 | Boolean | `false` |
+
+建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
 
 ## 贡献者
 

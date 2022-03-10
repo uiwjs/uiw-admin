@@ -29,6 +29,12 @@ export interface HeaderRightProps {
   // 重新加载权限
   onReloadAuth: () => void;
   layouts?: UseLayoutsProps;
+  // 隐藏刷新权限按钮
+  hideReloadButton?: boolean;
+  // 隐藏退出登录按钮
+  hideLogoutButton?: boolean;
+  // 隐藏用户信息
+  hideUserInfo?: boolean;
 }
 
 export default function HeaderRightMenu({
@@ -36,35 +42,41 @@ export default function HeaderRightMenu({
   profile = {},
   onReloadAuth,
   layouts,
+  hideReloadButton,
+  hideLogoutButton,
+  hideUserInfo,
 }: HeaderRightProps) {
   const { headerRightvisible, updateStore } = layouts || {};
 
   const navigate = useNavigate();
 
   const menuData: Array<HeaderMenuItemsProps & any> = [
-    {
-      title: (
-        <span style={{ fontSize: 15 }}>
-          账号 {profile?.userName || 'admin'}
-        </span>
-      ),
-      icon: 'user',
-    },
-    {
-      divider: true,
-    },
+    ...(!hideUserInfo
+      ? [
+          {
+            title: (
+              <span style={{ fontSize: 15 }}>
+                账号 {profile?.userName || 'admin'}
+              </span>
+            ),
+            icon: 'user',
+          },
+          {
+            divider: true,
+          },
+        ]
+      : []),
     ...menus,
     {
       title: '刷新权限',
       icon: 'reload',
       onClick: () => onReloadAuth(),
-    },
-    {
-      divider: true,
+      style: { display: hideReloadButton ? 'none' : '' },
     },
     {
       title: '退出登录',
       icon: 'logout',
+      style: { display: hideLogoutButton ? 'none' : '' },
       onClick: () => {
         navigate('/login', { replace: true });
         sessionStorage.removeItem('token');
