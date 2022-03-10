@@ -15,15 +15,6 @@ npm i @uiw-admin/basic-layouts --save # yarn add @uiw-admin/basic-layouts
 ```
 
 
-## useLayouts
-
-### response
-| 参数               | 必填 | 类型                                             | 默认值 | 说明 |
-| :----------------- | :--- | :----------------------------------------------- | :----- | :--- |
-| headerRightvisible | 否   | `boolen`                                         |        |      |
-| closeMenu          | 否   | `() => void`                                     |        |      |
-| updateStore        | 否   | `(datas: {headerRightvisible: boolean}) => void` |        |      |
-
 ## 基本使用
 >   -  routes 渲染路由菜单
 >   -  headerLayout 配置头部布局
@@ -70,6 +61,7 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 ```
 
 ## 右侧下拉菜单
+
 >   - menus配置右侧下拉菜单内容;
 >   - profile配置头像以及下拉菜单左侧内容;
 >   - onReloadAuth调用刷新权限接口;
@@ -156,6 +148,7 @@ const routerArrs =[
   }
 ]
 
+
 function BasicLayoutScreen() {
   return <HashRouter window={window}>
 
@@ -172,6 +165,79 @@ function BasicLayoutScreen() {
     </HashRouter>
 }
 ReactDOM.render(<BasicLayoutScreen />, _mount_);
+```
+
+
+## 自定义退出
+
+通过隐藏系统默认的退出登录，自定义退出登录
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```tsx
+import React from 'react'
+import BasicLayout, {
+  useLayouts,
+} from '@uiw-admin/basic-layouts'
+import { HashRouter } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
+
+function BasicLayoutScreen() {
+ 
+  const layouts = useLayouts()
+
+
+ const basicLayoutProps = {
+    // 右侧下拉菜单内容
+    menus: [
+      {
+        title: '欢迎来到uiw',
+        icon: 'smile',
+        // 调用关闭菜单事件
+        onClick: () => layouts.closeMenu(),
+      },
+      {
+        title: '退出登录',
+        icon: 'setting',
+        onClick: () => { console.log('退出'); layouts.closeMenu() },
+
+      },
+    ],
+    profile: {
+      // 头像地址
+      avatar: '',
+      // 下拉菜单左侧内容
+      menuLeft:<div style={{ marginRight: 15 }}>可做自定义dom</div>
+    },
+    // 调用刷新接口
+    onReloadAuth: () => {},
+    layouts,
+    hideReloadButton: true,
+    hideUserInfo: true,
+    hideLogoutButton: true
+  }
+
+  return (
+    <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
+      </BasicLayout>
+    </HashRouter>
+  )
+}
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
+
 ```
 
 
@@ -262,6 +328,18 @@ export interface UseLayoutsProps {
 | hideUserInfo | 隐藏用户信息 | Boolean | `false` |
 
 建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
+
+
+
+
+## useLayouts
+
+### response
+| 参数               | 必填 | 类型                                             | 默认值 | 说明 |
+| :----------------- | :--- | :----------------------------------------------- | :----- | :--- |
+| headerRightvisible | 否   | `boolen`                                         |        |      |
+| closeMenu          | 否   | `() => void`                                     |        |      |
+| updateStore        | 否   | `(datas: {headerRightvisible: boolean}) => void` |        |      |
 
 ## 贡献者
 
