@@ -47,7 +47,7 @@ npx react-codemod update-react-imports
 如果使用ts修改tsconfig.json文件
 
 ```json
-"jsx": "react",
+"jsx": "react-jsx",
 ```
 
 
