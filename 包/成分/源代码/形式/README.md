@@ -1178,9 +1178,6 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-```
-
-
 ## Props
 > 继承uiw-Form
 
