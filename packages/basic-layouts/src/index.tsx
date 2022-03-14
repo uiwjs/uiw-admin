@@ -16,7 +16,7 @@ import { Icon } from 'uiw';
 
 import { MainContext } from './hook';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 export type BasicLayoutProps = {
   logo?: string;
@@ -37,11 +37,16 @@ export type BasicLayoutProps = {
   menuHide?: boolean;
   /** 是否使用 内容区域默认样式  */
   isDefaultContentStyle?: boolean;
+  // 隐藏刷新权限按钮
+  hideReloadButton?: boolean;
+  // 隐藏退出登录按钮
+  hideLogoutButton?: boolean;
+  // 隐藏用户信息
+  hideUserInfo?: boolean;
 } & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
     routes = [],
-    footer,
     projectName = 'UIW Admin',
     // 右侧菜单参数HeaderRightProps
     profile = {},
@@ -53,14 +58,15 @@ function BasicLayout(props: BasicLayoutProps) {
     headerFontColor = '#000',
     menuHide,
     isDefaultContentStyle = true,
+    hideReloadButton,
+    hideLogoutButton,
+    hideUserInfo,
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
 
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
-
-  const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
 
   const Menus = React.useMemo(() => {
     return <Menu collapsed={collapsed} routes={routeData} />;
@@ -86,6 +92,9 @@ function BasicLayout(props: BasicLayoutProps) {
           profile={profile}
           menus={menus}
           layouts={layouts}
+          hideReloadButton={hideReloadButton}
+          hideLogoutButton={hideLogoutButton}
+          hideUserInfo={hideUserInfo}
         />
       </div>
     );

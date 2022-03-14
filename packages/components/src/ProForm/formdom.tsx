@@ -34,7 +34,6 @@ function FormDom({
   useEffect(() => {
     formInstanceRef.current = baseRef;
   }, [baseRef]);
-
   return (
     <Form
       ref={baseRef}
@@ -61,7 +60,7 @@ function FormDom({
           }
         }
       }}
-      onChange={({ initial, current }) => onChange?.(initial, current)}
+      // onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
         if (onSubmitError) {
           onSubmitError?.(error);

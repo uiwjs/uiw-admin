@@ -26,6 +26,8 @@ npm i @uiw-admin/router-control --save # yarn add  @uiw-admin/router-control
 | addModels  | 否   | `(path: string) => Promise<{ default: any }>` | undefined |                                        |
 | isAutoAuth | 否   | `boolean`                                     | `history` | 是否自动校验 "/" 的路由 token 是否存在 |
 
+> 如果验证登录的字段不是token,可通过https://uiwjs.github.io/uiw-admin/#/config?title=defaultdefinetype-%E7%B1%BB%E5%9E%8B TOKEN_NAME 自定义
+
 ⚠️注意： `routeType`值为 `history`或`browser` 的时候需要设置 `kktrc` 配置 `publicPath` 值为 `"/"`
 
 ```ts
