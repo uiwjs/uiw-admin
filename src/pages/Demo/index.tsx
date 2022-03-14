@@ -1,19 +1,10 @@
+import { Button, Dropdown, Menu } from 'uiw'
 import { useDispatch } from 'react-redux'
 import { Dispatch } from '@uiw-admin/models'
 import { ProTable, useTable } from '@uiw-admin/components'
 import Detail from './Detail'
 import { RootState } from '@uiw-admin/models'
 import { useSelector } from 'react-redux'
-import {
-  Form,
-  Row,
-  Col,
-  SearchSelect,
-  Button,
-  Notify,
-  Dropdown,
-  Menu,
-} from 'uiw'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
@@ -76,43 +67,91 @@ const Demo = () => {
   )
 
   return (
-    <Form
-      resetOnSubmit={false}
-      fields={{
-        selectField: {
-          children: (
-            <SearchSelect labelInValue showSearch allowClear option={[]} />
-          ),
-        },
-      }}>
-      {({ fields, state, canSubmit }) => {
-        return (
-          <div>
-            <Row gutter={20}>
-              <Col fixed>1{fields.selectField}</Col>
-            </Row>
-
-            <Row>
-              <Col fixed>
+    <>
+      <ProTable
+        searchBtns={[
+          { label: '搜索', type: 'primary', htmlType: 'submit' },
+          {
+            render: (
+              <Dropdown menu={menu} trigger="click" placement="bottomRight">
+                <Button type="danger">搜索render</Button>
+              </Dropdown>
+            ),
+          },
+        ]}
+        operateButtons={[
+          {
+            label: '新增',
+            type: 'primary',
+            onClick: handleEditTable.bind(this, 'add'),
+          },
+          {
+            render: <Button type="danger">操作render</Button>,
+          },
+        ]}
+        columns={[
+          {
+            title: '姓名',
+            key: 'name',
+            align: 'center',
+            props: {
+              widget: 'input',
+              // 组件属性
+              widgetProps: {
+                preIcon: 'user',
+                placeholder: '输入用户名',
+              },
+            },
+          },
+          {
+            title: '年龄',
+            key: 'age',
+            align: 'center',
+            props: {
+              widget: 'select',
+              option: [
+                { label: '20', value: 20 },
+                { label: '10', value: 10 },
+              ],
+            },
+          },
+          {
+            title: '地址',
+            key: 'info',
+            align: 'center',
+          },
+          {
+            title: '操作',
+            key: 'edit',
+            align: 'center',
+            width: 98,
+            render: (text: any, key: any, rowData: any) => (
+              <div
+                style={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  display: 'flex',
+                }}>
                 <Button
-                  disabled={!canSubmit()}
-                  type="primary"
-                  htmlType="submit">
-                  提交
+                  size="small"
+                  type="danger"
+                  onClick={handleEditTable.bind(this, 'edit', rowData)}>
+                  编辑
                 </Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <pre style={{ padding: 10, marginTop: 10 }}>
-                  {JSON.stringify(state.current, null, 2)}
-                </pre>
-              </Col>
-            </Row>
-          </div>
-        )
-      }}
-    </Form>
+                <Button
+                  size="small"
+                  type="success"
+                  onClick={handleEditTable.bind(this, 'view', rowData)}>
+                  查看
+                </Button>
+              </div>
+            ),
+          },
+        ]}
+        table={table}
+      />
+      <Detail updateData={updateData} onSearch={table.onSearch} />
+    </>
   )
 }
 export default Demo
