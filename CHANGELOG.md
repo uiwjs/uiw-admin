@@ -4,6 +4,10 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.31
+
+- @uiw-admin/basic-layouts: 修复notify组件在Drawer组件中不显示
+
 ## 5.2.30
 
 - 修改登录按钮loading
