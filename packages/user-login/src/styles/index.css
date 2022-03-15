@@ -126,3 +126,12 @@
   text-align: center;
   line-height: 30px;
 }
+
+
+.w-overlay {
+  z-index: 1000;
+}
+
+.w-notify-warpper {
+  z-index: 1001;
+}

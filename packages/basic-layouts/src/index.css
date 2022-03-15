@@ -72,9 +72,9 @@
 }
 
 .w-overlay {
-  z-index: 1000 !important;
+  z-index: 1000;
 }
 
 .w-notify-warpper {
-  z-index: 1001 !important;
+  z-index: 1001;
 }
