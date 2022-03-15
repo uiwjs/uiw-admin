@@ -6,6 +6,10 @@
 
 ## 5.2.31
 
+- @uiw-admin/user-login: 修复notify组件在登录页中不显示
+
+## 5.2.31
+
 - @uiw-admin/basic-layouts: 修复notify组件在Drawer组件中不显示
 
 ## 5.2.30
