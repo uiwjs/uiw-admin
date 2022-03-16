@@ -1,10 +1,14 @@
 import UserLogin from '@uiw-admin/user-login'
 import { setCookie } from '@uiw-admin/utils'
-import { useNavigate } from 'react-router-dom'
 import { Notify } from 'uiw'
-const UserLayout = () => {
-  const navigate = useNavigate()
+import { DefaultProps } from '@uiw-admin/router-control'
 
+const UserLayout = (props: Required<DefaultProps>) => {
+  const {
+    router: { navigate },
+  } = props
+
+  console.log(props)
   return (
     <UserLogin
       buttons={[
@@ -23,7 +27,7 @@ const UserLayout = () => {
         userName: 'username',
         passWord: 'password',
       }}
-      onBefore={(store) => ({ a: 12, b: 1221, ...store })}
+      // onBefore={(store) => ({ a: 12, b: 1221, ...store })}
       onSuccess={(data) => {
         if (data && data.token) {
           setCookie('token', data.token)
