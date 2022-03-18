@@ -114,7 +114,7 @@ ReactDOM.render(<Demo1 />, _mount_);
 
 ```
 
-> 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则集成columns列key
+> 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则继承columns列key
 
 
 ```jsx
@@ -524,8 +524,8 @@ ReactDOM.render(<Demo4 />, _mount_);
 | ----------- | ------------------------------------- | --------------------------------------------------------------- | ------ |
 | widget      | 表单组件                              | 支持例子中的组件, 组件名与uiw表单组件名字一致，只是首字母小写了 | -      |
 | widgetProps | 组件属性                              | 与uiw对应的组件属性一致                                         | -      |
-| label       | 表单标题，如果不填则集成columns title | String                                                          | -      |
-| key         | 表单name，如果不填则集成columns key   | String       | -      |
+| label       | 表单标题，如果不填则继承columns title | String                                                          | -      |
+| key         | 表单name，如果不填则继承columns key   | String       | -      |
 | option      | 组件 是`checkbox`、`select`、`searchSelect`、`searchTree` 使用， 数据源统一叫option   | Array       | -      |
 
 
