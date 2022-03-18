@@ -25,6 +25,9 @@ const Demo = () => {
        <ProForm
          title="卡片表单"
          formType="card"
+         onChange={(initial, current) => {
+          console.log('onChange', initial, current);
+         }}
          formDatas={ [
              {
                label: 'input',

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Fields, FormItemsProps } from '../type';
 import {
   Input,
