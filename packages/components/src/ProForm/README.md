@@ -25,6 +25,9 @@ const Demo = () => {
        <ProForm
          title="卡片表单"
          formType="card"
+         onChange={(initial, current) => {
+          console.log('onChange', initial, current);
+         }}
          formDatas={ [
              {
                label: 'input',
@@ -34,6 +37,18 @@ const Demo = () => {
                widgetProps: {},
                span:"24",
              },
+              {
+              label: 'radio',
+              widget: 'radio',
+              key: 'radio',
+              widgetProps: {
+                disabled: false
+              },
+              option: [
+                { label: '男', value: 'man' },
+                { label: '女', value: 'girl' }
+              ],
+            },
           ]}
        />
     </div>

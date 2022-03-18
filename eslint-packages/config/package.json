@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-uiw-admin",
-  "version": "5.2.30",
+  "version": "5.2.33",
   "description": "eslint 配置",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/eslint-packages/config#readme",

@@ -60,7 +60,7 @@ function FormDom({
           }
         }
       }}
-      // onChange={({ initial, current }) => onChange?.(initial, current)}
+      onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
         if (onSubmitError) {
           onSubmitError?.(error);
