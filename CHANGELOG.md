@@ -4,7 +4,14 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.2.31
+## 5.2.33
+
+- @uiw-admin/components
+  - 🐞`ProForm`: 修复ProForm onChange无效
+  - 🐞`ProForm`: 修复ProForm Radio组件disabled无效
+
+
+## 5.2.32
 
 - @uiw-admin/user-login: 修复notify组件在登录页中不显示
 
