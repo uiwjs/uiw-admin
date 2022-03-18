@@ -37,6 +37,18 @@ const Demo = () => {
                widgetProps: {},
                span:"24",
              },
+              {
+              label: 'radio',
+              widget: 'radio',
+              key: 'radio',
+              widgetProps: {
+                disabled: false
+              },
+              option: [
+                { label: '男', value: 'man' },
+                { label: '女', value: 'girl' }
+              ],
+            },
           ]}
        />
     </div>
