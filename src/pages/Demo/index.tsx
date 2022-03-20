@@ -125,7 +125,7 @@ const Demo = () => {
             key: 'edit',
             align: 'center',
             width: 98,
-            render: (text: any, key: any, rowData: any) => (
+            render: (text, key, rowData) => (
               <div
                 style={{
                   alignItems: 'center',
