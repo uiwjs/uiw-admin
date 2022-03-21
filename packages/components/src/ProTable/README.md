@@ -470,7 +470,7 @@ ReactDOM.render(<Demo4 />, _mount_);
 
 | 参数           | 说明                                                   | 类型                                            | 默认值 |
 | -------------- | ------------------------------------------------------ | ----------------------------------------------- | ------ |
-| columns        | 与uiw table colunms用法一致 必传                       | FormCol[]                                       | []     |
+| columns        | 与`uiw table` colunms用法一致 必传, 如果需要表单，也在此增加`props`                     | FormCol[]                                       | []     |
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | searchBtns     | 搜索栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | table          | useTable返回值                                         | Object 必传                                     |        |
@@ -514,7 +514,7 @@ ReactDOM.render(<Demo4 />, _mount_);
 
 其余属性与uiw Table一致
 
-### columns props
+### columns  props
 
 配置搜索表单
 

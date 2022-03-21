@@ -49,15 +49,12 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // columns列和标题是否居中
   const defaultColumns = () => {
     return columns.map((item) => {
-      const { align = 'left', render } = item;
+      const { render } = item;
       return {
         ...item,
         // 标题样式
-        style: { textAlign: align },
         // 列内容
-        render: render
-          ? render
-          : (text: string) => <div style={{ textAlign: align }}>{text}</div>,
+        render: render ? render : (text: any) => <div>{text}</div>,
       };
     });
   };
