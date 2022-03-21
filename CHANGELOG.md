@@ -4,6 +4,12 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+
+## 5.2.34
+
+- @uiw-admin/components
+  - 🐞`ProForm`: 去除调试代码
+
 ## 5.2.33
 
 - @uiw-admin/components
