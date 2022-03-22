@@ -16,7 +16,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "~7.16.7",
     "@uiw-admin/authorized": "5.2.35",
     "@uiw-admin/basic-layouts": "5.2.35",
     "@uiw-admin/components": "5.2.35",
