@@ -134,7 +134,11 @@ const BaseTable: React.FC<BaseTableProps> = ({
     defaultSelected,
     type === 'radio',
   );
-
+  //  总数
+  const total =
+    formatData && data
+      ? formatData(data).total
+      : data?.total || prevData?.total;
   // 分页
   const onPageChange = useCallback(
     async (page) => {
@@ -165,8 +169,8 @@ const BaseTable: React.FC<BaseTableProps> = ({
       }
     });
     const stores: any = {
-      data: data?.data,
-      total: data?.total,
+      data: tableData,
+      total,
       loading: isValidating,
       // onSearch,
       selection,
@@ -184,16 +188,17 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
     // 上一次请求数据
     if (data) {
-      setPrevData(formatData ? formatData(data) : data);
+      setPrevData(tableData);
     }
   }, [
-    JSON.stringify(data),
+    JSON.stringify(tableData),
     isValidating,
     JSON.stringify(columns),
     pageIndex,
     JSON.stringify(selection),
     setPageIndex,
     mutate,
+    total,
   ]);
 
   const selectionCol = [
@@ -254,11 +259,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
                 {...paginationProps}
                 current={pageIndex}
                 pageSize={pageSize}
-                total={
-                  formatData && data
-                    ? formatData(data).total
-                    : data?.total || prevData?.total
-                }
+                total={total}
                 onChange={(page) => {
                   onPageChange(page);
                 }}
