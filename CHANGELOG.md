@@ -3,6 +3,13 @@
 [![](https://img.shields.io/github/release/uiwjs/uiw-admin.svg)](https://github.com/uiwjs/uiw-admin/releases)
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
+
+## 5.2.37
+
+- @uiw-admin/components
+  - 🐞`router-control`: 修复navigate 为空
+
+
 ## 5.2.36
 
 - @uiw-admin/components
