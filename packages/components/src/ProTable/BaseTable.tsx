@@ -46,16 +46,11 @@ const BaseTable: React.FC<BaseTableProps> = ({
   const { x } = scroll;
   const isCheckbox = type === 'checkbox';
 
-  // columns列和标题是否居中
+  // 提出表单属性
   const defaultColumns = () => {
     return columns.map((item) => {
-      const { render } = item;
-      return {
-        ...item,
-        // 标题样式
-        // 列内容
-        render: render ? render : (text: any) => <div>{text}</div>,
-      };
+      const { props, ...others } = item;
+      return others;
     });
   };
 
