@@ -4,6 +4,12 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.38
+
+- @uiw-admin/basic-layouts: 页面刷新二级菜单默认展开
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复table ellipsis属性不生效
+
 ## 5.2.37
 
 - @uiw-admin/components
