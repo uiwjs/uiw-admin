@@ -25,6 +25,9 @@ const Demo = () => {
        <ProForm
          title="卡片表单"
          formType="card"
+         onChange={(initial, current) => {
+          console.log('onChange', initial, current);
+         }}
          formDatas={ [
              {
                label: 'input',
@@ -34,6 +37,18 @@ const Demo = () => {
                widgetProps: {},
                span:"24",
              },
+              {
+              label: 'radio',
+              widget: 'radio',
+              key: 'radio',
+              widgetProps: {
+                disabled: false
+              },
+              option: [
+                { label: '男', value: 'man' },
+                { label: '女', value: 'girl' }
+              ],
+            },
           ]}
        />
     </div>
@@ -1178,9 +1193,6 @@ const Demo = () => {
 ReactDOM.render(<Demo />, _mount_);
 ```
 
-```
-
-
 ## Props
 > 继承uiw-Form
 
@@ -1192,8 +1204,8 @@ ReactDOM.render(<Demo />, _mount_);
 | onSubmitError           | 调用 onSubmit 抛出的任何错误。从字段名称返回对象映射。 继承uiw/form onSubmitError             | (error:`any`) => void |  -     |
 | showSaveButton     | 展示提交按钮                                      | boolean                                                                  | false  |
 | showResetButton    | 展示重置按钮                                      | boolean                                                                  | false  |
-| saveButtonProps    | 提交按钮api;继承于uiw/button                      | boolean                                                                  | false  |
-| resetButtonProps   | 重置按钮api;继承于uiw/button                      | boolean                                                                  | false  |
+| saveButtonProps    | 提交按钮api;继承于uiw/button                      | ButtonProps                                                                  | -  |
+| resetButtonProps   | 重置按钮api;继承于uiw/button                      | ButtonProps                                                                  | -  |
 | buttonsContainer   | buttons容器样式(可调整button布局)                 | React.CSSProperties                                                      | -      |
 | title              | 标题                                              | string                                                                   | -      |
 | formType           | 表单类型                                          | 'collapse' 或 'card' 或 'pure'                                           | 'card' |

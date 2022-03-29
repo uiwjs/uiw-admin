@@ -44,6 +44,12 @@ npx react-codemod update-react-imports
 
 ```
 
+如果使用ts修改tsconfig.json文件
+
+```json
+"jsx": "react-jsx",
+```
+
 
 `eslint-config-uiw-admin` 您可以通过编辑`.eslintrc.json`文件来覆盖设置。在 [ESLint](https://eslint.org/docs/user-guide/configuring) 网站上了解更多关于配置 ESLint的信息。
 

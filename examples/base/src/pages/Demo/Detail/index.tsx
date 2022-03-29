@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProDrawer, ProForm, useForm } from '@uiw-admin/components'
-import { Slider } from 'uiw'
+import { Slider, Notify } from 'uiw'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '@uiw-admin/models'
 import { items, items2 } from './items'
@@ -20,8 +20,7 @@ const selectOption = [
   { value: 6, label: '哈密瓜' },
 ]
 
-// eslint-disable-next-line no-unused-vars
-const Detail = ({ updateData, onSearch }: DetailProps) => {
+const Detail = ({ updateData }: DetailProps) => {
   const dispatch = useDispatch<Dispatch>()
   const [option] = React.useState<any>(selectOption)
   const [loading, setLoading] = React.useState(false)
@@ -46,6 +45,9 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
   }
 
   const handleSave = async () => {
+    Notify.success({
+      description: '123',
+    })
     // 触发验证
     await form.submitvalidate()
     await form2.submitvalidate()
@@ -90,6 +92,7 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         }}
         cardProps={{
           noHover: true,
+          style: { marginBottom: 10 },
         }}
         formType={isView ? 'pure' : 'card'}
         readOnly={isView}
@@ -110,7 +113,6 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
           }) as any
         }
       />
-      <div style={{ marginTop: 10 }} />
       <ProForm
         form={form2}
         title="个人信息"
@@ -132,7 +134,6 @@ const Detail = ({ updateData, onSearch }: DetailProps) => {
         buttonsContainer={{ justifyContent: 'flex-start' }}
         formDatas={items2(queryInfo) as any}
       />
-      <div style={{ marginTop: 10 }} />
     </ProDrawer>
   )
 }

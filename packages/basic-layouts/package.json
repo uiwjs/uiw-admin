@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/basic-layouts",
-  "version": "5.2.30",
+  "version": "5.2.38",
   "description": "Basic Layouts",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/basic-layouts#readme",
@@ -40,21 +40,21 @@
   "peerDependencies": {
     "react": ">=17.x",
     "react-dom": ">=17.x",
-    "uiw": ">=4.13.0"
+    "uiw": ">=4.x"
   },
   "dependencies": {
     "@babel/runtime": "~7.17.0",
-    "@uiw-admin/document-title": "5.2.30",
+    "@uiw-admin/document-title": "5.2.38",
     "classnames": "2.3.1"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
     "@types/react": "~17.0.39",
     "@types/react-dom": "~17.0.11",
-    "@uiw-admin/router-control": "5.2.30",
+    "@uiw-admin/router-control": "5.2.38",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
     "react-router-dom": "6.2.1",
-    "uiw": "^4.13.2"
+    "uiw": "^4.15.0"
   }
 }

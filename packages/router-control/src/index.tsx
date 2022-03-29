@@ -176,6 +176,7 @@ export function RouteChild(props: ControllerProps = {}) {
     }
     return [];
   }, [authStr]);
+
   const roue = React.useMemo(
     () =>
       createRoutesFromChildren(
@@ -222,6 +223,5 @@ export default function Controller(props: ControllerProps = {}) {
   if (load) {
     return <div>Loading...</div>;
   }
-
   return <Provider store={store}>{dom}</Provider>;
 }

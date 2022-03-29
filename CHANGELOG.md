@@ -4,6 +4,48 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.2.38
+
+- @uiw-admin/basic-layouts: 页面刷新二级菜单默认展开
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复table ellipsis属性不生效
+
+## 5.2.37
+
+- @uiw-admin/components
+  - 🐞`router-control`: 修复navigate 为空
+
+
+## 5.2.36
+
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复usetable获取不到data值
+
+## 5.2.35
+
+- @uiw-admin/components
+  - 🐞`ProTable`: 去除`align`，uiw table已经支持
+
+## 5.2.34
+
+- @uiw-admin/components
+  - 🐞`ProForm`: 去除调试代码
+
+## 5.2.33
+
+- @uiw-admin/components
+  - 🐞`ProForm`: 修复ProForm onChange无效
+  - 🐞`ProForm`: 修复ProForm Radio组件disabled无效
+
+
+## 5.2.32
+
+- @uiw-admin/user-login: 修复notify组件在登录页中不显示
+
+## 5.2.31
+
+- @uiw-admin/basic-layouts: 修复notify组件在Drawer组件中不显示
+
 ## 5.2.30
 
 - 修改登录按钮loading

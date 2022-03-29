@@ -1,6 +1,6 @@
 {
   "name": "@examples/base",
-  "version": "5.2.30",
+  "version": "5.2.38",
   "description": "Use Rematch & TypeScript for the project.",
   "private": true,
   "scripts": {
@@ -17,37 +17,35 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@babel/runtime": "~7.16.7",
-    "@uiw-admin/authorized": "5.2.30",
-    "@uiw-admin/basic-layouts": "5.2.30",
-    "@uiw-admin/components": "5.2.30",
-    "@uiw-admin/document-title": "5.2.30",
-    "@uiw-admin/exceptions": "5.2.30",
-    "@uiw-admin/layout-tabs": "5.2.30",
-    "@uiw-admin/models": "5.2.30",
-    "@uiw-admin/router-control": "5.2.30",
-    "@uiw-admin/user-login": "5.2.30",
-    "@uiw-admin/utils": "5.2.30",
-    "@uiw/reset.css": "1.0.5",
+    "@uiw-admin/authorized": "5.2.38",
+    "@uiw-admin/basic-layouts": "5.2.38",
+    "@uiw-admin/components": "5.2.38",
+    "@uiw-admin/document-title": "5.2.38",
+    "@uiw-admin/exceptions": "5.2.38",
+    "@uiw-admin/layout-tabs": "5.2.38",
+    "@uiw-admin/models": "5.2.38",
+    "@uiw-admin/router-control": "5.2.38",
+    "@uiw-admin/user-login": "5.2.38",
+    "@uiw-admin/utils": "5.2.38",
+    "@uiw/reset.css": "~1.0.5",
     "axios": "~0.24.0",
-    "classnames": "2.3.1",
+    "classnames": "~2.3.1",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
-    "react-redux": "7.2.6",
-    "react-router-dom": "6.2.1",
+    "react-redux": "~7.2.6",
+    "react-router-dom": "^6.2.1",
     "swr": "^1.1.2",
-    "uiw": "^4.13.6"
+    "uiw": "^4.15.0"
   },
   "devDependencies": {
-    "@types/classnames": "2.3.1",
     "@types/react": "~17.0.39",
     "@types/react-dom": "~17.0.11",
     "@types/react-redux": "~7.1.22",
-    "@uiw-admin/config": "5.2.30",
-    "kkt": "~7.1.5",
+    "@uiw-admin/config": "5.2.38",
+    "kkt": "^7.1.5",
     "lint-staged": "~12.3.4",
     "prettier": "~2.5.1",
-    "yorkie": "2.0.0"
+    "yorkie": "~2.0.0"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import classnames from 'classnames';
 import Menu, { MenuItemProps, SubMenuProps } from '@uiw/react-menu';
-import { DefaultProps } from '@uiw-admin/router-control';
+import { DefaultProps, RoutesBaseProps } from '@uiw-admin/router-control';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { matchPath, NavigateFunction } from 'react-router';
 
@@ -37,6 +37,7 @@ function renderMenuItem(
     if (matchPath({ path: item.path }, pathName)) {
       props.active = true;
     }
+
     if (item.routes) {
       if (collapsed) {
         props.overlayProps = {
@@ -44,6 +45,14 @@ function renderMenuItem(
           usePortal: true,
         };
       }
+      if (
+        item.routes.find((route: RoutesBaseProps) => route.path === pathName)
+      ) {
+        props.overlayProps = {
+          isOpen: true,
+        };
+      }
+
       return (
         <Menu.SubMenu {...props} text={item.name || '-'} collapse={collapsed}>
           {renderMenuItem(item.routes, collapsed, pathName, navigate)}
@@ -79,6 +88,7 @@ export default (props: MenuProps = {}) => {
   const location = useLocation();
   const navigate = useNavigate();
   const pathName = location.pathname;
+
   return (
     <Menu
       theme="dark"

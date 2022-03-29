@@ -114,7 +114,7 @@ ReactDOM.render(<Demo1 />, _mount_);
 
 ```
 
-> 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则集成columns列key
+> 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则继承columns列key
 
 
 ```jsx
@@ -470,7 +470,7 @@ ReactDOM.render(<Demo4 />, _mount_);
 
 | 参数           | 说明                                                   | 类型                                            | 默认值 |
 | -------------- | ------------------------------------------------------ | ----------------------------------------------- | ------ |
-| columns        | 与uiw table colunms用法一致 必传                       | FormCol[]                                       | []     |
+| columns        | 与`uiw table` colunms用法一致 必传, 如果需要表单，也在此增加`props`                     | FormCol[]                                       | []     |
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | searchBtns     | 搜索栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | table          | useTable返回值                                         | Object 必传                                     |        |
@@ -514,7 +514,7 @@ ReactDOM.render(<Demo4 />, _mount_);
 
 其余属性与uiw Table一致
 
-### columns props
+### columns  props
 
 配置搜索表单
 
@@ -524,8 +524,8 @@ ReactDOM.render(<Demo4 />, _mount_);
 | ----------- | ------------------------------------- | --------------------------------------------------------------- | ------ |
 | widget      | 表单组件                              | 支持例子中的组件, 组件名与uiw表单组件名字一致，只是首字母小写了 | -      |
 | widgetProps | 组件属性                              | 与uiw对应的组件属性一致                                         | -      |
-| label       | 表单标题，如果不填则集成columns title | String                                                          | -      |
-| key         | 表单name，如果不填则集成columns key   | String       | -      |
+| label       | 表单标题，如果不填则继承columns title | String                                                          | -      |
+| key         | 表单name，如果不填则继承columns key   | String       | -      |
 | option      | 组件 是`checkbox`、`select`、`searchSelect`、`searchTree` 使用， 数据源统一叫option   | Array       | -      |
 
 

@@ -52,7 +52,6 @@ export type FormProps = {
 
 export interface FormCol extends TableColumns {
   props?: FormProps | Array<FormProps>;
-  align?: 'center' | 'left' | 'right';
 }
 
 export interface BaseTableProps extends TableProps {
