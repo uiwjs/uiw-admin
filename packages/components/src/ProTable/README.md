@@ -618,6 +618,7 @@ props: [
 | onRefersh    | 刷新分页数据  | () => void        | -      |
 | onReset      | 重置表单，查询数据  | () => void         | -      |
 | onSearch     | 查询数据             | () => void         | -     |
+| form     | 返回搜索表单form实例各种内部函数,可用于主动触发事件, 与[Uiw Form](https://uiwjs.github.io/#/components/form) ref 属性返回的一致	             | Ref         | -     |
 
 ### selection
 

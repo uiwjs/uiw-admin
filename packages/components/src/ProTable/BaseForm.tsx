@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, MutableRefObject } from 'react';
 import {
   Button,
   Input,
@@ -13,7 +13,7 @@ import {
   MonthPicker,
   FormSubmitProps,
   SearchSelect,
-  // TreeChecked
+  FormRefType,
 } from 'uiw';
 import Select from './widgets/Select';
 import FormRadio from './widgets/Radio';
@@ -39,7 +39,7 @@ const widgets = {
 const BaseForm: React.FC<BaseFormProps> = (props) => {
   const store = useStore();
 
-  const formRef = useRef<any>();
+  const formRef = useRef<FormRefType>();
 
   let { updateStore, updateForm } = store as any;
 
