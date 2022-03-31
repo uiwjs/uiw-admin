@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.0
+
+- @uiw-admin/components
+  - 🌟``ProTable`: 支持表头分组配置统一表单
+
 ## 5.2.39
 
 - @uiw-admin/components
