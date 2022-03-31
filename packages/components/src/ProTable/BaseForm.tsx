@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, MutableRefObject } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import {
   Button,
   Input,
@@ -19,7 +19,7 @@ import Select from './widgets/Select';
 import FormRadio from './widgets/Radio';
 import SearchTree from './widgets/SearchTree';
 import { useStore } from './hooks';
-import { BaseFormProps, Fields, FormProps } from './types';
+import { BaseFormProps, Fields, FormProps, FormCol } from './types';
 
 const widgets = {
   input: Input,
@@ -60,21 +60,28 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
   // 获取表单配置
   const getFormFields = useMemo(() => {
     const fields: Fields = {};
-    columns.forEach((col) => {
-      if (col.props && Object.keys(col.props).length > 0) {
-        if (Array.isArray(col.props)) {
-          col.props.forEach((f) => {
-            const name = f.key || col.key;
-            fields[name] = getFields(f, col.title);
-          });
-        } else {
-          const { key } = col.props;
-          const name = key || col.key;
-          fields[name] = getFields(col.props, col.title);
+    const helper = (cols: FormCol[]) => {
+      cols.forEach((col) => {
+        if (col.props && Object.keys(col.props).length > 0) {
+          if (Array.isArray(col.props)) {
+            col.props.forEach((f) => {
+              const name = f.key || col.key;
+              fields[name] = getFields(f, col.title);
+            });
+          } else {
+            const { key } = col.props;
+            const name = key || col.key;
+            fields[name] = getFields(col.props, col.title);
+          }
         }
-      }
-    });
+        // 多层children
+        if (col.children && col.children.length > 0) {
+          helper(col.children);
+        }
+      });
+    };
 
+    helper(columns);
     return fields;
   }, [JSON.stringify(columns)]);
 

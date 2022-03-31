@@ -6,10 +6,7 @@
 
 当你的表格需要与服务端进行交互，又或者表格有查询条件时使用
 
-
-
 ### 基础用例
-
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
@@ -115,7 +112,6 @@ ReactDOM.render(<Demo1 />, _mount_);
 ```
 
 > 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则继承columns列key
-
 
 ```jsx
 <ProTable
@@ -264,7 +260,6 @@ ReactDOM.render(<Demo2 />, _mount_);
 
 ```
 
-
 ### table多选、单选行
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
@@ -346,7 +341,6 @@ const table = useTable('https://randomuser.me/api', {
 ReactDOM.render(<Demo3 />, _mount_);
 
 ```
-
 
 ### table表单验证
 
@@ -465,6 +459,124 @@ ReactDOM.render(<Demo4 />, _mount_);
 
 ```
 
+### 表头分组
+
+与uiw table使用方法一致，可通过传props配置统一的表单
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import { ProTable, useTable } from '@uiw-admin/components';
+
+function Demo5() {
+  const table = useTable('https://randomuser.me/api', {
+    // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
+    formatData: (data) => {
+      data.results = data.results.map(res => ({
+        ...res,
+        city: res.location.city,
+        country: res.location.country,
+      }))
+      return {
+        total: 100,
+        data: data.results,
+      };
+    },
+    // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
+    query: (pageIndex, pageSize, searchValues) => {
+      return {
+        page: pageIndex,
+        results: pageSize,
+        ...searchValues,
+      }
+    },
+    requestOptions: {method: 'GET'}
+  });
+  console.log(table)
+  return (
+    <ProTable
+       // 搜索栏按钮
+      searchBtns={[
+        {
+          label: '搜索',
+          type: 'primary',
+          onClick: () => {
+            table.onSearch()
+          },
+        },
+        {
+          label: '重置',
+          onClick: () => {
+            table.onReset()
+          },
+        },
+      ]}
+     
+      paginationProps={{
+        pageSizeOptions: [10,20,30],
+        pageSize: 10,
+      }}
+      table={table}
+      columns={[
+        {
+          title: '名字',
+          key: 'name',
+          width: 100,
+          props: {
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {
+              preIcon: 'user',
+              placeholder: '输入用户名',
+            },
+          },
+          render: (text) => {
+            return <div>{text.title}.{text.first}{text.last}</div>
+          }
+        },
+        {
+          title: '年龄',
+          key: 'registered',
+          width: 100,
+          props: {
+            widget: 'select',
+            key: 'age',
+            option: [
+              { label: '20', value: 20 },
+              { label: '10', value: 10 },
+            ],
+          },
+          render: (text) => {
+            return <div>{text.age}</div>
+          }
+        },
+        {
+          title: '区域',
+          key: 'location',
+          children: [{
+            title: '城市',
+            key: 'city',
+            props: {
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {
+              placeholder: '输入国家',
+            },
+          },
+            
+          }, {
+            title: '国家',
+            key: 'country',
+          }]
+        },
+      ]}
+    />
+  );
+}
+
+ReactDOM.render(<Demo5 />, _mount_);
+
+```
 
 ## Props
 
@@ -479,7 +591,6 @@ ReactDOM.render(<Demo4 />, _mount_);
 | rowSelection   | 选择框配置                                             | RowSelection                                    | -      |
 | scroll         | 设置横向滚动                         | ScrollProps        | -      |
 | paginationProps| 分页属性                      | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)        | -      |
-
 
 ### searchBtns
 
@@ -496,29 +607,23 @@ ReactDOM.render(<Demo4 />, _mount_);
 
 ### rowSelection
 
-
 | 参数            | 说明                                     | 类型     | 默认值 |
 | --------------- | ---------------------------------------- | -------- | ------ |
 | checkbox        | 选择框类型                               | checkbox | radio  | checkbox |
 | selectKey       | 选择框的键名，必填,对应的column里的key。 | String   | -      |
 | defaultSelected | 选中默认值                               | []       | -      |
 
-
 ### ScrollProps
-
 
 | 参数 | 说明    | 类型             | 默认值 |
 | ---- | ------- | ---------------- | ------ |
 | x    | x轴宽度 | string 或 number | -      |
-
 
 其余属性与uiw Table一致
 
 ### columns  props
 
 配置搜索表单
-
-
 
 | 参数        | 说明                                  | 类型                                                            | 默认值 |
 | ----------- | ------------------------------------- | --------------------------------------------------------------- | ------ |
@@ -527,7 +632,6 @@ ReactDOM.render(<Demo4 />, _mount_);
 | label       | 表单标题，如果不填则继承columns title | String                                                          | -      |
 | key         | 表单name，如果不填则继承columns key   | String       | -      |
 | option      | 组件 是`checkbox`、`select`、`searchSelect`、`searchTree` 使用， 数据源统一叫option   | Array       | -      |
-
 
 当前支持的widget组件有
 
@@ -579,9 +683,9 @@ props: [
 
 | 参数    | 说明         | 类型   | 默认值 |
 | ------- | ------------ | ------ | ------ |
-| pageSizeOptions | 指定每页可以显示多少条	     | Number[]	 | {}     |
-| pageSize | 每页条数		     | Number | 10     |
-| onShowSizeChange     | pageSize 变化的回调	 | Function(current, pageSize)	 | -      |
+| pageSizeOptions | 指定每页可以显示多少条      | Number[]  | {}     |
+| pageSize | 每页条数       | Number | 10     |
+| onShowSizeChange     | pageSize 变化的回调  | Function(current, pageSize)  | -      |
 
 其余属性继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)
 
@@ -589,22 +693,19 @@ props: [
 
 ### params
 
-
 | 参数    | 说明         | 类型   | 默认值 |
 | ------- | ------------ | ------ | ------ |
 | api     | 接口请求地址 | string | -      |
 | options | 配置集合     | object | {}     |
-
 
 ### options
 
 | 参数             | 说明                                                              | 类型                                                                                     | 默认值                     |
 | ---------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------- |
 | formatData       | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式 | (data) => {total: 10, data: []}                                                          | -                          |
-| query            | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据   | (pageIndex: number, searchValues: any)	=> {page:  pageIndex, pageSize: 10, searchValues} | {}                         |
+| query            | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据   | (pageIndex: number, searchValues: any) => {page:  pageIndex, pageSize: 10, searchValues} | {}                         |
 | SWRConfiguration | swr配置                                                           | SWRConfiguration                                                                         | {revalidateOnFocus: false} |
 | requestOptions | request参数，继承自[axios config](https://axios-http.com/docs/req_config)     | object | {}     |
-
 
 ### response
 
@@ -618,7 +719,7 @@ props: [
 | onRefersh    | 刷新分页数据  | () => void        | -      |
 | onReset      | 重置表单，查询数据  | () => void         | -      |
 | onSearch     | 查询数据             | () => void         | -     |
-| form     | 返回搜索表单form实例各种内部函数,可用于主动触发事件, 与[Uiw Form](https://uiwjs.github.io/#/components/form) ref 属性返回的一致	             | Ref         | -     |
+| form     | 返回搜索表单form实例各种内部函数,可用于主动触发事件, 与[Uiw Form](https://uiwjs.github.io/#/components/form) ref 属性返回的一致              | Ref         | -     |
 
 ### selection
 
@@ -636,7 +737,6 @@ props: [
 | selectAll         | 选择全部元素       | () => void            | -      |
 | unSelectAll       | 取消选择全部元素   | () => void            | -      |
 | toggleAll         | 反选全部元素       | () => void            | -      |
-
 
 ## 贡献者
 
