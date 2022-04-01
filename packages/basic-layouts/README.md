@@ -23,6 +23,7 @@ npm i @uiw-admin/basic-layouts --save # yarn add @uiw-admin/basic-layouts
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```tsx
+window.SEARCH_MENU = true
 import React from 'react'
 import BasicLayout, {
   useLayouts,
@@ -69,6 +70,7 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
+window.SEARCH_MENU = true
 import React from 'react'
 import BasicLayout, {
   useLayouts,
@@ -130,6 +132,7 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
+window.SEARCH_MENU = true
 import React from 'react'
 import BasicLayout from '@uiw-admin/basic-layouts'
 import { HashRouter } from 'react-router-dom';
@@ -174,6 +177,7 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```tsx
+window.SEARCH_MENU = true
 import React from 'react'
 import BasicLayout, {
   useLayouts,
