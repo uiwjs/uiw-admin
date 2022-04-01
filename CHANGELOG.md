@@ -4,6 +4,14 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+
+## 5.3.1
+
+- @uiw-admin/basic-layouts
+  - 🌟 新增菜单搜索功能,
+- @uiw-admin/config
+  - 🌟 新增 define 变量 `SEARCH_MENU` ，用以控制菜单搜索功能
+
 ## 5.3.0
 
 - @uiw-admin/components
