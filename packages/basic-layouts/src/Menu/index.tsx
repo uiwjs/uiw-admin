@@ -193,7 +193,7 @@ const SearchMenus = (props: MenuProps) => {
   };
 
   return (
-    <div style={{ marginBottom: 8 }}>
+    <div style={{ marginBottom: 10, padding: '0px 10px' }}>
       <SearchSelect
         placeholder="请输入"
         mode="single"
