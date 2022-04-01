@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, MutableRefObject } from 'react';
 import { Params, useTableData, stateParams } from './types';
+import { FormRefType } from 'uiw';
 
 const useTable = (key: string, params: Params = {}): useTableData => {
   const { formatData, query, SWRConfiguration, requestOptions } = params;
 
   // 表单组件实例
-  const [form, setForm] = useState<any>(null);
+  const [form, setForm] = useState<MutableRefObject<FormRefType>>();
 
   const [state, setState] = useState<any>({
     // 当前页码
@@ -51,7 +52,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   };
   // 重置
   const onReset = async () => {
-    await form.current.resetForm();
+    await form?.current.getError();
     onSearch();
   };
   // 刷新当前页数据
@@ -63,6 +64,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     // 需要表单存在
     if (form) {
       await form.current.onSubmit();
+      // @ts-ignore
       const isNoError = form.current.getError();
       if (Object.keys(isNoError).length === 0) {
         await state.setPageIndex(1);

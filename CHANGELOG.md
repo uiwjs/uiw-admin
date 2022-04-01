@@ -4,6 +4,17 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.0
+
+- @uiw-admin/components
+  - 🌟``ProTable`: 支持表头分组配置统一表单
+
+## 5.2.39
+
+- @uiw-admin/components
+  - 🌟``ProTable`: 完善组件类型文档，更好的支持TypeScript
+
+
 ## 5.2.38
 
 - @uiw-admin/basic-layouts: 页面刷新二级菜单默认展开
