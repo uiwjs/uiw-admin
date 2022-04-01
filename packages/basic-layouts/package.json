@@ -45,9 +45,11 @@
   "dependencies": {
     "@babel/runtime": "~7.17.0",
     "@uiw-admin/document-title": "5.2.38",
-    "classnames": "2.3.1"
+    "classnames": "2.3.1",
+    "pinyin": "2.11.1"
   },
   "devDependencies": {
+    "@types/pinyin": "2.10.0",
     "@types/classnames": "2.3.1",
     "@types/react": "~17.0.39",
     "@types/react-dom": "~17.0.11",
