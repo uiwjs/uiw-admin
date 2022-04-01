@@ -96,6 +96,7 @@ export default Demos
 
 window.AUTH = true // 是否开启权限校验
 window.STORAGE = "session" // 本地存储数据方式
+// 上面这两种变量可以在`.kktrc.js`文件中配置全局变量(`define`)
 sessionStorage.setItem('auth',JSON.stringify(["/dom/save","/dom/edit"])) // 权限数据
 // 以上数据只能为了能正常渲染设置的变量
 
