@@ -11,6 +11,8 @@
   - 🌟 新增菜单搜索功能,
 - @uiw-admin/config
   - 🌟 新增 define 变量 `SEARCH_MENU` ，用以控制菜单搜索功能
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复重置无效
 
 ## 5.3.0
 

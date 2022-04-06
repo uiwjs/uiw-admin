@@ -1,6 +1,6 @@
 {
   "name": "website",
-  "version": "5.3.0",
+  "version": "5.3.1",
   "private": true,
   "description": "Document webiste.",
   "scripts": {
@@ -17,18 +17,18 @@
   },
   "dependencies": {
     "@babel/runtime": "~7.16.7",
-    "@uiw-admin/authorized": "5.3.0",
-    "@uiw-admin/basic-layouts": "5.3.0",
-    "@uiw-admin/components": "5.3.0",
-    "@uiw-admin/config": "5.3.0",
-    "@uiw-admin/document-title": "5.3.0",
-    "@uiw-admin/exceptions": "5.3.0",
-    "@uiw-admin/layout-tabs": "5.3.0",
-    "@uiw-admin/markdown-navbar": "5.3.0",
-    "@uiw-admin/models": "5.3.0",
-    "@uiw-admin/plugins": "5.3.0",
-    "@uiw-admin/router-control": "5.3.0",
-    "@uiw-admin/user-login": "5.3.0",
+    "@uiw-admin/authorized": "5.3.1",
+    "@uiw-admin/basic-layouts": "5.3.1",
+    "@uiw-admin/components": "5.3.1",
+    "@uiw-admin/config": "5.3.1",
+    "@uiw-admin/document-title": "5.3.1",
+    "@uiw-admin/exceptions": "5.3.1",
+    "@uiw-admin/layout-tabs": "5.3.1",
+    "@uiw-admin/markdown-navbar": "5.3.1",
+    "@uiw-admin/models": "5.3.1",
+    "@uiw-admin/plugins": "5.3.1",
+    "@uiw-admin/router-control": "5.3.1",
+    "@uiw-admin/user-login": "5.3.1",
     "@uiw/react-code-preview": "4.0.5",
     "@uiw/react-domain-verify": "1.1.2",
     "@uiw/react-github-corners": "1.5.3",
@@ -40,7 +40,7 @@
     "react-router-dom": "6.2.1",
     "react-test-renderer": "17.0.2",
     "uiw": "^4.15.0",
-    "uiw-admin": "5.3.0"
+    "uiw-admin": "5.3.1"
   },
   "devDependencies": {
     "@kkt/less-modules": "~7.1.1",
