@@ -52,7 +52,8 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   };
   // 重置
   const onReset = async () => {
-    await form?.current.getError();
+    console.log(form);
+    await form?.current.resetForm();
     onSearch();
   };
   // 刷新当前页数据
