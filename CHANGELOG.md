@@ -4,6 +4,10 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.2
+
+- @uiw-admin/components
+  - 🌟 `ProTable`: 表单列支持自定义
 
 ## 5.3.1
 
