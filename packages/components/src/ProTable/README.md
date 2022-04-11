@@ -568,13 +568,121 @@ function Demo5() {
             title: '国家',
             key: 'country',
           }]
-        },
+        }
       ]}
     />
   );
 }
 
 ReactDOM.render(<Demo5 />, _mount_);
+
+```
+
+### 自定义表单列
+
+默认是一行五个，可自定义
+
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+import React from 'react';
+import { ProTable, useTable } from '@uiw-admin/components';
+
+function Demo6() {
+  const table = useTable('https://randomuser.me/api', {
+    // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
+    formatData: (data) => {
+      return {
+        total: 100,
+        data: data.results,
+      };
+    },
+    // 格式化查询参数 会接收到pageIndex 当前页  searchValues 表单数据
+    query: (pageIndex, pageSize, searchValues) => {
+      return {
+        page: pageIndex,
+        results: pageSize,
+        ...searchValues,
+      }
+    },
+    requestOptions: {method: 'GET'}
+  });
+
+  return (
+    <ProTable
+      formCol={2}
+       // 搜索栏按钮
+      searchBtns={[
+        {
+          label: '搜索',
+          type: 'primary',
+          onClick: () => {
+            table.onSearch()
+          },
+        },
+        {
+          label: '重置',
+          onClick: () => {
+            table.onReset()
+          },
+        },
+      ]}
+      paginationProps={{
+        pageSizeOptions: [10,20,30],
+        pageSize: 10,
+      }}
+      table={table}
+      columns={[
+        {
+          title: '名字',
+          key: 'name',
+          props: {
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {
+              preIcon: 'user',
+              placeholder: '输入用户名',
+            },
+          },
+          render: (text) => {
+            return <div>{text.title}.{text.first}{text.last}</div>
+          }
+        },
+        {
+          title: '年龄',
+          key: 'registered',
+          props: {
+            widget: 'select',
+            key: 'age',
+            option: [
+              { label: '20', value: 20 },
+              { label: '10', value: 10 },
+            ],
+          },
+          render: (text) => {
+            return <div>{text.age}</div>
+          }
+        },
+        {
+          title: '手机号',
+          key: 'phone',
+        },
+        {
+          title: '性别',
+          key: 'gender',
+          props: {
+            widget: 'select',
+            option: [
+              { label: 'female', value: 'female' },
+              { label: 'male', value: 'male' },
+            ],
+          },
+        },
+      ]}
+    />
+  );
+}
+
+ReactDOM.render(<Demo6 />, _mount_);
 
 ```
 
@@ -585,12 +693,13 @@ ReactDOM.render(<Demo5 />, _mount_);
 | columns        | 与`uiw table` colunms用法一致 必传, 如果需要表单，也在此增加`props`                     | FormCol[]                                       | []     |
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | searchBtns     | 搜索栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
-| table          | useTable返回值                                         | Object 必传                                     |        |
+| table          | useTable返回值                                    | Object 必传                                     |        |
 | onPageChange   | 分页回调             |（page: number） => void                        | -      |
 | onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询 | ({initial, current}) => Boolean                 |        |
-| rowSelection   | 选择框配置                                             | RowSelection                                    | -      |
-| scroll         | 设置横向滚动                         | ScrollProps        | -      |
-| paginationProps| 分页属性                      | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)        | -      |
+| rowSelection   | 选择框配置                                        | RowSelection                                    | -      |
+| scroll         | 设置横向滚动                                      | ScrollProps        | -      |
+| paginationProps| 分页属性                                          | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)        | -      |
+| formCol        | 网格中表单一行列数                                 | number    | 5      |
 
 ### searchBtns
 

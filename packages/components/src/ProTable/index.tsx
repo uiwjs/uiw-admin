@@ -14,6 +14,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     searchBtns,
     onBeforeSearch,
     paginationProps,
+    formCol,
     ...tableProps
   } = props;
   const {
@@ -66,6 +67,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
             columns={columns}
             searchBtns={searchBtns}
             onBeforeSearch={onBeforeSearch}
+            formCol={formCol}
           />
         )}
 

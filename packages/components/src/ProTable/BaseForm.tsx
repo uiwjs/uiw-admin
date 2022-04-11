@@ -43,7 +43,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
   let { updateStore, updateForm } = store as any;
 
-  const { columns, searchBtns, onBeforeSearch } = props;
+  const { columns, searchBtns, onBeforeSearch, formCol = 5 } = props;
 
   const getFields = (formProps: FormProps, title: any) => {
     const { widgetProps, key, widget, label, initialValue, ...otherProps } =
@@ -102,8 +102,11 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
     }
   }, [formRef]);
 
+  // 表单占比
+  const cent = 100 / formCol + '%';
+
   const itemsLength = Object.keys(getFormFields).length;
-  const emptyLength = 4 - (itemsLength % 5);
+  const emptyLength = formCol - 1 - (itemsLength % formCol);
 
   return (
     <Form
@@ -133,15 +136,13 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
           <div>
             <Row gutter={12}>
               {Object.keys(fields).map((key) => (
-                <Col key={key} fixed style={{ width: '20%' }}>
+                <Col key={key} fixed style={{ width: cent }}>
                   {fields[key]}
                 </Col>
               ))}
-              {Array(emptyLength)
-                .fill('')
-                .map((value, index) => (
-                  <Col key={index.toString()} fixed style={{ width: '20%' }} />
-                ))}
+              {Array.from({ length: emptyLength }, (_, index) => (
+                <Col key={index.toString()} fixed style={{ width: cent }} />
+              ))}
               <Col
                 align="bottom"
                 style={{

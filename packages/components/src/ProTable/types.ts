@@ -34,6 +34,7 @@ export interface ProtableProps extends TableProps {
   scroll?: ScrollProps;
   paginationProps?: PaginationProps;
   requestOptions?: Options;
+  formCol?: number;
 }
 
 export type FormProps = {
