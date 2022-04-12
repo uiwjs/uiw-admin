@@ -61,6 +61,21 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 ```
 
+**菜单搜索功能**
+
+在根目录`.kktrc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen`
+
+```ts
+// .kktrc.js 
+import config from "@uiw-admin/config"
+export default config({
+  define:{
+    SEARCH_MENU:true
+  }
+})
+```
+
+
 ## 右侧下拉菜单
 
 >   - menus配置右侧下拉菜单内容;
@@ -332,9 +347,6 @@ export interface UseLayoutsProps {
 | hideUserInfo | 隐藏用户信息 | Boolean | `false` |
 
 建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
-
-
-
 
 ## useLayouts
 
