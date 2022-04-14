@@ -3,13 +3,10 @@ import { useDispatch } from 'react-redux'
 import { Dispatch } from '@uiw-admin/models'
 import { ProTable, useTable } from '@uiw-admin/components'
 import Detail from './Detail'
-import { RootState } from '@uiw-admin/models'
-import { useSelector } from 'react-redux'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
-  const stores = useSelector((state: RootState) => state)
-  console.log(stores)
+
   const updateData = (payload: any) => {
     dispatch({
       type: 'demo/updateState',
@@ -93,7 +90,6 @@ const Demo = () => {
           {
             title: '姓名',
             key: 'name',
-            align: 'center',
             props: {
               widget: 'input',
               // 组件属性
@@ -106,7 +102,6 @@ const Demo = () => {
           {
             title: '年龄',
             key: 'age',
-            align: 'center',
             props: {
               widget: 'select',
               option: [
@@ -118,14 +113,12 @@ const Demo = () => {
           {
             title: '地址',
             key: 'info',
-            align: 'center',
           },
           {
             title: '操作',
             key: 'edit',
-            align: 'center',
             width: 98,
-            render: (text: any, key: any, rowData: any) => (
+            render: (text, key, rowData) => (
               <div
                 style={{
                   alignItems: 'center',

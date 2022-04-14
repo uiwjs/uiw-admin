@@ -4,10 +4,12 @@ import {
   TableProps,
   FormSubmitProps,
   PaginationProps,
+  FormRefType,
 } from 'uiw';
 import { SWRConfiguration, MutatorOptions } from 'swr';
 import { UseSelections } from './useSelections';
 import { Options } from '@uiw-admin/utils/src/request';
+import { MutableRefObject } from 'react';
 
 type SelectionType = 'checkbox' | 'radio';
 
@@ -32,6 +34,7 @@ export interface ProtableProps extends TableProps {
   scroll?: ScrollProps;
   paginationProps?: PaginationProps;
   requestOptions?: Options;
+  formCol?: number;
 }
 
 export type FormProps = {
@@ -52,7 +55,6 @@ export type FormProps = {
 
 export interface FormCol extends TableColumns {
   props?: FormProps | Array<FormProps>;
-  align?: 'center' | 'left' | 'right';
 }
 
 export interface BaseTableProps extends TableProps {
@@ -105,7 +107,7 @@ export interface useTableData extends Params {
   };
   loading: boolean;
   selection: UseSelections<any>;
-  form: unknown;
+  form: MutableRefObject<FormRefType>;
   updateForm: (p: stateParams) => void;
   setPageIndex: (p: number) => void;
   mutate: (data?: any, opts?: boolean | MutatorOptions | undefined) => void;
@@ -114,7 +116,7 @@ export interface useTableData extends Params {
 export type stateParams = {
   data?: Record<string, string | number | JSX.Element>[];
   total?: number;
-  form?: {
-    [key: string]: any;
-  };
+  // form?: {
+  //   [key: string]: any;
+  // };
 };

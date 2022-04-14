@@ -60,8 +60,8 @@ export default defaultConfig({
 
 src
   pages
-    foo/models/b.ts   绑定到  path === "/foo"
-    test/models.ts  绑定到  path === "/test"
+    foo/models/b.ts   绑定到  path === "/foo" 路由中
+    test/models.ts  绑定到  path === "/test" 路由中
 
 // config/routes.json
 [
@@ -147,6 +147,19 @@ export default defaultConfig({
 | VERSION       | 否   | `string`                                     | 默认`package.json`中的`version`字段值 | 版本                                   |
 | TOKEN_STORAGE | 否   | `枚举类型："local" \| "session" \| "cookie"` | `session`                             | token 存储方式 默认与 `STORAGE` 值相同 |
 | TOKEN_NAME    | 否   | `string`                                     | `token`                               | token 存储字段                         |
+| SEARCH_MENU    | 否   | `string \| boolean`                                     | `true`                               | 菜单搜索                     |
+
+```ts
+import config from "@uiw-admin/config"
+export default config({
+  // ...
+  define:{
+    // ...
+    SEARCH_MENU:true
+  }
+})
+```
+
 
 ## alias
 

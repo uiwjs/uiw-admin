@@ -190,7 +190,7 @@ export function RouteChild(props: ControllerProps = {}) {
   );
   const dom = useRoutes(roue);
   /** 赋值 用于跳转 */
-  // navigate = useNavigate();
+  navigate = useNavigate();
   return dom;
 }
 

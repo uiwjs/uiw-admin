@@ -32,6 +32,7 @@ interface LayoutTabsProps {
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
+window.SEARCH_MENU = true
 import LayoutTabs from "@uiw-admin/layout-tabs"
 import { HashRouter } from 'react-router-dom';
 
@@ -63,7 +64,7 @@ ReactDOM.render(<Demo />, _mount_);
 配合使用 `BasicLayout` 组件使用
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
-
+window.SEARCH_MENU = true
 import React from 'react'
 import BasicLayout from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'

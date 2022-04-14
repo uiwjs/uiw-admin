@@ -4,6 +4,58 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.2
+
+- @uiw-admin/components
+  - 🌟 `ProTable`: 表单列支持自定义
+
+## 5.3.1
+
+- @uiw-admin/basic-layouts
+  - 🌟 新增菜单搜索功能,
+- @uiw-admin/config
+  - 🌟 新增 define 变量 `SEARCH_MENU` ，用以控制菜单搜索功能
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复重置无效
+
+## 5.3.0
+
+- @uiw-admin/components
+  - 🌟``ProTable`: 支持表头分组配置统一表单
+
+## 5.2.39
+
+- @uiw-admin/components
+  - 🌟``ProTable`: 完善组件类型文档，更好的支持TypeScript
+
+
+## 5.2.38
+
+- @uiw-admin/basic-layouts: 页面刷新二级菜单默认展开
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复table ellipsis属性不生效
+
+## 5.2.37
+
+- @uiw-admin/components
+  - 🐞`router-control`: 修复navigate 为空
+
+
+## 5.2.36
+
+- @uiw-admin/components
+  - 🐞`ProTable`: 修复usetable获取不到data值
+
+## 5.2.35
+
+- @uiw-admin/components
+  - 🐞`ProTable`: 去除`align`，uiw table已经支持
+
+## 5.2.34
+
+- @uiw-admin/components
+  - 🐞`ProForm`: 去除调试代码
+
 ## 5.2.33
 
 - @uiw-admin/components

@@ -85,7 +85,7 @@ export default (props: UserLoginProps) => {
     styleWarp = {},
     classNameBody = '',
     styleBody = {},
-    footer,
+    footer = true,
     bg = bgDefault,
     logo = bgDefault,
     children,
@@ -167,6 +167,19 @@ export default (props: UserLoginProps) => {
       fieldArr = fields;
     }
   }
+
+  const FooterRender = React.useMemo(() => {
+    if (footer === false || footer === '') {
+      return null;
+    } else if (footer === true) {
+      return (
+        <div className="copyright-footer">
+          版权所有 copyright &copy; 2022 uiw admin
+        </div>
+      );
+    }
+    return footer;
+  }, []);
 
   return (
     <div
@@ -298,13 +311,7 @@ export default (props: UserLoginProps) => {
           )}
         </div>
       </div>
-      {footer ? (
-        footer
-      ) : (
-        <div className="copyright-footer">
-          版权所有 copyright &copy; 2022 uiw admin
-        </div>
-      )}
+      {FooterRender}
     </div>
   );
 };

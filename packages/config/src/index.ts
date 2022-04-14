@@ -18,6 +18,8 @@ export type DefaultDefineType = {
   TOKEN_STORAGE?: 'local' | 'session' | 'cookie' | string;
   /** token 存储字段 ,默认 token  **/
   TOKEN_NAME?: string;
+  /** 菜单搜索  **/
+  SEARCH_MENU?: string | boolean;
 };
 
 /** 全局默认公共参数  */
@@ -35,6 +37,8 @@ export const defaultDefine: DefaultDefineType = {
   TOKEN_STORAGE: 'session',
   /** token 存储字段 **/
   TOKEN_NAME: 'token',
+  /** 菜单搜索  **/
+  SEARCH_MENU: true,
 };
 
 export type ConfFun = (

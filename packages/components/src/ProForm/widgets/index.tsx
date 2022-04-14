@@ -60,7 +60,6 @@ export function getFormFields(
       if (!hide) {
         const name = key;
         const Widget = widgetsList[widget];
-        console.log(widgetProps);
         fields[name] = {
           label: label,
           children: <Widget {...widgetProps} />,
