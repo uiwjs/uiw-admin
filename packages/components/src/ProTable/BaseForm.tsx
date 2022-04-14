@@ -14,6 +14,7 @@ import {
   FormSubmitProps,
   SearchSelect,
   FormRefType,
+  DateInputRange,
 } from 'uiw';
 import Select from './widgets/Select';
 import FormRadio from './widgets/Radio';
@@ -33,6 +34,7 @@ const widgets = {
   timePicker: TimePicker,
   monthPicker: MonthPicker,
   searchTree: SearchTree,
+  dateInputRange: DateInputRange,
   // treeChecked: TreeChecked,
 };
 

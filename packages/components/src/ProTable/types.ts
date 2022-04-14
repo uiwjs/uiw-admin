@@ -49,7 +49,8 @@ export type FormProps = {
     | 'timePicker'
     | 'searchSelect'
     | 'monthPicker'
-    | 'searchTree';
+    | 'searchTree'
+    | 'dateInputRange';
   [key: string]: any;
 };
 
