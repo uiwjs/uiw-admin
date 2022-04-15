@@ -6,7 +6,7 @@ import { RoutersProps } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import LayoutTabs from '@uiw-admin/layout-tabs'
-
+import AuthPage from '@uiw-admin/authorized'
 interface BasicLayoutProps {
   routes: RoutersProps[]
 }
@@ -79,10 +79,12 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   //   </Auth>
   // )
   return (
-    <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false}>
-      {/* <Outlet /> */}
-      <LayoutTabs routes={props.routes || []} />
-    </BasicLayout>
+    <AuthPage authority={true} redirectPath="/login">
+      <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false}>
+        {/* <Outlet /> */}
+        <LayoutTabs routes={props.routes || []} />
+      </BasicLayout>
+    </AuthPage>
   )
 }
 export default BasicLayoutScreen
