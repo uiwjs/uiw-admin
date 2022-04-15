@@ -69,6 +69,16 @@ export const AuthLayout = (props: any) => {
   return props.children;
 };
 
+const getRegExp = (str: string, path: string | undefined) => {
+  try {
+    // 为了判断字符串是否可以转换成 RegExp 对象
+    const result = new RegExp(`${str}`);
+    return result.test(`${path}`);
+  } catch (err) {
+    return 'noRegExp';
+  }
+};
+
 /** 递归路由 判断是否有权限  */
 export const getDeepTreeRoute = (
   routes: RoutersProps[],
@@ -91,7 +101,15 @@ export const getDeepTreeRoute = (
         '/login',
       ].includes(itemObj.path)
     ) {
-      const fig = authList.find((ite) => ite === itemObj.path);
+      const fig = authList.find((ite) => {
+        if (/\*$/.test(ite)) {
+          const result = getRegExp(ite, item.path);
+          if (result !== 'noRegExp') {
+            return result;
+          }
+        }
+        return ite === itemObj.path;
+      });
       // itemObj.isAuth = !!fig || !!itemObj.isAuth
       // 1. fig 存在
       // 2. fig 不存在 但是 item.isAuth===true 存在
