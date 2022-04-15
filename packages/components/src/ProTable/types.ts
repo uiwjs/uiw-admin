@@ -23,11 +23,11 @@ type ScrollProps = {
   x?: string | number;
 };
 
-export interface ProtableProps extends TableProps {
+export interface ProtableProps<T = any> extends TableProps {
   table: useTableData;
   operateButtons?: Array<ButtonProps & { render?: JSX.Element }>;
   searchBtns?: Array<ButtonProps & { render?: JSX.Element }>;
-  columns: FormCol[];
+  columns: FormCol<T>[];
   onBeforeSearch?: (state: FormSubmitProps) => Boolean;
   rowSelection?: RowSelection;
   onPageChange?: (page: number) => void;
@@ -49,11 +49,12 @@ export type FormProps = {
     | 'timePicker'
     | 'searchSelect'
     | 'monthPicker'
-    | 'searchTree';
+    | 'searchTree'
+    | 'dateInputRange';
   [key: string]: any;
 };
 
-export interface FormCol extends TableColumns {
+export interface FormCol<T = any> extends TableColumns<T> {
   props?: FormProps | Array<FormProps>;
 }
 

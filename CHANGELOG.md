@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.3
+
+- @uiw-admin/components
+  - 🌟 `ProTable`: ProTable 添加 DateInputRange日期组件查询
+
 ## 5.3.2
 
 - @uiw-admin/components
