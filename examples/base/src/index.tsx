@@ -15,6 +15,7 @@ ReactDOM.render(
     }}>
     <Control
       routeType="hash"
+      isAutoAuth={false}
       // addModels={(path) => import(`${path}`)}
     />
   </SWRConfig>,

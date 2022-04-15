@@ -35,7 +35,7 @@ npm i @uiw-admin/authorized --save # yarn add @uiw-admin/authorized
 
 | 参数         | 必填 | 类型          | 默认值   | 说明             |
 | :----------- | :--- | :------------ | :------- | :--------------- |
-| authority    | 否   | `boolean`     |          | 是否已经登录     |
+| authority    | 否   | `boolean`     |          | 判断是否有权限展示内容    |
 | redirectPath | 否   | `string`      | `/login` | 未登录重定向路径 |
 | children     | 是   | `JSX.Element` |          | 是否已经登录     |
 

@@ -39,6 +39,51 @@ export default defaultConfig({
 })
 ```
 
+**自定义控制页面权限**
+
+需要更改两个文件
+
+[Control 组件参数](https://uiwjs.github.io/uiw-admin/#/authorized?title=authpage)
+
+```diff
+// /src/index.tsx
+
+// ...
+import Control from '@uiw-admin/router-control'
+
+export default ()=>{
+    // ...
+   return (
+    <Control
+      routeType="hash"
++     isAutoAuth={false}
+    />
+  )
+}
+
+```
+
+[AuthPage 组件参数](https://uiwjs.github.io/uiw-admin/#/authorized?title=authpage)
+
+```diff
+# // /src/layouts/BasicLayout.tsx
+
+# // ...
++ import AuthPage from "@uiw-admin/authorized"
+
+export default ()=>{
+    // ...
+   return (
+    #  authority 自定义控制页面权限 是否跳转登录页
++    <AuthPage authority={true} redirectPath="/login" >
+     # // ...
++    </AuthPage>
+  )
+}
+
+```
+
+
 ## 菜单路由参数
 
 | 参数       | 必须 | 类型                         | 默认值    | 说明                                                                                                             |
@@ -50,7 +95,7 @@ export default defaultConfig({
 | icon       | 否   | `string \| React.React.Node` | undefined | 菜单图标标                                                                                                       |
 | component  | 否   | `string`                     | undefined | 渲染组件的路径(如果是`403/404/500`的页面直接写 `403/404/500`,使用`@uiw-admin/plugins`里面的`routes`时会进行转换) |
 | hideInMenu | 否   | `boolean`                    | 无        | 是否隐藏菜单                                                                                                     |
-| isAuth     | 否   | `boolean`                    | 无        | 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准                                                    |
+| isAuth     | 否   | `boolean`                    | 无        | 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准，不走其他校验                                                |
 | routes     | 否   | `RoutersJSON[]`              | 无        | 子集 路由 ,(参数与菜单路由参数一致)                                                                              |
 | navigate   | 否   | `string`                     | 无        | 自定义跳转(`"(navigate) => {console.log('navigate', navigate)}"`)                                                |
 
