@@ -163,7 +163,6 @@ const SearchMenus = (props: MenuProps) => {
         const current: any = listRouters.find(
           (item) => item.path === obj.value,
         );
-        console.log(current);
         const result = onNavigate(current, navigate);
         if (!result) {
           return;

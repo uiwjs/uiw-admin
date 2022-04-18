@@ -11,7 +11,9 @@ import {
   HashRouter,
   BrowserRouter,
   Navigate,
+  matchPath,
 } from 'react-router-dom';
+
 // @ts-ignore
 import RoutePathArr from '@@/routes';
 import { Provider } from 'react-redux';
@@ -51,10 +53,11 @@ export const Loadable = (
 
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
+  const location = useLocation();
   // @ts-ignore
   let tokenName = TOKEN_NAME;
   // 本地 存储 token
-  let token = sessionStorage.getItem(tokenName);
+  let token: string | boolean | null = sessionStorage.getItem(tokenName);
   // @ts-ignore
   if (TOKEN_STORAGE === 'local') {
     token = localStorage.getItem(tokenName);
@@ -63,8 +66,37 @@ export const AuthLayout = (props: any) => {
   if (TOKEN_STORAGE === 'cookie') {
     token = getCookie(tokenName);
   }
+  let authorityJudgment: ControllerProps['authorityJudgment'] =
+    props.authorityJudgment;
+
+  if (authorityJudgment) {
+    if (Array.isArray(authorityJudgment)) {
+      token = !!authorityJudgment.find((path) =>
+        matchPath(path, location.pathname),
+      );
+    } else if (typeof authorityJudgment === 'function') {
+      token = authorityJudgment(location.pathname);
+    } else if (
+      typeof authorityJudgment === 'object' &&
+      authorityJudgment instanceof RegExp
+    ) {
+      token = authorityJudgment.test(location.pathname);
+    }
+    if (['/403', '/404', '/500'].includes(location.pathname)) {
+      token = true;
+    }
+  }
+
+  let navigateTo: ControllerProps['navigateTo'] = props.navigateTo;
+  let to = '/login';
+  if (typeof navigateTo === 'string') {
+    to = navigateTo;
+  } else if (typeof navigateTo === 'function') {
+    to = navigateTo(location.pathname);
+  }
+
   if (!token) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to={to} replace />;
   }
   return props.children;
 };
@@ -142,13 +174,21 @@ const getTree = (
   routes: RoutersProps[] = [],
   addModels: ControllerProps['addModels'],
   isAutoAuth: boolean,
+  authorityJudgment: ControllerProps['authorityJudgment'],
+  navigateTo: ControllerProps['navigateTo'],
 ): JSX.Element[] => {
   let list: JSX.Element[] = [];
   routes.forEach((item, ind) => {
     const itemObj = item;
     // 判断是否有子项进行递归处理
     if (item.routes) {
-      itemObj.children = getTree(itemObj.routes, addModels, isAutoAuth);
+      itemObj.children = getTree(
+        itemObj.routes,
+        addModels,
+        isAutoAuth,
+        authorityJudgment,
+        navigateTo,
+      );
     }
     // 懒加载
     if (!React.isValidElement(itemObj.component) && itemObj.component) {
@@ -174,7 +214,14 @@ const getTree = (
       itemObj.element = <Navigate to={itemObj.redirect} />;
     }
     if (itemObj.element && itemObj.path === '/' && isAutoAuth) {
-      itemObj.element = <AuthLayout>{itemObj.element}</AuthLayout>;
+      itemObj.element = (
+        <AuthLayout
+          authorityJudgment={authorityJudgment}
+          navigateTo={navigateTo}
+        >
+          {itemObj.element}
+        </AuthLayout>
+      );
     }
     list.push(<Route key={ind} {...itemObj} />);
   });
@@ -202,6 +249,8 @@ export function RouteChild(props: ControllerProps = {}) {
           getDeepTreeRoute(RoutePathArr, authList),
           props.addModels,
           !!props.isAutoAuth,
+          props.authorityJudgment,
+          props.navigateTo,
         ),
       ),
     [JSON.stringify(authList)],
@@ -213,7 +262,13 @@ export function RouteChild(props: ControllerProps = {}) {
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routeType, addModels, isAutoAuth = true } = props;
+  const {
+    routeType,
+    addModels,
+    isAutoAuth = true,
+    authorityJudgment,
+    navigateTo,
+  } = props;
   const load = useLoadModels({ path: '/', addModels });
   // @ts-ignore
   let base = BASE_NAME;
@@ -221,19 +276,34 @@ export default function Controller(props: ControllerProps = {}) {
     if (routeType === 'history') {
       return (
         <HistoryRouter history={history} basename={base}>
-          <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
+          <RouteChild
+            addModels={props.addModels}
+            isAutoAuth={isAutoAuth}
+            authorityJudgment={authorityJudgment}
+            navigateTo={navigateTo}
+          />
         </HistoryRouter>
       );
     } else if (routeType === 'browser') {
       return (
         <BrowserRouter window={window} basename={base}>
-          <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
+          <RouteChild
+            addModels={props.addModels}
+            isAutoAuth={isAutoAuth}
+            authorityJudgment={authorityJudgment}
+            navigateTo={navigateTo}
+          />
         </BrowserRouter>
       );
     }
     return (
       <HashRouter window={window} basename={base}>
-        <RouteChild addModels={props.addModels} isAutoAuth={isAutoAuth} />
+        <RouteChild
+          addModels={props.addModels}
+          isAutoAuth={isAutoAuth}
+          authorityJudgment={authorityJudgment}
+          navigateTo={navigateTo}
+        />
       </HashRouter>
     );
   }, [routeType]);
