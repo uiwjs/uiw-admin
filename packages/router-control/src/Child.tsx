@@ -110,12 +110,14 @@ export const getDeepTreeRoute = (
   routes: RoutersProps[],
   authList: string[],
   notLoginMenus: ControllerProps['notLoginMenus'],
+  navigateTo: ControllerProps['navigateTo'],
 ) => {
   return routes.map((item) => {
     const itemObj = { ...item };
     let authorityJudgmentFig = true;
+    const token = getToken();
 
-    const exclude = getToken() ? ['/welcome', '/home'] : [];
+    const exclude = token ? ['/welcome', '/home'] : [];
 
     if (
       // @ts-ignore
@@ -163,7 +165,17 @@ export const getDeepTreeRoute = (
       } else {
         itemObj.isAuth = false;
         itemObj.hideInMenu = true;
-        itemObj.component = <Exceptions403 />;
+        if (!token && item.path) {
+          let to = '/login';
+          if (typeof navigateTo === 'string') {
+            to = navigateTo;
+          } else if (typeof navigateTo === 'function') {
+            to = navigateTo(item.path);
+          }
+          itemObj.component = <Navigate to={to} replace />;
+        } else {
+          itemObj.component = <Exceptions403 />;
+        }
       }
     }
     if (itemObj.routes) {
@@ -171,6 +183,7 @@ export const getDeepTreeRoute = (
         itemObj.routes,
         authList,
         notLoginMenus,
+        navigateTo,
       );
     }
     if (itemObj.path && ['*', '/403', '/404', '/500'].includes(itemObj.path)) {

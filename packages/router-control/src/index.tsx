@@ -45,7 +45,12 @@ export function RouteChild(props: ControllerProps = {}) {
     () =>
       createRoutesFromChildren(
         getTree(
-          getDeepTreeRoute(RoutePathArr, authList, props.notLoginMenus),
+          getDeepTreeRoute(
+            RoutePathArr,
+            authList,
+            props.notLoginMenus,
+            props.navigateTo,
+          ),
           props.addModels,
           !!props.isAutoAuth,
           props.notLoginMenus,
