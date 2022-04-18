@@ -43,7 +43,28 @@ export default defaultConfig({
 })
 ```
 
-**自定义控制页面权限**
+## 不走登录配置
+
+```diff
+// /src/index.tsx
+
+// ...
+import Control from '@uiw-admin/router-control'
+
+export default ()=>{
+    // ...
+   return (
+    <Control
+      routeType="hash"
++     notLoginMenus={["/home"]}
+    />
+  )
+}
+
+```
+
+
+## 自定义控制页面权限
 
 需要更改两个文件
 
