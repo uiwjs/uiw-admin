@@ -16,7 +16,7 @@ ReactDOM.render(
     <Control
       routeType="hash"
       // isAutoAuth={false}
-      authorityJudgment={['/home']}
+      notLoginMenus={['/home']}
       // navigateTo="/404"
       // addModels={(path) => import(`${path}`)}
     />
