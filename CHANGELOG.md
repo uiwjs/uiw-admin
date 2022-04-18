@@ -8,7 +8,7 @@
 
 - @uiw-admin/router-control
   - 🌟 菜单权限匹配新增正则匹配
-  - 🌟 新增`authorityJudgment`参数控制部分菜单不登录直接进入展示
+  - 🌟 新增`notLoginMenus`参数控制部分菜单不登录直接进入展示
 
 ## 5.3.3
 

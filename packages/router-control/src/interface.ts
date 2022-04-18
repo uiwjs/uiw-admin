@@ -68,7 +68,7 @@ export interface ControllerProps {
   /** 是否自动校验 "/" 路由  token 是否存在,   */
   isAutoAuth?: boolean;
   /** 判断 "/" 路径 的权限 **/
-  authorityJudgment?: string[] | RegExp | ((current: string) => boolean);
+  notLoginMenus?: string[] | RegExp | ((current: string) => boolean);
   /**  判断 "/" 路径 的权限 重定向跳转地址  **/
   navigateTo?: string | ((current: string) => string);
 }
