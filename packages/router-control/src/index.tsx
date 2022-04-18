@@ -69,7 +69,7 @@ export const AuthLayout = (props: any) => {
   let authorityJudgment: ControllerProps['authorityJudgment'] =
     props.authorityJudgment;
 
-  if (authorityJudgment) {
+  if (authorityJudgment && !token) {
     if (Array.isArray(authorityJudgment)) {
       token = !!authorityJudgment.find((path) =>
         matchPath(path, location.pathname),
@@ -115,9 +115,11 @@ const getRegExp = (str: string, path: string | undefined) => {
 export const getDeepTreeRoute = (
   routes: RoutersProps[],
   authList: string[],
+  authorityJudgment: ControllerProps['authorityJudgment'],
 ) => {
   return routes.map((item) => {
     const itemObj = { ...item };
+    let authorityJudgmentFig = true;
     // @ts-ignore
     if (
       AUTH &&
@@ -133,7 +135,8 @@ export const getDeepTreeRoute = (
         '/login',
       ].includes(itemObj.path)
     ) {
-      const fig = authList.find((ite) => {
+      let fig;
+      fig = !!authList.find((ite) => {
         if (/\*$/.test(ite)) {
           const result = getRegExp(ite, item.path);
           if (result !== 'noRegExp') {
@@ -142,13 +145,30 @@ export const getDeepTreeRoute = (
         }
         return ite === itemObj.path;
       });
+
+      /** 可以不用登录直接查看的页面展示有权限 **/
+      if (authorityJudgment && item.path && !fig) {
+        if (Array.isArray(authorityJudgment)) {
+          fig = authorityJudgmentFig = !!authorityJudgment.find(
+            (path) => path === item.path,
+          );
+        } else if (typeof authorityJudgment === 'function') {
+          fig = authorityJudgmentFig = authorityJudgment(item.path);
+        } else if (
+          typeof authorityJudgment === 'object' &&
+          authorityJudgment instanceof RegExp
+        ) {
+          fig = authorityJudgmentFig = authorityJudgment.test(item.path);
+        }
+      }
+
       // itemObj.isAuth = !!fig || !!itemObj.isAuth
       // 1. fig 存在
       // 2. fig 不存在 但是 item.isAuth===true 存在
       // 3. fig  不存在 item.isAuth 不存在
       if (!!fig) {
         itemObj.isAuth = true;
-      } else if (!fig && item.isAuth) {
+      } else if (!fig && item.isAuth && authorityJudgmentFig) {
         itemObj.isAuth = true;
       } else {
         itemObj.isAuth = false;
@@ -157,7 +177,11 @@ export const getDeepTreeRoute = (
       }
     }
     if (itemObj.routes) {
-      itemObj.routes = getDeepTreeRoute(itemObj.routes, authList);
+      itemObj.routes = getDeepTreeRoute(
+        itemObj.routes,
+        authList,
+        authorityJudgment,
+      );
     }
     if (itemObj.path && ['*', '/403', '/404', '/500'].includes(itemObj.path)) {
       itemObj.hideInMenu = true;
@@ -165,6 +189,10 @@ export const getDeepTreeRoute = (
     // 默认有权限的就是有权限
     if (Reflect.has(item, 'isAuth')) {
       itemObj.isAuth = item.isAuth;
+    }
+    // authorityJudgmentFig 不登录的权限
+    if (!authorityJudgmentFig) {
+      itemObj.isAuth = authorityJudgmentFig;
     }
     return { ...itemObj };
   });
@@ -246,7 +274,7 @@ export function RouteChild(props: ControllerProps = {}) {
     () =>
       createRoutesFromChildren(
         getTree(
-          getDeepTreeRoute(RoutePathArr, authList),
+          getDeepTreeRoute(RoutePathArr, authList, props.authorityJudgment),
           props.addModels,
           !!props.isAutoAuth,
           props.authorityJudgment,

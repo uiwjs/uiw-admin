@@ -28,10 +28,12 @@
         "path": "/dom",
         "name": "子项",
         "icon": "copy",
+        "isAuth": true,
         "routes": [
           {
             "path": "/dom/courses",
             "name": "Dashboard",
+            "isAuth": true,
             "component": "@/pages/Dashboard"
           }
         ]
