@@ -30,7 +30,7 @@ npm i @uiw-admin/router-control --save # yarn add  @uiw-admin/router-control
 
 > 如果验证登录的字段不是token,可通过 [TOKEN_NAME](https://uiwjs.github.io/uiw-admin/#/config?title=defaultdefinetype-类型) 自定义
 
-⚠️注意：`notLoginMenus` 参数控制哪些菜单是可以不用登录直接展示的，当使用这个的时候的时候注意📢在不登录的情况下配置路由中 `isAuth` 参数无效 ，直接走`notLoginMenus`返回值判断。当登录的情况下，在路由的权限没有存储本地的情况下，才会调用`notLoginMenus`进行判断当前路由权限
+⚠️注意：`notLoginMenus` 参数控制哪些菜单是可以不用登录直接展示的，当使用这个的时候的时候注意📢在不登录的情况下配置路由中 `isAuth` 参数无效 ，直接走`notLoginMenus`返回值判断(默认存在的路由权限`"/" "*" "404" "403" "500" "/login"`)。当登录的情况下，在路由的权限没有存储本地的情况下，才会调用`notLoginMenus`进行判断当前路由权限
 
 ⚠️注意： `routeType`值为 `history`或`browser` 的时候需要设置 `kktrc` 配置 `publicPath` 值为 `"/"`
 
