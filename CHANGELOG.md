@@ -4,7 +4,7 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.3.4(未发版)
+## 5.3.4
 
 - @uiw-admin/router-control
   - 🌟 菜单权限匹配新增正则匹配
