@@ -28,7 +28,7 @@ npm i @uiw-admin/router-control --save # yarn add  @uiw-admin/router-control
 | notLoginMenus | 否   | `string[] \| RegExp \| ((current: string) => boolean)`  |   | 控制哪些菜单是可以不用登录直接展示的  |
 | navigateTo | 否   | `string \| ((current: string) => boolean)`  |   |  判断 "/" 路径 的权限  重定向跳转地址  |
 
-> 如果验证登录的字段不是token,可通过https://uiwjs.github.io/uiw-admin/#/config?title=defaultdefinetype-%E7%B1%BB%E5%9E%8B TOKEN_NAME 自定义
+> 如果验证登录的字段不是token,可通过 [TOKEN_NAME](https://uiwjs.github.io/uiw-admin/#/config?title=defaultdefinetype-类型) 自定义
 
 ⚠️注意：`notLoginMenus` 参数控制哪些菜单是可以不用登录直接展示的，当使用这个的时候的时候注意📢在不登录的情况下配置路由中 `isAuth` 参数无效 ，直接走`notLoginMenus`返回值判断。当登录的情况下，在路由的权限没有存储本地的情况下，才会调用`notLoginMenus`进行判断当前路由权限
 
