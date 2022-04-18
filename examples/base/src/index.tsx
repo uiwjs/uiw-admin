@@ -17,7 +17,7 @@ ReactDOM.render(
       routeType="hash"
       // isAutoAuth={false}
       authorityJudgment={['/home']}
-      navigateTo="/404"
+      // navigateTo="/404"
       // addModels={(path) => import(`${path}`)}
     />
   </SWRConfig>,
