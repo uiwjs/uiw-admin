@@ -4,6 +4,7 @@ module.exports.authList = [
   '/demo',
   '/dom',
   '/dom/*',
+  '/tableList/:id',
   '/exceptions',
   '/exceptions/403',
   '/exceptions/404',
