@@ -43,7 +43,7 @@ export default defaultConfig({
 })
 ```
 
-## 不走登录配置
+## 不需要登录可以展示的菜单
 
 ```diff
 // /src/index.tsx

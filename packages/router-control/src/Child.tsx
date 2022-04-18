@@ -37,9 +37,7 @@ export const Loadable = (
   };
 };
 
-/** 这是一种是否登录验证方式 */
-export const AuthLayout = (props: any) => {
-  const location = useLocation();
+const getToken = () => {
   // @ts-ignore
   let tokenName = TOKEN_NAME;
   // 本地 存储 token
@@ -52,6 +50,17 @@ export const AuthLayout = (props: any) => {
   if (TOKEN_STORAGE === 'cookie') {
     token = getCookie(tokenName);
   }
+  return token;
+};
+
+/** 这是一种是否登录验证方式 */
+export const AuthLayout = (props: any) => {
+  const location = useLocation();
+  // @ts-ignore
+  let tokenName = TOKEN_NAME;
+  // 本地 存储 token
+  let token: string | boolean | null = getToken();
+
   let notLoginMenus: ControllerProps['notLoginMenus'] = props.notLoginMenus;
 
   if (notLoginMenus && !token) {
@@ -105,20 +114,16 @@ export const getDeepTreeRoute = (
   return routes.map((item) => {
     const itemObj = { ...item };
     let authorityJudgmentFig = true;
-    // @ts-ignore
+
+    const exclude = getToken() ? ['/welcome', '/home'] : [];
+
     if (
+      // @ts-ignore
       AUTH &&
       itemObj.path &&
-      ![
-        '/',
-        '*',
-        '/403',
-        '/404',
-        '/500',
-        '/welcome',
-        '/home',
-        '/login',
-      ].includes(itemObj.path)
+      !['/', '*', '/403', '/404', '/500', '/login']
+        .concat(exclude)
+        .includes(itemObj.path)
     ) {
       let fig;
       fig = !!authList.find((ite) => {
