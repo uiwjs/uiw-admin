@@ -19,6 +19,10 @@ export * from './interface';
 import { useLoadModels } from './utils';
 import { getTree, getDeepTreeRoute } from './Child';
 
+export * from 'react-router-dom';
+export * from 'react-router';
+export * from 'react-redux';
+
 export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
 export let navigate: NavigateFunction = () => {};
