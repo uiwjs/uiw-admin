@@ -62,12 +62,11 @@ const LayoutTabs = (props: LayoutTabsProps) => {
 
   React.useMemo(() => {
     const tabData = [...pathArr].map((item) => {
-      if (item.path && Current.isMatch) {
-        const match = matchPath({ path: item.path }, location.pathname);
-        if (match) {
-          item.location = location;
-        }
-      } else if (item.path === location.pathname) {
+      //  /dom/1?a=2  a 是变量，替换
+      if (
+        item.location.pathname === location.pathname &&
+        location.search !== item.location.search
+      ) {
         item.location = location;
       }
       return item;
@@ -133,7 +132,6 @@ const LayoutTabs = (props: LayoutTabsProps) => {
         }}
       >
         {pathArr.map((item, index) => {
-          console.log(item.location.pathname);
           return (
             <Tabs.Pane
               key={item.location.pathname}
