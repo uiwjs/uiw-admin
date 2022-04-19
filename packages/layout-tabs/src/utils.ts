@@ -17,10 +17,24 @@ export const getRoutesList = (
   return list;
 };
 
-export const getRender = (
-  routeListData: RoutersProps[],
-  location: Location,
-) => {
+const getO = (routeListData: RoutersProps[], location: Location) => {
+  return routeListData.find((item) => {
+    if (location.pathname === '/' && item.index && item.redirect) {
+      return item.index;
+    }
+    if (
+      location &&
+      location.pathname &&
+      item.path &&
+      location.pathname !== '/'
+    ) {
+      return location.pathname === item.path;
+    }
+    return false;
+  });
+};
+
+const getM = (routeListData: RoutersProps[], location: Location) => {
   return routeListData.find((item) => {
     if (location.pathname === '/' && item.index && item.redirect) {
       return item.index;
@@ -35,4 +49,38 @@ export const getRender = (
     }
     return false;
   });
+};
+
+export const getMatch = (routeListData: RoutersProps[], location: Location) => {
+  const o = getO(routeListData, location);
+  if (o) {
+    return {
+      current: o,
+      isMatch: false,
+    };
+  } else {
+    const match = getM(routeListData, location);
+    return {
+      current: match,
+      isMatch: match ? true : false,
+    };
+  }
+};
+
+export const getMatchRender = (
+  routeListData: (RoutersProps & { location: Location; isMatch: boolean })[],
+  location: Location,
+  isMatch: boolean,
+) => {
+  if (isMatch) {
+    return getM(routeListData, location) as RoutersProps & {
+      location: Location;
+      isMatch: boolean;
+    };
+  } else {
+    return getO(routeListData, location) as RoutersProps & {
+      location: Location;
+      isMatch: boolean;
+    };
+  }
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs, Icon } from 'uiw';
 import { RoutersProps } from '@uiw-admin/router-control';
-import { getRoutesList, getRender } from './utils';
+import { getRoutesList, getMatch, getMatchRender } from './utils';
 import { matchPath } from 'react-router';
 import './styles/index.css';
 import { useNavigate, useLocation, Location } from 'react-router-dom';
@@ -15,37 +15,60 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [pathArr, setPathArr] = React.useState<
-    (RoutersProps & { location: Location })[]
+    (RoutersProps & { location: Location; isMatch: boolean })[]
   >([]);
 
-  const routeListData = getRoutesList(routes);
-  const Current = getRender(routeListData, location) as RoutersProps;
+  const routeListData = React.useMemo(() => getRoutesList(routes), [routes]);
+  const Current = getMatch(routeListData, location);
 
   React.useEffect(() => {
-    if (!Current) {
+    if (!Current.current) {
       // 没找到跳转
       navigate('/404');
       return;
     }
-    if (Current && Current.redirect) {
-      navigate(Current.redirect);
+    if (Current.current && Current.current.redirect) {
+      navigate(Current.current.redirect);
       return;
     }
-    const curr = getRender(pathArr, location);
+    const curr = getMatchRender(pathArr, location, Current.isMatch);
+    // 还有一种可能  /dom/:id 中的 id 值不一样，这种情况下需要替换
+
     if (!curr) {
       setPathArr((pre) =>
-        pre.concat([{ ...Current, location }]).filter((item) => !!item),
+        pre
+          .concat([{ ...Current.current, isMatch: Current.isMatch, location }])
+          .filter((item) => !!item),
       );
+    } else if (
+      curr &&
+      Current.isMatch &&
+      (curr.location.pathname !== location.pathname ||
+        curr.location.search !== location.search)
+    ) {
+      setPathArr((pre) => {
+        return pre.map((item) => {
+          if (curr.location.pathname === item.location.pathname) {
+            return {
+              ...item,
+              location,
+            };
+          }
+          return item;
+        });
+      });
     }
   }, [location.pathname]);
 
   React.useMemo(() => {
     const tabData = [...pathArr].map((item) => {
-      if (item.path) {
+      if (item.path && Current.isMatch) {
         const match = matchPath({ path: item.path }, location.pathname);
         if (match) {
           item.location = location;
         }
+      } else if (item.path === location.pathname) {
+        item.location = location;
       }
       return item;
     });
@@ -110,6 +133,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
         }}
       >
         {pathArr.map((item, index) => {
+          console.log(item.location.pathname);
           return (
             <Tabs.Pane
               key={item.location.pathname}
@@ -122,6 +146,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
                   }}
                 >
                   {item.name}
+                  {item.location.pathname}
                   {pathArr.length > 1 ? (
                     <Icon
                       type="close"
@@ -140,10 +165,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
       </Tabs>
       <div className="uiw-layout-tabs-body">
         {pathArr.map((item) => {
-          const match = matchPath(
-            { path: item.path as string },
-            location.pathname,
-          );
+          const match = item.location.pathname === location.pathname;
           return (
             <div
               key={item.location.pathname}
