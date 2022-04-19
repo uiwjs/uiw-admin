@@ -342,9 +342,9 @@ export interface UseLayoutsProps {
 | onReloadAuth          | 否   | `() => void`                                                                             |           | 重新加载权限             |
 | layouts               | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
 | isDefaultContentStyle | 否   | `boolean`                                                                                | `true`    | 内容区域默认样式展示     |
-| hideReloadButton | 隐藏刷新权限按钮 | Boolean | `false` |
-| hideLogoutButton | 隐藏退出登录按钮 | Boolean | `false` |
-| hideUserInfo | 隐藏用户信息 | Boolean | `false` |
+| hideReloadButton | 隐藏刷新权限按钮 | `Boolean` | `false` |
+| hideLogoutButton | 隐藏退出登录按钮 | `Boolean` | `false` |
+| hideUserInfo | 隐藏用户信息 | `Boolean` | `false` |
 
 建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
 
