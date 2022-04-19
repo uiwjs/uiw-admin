@@ -137,8 +137,13 @@ export const fromValidate = (rules: FromValidateProps[] = []) => {
           } else if (required && isNumberOrString(value) && !value) {
             errorObj[key] = message;
             // 自定义验证规则
-          } else if (validator && !validator(value)) {
-            errorObj[key] = message;
+          } else if (validator) {
+            const result = validator(value);
+            if (!result) {
+              errorObj[key] = message;
+            } else if (result && typeof result === 'string') {
+              errorObj[key] = result;
+            }
             // 正则判断
           } else if (
             isNumberOrString(value) &&
