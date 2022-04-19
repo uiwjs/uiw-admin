@@ -6,7 +6,7 @@
 
 ## 5.3.6
 
-- @uiw-admin/router-control
+- @uiw-admin/basic-layouts
   - 🐞 修复路由参数的方式照成面包屑不展示
 
 ## 5.3.5
