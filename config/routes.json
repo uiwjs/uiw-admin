@@ -42,6 +42,13 @@
             "name": "Dashboard",
             "isAuth": true,
             "component": "@/pages/Dashboard"
+          },
+          {
+            "path": "/dom/:id",
+            "name": "Dashboard2",
+            "isAuth": true,
+            "hideInMenu": true,
+            "component": "@/pages/TableList"
           }
         ]
       },
