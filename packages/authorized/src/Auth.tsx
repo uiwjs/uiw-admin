@@ -29,15 +29,18 @@ export interface AuthBtnProps {
 }
 export const AuthBtn = (props: AuthBtnProps) => {
   const { path, disabled, children } = props;
-  // @ts-ignore
-  if (AUTH) {
-    const fig = getAuthPath(path);
-    if (fig) {
-      return children;
-    } else if (disabled && React.isValidElement(children)) {
-      return React.cloneElement(children, { disabled } as any);
+  const fig = React.useMemo(() => {
+    // @ts-ignore
+    if (AUTH) {
+      return getAuthPath(path);
     }
-    return <React.Fragment />;
+    return true;
+  }, [path]);
+
+  if (fig) {
+    return children;
+  } else if (!fig && disabled && React.isValidElement(children)) {
+    return React.cloneElement(children, { disabled } as any);
   }
-  return children;
+  return <React.Fragment />;
 };
