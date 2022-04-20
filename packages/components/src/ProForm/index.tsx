@@ -97,7 +97,7 @@ function ProForm(props: ProFormProps, ref: any) {
   }
   return (
     <StoreCtx.Provider value={store}>
-      <ColPropsContext.Provider value={colProps}>
+      <ColPropsContext.Provider value={colProps || {}}>
         {children}
       </ColPropsContext.Provider>
     </StoreCtx.Provider>
