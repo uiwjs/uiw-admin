@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Avatar, Popover } from 'uiw';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { UseLayoutsProps } from '../useLayouts';
 import './index.css';
 
@@ -12,6 +12,9 @@ export interface HeaderMenuItemsProps {
   render?: React.ReactNode;
 }
 export interface HeaderRightProps {
+  // 退出登录
+  onLogout?: (navigate: NavigateFunction) => void;
+
   /**
    * 菜单
    */
@@ -45,6 +48,7 @@ export default function HeaderRightMenu({
   hideReloadButton,
   hideLogoutButton,
   hideUserInfo,
+  onLogout,
 }: HeaderRightProps) {
   const { headerRightvisible, updateStore } = layouts || {};
 
@@ -78,6 +82,10 @@ export default function HeaderRightMenu({
       icon: 'logout',
       style: { display: hideLogoutButton ? 'none' : '' },
       onClick: () => {
+        if (onLogout) {
+          onLogout(navigate);
+          return;
+        }
         navigate('/login', { replace: true });
         sessionStorage.removeItem('token');
         sessionStorage.removeItem('auth');
