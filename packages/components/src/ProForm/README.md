@@ -1258,7 +1258,7 @@ ReactDOM.render(<Demo />, _mount_);
 | -------- | -------- | ------------------------ | ------ |
 | message    | 验证提示消息     | string           | -      |
 | pattern    | 验证正则      | RegExp | -      |
-| validator | 自定义验证规则 | (value: any | any[]) => boolean\|string | - | 
+| validator | 自定义验证规则 | (value: any \| any[]) => boolean\|string | - | 
 | required | 是否必填 | boolean | - | 
 
 ### OptionsProps
