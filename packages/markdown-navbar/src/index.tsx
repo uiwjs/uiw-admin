@@ -183,9 +183,8 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   };
 
   const scrollToTarget = (dataId: string) => {
-    const target = document.querySelector(
-      `#${decodeURIComponent(dataId)}`,
-    ) as HTMLElement;
+    const ids = `${decodeURIComponent(dataId)}`.replace(/\./g, '');
+    const target = document.querySelector(`#${ids}`) as HTMLElement;
     if (target && typeof target.offsetTop === 'number') {
       safeScrollTo(window, target.offsetTop - headingTopOffset, 0);
     }
