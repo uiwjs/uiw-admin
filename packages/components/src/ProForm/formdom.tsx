@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
 import { ProFormProps } from './type';
-import { useStore } from './hooks/store';
+import { useStore, useColPropsContext } from './hooks/store';
 import { fromValidate } from './utils';
 import './style/form-item.less';
 
@@ -24,6 +24,7 @@ function FormDom({
 }) {
   const baseRef = useRef(null);
   const store = useStore();
+  const colProps = useColPropsContext();
 
   const { setFormState } = store as any;
 
@@ -75,10 +76,21 @@ function FormDom({
           <React.Fragment>
             <Row gutter={10}>
               {Object.keys(fields).map((key) => {
-                const colSpan = fields[key]?.props?.span || '8';
+                const colSpan =
+                  fields[key]?.props?.span ||
+                  (colProps && colProps.span) ||
+                  '8';
                 const colstyle = fields[key]?.props?.colstyle || {};
                 return (
-                  <Col style={{ ...{ ...colstyle } }} key={key} span={colSpan}>
+                  <Col
+                    {...colProps}
+                    style={{
+                      ...((colProps && colProps.style) || {}),
+                      ...colstyle,
+                    }}
+                    key={key}
+                    span={colSpan}
+                  >
                     {fields[key]}
                   </Col>
                 );

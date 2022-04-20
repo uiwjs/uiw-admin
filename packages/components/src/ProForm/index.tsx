@@ -4,7 +4,7 @@ import FormDom from './formdom';
 import ReadFormDom from './readform';
 import { getFormFields } from './widgets';
 import { ProFormProps, UseFormStateProps } from './type';
-import { StoreCtx } from './hooks/store';
+import { StoreCtx, ColPropsContext } from './hooks/store';
 import { isObjectEmpty } from './utils';
 import './style/form-item.less';
 
@@ -19,6 +19,7 @@ function ProForm(props: ProFormProps, ref: any) {
     cardProps = {},
     collapseProps = {},
     collapsePanelProps = {},
+    colProps,
   } = props;
 
   // 获取表单配置
@@ -94,8 +95,13 @@ function ProForm(props: ProFormProps, ref: any) {
   } else {
     children = child;
   }
-
-  return <StoreCtx.Provider value={store}>{children}</StoreCtx.Provider>;
+  return (
+    <StoreCtx.Provider value={store}>
+      <ColPropsContext.Provider value={colProps}>
+        {children}
+      </ColPropsContext.Provider>
+    </StoreCtx.Provider>
+  );
 }
 
 export default forwardRef(ProForm);

@@ -8,6 +8,7 @@ import {
   CollapseProps,
   CollapsePanelProps,
   FormState,
+  ColProps,
 } from 'uiw';
 export interface ProFormProps {
   formDatas?: FormItemsProps[];
@@ -37,6 +38,7 @@ export interface ProFormProps {
   cardProps?: CardProps;
   collapseProps?: CollapseProps;
   collapsePanelProps?: CollapsePanelProps;
+  colProps?: ColProps;
 }
 export interface FormItemsProps
   extends Omit<UiwFormItemProps<any>, 'initialValue' | 'validator'> {

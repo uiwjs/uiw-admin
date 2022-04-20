@@ -28,6 +28,7 @@ const Demo = () => {
          onChange={(initial, current) => {
           console.log('onChange', initial, current);
          }}
+         colProps={{span:12}}
          formDatas={ [
              {
                label: 'input',
@@ -35,7 +36,6 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               span:"24",
              },
               {
               label: 'radio',
@@ -1233,6 +1233,7 @@ ReactDOM.render(<Demo />, _mount_);
 | cardProps          | uiw`Card` API                                     | CardProps                                                                | {}     |
 | collapseProps      | uiw`Collapse` API                                 | CollapseProps                                                            | {}     |
 | collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
+| colProps           | uiw`Col` API,公共属性                              | colProps                                                                 |         |
 
 ### FormItemsProps
 > 继承uiw-FormItem
