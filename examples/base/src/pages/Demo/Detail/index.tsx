@@ -1,9 +1,9 @@
 import React from 'react'
 import { ProDrawer, ProForm, useForm } from '@uiw-admin/components'
 import { Slider, Notify } from 'uiw'
-import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '@uiw-admin/models'
 import { items, items2 } from './items'
+import { useDispatch, useSelector } from '@uiw-admin/router-control'
 
 interface DetailProps {
   updateData?: any
