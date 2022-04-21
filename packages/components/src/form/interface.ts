@@ -37,8 +37,8 @@ export interface ComFormProps<T = any> extends FormProps<T> {
   buttonGroupStyle?: React.CSSProperties;
 
   /** 老的API **/
-  showSaveButton: boolean;
-  showResetButton: boolean;
-  saveButtonProps: Omit<ButtonProps, 'ref'>;
-  resetButtonProps: Omit<ButtonProps, 'ref'>;
+  showSaveButton?: boolean;
+  showResetButton?: boolean;
+  saveButtonProps?: Omit<ButtonProps, 'ref'>;
+  resetButtonProps?: Omit<ButtonProps, 'ref'>;
 }
