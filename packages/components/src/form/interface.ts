@@ -11,6 +11,9 @@ export type Rule =
   | ((value: any) => string | undefined)
   | Record<string, unknown>;
 
+export interface FormButtonProps extends ButtonProps {
+  label?: string;
+}
 export interface FormFieldsNewProps<T = any>
   extends Omit<FormFieldsProps<T>, 'validator'> {
   rules?: Rule[];
@@ -39,6 +42,6 @@ export interface ComFormProps<T = any> extends FormProps<T> {
   /** 老的API **/
   showSaveButton?: boolean;
   showResetButton?: boolean;
-  saveButtonProps?: Omit<ButtonProps, 'ref'>;
-  resetButtonProps?: Omit<ButtonProps, 'ref'>;
+  saveButtonProps?: FormButtonProps;
+  resetButtonProps?: FormButtonProps;
 }

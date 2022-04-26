@@ -1235,6 +1235,17 @@ ReactDOM.render(<Demo />, _mount_);
 | collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
 | colProps           | uiw`Col` API,公共属性                              | colProps                                                                 |         |
 
+
+### saveButtonProps resetButtonProps
+
+其余属性继承于[uiw/button](https://uiwjs.github.io/#/components/button)
+
+| 参数     | 说明     | 类型                     | 默认值 |
+| -------- | -------- | ------------------------ | ------ |
+| label    | 按钮标题     | string           | 提交/重置      |
+
+
+
 ### FormItemsProps
 > 继承uiw-FormItem
 
