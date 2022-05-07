@@ -45,9 +45,6 @@ const Detail = ({ updateData }: DetailProps) => {
   }
 
   const handleSave = async () => {
-    Notify.success({
-      description: '123',
-    })
     // 触发验证
     await form.submitvalidate()
     await form2.submitvalidate()

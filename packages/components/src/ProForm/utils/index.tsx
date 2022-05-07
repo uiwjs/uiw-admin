@@ -124,6 +124,7 @@ export const fromValidate = (rules: FromValidateProps[] = []) => {
       rules.forEach(
         ({ validator = null, message = '', required, pattern = null }) => {
           // 必填 && object && 为空
+          console.log(key, value);
           if (required && isObject(value) && (isObjectEmpty(value) || !value)) {
             errorObj[key] = message;
             // 必填 && arrary && 为空
@@ -134,6 +135,8 @@ export const fromValidate = (rules: FromValidateProps[] = []) => {
           ) {
             errorObj[key] = message;
             // 必填 && string或number && 为空
+          } else if (required && (value === undefined || value === null)) {
+            errorObj[key] = message;
           } else if (required && isNumberOrString(value) && !value) {
             errorObj[key] = message;
             // 自定义验证规则
