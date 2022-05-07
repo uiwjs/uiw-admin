@@ -8,6 +8,7 @@
 
 - @uiw-admin/components
   - 🌟 [ProForm] 增加 `validator` 支持返回自定义提示内容
+  - 🐞 [ProForm] 修复验证日期无效
 
 ## 5.3.6
 
