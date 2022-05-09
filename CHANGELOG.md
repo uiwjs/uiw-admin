@@ -4,7 +4,12 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-## 5.3.7(未发版)
+## 5.3.8
+
+- @uiw-admin/components
+  - 🐞 [ProForm] [修复ProForm表单属性为hide也会表单校验](https://github.com/uiwjs/uiw-admin/issues/141)
+
+## 5.3.7
 
 - @uiw-admin/components
   - 🌟 [ProForm] 增加 `validator` 支持返回自定义提示内容
