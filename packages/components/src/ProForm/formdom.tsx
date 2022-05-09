@@ -45,14 +45,15 @@ function FormDom({
         if (onSubmit) {
           onSubmit?.(initial, current);
         } else {
+          const filterFormDatas = formDatas.filter(
+            (item) => item.hide !== true,
+          );
           const validateList =
-            (formDatas.length > 0 &&
-              formDatas.map((item) => ({
-                key: item.key,
-                value: current[item.key],
-                rules: item.rules,
-              }))) ||
-            [];
+            filterFormDatas.map((item) => ({
+              key: item.key,
+              value: current[item.key],
+              rules: item.rules,
+            })) || [];
           const errorObj = fromValidate(validateList);
           if (Object.keys(errorObj).length > 0) {
             const err: any = new Error();
