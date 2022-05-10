@@ -144,7 +144,6 @@ const LayoutTabs = (props: LayoutTabsProps) => {
                   }}
                 >
                   {item.name}
-                  {item.location.pathname}
                   {pathArr.length > 1 ? (
                     <Icon
                       type="close"
