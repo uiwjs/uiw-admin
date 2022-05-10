@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.9
+
+- @uiw-admin/layout-tabs
+  - 🐞 修复tabs渲染问题
+
 ## 5.3.8
 
 - @uiw-admin/components
