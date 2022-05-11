@@ -346,6 +346,8 @@ export interface UseLayoutsProps {
 | hideLogoutButton | 隐藏退出登录按钮 | `Boolean` | `false` |
 | hideUserInfo | 隐藏用户信息 | `Boolean` | `false` |
 | onLogout     | 否   | `(navigate: NavigateFunction) => void` |  | 覆盖原始退出事件 | 
+| onLogoClick     | 否   | `(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void` |  | logo 点击事件 | 
+
 
 建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
 

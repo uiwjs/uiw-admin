@@ -43,6 +43,10 @@ export type BasicLayoutProps = {
   hideLogoutButton?: boolean;
   // 隐藏用户信息
   hideUserInfo?: boolean;
+  /** 标题部分 点击事件 **/
+  onLogoClick?: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => void;
 } & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
@@ -61,6 +65,7 @@ function BasicLayout(props: BasicLayoutProps) {
     hideReloadButton,
     hideLogoutButton,
     hideUserInfo,
+    onLogoClick,
   } = props || {};
 
   const [collapsed, setCollapsed] = useState(false);
@@ -109,6 +114,7 @@ function BasicLayout(props: BasicLayoutProps) {
         {headerLayout === 'top' && (
           <div style={{ minWidth: 200 }}>
             <LogoHeader
+              onLogoClick={onLogoClick}
               collapsed={false}
               projectName={projectName}
               logo={props.logo}
@@ -153,6 +159,7 @@ function BasicLayout(props: BasicLayoutProps) {
               >
                 {headerLayout === 'default' ? (
                   <LogoHeader
+                    onLogoClick={onLogoClick}
                     collapsed={collapsed}
                     projectName={projectName}
                     logo={props.logo}

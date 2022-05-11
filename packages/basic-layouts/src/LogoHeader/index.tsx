@@ -6,6 +6,9 @@ interface LogoHeaderProps {
   collapsed?: boolean;
   projectName?: string;
   logo?: string;
+  onLogoClick?: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => void;
 }
 
 export default (props: LogoHeaderProps = {}) => {
@@ -24,6 +27,14 @@ export default (props: LogoHeaderProps = {}) => {
       ),
     [props.projectName, headerFontColor],
   );
+  const linkProps = useMemo(() => {
+    if (props.onLogoClick && typeof props.onLogoClick === 'function') {
+      return {
+        onClick: props.onLogoClick,
+      };
+    }
+    return {};
+  }, [props.onLogoClick]);
 
   return useMemo(
     () => (
@@ -36,6 +47,7 @@ export default (props: LogoHeaderProps = {}) => {
       >
         <Link
           to="/"
+          {...linkProps}
           style={props.collapsed ? { justifyContent: 'center' } : {}}
         >
           {logo}

@@ -80,7 +80,14 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   // )
   return (
     <AuthPage authority={true} redirectPath="/login">
-      <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false}>
+      <BasicLayout
+        {...basicLayoutProps}
+        onLogoClick={(event) => {
+          event.stopPropagation()
+          event.preventDefault()
+          console.log('logo点击事件', event)
+        }}
+        isDefaultContentStyle={false}>
         {/* <Outlet /> */}
         <LayoutTabs routes={props.routes || []} />
       </BasicLayout>
