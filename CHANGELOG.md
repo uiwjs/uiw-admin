@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.10
+
+- @uiw-admin/basic-layouts
+  - 🌟 新增login位置点击事件
+
 ## 5.3.9
 
 - @uiw-admin/layout-tabs
