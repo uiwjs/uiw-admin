@@ -117,7 +117,7 @@ export default ()=>{
 | redirect   | 否   | `string`                     | undefined | 重定向  当`index===true`生效                                                                                     |
 | path       | 否   | `string`                     | undefined | 跳转路由                                                                                                         |
 | name       | 否   | `string`                     | undefined | 菜单名称                                                                                                         |
-| icon       | 否   | `string \| React.React.Node` | undefined | 菜单图标标                                                                                                       |
+| icon       | 否   | `React.ReactNode`            | undefined | 菜单图标                                                                                                       |
 | component  | 否   | `string`                     | undefined | 渲染组件的路径(如果是`403/404/500`的页面直接写 `403/404/500`,使用`@uiw-admin/plugins`里面的`routes`时会进行转换) |
 | hideInMenu | 否   | `boolean`                    | 无        | 是否隐藏菜单                                                                                                     |
 | isAuth     | 否   | `boolean`                    | 无        | 用于路由校验权限， 注意：如果存在这个字段则以这个字段权限为准，不走其他校验                                                |
