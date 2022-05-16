@@ -63,7 +63,7 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 **菜单搜索功能**
 
-在根目录`.kktrc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen`
+在根目录`.kktrc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen` 默认`true`
 
 ```ts
 // .kktrc.js 
