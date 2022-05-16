@@ -259,71 +259,76 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 ```
 
+## 菜单隐藏
 
-<!-- ## 参数
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx
+window.SEARCH_MENU = true
+import React from 'react'
+import BasicLayout, {
+  useLayouts,
+} from '@uiw-admin/basic-layouts'
+import { HashRouter ,useRoutes ,Outlet,useLocation } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
 
-```ts
-
-export type BasicLayoutProps = {
-  logo?: string;
-  projectName?: string;
-  /**
-   * 页脚
-   */
-  footer?: React.ReactElement;
-  /** 子集路由 */ 
-  routes?: RoutersProps[];
-  children?: React.ReactNode;
-  /** 头部 布局 */
-  headerLayout?: "top" | "default",
-  /** 头部背景色 */
-  headerBackground?: string,
-  /** 头部字体颜色 */
-  headerFontColor?: string;
-    /** 菜单隐藏 */
-  menuHide?: boolean;
-} & HeaderRightProps;
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
 
 
-export interface HeaderMenuItemsProps {
-  title: React.ReactNode;
-  icon: JSX.Element | string | false | null;
-  onClick?: () => void;
-  divider?: boolean;
-  render?: React.ReactNode;
+const Com = (props)=>{
+  const { routes } = props
+  const location = useLocation()
+  return (<BasicLayout {...props} menuHide={location.pathname==="/layout-tabs"} >
+    <LayoutTabs routes={routes} /> 
+  </BasicLayout>)
 }
 
-export interface HeaderRightProps {
-  /**
-   * 菜单
-   */
-  menus?: Array<HeaderMenuItemsProps>;
-  /**
-   * avatar 头像
-   * userName 用户名
-   * menuLeft 菜单左侧
-   */
-  profile?: {
-    avatar?: string;
-    userName?: string;
-    menuLeft?: React.ReactElement;
-  };
-  // 重新加载权限
-  onReloadAuth: () => void;
-  layouts?: UseLayoutsProps;
+function BasicLayoutScreen() {
+  const layouts = useLayouts()
+  const basicLayoutProps = {
+    // 右侧下拉菜单内容
+    menus: [
+      {
+        title: '欢迎来到uiw',
+        icon: 'smile',
+        // 调用关闭菜单事件
+        onClick: () => layouts.closeMenu(),
+      },
+      {
+        title: '修改密码',
+        icon: 'setting',
+      },
+    ],
+    profile: {
+      // 头像地址
+      avatar: '',
+      // 下拉菜单左侧内容
+      menuLeft:<div style={{ marginRight: 15 }}>可做自定义dom</div>
+    },
+    // 调用刷新接口
+    onReloadAuth: () => {},
+    layouts,
+  }
+
+
+  return <HashRouter window={window}>
+      <Com  {...basicLayoutProps}  routes={routerArrs}  />
+    </HashRouter>
 }
 
-export interface Params {
-  headerRightvisible: boolean;
-}
+ReactDOM.render(<BasicLayoutScreen />, _mount_);
+```
 
-export interface UseLayoutsProps {
-  headerRightvisible: boolean;
-  closeMenu: () => void;
-  updateStore: (datas: Params) => void;
-}
-
-``` -->
 ## Props
 
 | 参数                  | 必填 | 类型                                                                                     | 默认值    | 说明                     |
@@ -336,7 +341,7 @@ export interface UseLayoutsProps {
 | headerLayout          | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
 | headerBackground      | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
 | headerFontColor       | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
-| menuHide              | 否   | `boolen`                                                                                 | `false`   | 头部字体颜色             |
+| menuHide              | 否   | `boolen`                                                                                 | `false`   | 菜单隐藏             |
 | menus                 | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
 | profile               | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
 | onReloadAuth          | 否   | `() => void`                                                                             |           | 重新加载权限             |
