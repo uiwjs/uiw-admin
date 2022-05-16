@@ -75,13 +75,12 @@ export default config({
 })
 ```
 
+## 右侧头像部分配置
 
-## 右侧下拉菜单
-
->   - menus配置右侧下拉菜单内容;
->   - profile配置头像以及下拉菜单左侧内容;
->   - onReloadAuth调用刷新权限接口;
->   - layouts.closeMenu关闭菜单事件;
+> - menus配置右侧下拉菜单内容;
+> - profile配置头像以及下拉菜单左侧内容;
+> - onReloadAuth调用刷新权限接口;
+> - layouts.closeMenu关闭菜单事件;
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
