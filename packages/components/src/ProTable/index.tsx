@@ -5,6 +5,7 @@ import Table from './BaseTable';
 import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
+import './index.css';
 
 const ProTabel: React.FC<ProtableProps> = (props) => {
   const {
@@ -15,6 +16,8 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     onBeforeSearch,
     paginationProps,
     formCol,
+    tableHeadHidden,
+    tableBackgroundColor = '#fff',
     ...tableProps
   } = props;
   const {
@@ -88,11 +91,19 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
           </div>
         )}
         {/* 列表组件 */}
-        <Table
-          columns={columns}
-          {...tableProps}
-          paginationProps={paginationProps}
-        />
+        <div
+          className={[
+            tableHeadHidden ? 'is-need-table-header' : '',
+            'table-parent-uiw-admin',
+          ].join('')}
+          style={{ backgroundColor: tableBackgroundColor }}
+        >
+          <Table
+            columns={columns}
+            {...tableProps}
+            paginationProps={paginationProps}
+          />
+        </div>
       </Skeleton>
     </StoreCtx.Provider>
   );

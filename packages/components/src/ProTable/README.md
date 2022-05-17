@@ -700,6 +700,9 @@ ReactDOM.render(<Demo6 />, _mount_);
 | scroll         | 设置横向滚动                                      | ScrollProps        | -      |
 | paginationProps| 分页属性                                          | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)        | -      |
 | formCol        | 网格中表单一行列数                                 | number    | 5      |
+| tableBackgroundColor        | 网格中表格的背景色                                 | React.CSSProperties['backgroundColor']    | #fff      |
+| tableHeadHidden        | 网格中表头是否显示                               | boolean    | false      |
+ 
 
 ### searchBtns
 
