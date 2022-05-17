@@ -77,7 +77,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // 是否首次调取数据
   const isFirstMountRef = useRef(false);
   // 格式化接口查询参数
-  const formatQuery = useCallback(() => {
+  const formatQuery = () => {
     if (query) {
       return query(
         pageIndex,
@@ -91,12 +91,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
         pageSize: 10,
       };
     }
-  }, [
-    pageIndex,
-    JSON.stringify(defaultValues),
-    JSON.stringify(searchValues),
-    pgSize,
-  ]);
+  };
 
   const pageSize = formatQuery().pageSize || 10;
   // 调接口

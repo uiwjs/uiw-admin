@@ -52,7 +52,6 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   };
   // 重置
   const onReset = async () => {
-    console.log(form);
     await form?.current.resetForm();
     onSearch();
   };
