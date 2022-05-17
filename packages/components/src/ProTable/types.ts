@@ -35,6 +35,8 @@ export interface ProtableProps<T = any> extends TableProps {
   paginationProps?: PaginationProps;
   requestOptions?: Options;
   formCol?: number;
+  tableBackgroundColor?: React.CSSProperties['backgroundColor'];
+  tableHeadHidden?: boolean;
 }
 
 export type FormProps = {
