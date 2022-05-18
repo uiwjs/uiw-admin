@@ -95,7 +95,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
           className={[
             tableHeadHidden ? 'is-need-table-header' : '',
             'table-parent-uiw-admin',
-          ].join('')}
+          ].join(' ')}
           style={{ backgroundColor: tableBackgroundColor }}
         >
           <Table
