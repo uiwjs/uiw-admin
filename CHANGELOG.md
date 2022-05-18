@@ -4,6 +4,16 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.12
+
+- @uiw-admin/components
+  - 🐞 [ProTable] 修复usetable query无法获取到最新值
+
+## 5.3.11
+
+- @uiw-admin/components
+  - 🌟 [ProTable] 新增tableBackgroundColor和tableHeadHidden
+
 ## 5.3.10
 
 - @uiw-admin/basic-layouts
