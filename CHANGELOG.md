@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.13
+
+- @uiw-admin/components
+  - 🐞 [ProTable] 修复tableBackgroundColor tableHeadHidden 属性传递失效问题
+
 ## 5.3.12
 
 - @uiw-admin/components
