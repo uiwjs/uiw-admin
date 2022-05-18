@@ -17,7 +17,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     paginationProps,
     formCol,
     tableHeadHidden,
-    tableBackgroundColor = '#fff',
+    tableBackgroundColor,
     ...tableProps
   } = props;
   const {
@@ -94,8 +94,10 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
         <div
           className={[
             tableHeadHidden ? 'is-need-table-header' : '',
-            'table-parent-uiw-admin',
-          ].join(' ')}
+            tableBackgroundColor ? 'table-parent-uiw-admin' : '',
+          ]
+            .filter((it) => it)
+            .join(' ')}
           style={{ backgroundColor: tableBackgroundColor }}
         >
           <Table
