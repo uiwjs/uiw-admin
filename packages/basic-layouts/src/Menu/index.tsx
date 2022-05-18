@@ -6,7 +6,7 @@ import {
   RoutesBaseProps,
   Routers,
 } from '@uiw-admin/router-control';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, Location } from 'react-router-dom';
 import { matchPath, NavigateFunction } from 'react-router';
 import { getRoutesList } from './../utils';
 import { SearchSelect, SearchSelectOptionData } from 'uiw';
@@ -14,6 +14,10 @@ import { SearchSelect, SearchSelectOptionData } from 'uiw';
 import pinyin from 'pinyin';
 
 type ValueType = string | number;
+
+type Options = {
+  location: Location;
+};
 
 interface MenuProps {
   collapsed?: boolean;
@@ -23,15 +27,16 @@ interface MenuProps {
 const onNavigate = (
   item: Omit<Routers, 'navigate'> & { navigate: Function | string },
   navigate: NavigateFunction,
+  options: Options,
 ) => {
   if (Reflect.has(item, 'navigate') && item.navigate) {
     if (typeof item.navigate === 'function') {
-      item.navigate(navigate);
+      item.navigate(navigate, options);
       return;
     }
     const Fun = new Function(`return ${item.navigate}`)();
     if (typeof Fun === 'function') {
-      Fun(navigate);
+      Fun(navigate, options);
     }
     return;
   }
@@ -43,6 +48,7 @@ function renderMenuItem(
   collapsed: boolean,
   pathName: string,
   navigate: NavigateFunction,
+  options: Options,
   level?: boolean,
 ) {
   return routes.map((item: any, index: number) => {
@@ -83,7 +89,7 @@ function renderMenuItem(
 
       return (
         <Menu.SubMenu {...props} text={item.name || '-'} collapse={collapsed}>
-          {renderMenuItem(item.routes, collapsed, pathName, navigate)}
+          {renderMenuItem(item.routes, collapsed, pathName, navigate, options)}
         </Menu.SubMenu>
       );
     }
@@ -91,7 +97,7 @@ function renderMenuItem(
       <Menu.Item
         {...props}
         onClick={() => {
-          const result = onNavigate(item, navigate);
+          const result = onNavigate(item, navigate, options);
           if (!result) {
             return;
           }
@@ -106,7 +112,7 @@ function renderMenuItem(
 
 const SearchMenus = (props: MenuProps) => {
   const { routes = [] } = props || {};
-
+  const location = useLocation();
   const navigate = useNavigate();
 
   const listRouters = React.useMemo(() => {
@@ -163,7 +169,7 @@ const SearchMenus = (props: MenuProps) => {
         const current: any = listRouters.find(
           (item) => item.path === obj.value,
         );
-        const result = onNavigate(current, navigate);
+        const result = onNavigate(current, navigate, { location });
         if (!result) {
           return;
         }
@@ -222,7 +228,14 @@ export default (props: MenuProps = {}) => {
         inlineCollapsed={!!collapsed}
         style={{ padding: '0 12px' }}
       >
-        {renderMenuItem(routes, !!collapsed, pathName, navigate, true)}
+        {renderMenuItem(
+          routes,
+          !!collapsed,
+          pathName,
+          navigate,
+          { location },
+          true,
+        )}
       </Menu>
     </React.Fragment>
   );

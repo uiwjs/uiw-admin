@@ -154,6 +154,7 @@ export const getJSONData = (content: string) => {
     ],
   };
   const ast = parse(content, option);
+  let isReact = false;
   traverse(ast, {
     ExportDefaultDeclaration(path: NodePath<t.ExportDefaultDeclaration>) {
       let node = path.node.declaration;
@@ -163,6 +164,14 @@ export const getJSONData = (content: string) => {
       // 如果 node 是一个数组
       if (t.isArrayExpression(node)) {
         isJSON = true;
+      }
+    },
+    ImportDefaultSpecifier(path) {
+      const node = path.node;
+      if (t.isImportDefaultSpecifier(node)) {
+        if (node.local.name === 'React') {
+          isReact = true;
+        }
       }
     },
     ObjectProperty(path) {
@@ -184,37 +193,12 @@ export const getJSONData = (content: string) => {
         }
       }
     },
-    // ArrayExpression(path) {
-    //   let elements = path.node.elements;
-    //   elements.forEach((item) => {
-    //     if (t.isObjectExpression(item) && item.properties) {
-    //       item.properties.forEach((objItem) => {
-    //         if (
-    //           t.isObjectProperty(objItem) &&
-    //           ((t.isStringLiteral(objItem.key) &&
-    //             objItem.key.value === 'component') ||
-    //             (t.isIdentifier(objItem.key) &&
-    //               objItem.key.name === 'component'))
-    //         ) {
-    //           if (t.isStringLiteral(objItem.value)) {
-    //             const valus = objItem.value.value;
-    //             if (['404', '403', '500'].includes(objItem.value.value)) {
-    //               objItem.value = getJSX(`Exceptions${valus}`);
-    //             } else {
-    //               objItem.value = getReactLazy(valus);
-    //             }
-    //           }
-    //         }
-    //       });
-    //     }
-    //   });
-    // },
   });
   jsonCode = generate(ast).code;
   return {
     isJSON,
     jsonArr,
-    jsonCode,
+    jsonCode: isReact ? jsonCode : `import React from "react"\n${jsonCode}`,
   };
 };
 
