@@ -36,19 +36,38 @@
         "name": "子项",
         "icon": "copy",
         "isAuth": true,
+        "side": true,
         "routes": [
           {
+            "index": true,
             "path": "/dom/courses",
             "name": "Dashboard",
             "isAuth": true,
             "component": "@/pages/Dashboard"
           },
           {
-            "path": "/dom/:id",
-            "name": "Dashboard2",
-            "isAuth": true,
-            "hideInMenu": true,
-            "component": "@/pages/TableList"
+            "path": "/dom/exceptions",
+            "name": "异常12",
+            "icon": "warning-o",
+            "side": true,
+            "routes": [
+              {
+                "index": true,
+                "path": "/dom/exceptions/403",
+                "name": "403-1",
+                "component": "403"
+              },
+              {
+                "path": "/dom/exceptions/500",
+                "name": "500-1",
+                "component": "500"
+              },
+              {
+                "path": "/dom/exceptions/404",
+                "name": "404-1",
+                "component": "404"
+              }
+            ]
           }
         ]
       },

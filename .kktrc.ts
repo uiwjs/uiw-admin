@@ -5,7 +5,7 @@ import express from 'express'
 
 export default defaultConfig({
   define: {
-    // AUTH: false,
+    AUTH: false,
     STORAGE: 'local',
     // TOKEN_STORAGE: "cookie",
     // TOKEN_NAME: "存储字段"
