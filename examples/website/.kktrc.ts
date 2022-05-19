@@ -24,6 +24,15 @@ export default (
     }),
   );
   conf.module!.exprContextCritical = false;
+  conf.resolve = {
+    ...conf.resolve,
+    alias: {
+      ...conf.resolve?.alias,
+      '@': path.resolve(process.cwd(), 'src'),
+      '@@': path.resolve(process.cwd(), 'src/.uiw'),
+    },
+  };
+
   if (env === 'production') {
     conf.output = { ...conf.output, publicPath: './' };
     conf.optimization = {

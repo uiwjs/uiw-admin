@@ -17,7 +17,11 @@
     "jsx": "react-jsx",
     "typeRoots": ["node_modules/@types"],
     "noFallthroughCasesInSwitch": true,
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@@/*": ["./src/.uiw/*"]
+    }
   },
   "include": ["src", ".kktrc.ts"]
 }

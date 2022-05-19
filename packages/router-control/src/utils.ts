@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { store } from '@uiw-admin/models';
 import { ControllerProps } from './interface';

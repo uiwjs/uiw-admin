@@ -1,15 +1,15 @@
+// @ts-nocheck
 import {
   RematchRootState,
   RematchDispatch,
   Model,
   RematchStore,
+  init,
 } from '@rematch/core';
 import { ExtraModelsFromLoading } from '@rematch/loading';
 /**  @@ 指向 /src/.uiw 目录 */
-// @ts-ignore
 import { store, RootModel } from '@@/rematch';
-// @ts-ignore
-export { store } from '@@/rematch';
+export { store };
 
 export type FullModel = ExtraModelsFromLoading<RootModel>;
 const stores = store as RematchStore<RootModel, FullModel>;
@@ -20,5 +20,4 @@ export type AddModel = typeof addModel;
 export type Dispatch = RematchDispatch<RootModel>;
 export type RootState = RematchRootState<RootModel, FullModel>;
 export type ModelDefault<T = any> = Model<RootModel, T>;
-// @ts-ignore
 export * from '@@/rematch';
