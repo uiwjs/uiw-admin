@@ -4,6 +4,16 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.15(未发)
+
+- @uiw-admin/basic-layout
+  - 🌟 新增侧边菜单使用子路由展示控制
+
+## 5.3.14
+
+- @uiw-admin/plugin
+  - 🌟 [routes] 修改判断是否引入react,进行拼接react引入
+
 ## 5.3.13
 
 - @uiw-admin/components
