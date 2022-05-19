@@ -21,6 +21,7 @@ type Options = {
 
 interface MenuProps {
   collapsed?: boolean;
+  allRoutes?: DefaultProps['routes'];
   routes?: DefaultProps['routes'];
 }
 
@@ -29,7 +30,7 @@ export const onNavigate = (
   navigate: NavigateFunction,
   options: Options,
 ) => {
-  if (Reflect.has(item, 'navigate') && item.navigate) {
+  if (item && Reflect.has(item, 'navigate') && item.navigate) {
     if (typeof item.navigate === 'function') {
       item.navigate(navigate, options);
       return;
@@ -132,6 +133,7 @@ const SearchMenus = (props: MenuProps) => {
           'name' in item &&
           !item.hideInMenu &&
           !item.index &&
+          !item.redirect &&
           item.path !== '*'
         );
       })
@@ -217,14 +219,14 @@ const SearchMenus = (props: MenuProps) => {
   );
 };
 export default (props: MenuProps = {}) => {
-  const { routes = [], collapsed } = props;
+  const { routes = [], collapsed, allRoutes } = props;
   const location = useLocation();
   const navigate = useNavigate();
   const pathName = location.pathname;
 
   // @ts-ignore
   const searchMenu = (SEARCH_MENU && collapsed) || (
-    <SearchMenus routes={routes} />
+    <SearchMenus routes={allRoutes} />
   );
   return (
     <React.Fragment>

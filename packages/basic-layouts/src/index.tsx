@@ -88,7 +88,13 @@ function BasicLayout(props: BasicLayoutProps) {
   });
 
   const Menus = React.useMemo(() => {
-    return <Menu collapsed={collapsed} routes={ChildMenus.routeData} />;
+    return (
+      <Menu
+        collapsed={collapsed}
+        routes={ChildMenus.routeData}
+        allRoutes={routeData}
+      />
+    );
   }, [JSON.stringify(ChildMenus), collapsed]);
 
   const mapRoute = React.useMemo(() => {

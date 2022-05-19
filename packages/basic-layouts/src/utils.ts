@@ -26,6 +26,9 @@ export const getRoutesList = (
   data.forEach((item) => {
     if (item.routes) {
       getRoutesList(item.routes, list);
+      if (item.side) {
+        list.push(item);
+      }
     } else {
       list.push(item);
     }
