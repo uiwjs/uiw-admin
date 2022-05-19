@@ -24,7 +24,7 @@ interface MenuProps {
   routes?: DefaultProps['routes'];
 }
 
-const onNavigate = (
+export const onNavigate = (
   item: Omit<Routers, 'navigate'> & { navigate: Function | string },
   navigate: NavigateFunction,
   options: Options,
@@ -60,7 +60,12 @@ function renderMenuItem(
     if (Reflect.has(item, 'isAuth')) {
       isAuth = Reflect.get(item, 'isAuth');
     }
-    if (item.index || item.hideInMenu || !isAuth || item.path === '*') {
+    if (
+      (item.index && item.redirect) ||
+      item.hideInMenu ||
+      !isAuth ||
+      item.path === '*'
+    ) {
       return <Fragment key={index} />;
     }
     if (level) {
@@ -72,7 +77,7 @@ function renderMenuItem(
       props.active = true;
     }
 
-    if (item.routes) {
+    if (item.routes && !item.side) {
       if (collapsed) {
         props.overlayProps = {
           isOutside: true,

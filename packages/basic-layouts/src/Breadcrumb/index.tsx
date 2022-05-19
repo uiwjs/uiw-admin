@@ -1,16 +1,25 @@
 import React from 'react';
 import { Breadcrumb } from 'uiw';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BreadcrumbMap } from './../utils';
 import { matchPath } from 'react-router';
+import { onNavigate } from '../Menu';
+import { RoutersProps } from '@uiw-admin/router-control';
 
+import './index.css';
 interface BreadProps {
   routeMap: BreadcrumbMap;
+  sideMenusMap: {
+    sideMenus: Map<string, RoutersProps[]>;
+    flat: Map<string, string>;
+    flatSide: Map<string, string>;
+  };
 }
 const Bread = (props: BreadProps) => {
-  const { routeMap } = props;
-  const location = useLocation();
+  const { routeMap, sideMenusMap } = props;
+  const navigate = useNavigate();
 
+  const location = useLocation();
   const domList = React.useMemo(() => {
     const result = routeMap.breadcrumb.get(location.pathname);
     if (!result) {
@@ -29,9 +38,29 @@ const Bread = (props: BreadProps) => {
   }, [location.pathname]);
 
   return (
-    <Breadcrumb>
+    <Breadcrumb className="uiw-admin-breadcrumb">
       {domList?.map((item, index) => {
-        return <Breadcrumb.Item key={index}>{item.name}</Breadcrumb.Item>;
+        return (
+          <Breadcrumb.Item
+            onClick={() => {
+              if (item.side && item.path) {
+                const parentPath = sideMenusMap.flatSide.get(item.path);
+                if (parentPath) {
+                  const result = onNavigate(item as any, navigate, {
+                    location,
+                  });
+                  if (!result) {
+                    return;
+                  }
+                  navigate(parentPath, { replace: true });
+                }
+              }
+            }}
+            key={index}
+          >
+            {item.name}
+          </Breadcrumb.Item>
+        );
       })}
     </Breadcrumb>
   );

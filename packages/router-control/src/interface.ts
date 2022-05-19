@@ -23,6 +23,8 @@ export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
   /** 自定义 跳转 */
   // navigate?: (navigate: NavigateFunction) => void;
   navigate?: string;
+  /** 控制是否侧边只展示子路由 **/
+  side?: boolean;
 }
 
 // json文件格式

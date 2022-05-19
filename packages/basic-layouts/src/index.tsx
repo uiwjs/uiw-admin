@@ -3,18 +3,29 @@ import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
-import { RoutersProps } from '@uiw-admin/router-control';
+import {
+  RoutersProps,
+  useLocation,
+  useNavigate,
+  Navigate,
+} from '@uiw-admin/router-control';
 import LogoHeader from './LogoHeader';
-import Menu from './Menu';
+import Menu, { onNavigate } from './Menu';
 import Bread from './Breadcrumb';
 import './index.css';
-import { getMenu, BreadcrumbMap } from './utils';
-import BodyContent from './Content';
+import {
+  getMenu,
+  BreadcrumbMap,
+  getSideMenusMap,
+  getMenuList,
+  getCurrentPath,
+  getDiffIndex,
+} from './utils';
+import BodyContent, { WarpBody } from './Content';
 import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';
 import { Icon } from 'uiw';
-
-import { MainContext } from './hook';
+import { MainContext, useSideMenus } from './hook';
 
 const { Header, Sider, Content } = Layout;
 
@@ -72,10 +83,13 @@ function BasicLayout(props: BasicLayoutProps) {
 
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
+  const { sideItemIndex, ChildMenus, sideMenusMap } = useSideMenus({
+    routeData,
+  });
 
   const Menus = React.useMemo(() => {
-    return <Menu collapsed={collapsed} routes={routeData} />;
-  }, [JSON.stringify(routeData), collapsed]);
+    return <Menu collapsed={collapsed} routes={ChildMenus.routeData} />;
+  }, [JSON.stringify(ChildMenus), collapsed]);
 
   const mapRoute = React.useMemo(() => {
     return new BreadcrumbMap(routeData);
@@ -135,7 +149,7 @@ function BasicLayout(props: BasicLayoutProps) {
               style={{ fontSize: 12, marginRight: 20 }}
               onClick={() => setCollapsed(!collapsed)}
             />
-            <Bread routeMap={mapRoute} />
+            <Bread sideMenusMap={sideMenusMap} routeMap={mapRoute} />
           </div>
         )}
       </div>
@@ -173,10 +187,14 @@ function BasicLayout(props: BasicLayoutProps) {
             <Layout>
               {headerLayout === 'default' && header}
               {!isDefaultContentStyle ? (
-                props.children
+                <WarpBody sideItemIndex={sideItemIndex}>
+                  {props.children}
+                </WarpBody>
               ) : (
                 <Content className="uiw-admin-global-content">
-                  <BodyContent>{props.children}</BodyContent>
+                  <WarpBody sideItemIndex={sideItemIndex}>
+                    <BodyContent>{props.children}</BodyContent>
+                  </WarpBody>
                 </Content>
               )}
             </Layout>
