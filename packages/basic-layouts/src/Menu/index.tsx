@@ -225,9 +225,9 @@ export default (props: MenuProps = {}) => {
   const pathName = location.pathname;
 
   // @ts-ignore
-  const searchMenu = (SEARCH_MENU && collapsed) || (
-    <SearchMenus routes={allRoutes} />
-  );
+  const searchMenu =
+    (SEARCH_MENU && collapsed) ||
+    (SEARCH_MENU ? <SearchMenus routes={allRoutes} /> : <></>);
   return (
     <React.Fragment>
       {searchMenu}
