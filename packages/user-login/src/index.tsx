@@ -216,7 +216,7 @@ export default (props: UserLoginProps) => {
                     if (typeof result === 'string' && result) {
                       errorObj[item.name] = result;
                     }
-                  } else if (item.required && !current[userName]) {
+                  } else if (item.required && !current[item.name]) {
                     errorObj[item.name] = `${item.label}不能为空`;
                   }
                 });
