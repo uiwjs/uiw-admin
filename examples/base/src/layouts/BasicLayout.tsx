@@ -3,6 +3,7 @@ import BasicLayout, {
   BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'
+// import { history } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import LayoutTabs from '@uiw-admin/layout-tabs'
@@ -82,9 +83,8 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     <AuthPage authority={true} redirectPath="/login">
       <BasicLayout
         {...basicLayoutProps}
-        onLogoClick={(event) => {
-          event.stopPropagation()
-          event.preventDefault()
+        onLogoClick={(event: any) => {
+          // history.push("/demo#/tableList");
           console.log('logo点击事件', event)
         }}
         isDefaultContentStyle={false}>
