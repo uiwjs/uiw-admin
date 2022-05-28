@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProDrawer, ProForm, useForm } from '@uiw-admin/components'
-import { Slider, Notify } from 'uiw'
+import { Slider /*Notify*/ } from 'uiw'
 import { RootState, Dispatch } from '@uiw-admin/models'
 import { items, items2 } from './items'
 import { useDispatch, useSelector } from '@uiw-admin/router-control'
@@ -79,6 +79,7 @@ const Detail = ({ updateData }: DetailProps) => {
           type: 'primary',
           style: { width: 80 },
           path: '/demo/cancel',
+          onClick: onClose,
         },
       ]}>
       <ProForm
