@@ -4,6 +4,13 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.16
+
+- @uiw-admin/basic-layout
+  - 🐞 修复菜单栏搜索框显示隐藏问题
+- @uiw-admin/user-login
+  - 🐞 修复验证页面失效问题
+
 ## 5.3.15
 
 - @uiw-admin/basic-layout
