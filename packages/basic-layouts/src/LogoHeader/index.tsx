@@ -28,12 +28,16 @@ export default (props: LogoHeaderProps = {}) => {
     [props.projectName, headerFontColor],
   );
   const linkProps = useMemo(() => {
-    if (props.onLogoClick && typeof props.onLogoClick === 'function') {
-      return {
-        onClick: props.onLogoClick,
-      };
-    }
-    return {};
+    const { onLogoClick } = props;
+    return onLogoClick && typeof onLogoClick === 'function'
+      ? {
+          onClick: (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+            onLogoClick(event);
+            event.stopPropagation();
+            event.preventDefault();
+          },
+        }
+      : {};
   }, [props.onLogoClick]);
 
   return useMemo(
