@@ -198,6 +198,9 @@ const BaseTable: React.FC<BaseTableProps> = ({
             return (
               <Checkbox
                 checked={selection.allSelected as any}
+                indeterminate={
+                  !selection.allSelected && selection.partiallySelected
+                }
                 onClick={() => {
                   selection.toggleAll();
                 }}
