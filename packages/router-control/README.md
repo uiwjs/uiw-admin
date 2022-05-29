@@ -124,6 +124,7 @@ export default ()=>{
 | routes     | 否   | `RoutersJSON[]`              | 无        | 子集 路由 ,(参数与菜单路由参数一致)                                                                              |
 | navigate   | 否   | `string`                     | 无        | 自定义跳转(`"(navigate) => {console.log('navigate', navigate)}"`)                                                |
 | side   | 否   | `boolean`                     | 无        | 控制菜单子路由进行菜单展示                                               |
+| hiddenMainMenu   | 否   | `boolean`                     | 无        | 控制是否隐藏左侧菜单栏                                         |
 
 ## 自定义菜单图标
 
