@@ -340,7 +340,7 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 | headerLayout          | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
 | headerBackground      | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
 | headerFontColor       | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
-| menuHide              | 否   | `boolen`                                                                                 | `false`   | 菜单隐藏             |
+| menuHide              | 否   | `boolen`                                                                                 | `false`   | 菜单隐藏(可从路由组件router-control组件带参数hiddenMainMenu控制)             |
 | menus                 | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
 | profile               | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
 | onReloadAuth          | 否   | `() => void`                                                                             |           | 重新加载权限             |
