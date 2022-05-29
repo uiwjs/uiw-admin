@@ -71,22 +71,24 @@ function BasicLayout(props: BasicLayoutProps) {
     headerLayout = 'default',
     headerBackground = '#fff',
     headerFontColor = '#000',
-    menuHide,
     isDefaultContentStyle = true,
     hideReloadButton,
     hideLogoutButton,
     hideUserInfo,
     onLogoClick,
   } = props || {};
+  let { menuHide } = props;
 
   const [collapsed, setCollapsed] = useState(false);
 
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
-  const { sideItemIndex, ChildMenus, sideMenusMap } = useSideMenus({
-    routeData,
-  });
-
+  const { sideItemIndex, ChildMenus, sideMenusMap, hiddenMainMenu } =
+    useSideMenus({
+      routeData,
+    });
+  /**路由带参数隐藏菜单 */
+  menuHide = hiddenMainMenu;
   const Menus = React.useMemo(() => {
     return (
       <Menu

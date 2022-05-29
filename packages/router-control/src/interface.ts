@@ -16,6 +16,8 @@ export interface RoutesBaseProps extends Omit<RouteObject, 'children'> {
   redirect?: string;
   /** 子集 路由 */
   routes?: RoutesBaseProps[];
+  /** 影藏藏主菜单 */
+  hiddenMainMenu: false;
   /** 是否隐藏菜单 */
   hideInMenu?: boolean;
   /** 用于路由校验权限 */

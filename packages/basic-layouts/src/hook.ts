@@ -28,6 +28,7 @@ export const useSideMenus = (props: { routeData: RoutersProps[] }) => {
 
   // 获取当前路由匹配信息
   const currentPath = getCurrentPath(listMenus, location.pathname);
+  const hiddenMainMenu = currentPath?.hiddenMainMenu;
   // 获取子路由信息
   const ChildMenus = React.useMemo(() => {
     const parentPath = sideMenusMap.flat.get(currentPath?.path || '');
@@ -57,5 +58,6 @@ export const useSideMenus = (props: { routeData: RoutersProps[] }) => {
     sideItemIndex,
     ChildMenus,
     sideMenusMap,
+    hiddenMainMenu,
   };
 };
