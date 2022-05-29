@@ -64,6 +64,7 @@ function renderMenuItem(
     if (
       (item.index && item.redirect) ||
       item.hideInMenu ||
+      item.hiddenMainMenu ||
       !isAuth ||
       item.path === '*'
     ) {
@@ -132,6 +133,7 @@ const SearchMenus = (props: MenuProps) => {
           item &&
           'name' in item &&
           !item.hideInMenu &&
+          !item.hiddenMainMenu &&
           !item.index &&
           !item.redirect &&
           item.path !== '*'
