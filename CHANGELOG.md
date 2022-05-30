@@ -4,7 +4,8 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
-
+## 5.3.18
+   - 🐞 添加路由参数控制左侧主菜单显示隐藏
 
 ## 5.3.17
 
