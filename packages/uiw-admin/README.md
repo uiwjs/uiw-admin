@@ -88,12 +88,12 @@ $ yarn build
 
 > 一个基础的 uiw-admin 项目大致是这样的，
 
-```
+```bash
 .
 ├── README.md
 ├── config
-│   └── routes.json   路由配置
-├── mocker  mock 数据
+│   └── routes.json  # 路由配置
+├── mocker           # mock 数据
 │   ├── auth
 │   │   └── index.js
 │   ├── demo.js
@@ -112,9 +112,9 @@ $ yarn build
 │   │   └── logo-light.svg
 │   ├── index.css
 │   ├── index.tsx
-│   ├── layouts 框架组件
-│   │   ├── BasicLayout.tsx 框架菜单
-│   │   ├── UserLayout.tsx 登陆页面
+│   ├── layouts             # 框架组件
+│   │   ├── BasicLayout.tsx # 框架菜单
+│   │   ├── UserLayout.tsx  # 登陆页面
 │   │   └── logo.svg
 │   ├── models    remach models
 │   │   ├── Doc
@@ -123,7 +123,7 @@ $ yarn build
 │   │   ├── global.ts
 │   │   ├── home.ts
 │   │   └── login.ts
-│   ├── pages  页面， 文件名大写
+│   ├── pages                 # 页面， 文件名大写
 │   │   ├── Dashboard
 │   │   │   └── index.tsx
 │   │   ├── Demo
@@ -137,7 +137,7 @@ $ yarn build
 │   │       ├── index.module.less
 │   │       └── index.tsx
 │   ├── react-app-env.d.ts
-│   └── servers 放置api文件的地方，文件名已后端接口模块名命名，不以路由命名
+│   └── servers               # 放置api文件的地方，文件名已后端接口模块名命名，不以路由命名
 │       └── index.ts
 └── tsconfig.json
 ```
