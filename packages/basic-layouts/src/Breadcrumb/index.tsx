@@ -36,13 +36,15 @@ const Bread = (props: BreadProps) => {
     }
     return result;
   }, [location.pathname]);
-
   return (
     <Breadcrumb className="uiw-admin-breadcrumb">
       {domList?.map((item, index) => {
         return (
           <Breadcrumb.Item
             onClick={() => {
+              // if(index===(domList.length-1)){
+              // }
+              // 进入子集当前菜单不显示 点击当前菜单不显示
               if (item.side && item.path) {
                 const parentPath = sideMenusMap.flatSide.get(item.path);
                 if (parentPath) {
@@ -53,6 +55,13 @@ const Bread = (props: BreadProps) => {
                     return;
                   }
                   navigate(parentPath, { replace: true });
+                }
+                // 存在子集菜单，点击父级面包屑跳转到第一个子集菜单
+              } else if (item.path) {
+                if (item && item?.routes && item?.routes?.length > 0) {
+                  const firstChildPath = item.routes[0].path;
+                  !!firstChildPath &&
+                    navigate(firstChildPath, { replace: true });
                 }
               }
             }}
