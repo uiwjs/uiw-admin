@@ -83,8 +83,9 @@ const Demo = () => {
         visible={drawerVisible}
         onClose={()=>setDrawerVisible(false)}
         buttons={[
-          { label: '取消', type:"primary" , onClick: ()=>setDrawerVisible(false) },
+   { label: '取消', type:"primary" , onClick: ()=>setDrawerVisible(false) },
           { label: '保存',type:"primary",show:false },
+          { label: '禁用按钮',  disabled:true, show:true },
         ]}
       >
         <div>集成了Button</div>

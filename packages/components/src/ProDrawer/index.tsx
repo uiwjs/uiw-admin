@@ -63,8 +63,10 @@ function ProDrawer(props: ProDrawerProps) {
           idx,
         ) =>
           show && (
-            <BtnAuth key={idx} path={path} disabled={disabled}>
-              <Button {...others}>{label}</Button>
+            <BtnAuth key={idx} path={path}>
+              <Button disabled={disabled} {...others}>
+                {label}
+              </Button>
             </BtnAuth>
           ),
       )}
