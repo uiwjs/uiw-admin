@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Menu, Avatar, Popover } from 'uiw';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { UseLayoutsProps } from '../useLayouts';
@@ -124,6 +124,21 @@ export default function HeaderRightMenu({
     </div>
   );
 
+  const avatarWarp = useMemo(() => {
+    const avatar = profile?.avatar;
+    const userName = profile?.userName;
+    const initialsName = userName ? userName.trim().split('')[0] : ''; // 名称缩写首字母
+    let node;
+    if (avatar) {
+      node = <img src={avatar} alt={initialsName} />;
+    } else if (userName) {
+      node = <div className="avatar">{initialsName}</div>;
+    } else {
+      node = <Avatar icon="user" size="default" />;
+    }
+    return node;
+  }, [profile?.avatar, profile?.userName]);
+
   return (
     <div className="uiw-global-header-menu">
       <span className="uiw-global-header-menu">
@@ -136,11 +151,7 @@ export default function HeaderRightMenu({
           placement="bottomRight"
           content={menuView}
         >
-          {profile?.avatar ? (
-            <img src={profile.avatar} />
-          ) : (
-            <Avatar icon="user" size="default" />
-          )}
+          {avatarWarp}
         </Popover>
       </span>
     </div>
