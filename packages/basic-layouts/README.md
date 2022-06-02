@@ -332,6 +332,8 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 | 参数                  | 必填 | 类型                                                                                     | 默认值    | 说明                     |
 | :-------------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
+| className                  | 否   | `string`                                                                                 |           | BasicLayout 外层className                 |
+| style                  | 否   | `object`                                                                                 |           | BasicLayout 外层最外层样式式                  |
 | logo                  | 否   | `string`                                                                                 |           | logo图标                 |
 | projectName           | 否   | `string`                                                                                 |           | 项目名称                 |
 | footer                | 否   | `React.ReactElement`                                                                     |           | 页脚                     |

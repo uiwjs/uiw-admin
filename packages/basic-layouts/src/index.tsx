@@ -30,6 +30,8 @@ import { MainContext, useSideMenus } from './hook';
 const { Header, Sider, Content } = Layout;
 
 export type BasicLayoutProps = {
+  className?: string;
+  style?: React.CSSProperties;
   logo?: string;
   projectName?: string;
   /**
@@ -61,6 +63,7 @@ export type BasicLayoutProps = {
 } & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
+    className,
     routes = [],
     projectName = 'UIW Admin',
     // 右侧菜单参数HeaderRightProps
@@ -76,6 +79,7 @@ function BasicLayout(props: BasicLayoutProps) {
     hideLogoutButton,
     hideUserInfo,
     onLogoClick,
+    ...others
   } = props || {};
   let { menuHide } = props;
 
@@ -126,11 +130,20 @@ function BasicLayout(props: BasicLayoutProps) {
       </div>
     );
   }, [profile, menus, JSON.stringify(layouts)]);
+  const cls = [className, 'uiw-admin-global-header']
+    .filter(Boolean)
+    .join(' ')
+    .trim();
 
   const header = (
     <Header
-      className={'uiw-admin-global-header'}
-      style={{ background: headerBackground, color: headerFontColor }}
+      {...others}
+      className={cls}
+      style={{
+        background: headerBackground,
+        color: headerFontColor,
+        ...props.style,
+      }}
     >
       <div style={{ display: 'flex' }}>
         {headerLayout === 'top' && (
