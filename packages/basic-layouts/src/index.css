@@ -32,6 +32,17 @@
   cursor: pointer;
   transition: all 0.3s;
 }
+.uiw-admin-global-title-top {
+  height: 100%;
+}
+
+.uiw-admin-global-title-top a {
+  height: 100%;
+  text-decoration: none !important;
+}
+.uiw-admin-global-title a {
+  text-decoration: none !important;
+}
 .uiw-admin-global-title h1,
 .uiw-admin-global-title-top h1 {
   box-sizing: border-box;
