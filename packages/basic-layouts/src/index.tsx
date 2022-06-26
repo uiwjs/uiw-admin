@@ -3,24 +3,12 @@ import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
-import {
-  RoutersProps,
-  useLocation,
-  useNavigate,
-  Navigate,
-} from '@uiw-admin/router-control';
+import { RoutersProps } from '@uiw-admin/router-control';
 import LogoHeader from './LogoHeader';
-import Menu, { onNavigate } from './Menu';
+import Menu from './Menu';
 import Bread from './Breadcrumb';
 import './index.css';
-import {
-  getMenu,
-  BreadcrumbMap,
-  getSideMenusMap,
-  getMenuList,
-  getCurrentPath,
-  getDiffIndex,
-} from './utils';
+import { getMenu, BreadcrumbMap } from './utils';
 import BodyContent, { WarpBody } from './Content';
 import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';

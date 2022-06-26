@@ -1,10 +1,14 @@
 import React from 'react';
 import { Tabs, Icon } from 'uiw';
-import { RoutersProps } from '@uiw-admin/router-control';
+import {
+  RoutersProps,
+  useNavigate,
+  useLocation,
+  Location,
+} from '@uiw-admin/router-control';
 import { getRoutesList, getMatch, getMatchRender } from './utils';
 import { matchPath } from 'react-router';
 import './styles/index.css';
-import { useNavigate, useLocation, Location } from 'react-router-dom';
 
 export interface LayoutTabsProps {
   /** 子集路由 */
