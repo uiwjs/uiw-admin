@@ -5,3 +5,11 @@ export const transformationDefineString = (obj: Record<string, any>) => {
   });
   return result;
 };
+
+export const getFunDefault = (path?: string) => {
+  if (path) {
+    const fun = require(path);
+    return fun.default || fun;
+  }
+  return () => {};
+};

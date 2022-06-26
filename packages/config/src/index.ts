@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import { LoaderConfOptions, WebpackConfiguration } from 'kkt';
 import path from 'path';
-import { transformationDefineString } from './uitls';
+import { transformationDefineString, getFunDefault } from './uitls';
 
 export * from 'kkt';
 
@@ -142,10 +142,10 @@ export default (props: ConfigProps) => {
     if (newLoader) {
       newLoader.forEach((fun) => {
         if (typeof fun === 'string') {
-          conf = require(fun)(conf, env, options);
+          conf = getFunDefault(fun)(conf, env, options);
         } else if (Array.isArray(fun)) {
           const [paths, rest] = fun;
-          conf = require(paths)(conf, env, { ...options, ...rest });
+          conf = getFunDefault(paths)(conf, env, { ...options, ...rest });
         } else if (typeof fun === 'function') {
           conf = fun(conf, env, options);
         } else if (fun && fun.loader) {
@@ -159,11 +159,11 @@ export default (props: ConfigProps) => {
     if (Array.isArray(newPlugins)) {
       newPlugins.forEach((pathArr) => {
         if (typeof pathArr === 'string') {
-          const Cls = require(pathArr);
+          const Cls = getFunDefault(pathArr);
           plugin.push(new Cls());
         } else if (Array.isArray(pathArr)) {
           const [paths, rest] = pathArr;
-          const Cls = require(paths);
+          const Cls = getFunDefault(paths);
           plugin.push(new Cls(rest));
         } else {
           plugin.push(pathArr);
