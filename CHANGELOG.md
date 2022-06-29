@@ -4,6 +4,11 @@
 
 严格遵循 [`Semantic Versioning 2.0.0`](http://semver.org/lang/zh-CN/) 语义化版本规范。
 
+## 5.3.20(未发版)
+
+- @uiw-admin/config
+  - 🐞 修复`require`引用包调用问题
+
 ## 5.3.19
 
 - @uiw-admin/basic-layout
