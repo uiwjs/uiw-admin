@@ -43,7 +43,7 @@
     "uiw": ">=4.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.17.0"
+    "@babel/runtime": "~7.18.0"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
