@@ -86,7 +86,7 @@
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
-    "@babel/preset-typescript": "~7.16.7",
+    "@babel/preset-typescript": "~7.18.0",
     "@babel/core": "~7.18.0",
     "ajv": "^8.9.0",
     "husky": "~7.0.4",
@@ -98,9 +98,10 @@
     "styled-components": "^5.3.5"
   },
   "resolutions": {
-    "@babel/parser": "7.18.13",
-    "@babel/traverse": "7.18.13",
-    "@babel/types": "7.18.13"
+    "@babel/core": "~7.18.0",
+    "@babel/parser": "7.18.8",
+    "@babel/traverse": "7.18.8",
+    "@babel/types": "7.18.8"
   },
   "workspaces": {
     "packages": [
