@@ -11,10 +11,9 @@
       "license": "MIT"
     },
     "bootstrap": {
-      "yarnClientArgs": ["--no-yarn-lock", "--no-package-lock"],
+      "yarnClientArgs": ["--no-yarn-lock"],
+      "npmClientArgs": ["--no-package-lock"],
       "forceLocal": true
     }
-  },
-  "npmClient": "yarn",
-  "useWorkspaces": true
+  }
 }
