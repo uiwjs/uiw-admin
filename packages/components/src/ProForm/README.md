@@ -493,7 +493,10 @@ import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
-  const [state,setState] = React.useState({})
+  const [state,setState] = React.useState({
+    input:'',
+    upload: []
+  })
   const form = useForm()
 
     return (
@@ -507,7 +510,7 @@ const Demo = () => {
                label: 'input',
                key: 'input',
                widget: 'input',
-               initialValue: '',
+               initialValue: state.input,
                widgetProps: {},
                span:"24",
                required:true,
@@ -515,6 +518,15 @@ const Demo = () => {
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
              },
+              {
+              label: 'upload',
+              key: 'upload',
+              widget: 'upload',
+              initialValue: state.upload,
+              widgetProps:{
+                uploadType: 'card',
+              },
+            },
           ]}
        />
        <Button 
@@ -547,8 +559,14 @@ const Demo = () => {
         style={{ marginTop:10,width:80 }} 
         type="primary" 
         onClick={()=> {
-          form.setFields({input:'1234'})
-          setState({input:'1234'})
+          form.setFields({
+            input:'1234',
+            upload:[ { dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4', name: 'uiw.png' }]
+          })
+          setState({
+            input:'1234',
+            upload:[ { dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4', name: 'uiw.png' }]
+          })
         } }
        >
         设置
