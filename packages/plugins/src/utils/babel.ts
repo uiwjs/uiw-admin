@@ -196,8 +196,8 @@ export const getJSONData = (content: string) => {
   };
 };
 
-/** 对字符串进行解析处理图标 */
-export const babelPluginIcons = (content: string) => {
+/** 对字符串进行解析处理图标和 404、403、500 页面加载 */
+export const babelPluginComponents = (content: string) => {
   const ast = getAst(content);
   const iconsList: string[] = [];
   const importList: string[] = [];
