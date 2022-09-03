@@ -10,7 +10,11 @@ import {
   getJSONData,
   stringToJson,
   getRouteMapModels,
+<<<<<<< HEAD
   babelPluginComponents,
+=======
+  babelPluginIcons,
+>>>>>>> 9f51f8ed (feat:路由加载icon图标方式)
 } from './../utils';
 import { RoutersProps } from './../utils/interface';
 
@@ -75,7 +79,11 @@ class RoutesWebpackPlugin {
     const content = ['js', 'ts'].includes(isType as string)
       ? this.jsonCode
       : strs;
+<<<<<<< HEAD
     const babelIcons = babelPluginComponents(content);
+=======
+    const babelIcons = babelPluginIcons(content);
+>>>>>>> 9f51f8ed (feat:路由加载icon图标方式)
     let routeTemp = createTemp(babelIcons.code, babelIcons.iconsList, isType);
     fs.writeFileSync(
       path.resolve(
