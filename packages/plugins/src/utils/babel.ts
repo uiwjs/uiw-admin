@@ -2,10 +2,7 @@ import { parse, ParserOptions, ParserPlugin } from '@babel/parser';
 import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
-<<<<<<< HEAD
 import template from '@babel/template';
-=======
->>>>>>> 9f51f8ed (feat:路由加载icon图标方式)
 import { RoutersProps } from './interface';
 import { getToUpperCase } from './index';
 
@@ -172,28 +169,6 @@ export const getJSONData = (content: string) => {
         }
       }
     },
-<<<<<<< HEAD
-=======
-    ObjectProperty(path) {
-      // 判断父级的父级是否是数组 如果是数组则进行转换
-      if (t.isArrayExpression(path.parentPath.parent)) {
-        const { node } = path;
-        if (
-          (t.isStringLiteral(node.key) && node.key.value === 'component') ||
-          (t.isIdentifier(node.key) && node.key.name === 'component')
-        ) {
-          if (t.isStringLiteral(node.value)) {
-            const valus = node.value.value;
-            if (['404', '403', '500'].includes(node.value.value)) {
-              node.value = getJSX(`Exceptions${valus}`);
-            } else {
-              node.value = getReactLazy(valus);
-            }
-          }
-        }
-      }
-    },
->>>>>>> 9f51f8ed (feat:路由加载icon图标方式)
   });
   jsonCode = generate(ast).code;
   return {
@@ -203,13 +178,8 @@ export const getJSONData = (content: string) => {
   };
 };
 
-<<<<<<< HEAD
 /** 对字符串进行解析处理图标和 404、403、500 页面加载 */
 export const babelPluginComponents = (content: string) => {
-=======
-/** 对字符串进行解析处理图标 */
-export const babelPluginIcons = (content: string) => {
->>>>>>> 9f51f8ed (feat:路由加载icon图标方式)
   const ast = getAst(content);
   const iconsList: string[] = [];
   const importList: string[] = [];
@@ -251,7 +221,6 @@ export const babelPluginIcons = (content: string) => {
             iconsList.push(newValue);
           }
         }
-<<<<<<< HEAD
         // 对 navigate 进行转换
         if (
           (t.isStringLiteral(node.key) && node.key.value === 'navigate') ||
@@ -266,8 +235,6 @@ export const babelPluginIcons = (content: string) => {
             }
           }
         }
-=======
->>>>>>> 9f51f8ed (feat:路由加载icon图标方式)
       }
     },
   });
