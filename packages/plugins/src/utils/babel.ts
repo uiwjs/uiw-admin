@@ -2,6 +2,7 @@ import { parse, ParserOptions, ParserPlugin } from '@babel/parser';
 import traverse, { NodePath } from '@babel/traverse';
 import * as t from '@babel/types';
 import generate from '@babel/generator';
+import template from '@babel/template';
 import { RoutersProps } from './interface';
 import { getToUpperCase } from './index';
 
@@ -168,25 +169,6 @@ export const getJSONData = (content: string) => {
         }
       }
     },
-    ObjectProperty(path) {
-      // 判断父级的父级是否是数组 如果是数组则进行转换
-      if (t.isArrayExpression(path.parentPath.parent)) {
-        const { node } = path;
-        if (
-          (t.isStringLiteral(node.key) && node.key.value === 'component') ||
-          (t.isIdentifier(node.key) && node.key.name === 'component')
-        ) {
-          if (t.isStringLiteral(node.value)) {
-            const valus = node.value.value;
-            if (['404', '403', '500'].includes(node.value.value)) {
-              node.value = getJSX(`Exceptions${valus}`);
-            } else {
-              node.value = getReactLazy(valus);
-            }
-          }
-        }
-      }
-    },
   });
   jsonCode = generate(ast).code;
   return {
@@ -237,6 +219,20 @@ export const babelPluginComponents = (content: string) => {
             const newValue = getToUpperCase(valus) + `_Icon`;
             node.value = getJSX(`${newValue}`);
             iconsList.push(newValue);
+          }
+        }
+        // 对 navigate 进行转换
+        if (
+          (t.isStringLiteral(node.key) && node.key.value === 'navigate') ||
+          (t.isIdentifier(node.key) && node.key.name === 'navigate')
+        ) {
+          if (t.isStringLiteral(node.value)) {
+            const valus = node.value.value;
+            const fn = template(valus);
+            const newValue = fn();
+            if (t.isExpressionStatement(newValue)) {
+              node.value = newValue.expression;
+            }
           }
         }
       }
