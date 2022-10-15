@@ -9,8 +9,6 @@ import {
   matchPath,
 } from 'react-router-dom';
 
-// @ts-ignore
-import RoutePathArr from '@@/routes';
 import { Exceptions403 } from '@uiw-admin/exceptions';
 import { ControllerProps, RoutersProps } from './interface';
 import { useLoadModels } from './utils';

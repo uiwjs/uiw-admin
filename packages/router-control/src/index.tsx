@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from 'react';
 import {
   unstable_HistoryRouter,
@@ -10,7 +9,6 @@ import {
   BrowserRouter,
 } from 'react-router-dom';
 
-// @ts-ignore
 import RoutePathArr from '@@/routes';
 import { Provider } from 'react-redux';
 import { store } from '@uiw-admin/models';
