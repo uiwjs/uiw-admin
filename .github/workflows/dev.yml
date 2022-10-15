@@ -1,0 +1,29 @@
+name: CI
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build-uiw-admin:
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+
+    - run: yarn install
+    - run: yarn run build
+    - run: yarn run build:create
+
+    - name: 📦 publish to NPM
+      uses: kktjs/npm-publish@main
+      with:
+        token: ${{ secrets.NPM_TOKEN }}
+        workspaces: |
+          packages/*
+          !packages/markdown-navbar
+        tag: bate
