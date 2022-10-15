@@ -26,4 +26,6 @@ jobs:
         workspaces: |
           packages/*
           !packages/markdown-navbar
+          create-uiw-admin
+          eslint-packages/config
         tag: bate
