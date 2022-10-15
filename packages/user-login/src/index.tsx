@@ -1,5 +1,4 @@
 import React from 'react';
-// @ts-ignore
 import bgDefault from './assets/r2g7rm.jpg';
 import DocumentTitle from '@uiw-admin/document-title';
 import { Form, Row, Col, ButtonProps, Button, FormFieldsProps } from 'uiw';
@@ -260,7 +259,9 @@ export default (props: UserLoginProps) => {
                 };
               }, {})}
             >
-              {({ fields, canSubmit }) => {
+              {({ fields = {}, canSubmit }) => {
+                const disabled =
+                  typeof canSubmit === 'function' ? canSubmit() : undefined;
                 return (
                   <div>
                     {fieldArr.map((item, index) => {
@@ -280,7 +281,7 @@ export default (props: UserLoginProps) => {
                               loading={
                                 !!isValidating && item.htmlType === 'submit'
                               }
-                              disabled={!canSubmit()}
+                              disabled={!disabled}
                               className="btns"
                               type="danger"
                               {...rest}
@@ -291,7 +292,7 @@ export default (props: UserLoginProps) => {
                         })
                       ) : (
                         <Button
-                          disabled={!canSubmit()}
+                          disabled={!disabled}
                           loading={!!isValidating}
                           className="btns"
                           block
