@@ -2,7 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - dev
+      - v6
 
 jobs:
   build-uiw-admin:
