@@ -1,9 +1,6 @@
-// @ts-nocheck
 import React from 'react';
 import { store } from '@uiw-admin/models';
 import { ControllerProps } from './interface';
-
-// @ts-ignore
 import routeModels from '@@/routeMapModels.json';
 /**  加载 model  */
 export const useLoadModels = (props: {
@@ -13,10 +10,8 @@ export const useLoadModels = (props: {
   const { addModels, path } = props;
   const [load, setLoad] = React.useState(true);
   const addModel = async (path: string) => {
-    // @ts-ignore
     if (BINDPAGR) {
       try {
-        // @ts-ignore
         const modelArr = routeModels[path] || [];
         if (addModels) {
           modelArr.forEach(async (item: { path: string; name: string }) => {

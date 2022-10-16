@@ -29,7 +29,6 @@ export let navigate: NavigateFunction = () => {};
 export function RouteChild(props: ControllerProps = {}) {
   // 这边取权限校验值
   let authStr = sessionStorage.getItem('auth');
-  // @ts-ignore
   if (STORAGE === 'local') {
     authStr = localStorage.getItem('auth');
   }
@@ -73,7 +72,6 @@ export default function Controller(props: ControllerProps = {}) {
     navigateTo,
   } = props;
   const load = useLoadModels({ path: '/', addModels });
-  // @ts-ignore
   let base = BASE_NAME;
   const dom = React.useMemo(() => {
     if (routeType === 'history') {

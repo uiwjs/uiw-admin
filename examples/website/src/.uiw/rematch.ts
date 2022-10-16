@@ -1,4 +1,3 @@
-// @ts-ignore
 import { init, Models } from '@rematch/core';
 import { ExtraModelsFromLoading } from '@rematch/loading';
 export const models = {};

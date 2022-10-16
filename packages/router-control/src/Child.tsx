@@ -37,15 +37,12 @@ export const Loadable = (
 };
 
 const getToken = () => {
-  // @ts-ignore
   let tokenName = TOKEN_NAME;
   // 本地 存储 token
   let token: string | boolean | null = sessionStorage.getItem(tokenName);
-  // @ts-ignore
   if (TOKEN_STORAGE === 'local') {
     token = localStorage.getItem(tokenName);
   }
-  // @ts-ignore
   if (TOKEN_STORAGE === 'cookie') {
     token = getCookie(tokenName);
   }
@@ -55,7 +52,7 @@ const getToken = () => {
 /** 这是一种是否登录验证方式 */
 export const AuthLayout = (props: any) => {
   const location = useLocation();
-  // @ts-ignore
+
   let tokenName = TOKEN_NAME;
   // 本地 存储 token
   let token: string | boolean | null = getToken();
@@ -119,7 +116,6 @@ export const getDeepTreeRoute = (
     const exclude = token ? ['/welcome', '/home'] : [];
 
     if (
-      // @ts-ignore
       AUTH &&
       itemObj.path &&
       !['/', '*', '/403', '/404', '/500', '/login']

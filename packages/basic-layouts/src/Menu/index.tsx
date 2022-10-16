@@ -226,7 +226,6 @@ export default (props: MenuProps = {}) => {
   const navigate = useNavigate();
   const pathName = location.pathname;
 
-  // @ts-ignore
   const searchMenu =
     (SEARCH_MENU && collapsed) ||
     (SEARCH_MENU ? <SearchMenus routes={allRoutes} /> : <></>);

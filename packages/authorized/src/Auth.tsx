@@ -1,12 +1,10 @@
 import React from 'react';
 
 export const getAuthPath = (path?: string): boolean => {
-  // @ts-ignore
   if (AUTH) {
     let authList: string[] = [];
 
     let authStr = sessionStorage.getItem('auth');
-    // @ts-ignore
     if (STORAGE === 'local') {
       authStr = localStorage.getItem('auth');
     }
@@ -30,7 +28,6 @@ export interface AuthBtnProps {
 export const AuthBtn = (props: AuthBtnProps) => {
   const { path, disabled, children } = props;
   const fig = React.useMemo(() => {
-    // @ts-ignore
     if (AUTH) {
       return getAuthPath(path);
     }
