@@ -43,7 +43,7 @@
     "uiw": ">=4.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.18.0",
+    "@babel/runtime": "~7.20.0",
     "@uiw-admin/document-title": "5.3.19",
     "classnames": "2.3.1",
     "pinyin": "~2.11.2"
