@@ -2,10 +2,7 @@ import { RoutersProps, ModelType, RouteModels } from './interface';
 import path from 'path';
 import fs from 'fs';
 export * from './babel';
-<<<<<<< HEAD
 export * from './rematch';
-=======
->>>>>>> 9f51f8ed (feat:路由加载icon图标方式)
 
 // 判断 路由的 component 路径指向是文件还是目录  如果是文件则去除最后一项 变成目录
 // 拼接项目 path.resolve(process.cwd(), 'src') 地址 进行判断数据
