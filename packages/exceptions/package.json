@@ -43,7 +43,7 @@
     "uiw": ">=4.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.20.0"
+    "@babel/runtime": "~7.20.1"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
@@ -51,8 +51,8 @@
     "@types/react-dom": "~17.0.11",
     "react": "~17.0.2",
     "react-dom": "~17.0.2",
-    "react-router": "^6.2.1",
-    "react-router-dom": "^6.2.1",
+    "react-router": "~6.2.1",
+    "react-router-dom": "~6.2.1",
     "uiw": "^5.0.0-bate-5"
   }
 }
