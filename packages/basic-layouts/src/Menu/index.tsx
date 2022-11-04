@@ -64,7 +64,8 @@ function renderMenuItem(
     if (
       (item.index && item.redirect) ||
       item.hideInMenu ||
-      item.hiddenMainMenu ||
+      // 隐藏菜单功能和  hideInMenu 有冲突， hiddenMainMenu 只用于隐藏侧边菜单使用，不进行隐藏当前项，需要隐藏当前项的请使用  hideInMenu 字段参数
+      // item.hiddenMainMenu ||
       !isAuth ||
       item.path === '*'
     ) {

@@ -69,7 +69,7 @@ function BasicLayout(props: BasicLayoutProps) {
     onLogoClick,
     ...others
   } = props || {};
-  let { menuHide } = props;
+  const { menuHide } = props;
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -80,7 +80,7 @@ function BasicLayout(props: BasicLayoutProps) {
       routeData,
     });
   /**路由带参数隐藏菜单 */
-  menuHide = hiddenMainMenu;
+  const newMenuHide = menuHide || hiddenMainMenu;
   const Menus = React.useMemo(() => {
     return (
       <Menu
@@ -144,7 +144,7 @@ function BasicLayout(props: BasicLayoutProps) {
             />
           </div>
         )}
-        {!menuHide && (
+        {!newMenuHide && (
           <div>
             <Button
               basic
@@ -175,7 +175,7 @@ function BasicLayout(props: BasicLayoutProps) {
         <Layout style={{ height: '100%' }}>
           {headerLayout === 'top' && header}
           <Layout>
-            {!menuHide && (
+            {!newMenuHide && (
               <Sider
                 collapsed={collapsed}
                 className={classnames('uiw-admin-global-sider-menu', {})}
