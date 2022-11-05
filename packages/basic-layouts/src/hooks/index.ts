@@ -1,32 +1,11 @@
 import React from 'react';
 import { RoutersProps, useLocation } from '@uiw-admin/router-control';
 
-import {
-  getSideMenusMap,
-  getMenuList,
-  getCurrentPath,
-  BreadcrumbMap,
-} from '../utils';
+import { getSideMenusMap, getMenuList, getCurrentPath } from '../utils';
 export const MainContext = React.createContext<{
   headerLayout?: 'top' | 'default';
   headerBackground?: string;
   headerFontColor?: string;
-  sideMenus?: {
-    sideItemIndex: RoutersProps | undefined;
-    ChildMenus: {
-      routeData: RoutersProps[];
-      parentPath: string | undefined;
-    };
-    sideMenusMap: {
-      sideMenus: Map<string, RoutersProps[]>;
-      flat: Map<string, string>;
-      flatSide: Map<string, string>;
-    };
-    hiddenMainMenu: boolean | undefined;
-  };
-  mianMenuHide?: boolean | undefined;
-  mapRoute?: BreadcrumbMap;
-  routeData?: RoutersProps[];
 }>({
   headerLayout: 'top',
   headerBackground: '#fff',

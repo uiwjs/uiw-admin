@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useMain } from '../hooks';
+import { useHeadStyle } from '../hooks/useHeadStyle';
 
 interface LogoHeaderProps {
   collapsed?: boolean;
@@ -12,7 +12,7 @@ interface LogoHeaderProps {
 }
 
 export default (props: LogoHeaderProps = {}) => {
-  const { headerFontColor, headerLayout } = useMain();
+  const { headerFontColor, headerLayout } = useHeadStyle();
   const logo = useMemo(
     () =>
       props.logo && <img src={props.logo} alt={props.projectName || 'logo'} />,

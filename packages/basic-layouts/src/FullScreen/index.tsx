@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Icon } from 'uiw';
-import { useMain } from '../hooks';
+import { useHeadStyle } from '../hooks/useHeadStyle';
 
 /**
  * 当前是否全屏
@@ -54,7 +54,7 @@ export default () => {
       el.msExitFullscreen();
     }
   }
-  const { headerFontColor } = useMain();
+  const { headerFontColor } = useHeadStyle();
   const handle = () => {
     if (!isFullScreen() && fullscreen) {
       setFullscreen(false);

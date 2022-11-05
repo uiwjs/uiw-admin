@@ -1,225 +1,42 @@
-import React, { useMemo, Fragment, useState } from 'react';
-import Layout from '@uiw/react-layout';
-import Button from '@uiw/react-button';
-import classnames from 'classnames';
-import DocumentTitle from '@uiw-admin/document-title';
-import { RoutersProps } from '@uiw-admin/router-control';
-import LogoHeader from './LogoHeader';
-import Menu from './Menu';
-import Bread from './Breadcrumb';
+import { Fragment } from 'react';
 import './index.css';
-import { getMenu, BreadcrumbMap } from './utils';
-import BodyContent, { WarpBody } from './Content';
-import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
-import FullScreen from './FullScreen';
-import { Icon } from 'uiw';
-import { MainContext, useSideMenus } from './hooks';
+import { MainContext } from './hooks';
+import Main from './main';
+import { CollapsedProvider } from './hooks/useCollapsed';
+import { HeadStyleProvider } from './hooks/useHeadStyle';
+import { MenuRouteProvider } from './hooks/useMenuRoute';
+import DocumentTitle from '@uiw-admin/document-title';
+import { BasicLayoutProps } from './interface';
+export * from './hooks/useCollapsed';
+export * from './hooks/useHeadStyle';
+export * from './hooks/useMenuRoute';
+export * from './interface';
 
-const { Header, Sider, Content } = Layout;
-
-export type BasicLayoutProps = {
-  className?: string;
-  style?: React.CSSProperties;
-  logo?: string;
-  projectName?: string;
-  /**
-   * 页脚
-   */
-  footer?: React.ReactElement;
-  routes?: RoutersProps[];
-  children?: React.ReactNode;
-  /** 头部 布局 */
-  headerLayout?: 'top' | 'default';
-  /** 头部背景色 */
-  headerBackground?: string;
-  /** 头部字体颜色 */
-  headerFontColor?: string;
-  /** 菜单隐藏 */
-  menuHide?: boolean;
-  /** 是否使用 内容区域默认样式  */
-  isDefaultContentStyle?: boolean;
-  // 隐藏刷新权限按钮
-  hideReloadButton?: boolean;
-  // 隐藏退出登录按钮
-  hideLogoutButton?: boolean;
-  // 隐藏用户信息
-  hideUserInfo?: boolean;
-  /** 标题部分 点击事件 **/
-  onLogoClick?: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
-  ) => void;
-} & HeaderRightProps;
 function BasicLayout(props: BasicLayoutProps) {
   const {
-    className,
     routes = [],
-    projectName = 'UIW Admin',
-    // 右侧菜单参数HeaderRightProps
-    profile = {},
-    menus = [],
-    onReloadAuth,
-    layouts,
     headerLayout = 'default',
     headerBackground = '#fff',
     headerFontColor = '#000',
-    isDefaultContentStyle = true,
-    hideReloadButton,
-    hideLogoutButton,
-    hideUserInfo,
-    onLogoClick,
-    ...others
+    projectName = 'UIW Admin',
   } = props || {};
   const { menuHide } = props;
 
-  const [collapsed, setCollapsed] = useState(false);
-
-  /** 转换 用于 侧边路由展示 */
-  const routeData = getMenu(routes);
-  const newSideMenus = useSideMenus({
-    routeData,
-  });
-  const { sideItemIndex, ChildMenus, sideMenusMap, hiddenMainMenu } =
-    newSideMenus;
-  /**路由带参数隐藏菜单 */
-  const newMenuHide = menuHide || hiddenMainMenu;
-  const Menus = React.useMemo(() => {
-    return (
-      <Menu
-        collapsed={collapsed}
-        routes={ChildMenus.routeData}
-        allRoutes={routeData}
-      />
-    );
-  }, [JSON.stringify(ChildMenus), collapsed]);
-
-  const mapRoute = React.useMemo(() => {
-    return new BreadcrumbMap(routeData);
-  }, [JSON.stringify(routeData)]);
-
-  const renderHeaderRightMenu = useMemo(() => {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          justifyItems: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {profile?.menuLeft}
-        <FullScreen />
-        <HeaderRightMenu
-          onReloadAuth={onReloadAuth}
-          profile={profile}
-          menus={menus}
-          layouts={layouts}
-          hideReloadButton={hideReloadButton}
-          hideLogoutButton={hideLogoutButton}
-          hideUserInfo={hideUserInfo}
-        />
-      </div>
-    );
-  }, [profile, menus, JSON.stringify(layouts)]);
-  const cls = [className, 'uiw-admin-global-header']
-    .filter(Boolean)
-    .join(' ')
-    .trim();
-
-  const header = (
-    <Header
-      {...others}
-      className={cls}
-      style={{
-        background: headerBackground,
-        color: headerFontColor,
-        ...props.style,
-      }}
-    >
-      <div style={{ display: 'flex' }}>
-        {headerLayout === 'top' && (
-          <div style={{ minWidth: 200 }}>
-            <LogoHeader
-              onLogoClick={onLogoClick}
-              collapsed={false}
-              projectName={projectName}
-              logo={props.logo}
-            />
-          </div>
-        )}
-        {!newMenuHide && (
-          <div>
-            <Button
-              basic
-              icon={
-                <Icon
-                  type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                  color={headerFontColor}
-                />
-              }
-              // icon={collapsed ? 'menu-unfold' : 'menu-fold'}
-              style={{ fontSize: 12, marginRight: 20 }}
-              onClick={() => setCollapsed(!collapsed)}
-            />
-            <Bread sideMenusMap={sideMenusMap} routeMap={mapRoute} />
-          </div>
-        )}
-      </div>
-      {renderHeaderRightMenu}
-    </Header>
-  );
-  const childProvider = {
-    sideMenus: newSideMenus,
-    mianMenuHide: newMenuHide,
-    mapRoute,
-    routeData,
-  };
   return (
     <Fragment>
       <MainContext.Provider
-        value={{
-          headerLayout,
-          headerBackground,
-          headerFontColor,
-          ...childProvider,
-        }}
+        value={{ headerLayout, headerBackground, headerFontColor }}
       >
         <DocumentTitle title={projectName || ''} />
-        <Layout style={{ height: '100%' }}>
-          {headerLayout === 'top' && header}
-          <Layout>
-            {!newMenuHide && (
-              <Sider
-                collapsed={collapsed}
-                className={classnames('uiw-admin-global-sider-menu', {})}
-              >
-                {headerLayout === 'default' ? (
-                  <LogoHeader
-                    onLogoClick={onLogoClick}
-                    collapsed={collapsed}
-                    projectName={projectName}
-                    logo={props.logo}
-                  />
-                ) : (
-                  <div style={{ marginTop: 10 }} />
-                )}
-                {Menus}
-              </Sider>
-            )}
-            <Layout>
-              {headerLayout === 'default' && header}
-              {!isDefaultContentStyle ? (
-                <WarpBody sideItemIndex={sideItemIndex}>
-                  {props.children}
-                </WarpBody>
-              ) : (
-                <Content className="uiw-admin-global-content">
-                  <WarpBody sideItemIndex={sideItemIndex}>
-                    <BodyContent>{props.children}</BodyContent>
-                  </WarpBody>
-                </Content>
-              )}
-            </Layout>
-          </Layout>
-        </Layout>
+        <CollapsedProvider>
+          <HeadStyleProvider
+            {...{ headerLayout, headerBackground, headerFontColor }}
+          >
+            <MenuRouteProvider routes={routes} menuHide={menuHide}>
+              <Main {...props} />
+            </MenuRouteProvider>
+          </HeadStyleProvider>
+        </CollapsedProvider>
       </MainContext.Provider>
     </Fragment>
   );
