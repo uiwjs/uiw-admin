@@ -8,7 +8,7 @@ import {
 } from '@uiw-admin/router-control';
 import { useLocation, useNavigate, Location } from 'react-router-dom';
 import { matchPath, NavigateFunction } from 'react-router';
-import { getRoutesList } from './../utils';
+import { getRoutesList } from '../utils';
 import { SearchSelect, SearchSelectOptionData } from 'uiw';
 
 import pinyin from 'pinyin';

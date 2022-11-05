@@ -1,7 +1,7 @@
 import React from 'react';
 import { Breadcrumb } from 'uiw';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BreadcrumbMap } from './../utils';
+import { BreadcrumbMap } from '../utils';
 import { matchPath } from 'react-router';
 import { onNavigate } from '../Menu';
 import { RoutersProps } from '@uiw-admin/router-control';

@@ -13,7 +13,7 @@ import BodyContent, { WarpBody } from './Content';
 import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';
 import { Icon } from 'uiw';
-import { MainContext, useSideMenus } from './hook';
+import { MainContext, useSideMenus } from './hooks';
 
 const { Header, Sider, Content } = Layout;
 
@@ -75,10 +75,11 @@ function BasicLayout(props: BasicLayoutProps) {
 
   /** 转换 用于 侧边路由展示 */
   const routeData = getMenu(routes);
+  const newSideMenus = useSideMenus({
+    routeData,
+  });
   const { sideItemIndex, ChildMenus, sideMenusMap, hiddenMainMenu } =
-    useSideMenus({
-      routeData,
-    });
+    newSideMenus;
   /**路由带参数隐藏菜单 */
   const newMenuHide = menuHide || hiddenMainMenu;
   const Menus = React.useMemo(() => {
@@ -165,11 +166,21 @@ function BasicLayout(props: BasicLayoutProps) {
       {renderHeaderRightMenu}
     </Header>
   );
-
+  const childProvider = {
+    sideMenus: newSideMenus,
+    mianMenuHide: newMenuHide,
+    mapRoute,
+    routeData,
+  };
   return (
     <Fragment>
       <MainContext.Provider
-        value={{ headerLayout, headerBackground, headerFontColor }}
+        value={{
+          headerLayout,
+          headerBackground,
+          headerFontColor,
+          ...childProvider,
+        }}
       >
         <DocumentTitle title={projectName || ''} />
         <Layout style={{ height: '100%' }}>

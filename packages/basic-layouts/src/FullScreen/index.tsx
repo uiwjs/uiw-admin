@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Icon } from 'uiw';
-import { useMain } from './../hook';
+import { useMain } from '../hooks';
 
 /**
  * 当前是否全屏

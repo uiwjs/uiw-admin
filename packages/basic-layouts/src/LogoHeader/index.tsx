@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useMain } from './../hook';
+import { useMain } from '../hooks';
 
 interface LogoHeaderProps {
   collapsed?: boolean;
