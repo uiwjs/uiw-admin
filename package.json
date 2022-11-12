@@ -87,7 +87,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/preset-typescript": "~7.18.6",
-    "@babel/core": "~7.19.6",
+    "@babel/core": "~7.20.2",
     "ajv": "^8.9.0",
     "husky": "~7.0.4",
     "lerna": "~5.1.0",
