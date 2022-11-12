@@ -15,6 +15,7 @@ import useSelections from './useSelections';
 const BaseTable: React.FC<BaseTableProps> = ({
   style,
   columns,
+  handlerCols,
   rowSelection = {},
   onPageChange: pageChange,
   scroll = {},
@@ -72,7 +73,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
       }
     });
     return defaultSearchValues;
-  }, [JSON.stringify(columns)]);
+  }, [JSON.stringify(handlerCols)]);
 
   // 是否首次调取数据
   const isFirstMountRef = useRef(false);
@@ -183,7 +184,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   }, [
     JSON.stringify(tableData),
     isValidating,
-    JSON.stringify(columns),
+    JSON.stringify(handlerCols),
     pageIndex,
     JSON.stringify(selection),
     setPageIndex,

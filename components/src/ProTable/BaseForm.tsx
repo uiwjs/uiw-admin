@@ -45,7 +45,13 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
   let { updateStore, updateForm } = store as any;
 
-  const { columns, searchBtns, onBeforeSearch, formCol = 5 } = props;
+  const {
+    columns,
+    handlerCols,
+    searchBtns,
+    onBeforeSearch,
+    formCol = 5,
+  } = props;
 
   const getFields = (formProps: FormProps, title: any) => {
     const { widgetProps, key, widget, label, initialValue, ...otherProps } =
@@ -85,7 +91,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
     helper(columns);
     return fields;
-  }, [JSON.stringify(columns)]);
+  }, [JSON.stringify(handlerCols)]);
 
   // 查询
   const onFormSearch = ({ initial, current }: FormSubmitProps) => {

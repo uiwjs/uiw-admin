@@ -7,17 +7,6 @@ import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 import './index.css';
 
-const handlerCols = (arr = []) => {
-  return arr.map((item: any) => {
-    const _props = item.props;
-    delete _props.widgetProps.preIcon;
-    return {
-      props: _props,
-      ...item,
-    };
-  });
-};
-
 const ProTabel: React.FC<ProtableProps> = (props) => {
   const {
     table,
@@ -113,12 +102,12 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
             .join(' ')}
           style={{ backgroundColor: tableBackgroundColor }}
         >
-          {/* <Table
+          <Table
             columns={columns}
             handlerCols={handlerCols()}
             {...tableProps}
             paginationProps={paginationProps}
-          /> */}
+          />
         </div>
       </Skeleton>
     </StoreCtx.Provider>
@@ -126,3 +115,17 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
 };
 
 export default ProTabel;
+
+const handlerCols = (columns = []) => {
+  let arr: any[] = [];
+  columns.forEach((item: any) => {
+    const { props, ...itemOthers } = item;
+    const { widgetProps, ...propsOthers } = props;
+    const { preIcon, ...widgetPropsOthers } = widgetProps;
+    arr.push({
+      ...itemOthers,
+      props: { ...propsOthers, widgetProps: { ...widgetPropsOthers } },
+    });
+  });
+  return arr;
+};
