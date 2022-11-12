@@ -195,12 +195,12 @@ jobs:
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/exceptions/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/authorized/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/basic-layouts/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/components/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./components/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/config/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/document-title/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/layout-tabs/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/models/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/plugins/package.json
+    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./plugins/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/router-control/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/uiw-admin/package.json
     - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/user-login/package.json

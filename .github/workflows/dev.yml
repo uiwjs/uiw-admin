@@ -25,6 +25,8 @@ jobs:
         token: ${{ secrets.NPM_TOKEN }}
         workspaces: |
           packages/*
+          plugins
+          components
           !packages/markdown-navbar
           create-uiw-admin
           eslint-packages/config

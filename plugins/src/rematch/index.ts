@@ -4,9 +4,9 @@
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import { RematchFiles, getFilenameInfo } from './../utils';
+import { RematchFiles, getFilenameInfo } from '../utils';
 import createRematchTemps, { createModelsTempStr } from './temp';
-import { ModelType } from './../utils/interface';
+import { ModelType } from '../utils/interface';
 import chokidar from 'chokidar';
 import { getModelInfo } from './utils';
 

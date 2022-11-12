@@ -11,8 +11,8 @@ import {
   stringToJson,
   getRouteMapModels,
   babelPluginComponents,
-} from './../utils';
-import { RoutersProps } from './../utils/interface';
+} from '../utils';
+import { RoutersProps } from '../utils/interface';
 
 type ISTYPE = 'json' | 'ts' | 'js' | false;
 
