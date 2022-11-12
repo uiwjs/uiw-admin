@@ -101,6 +101,8 @@
     "packages": [
       "packages/*",
       "examples/*",
+      "plugins",
+      "components",
       "create-uiw-admin",
       "eslint-packages/*"
     ],

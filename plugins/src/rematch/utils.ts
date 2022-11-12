@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { IsModel } from './../utils';
+import { IsModel } from '../utils';
 /**获取model文件信息*/
 export const getModelInfo = (newPath: string) => {
   // 1. 判断是否已经存在
