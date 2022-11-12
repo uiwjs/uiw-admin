@@ -7,10 +7,21 @@ import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 import './index.css';
 
+const handlerCols = (arr = []) => {
+  return arr.map((item: any) => {
+    const _props = item.props;
+    delete _props.widgetProps.preIcon;
+    return {
+      props: _props,
+      ...item,
+    };
+  });
+};
+
 const ProTabel: React.FC<ProtableProps> = (props) => {
   const {
     table,
-    columns,
+    columns = [],
     operateButtons = [],
     searchBtns,
     onBeforeSearch,
@@ -61,6 +72,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     }),
     [JSON.stringify(table)],
   );
+
   return (
     <StoreCtx.Provider value={{ ...store }}>
       <Skeleton loading={loading}>
@@ -68,6 +80,7 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
         {searchBtns && searchBtns.length > 0 && (
           <BaseForm
             columns={columns}
+            handlerCols={handlerCols(columns)}
             searchBtns={searchBtns}
             onBeforeSearch={onBeforeSearch}
             formCol={formCol}
@@ -100,11 +113,12 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
             .join(' ')}
           style={{ backgroundColor: tableBackgroundColor }}
         >
-          <Table
+          {/* <Table
             columns={columns}
+            handlerCols={handlerCols()}
             {...tableProps}
             paginationProps={paginationProps}
-          />
+          /> */}
         </div>
       </Skeleton>
     </StoreCtx.Provider>
