@@ -174,7 +174,7 @@ export const items = (queryInfo: any, attr: any) => [
     label: 'searchSelect2',
     key: 'searchSelect2',
     widget: 'searchSelect',
-    // option: attr.searchSelect.option,
+    option: attr.searchSelect.option,
     widgetProps: {
       labelInValue: true,
       allowClear: true,

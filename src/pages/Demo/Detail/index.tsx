@@ -56,6 +56,9 @@ const Detail = ({ updateData }: DetailProps) => {
     if (errors && Object.keys(errors).length > 0) return
     if (errors2 && Object.keys(errors2).length > 0) return
     // 调用接口
+    const datas1 = form.getFieldValues() || {}
+    const datas2 = form.getFieldValues() || {}
+    console.log('obj', { ...datas1, ...datas2 })
   }
 
   return (
