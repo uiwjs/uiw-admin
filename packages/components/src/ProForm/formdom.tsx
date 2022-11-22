@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
-import { ProFormProps } from './type';
+import { ProFormProps, UseFormStateProps } from './type';
 import { useStore, useColPropsContext } from './hooks/store';
 import { fromValidate } from './utils';
 import './style/form-item.less';
@@ -19,9 +19,11 @@ function FormDom({
   formInstanceRef,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
-  formInstanceRef: any;
+  formInstanceRef: React.MutableRefObject<
+    { current: UseFormStateProps | null } | undefined
+  >;
 }) {
-  const baseRef = useRef(null);
+  const baseRef: React.MutableRefObject<null> = useRef(null);
   const store = useStore();
   const colProps = useColPropsContext();
 
