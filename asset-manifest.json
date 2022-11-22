@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.4c3b187d.css",
-    "main.js": "/static/js/main.7a63202c.js",
+    "main.js": "/static/js/main.a1a236b4.js",
     "static/css/8954.cf4c2848.chunk.css": "/static/css/8954.cf4c2848.chunk.css",
     "static/js/8954.bee3a023.chunk.js": "/static/js/8954.bee3a023.chunk.js",
     "static/css/1134.531fee19.chunk.css": "/static/css/1134.531fee19.chunk.css",
@@ -71,11 +71,11 @@
     "refractor-vendor.js": "/static/js/refractor-vendor.e97ee488.chunk.js",
     "parse5-vendor.js": "/static/js/parse5-vendor.e4e6ff99.chunk.js",
     "react-vendor.js": "/static/js/react-vendor.1cbb6174.js",
-    "static/js/7360.f4b6831d.chunk.js": "/static/js/7360.f4b6831d.chunk.js",
+    "static/js/7360.7cb12ad0.chunk.js": "/static/js/7360.7cb12ad0.chunk.js",
     "static/js/4093.20b9bcdb.chunk.js": "/static/js/4093.20b9bcdb.chunk.js",
     "static/js/5855.c84c6c87.chunk.js": "/static/js/5855.c84c6c87.chunk.js",
     "static/js/1301.9358b1d3.chunk.js": "/static/js/1301.9358b1d3.chunk.js",
-    "static/js/6227.5eb698f7.chunk.js": "/static/js/6227.5eb698f7.chunk.js",
+    "static/js/6227.d1239156.chunk.js": "/static/js/6227.d1239156.chunk.js",
     "static/js/929.8d263373.chunk.js": "/static/js/929.8d263373.chunk.js",
     "static/js/2803.0581ce03.chunk.js": "/static/js/2803.0581ce03.chunk.js",
     "static/media/r2g7rm.jpg": "/static/media/r2g7rm.c1f408daff26a9128797.jpg",
@@ -84,7 +84,7 @@
     "static/media/404.svg": "/static/media/404.ad300103c5127caf4398.svg",
     "index.html": "/index.html",
     "main.4c3b187d.css.map": "/static/css/main.4c3b187d.css.map",
-    "main.7a63202c.js.map": "/static/js/main.7a63202c.js.map",
+    "main.a1a236b4.js.map": "/static/js/main.a1a236b4.js.map",
     "8954.cf4c2848.chunk.css.map": "/static/css/8954.cf4c2848.chunk.css.map",
     "8954.bee3a023.chunk.js.map": "/static/js/8954.bee3a023.chunk.js.map",
     "1134.531fee19.chunk.css.map": "/static/css/1134.531fee19.chunk.css.map",
@@ -154,11 +154,11 @@
     "refractor-vendor.e97ee488.chunk.js.map": "/static/js/refractor-vendor.e97ee488.chunk.js.map",
     "parse5-vendor.e4e6ff99.chunk.js.map": "/static/js/parse5-vendor.e4e6ff99.chunk.js.map",
     "react-vendor.1cbb6174.js.map": "/static/js/react-vendor.1cbb6174.js.map",
-    "7360.f4b6831d.chunk.js.map": "/static/js/7360.f4b6831d.chunk.js.map",
+    "7360.7cb12ad0.chunk.js.map": "/static/js/7360.7cb12ad0.chunk.js.map",
     "4093.20b9bcdb.chunk.js.map": "/static/js/4093.20b9bcdb.chunk.js.map",
     "5855.c84c6c87.chunk.js.map": "/static/js/5855.c84c6c87.chunk.js.map",
     "1301.9358b1d3.chunk.js.map": "/static/js/1301.9358b1d3.chunk.js.map",
-    "6227.5eb698f7.chunk.js.map": "/static/js/6227.5eb698f7.chunk.js.map",
+    "6227.d1239156.chunk.js.map": "/static/js/6227.d1239156.chunk.js.map",
     "929.8d263373.chunk.js.map": "/static/js/929.8d263373.chunk.js.map",
     "2803.0581ce03.chunk.js.map": "/static/js/2803.0581ce03.chunk.js.map"
   },
@@ -167,6 +167,6 @@
     "static/js/uiw-vendor.c4a13bc2.js",
     "static/js/react-vendor.1cbb6174.js",
     "static/css/main.4c3b187d.css",
-    "static/js/main.7a63202c.js"
+    "static/js/main.a1a236b4.js"
   ]
 }
