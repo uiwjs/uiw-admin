@@ -11,7 +11,6 @@ function FormDom({
   onSubmit,
   onChange,
   onSubmitError,
-  // afterSubmit,
   buttonsContainer,
   showSaveButton = false,
   showResetButton = false,
@@ -72,7 +71,7 @@ function FormDom({
       }}
       fields={formfields}
     >
-      {({ fields, state, canSubmit, resetForm }) => {
+      {({ fields = {}, state, canSubmit = () => false, resetForm }) => {
         return (
           <React.Fragment>
             <Row gutter={10}>

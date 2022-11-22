@@ -133,7 +133,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       ref={formRef}
       fields={getFormFields}
     >
-      {({ fields, state, canSubmit, resetForm }) => {
+      {({ fields = {}, state, canSubmit, resetForm }) => {
         return (
           <div>
             <Row gutter={12}>

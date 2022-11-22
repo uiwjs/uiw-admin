@@ -1,4 +1,3 @@
-import React from 'react';
 import { Descriptions } from 'uiw';
 import { ProFormProps } from './type';
 import { getReadValue } from './utils/index';
