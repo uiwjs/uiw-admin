@@ -5,6 +5,7 @@ import ReadFormDom from './readform';
 import { getFormFields } from './widgets';
 import { ProFormProps, UseFormStateProps, UseFormProps } from './type';
 import { StoreCtx, ColPropsContext } from './hooks/store';
+import { isObjectEmpty } from './utils';
 import './style/form-item.less';
 
 function ProForm(
@@ -36,9 +37,33 @@ function ProForm(
 
   const store = useMemo(() => ({ setFormState }), [form]);
 
-  // 通过ref导出实例方法
   const formInstanceRef = useRef<{ current: UseFormStateProps }>();
-  useImperativeHandle(ref, () => ({ ...form }));
+
+  // 通过ref导出实例方法
+  useImperativeHandle(ref, () => {
+    const { onSubmit, getError, getFieldValues } =
+      formInstanceRef?.current?.current || {};
+    // 表单验证(同时兼容老api submitvalidate和新api onSubmit )
+    const submitvalidate = () => onSubmit?.() || null;
+    // 验证并获取表单值
+    const validateFieldsAndGetValue = () => {
+      return new Promise(async function (resolve, reject) {
+        await submitvalidate();
+        const errors = getError?.() || {};
+        if (isObjectEmpty(errors)) {
+          const value = getFieldValues?.() || {};
+          resolve(value);
+        } else {
+          reject(errors);
+        }
+      });
+    };
+    return {
+      ...formInstanceRef.current?.current,
+      submitvalidate,
+      validateFieldsAndGetValue,
+    };
+  });
 
   let children: React.ReactNode;
   const formDomProps = { ...props, formfields, formInstanceRef };

@@ -27,7 +27,9 @@ function FormDom({
   const store = useStore();
   const colProps = useColPropsContext();
 
-  const { setFormState } = store as any;
+  const { setFormState } = store as {
+    setFormState: ((p: any) => void) | undefined;
+  };
 
   // 通过store获取表单实例
   useEffect(() => setFormState?.(baseRef), [baseRef]);
@@ -36,6 +38,7 @@ function FormDom({
   useEffect(() => {
     formInstanceRef.current = baseRef;
   }, [baseRef]);
+
   return (
     <Form
       ref={baseRef}

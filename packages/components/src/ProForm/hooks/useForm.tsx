@@ -14,7 +14,7 @@ const useForm = () => {
   const getError = () => formState?.current?.getError() || {};
 
   // 验证并获取表单值
-  const validateFieldsAndGetValue = async () => {
+  const validateFieldsAndGetValue = () => {
     return new Promise(async function (resolve, reject) {
       await submitvalidate();
       const errors = getError();
