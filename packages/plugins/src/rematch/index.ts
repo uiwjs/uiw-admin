@@ -4,10 +4,11 @@
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import { IsModel } from './../utils';
+import { RematchFiles, getFilenameInfo } from './../utils';
 import createRematchTemps, { createModelsTempStr } from './temp';
 import { ModelType } from './../utils/interface';
 import chokidar from 'chokidar';
+import { getModelInfo } from './utils';
 
 export type { ModelType };
 class RematchWebpackPlugin {
@@ -31,47 +32,9 @@ class RematchWebpackPlugin {
     this.restCreate();
   }
   // 递归文件
-  getPathDeep = (filePath: string, isModel = false) => {
-    const files = fs.readdirSync(filePath);
-    if (files) {
-      files.forEach((filename: string) => {
-        let mode = isModel;
-        const filedir = path.join(filePath, filename);
-        const isNoEmty = fs.existsSync(filedir);
-        if (!isNoEmty) {
-          return;
-        }
-        const stats = fs.statSync(filedir);
-        if (stats) {
-          const isFile = stats.isFile(); //是文件
-          const isDir = stats.isDirectory(); //是文件夹
-          if (isFile && isModel && /\.(ts||js)$/.test(filename)) {
-            const data = fs.readFileSync(filedir, { encoding: 'utf-8' });
-            const { isModels, modelNames, isCreateModel } = IsModel(data);
-            const pathUrls = `${filedir}`.replace(/\\/g, '/');
-            const location = pathUrls.replace(/\/models.*$/, '');
-            const srcPath = pathUrls.replace(new RegExp(this.src), '.');
-            if (isModels) {
-              this.oldModel.push({
-                path: pathUrls,
-                filename: filename.replace(/\.(ts|js)$/, ''),
-                modelName: modelNames,
-                isCreateModel,
-                location,
-                name: modelNames || filename,
-                srcPath,
-              });
-            }
-          }
-          if (filename === 'models') {
-            mode = true;
-          }
-          if (isDir) {
-            this.getPathDeep(filedir, mode); //递归，如果是文件夹，就继续遍历该文件夹下面的文件
-          }
-        }
-      });
-    }
+  getPathDeep = (filePath: string) => {
+    const rematchFiles = new RematchFiles(filePath);
+    this.oldModel = rematchFiles.modelList;
   };
 
   // 重新生成
@@ -131,22 +94,9 @@ class RematchWebpackPlugin {
     if (stats.isDirectory()) {
       return;
     }
-    // 1. 判断是否已经存在
-    // 如果已经存在着直接更新
-    let isMode = false;
-    let modelName: undefined;
-    let isCreateModel = false;
-    // 先判断路径是否存在models 和ts|js 结尾
-    if (/\.(ts|js)$/.test(newPath) && /models/.test(newPath)) {
-      const {
-        isModels,
-        modelNames,
-        isCreateModel: isCreate,
-      } = IsModel(fs.readFileSync(newPath, { encoding: 'utf-8' }));
-      modelName = modelNames;
-      isMode = isModels;
-      isCreateModel = isCreate;
-    }
+    // 获取文件信息
+    const { isMode, modelName, isCreateModel } = getModelInfo(newPath);
+
     const newFile = this.oldModel.find((item) => item.path === newPath);
     if (newFile) {
       // 进行判断是否还是 model
@@ -167,26 +117,24 @@ class RematchWebpackPlugin {
           return { ...item };
         });
       }
-      this.restCreate();
-    } else {
+    } else if (isMode) {
       // 判断是不是 model  是则更新
-      if (isMode) {
-        const pathUrls = `${newPath}`.replace(/\\/g, '/');
-        const arr = pathUrls.split(/\\|\//);
-        let filename = arr[arr.length - 1].replace(/\.(ts|js)$/, '');
-        const location = pathUrls.replace(/\/models.*$/, '');
-        const srcPath = pathUrls.replace(new RegExp(this.src), '.');
-        this.oldModel.push({
-          path: pathUrls,
-          filename,
-          modelName,
-          isCreateModel,
-          location,
-          name: modelName || filename,
-          srcPath,
-        });
-        this.restCreate();
-      }
+      const { srcPath, location, pathUrls, fileName } = getFilenameInfo(
+        newPath,
+        this.src,
+      );
+      this.oldModel.push({
+        path: pathUrls,
+        filename: fileName,
+        modelName,
+        isCreateModel,
+        location,
+        name: modelName || fileName,
+        srcPath,
+      });
+    }
+    if (isMode || newFile) {
+      this.restCreate();
     }
   };
   // 校验文件
@@ -217,16 +165,6 @@ class RematchWebpackPlugin {
               this.checkField(path.resolve(process.cwd(), 'src', pathName));
             }
           });
-        // const watcher = fs.watch(path.resolve(process.cwd(), 'src'), {
-        //   recursive: true,
-        // });
-        // watcher.on('change', (type, filename) => {
-        //   if (typeof filename === 'string') {
-        //     this.field = filename as string;
-        //     this.newPath = path.resolve(process.cwd(), 'src', this.field);
-        //     this.checkField();
-        //   }
-        // });
       }
     });
   }

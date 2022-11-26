@@ -7,6 +7,9 @@ import {
   createRoutesFromChildren,
   HashRouter,
   BrowserRouter,
+  createBrowserRouter,
+  createHashRouter,
+  RouterProvider,
 } from 'react-router-dom';
 
 import RoutePathArr from '@@/routes';
@@ -39,28 +42,30 @@ export function RouteChild(props: ControllerProps = {}) {
     return [];
   }, [authStr]);
 
-  const roue = React.useMemo(
-    () =>
-      createRoutesFromChildren(
-        getTree(
-          getDeepTreeRoute(
-            RoutePathArr,
-            authList,
-            props.notLoginMenus,
-            props.navigateTo,
-          ),
-          props.addModels,
-          !!props.isAutoAuth,
+  const routes = React.useMemo(() => {
+    const createRouters =
+      props.routeType === 'history' ? createBrowserRouter : createHashRouter;
+    return createRouters(
+      getTree(
+        getDeepTreeRoute(
+          RoutePathArr,
+          authList,
           props.notLoginMenus,
           props.navigateTo,
         ),
+        props.addModels,
+        !!props.isAutoAuth,
+        props.notLoginMenus,
+        props.navigateTo,
       ),
-    [JSON.stringify(authList)],
-  );
-  const dom = useRoutes(roue);
+    );
+  }, [JSON.stringify(authList)]);
   /** 赋值 用于跳转 */
-  navigate = useNavigate();
-  return dom;
+  navigate = routes.navigate;
+  console.log('routes', routes);
+  return (
+    <RouterProvider router={routes} fallbackElement={<div>loading...</div>} />
+  );
 }
 
 export default function Controller(props: ControllerProps = {}) {
@@ -74,33 +79,38 @@ export default function Controller(props: ControllerProps = {}) {
   const load = useLoadModels({ path: '/', addModels });
   // @ts-ignore
   let base = BASE_NAME;
-  const dom = React.useMemo(() => {
-    if (routeType === 'browser') {
-      return (
-        <BrowserRouter window={window} basename={base}>
-          <RouteChild
-            addModels={props.addModels}
-            isAutoAuth={isAutoAuth}
-            notLoginMenus={notLoginMenus}
-            navigateTo={navigateTo}
-          />
-        </BrowserRouter>
-      );
-    }
-    return (
-      <HashRouter window={window} basename={base}>
-        <RouteChild
-          addModels={props.addModels}
-          isAutoAuth={isAutoAuth}
-          notLoginMenus={notLoginMenus}
-          navigateTo={navigateTo}
-        />
-      </HashRouter>
-    );
-  }, [routeType]);
+  // const dom = React.useMemo(() => {
+  //   if (routeType === 'browser') {
+  //     return (
+  //       <BrowserRouter window={window} basename={base}>
+
+  //       </BrowserRouter>
+  //     );
+  //   }
+  //   return (
+  //     <HashRouter window={window} basename={base}>
+  //       <RouteChild
+  //         addModels={props.addModels}
+  //         isAutoAuth={isAutoAuth}
+  //         notLoginMenus={notLoginMenus}
+  //         navigateTo={navigateTo}
+  //       />
+  //     </HashRouter>
+  //   );
+  // }, [routeType]);
 
   if (load) {
     return <div>Loading...</div>;
   }
-  return <Provider store={store}>{dom}</Provider>;
+  return (
+    <Provider store={store}>
+      <RouteChild
+        addModels={props.addModels}
+        isAutoAuth={isAutoAuth}
+        notLoginMenus={notLoginMenus}
+        navigateTo={navigateTo}
+        routeType={routeType}
+      />
+    </Provider>
+  );
 }

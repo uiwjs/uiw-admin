@@ -4,10 +4,15 @@
 import fs from 'fs';
 import path from 'path';
 import webpack from 'webpack';
-import createTemp, { getJsonToString } from './temp';
+import createTemp from './temp';
 import chokidar from 'chokidar';
-import { getJSONData, stringToJson, getRouteMapModels } from './../utils';
-import { RoutersProps } from './../utils/interface';
+import {
+  getJSONData,
+  stringToJson,
+  getRouteMapModels,
+  babelPluginComponents,
+} from '../utils';
+import { RoutersProps } from '../utils/interface';
 
 type ISTYPE = 'json' | 'ts' | 'js' | false;
 
@@ -67,8 +72,14 @@ class RoutesWebpackPlugin {
     if (!fs.existsSync(this.uiw)) {
       fs.mkdirSync(this.uiw);
     }
+    const content = ['js', 'ts'].includes(isType as string)
+      ? this.jsonCode
+      : strs;
+    const babelIcons = babelPluginComponents(content);
     let routeTemp = createTemp(
-      ['js', 'ts'].includes(isType as string) ? this.jsonCode : strs,
+      babelIcons.code,
+      babelIcons.iconsList,
+      babelIcons.importLazy,
       isType,
     );
     fs.writeFileSync(
@@ -86,12 +97,12 @@ class RoutesWebpackPlugin {
   checkPreAndNext = (isType: ISTYPE) => {
     if (this.preString !== this.nextString) {
       //  读取文件数据
-      const routerTemp = JSON.stringify(this.routes, getJsonToString, 2)
-        .replace(/\"component\": (\"(.+?)\")/g, (global, m1, m2) => {
-          return `"component": ${m2.replace(/\^/g, '"')}`;
-        })
-        .replace(/\\r\\n/g, '\r\n')
-        .replace(/\\n/g, '\r\n');
+      const routerTemp = JSON.stringify(this.routes, null, 2);
+      // .replace(/\"component\": (\"(.+?)\")/g, (global, m1, m2) => {
+      //   return `"component": ${m2.replace(/\^/g, '"')}`;
+      // })
+      // .replace(/\\r\\n/g, '\r\n')
+      // .replace(/\\n/g, '\r\n');
       this.createTemps(routerTemp, isType);
     }
   };

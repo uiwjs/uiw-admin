@@ -252,7 +252,7 @@ export const getTree = (
         </AuthLayout>
       );
     }
-    list.push(<Route key={ind} {...itemObj} />);
+    list.push({ ...itemObj });
   });
   return list;
 };
