@@ -1,7 +1,6 @@
 // @ts-nocheck
 import React from 'react';
 import {
-  unstable_HistoryRouter,
   useRoutes,
   useNavigate,
   NavigateFunction,
@@ -10,7 +9,6 @@ import {
   BrowserRouter,
 } from 'react-router-dom';
 
-// @ts-ignore
 import RoutePathArr from '@@/routes';
 import { Provider } from 'react-redux';
 import { store } from '@uiw-admin/models';
@@ -24,7 +22,6 @@ export * from 'react-router-dom';
 export * from 'react-router';
 export * from 'react-redux';
 
-export const HistoryRouter = unstable_HistoryRouter;
 export const history = createBrowserHistory();
 export let navigate: NavigateFunction = () => {};
 
@@ -78,18 +75,7 @@ export default function Controller(props: ControllerProps = {}) {
   // @ts-ignore
   let base = BASE_NAME;
   const dom = React.useMemo(() => {
-    if (routeType === 'history') {
-      return (
-        <HistoryRouter history={history} basename={base}>
-          <RouteChild
-            addModels={props.addModels}
-            isAutoAuth={isAutoAuth}
-            notLoginMenus={notLoginMenus}
-            navigateTo={navigateTo}
-          />
-        </HistoryRouter>
-      );
-    } else if (routeType === 'browser') {
+    if (routeType === 'browser') {
       return (
         <BrowserRouter window={window} basename={base}>
           <RouteChild
