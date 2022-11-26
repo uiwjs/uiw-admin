@@ -15,7 +15,8 @@ import useSelections from './useSelections';
 const BaseTable: React.FC<BaseTableProps> = ({
   style,
   columns,
-  rowSelection = {},
+  handlerCols,
+  rowSelection = { selectKey: '', type: 'checkbox', defaultSelected: [] },
   onPageChange: pageChange,
   scroll = {},
   paginationProps = {},
@@ -72,7 +73,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
       }
     });
     return defaultSearchValues;
-  }, [JSON.stringify(columns)]);
+  }, [JSON.stringify(handlerCols)]);
 
   // 是否首次调取数据
   const isFirstMountRef = useRef(false);
@@ -183,7 +184,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   }, [
     JSON.stringify(tableData),
     isValidating,
-    JSON.stringify(columns),
+    JSON.stringify(handlerCols),
     pageIndex,
     JSON.stringify(selection),
     setPageIndex,
@@ -225,10 +226,10 @@ const BaseTable: React.FC<BaseTableProps> = ({
           />
         ) : (
           <Radio
+            checked={selection.isSelected(rowData[selectKey])}
             onChange={() => {
               selection.toggle(rowData[selectKey]);
             }}
-            checked={selection.isSelected(rowData[selectKey])}
           />
         );
       },

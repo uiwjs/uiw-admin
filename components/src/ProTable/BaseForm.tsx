@@ -45,7 +45,13 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
   let { updateStore, updateForm } = store as any;
 
-  const { columns, searchBtns, onBeforeSearch, formCol = 5 } = props;
+  const {
+    columns,
+    handlerCols,
+    searchBtns,
+    onBeforeSearch,
+    formCol = 5,
+  } = props;
 
   const getFields = (formProps: FormProps, title: any) => {
     const { widgetProps, key, widget, label, initialValue, ...otherProps } =
@@ -85,7 +91,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
     helper(columns);
     return fields;
-  }, [JSON.stringify(columns)]);
+  }, [JSON.stringify(handlerCols)]);
 
   // 查询
   const onFormSearch = ({ initial, current }: FormSubmitProps) => {
@@ -133,15 +139,17 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       ref={formRef}
       fields={getFormFields}
     >
-      {({ fields, state, canSubmit, resetForm }) => {
+      {({ fields }) => {
         return (
           <div>
             <Row gutter={12}>
-              {Object.keys(fields).map((key) => (
-                <Col key={key} fixed style={{ width: cent }}>
-                  {fields[key]}
-                </Col>
-              ))}
+              {fields &&
+                Object.keys(fields).length > 0 &&
+                Object.keys(fields).map((key) => (
+                  <Col key={key} fixed style={{ width: cent }}>
+                    {fields[key]}
+                  </Col>
+                ))}
               {Array.from({ length: emptyLength }, (_, index) => (
                 <Col key={index.toString()} fixed style={{ width: cent }} />
               ))}
