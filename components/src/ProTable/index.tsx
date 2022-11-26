@@ -4,7 +4,7 @@ import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
-import { ProtableProps } from './types';
+import { ProtableProps, FormCol } from './types';
 import './index.css';
 
 const ProTabel: React.FC<ProtableProps> = (props) => {
@@ -104,8 +104,8 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
         >
           <Table
             columns={columns}
-            handlerCols={handlerCols()}
             {...tableProps}
+            handlerCols={handlerCols(columns)}
             paginationProps={paginationProps}
           />
         </div>
@@ -116,16 +116,18 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
 
 export default ProTabel;
 
-const handlerCols = (columns = []) => {
-  let arr: any[] = [];
-  columns.forEach((item: any) => {
-    const { props, ...itemOthers } = item;
-    const { widgetProps, ...propsOthers } = props;
-    const { preIcon, ...widgetPropsOthers } = widgetProps;
-    arr.push({
-      ...itemOthers,
-      props: { ...propsOthers, widgetProps: { ...widgetPropsOthers } },
+const handlerCols = (columns: FormCol[] = []) => {
+  let arr: FormCol[] = [];
+  if (columns.length > 0) {
+    columns.forEach((item: any) => {
+      const { props = {}, ...itemOthers } = item;
+      const { widgetProps = {}, ...propsOthers } = props;
+      const { preIcon, ...widgetPropsOthers } = widgetProps;
+      arr.push({
+        ...itemOthers,
+        props: { ...propsOthers, widgetProps: { ...widgetPropsOthers } },
+      });
     });
-  });
+  }
   return arr;
 };

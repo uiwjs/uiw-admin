@@ -63,6 +63,7 @@ export interface FormCol<T = any> extends TableColumns<T> {
 export interface BaseTableProps extends TableProps {
   style?: React.CSSProperties;
   columns: TableColumns[];
+  handlerCols: TableColumns[];
   rowSelection?: RowSelection;
   onPageChange?: (page: number) => void;
   scroll?: ScrollProps;
@@ -70,7 +71,9 @@ export interface BaseTableProps extends TableProps {
 }
 
 export interface BaseFormProps
-  extends Omit<ProtableProps, 'table' | 'operateButtons'> {}
+  extends Omit<ProtableProps, 'table' | 'operateButtons'> {
+  handlerCols: FormCol<any>[];
+}
 
 export type Fields = {
   [key: string]: any;

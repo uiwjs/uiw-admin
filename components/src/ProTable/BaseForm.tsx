@@ -139,15 +139,17 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
       ref={formRef}
       fields={getFormFields}
     >
-      {({ fields, state, canSubmit, resetForm }) => {
+      {({ fields }) => {
         return (
           <div>
             <Row gutter={12}>
-              {Object.keys(fields).map((key) => (
-                <Col key={key} fixed style={{ width: cent }}>
-                  {fields[key]}
-                </Col>
-              ))}
+              {fields &&
+                Object.keys(fields).length > 0 &&
+                Object.keys(fields).map((key) => (
+                  <Col key={key} fixed style={{ width: cent }}>
+                    {fields[key]}
+                  </Col>
+                ))}
               {Array.from({ length: emptyLength }, (_, index) => (
                 <Col key={index.toString()} fixed style={{ width: cent }} />
               ))}

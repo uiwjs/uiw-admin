@@ -16,7 +16,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   style,
   columns,
   handlerCols,
-  rowSelection = {},
+  rowSelection = { selectKey: '', type: 'checkbox', defaultSelected: [] },
   onPageChange: pageChange,
   scroll = {},
   paginationProps = {},
@@ -226,10 +226,10 @@ const BaseTable: React.FC<BaseTableProps> = ({
           />
         ) : (
           <Radio
+            checked={selection.isSelected(rowData[selectKey])}
             onChange={() => {
               selection.toggle(rowData[selectKey]);
             }}
-            checked={selection.isSelected(rowData[selectKey])}
           />
         );
       },

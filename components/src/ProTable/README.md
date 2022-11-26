@@ -11,6 +11,7 @@
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import React from 'react';
+import { Icon } from 'uiw';
 import { ProTable, useTable } from '@uiw-admin/components';
 
 function Demo1() {
@@ -64,7 +65,7 @@ function Demo1() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: <Icon type="user" />,
               placeholder: '输入用户名',
             },
           },
@@ -124,7 +125,7 @@ ReactDOM.render(<Demo1 />, _mount_);
         widget: 'input',
         initialValue: '',
         widgetProps: {
-          preIcon: 'user',
+          preIcon: <Icon type="user" />,
           placeholder: '输入用户名',
         },
       },
@@ -162,11 +163,11 @@ import { Dropdown, Menu, ButtonGroup, Button, Divider, Icon } from 'uiw';
 const menu = (
   <div>
     <Menu bordered style={{ minWidth: 120 }}>
-      <Menu.Item icon="reload" text="重新加载" />
-      <Menu.Item icon="heart-on" text="另存为" active />
-      <Menu.Item icon="appstore" text="应用商城" />
-      <Menu.Item icon="bar-chart" text="月统计报表" />
-      <Menu.Item icon="setting" text="偏好设置" />
+      <Menu.Item icon={<Icon type="reload" />} text="重新加载" />
+      <Menu.Item icon={<Icon type="heart-on" />} text="另存为" active />
+      <Menu.Item  icon={<Icon type="appstore" />} text="应用商城" />
+      <Menu.Item icon={<Icon type="bar-chart" />} text="月统计报表" />
+      <Menu.Item  icon={<Icon type="setting" />}  text="偏好设置" />
     </Menu>
   </div>
 );
@@ -196,7 +197,7 @@ const table = useTable('https://randomuser.me/api', {
       operateButtons={[
         { label: '自定义查询', type: 'primary',  style: {marginRight: 10} },
         {
-          
+
           render: <Dropdown trigger="click" menu={menu} >
                     <a href='#' onClick={e => e.preventDefault()}>
                       点击我出现下拉菜单 <Icon type="down" />
@@ -213,7 +214,7 @@ const table = useTable('https://randomuser.me/api', {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: <Icon type="user" />,
               placeholder: '输入用户名',
             },
           },
@@ -265,6 +266,7 @@ ReactDOM.render(<Demo2 />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import React, { useState } from 'react';
+import { Icon } from 'uiw';
 import { ProTable, useTable } from '@uiw-admin/components';
 
 function Demo3() {
@@ -324,7 +326,7 @@ const table = useTable('https://randomuser.me/api', {
               widget: 'input',
               initialValue: '',
               widgetProps: {
-                preIcon: 'user',
+                preIcon: <Icon type="user" />,
                 placeholder: '输入用户名',
               },
             },
@@ -347,6 +349,7 @@ ReactDOM.render(<Demo3 />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import React from 'react';
+import { Icon } from 'uiw';
 import { ProTable, useTable } from '@uiw-admin/components';
 
 function Demo4() {
@@ -412,7 +415,7 @@ function Demo4() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: <Icon type="user" />,
               placeholder: '输入用户名',
             },
           },
@@ -466,6 +469,7 @@ ReactDOM.render(<Demo4 />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import React from 'react';
+import { Icon } from 'uiw';
 import { ProTable, useTable } from '@uiw-admin/components';
 
 function Demo5() {
@@ -526,7 +530,7 @@ function Demo5() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: <Icon type="user" />,
               placeholder: '输入用户名',
             },
           },
@@ -585,6 +589,7 @@ ReactDOM.render(<Demo5 />, _mount_);
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 import React from 'react';
+import { Icon } from 'uiw';
 import { ProTable, useTable } from '@uiw-admin/components';
 
 function Demo6() {
@@ -639,7 +644,7 @@ function Demo6() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: <Icon type="user" />,
               placeholder: '输入用户名',
             },
           },
@@ -771,7 +776,7 @@ props: {
   widget: 'input',
   initialValue: 'zzz',
   widgetProps: {
-    preIcon: 'user',
+    preIcon: <Icon type="user" />,
     placeholder: '输入用户名',
   }
 }

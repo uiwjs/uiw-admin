@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Icon } from 'uiw'
 import { ProTable, useTable } from '@uiw-admin/components'
 import { useCity } from '../../servers'
 
@@ -97,7 +98,7 @@ export default function Demo() {
             key: 'name',
             // 组件属性
             widgetProps: {
-              preIcon: 'user',
+              preIcon: <Icon type="user" />,
               placeholder: '输入用户名',
             },
           },
