@@ -6,7 +6,8 @@ import { RoutersProps } from '@uiw-admin/router-control'
 // import { history } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
-import LayoutTabs from '@uiw-admin/layout-tabs'
+// import LayoutTabs from '@uiw-admin/layout-tabs'
+import { Outlet } from 'react-router-dom'
 import AuthPage from '@uiw-admin/authorized'
 interface BasicLayoutProps {
   routes: RoutersProps[]
@@ -88,8 +89,8 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
           console.log('logo点击事件', event)
         }}
         isDefaultContentStyle={false}>
-        {/* <Outlet /> */}
-        <LayoutTabs routes={props.routes || []} />
+        <Outlet />
+        {/* <LayoutTabs routes={props.routes || []} /> */}
       </BasicLayout>
     </AuthPage>
   )
