@@ -22,6 +22,8 @@ const Dashboard = () => {
         }}
       />
       Dashboard
+      <button onClick={() => navigate('/admin/12')}>点击</button>
+      <button onClick={() => navigate('/tableList/12')}>点击</button>
       <button onClick={() => navigate('/tableList/12')}>点击</button>
       <button onClick={() => navigate('/dom/12')}>点击2</button>
       <button onClick={() => navigate('/dom/2')}>点击3</button>

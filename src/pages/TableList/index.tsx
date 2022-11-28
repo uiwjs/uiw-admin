@@ -3,9 +3,11 @@ import { ProTable, useTable } from '@uiw-admin/components'
 import { useCity } from '../../servers'
 import { useLoaderData } from 'react-router-dom'
 
-Demo.loader = () => {
+Demo.loader = async (props: any) => {
+  console.log('props', props)
+  const result = await Promise.resolve(1)
   return {
-    a: 1,
+    a: result,
   }
 }
 

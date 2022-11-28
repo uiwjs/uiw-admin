@@ -32,6 +32,13 @@
         "icon": "home"
       },
       {
+        "path": "/:group/*",
+        "name": "测试点击页面",
+        "hideInMenu": true,
+        "component": "@/pages/TableList",
+        "icon": "home"
+      },
+      {
         "path": "/dom",
         "name": "子项",
         "icon": "copy",

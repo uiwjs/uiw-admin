@@ -15,6 +15,7 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const layouts = useLayouts()
+  console.log('props', props)
 
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
