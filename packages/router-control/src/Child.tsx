@@ -114,7 +114,11 @@ export const getDeepTreeRoute = (
   navigateTo: ControllerProps['navigateTo'],
 ) => {
   return routes.map((item) => {
-    const itemObj = { ...item };
+    const { loader, ...rest } = item;
+    const itemObj = { ...rest };
+    if (loader) {
+      itemObj.loader = loader;
+    }
     let authorityJudgmentFig = true;
     const token = getToken();
 
