@@ -35,7 +35,10 @@ const Demo = () => {
                key: 'input',
                widget: 'input',
                initialValue: '',
-               widgetProps: {},
+               widgetProps: {
+                 preIcon: <Icon type="user" />,
+                 placeholder: '输入用户名',
+               },
              },
               {
               label: 'radio',
@@ -328,7 +331,7 @@ const Demo = () => {
               label: 'textarea',
               key: 'textarea',
               widget: 'textarea',
-              span:24,
+              span:'24',
               colstyle:{ maxWidth:800 }
              },
              {
@@ -587,7 +590,7 @@ ReactDOM.render(<Demo />, _mount_);
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
-import { Button } from 'uiw'
+import { Button , Icon} from 'uiw'
 const Demo = () => {
   const [state,setState] = React.useState({})
   const form = useForm()
@@ -605,7 +608,10 @@ const Demo = () => {
                key: 'input',
                widget: 'input',
                initialValue: '',
-               widgetProps: {},
+               widgetProps: {
+                  preIcon: <Icon type="user" />,
+                  placeholder: '输入用户名',
+               },
                span:"24",
                required:true,
                rules: [

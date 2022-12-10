@@ -72,30 +72,31 @@ function FormDom({
       }}
       fields={formfields}
     >
-      {({ fields, state, canSubmit, resetForm }) => {
+      {({ fields, state, canSubmit = () => false, resetForm }) => {
         return (
           <React.Fragment>
             <Row gutter={10}>
-              {Object.keys(fields).map((key) => {
-                const colSpan =
-                  fields[key]?.props?.span ||
-                  (colProps && colProps.span) ||
-                  '8';
-                const colstyle = fields[key]?.props?.colstyle || {};
-                return (
-                  <Col
-                    {...colProps}
-                    style={{
-                      ...((colProps && colProps.style) || {}),
-                      ...colstyle,
-                    }}
-                    key={key}
-                    span={colSpan}
-                  >
-                    {fields[key]}
-                  </Col>
-                );
-              })}
+              {fields &&
+                Object.keys(fields).map((key) => {
+                  const colSpan =
+                    fields[key]?.props?.span ||
+                    (colProps && colProps.span) ||
+                    '8';
+                  const colstyle = fields[key]?.props?.colstyle || {};
+                  return (
+                    <Col
+                      {...colProps}
+                      style={{
+                        ...((colProps && colProps.style) || {}),
+                        ...colstyle,
+                      }}
+                      key={key}
+                      span={colSpan}
+                    >
+                      {fields[key]}
+                    </Col>
+                  );
+                })}
             </Row>
             <div className="w-form-item-center" style={{ ...buttonsContainer }}>
               <Button
