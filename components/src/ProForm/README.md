@@ -19,6 +19,8 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
+import { Icon } from 'uiw'
+
 const Demo = () => {
     return (
      <div>

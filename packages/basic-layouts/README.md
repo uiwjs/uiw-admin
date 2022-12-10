@@ -112,13 +112,13 @@ function BasicLayoutScreen() {
     menus: [
       {
         title: '欢迎来到uiw',
-        icon: 'smile',
+        icon: <Icon type="smile-o" />,
         // 调用关闭菜单事件
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
-        icon: 'setting',
+        icon: <Icon type="setting-o" />,
       },
     ],
     profile: {
@@ -221,13 +221,13 @@ function BasicLayoutScreen() {
     menus: [
       {
         title: '欢迎来到uiw',
-        icon: 'smile',
+        icon: <Icon type="smile-o" />,
         // 调用关闭菜单事件
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '退出登录',
-        icon: 'setting',
+        icon: <Icon type="setting-o" />,
         onClick: () => { console.log('退出'); layouts.closeMenu() },
 
       },
@@ -299,13 +299,13 @@ function BasicLayoutScreen() {
     menus: [
       {
         title: '欢迎来到uiw',
-        icon: 'smile',
+        icon: <Icon type="smile-o" />,
         // 调用关闭菜单事件
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
-        icon: 'setting',
+        icon: <Icon type="setting-o" />,
       },
     ],
     profile: {

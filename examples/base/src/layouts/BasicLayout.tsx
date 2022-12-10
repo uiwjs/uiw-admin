@@ -35,12 +35,12 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     menus: [
       {
         title: '欢迎来到uiw',
-        icon: 'smile',
+        icon: <Icon type="smile-o" />,
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
-        icon: 'setting',
+        icon: <Icon type="setting-o" />,
         onClick: () => layouts.closeMenu(),
       },
     ],

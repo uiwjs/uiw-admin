@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
-import { Menu, Avatar, Popover } from 'uiw';
+import { Menu, Avatar, Popover, Icon } from 'uiw';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { UseLayoutsProps } from '../useLayouts';
 import './index.css';
 
 export interface HeaderMenuItemsProps {
   title: React.ReactNode;
-  icon: JSX.Element | string | false | null;
+  icon?: React.ReactNode;
   onClick?: () => void;
   divider?: boolean;
   render?: React.ReactNode;
@@ -63,7 +63,7 @@ export default function HeaderRightMenu({
                 账号 {profile?.userName || 'admin'}
               </span>
             ),
-            icon: 'user',
+            icon: <Icon type="user" />,
           },
           {
             divider: true,
@@ -73,13 +73,13 @@ export default function HeaderRightMenu({
     ...menus,
     {
       title: '刷新权限',
-      icon: 'reload',
+      icon: <Icon type="reload" />,
       onClick: () => onReloadAuth(),
       style: { display: hideReloadButton ? 'none' : '' },
     },
     {
       title: '退出登录',
-      icon: 'logout',
+      icon: <Icon type="logout" />,
       style: { display: hideLogoutButton ? 'none' : '' },
       onClick: () => {
         if (onLogout) {
@@ -134,7 +134,7 @@ export default function HeaderRightMenu({
     } else if (userName) {
       node = <div className="avatar">{initialsName}</div>;
     } else {
-      node = <Avatar icon="user" size="default" />;
+      node = <Avatar icon={<Icon type="user" />} size="default" />;
     }
     return node;
   }, [profile?.avatar, profile?.userName]);
