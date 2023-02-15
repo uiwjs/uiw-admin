@@ -210,7 +210,7 @@ function BasicLayout(props: BasicLayoutProps) {
           </Layout>
         </Layout>
       </MainContext.Provider>
-    </Fragment >
+    </Fragment>
   );
 }
 
