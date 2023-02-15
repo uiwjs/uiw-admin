@@ -1,5 +1,8 @@
+#root > div {
+  height: 100%;
+}
 .uiw-admin-global-sider-menu {
-  box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
   overflow: auto;
 }
 
@@ -11,27 +14,37 @@
   vertical-align: middle;
 }
 .w-layout-header.uiw-admin-global-header {
-  border-bottom: 1px solid #ccc;
+  /* border-bottom: 1px solid #ccc; */
   height: 53px;
   min-height: 53px;
   line-height: 53px;
   background-color: #fff;
   padding-left: 10px;
+  padding-right: 10px;
   display: flex;
   justify-content: space-between;
 }
-
-
-
-
-.uiw-admin-global-title {
+.uiw-admin-global-title,
+.uiw-admin-global-title-top {
   position: relative;
   padding: 0 14px;
   overflow: hidden;
   cursor: pointer;
-  transition: all .3s;
+  transition: all 0.3s;
 }
-.uiw-admin-global-title h1 {
+.uiw-admin-global-title-top {
+  height: 100%;
+}
+
+.uiw-admin-global-title-top a {
+  height: 100%;
+  text-decoration: none !important;
+}
+.uiw-admin-global-title a {
+  text-decoration: none !important;
+}
+.uiw-admin-global-title h1,
+.uiw-admin-global-title-top h1 {
   box-sizing: border-box;
   display: inline-block;
   margin: 0 0 0 12px;
@@ -40,7 +53,7 @@
   font-size: 20px;
   vertical-align: middle;
   animation: fade-in;
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   white-space: nowrap;
 }
 .uiw-admin-global-title a {
@@ -50,8 +63,29 @@
   padding-bottom: 10px;
   text-decoration: none;
 }
-.uiw-admin-global-title img {
+.uiw-admin-global-title img,
+.uiw-admin-global-title-top img {
   display: inline-block;
   height: 36px;
   vertical-align: middle;
+}
+
+.uiw-admin-global-title-top a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.uiw-admin-global-content {
+  overflow: auto;
+  height: 100%;
+  padding: 14px;
+}
+
+.w-overlay {
+  z-index: 1000;
+}
+
+.w-notify-warpper {
+  z-index: 1001;
 }

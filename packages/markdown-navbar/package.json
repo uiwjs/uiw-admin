@@ -1,0 +1,42 @@
+{
+  "name": "@uiw-admin/markdown-navbar",
+  "version": "6.0.0-bate-1",
+  "description": "markdown导航栏",
+  "author": "xingyuefeng <15262870437@163.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib",
+    "esm",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uiwjs/uiw-admin.git"
+  },
+  "keywords": [
+    "design",
+    "uiw",
+    "uiw-react",
+    "uiw-admin",
+    "react.js",
+    "react",
+    "markdown-navbar"
+  ],
+  "peerDependencies": {
+    "react": ">=17.x",
+    "react-dom": ">=17.x"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.6"
+  }
+}

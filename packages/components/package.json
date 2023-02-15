@@ -1,0 +1,64 @@
+{
+  "name": "@uiw-admin/components",
+  "version": "6.0.0-bate-1",
+  "description": "业务组件集合",
+  "author": "xingyuefeng <15262870437@163.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib",
+    "esm",
+    "src"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uiwjs/uiw-admin.git"
+  },
+  "keywords": [
+    "design",
+    "uiw",
+    "uiw-react",
+    "uiw-admin",
+    "react.js",
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "ui",
+    "css",
+    "uikit",
+    "react-ui",
+    "framework",
+    "front-end",
+    "frontend"
+  ],
+  "peerDependencies": {
+    "react": ">=17.x",
+    "react-dom": ">=17.x",
+    "uiw": ">=4.x"
+  },
+  "dependencies": {
+    "@babel/runtime": "~7.17.0",
+    "@uiw-admin/authorized": "6.0.0-bate-1",
+    "@uiw-admin/document-title": "6.0.0-bate-1",
+    "@uiw-admin/router-control": "6.0.0-bate-1",
+    "@uiw-admin/utils": "6.0.0-bate-1",
+    "classnames": "2.3.1"
+  },
+  "devDependencies": {
+    "@types/classnames": "2.3.1",
+    "@types/react": "~17.0.39",
+    "@types/react-dom": "~17.0.11",
+    "react": "~17.0.2",
+    "react-dom": "~17.0.2",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
+    "uiw": "^5.0.0-bate-5"
+  }
+}

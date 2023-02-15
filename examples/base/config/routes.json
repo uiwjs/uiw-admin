@@ -1,0 +1,127 @@
+[
+  {
+    "path": "/login",
+    "component": "@/layouts/UserLayout"
+  },
+  {
+    "path": "/",
+    "component": "@/layouts/BasicLayout",
+    "routes": [
+      {
+        "index": true,
+        "redirect": "/tableList"
+      },
+      {
+        "path": "/tableList",
+        "name": "查询表格",
+        "component": "@/pages/TableList",
+        "icon": "search",
+        "navigate": "(navigate) => {navigate('/tableList',{ replace: true })}"
+      },
+      {
+        "path": "/tableList/:id",
+        "name": "查询表格2",
+        "component": "@/pages/TableList",
+        "icon": "search",
+        "navigate": "(navigate) => {navigate('/tableList',{ replace: true })}"
+      },
+      {
+        "path": "/home",
+        "name": "首页",
+        "component": "@/pages/TableList",
+        "icon": "home"
+      },
+      {
+        "path": "/dom",
+        "name": "子项",
+        "icon": "copy",
+        "isAuth": true,
+        "side": true,
+        "routes": [
+          {
+            "index": true,
+            "path": "/dom/courses",
+            "name": "Dashboard",
+            "isAuth": true,
+            "component": "@/pages/Dashboard"
+          },
+          {
+            "path": "/dom/exceptions",
+            "name": "异常12",
+            "icon": "warning-o",
+            "side": true,
+            "routes": [
+              {
+                "index": true,
+                "path": "/dom/exceptions/403",
+                "name": "403-1",
+                "component": "403"
+              },
+              {
+                "path": "/dom/exceptions/500",
+                "name": "500-1",
+                "component": "500"
+              },
+              {
+                "path": "/dom/exceptions/404",
+                "name": "404-1",
+                "component": "404"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "path": "/demo",
+        "name": "列表查询/新增demo",
+        "component": "@/pages/Demo",
+        "icon": "component"
+      },
+      {
+        "path": "/exceptions",
+        "name": "异常",
+        "icon": "warning-o",
+        "routes": [
+          {
+            "path": "/exceptions/403",
+            "name": "403",
+            "component": "403"
+          },
+          {
+            "path": "/exceptions/500",
+            "name": "500",
+            "component": "500"
+          },
+          {
+            "path": "/exceptions/404",
+            "name": "404",
+            "component": "404"
+          }
+        ]
+      },
+      {
+        "path": "/403",
+        "name": "403",
+        "hideInMenu": true,
+        "component": "403"
+      },
+      {
+        "path": "/500",
+        "name": "500",
+        "hideInMenu": true,
+        "component": "500"
+      },
+      {
+        "path": "/404",
+        "name": "404",
+        "hideInMenu": true,
+        "component": "404"
+      },
+      {
+        "path": "*",
+        "name": "404",
+        "component": "404"
+      }
+    ]
+  }
+]

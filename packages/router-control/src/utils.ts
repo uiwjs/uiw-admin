@@ -1,24 +1,42 @@
+// @ts-nocheck
 import React from 'react';
+import { store } from '@uiw-admin/models';
+import { ControllerProps } from './interface';
 
-export interface Routers {
-  path: string;
-  key?: string;
-  redirect?: string;
-  name?: string;
-  icon?: string;
-  component?: () => Promise<React.ReactNode>;
-  models?: string[];
-  routes?: Routers[];
-}
-
-export function getRouterList(data: Routers[] = [],  treeList: Routers[] = []) {
-  data.forEach((node) => {
-    if (node.routes) {
-      treeList = getRouterList(node.routes, treeList);
-    } else if (node.path) {
-      node.key = node.path;
-      treeList.push(node);
+// @ts-ignore
+import routeModels from '@@/routeMapModels.json';
+/**  加载 model  */
+export const useLoadModels = (props: {
+  path?: string;
+  addModels?: ControllerProps['addModels'];
+}) => {
+  const { addModels, path } = props;
+  const [load, setLoad] = React.useState(true);
+  const addModel = async (path: string) => {
+    // @ts-ignore
+    if (BINDPAGR) {
+      try {
+        // @ts-ignore
+        const modelArr = routeModels[path] || [];
+        if (addModels) {
+          modelArr.forEach(async (item: { path: string; name: string }) => {
+            const model = (await addModels(item.path)).default;
+            store.addModel({ name: item.name, ...model });
+          });
+        }
+      } catch (err) {
+        setLoad(false);
+      }
     }
-  })
-  return treeList;
-}
+    setLoad(false);
+  };
+
+  React.useMemo(() => {
+    if (addModels && path) {
+      addModel(path);
+    } else {
+      setLoad(false);
+    }
+  }, []);
+  return load;
+};

@@ -1,5 +1,4 @@
 {
-  "name": "uiw-admin",
   "version": "4.0.0",
   "private": true,
   "description": "UIW Admin Project",
@@ -8,31 +7,64 @@
     "url": "https://github.com/uiwjs/uiw-admin.git"
   },
   "scripts": {
-    "lib:t:esm": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb types --outDir lib/esm --target ESNEXT",
-    "lib:t:cjs": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb types --outDir lib/cjs --target ESNEXT",
-    "lib:b": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb build --target react",
-    "lib:css": "lerna exec --scope @uiw-admin/basic-layouts -- compile-less -d src -o lib/esm",
-    "lib:type": "npm run lib:t:esm & npm run lib:t:cjs",
-    "lib:build": "npm run lib:b && npm run lib:type && npm run lib:css",
-    "lib:w": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb watch --target react",
-    "lib:w:type": "npm run lib:t:esm -- --watch & npm run lib:t:cjs -- --watch",
-    "//--------": "//--------",
-    "bootstrap": "lerna bootstrap",
-    "hoist": "lerna bootstrap --hoist --no-ci",
-    "bootstrap:webiste": "lerna bootstrap --scope @examples/base",
-    "type": "npm run t:cjs && npm run t:esm",
-    "t:esm": "lerna exec --scope @uiw-admin/* -- tsbb types --outDir lib/esm --target ESNEXT",
-    "t:cjs": "lerna exec --scope @uiw-admin/* -- tsbb types --outDir lib/cjs --target ESNEXT",
-    "b:css": "lerna exec --scope @uiw-admin/* -- compile-less -d src -o lib/esm",
-    "b:lib": "lerna exec --scope @uiw-admin/* -- tsbb build --target react",
-    "build": "npm run b:lib && npm run type && npm run b:css",
-    "b:website": "lerna exec --scope @examples/base -- npm run build",
-    "watch": "lerna exec --scope @uiw-admin/* -- tsbb watch --target react",
-    "version": "lerna version --no-changelog --no-git-tag-version --no-push --yes",
-    "publish": "lerna publish from-package",
+    "initi": "npm run clean && npm install",
+    "prepare": "husky install",
+    "-----authorized-----": "----------",
+    "build:authorized": "lerna exec --scope @uiw-admin/authorized -- tsbb build",
+    "watch:authorized": "lerna exec --scope @uiw-admin/authorized -- tsbb watch",
+    "-----layout-----": "----------",
+    "build:layout:ui": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb build",
+    "watch:layout:ui": "lerna exec --scope @uiw-admin/basic-layouts -- tsbb watch",
+    "-----router-----": "----------",
+    "build:router:ui": "lerna exec --scope @uiw-admin/router-control -- tsbb build",
+    "watch:router:ui": "lerna exec --scope @uiw-admin/router-control -- tsbb watch",
+    "-----tabs-----": "----------",
+    "build:tabs:ui": "lerna exec --scope @uiw-admin/layout-tabs -- tsbb build",
+    "watch:tabs:ui": "lerna exec --scope @uiw-admin/layout-tabs -- tsbb watch",
+    "-----components-----": "----------",
+    "build:components:ui": "lerna exec --scope @uiw-admin/components -- tsbb build",
+    "watch:components:ui": "lerna exec --scope @uiw-admin/components -- tsbb watch",
+    "-----markdown-navbar-----": "----------",
+    "build:markdown-navbar": "lerna exec --scope @uiw-admin/markdown-navbar -- tsbb build",
+    "watch:markdown-navbar": "lerna exec --scope @uiw-admin/markdown-navbar -- tsbb watch",
+    "-----login-----": "----------",
+    "build:login:ui": "lerna exec --scope  @uiw-admin/user-login -- tsbb build",
+    "watch:login:ui": "lerna exec --scope  @uiw-admin/user-login -- tsbb watch",
+    "-----models-----": "----------",
+    "build:models": "lerna exec --scope @uiw-admin/models -- tsbb build",
+    "watch:models": "lerna exec --scope @uiw-admin/models -- tsbb watch",
+    "-----plugins-----": "----------",
+    "build:plugins": "lerna exec --scope @uiw-admin/plugins -- tsbb build --no-esm",
+    "watch:plugins": "lerna exec --scope @uiw-admin/plugins -- tsbb watch",
+    "-----config-----": "----------",
+    "build:config": "lerna exec --scope @uiw-admin/config -- tsbb build",
+    "watch:config": "lerna exec --scope @uiw-admin/config -- tsbb watch",
+    "-----create-uiw-admin-----": "----------",
+    "build:create": "lerna exec --scope create-uiw-admin -- npm run build",
+    "-----------": "--------------",
+    "build:utils": "lerna exec --scope @uiw-admin/utils -- tsbb build",
+    "watch:utils": "lerna exec --scope @uiw-admin/utils -- tsbb watch",
+    "build": "lerna exec --scope @uiw-admin/* -- tsbb build",
+    "watch": "lerna exec --scope @uiw-admin/* -- tsbb watch",
+    "build:website": "lerna exec --scope @examples/base -- npm run build",
+    "----": "----",
+    "build:js": "node ./script/copy",
+    "----------": "-------------",
+    "www": "lerna exec --scope website -- npm run start",
+    "www:build": "lerna exec --scope website -- npm run build",
+    "-----www-doc-end-----": "-------website-doc------",
+    "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
+    "publish": "npm run build && lerna publish from-package",
     "start": "lerna exec --scope @examples/base npm run start",
+    "start:website": "lerna exec --scope website npm run start",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
-    "clean": "lerna clean",
+    "clean": "lerna clean && npm run remove && rm -rf ./package-lock.json && rm -rf node_modules && npm run remove:c ",
+    "remove": " lerna exec --scope @uiw-admin/* --scope @example/*  -- rm -rf package-lock.json",
+    "remove:c": "rm -rf package-lock.json &&  npm run remove:yarn && npm run remove:lib && npm run remove:esm",
+    "remove:yarn": "lerna exec --scope @uiw-admin/* --scope @example/*  -- rm -rf yarn.lock",
+    "remove:lib": "lerna exec --scope @uiw-admin/*  -- rm -rf ./lib",
+    "remove:esm": "lerna exec --scope @uiw-admin/*  -- rm -rf ./esm",
+    "test": "tsbb test",
     "tsbb": "tsbb",
     "lerna": "lerna"
   },
@@ -42,18 +74,41 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
+    "*.{js,jsx,ts,tsx,less,md,json}": [
       "prettier --write"
+    ]
+  },
+  "jest": {
+    "testMatch": [
+      "<rootDir>/test/*.test.{js,ts}"
     ]
   },
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
-    "compile-less-cli": "1.5.1",
-    "husky": "4.3.5",
-    "lerna": "3.22.1",
-    "lint-staged": "10.5.3",
-    "prettier": "2.2.1",
-    "tsbb": "1.7.8"
+    "@babel/preset-typescript": "~7.16.7",
+    "@babel/core": "~7.18.0",
+    "ajv": "^8.9.0",
+    "husky": "~7.0.4",
+    "lerna": "~4.0.0",
+    "lint-staged": "~12.5.0",
+    "prettier": "^2.7.0",
+    "tsbb": "~3.7.0",
+    "webpack-bundle-analyzer": "~4.5.0",
+    "styled-components": "^5.3.5"
+  },
+  "resolutions": {
+    "@babel/parser": "7.18.13",
+    "@babel/traverse": "7.18.13",
+    "@babel/types": "7.18.13"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "examples/*",
+      "create-uiw-admin",
+      "eslint-packages/*"
+    ],
+    "nohoist": []
   }
 }

@@ -2,9 +2,7 @@
 **/*.svg
 **/*.ejs
 **/*.html
+examples/website/build
 package.json
 dist
 lib
-.umi
-.umi-production
-.umi-test

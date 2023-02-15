@@ -1,7 +1,9 @@
-React Component Example for TypeScript.
+uiw-admin Example 
 ===
 
-Create a project for the React component library containing a website preview of the component library instance. The documents and component libraries are put into a project, all written in `TypeScript`, the component library source files are added to the `src` directory, and the document website source files are added to the `website` directory.
+## Open in CodeSandbox
+
+[![Edit uiw-admin Demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/uiwjs/uiw-admin/tree/master/examples/base)
 
 ## Quick Start
 
@@ -10,21 +12,61 @@ Create a project for the React component library containing a website preview of
 Runs the project in development mode.  
 
 ```bash
-# Step 1, run first, listen to the component compile and output the .js file
-npm run ts:watch
-# Step 2, listen for compilation output type .d.ts file
-npm run types:watch
-# Step 3, development mode, listen to compile preview website instance
-npm run doc:dev
+npm install
+npm start
 ```
 
-**production**
-
-Builds the app for production to the build folder.
-
-```bash
-npm run released
+## 目录结构
 ```
-
-The build is minified and the filenames include the hashes.
-Your app is ready to be deployed!
+.
+├── README.md
+├── config
+│   └── routes.json   路由配置
+├── mocker  mock 数据
+│   ├── auth
+│   │   └── index.js
+│   ├── demo.js
+│   ├── index.js
+│   ├── login.js
+│   └── selectPage.js
+├── package.json
+├── public
+│   ├── favicon.ico
+│   └── index.html
+├── sandbox.config.json
+├── src
+│   ├── assets
+│   │   ├── head.png
+│   │   ├── logo-dark.svg
+│   │   └── logo-light.svg
+│   ├── index.css
+│   ├── index.tsx
+│   ├── layouts 框架组件
+│   │   ├── BasicLayout.tsx
+│   │   ├── UserLayout.tsx
+│   │   └── logo.svg
+│   ├── models    remach models
+│   │   ├── Doc
+│   │   │   └── doc.ts
+│   │   ├── demo.ts
+│   │   ├── global.ts
+│   │   ├── home.ts
+│   │   └── login.ts
+│   ├── pages  页面， 文件名大写
+│   │   ├── Dashboard
+│   │   │   └── index.tsx
+│   │   ├── Demo
+│   │   │   ├── Detail
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── items.tsx
+│   │   │   └── index.tsx
+│   │   ├── TableList
+│   │   │   └── index.tsx
+│   │   └── login
+│   │       ├── index.module.less
+│   │       └── index.tsx
+│   ├── react-app-env.d.ts
+│   └── servers 放置api文件的地方，文件名已后端接口模块名命名，不以路由命名
+│       └── index.ts
+└── tsconfig.json
+```
