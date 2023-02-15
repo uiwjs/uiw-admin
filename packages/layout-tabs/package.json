@@ -50,10 +50,10 @@
   },
   "devDependencies": {
     "@types/react": "~18.0.25",
-    "@types/react-dom": "~18.0.25",
+    "@types/react-dom": "~18.0.11",
     "@uiw-admin/router-control": "6.0.0-bate-1",
-    "react": "~18.0.25",
-    "react-dom": "~18.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "uiw": "^5.0.0-bate-5"
