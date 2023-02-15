@@ -1,24 +1,27 @@
-import { createModel } from '@rematch/core';
-import { Dispatch } from './';
-
+import { RootModel } from '@uiw-admin/models'
+import { createModel } from '@rematch/core'
 export interface GlobalState {
-  test?: string;
+  test: string
+  [s: string]: any
 }
 
-export default createModel({
+const global = createModel<RootModel>()({
+  name: 'global',
   state: {
     test: '测试全局State',
   },
   reducers: {
-    updateState: (state: any, payload: GlobalState): GlobalState => ({
+    updateState: (state: GlobalState, payload: GlobalState) => ({
       ...state,
       ...payload,
     }),
   },
-  effects: (dispatch: any) => ({
+  effects: (dispatch) => ({
     async verify() {
-      const dph = dispatch as Dispatch;
-      dph.global.updateState({ test: '测试2' });
+      const dph = dispatch
+      dph.global.updateState({ test: '测试2' })
     },
   }),
-});
+})
+
+export default global

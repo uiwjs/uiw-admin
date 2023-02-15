@@ -1,96 +1,118 @@
 import React from 'react';
-import { StaticContext } from 'react-router';
-import * as H from 'history';
-import { RouteComponentProps, Router, HashRouter } from 'react-router-dom';
-import { Route, Redirect, Switch } from 'react-router-dom';
-import {createBrowserHistory} from 'history'
-import dynamic from 'react-dynamic-loadable';
+import {
+  unstable_HistoryRouter,
+  useRoutes,
+  useNavigate,
+  NavigateFunction,
+  createRoutesFromChildren,
+  HashRouter,
+  BrowserRouter,
+} from 'react-router-dom';
 
-export * from './utils';
+import RoutePathArr from '@@/routes';
+import { Provider } from 'react-redux';
+import { store } from '@uiw-admin/models';
+import { createBrowserHistory } from 'history';
+import { ControllerProps } from './interface';
+export * from './interface';
+import { useLoadModels } from './utils';
+import { getTree, getDeepTreeRoute } from './Child';
 
-export interface Routers {
-  path: string;
-  key?: string;
-  redirect?: string;
-  name?: string;
-  icon?: string;
-  component?: () => Promise<React.ReactNode>;
-  models?: string[];
-  routes?: Routers[];
-}
+export * from 'react-router-dom';
+export * from 'react-router';
+export * from 'react-redux';
 
-export interface match<Params extends { [K in keyof Params]?: string } = {}> {
-  params: Params;
-  isExact: boolean;
-  path: string;
-  url: string;
-}
+export const HistoryRouter = unstable_HistoryRouter;
+export const history = createBrowserHistory();
+export let navigate: NavigateFunction = () => {};
 
-export type DefaultProps = React.PropsWithChildren<
-    RouteComponentProps<any, StaticContext, H.LocationState>
-  > & {
-  routes: Routers[];
-}
+export function RouteChild(props: ControllerProps = {}) {
+  // 这边取权限校验值
+  let authStr = sessionStorage.getItem('auth');
+  // @ts-ignore
+  if (STORAGE === 'local') {
+    authStr = localStorage.getItem('auth');
+  }
+  let authList: string[] = React.useMemo(() => {
+    if (authStr) {
+      return JSON.parse(authStr);
+    }
+    return [];
+  }, [authStr]);
 
-// wrapper of dynamic
-const dynamicWrapper = (component: () => Promise<any>, modelFun: Promise<any>[]) =>
-  dynamic({
-    models: (modelFun || null) as any,
-    // models: () =>
-    //   models.map((m: string) => {
-    //     return import(`../models/${m}.ts`).then((md) => {
-    //       const modelData = md.default || md;
-    //       store.model({ name: m, ...modelData });
-    //     });
-    //   }),
-    component,
-    LoadingComponent: () => <span>loading....</span>,
-  });
-
-export interface ControllerProps {
-  /** 是否为 hash 路由 */
-  isHashRouter?: boolean;
-  routes?: Routers[];
-  /**
-   * 加载 models
-   */
-  loadModels?: (models: string[]) => Promise<any>[];
+  const roue = React.useMemo(
+    () =>
+      createRoutesFromChildren(
+        getTree(
+          getDeepTreeRoute(
+            RoutePathArr,
+            authList,
+            props.notLoginMenus,
+            props.navigateTo,
+          ),
+          props.addModels,
+          !!props.isAutoAuth,
+          props.notLoginMenus,
+          props.navigateTo,
+        ),
+      ),
+    [JSON.stringify(authList)],
+  );
+  const dom = useRoutes(roue);
+  /** 赋值 用于跳转 */
+  navigate = useNavigate();
+  return dom;
 }
 
 export default function Controller(props: ControllerProps = {}) {
-  const { routes = [], loadModels = () => [] } = props;
-  const Child = () => (
-    <Switch>
-      {routes.map((item, index) => {
-        if (item.redirect) {
-          return <Redirect key={index} from={item.path} to={item.redirect} />
-        }
-        if (!item.component) {
-          return null;
-        }
-        const modelFun = loadModels(item.models || []);
-        const Com = dynamicWrapper(item.component, modelFun) as any;
-        return (
-          <Route
-            path={item.path}
-            key={index}
-            render={(childProps) => (
-              <Com {...childProps} {...props} routes={item.routes || []} />
-            )}
+  const {
+    routeType,
+    addModels,
+    isAutoAuth = true,
+    notLoginMenus,
+    navigateTo,
+  } = props;
+  const load = useLoadModels({ path: '/', addModels });
+  // @ts-ignore
+  let base = BASE_NAME;
+  const dom = React.useMemo(() => {
+    if (routeType === 'history') {
+      return (
+        <HistoryRouter history={history} basename={base}>
+          <RouteChild
+            addModels={props.addModels}
+            isAutoAuth={isAutoAuth}
+            notLoginMenus={notLoginMenus}
+            navigateTo={navigateTo}
           />
-        );
-      })}
-    </Switch>
-  );
-  return (
-    <Router history={createBrowserHistory()}>
-      {props.isHashRouter ? (
-        <HashRouter>
-          <Child />
-        </HashRouter>
-      ) : (
-        <Child />
-      )}
-    </Router>
-  );
+        </HistoryRouter>
+      );
+    } else if (routeType === 'browser') {
+      return (
+        <BrowserRouter window={window} basename={base}>
+          <RouteChild
+            addModels={props.addModels}
+            isAutoAuth={isAutoAuth}
+            notLoginMenus={notLoginMenus}
+            navigateTo={navigateTo}
+          />
+        </BrowserRouter>
+      );
+    }
+    return (
+      <HashRouter window={window} basename={base}>
+        <RouteChild
+          addModels={props.addModels}
+          isAutoAuth={isAutoAuth}
+          notLoginMenus={notLoginMenus}
+          navigateTo={navigateTo}
+        />
+      </HashRouter>
+    );
+  }, [routeType]);
+
+  if (load) {
+    return <div>Loading...</div>;
+  }
+  return <Provider store={store}>{dom}</Provider>;
 }

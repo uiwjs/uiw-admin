@@ -1,0 +1,61 @@
+{
+  "name": "@uiw-admin/layout-tabs",
+  "version": "6.0.0-bate-1",
+  "description": "layout tabs",
+  "author": "Kenny Wong <wowohoo@qq.com>",
+  "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/layout-tabs#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "lib",
+    "esm",
+    "src"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "design",
+    "uiw",
+    "uiw-react",
+    "uiw-admin",
+    "react.js",
+    "react",
+    "react-component",
+    "component",
+    "components",
+    "ui",
+    "css",
+    "uikit",
+    "react-ui",
+    "framework",
+    "front-end",
+    "frontend"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uiwjs/uiw-admin.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "peerDependencies": {
+    "react": ">=17.x",
+    "react-dom": ">=17.x",
+    "uiw": ">=4.x"
+  },
+  "dependencies": {
+    "@babel/runtime": "~7.17.0"
+  },
+  "devDependencies": {
+    "@types/react": "~17.0.39",
+    "@types/react-dom": "~17.0.11",
+    "@uiw-admin/router-control": "6.0.0-bate-1",
+    "react": "~17.0.2",
+    "react-dom": "~17.0.2",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^6.2.1",
+    "uiw": "^5.0.0-bate-5"
+  }
+}

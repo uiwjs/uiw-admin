@@ -17,7 +17,6 @@ function DocumentTitle(props = {} as any): JSX.Element {
       })}
     </Fragment>
   );
-};
+}
 
-
-export default DocumentTitle
+export default DocumentTitle;

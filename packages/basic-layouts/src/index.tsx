@@ -1,101 +1,219 @@
-import React, {useMemo, Fragment, useState} from 'react';
+import React, { useMemo, Fragment, useState } from 'react';
 import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
-import { StaticContext } from 'react-router';
-import { History } from 'history';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import dynamic from 'react-dynamic-loadable';
-import Controller, { DefaultProps, getRouterList } from '@uiw-admin/router-control';
 import DocumentTitle from '@uiw-admin/document-title';
+import { RoutersProps } from '@uiw-admin/router-control';
 import LogoHeader from './LogoHeader';
 import Menu from './Menu';
+import Bread from './Breadcrumb';
 import './index.css';
+import { getMenu, BreadcrumbMap } from './utils';
+import BodyContent, { WarpBody } from './Content';
+import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
+import FullScreen from './FullScreen';
+import { Icon } from 'uiw';
+import { MainContext, useSideMenus } from './hook';
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
-// wrapper of dynamic
-const dynamicWrapper = (component: () => Promise<any>, modelFun: Promise<any>[] | null, loadingComponent?: JSX.Element) =>
-  dynamic({
-    models: (modelFun || null) as any,
-    component,
-    LoadingComponent: () => loadingComponent || <span>loading....</span>,
-  });
-
-export type BasicLayoutProps = DefaultProps & {
-  /**
-   * 加载 models
-   */
-  loadModels?: (models: string[]) => Promise<any>[];
-  loadingComponent?: JSX.Element;
+export type BasicLayoutProps = {
+  className?: string;
+  style?: React.CSSProperties;
   logo?: string;
   projectName?: string;
   /**
    * 页脚
    */
   footer?: React.ReactElement;
-  headerRight?: React.ReactElement;
-};
+  routes?: RoutersProps[];
+  children?: React.ReactNode;
+  /** 头部 布局 */
+  headerLayout?: 'top' | 'default';
+  /** 头部背景色 */
+  headerBackground?: string;
+  /** 头部字体颜色 */
+  headerFontColor?: string;
+  /** 菜单隐藏 */
+  menuHide?: boolean;
+  /** 是否使用 内容区域默认样式  */
+  isDefaultContentStyle?: boolean;
+  // 隐藏刷新权限按钮
+  hideReloadButton?: boolean;
+  // 隐藏退出登录按钮
+  hideLogoutButton?: boolean;
+  // 隐藏用户信息
+  hideUserInfo?: boolean;
+  /** 标题部分 点击事件 **/
+  onLogoClick?: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => void;
+} & HeaderRightProps;
+function BasicLayout(props: BasicLayoutProps) {
+  const {
+    className,
+    routes = [],
+    projectName = 'UIW Admin',
+    // 右侧菜单参数HeaderRightProps
+    profile = {},
+    menus = [],
+    onReloadAuth,
+    layouts,
+    headerLayout = 'default',
+    headerBackground = '#fff',
+    headerFontColor = '#000',
+    isDefaultContentStyle = true,
+    hideReloadButton,
+    hideLogoutButton,
+    hideUserInfo,
+    onLogoClick,
+    ...others
+  } = props || {};
+  let { menuHide } = props;
 
-export default function BasicLayout(props = {} as BasicLayoutProps) {
-  const { routes = [], loadModels = () => null, loadingComponent, footer, headerRight, projectName = 'UIW Admin' } = props;
   const [collapsed, setCollapsed] = useState(false);
-  const data = getRouterList(routes);
-  const footerView = useMemo(() => <Footer>{footer}</Footer>, [footer]);
-  return (
-    <Fragment>
-      <DocumentTitle title={projectName || ''} />
-      <Layout hasSider style={{ height: '100%' }}>
-        <Sider collapsed={collapsed} className={classnames('uiw-admin-global-sider-menu', {
-          
-        })}>
-          <LogoHeader
-            collapsed={collapsed}
-            projectName={projectName}
-            logo={props.logo}
-          />
-          <Menu collapsed={collapsed} routes={routes} />
-        </Sider>
-        <Layout>
-          <Header className="uiw-admin-global-header">
+
+  /** 转换 用于 侧边路由展示 */
+  const routeData = getMenu(routes);
+  const { sideItemIndex, ChildMenus, sideMenusMap, hiddenMainMenu } =
+    useSideMenus({
+      routeData,
+    });
+  /**路由带参数隐藏菜单 */
+  menuHide = hiddenMainMenu;
+  const Menus = React.useMemo(() => {
+    return (
+      <Menu
+        collapsed={collapsed}
+        routes={ChildMenus.routeData}
+        allRoutes={routeData}
+      />
+    );
+  }, [JSON.stringify(ChildMenus), collapsed]);
+
+  const mapRoute = React.useMemo(() => {
+    return new BreadcrumbMap(routeData);
+  }, [JSON.stringify(routeData)]);
+
+  const renderHeaderRightMenu = useMemo(() => {
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyItems: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {profile?.menuLeft}
+        <FullScreen />
+        <HeaderRightMenu
+          onReloadAuth={onReloadAuth}
+          profile={profile}
+          menus={menus}
+          layouts={layouts}
+          hideReloadButton={hideReloadButton}
+          hideLogoutButton={hideLogoutButton}
+          hideUserInfo={hideUserInfo}
+        />
+      </div>
+    );
+  }, [profile, menus, JSON.stringify(layouts)]);
+  const cls = [className, 'uiw-admin-global-header']
+    .filter(Boolean)
+    .join(' ')
+    .trim();
+
+  const header = (
+    <Header
+      {...others}
+      className={cls}
+      style={{
+        background: headerBackground,
+        color: headerFontColor,
+        ...props.style,
+      }}
+    >
+      <div style={{ display: 'flex' }}>
+        {headerLayout === 'top' && (
+          <div style={{ minWidth: 200 }}>
+            <LogoHeader
+              onLogoClick={onLogoClick}
+              collapsed={false}
+              projectName={projectName}
+              logo={props.logo}
+            />
+          </div>
+        )}
+        {!menuHide && (
+          <div>
             <Button
               basic
-              icon={collapsed ? 'menu-unfold' : 'menu-fold'}
-              style={{ fontSize: 12 }}
+              icon={
+                <Icon
+                  type={collapsed ? 'menu-unfold' : 'menu-fold'}
+                  color={headerFontColor}
+                />
+              }
+              // icon={collapsed ? 'menu-unfold' : 'menu-fold'}
+              style={{ fontSize: 12, marginRight: 20 }}
               onClick={() => setCollapsed(!collapsed)}
             />
-            {headerRight}
-          </Header>
-          <Content>
-            <Switch>
-              {data.map((item, index) => {
-                if (!item.path) {
-                  return null;
-                }
-                if (props.location.pathname === item.path && item.redirect) {
-                  return (
-                    <Redirect to={item.redirect} key={index}/>
-                  );
-                }
-                if (!item.component) {
-                  return null;
-                }
-                const modelFun = loadModels(item.models || []);
-                const Com = dynamicWrapper(item.component, modelFun, loadingComponent) as any;
-                return (
-                  <Route
-                    key={index}
-                    exact
-                    path={item.path}
-                    render={(childProps) => <Com {...childProps} {...props} routes={item.routes || []} routesList={data} />}
+            <Bread sideMenusMap={sideMenusMap} routeMap={mapRoute} />
+          </div>
+        )}
+      </div>
+      {renderHeaderRightMenu}
+    </Header>
+  );
+
+  return (
+    <Fragment>
+      <MainContext.Provider
+        value={{ headerLayout, headerBackground, headerFontColor }}
+      >
+        <DocumentTitle title={projectName || ''} />
+        <Layout style={{ height: '100%' }}>
+          {headerLayout === 'top' && header}
+          <Layout>
+            {!menuHide && (
+              <Sider
+                collapsed={collapsed}
+                className={classnames('uiw-admin-global-sider-menu', {})}
+              >
+                {headerLayout === 'default' ? (
+                  <LogoHeader
+                    onLogoClick={onLogoClick}
+                    collapsed={collapsed}
+                    projectName={projectName}
+                    logo={props.logo}
                   />
-                );
-              })}
-            </Switch>
-          </Content>
-          {footerView}
+                ) : (
+                  <div style={{ marginTop: 10 }} />
+                )}
+                {Menus}
+              </Sider>
+            )}
+            <Layout>
+              {headerLayout === 'default' && header}
+              {!isDefaultContentStyle ? (
+                <WarpBody sideItemIndex={sideItemIndex}>
+                  {props.children}
+                </WarpBody>
+              ) : (
+                <Content className="uiw-admin-global-content">
+                  <WarpBody sideItemIndex={sideItemIndex}>
+                    <BodyContent>{props.children}</BodyContent>
+                  </WarpBody>
+                </Content>
+              )}
+            </Layout>
+          </Layout>
         </Layout>
-      </Layout>
+      </MainContext.Provider>
     </Fragment>
   );
-};
+}
+
+export default BasicLayout;
+
+export { default as useLayouts } from './useLayouts';

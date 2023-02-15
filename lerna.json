@@ -1,13 +1,18 @@
 {
-  "packages": ["examples/*", "packages/*"],
-  "version": "independent",
+  "packages": [
+    "packages/*",
+    "examples/*",
+    "create-uiw-admin",
+    "eslint-packages/*"
+  ],
+  "version": "6.0.0-bate-1",
   "command": {
     "create": {
       "license": "MIT"
     },
     "bootstrap": {
-      "npmClientArgs": ["--no-package-lock"],
       "yarnClientArgs": ["--no-yarn-lock"],
+      "npmClientArgs": ["--no-package-lock"],
       "forceLocal": true
     }
   }
