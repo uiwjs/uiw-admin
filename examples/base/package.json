@@ -30,8 +30,8 @@
     "@uiw/reset.css": "~1.0.5",
     "axios": "^0.27.0",
     "classnames": "~2.3.1",
-    "react": "~17.0.2",
-    "react-dom": "~17.0.2",
+    "react": "~18.0.25",
+    "react-dom": "~18.3.0",
     "react-redux": "~7.2.6",
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
@@ -40,8 +40,8 @@
     "uiw": "^5.0.0-bate-5"
   },
   "devDependencies": {
-    "@types/react": "~17.0.39",
-    "@types/react-dom": "~17.0.11",
+    "@types/react": "~18.0.25",
+    "@types/react-dom": "~18.0.25",
     "@types/react-redux": "~7.1.22",
     "@uiw-admin/config": "6.0.0-bate-1",
     "kkt": "^7.2.0",
