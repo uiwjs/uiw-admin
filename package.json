@@ -98,9 +98,9 @@
     "styled-components": "^5.3.5"
   },
   "resolutions": {
-    "@babel/parser": "7.18.13",
-    "@babel/traverse": "7.18.13",
-    "@babel/types": "7.18.13"
+    "@babel/parser": "7.20.12",
+    "@babel/traverse": "7.20.12",
+    "@babel/types": "7.20.12"
   },
   "workspaces": {
     "packages": [
