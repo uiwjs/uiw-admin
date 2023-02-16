@@ -9,7 +9,7 @@
     "children": [
       {
         "index": true,
-        "redirect": "/tableList"
+        "element": "@/pages/TableList"
       },
       {
         "path": "/tableList",

@@ -10,7 +10,7 @@ import {
 } from 'react-router-dom';
 
 // @ts-ignore
-import RoutePathArr from '@@/routes/config';
+import RoutePathArr from '@@/routes';
 import { Provider } from 'react-redux';
 import { store } from '@uiw-admin/models';
 import { createBrowserHistory } from 'history';
