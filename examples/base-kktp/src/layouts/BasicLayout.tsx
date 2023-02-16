@@ -9,7 +9,6 @@ import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import LayoutTabs from '@uiw-admin/layout-tabs'
 import AuthPage from '@uiw-admin/authorized'
-// import RoutePathArr from '@@/routes';
 interface BasicLayoutProps {
   routes: RoutersProps[]
 }
