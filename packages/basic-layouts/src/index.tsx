@@ -14,7 +14,6 @@ import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';
 import { Icon } from 'uiw';
 import { MainContext, useSideMenus } from './hook';
-import useLayouts from './useLayouts';
 
 const { Header, Sider, Content } = Layout;
 
