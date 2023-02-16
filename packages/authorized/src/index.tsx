@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { navigate } from "@uiw-admin/router-control"
 
 export * from './Auth';
+export { default as AuthBtn } from './Auth';
 
 interface AuthorizedProps {
   authority?: boolean;
@@ -19,6 +20,7 @@ const AuthPage = (
       if (props.redirectPath) {
         navigate(props.redirectPath, { replace: true });
       } else {
+        console.log(6899);
         navigate('/login', { replace: true });
       }
     }

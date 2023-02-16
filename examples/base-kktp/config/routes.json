@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/login",
+    "element": "@/layouts/UserLayout"
+  },
+  {
+    "index": true,
+    "element": "@/layouts/BasicLayout"
+  },
+  {
+    "path": "/",
+    "element": "@/layouts/BasicLayout"
+  }
+]

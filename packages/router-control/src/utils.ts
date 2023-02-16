@@ -4,7 +4,8 @@ import { store } from '@uiw-admin/models';
 import { ControllerProps } from './interface';
 
 // @ts-ignore
-import routeModels from '@@/routeMapModels.json';
+// import routeModels from '@@/routeMapModels.json';
+const routeModels = {};
 /**  加载 model  */
 export const useLoadModels = (props: {
   path?: string;

@@ -27,7 +27,7 @@ export interface AuthBtnProps {
   disabled?: boolean;
   children: JSX.Element;
 }
-export const AuthBtn = (props: AuthBtnProps) => {
+const AuthBtn = (props: AuthBtnProps) => {
   const { path, disabled, children } = props;
   const fig = React.useMemo(() => {
     // @ts-ignore
@@ -44,3 +44,5 @@ export const AuthBtn = (props: AuthBtnProps) => {
   }
   return <React.Fragment />;
 };
+
+export default AuthBtn;
