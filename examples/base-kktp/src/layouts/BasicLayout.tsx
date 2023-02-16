@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import BasicLayout, {
   useLayouts,
   BasicLayoutProps as BasicLayoutType,
@@ -8,13 +9,13 @@ import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import LayoutTabs from '@uiw-admin/layout-tabs'
 import AuthPage from '@uiw-admin/authorized'
+// import RoutePathArr from '@@/routes';
 interface BasicLayoutProps {
   routes: RoutersProps[]
 }
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const layouts = useLayouts()
-
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
@@ -88,8 +89,8 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
           console.log('logo点击事件', event)
         }}
         isDefaultContentStyle={false}>
-        {/* <Outlet /> */}
-        <LayoutTabs routes={props.routes || []} />
+        <Outlet />
+        {/* <LayoutTabs routes={props.routes || []} /> */}
       </BasicLayout>
     </AuthPage>
   )

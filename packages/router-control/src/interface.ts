@@ -75,4 +75,5 @@ export interface ControllerProps {
   notLoginMenus?: string[] | RegExp | ((current: string) => boolean);
   /**  判断 "/" 路径 的权限 重定向跳转地址  **/
   navigateTo?: string | ((current: string) => string);
+  isKktp?: boolean;
 }

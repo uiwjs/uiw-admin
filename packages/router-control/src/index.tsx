@@ -9,7 +9,8 @@ import {
   BrowserRouter,
 } from 'react-router-dom';
 
-import RoutePathArr from '@@/routes';
+// @ts-ignore
+import RoutePathArr from '@@/routes/config';
 import { Provider } from 'react-redux';
 import { store } from '@uiw-admin/models';
 import { createBrowserHistory } from 'history';
@@ -71,44 +72,54 @@ export default function Controller(props: ControllerProps = {}) {
     isAutoAuth = true,
     notLoginMenus,
     navigateTo,
+    isKktp,
   } = props;
   const load = useLoadModels({ path: '/', addModels });
-  // @ts-ignore
-  let base = BASE_NAME;
   const dom = React.useMemo(() => {
-    if (routeType === 'history') {
+    if (isKktp) {
       return (
-        <HistoryRouter history={history} basename={base}>
-          <RouteChild
-            addModels={props.addModels}
-            isAutoAuth={isAutoAuth}
-            notLoginMenus={notLoginMenus}
-            navigateTo={navigateTo}
-          />
-        </HistoryRouter>
-      );
-    } else if (routeType === 'browser') {
-      return (
-        <BrowserRouter window={window} basename={base}>
-          <RouteChild
-            addModels={props.addModels}
-            isAutoAuth={isAutoAuth}
-            notLoginMenus={notLoginMenus}
-            navigateTo={navigateTo}
-          />
-        </BrowserRouter>
-      );
-    }
-    return (
-      <HashRouter window={window} basename={base}>
         <RouteChild
           addModels={props.addModels}
           isAutoAuth={isAutoAuth}
           notLoginMenus={notLoginMenus}
           navigateTo={navigateTo}
         />
-      </HashRouter>
-    );
+      );
+    } else {
+      if (routeType === 'history') {
+        return (
+          <HistoryRouter history={history}>
+            <RouteChild
+              addModels={props.addModels}
+              isAutoAuth={isAutoAuth}
+              notLoginMenus={notLoginMenus}
+              navigateTo={navigateTo}
+            />
+          </HistoryRouter>
+        );
+      } else if (routeType === 'browser') {
+        return (
+          <BrowserRouter window={window}>
+            <RouteChild
+              addModels={props.addModels}
+              isAutoAuth={isAutoAuth}
+              notLoginMenus={notLoginMenus}
+              navigateTo={navigateTo}
+            />
+          </BrowserRouter>
+        );
+      }
+      return (
+        <HashRouter window={window}>
+          <RouteChild
+            addModels={props.addModels}
+            isAutoAuth={isAutoAuth}
+            notLoginMenus={notLoginMenus}
+            navigateTo={navigateTo}
+          />
+        </HashRouter>
+      );
+    }
   }, [routeType]);
 
   if (load) {

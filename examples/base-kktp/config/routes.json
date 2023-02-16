@@ -4,11 +4,55 @@
     "element": "@/layouts/UserLayout"
   },
   {
-    "index": true,
-    "element": "@/layouts/BasicLayout"
-  },
-  {
     "path": "/",
-    "element": "@/layouts/BasicLayout"
+    "element": "@/layouts/BasicLayout",
+    "children": [
+      {
+        "index": true,
+        "redirect": "/tableList"
+      },
+      {
+        "path": "/tableList",
+        "name": "查询表格",
+        "element": "@/pages/TableList",
+        "icon": "search",
+        "navigate": "(navigate) => {navigate('/tableList',{ replace: true })}"
+      },
+      {
+        "path": "/tableList/:id",
+        "name": "查询表格2",
+        "element": "@/pages/TableList",
+        "icon": "search",
+        "navigate": "(navigate) => {navigate('/tableList',{ replace: true })}"
+      },
+      {
+        "path": "/home",
+        "name": "首页",
+        "element": "@/pages/TableList",
+        "icon": "home"
+      },
+      {
+        "path": "/dom",
+        "name": "子项",
+        "icon": "copy",
+        "isAuth": true,
+        "side": true,
+        "children": [
+          {
+            "index": true,
+            "path": "/dom/courses",
+            "name": "Dashboard",
+            "isAuth": true,
+            "element": "@/pages/Dashboard"
+          }
+        ]
+      },
+      {
+        "path": "/demo",
+        "name": "列表查询/新增demo",
+        "element": "@/pages/Demo",
+        "icon": "element"
+      }
+    ]
   }
 ]
