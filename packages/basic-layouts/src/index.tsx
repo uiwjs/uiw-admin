@@ -216,4 +216,5 @@ function BasicLayout(props: BasicLayoutProps) {
 
 export default BasicLayout;
 
+export * from './useLayouts';
 export { default as useLayouts } from './useLayouts';
