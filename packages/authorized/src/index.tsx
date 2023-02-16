@@ -20,7 +20,6 @@ const AuthPage = (
       if (props.redirectPath) {
         navigate(props.redirectPath, { replace: true });
       } else {
-        console.log(6899);
         navigate('/login', { replace: true });
       }
     }
