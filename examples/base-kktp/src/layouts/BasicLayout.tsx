@@ -19,7 +19,6 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     revalidateOnMount: false,
     revalidateOnFocus: false,
     onSuccess: (data) => {
-      console.log(555, data)
       if (data && data.code === 200) {
         sessionStorage.setItem('token', data.token)
         sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
@@ -68,8 +67,6 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     // hideLogoutButton: true,
     // hideUserInfo: true
   }
-
-  console.log(555)
 
   // 验证是否登录的方式
   // 1. 使用 Auth 组件
