@@ -5,9 +5,9 @@
     "children": [
       { "index": true, "element": "@/pages/quick-start" },
       { "path": "/quick-start/*", "element": "@/pages/quick-start" },
+      { "path": "/authorized/*", "element": "@/pages/authorized" },
       { "path": "/mocker/*", "element": "@/pages/mocker" },
       { "path": "/proxy/*", "element": "@/pages/proxy" },
-      { "path": "/authorized/*", "element": "@/pages/authorized" },
       { "path": "/basic-layouts/*", "element": "@/pages/basic-layouts" },
       { "path": "/components/*", "element": "@/pages/components" },
       { "path": "/config/*", "element": "@/pages/config" },

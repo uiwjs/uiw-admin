@@ -11,6 +11,7 @@ package-lock.json
 yarn.lock
 baseJS
 basejs
+.kktp
 
 *.lerna_backup
 .DS_Store
