@@ -9,6 +9,7 @@ const demo = createModel<RootModel>()({
     tableType: '',
     queryInfo: {},
     isView: false,
+    a: 1,
   },
   reducers: {
     updateState: (state: any, payload: any) => ({

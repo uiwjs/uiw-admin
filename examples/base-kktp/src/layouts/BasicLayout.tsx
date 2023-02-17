@@ -1,19 +1,25 @@
-import { Outlet } from 'react-router-dom'
+import { useMemo } from 'react'
 import BasicLayout, {
   useLayouts,
   BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'
-// import { history } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import LayoutTabs from '@uiw-admin/layout-tabs'
 import AuthPage from '@uiw-admin/authorized'
+// @ts-ignore
+import RoutePathArr from '@@/routes/config'
 interface BasicLayoutProps {
   routes: RoutersProps[]
 }
 
-function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+function BasicLayoutScreen(props: BasicLayoutProps) {
+  const route = useMemo(() => {
+    const routes = RoutePathArr.find((item: any) => item.path === '/')
+    return routes ? routes.children : []
+  }, [])
+
   const layouts = useLayouts()
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
@@ -60,6 +66,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     },
     layouts,
     ...props,
+
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
@@ -68,28 +75,17 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     // hideUserInfo: true
   }
 
-  // 验证是否登录的方式
-  // 1. 使用 Auth 组件
-  // 2. 路由中进行处理  path==="/" 的 element 外层包裹组件进行重定向
-  // return (
-  //   <Auth >
-  //   <BasicLayout {...basicLayoutProps} {...props} >
-  //     <Outlet />
-  //     {/* <LayoutTabs routes={routes || []} /> */}
-  //   </BasicLayout>
-  //   </Auth>
-  // )
   return (
     <AuthPage authority={true} redirectPath="/login">
       <BasicLayout
         {...basicLayoutProps}
+        routes={route as any}
         onLogoClick={(event: any) => {
           // history.push("/demo#/tableList");
           console.log('logo点击事件', event)
         }}
         isDefaultContentStyle={false}>
-        <Outlet />
-        {/* <LayoutTabs routes={props.routes || []} /> */}
+        <LayoutTabs routes={RoutePathArr || []} />
       </BasicLayout>
     </AuthPage>
   )

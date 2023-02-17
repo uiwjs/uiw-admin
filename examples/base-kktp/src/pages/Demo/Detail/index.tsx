@@ -25,8 +25,11 @@ const Detail = ({ updateData }: DetailProps) => {
   const [option] = React.useState<any>(selectOption)
   const [loading, setLoading] = React.useState(false)
 
+  const store = useSelector((store) => store)
+  console.log(333, store)
+
   const {
-    demo: { drawerVisible, tableType, queryInfo = {}, isView },
+    demo: { drawerVisible = false, tableType, queryInfo = {}, isView, a },
   } = useSelector((state: RootState) => state)
 
   const form = useForm()

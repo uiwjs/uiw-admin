@@ -72,54 +72,42 @@ export default function Controller(props: ControllerProps = {}) {
     isAutoAuth = true,
     notLoginMenus,
     navigateTo,
-    isKktp,
   } = props;
   const load = useLoadModels({ path: '/', addModels });
   const dom = React.useMemo(() => {
-    if (isKktp) {
+    if (routeType === 'history') {
       return (
-        <RouteChild
-          addModels={props.addModels}
-          isAutoAuth={isAutoAuth}
-          notLoginMenus={notLoginMenus}
-          navigateTo={navigateTo}
-        />
-      );
-    } else {
-      if (routeType === 'history') {
-        return (
-          <HistoryRouter history={history}>
-            <RouteChild
-              addModels={props.addModels}
-              isAutoAuth={isAutoAuth}
-              notLoginMenus={notLoginMenus}
-              navigateTo={navigateTo}
-            />
-          </HistoryRouter>
-        );
-      } else if (routeType === 'browser') {
-        return (
-          <BrowserRouter window={window}>
-            <RouteChild
-              addModels={props.addModels}
-              isAutoAuth={isAutoAuth}
-              notLoginMenus={notLoginMenus}
-              navigateTo={navigateTo}
-            />
-          </BrowserRouter>
-        );
-      }
-      return (
-        <HashRouter window={window}>
+        <HistoryRouter history={history}>
           <RouteChild
             addModels={props.addModels}
             isAutoAuth={isAutoAuth}
             notLoginMenus={notLoginMenus}
             navigateTo={navigateTo}
           />
-        </HashRouter>
+        </HistoryRouter>
+      );
+    } else if (routeType === 'browser') {
+      return (
+        <BrowserRouter window={window}>
+          <RouteChild
+            addModels={props.addModels}
+            isAutoAuth={isAutoAuth}
+            notLoginMenus={notLoginMenus}
+            navigateTo={navigateTo}
+          />
+        </BrowserRouter>
       );
     }
+    return (
+      <HashRouter window={window}>
+        <RouteChild
+          addModels={props.addModels}
+          isAutoAuth={isAutoAuth}
+          notLoginMenus={notLoginMenus}
+          navigateTo={navigateTo}
+        />
+      </HashRouter>
+    );
   }, [routeType]);
 
   if (load) {
