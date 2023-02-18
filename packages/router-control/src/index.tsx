@@ -9,6 +9,7 @@ import {
   BrowserRouter,
 } from 'react-router-dom';
 
+// @ts-ignore
 import RoutePathArr from '@@/routes';
 import { Provider } from 'react-redux';
 import { store } from '@uiw-admin/models';
@@ -73,12 +74,10 @@ export default function Controller(props: ControllerProps = {}) {
     navigateTo,
   } = props;
   const load = useLoadModels({ path: '/', addModels });
-  // @ts-ignore
-  let base = BASE_NAME;
   const dom = React.useMemo(() => {
     if (routeType === 'history') {
       return (
-        <HistoryRouter history={history} basename={base}>
+        <HistoryRouter history={history}>
           <RouteChild
             addModels={props.addModels}
             isAutoAuth={isAutoAuth}
@@ -89,7 +88,7 @@ export default function Controller(props: ControllerProps = {}) {
       );
     } else if (routeType === 'browser') {
       return (
-        <BrowserRouter window={window} basename={base}>
+        <BrowserRouter window={window}>
           <RouteChild
             addModels={props.addModels}
             isAutoAuth={isAutoAuth}
@@ -100,7 +99,7 @@ export default function Controller(props: ControllerProps = {}) {
       );
     }
     return (
-      <HashRouter window={window} basename={base}>
+      <HashRouter window={window}>
         <RouteChild
           addModels={props.addModels}
           isAutoAuth={isAutoAuth}

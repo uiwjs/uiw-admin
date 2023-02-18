@@ -250,7 +250,9 @@ export const getTree = (
         </AuthLayout>
       );
     }
-    list.push(<Route key={ind} {...itemObj} />);
+    if (!itemObj.index || !item.redirect) {
+      list.push(<Route key={ind} {...itemObj} />);
+    }
   });
   return list;
 };

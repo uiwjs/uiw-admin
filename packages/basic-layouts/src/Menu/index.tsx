@@ -9,7 +9,7 @@ import {
 import { useLocation, useNavigate, Location } from 'react-router-dom';
 import { matchPath, NavigateFunction } from 'react-router';
 import { getRoutesList } from './../utils';
-import { SearchSelect, SearchSelectOptionData } from 'uiw';
+import { SearchSelect, SearchSelectOptionData, Icon } from 'uiw';
 
 import pinyin from 'pinyin';
 
@@ -55,7 +55,7 @@ function renderMenuItem(
   return routes.map((item: any, index: number) => {
     const props = {
       key: index,
-      icon: item.icon,
+      icon: item.icon ? <Icon type={item.icon} /> : undefined,
     } as Omit<MenuItemProps<any> & SubMenuProps<any>, 'ref'>;
     let isAuth = true;
     if (Reflect.has(item, 'isAuth')) {

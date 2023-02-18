@@ -6,3 +6,4 @@ examples/website/build
 package.json
 dist
 lib
+.kktp
