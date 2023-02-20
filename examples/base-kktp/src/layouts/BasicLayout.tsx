@@ -3,7 +3,7 @@ import BasicLayout, {
   useLayouts,
   BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
-import { RoutersProps } from '@uiw-admin/router-control'
+import { RoutesBaseProps } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import LayoutTabs from '@uiw-admin/layout-tabs'
@@ -11,7 +11,7 @@ import AuthPage from '@uiw-admin/authorized'
 // @ts-ignore
 import RoutePathArr from '@@/routes/config'
 interface BasicLayoutProps {
-  routes: RoutersProps[]
+  routes: RoutesBaseProps[]
 }
 
 function BasicLayoutScreen(props: BasicLayoutProps) {
@@ -66,7 +66,6 @@ function BasicLayoutScreen(props: BasicLayoutProps) {
     },
     layouts,
     ...props,
-
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
@@ -79,7 +78,7 @@ function BasicLayoutScreen(props: BasicLayoutProps) {
     <AuthPage authority={true} redirectPath="/login">
       <BasicLayout
         {...basicLayoutProps}
-        routes={route as any}
+        routes={route as RoutesBaseProps[]}
         onLogoClick={(event: any) => {
           // history.push("/demo#/tableList");
           console.log('logo点击事件', event)

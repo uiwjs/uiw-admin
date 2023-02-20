@@ -9,8 +9,7 @@
     "children": [
       {
         "index": true,
-        "redirect": "/tableList",
-        "element": "@/pages/TableList"
+        "redirect": "/tableList"
       },
       {
         "path": "/tableList",
@@ -34,14 +33,47 @@
         "children": [
           {
             "index": true,
-            "redirect": "/dom/courses",
+            "redirect": "/dom/dashboard",
             "element": "@/pages/Dashboard"
           },
           {
-            "path": "/dom/courses",
+            "path": "/dom/dashboard",
             "name": "Dashboard",
             "isAuth": true,
             "element": "@/pages/Dashboard"
+          },
+          {
+            "path": "/dom/demo",
+            "name": "Dashboard2",
+            "element": "@/pages/Demo",
+            "icon": "home"
+          },
+          {
+            "path": "/dom/exceptions",
+            "name": "异常12",
+            "icon": "warning-o",
+            "side": true,
+            "children": [
+              {
+                "index": true,
+                "redirect": "/dom/exceptions/403"
+              },
+              {
+                "path": "/dom/exceptions/403",
+                "name": "403-1",
+                "element": "@uiw-admin/exceptions/esm/Exceptions/403"
+              },
+              {
+                "path": "/dom/exceptions/500",
+                "name": "500-1",
+                "element": "@uiw-admin/exceptions/esm/Exceptions/500"
+              },
+              {
+                "path": "/dom/exceptions/404",
+                "name": "404-1",
+                "element": "@uiw-admin/exceptions/esm/Exceptions/404"
+              }
+            ]
           }
         ]
       },
@@ -49,7 +81,7 @@
         "path": "/demo",
         "name": "列表查询/新增demo",
         "element": "@/pages/Demo",
-        "icon": "element"
+        "icon": "home"
       }
     ]
   }

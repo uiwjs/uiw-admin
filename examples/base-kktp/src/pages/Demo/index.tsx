@@ -1,14 +1,13 @@
 import { Button, Dropdown, Menu } from 'uiw'
 import { useSelector } from 'react-redux'
-import { RootState, Dispatch } from '@uiw-admin/models'
+import { Dispatch } from '@uiw-admin/models'
 import { ProTable, useTable } from '@uiw-admin/components'
 import Detail from './Detail'
 import { useDispatch } from '@uiw-admin/router-control'
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
 
-  const store = useSelector((store: RootState) => store.demo)
-  console.log('store222', store)
+  // const store = useSelector((store: RootState) => store.demo)
 
   const updateData = (payload: any) => {
     dispatch({

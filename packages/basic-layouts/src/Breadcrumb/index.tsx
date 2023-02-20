@@ -4,13 +4,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { BreadcrumbMap } from './../utils';
 import { matchPath } from 'react-router';
 import { onNavigate } from '../Menu';
-import { RoutersProps } from '@uiw-admin/router-control';
+import { RoutesBaseProps } from '@uiw-admin/router-control';
 
 import './index.css';
 interface BreadProps {
   routeMap: BreadcrumbMap;
   sideMenusMap: {
-    sideMenus: Map<string, RoutersProps[]>;
+    sideMenus: Map<string, RoutesBaseProps[]>;
     flat: Map<string, string>;
     flatSide: Map<string, string>;
   };
@@ -46,6 +46,7 @@ const Bread = (props: BreadProps) => {
               // }
               // 进入子集当前菜单不显示 点击当前菜单不显示
               if (item.side && item.path) {
+                console.log(12, item);
                 const parentPath = sideMenusMap.flatSide.get(item.path);
                 if (parentPath) {
                   const result = onNavigate(item as any, navigate, {
@@ -58,8 +59,8 @@ const Bread = (props: BreadProps) => {
                 }
                 // 存在子集菜单，点击父级面包屑跳转到第一个子集菜单
               } else if (item.path) {
-                if (item && item?.routes && item?.routes?.length > 0) {
-                  const firstChildPath = item.routes[0].path;
+                if (item && item?.children && item?.children?.length > 0) {
+                  const firstChildPath = item.children[0].path;
                   !!firstChildPath &&
                     navigate(firstChildPath, { replace: true });
                 }

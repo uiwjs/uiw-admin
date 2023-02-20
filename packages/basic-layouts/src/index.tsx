@@ -3,7 +3,7 @@ import Layout from '@uiw/react-layout';
 import Button from '@uiw/react-button';
 import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
-import { RoutersProps } from '@uiw-admin/router-control';
+import { RoutesBaseProps } from '@uiw-admin/router-control';
 import LogoHeader from './LogoHeader';
 import Menu from './Menu';
 import Bread from './Breadcrumb';
@@ -26,7 +26,7 @@ export type BasicLayoutProps = {
    * 页脚
    */
   footer?: React.ReactElement;
-  routes?: RoutersProps[];
+  routes?: RoutesBaseProps[];
   children?: React.ReactNode;
   /** 头部 布局 */
   headerLayout?: 'top' | 'default';
@@ -74,7 +74,7 @@ function BasicLayout(props: BasicLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
 
   /** 转换 用于 侧边路由展示 */
-  const routeData = getMenu(routes);
+  const routeData = routes;
   const { sideItemIndex, ChildMenus, sideMenusMap, hiddenMainMenu } =
     useSideMenus({
       routeData,
