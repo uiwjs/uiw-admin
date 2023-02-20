@@ -1,8 +1,6 @@
-import { RootModel } from '@uiw-admin/models'
-import { createModel } from '@rematch/core'
 import { selectById } from '../servers/demo'
 
-const demo = createModel<RootModel>()({
+const demo = {
   name: 'demo',
   state: {
     drawerVisible: false,
@@ -17,7 +15,7 @@ const demo = createModel<RootModel>()({
       ...payload,
     }),
   },
-  effects: (dispatch) => ({
+  effects: (dispatch: any) => ({
     async selectById(payload: any) {
       const dph = dispatch
       const data = await selectById(payload)
@@ -38,5 +36,5 @@ const demo = createModel<RootModel>()({
       })
     },
   }),
-})
+}
 export default demo

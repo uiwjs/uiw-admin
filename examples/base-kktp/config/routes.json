@@ -9,6 +9,7 @@
     "children": [
       {
         "index": true,
+        "redirect": "/tableList",
         "element": "@/pages/TableList"
       },
       {
@@ -40,6 +41,10 @@
         "children": [
           {
             "index": true,
+            "redirect": "/dom/courses",
+            "element": "@/pages/Dashboard"
+          },
+          {
             "path": "/dom/courses",
             "name": "Dashboard",
             "isAuth": true,
