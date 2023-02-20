@@ -8,7 +8,6 @@ const UserLayout = (props: Required<DefaultProps>) => {
     router: { navigate },
   } = props
 
-  console.log(props)
   return (
     <UserLogin
       buttons={[

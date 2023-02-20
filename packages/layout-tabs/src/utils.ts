@@ -3,17 +3,17 @@ import { Location } from 'react-router-dom';
 import { matchPath } from 'react-router';
 
 /** 把数组扁平化 用于 选项卡渲染 */
-export const getRoutesList = (
-  data: RoutersProps[] = [],
-  list: RoutersProps[] = [],
-) => {
-  data.forEach((item) => {
-    if (item.routes) {
-      getRoutesList(item.routes, list);
-    } else {
-      list.push(item);
-    }
-  });
+export const getRoutesList = (data: any[] = []) => {
+  const list: any[] = [];
+  (function returnArr(arr) {
+    arr.forEach((item) => {
+      if (item.children) {
+        returnArr(item.children);
+      } else {
+        list.push(item);
+      }
+    });
+  })(data);
   return list;
 };
 

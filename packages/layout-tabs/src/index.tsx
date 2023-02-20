@@ -8,11 +8,12 @@ import {
 } from '@uiw-admin/router-control';
 import { getRoutesList, getMatch, getMatchRender } from './utils';
 import { matchPath } from 'react-router';
+import { Outlet } from 'react-router-dom';
 import './styles/index.css';
 
 export interface LayoutTabsProps {
   /** 子集路由 */
-  routes: RoutersProps[];
+  routes: any[];
 }
 const LayoutTabs = (props: LayoutTabsProps) => {
   const { routes } = props;
@@ -26,11 +27,11 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   const Current = getMatch(routeListData, location);
 
   React.useEffect(() => {
-    if (!Current.current) {
-      // 没找到跳转
-      navigate('/404');
-      return;
-    }
+    // if (!Current.current) {
+    //   // 没找到跳转
+    //   navigate('/404');
+    //   return;
+    // }
     if (Current.current && Current.current.redirect) {
       navigate(Current.current.redirect);
       return;
@@ -165,7 +166,8 @@ const LayoutTabs = (props: LayoutTabsProps) => {
         })}
       </Tabs>
       <div className="uiw-layout-tabs-body">
-        {pathArr.map((item) => {
+        <Outlet />
+        {/* {pathArr.map((item) => {
           const match = item.location.pathname === location.pathname;
           return (
             <div
@@ -178,7 +180,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
               {item.element}
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

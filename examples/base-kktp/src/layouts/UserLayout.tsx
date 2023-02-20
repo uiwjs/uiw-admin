@@ -10,7 +10,6 @@ const UserLayout = (props: Required<DefaultProps>) => {
   // } = props
   const navigate = useNavigate()
 
-  console.log(props)
   return (
     <UserLogin
       buttons={[
