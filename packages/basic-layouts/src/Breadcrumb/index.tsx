@@ -46,7 +46,6 @@ const Bread = (props: BreadProps) => {
               // }
               // 进入子集当前菜单不显示 点击当前菜单不显示
               if (item.side && item.path) {
-                console.log(12, item);
                 const parentPath = sideMenusMap.flatSide.get(item.path);
                 if (parentPath) {
                   const result = onNavigate(item as any, navigate, {
@@ -55,7 +54,27 @@ const Bread = (props: BreadProps) => {
                   if (!result) {
                     return;
                   }
-                  navigate(parentPath, { replace: true });
+                  const newRoute = routeMap.flat.find(
+                    (item: RoutesBaseProps) => item.path === parentPath,
+                  );
+                  if (
+                    newRoute &&
+                    newRoute.children &&
+                    newRoute.children.length > 0
+                  ) {
+                    const redirectRoute = newRoute.children.find(
+                      (item: RoutesBaseProps) => item.redirect,
+                    );
+                    if (redirectRoute) {
+                      navigate(redirectRoute.redirect || parentPath, {
+                        replace: true,
+                      });
+                    } else {
+                      navigate(parentPath, { replace: true });
+                    }
+                  } else {
+                    navigate(parentPath, { replace: true });
+                  }
                 }
                 // 存在子集菜单，点击父级面包屑跳转到第一个子集菜单
               } else if (item.path) {
