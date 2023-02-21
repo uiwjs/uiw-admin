@@ -1,5 +1,5 @@
 import React from 'react';
-import { RoutersProps, useLocation } from '@uiw-admin/router-control';
+import { RoutesBaseProps, useLocation } from '@uiw-admin/router-control';
 
 import { getSideMenusMap, getMenuList, getCurrentPath } from './utils';
 export const MainContext = React.createContext<{
@@ -11,9 +11,10 @@ export const MainContext = React.createContext<{
   headerBackground: '#fff',
   headerFontColor: '#000',
 });
+
 export const useMain = () => React.useContext(MainContext);
 
-export const useSideMenus = (props: { routeData: RoutersProps[] }) => {
+export const useSideMenus = (props: { routeData: RoutesBaseProps[] }) => {
   const { routeData } = props;
   const location = useLocation();
 

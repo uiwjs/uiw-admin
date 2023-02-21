@@ -4,13 +4,13 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { BreadcrumbMap } from './../utils';
 import { matchPath } from 'react-router';
 import { onNavigate } from '../Menu';
-import { RoutersProps } from '@uiw-admin/router-control';
+import { RoutesBaseProps } from '@uiw-admin/router-control';
 
 import './index.css';
 interface BreadProps {
   routeMap: BreadcrumbMap;
   sideMenusMap: {
-    sideMenus: Map<string, RoutersProps[]>;
+    sideMenus: Map<string, RoutesBaseProps[]>;
     flat: Map<string, string>;
     flatSide: Map<string, string>;
   };
@@ -54,12 +54,32 @@ const Bread = (props: BreadProps) => {
                   if (!result) {
                     return;
                   }
-                  navigate(parentPath, { replace: true });
+                  const newRoute = routeMap.flat.find(
+                    (item: RoutesBaseProps) => item.path === parentPath,
+                  );
+                  if (
+                    newRoute &&
+                    newRoute.children &&
+                    newRoute.children.length > 0
+                  ) {
+                    const redirectRoute = newRoute.children.find(
+                      (item: RoutesBaseProps) => item.redirect,
+                    );
+                    if (redirectRoute) {
+                      navigate(redirectRoute.redirect || parentPath, {
+                        replace: true,
+                      });
+                    } else {
+                      navigate(parentPath, { replace: true });
+                    }
+                  } else {
+                    navigate(parentPath, { replace: true });
+                  }
                 }
                 // 存在子集菜单，点击父级面包屑跳转到第一个子集菜单
               } else if (item.path) {
-                if (item && item?.routes && item?.routes?.length > 0) {
-                  const firstChildPath = item.routes[0].path;
+                if (item && item?.children && item?.children?.length > 0) {
+                  const firstChildPath = item.children[0].path;
                   !!firstChildPath &&
                     navigate(firstChildPath, { replace: true });
                 }
