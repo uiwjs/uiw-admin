@@ -54,7 +54,7 @@
     "@types/react-dom": "~18.0.11",
     "@uiw-admin/utils": "6.0.0-bate-1",
     "react": "~18.0.25",
-    "react-dom": "~18.3.0",
+    "react-dom": "~18.2.0",
     "swr": "^1.3.0",
     "uiw": "^5.0.0-bate-5"
   }
