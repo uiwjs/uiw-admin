@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  RoutersProps,
+  RoutesBaseProps,
   useLocation,
   useNavigate,
   Navigate,
@@ -17,7 +17,7 @@ export default (props: ContentProps) => {
 };
 export interface WarpBodyProps {
   children: React.ReactNode;
-  sideItemIndex: undefined | RoutersProps;
+  sideItemIndex: undefined | RoutesBaseProps;
 }
 export const WarpBody = (props: WarpBodyProps) => {
   const { sideItemIndex } = props;

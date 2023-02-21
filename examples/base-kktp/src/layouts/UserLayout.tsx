@@ -1,13 +1,9 @@
 import UserLogin from '@uiw-admin/user-login'
 import { setCookie } from '@uiw-admin/utils'
 import { Notify } from 'uiw'
-import { DefaultProps } from '@uiw-admin/router-control'
 import { useNavigate } from 'react-router-dom'
 
-const UserLayout = (props: Required<DefaultProps>) => {
-  // const {
-  //   router: { navigate },
-  // } = props
+const UserLayout = () => {
   const navigate = useNavigate()
 
   return (

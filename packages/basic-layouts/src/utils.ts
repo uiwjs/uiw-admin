@@ -1,17 +1,17 @@
-import { RoutersProps } from '@uiw-admin/router-control';
+import { RoutesBaseProps } from '@uiw-admin/router-control';
 import { matchPath } from '@uiw-admin/router-control';
 
 /** 菜单转化 去除 dom  */
-export function getMenu(data: RoutersProps[] = []) {
-  let treeList: RoutersProps[] = [];
+export function getMenu(data: RoutesBaseProps[] = []) {
+  let treeList: RoutesBaseProps[] = [];
   data.forEach((item) => {
     let obj = { ...item };
-    if (item.routes) {
-      const child = getMenu(obj.routes);
-      obj.routes = child;
+    if (item.children) {
+      const child = getMenu(obj.children);
+      obj.children = child;
     }
     if (item.path && item.path !== '*') {
-      const { element, component, children, path, ...rest } = obj;
+      const { element, component, path, ...rest } = obj;
       treeList.push({ ...rest, path, key: path });
     }
   });
@@ -20,12 +20,12 @@ export function getMenu(data: RoutersProps[] = []) {
 
 /** 把数组扁平化 用于 选项卡渲染 */
 export const getRoutesList = (
-  data: RoutersProps[] = [],
-  list: RoutersProps[] = [],
+  data: RoutesBaseProps[] = [],
+  list: RoutesBaseProps[] = [],
 ) => {
   data.forEach((item) => {
-    if (item.routes) {
-      getRoutesList(item.routes, list);
+    if (item.children) {
+      getRoutesList(item.children, list);
       if (item.side) {
         list.push(item);
       }
@@ -38,13 +38,13 @@ export const getRoutesList = (
 
 /** 把数组扁平化 用于 选项卡渲染 */
 export const getMenuList = (
-  data: RoutersProps[] = [],
-  list: RoutersProps[] = [],
+  data: RoutesBaseProps[] = [],
+  list: RoutesBaseProps[] = [],
 ) => {
   data.forEach((item) => {
-    const { routes, ...rest } = item;
-    if (Array.isArray(routes)) {
-      getMenuList(routes, list);
+    const { children, ...rest } = item;
+    if (Array.isArray(children)) {
+      getMenuList(children, list);
     }
     list.push(rest);
   });
@@ -53,17 +53,17 @@ export const getMenuList = (
 
 /** 菜单 转换成 渲染面包屑导航  */
 export class BreadcrumbMap {
-  breadcrumb: Map<string, RoutersProps[]> = new Map([]);
-  flat: RoutersProps[] = [];
-  constructor(routeData: RoutersProps[]) {
+  breadcrumb: Map<string, RoutesBaseProps[]> = new Map([]);
+  flat: RoutesBaseProps[] = [];
+  constructor(routeData: RoutesBaseProps[]) {
     this.init(routeData);
   }
-  private init(route: RoutersProps[], parent?: RoutersProps[]) {
+  private init(route: RoutesBaseProps[], parent?: RoutesBaseProps[]) {
     route.forEach((item) => {
       let par = (parent || []).concat([item]);
       /** 始终把自己加载最后 */
-      if (item.routes) {
-        this.init(item.routes, par);
+      if (item.children) {
+        this.init(item.children, par);
       }
       if (item.path && item.path !== '*') {
         this.breadcrumb.set(item.path, par);
@@ -82,21 +82,21 @@ export class BreadcrumbMap {
  * 1. 拆分路由，把 side===true 的放入一个存储里面
  * 2. 子集对应的第一个  side===true 存储到一个位置里面
  * ***/
-export const getSideMenusMap = (route: RoutersProps[]) => {
+export const getSideMenusMap = (route: RoutesBaseProps[]) => {
   /** 对应的下级路由 **/
-  const sideMenus = new Map<string, RoutersProps[]>([]);
+  const sideMenus = new Map<string, RoutesBaseProps[]>([]);
   /** 子集对应的所有 side===true 的路由地址 **/
   const flat = new Map<string, string>([]);
   const flatSide = new Map<string, string>([]);
 
-  const loop = (route: RoutersProps[], parent?: string) => {
+  const loop = (route: RoutesBaseProps[], parent?: string) => {
     route.forEach((item) => {
-      const { path, side, routes } = item;
-      if (Array.isArray(routes)) {
-        loop(routes, side ? path : parent);
+      const { path, side, children } = item;
+      if (Array.isArray(children)) {
+        loop(children, side ? path : parent);
       }
-      if (side && path && routes) {
-        sideMenus.set(path, routes);
+      if (side && path && children) {
+        sideMenus.set(path, children);
       }
       if (path) {
         if (side) {
@@ -116,7 +116,7 @@ export const getSideMenusMap = (route: RoutersProps[]) => {
   };
 };
 
-export const getCurrentPath = (routes: RoutersProps[], path: string) => {
+export const getCurrentPath = (routes: RoutesBaseProps[], path: string) => {
   // matchPath;
   // 1. 选判断直接相等的
   const isOne = routes.find((item) => item.path === path);
@@ -134,6 +134,6 @@ export const getCurrentPath = (routes: RoutersProps[], path: string) => {
   return undefined;
 };
 
-export const getDiffIndex = (routes: RoutersProps[], pathname: string) => {
+export const getDiffIndex = (routes: RoutesBaseProps[], pathname: string) => {
   return routes.find((item) => item.index);
 };

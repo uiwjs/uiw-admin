@@ -1,11 +1,7 @@
 import React, { Fragment } from 'react';
 import classnames from 'classnames';
 import Menu, { MenuItemProps, SubMenuProps } from '@uiw/react-menu';
-import {
-  DefaultProps,
-  RoutesBaseProps,
-  Routers,
-} from '@uiw-admin/router-control';
+import { RoutesBaseProps } from '@uiw-admin/router-control';
 import { useLocation, useNavigate, Location } from 'react-router-dom';
 import { matchPath, NavigateFunction } from 'react-router';
 import { getRoutesList } from './../utils';
@@ -21,12 +17,12 @@ type Options = {
 
 interface MenuProps {
   collapsed?: boolean;
-  allRoutes?: DefaultProps['routes'];
-  routes?: DefaultProps['routes'];
+  allRoutes?: RoutesBaseProps[];
+  routes?: RoutesBaseProps[];
 }
 
 export const onNavigate = (
-  item: Omit<Routers, 'navigate'> & { navigate: Function | string },
+  item: Omit<RoutesBaseProps, 'navigate'> & { navigate: Function | string },
   navigate: NavigateFunction,
   options: Options,
 ) => {
@@ -79,7 +75,7 @@ function renderMenuItem(
       props.active = true;
     }
 
-    if (item.routes && !item.side) {
+    if (item.children && !item.side) {
       if (collapsed) {
         props.overlayProps = {
           isOutside: true,
@@ -87,7 +83,7 @@ function renderMenuItem(
         };
       }
       if (
-        item.routes.find((route: RoutesBaseProps) => route.path === pathName)
+        item.children.find((route: RoutesBaseProps) => route.path === pathName)
       ) {
         props.overlayProps = {
           isOpen: true,
@@ -96,7 +92,13 @@ function renderMenuItem(
 
       return (
         <Menu.SubMenu {...props} text={item.name || '-'} collapse={collapsed}>
-          {renderMenuItem(item.routes, collapsed, pathName, navigate, options)}
+          {renderMenuItem(
+            item.children,
+            collapsed,
+            pathName,
+            navigate,
+            options,
+          )}
         </Menu.SubMenu>
       );
     }
@@ -108,7 +110,14 @@ function renderMenuItem(
           if (!result) {
             return;
           }
-          navigate(item.path, { replace: true });
+          if (item.children && item.children.length > 0) {
+            const filterData = item.children.filter(
+              (item2: RoutesBaseProps) => item2.redirect,
+            );
+            navigate(filterData[0].redirect, { replace: true });
+          } else {
+            navigate(item.path, { replace: true });
+          }
         }}
         // to={item.path}
         text={item.name || '-'}

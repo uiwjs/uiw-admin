@@ -25,8 +25,7 @@ const Detail = ({ updateData }: DetailProps) => {
   const [option] = React.useState<any>(selectOption)
   const [loading, setLoading] = React.useState(false)
 
-  const store = useSelector((store) => store)
-  console.log(333, store)
+  // const store = useSelector((store) => store)
 
   const {
     demo: { drawerVisible = false, tableType, queryInfo = {}, isView, a },
