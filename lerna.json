@@ -5,14 +5,18 @@
     "create-uiw-admin",
     "eslint-packages/*"
   ],
-  "version": "6.0.0-bate-1",
+  "version": "6.0.0-bate-1.1",
   "command": {
     "create": {
       "license": "MIT"
     },
     "bootstrap": {
-      "yarnClientArgs": ["--no-yarn-lock"],
-      "npmClientArgs": ["--no-package-lock"],
+      "yarnClientArgs": [
+        "--no-yarn-lock"
+      ],
+      "npmClientArgs": [
+        "--no-package-lock"
+      ],
       "forceLocal": true
     }
   }
