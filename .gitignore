@@ -12,6 +12,7 @@ yarn.lock
 baseJS
 basejs
 .kktp
+.uiw
 
 *.lerna_backup
 .DS_Store
