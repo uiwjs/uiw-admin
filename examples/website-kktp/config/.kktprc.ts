@@ -2,9 +2,7 @@ import pkg from '../package.json';
 
 export default {
   initEntery: true,
-  initRoutes: {
-    outletLayout: '@/components/BaseLayout',
-  },
+  initRoutes: true,
   initModel: true,
   define: {
     VERSION: pkg.version,
