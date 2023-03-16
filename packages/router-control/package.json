@@ -48,13 +48,13 @@
   },
   "devDependencies": {
     "@babel/runtime": "~7.20.0",
-    "@types/react": "~17.0.39",
-    "@types/react-dom": "~17.0.11",
+    "@types/react": "~18.0.0",
+    "@types/react-dom": "~18.0.0",
     "@uiw-admin/exceptions": "5.3.21",
     "@uiw-admin/models": "5.3.21",
     "@uiw-admin/utils": "5.3.21",
-    "react": "~17.0.2",
-    "react-dom": "~17.0.2",
+    "react": "~18.2.0",
+    "react-dom": "~18.2.0",
     "react-redux": "~7.2.6",
     "react-router": "~6.4.3",
     "react-router-dom": "~6.4.3"
