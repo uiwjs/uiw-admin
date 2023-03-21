@@ -57,6 +57,7 @@ export default class Markdown extends Component<MarkdownProps, MarkdownState> {
   componentDidMount() {
     if (this.getMdStr) {
       this.getMdStr().then((str: any) => {
+        console.log(3333, str);
         this.setState({
           mdStr: str.default || str,
         });

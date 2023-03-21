@@ -1,8 +1,8 @@
 import { Button, Dropdown, Menu } from 'uiw'
-import { Dispatch } from '@uiw-admin/models'
 import { ProTable, useTable } from '@uiw-admin/components'
 import Detail from './Detail'
-import { useDispatch } from '@uiw-admin/router-control'
+import { Dispatch, useDispatch } from '@kkt/pro'
+
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
 

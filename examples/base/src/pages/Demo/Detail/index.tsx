@@ -1,9 +1,8 @@
 import React from 'react'
 import { ProDrawer, ProForm, useForm } from '@uiw-admin/components'
 import { Slider /*Notify*/ } from 'uiw'
-import { RootState, Dispatch } from '@uiw-admin/models'
 import { items, items2 } from './items'
-import { useDispatch, useSelector } from '@uiw-admin/router-control'
+import { useDispatch, useSelector, RootState, Dispatch } from '@kkt/pro'
 
 interface DetailProps {
   updateData?: any
@@ -26,7 +25,7 @@ const Detail = ({ updateData }: DetailProps) => {
   const [loading, setLoading] = React.useState(false)
 
   const {
-    demo: { drawerVisible, tableType, queryInfo = {}, isView },
+    demo: { drawerVisible = false, tableType, queryInfo = {}, isView },
   } = useSelector((state: RootState) => state)
 
   const form = useForm()
