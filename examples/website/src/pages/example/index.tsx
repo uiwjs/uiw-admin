@@ -19,7 +19,7 @@ export default function Page() {
         </Button>
       </div>
       <iframe
-        src="https://stackblitz.com/github/uiwjs/uiw-admin/tree/master/examples/base?embed=1&hideNavigation=0&hidedevtools=0"
+        src="https://stackblitz.com/github/uiwjs/uiw-admin/tree/yb/examples/base?embed=1&hideNavigation=0&hidedevtools=0"
         style={{
           width: '100%',
           height: '100vh',
