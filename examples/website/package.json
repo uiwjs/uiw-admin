@@ -16,7 +16,7 @@
     "react-dom": ">=16.14.0"
   },
   "dependencies": {
-    "@babel/runtime": "~7.16.7",
+    "@babel/runtime": "~7.21.0",
     "@uiw-admin/authorized": "6.0.0-bate-1.1",
     "@uiw-admin/basic-layouts": "6.0.0-bate-1.1",
     "@uiw-admin/components": "6.0.0-bate-1.1",
