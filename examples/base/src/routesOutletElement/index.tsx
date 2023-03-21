@@ -1,22 +1,16 @@
-import { cloneElement, useMemo } from 'react'
-import { RouteObject } from 'react-router'
+import { cloneElement } from 'react'
 import { SWRConfig } from 'swr'
-import type { Router as RemixRouter } from '@remix-run/router'
 import { request } from '@uiw-admin/utils'
+import { KktproRoutesProps } from '@kkt/pro'
 import '@uiw/reset.css'
 import './index.css'
 
 interface RoutesOutletElementProps {
   children: React.ReactNode
-  routes: RouteObject[]
-  createRouter: (routes: RouteObject[], options?: any) => RemixRouter
+  routes: KktproRoutesProps[]
 }
 const RoutesOutletElement = (props: RoutesOutletElementProps) => {
-  const { createRouter } = props
-
-  const newRoutes = useMemo(() => {
-    return props.routes
-  }, [props.routes])
+  const { routes } = props
 
   return (
     <SWRConfig
@@ -27,7 +21,7 @@ const RoutesOutletElement = (props: RoutesOutletElementProps) => {
         provider: () => new Map(),
       }}>
       {cloneElement(props.children as JSX.Element, {
-        router: createRouter(newRoutes),
+        router: routes,
       })}
     </SWRConfig>
   )

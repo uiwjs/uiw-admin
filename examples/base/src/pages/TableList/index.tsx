@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { ProTable, useTable } from '@uiw-admin/components'
-import { useCity } from '../../servers'
+import { useCity } from '@/servers'
 
 export default function Demo() {
   const table = useTable('/api/getData', {
@@ -28,7 +28,7 @@ export default function Demo() {
   const handleSearch = (val: string) => {
     setVal(val)
   }
-  console.log(table)
+  // console.log(table)
   return (
     <ProTable
       // 操作栏按钮

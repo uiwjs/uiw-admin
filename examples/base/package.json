@@ -4,10 +4,11 @@
   "description": "Use Rematch & TypeScript for the project.",
   "private": true,
   "scripts": {
-    "start": "kkt start",
-    "build": "kkt build",
-    "lint": "eslint \"{src,}/**/*.{ts,tsx,js,jsx}\"",
-    "lint:fix": "yarn lint --fix"
+    "start": "kktp start",
+    "build": "kktp build",
+    "doc": "kktp doc --entry=./build --local",
+    "test": "kktp test --env=jsdom",
+    "coverage": "kktp test --env=jsdom --coverage"
   },
   "repository": {
     "type": "git",
@@ -33,9 +34,9 @@
     "classnames": "~2.3.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "~7.2.6",
-    "react-router": "^6.2.1",
-    "react-router-dom": "^6.2.1",
+    "react-redux": "~8.0.5",
+    "react-router": "^6.8.0",
+    "react-router-dom": "^6.8.0",
     "styled-components": "^5.3.5",
     "swr": "^1.3.0",
     "uiw": "^5.0.0-bate-5"
@@ -45,7 +46,7 @@
     "@types/react-dom": "~18.0.11",
     "@types/react-redux": "~7.1.22",
     "@uiw-admin/config": "6.0.0-bate-1",
-    "kkt": "^7.2.0",
+    "@kkt/pro": "^1.0.5",
     "lint-staged": "~12.5.0",
     "prettier": "^2.7.0",
     "yorkie": "~2.0.0"

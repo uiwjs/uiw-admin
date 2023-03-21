@@ -56,7 +56,6 @@
     "version": "lerna version --exact --force-publish --no-push --no-git-tag-version",
     "publish": "npm run build && lerna publish from-package",
     "start": "lerna exec --scope @examples/base npm run start",
-    "start:kktp": "lerna exec --scope @examples/base-kktp npm run start",
     "start:website": "lerna exec --scope website npm run start",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "clean": "lerna clean && npm run remove && rm -rf ./package-lock.json && rm -rf node_modules && npm run remove:c ",
@@ -87,8 +86,8 @@
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
-    "@babel/preset-typescript": "~7.16.7",
-    "@babel/core": "~7.18.0",
+    "@babel/preset-typescript": "~7.21.0",
+    "@babel/core": "~7.21.3",
     "ajv": "^8.9.0",
     "husky": "~7.0.4",
     "lerna": "~4.0.0",
@@ -99,9 +98,9 @@
     "styled-components": "^5.3.5"
   },
   "resolutions": {
-    "@babel/parser": "7.20.13",
-    "@babel/traverse": "7.20.12",
-    "@babel/types": "7.20.7"
+    "@babel/parser": "7.21.3",
+    "@babel/traverse": "7.21.3",
+    "@babel/types": "7.21.3"
   },
   "workspaces": {
     "packages": [

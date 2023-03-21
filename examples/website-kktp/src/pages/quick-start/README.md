@@ -1,1 +1,0 @@
-../../../../../packages/uiw-admin/README.md

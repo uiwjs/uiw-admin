@@ -45,7 +45,7 @@
     "react-dom": ">=17.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.17.0",
+    "@babel/runtime": "~7.21.0",
     "@uiw-admin/router-control": "6.0.0-bate-1.1"
   },
   "devDependencies": {

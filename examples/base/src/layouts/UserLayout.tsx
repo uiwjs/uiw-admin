@@ -1,12 +1,10 @@
 import UserLogin from '@uiw-admin/user-login'
 import { setCookie } from '@uiw-admin/utils'
 import { Notify } from 'uiw'
-import { DefaultProps } from '@uiw-admin/router-control'
+import { KktproPageProps } from '@kkt/pro'
 
-const UserLayout = (props: Required<DefaultProps>) => {
-  const {
-    router: { navigate },
-  } = props
+const UserLayout = (props: KktproPageProps) => {
+  const { navigate } = props
 
   return (
     <UserLogin

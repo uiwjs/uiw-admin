@@ -1,1 +1,0 @@
-website: https://uiwjs.github.io/uiw-admin
