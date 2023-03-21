@@ -1,6 +1,6 @@
 {
   "installDependencies": true,
-  "startCommand": "npm start2",
+  "startCommand": "npm start22",
   "installOptions": {
     "frozen-lockfile": true,
     "no-optional": true
