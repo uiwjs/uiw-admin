@@ -40,7 +40,8 @@
     "react-router-dom": "^6.8.0",
     "styled-components": "^5.3.5",
     "swr": "2.1.0",
-    "uiw": "^5.0.0-bate-5"
+    "uiw": "^5.0.0-bate-5",
+    "@babel/runtime": "^7.21.0"
   },
   "devDependencies": {
     "@types/react": "~18.0.25",
