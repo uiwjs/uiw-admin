@@ -37,14 +37,13 @@ jobs:
     # 生成文档
     - run: npm run www:build
 
-    - name: Create README.md of Build
-        working-directory: ./base/build
-        run: |
-          cat > README.md << EOF
-          Documentation uiw-admin/base-doc
-          ====
-          Preview: https://raw.githack.com/uiwjs/uiw-admin/base-doc/index.html
-          EOF
+    # 生成案例网站
+    - name: Deploy Website
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: base-doc
+        publish_dir: ./examples/base/build
 
     # 压缩 examples/base 生成 ts 快捷开发
     - name: Compress uiw-admin-ts Example.
@@ -166,13 +165,6 @@ jobs:
     - name: get tag version
       id: tag_version
       uses: jaywcjlove/changelog-generator@v1.5.4
-
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        commit_message: '[${{steps.tag_version.outputs.tag}}] ${{ github.event.head_commit.message }}'
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./examples/website/build
 
     - name: Generate Changelog
       id: changelog
