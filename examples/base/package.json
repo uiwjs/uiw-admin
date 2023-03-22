@@ -49,6 +49,7 @@
     "uiw": "^5.0.0-bate-5"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.21.0",
     "@types/react": "~18.0.25",
     "@types/react-dom": "~18.0.11",
     "@types/react-redux": "~7.1.22",
