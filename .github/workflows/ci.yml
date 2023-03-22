@@ -2,154 +2,45 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - v5
 
 jobs:
   build-uiw-admin:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@master
 
     - name: Setup Node
-      uses: actions/setup-node@v1
+      uses: actions/setup-node@v3
       with:
-        node-version: 14
-
-    - name: Look Changelog
-      uses: jaywcjlove/changelog-generator@v1.5.4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        filter-author: (renovate-bot|Renovate Bot)
-        filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
+        node-version: 16
 
     - run: yarn install
     - run: yarn run build
     - run: yarn run build:create
 
-    # examples/base 里面的 ts 转换 成 js版本并存储到 examples/basejs
-    - run: yarn run build:js
-    - run: yarn run test
-
-    # 案例打包 
-    - run: yarn run build:website
-      env:
-        CI: false
     # 生成文档
     - run: npm run www:build
 
-    # 压缩 examples/base 生成 ts 快捷开发
-    - name: Compress uiw-admin-ts Example.
-      run: zip -r -y uiw-admin-ts.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".uiw/*"
-      working-directory: examples/base
-    
-    # 压缩 examples/basejs 生成 js 快捷开发
-    - name: Compress uiw-admin-js Example.
-      run: zip -r -y uiw-admin-js.zip . -x tsconfig.json -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts" -x ".uiw/*"
-      working-directory: examples/basejs
-    
-    # examples/website/build 生成 zip 文件夹 用于存储压缩包
-    - run: mkdir -p examples/website/build/zip
-    # 复制快捷开发压缩包 到 examples/website/build/zip/ 文件夹下
-    - run: cp -rp ./examples/base/uiw-admin-ts.zip ./examples/website/build/zip/
-    - run: cp -rp ./examples/basejs/uiw-admin-js.zip ./examples/website/build/zip/
-    
-    - run: npm run coverage
-      working-directory: create-uiw-admin
-   
-    - run: npm i coverage-badges-cli markdown-to-html-cli -g
-    # 生成 coverage 标识
-    - run: coverage-badges
-      working-directory: create-uiw-admin
-    # 生成 coverage 报告
-    - run: markdown-to-html --output coverage/index.html --favicon https://raw.githubusercontent.com/uiwjs/uiw/92f189f53312f1177466f48991736f95f86da0a6/src/assets/logo-README.svg
-      working-directory: create-uiw-admin
-    # examples/website/build 生成 coverage 文件夹 用于报告
-    - run: mkdir -p examples/website/build/coverage
-    - run: cp -rp ./create-uiw-admin/coverage/* ./examples/website/build/coverage/
-
-    - name: Add Download Page
-      working-directory: examples/website/build/zip
+    - name: Create README.md
+      working-directory: ./examples/website/build
       run: |
-        ICON='<svg viewBox="0 0 1024 1024" width="14" height="14"><path d="M192 384h640a42.666667 42.666667 0 0 1 42.666667 42.666667v362.666666a42.666667 42.666667 0 0 1-42.666667 42.666667H192v106.666667a21.333333 21.333333 0 0 0 21.333333 21.333333h725.333334a21.333333 21.333333 0 0 0 21.333333-21.333333V308.821333L949.909333 298.666667h-126.528A98.048 98.048 0 0 1 725.333333 200.618667V72.661333L716.714667 64H213.333333a21.333333 21.333333 0 0 0-21.333333 21.333333v298.666667zM128 832H42.666667a42.666667 42.666667 0 0 1-42.666667-42.666667V426.666667a42.666667 42.666667 0 0 1 42.666667-42.666667h85.333333V85.333333a85.333333 85.333333 0 0 1 85.333333-85.333333h530.026667L1024 282.453333V938.666667a85.333333 85.333333 0 0 1-85.333333 85.333333H213.333333a85.333333 85.333333 0 0 1-85.333333-85.333333v-106.666667z m32.661333-359.509333v38.4h147.072l-158.592 200.448V746.666667h226.176v-38.4H207.893333l158.208-200.064v-35.712h-205.44z m251.136 0V746.666667h44.928V472.490667h-44.928z m98.688 0V746.666667h44.928v-105.216h67.968c66.816 0 100.224-28.416 100.224-84.864 0-56.064-33.408-84.096-99.456-84.096h-113.664z m44.928 38.4h65.28c19.584 0 34.176 3.456 43.392 10.752 9.216 6.912 14.208 18.432 14.208 34.944 0 16.512-4.608 28.416-13.824 35.712-9.216 6.912-23.808 10.752-43.776 10.752h-65.28v-92.16z" fill="currentColor"></path></svg> '
-        GITHUBREADME='https://github.com/uiwjs/uiw-admin/tree/master/examples'
-        VERSION_NUMBER=$(echo "${{ steps.create_tag.outputs.versionNumber || steps.create_tag.outputs.version || steps.create_tag.outputs.preversion }}")
-        cat > index.html << EOF
-        <!DOCTYPE html><html lang="en">
-        <head>
-        <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
-        <title>uiw-admin Example Zip Files</title>
-        <style type="text/css">
-        body, html { height: 100%; font-size: 12px; font-family: Avenir Next,PingFang SC,Hiragino Sans GB,Droid Sans Fallback,Microsoft YaHei,sans-serif; }
-        h1 { font-size: 2.6rem; font-weight: 300; }
-        h1 sup { color: #7b7b7b; font-size: 14px; position: absolute; font-weight: normal;}
-        a:hover { color: #0949d1; }
-        .header { position: relative; width: 100%; height: 60%; text-align: center; }
-        .list { border-spacing: 0; border-collapse: collapse; margin: 0 auto 0 auto;}
-        .list td { padding: 3px 10px; line-height: 21px; }
-        .list td svg { display: block; }
-        .list tr:hover { background-color: #f1f1f1; }
-        .links { text-align: center; padding: 50px 0 0 0; font-size: 14px; }
-        .footer { color: #696969; text-align: center; padding: 10px 0 90px 0; }
-        .footer a { padding: 10px 0 90px 0; color: #696969 }
-        </style>
-        </head>
-        <body>
-        <table class="header"> <tbody> <tr> <td>
-          <h1>uiw-admin Example Zip Files<sup>v$VERSION_NUMBER</sup></h1>
-        </td> </tr> </tbody> </table>
-        <table class="list">
-          <tbody>
-        $(for file in $(ls *.zip); do
-          echo "<tr>"
-          echo "<td>${ICON}</td>"
-          echo "<td><a href=\"${file}\">$file</a></td>"
-          echo "<td><a target=\"__blank\" href=\"$GITHUBREADME${file//.zip/}\">Document</a></td>"
-          echo "</tr>"
-        done)
-          </tbody>
-        </table>
-        <div class="links">
-          <a target="__blank" href="https://github.com/uiwjs/uiw-admin">GitHub</a> ·
-          <a target="__blank" href="https://github.com/uiwjs/uiw-admin/issues">Feedback</a> ·
-          <a target="__blank" href="https://github.com/uiwjs/uiw-admin">Create TSBB Project</a> ·
-          <a target="__blank" href="https://github.com/uiwjs/uiw-admin">uiw-admin</a>
-        </div>
-        <div class="footer">
-          Licensed under MIT. (Yes it's free and open-sourced)
-          <div>
-            Created By <a target="__blank" href="https://github.com/jaywcjlove">小弟调调™</a>
-          </div>
-        </div>
-        </body></html>
+        cat > README.md << EOF
+        Documentation uiw-admin@v5
+        ====
+        Preview: https://raw.githack.com/uiwjs/uiw-admin/v5-doc/index.html
         EOF
 
-    - name: Heroku -> Setting
-      working-directory: examples/base
-      run: |
-        node -e 'var fs = require("fs");var pkg = require("./package.json");delete pkg.scripts.build;fs.writeFileSync("./package.json", JSON.stringify(pkg, null, 2));'
-        # cat > ~/app.json <<EOF
-        # {
-        #   "stack": "heroku-20"
-        # }
-        # EOF
-
-    - name: Generate Contributors Images
-      uses: jaywcjlove/github-action-contributors@main
+    - name: 📦 publish to NPM
+      uses: kktjs/npm-publish@main
       with:
-        filter-author: (renovate\[bot\]|renovate-bot|dependabot\[bot\])
-        output: ./examples/website/build/CONTRIBUTORS.svg
-        avatarSize: 36
-
-    - name: Create Tag
-      id: create_tag
-      uses: jaywcjlove/create-tag-action@v1.3.5
-      with:
-        package-path: ./packages/uiw-admin/package.json
-
-    - name: get tag version
-      id: tag_version
-      uses: jaywcjlove/changelog-generator@v1.5.4
+        token: ${{ secrets.NPM_TOKEN }}
+        workspaces: |
+          packages/*
+          !packages/markdown-navbar
+          create-uiw-admin
+          eslint-packages/config
+        tag: bate
 
     - name: Deploy Website
       uses: peaceiris/actions-gh-pages@v3
@@ -157,46 +48,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_branch: v5-doc
         publish_dir: ./examples/website/build
-
-    - name: Generate Changelog
-      id: changelog
-      uses: jaywcjlove/changelog-generator@v1.5.4
-      if: steps.create_tag.outputs.successful
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        filter-author: (renovate-bot|Renovate Bot)
-        filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
-
-    - name: Create Release
-      uses: ncipollo/release-action@v1
-      if: steps.create_tag.outputs.successful
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        name: ${{ steps.create_tag.outputs.version }}
-        tag: ${{ steps.create_tag.outputs.version }}
-        body: |
-          [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/uiw@${{steps.changelog.outputs.version}}/file/README.md)
-          
-          ${{ steps.changelog.outputs.compareurl }}
-
-          ${{ steps.changelog.outputs.changelog }}
-
-          Document uiw-admin@${{ steps.create_tag.outputs.version }}:
-          https://raw.githack.com/uiwjs/uiw-admin/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html
-
-    - run: npm install @jsdevtools/npm-publish -g
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/exceptions/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/authorized/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/basic-layouts/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/components/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/config/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/document-title/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/layout-tabs/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/models/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/plugins/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/router-control/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/uiw-admin/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/user-login/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./packages/utils/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./create-uiw-admin/package.json
-    - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./eslint-packages/config/package.json
