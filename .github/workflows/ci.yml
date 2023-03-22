@@ -38,7 +38,7 @@ jobs:
     - run: npm run www:build
 
     - name: Create README.md of Build
-        working-directory: ./base/build
+        working-directory: examples/base/build
         run: |
           cat > README.md << EOF
           Documentation uiw-admin/base-doc
