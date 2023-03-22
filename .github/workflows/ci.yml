@@ -19,49 +19,8 @@ jobs:
     - run: yarn run build
     - run: yarn run build:create
 
-    # examples/base 里面的 ts 转换 成 js版本并存储到 examples/basejs
-    - run: yarn run build:js
-    - run: yarn run test
-
-    # 案例打包 
-    - run: yarn run build:website
-      env:
-        CI: false
     # 生成文档
     - run: npm run www:build
-
-    # 生成文档
-    - run: npm run www:build
-
-    # 压缩 examples/base 生成 ts 快捷开发
-    - name: Compress uiw-admin-ts Example.
-      run: zip -r -y uiw-admin-ts.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".uiw/*"
-      working-directory: examples/base
-    
-    # 压缩 examples/basejs 生成 js 快捷开发
-    - name: Compress uiw-admin-js Example.
-      run: zip -r -y uiw-admin-js.zip . -x tsconfig.json -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".kktrc.ts" -x ".uiw/*"
-      working-directory: examples/basejs
-    
-    # examples/website/build 生成 zip 文件夹 用于存储压缩包
-    - run: mkdir -p examples/website/build/zip
-    # 复制快捷开发压缩包 到 examples/website/build/zip/ 文件夹下
-    - run: cp -rp ./examples/base/uiw-admin-ts.zip ./examples/website/build/zip/
-    - run: cp -rp ./examples/basejs/uiw-admin-js.zip ./examples/website/build/zip/
-    
-    - run: npm run coverage
-      working-directory: create-uiw-admin
-   
-    - run: npm i coverage-badges-cli markdown-to-html-cli -g
-    # 生成 coverage 标识
-    - run: coverage-badges
-      working-directory: create-uiw-admin
-    # 生成 coverage 报告
-    - run: markdown-to-html --output coverage/index.html --favicon https://raw.githubusercontent.com/uiwjs/uiw/92f189f53312f1177466f48991736f95f86da0a6/src/assets/logo-README.svg
-      working-directory: create-uiw-admin
-    # examples/website/build 生成 coverage 文件夹 用于报告
-    - run: mkdir -p examples/website/build/coverage
-    - run: cp -rp ./create-uiw-admin/coverage/* ./examples/website/build/coverage/
 
     - name: Create README.md
       working-directory: ./examples/website/build
