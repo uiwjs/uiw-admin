@@ -37,6 +37,15 @@ jobs:
     # 生成文档
     - run: npm run www:build
 
+    - name: Create README.md of Build
+        working-directory: ./base/build
+        run: |
+          cat > README.md << EOF
+          Documentation uiw-admin/base-doc
+          ====
+          Preview: https://raw.githack.com/uiwjs/uiw-admin/base-doc/index.html
+          EOF
+
     # 压缩 examples/base 生成 ts 快捷开发
     - name: Compress uiw-admin-ts Example.
       run: zip -r -y uiw-admin-ts.zip . -x "node_modules/*" -x "build/*" -x "dist/*" -x "coverage/*" -x ".eslintcache" -x "sandbox.config.json" -x ".stackblitzrc" -x ".uiw/*"
