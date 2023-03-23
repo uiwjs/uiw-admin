@@ -35,7 +35,7 @@ jobs:
       env:
         CI: false
     # 生成文档
-    - run: npm run www:build
+    - run: export CI=false && npm run www:build
 
     # 生成案例网站
     - name: Deploy Website
