@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@babel/runtime": "~7.20.0",
+    "@babel/plugin-proposal-private-property-in-object":"7.21.0",
     "@uiw-admin/authorized": "5.3.21",
     "@uiw-admin/basic-layouts": "5.3.21",
     "@uiw-admin/components": "5.3.21",
