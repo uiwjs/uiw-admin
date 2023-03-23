@@ -1,20 +1,8 @@
 import { useState } from 'react'
 import { ProTable, useTable } from '@uiw-admin/components'
-import { useCity } from '../../servers'
-import { useLoaderData } from 'react-router-dom'
-
-Demo.loader = async (props: any) => {
-  console.log('props', props)
-  const result = await Promise.resolve(1)
-  return {
-    a: result,
-  }
-}
+import { useCity } from '@/servers'
 
 export default function Demo() {
-  const data = useLoaderData()
-  console.log('data', data)
-
   const table = useTable('/api/getData', {
     // 格式化接口返回的数据，必须返回{total 总数, data: 列表数据}的格式
     formatData: (data) => {

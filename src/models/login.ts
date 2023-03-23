@@ -1,6 +1,4 @@
-import { history } from '@uiw-admin/router-control'
-import { RootModel } from '@uiw-admin/models'
-import { createModel } from '@rematch/core'
+// import { Dispatch } from '@uiw-admin/models';
 
 export interface LoginState {
   token?: string | null
@@ -9,7 +7,7 @@ export interface LoginState {
   } | null
 }
 
-const login = createModel<RootModel>()({
+const login = {
   name: 'login',
   state: {
     userData: null,
@@ -23,15 +21,16 @@ const login = createModel<RootModel>()({
   },
   effects: (dispatch: any) => ({
     async submit() {
-      dispatch.login.updateState({ token: '测试2' })
-      sessionStorage.setItem('auth', JSON.stringify(['/home', '/dac']))
-      history.push('/home')
+      // console.log(555, dispatch.login, data)
+      // dispatch.login.updateState({ token: '测试2' })
+      // sessionStorage.setItem('auth', JSON.stringify(['/home', '/dac']))
+      // history.push('/home')
       // this.updateState()
       // await login({ username: 'test', password: 'www' });
       // dispatch.sharks.increment(payload)
       // `dispatch.s` will suggest `sharks`
     },
   }),
-})
+}
 
 export default login

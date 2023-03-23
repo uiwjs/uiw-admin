@@ -1,17 +1,16 @@
 import BasicLayout, {
   useLayouts,
-  BasicLayoutProps as BasicLayoutType,
+  BasicLayoutProps,
 } from '@uiw-admin/basic-layouts'
-import { RoutersProps } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import { Outlet } from 'react-router-dom'
 import AuthPage from '@uiw-admin/authorized'
-interface BasicLayoutProps {
-  routes: RoutersProps[]
-}
+import { KktproPageProps } from '@kkt/pro'
 
-function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
+function BasicLayoutScreen(props: KktproPageProps) {
+  const route = props.routes
+
   const layouts = useLayouts()
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
@@ -27,18 +26,18 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
     },
   })
 
-  const basicLayoutProps: BasicLayoutType = {
+  const basicLayoutProps: BasicLayoutProps = {
     onReloadAuth: async () => mutate(),
     // 修改密码以及其他操作在项目中进行
     menus: [
       {
         title: '欢迎来到uiw',
-        icon: 'smile',
+        icon: <Icon type="smile" />,
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
-        icon: 'setting',
+        icon: <Icon type="setting" />,
         onClick: () => layouts.closeMenu(),
       },
     ],
@@ -57,30 +56,17 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       ),
     },
     layouts,
-    ...props,
+    routes: props.routes as any,
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
-    // hideReloadButton: true,
-    // hideLogoutButton: true,
-    // hideUserInfo: true
   }
 
-  // 验证是否登录的方式
-  // 1. 使用 Auth 组件
-  // 2. 路由中进行处理  path==="/" 的 element 外层包裹组件进行重定向
-  // return (
-  //   <Auth >
-  //   <BasicLayout {...basicLayoutProps} {...props} >
-  //     <Outlet />
-  //     {/* <LayoutTabs routes={routes || []} /> */}
-  //   </BasicLayout>
-  //   </Auth>
-  // )
   return (
     <AuthPage authority={true} redirectPath="/login">
       <BasicLayout
         {...basicLayoutProps}
+        routes={route as any}
         onLogoClick={(event: any) => {
           // history.push("/demo#/tableList");
           console.log('logo点击事件', event)
