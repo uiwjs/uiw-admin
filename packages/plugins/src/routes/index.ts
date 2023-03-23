@@ -11,8 +11,8 @@ import {
   stringToJson,
   getRouteMapModels,
   babelPluginComponents,
-} from '../utils';
-import { RoutersProps } from '../utils/interface';
+} from './../utils';
+import { RoutersProps } from './../utils/interface';
 
 type ISTYPE = 'json' | 'ts' | 'js' | false;
 
@@ -76,12 +76,7 @@ class RoutesWebpackPlugin {
       ? this.jsonCode
       : strs;
     const babelIcons = babelPluginComponents(content);
-    let routeTemp = createTemp(
-      babelIcons.code,
-      babelIcons.iconsList,
-      babelIcons.importLazy,
-      isType,
-    );
+    let routeTemp = createTemp(babelIcons.code, babelIcons.iconsList, isType);
     fs.writeFileSync(
       path.resolve(
         process.cwd(),

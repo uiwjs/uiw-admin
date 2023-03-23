@@ -1,6 +1,11 @@
 {
   "installDependencies": true,
   "startCommand": "npm start",
+  "installOptions": {
+    "frozen-lockfile": true,
+    "no-optional": true
+  },
+  "node": "16",
   "env": {
     "NODE_ENV": "development"
   }

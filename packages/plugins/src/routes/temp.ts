@@ -1,16 +1,7 @@
 // 模板
-const getReactLazy = (importLazy: Record<string, string>) => {
-  let lazyString = '';
-  Object.entries(importLazy).map(([key, paths]) => {
-    lazyString = lazyString + `import ${key} from "${paths}"\n`;
-  });
-  return lazyString;
-};
-
 export default (
   routeStr: string,
   iconsList: string[],
-  importLazy: Record<string, string>,
   isType: 'ts' | 'js' | 'json' | boolean,
 ) => {
   let reactTemp = `import React from "react"`;
@@ -22,7 +13,6 @@ export default (
 // @ts-nocheck
 ${(!isReact && reactTemp) || ''}
 import {Exceptions404,Exceptions403,Exceptions500 } from "@uiw-admin/exceptions"
-${getReactLazy(importLazy)}
 ${iconStr}
 ${routeStr};    
     `;

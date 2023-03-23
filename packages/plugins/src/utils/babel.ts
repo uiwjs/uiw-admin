@@ -4,7 +4,7 @@ import * as t from '@babel/types';
 import generate from '@babel/generator';
 import template from '@babel/template';
 import { RoutersProps } from './interface';
-import { getToUpperCase, toPascalCase } from './index';
+import { getToUpperCase } from './index';
 
 const pluginsConfig: ParserPlugin[] = [
   'jsx',
@@ -183,7 +183,6 @@ export const babelPluginComponents = (content: string) => {
   const ast = getAst(content);
   const iconsList: string[] = [];
   const importList: string[] = [];
-  const importLazy: Record<string, string> = {};
   traverse(ast, {
     ImportSpecifier(path) {
       const node = path.node;
@@ -206,19 +205,7 @@ export const babelPluginComponents = (content: string) => {
             if (['404', '403', '500'].includes(node.value.value)) {
               node.value = getJSX(`Exceptions${valus}`);
             } else {
-              const ComponentName =
-                'Components' +
-                toPascalCase(valus.replace(/^@/, '').split('/').join(''));
-              node.value = getJSX(`${ComponentName}`);
-              importLazy[ComponentName] = valus;
-              if (t.isObjectExpression(path.parent)) {
-                path.parent.properties.push(
-                  t.objectProperty(
-                    t.identifier('loader'),
-                    t.identifier(`${ComponentName}.loader`),
-                  ),
-                );
-              }
+              node.value = getReactLazy(valus);
             }
           }
         }
@@ -262,6 +249,5 @@ export const babelPluginComponents = (content: string) => {
   return {
     iconsList: newIcon,
     code: jsonCode,
-    importLazy,
   };
 };

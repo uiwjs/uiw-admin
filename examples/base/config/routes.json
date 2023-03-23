@@ -1,12 +1,12 @@
 [
   {
     "path": "/login",
-    "component": "@/layouts/UserLayout"
+    "element": "@/layouts/UserLayout"
   },
   {
     "path": "/",
-    "component": "@/layouts/BasicLayout",
-    "routes": [
+    "element": "@/layouts/BasicLayout",
+    "children": [
       {
         "index": true,
         "redirect": "/tableList"
@@ -14,21 +14,13 @@
       {
         "path": "/tableList",
         "name": "查询表格",
-        "component": "@/pages/TableList",
-        "icon": "search",
-        "navigate": "(navigate) => {navigate('/tableList',{ replace: true })}"
-      },
-      {
-        "path": "/tableList/:id",
-        "name": "查询表格2",
-        "component": "@/pages/TableList",
-        "icon": "search",
-        "navigate": "(navigate) => {navigate('/tableList',{ replace: true })}"
+        "element": "@/pages/TableList",
+        "icon": "search"
       },
       {
         "path": "/home",
         "name": "首页",
-        "component": "@/pages/TableList",
+        "element": "@/pages/TableList",
         "icon": "home"
       },
       {
@@ -44,35 +36,48 @@
         "icon": "copy",
         "isAuth": true,
         "side": true,
-        "routes": [
+        "children": [
           {
             "index": true,
-            "path": "/dom/courses",
+            "redirect": "/dom/dashboard",
+            "element": "@/pages/Dashboard"
+          },
+          {
+            "path": "/dom/dashboard",
             "name": "Dashboard",
             "isAuth": true,
-            "component": "@/pages/Dashboard"
+            "element": "@/pages/Dashboard"
+          },
+          {
+            "path": "/dom/demo",
+            "name": "Dashboard2",
+            "element": "@/pages/Demo",
+            "icon": "home"
           },
           {
             "path": "/dom/exceptions",
             "name": "异常12",
             "icon": "warning-o",
             "side": true,
-            "routes": [
+            "children": [
               {
                 "index": true,
+                "redirect": "/dom/exceptions/403"
+              },
+              {
                 "path": "/dom/exceptions/403",
                 "name": "403-1",
-                "component": "403"
+                "element": "@uiw-admin/exceptions/esm/Exceptions/403"
               },
               {
                 "path": "/dom/exceptions/500",
                 "name": "500-1",
-                "component": "500"
+                "element": "@uiw-admin/exceptions/esm/Exceptions/500"
               },
               {
                 "path": "/dom/exceptions/404",
                 "name": "404-1",
-                "component": "404"
+                "element": "@uiw-admin/exceptions/esm/Exceptions/404"
               }
             ]
           }
@@ -81,53 +86,8 @@
       {
         "path": "/demo",
         "name": "列表查询/新增demo",
-        "component": "@/pages/Demo",
-        "icon": "component"
-      },
-      {
-        "path": "/exceptions",
-        "name": "异常",
-        "icon": "warning-o",
-        "routes": [
-          {
-            "path": "/exceptions/403",
-            "name": "403",
-            "component": "403"
-          },
-          {
-            "path": "/exceptions/500",
-            "name": "500",
-            "component": "500"
-          },
-          {
-            "path": "/exceptions/404",
-            "name": "404",
-            "component": "404"
-          }
-        ]
-      },
-      {
-        "path": "/403",
-        "name": "403",
-        "hideInMenu": true,
-        "component": "403"
-      },
-      {
-        "path": "/500",
-        "name": "500",
-        "hideInMenu": true,
-        "component": "500"
-      },
-      {
-        "path": "/404",
-        "name": "404",
-        "hideInMenu": true,
-        "component": "404"
-      },
-      {
-        "path": "*",
-        "name": "404",
-        "component": "404"
+        "element": "@/pages/Demo",
+        "icon": "home"
       }
     ]
   }

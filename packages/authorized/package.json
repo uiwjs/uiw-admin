@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/authorized",
-  "version": "5.3.21",
+  "version": "6.0.0-bate-1.1",
   "description": "authorized",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/authorized#readme",
@@ -45,15 +45,15 @@
     "react-dom": ">=17.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.20.0",
-    "@uiw-admin/router-control": "5.3.21"
+    "@babel/runtime": "~7.21.0",
+    "@uiw-admin/router-control": "6.0.0-bate-1.1"
   },
   "devDependencies": {
-    "@types/react": "~17.0.39",
-    "@types/react-dom": "~17.0.11",
-    "react": "~17.0.2",
-    "react-dom": "~17.0.2",
-    "react-router": "~6.4.3",
-    "react-router-dom": "~6.4.3"
+    "@types/react": "~18.0.25",
+    "@types/react-dom": "~18.0.11",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router": "^6.8.0",
+    "react-router-dom": "^6.8.0"
   }
 }

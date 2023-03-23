@@ -1,10 +1,8 @@
-// @ts-nocheck
 import {
   RematchRootState,
   RematchDispatch,
   Model,
   RematchStore,
-  init,
 } from '@rematch/core';
 import { ExtraModelsFromLoading } from '@rematch/loading';
 /**  @@ 指向 /src/.uiw 目录 */

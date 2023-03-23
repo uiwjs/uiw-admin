@@ -64,6 +64,7 @@ export default class Markdown extends Component<MarkdownProps, MarkdownState> {
     }
   }
   render() {
+    console.log('mdStr', this.state.mdStr);
     return (
       <>
         <Row>

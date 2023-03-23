@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/basic-layouts",
-  "version": "5.3.21",
+  "version": "6.0.0-bate-1.1",
   "description": "Basic Layouts",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/basic-layouts#readme",
@@ -43,21 +43,21 @@
     "uiw": ">=4.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.20.0",
-    "@uiw-admin/document-title": "5.3.21",
+    "@babel/runtime": "~7.21.0",
+    "@uiw-admin/document-title": "6.0.0-bate-1.1",
     "classnames": "2.3.1",
     "pinyin": "~2.11.2"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
     "@types/pinyin": "2.10.0",
-    "@types/react": "~17.0.39",
-    "@types/react-dom": "~17.0.11",
-    "@uiw-admin/router-control": "5.3.21",
-    "react": "~17.0.2",
-    "react-dom": "~17.0.2",
-    "react-router": "~6.4.3",
-    "react-router-dom": "~6.4.3",
-    "uiw": "^4.15.0"
+    "@types/react": "~18.0.25",
+    "@types/react-dom": "~18.0.11",
+    "@uiw-admin/router-control": "6.0.0-bate-1.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router": "^6.8.0",
+    "react-router-dom": "^6.8.0",
+    "uiw": "^5.0.0-bate-5"
   }
 }

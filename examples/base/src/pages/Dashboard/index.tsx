@@ -1,7 +1,8 @@
-import { navigate } from '@uiw-admin/router-control'
+import { KktproPageProps } from '@kkt/pro'
 import { Form } from '@uiw-admin/components'
 import { Input } from 'uiw'
-const Dashboard = () => {
+
+const Dashboard = (props: KktproPageProps) => {
   return (
     <div>
       <Form
@@ -22,13 +23,11 @@ const Dashboard = () => {
         }}
       />
       Dashboard
-      <button onClick={() => navigate('/admin/12')}>点击</button>
-      <button onClick={() => navigate('/tableList/12')}>点击</button>
-      <button onClick={() => navigate('/tableList/12')}>点击</button>
-      <button onClick={() => navigate('/dom/12')}>点击2</button>
-      <button onClick={() => navigate('/dom/2')}>点击3</button>
-      <button onClick={() => navigate('/dom/2?a=2')}>点击4</button>
-      <button onClick={() => navigate('/dom/2?a=45')}>点击5</button>
+      <button onClick={() => props.navigate('/tableList/12')}>点击</button>
+      <button onClick={() => props.navigate('/dom/12')}>点击2</button>
+      <button onClick={() => props.navigate('/dom/2')}>点击3</button>
+      <button onClick={() => props.navigate('/dom/2?a=2')}>点击4</button>
+      <button onClick={() => props.navigate('/dom/2?a=45')}>点击5</button>
     </div>
   )
 }

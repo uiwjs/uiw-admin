@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { navigate } from "@uiw-admin/router-control"
 
 export * from './Auth';
+export { default as AuthBtn } from './Auth';
 
 interface AuthorizedProps {
   authority?: boolean;
