@@ -3,10 +3,8 @@ import BasicLayout, {
   BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'
-// import { history } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
-// import LayoutTabs from '@uiw-admin/layout-tabs'
 import { Outlet } from 'react-router-dom'
 import AuthPage from '@uiw-admin/authorized'
 interface BasicLayoutProps {
@@ -32,6 +30,7 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   })
 
   const basicLayoutProps: BasicLayoutType = {
+    routes: props.routes,
     onReloadAuth: async () => mutate(),
     // 修改密码以及其他操作在项目中进行
     menus: [
@@ -61,7 +60,6 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
       ),
     },
     layouts,
-    ...props,
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
