@@ -20,7 +20,7 @@ jobs:
     - run: yarn run build:create
 
     # 生成文档
-    - run: npm run www:build
+    - run: export CI=false && npm run www:build
 
     - name: Create README.md
       working-directory: ./examples/website/build
