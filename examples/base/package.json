@@ -24,7 +24,7 @@
     "@swc-node/core": ">=1.10.1"
   },
   "dependencies": {
-    "@kkt/pro": "^1.0.6",
+    "@kkt/pro": "^1.0.7",
     "@uiw-admin/authorized": "6.0.0-bate-1.1",
     "@uiw-admin/basic-layouts": "6.0.0-bate-1.1",
     "@uiw-admin/components": "6.0.0-bate-1.1",
