@@ -32,12 +32,12 @@ function BasicLayoutScreen(props: KktproPageProps) {
     menus: [
       {
         title: '欢迎来到uiw',
-        icon: 'smile',
+        icon: <Icon type="smile" />,
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
-        icon: 'setting',
+        icon: <Icon type="setting" />,
         onClick: () => layouts.closeMenu(),
       },
     ],
