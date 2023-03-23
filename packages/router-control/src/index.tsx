@@ -62,7 +62,6 @@ export function RouteChild(props: ControllerProps = {}) {
   }, [JSON.stringify(authList)]);
   /** 赋值 用于跳转 */
   navigate = routes.navigate;
-  console.log('routes', routes);
   return (
     <RouterProvider router={routes} fallbackElement={<div>loading...</div>} />
   );
