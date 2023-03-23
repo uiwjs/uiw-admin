@@ -55,7 +55,7 @@
     "@uiw-admin/utils": "6.0.0-bate-1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-redux": "^7.2.6",
+    "react-redux": "^8.0.0",
     "react-router": "^6.8.0",
     "react-router-dom": "^6.8.0"
   },
