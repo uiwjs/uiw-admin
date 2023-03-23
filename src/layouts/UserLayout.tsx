@@ -8,7 +8,6 @@ const UserLayout = (props: Required<DefaultProps>) => {
     router: { navigate },
   } = props
 
-  console.log(props)
   return (
     <UserLogin
       buttons={[
@@ -35,7 +34,7 @@ const UserLayout = (props: Required<DefaultProps>) => {
           sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
           localStorage.setItem('token', data.token)
           localStorage.setItem('auth', JSON.stringify(data.authList || []))
-          navigate('/home', { replace: true })
+          navigate?.('/home', { replace: true })
         } else {
           Notify.error({
             title: '错误通知',

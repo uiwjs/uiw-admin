@@ -3,10 +3,8 @@ import BasicLayout, {
   BasicLayoutProps as BasicLayoutType,
 } from '@uiw-admin/basic-layouts'
 import { RoutersProps } from '@uiw-admin/router-control'
-// import { history } from '@uiw-admin/router-control'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
-// import LayoutTabs from '@uiw-admin/layout-tabs'
 import { Outlet } from 'react-router-dom'
 import AuthPage from '@uiw-admin/authorized'
 interface BasicLayoutProps {
@@ -15,8 +13,6 @@ interface BasicLayoutProps {
 
 function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
   const layouts = useLayouts()
-  console.log('props', props)
-
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
@@ -91,7 +87,6 @@ function BasicLayoutScreen(props: BasicLayoutProps = { routes: [] }) {
         }}
         isDefaultContentStyle={false}>
         <Outlet />
-        {/* <LayoutTabs routes={props.routes || []} /> */}
       </BasicLayout>
     </AuthPage>
   )

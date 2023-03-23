@@ -40,7 +40,6 @@ export default function Demo() {
   const handleSearch = (val: string) => {
     setVal(val)
   }
-  console.log(table)
   return (
     <ProTable
       // 操作栏按钮
