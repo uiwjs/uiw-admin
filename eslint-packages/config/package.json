@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-uiw-admin",
-  "version": "6.0.0-bate-1.1",
+  "version": "6.0.0",
   "description": "eslint 配置",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/eslint-packages/config#readme",

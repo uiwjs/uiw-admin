@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/authorized",
-  "version": "6.0.0-bate-1.1",
+  "version": "6.0.0",
   "description": "authorized",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/authorized#readme",
@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "@babel/runtime": "~7.21.0",
-    "@uiw-admin/router-control": "6.0.0-bate-1.1"
+    "@uiw-admin/router-control": "6.0.0"
   },
   "devDependencies": {
     "@types/react": "~18.0.25",
