@@ -15,8 +15,7 @@
 ## 基础抽屉
 > 基础抽屉，点击触发按钮抽屉从右滑出，点击遮罩区关闭。
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React, { useState } from 'react';
 import { ProDrawer } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -31,15 +30,12 @@ const Demo = () => {
      </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
-
-
 ## 预设宽度
 > 可通过width控制Drawer宽(默认800px),也可通过size控制
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React, { useState } from 'react';
 import { ProDrawer } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -64,13 +60,12 @@ const Demo = () => {
      </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ## 抽屉按钮
 >通过传递buttons生成按钮,按钮继承了uiw/buttons,我们可以通过show控制按钮显示与隐藏
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React, { useState } from 'react';
 import { ProDrawer } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -94,14 +89,13 @@ const Demo = () => {
      </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 表单抽屉
 > 配和ProForm使用(新增;编辑;查看等业务)
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React, { useState } from 'react';
 import { ProDrawer,ProForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -134,36 +128,40 @@ const Demo = () => {
      </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 抽屉按钮权限
 > 我们可以通过path与登陆时获取的按钮权限菜单进行匹配,从而控制按钮的权限
-```jsx
-import ReactDOM from 'react-dom';
-import React from 'react';
+<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+```jsx mdx:preview
+import React, { useState } from 'react';
 import { ProDrawer } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
+   const [ drawerVisible,setDrawerVisible ] = useState( false )
     return (
-       <ProDrawer
-        visible={drawerVisible}
-        onClose={()=>setDrawerVisible(false)}
-        buttons={[
-          { label: '取消', type:"primary" , onClick: ()=>setDrawerVisible(false) },
-          {
-            label: '保存',
-            type:"primary",
-            onClick: ()=>{},
-            path:"/demo/drawer"
-          },
-        ]}
-      >
-        <div>集成了Button</div>
-      </ProDrawer>
+      <div>
+        <ProDrawer
+          visible={drawerVisible}
+          onClose={()=>setDrawerVisible(false)}
+          buttons={[
+            { label: '取消', type:"primary" , onClick: ()=>setDrawerVisible(false) },
+            {
+              label: '保存',
+              type:"primary",
+              onClick: ()=>{},
+              path:"/demo/drawer"
+            },
+          ]}
+        >
+          <div>集成了Button</div>
+        </ProDrawer>
+        <Button type="primary" onClick={()=>setDrawerVisible(true)}>打开弹框</Button>
+       </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 

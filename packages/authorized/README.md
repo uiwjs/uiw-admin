@@ -102,6 +102,7 @@ sessionStorage.setItem('auth',JSON.stringify(["/dom/save","/dom/edit"])) // 权�
 
 import React from "react"
 import { AuthBtn } from "@uiw-admin/authorized"
+import { createRoot } from 'react-dom';
 
 const Demos = ()=>{
   return (
@@ -121,7 +122,7 @@ const Demos = ()=>{
    </div>
   )
 }
-ReactDOM.render(<Demos />, _mount_);
+createRoot(_mount_).render(<Demos />);
 ```
 
 ## 贡献者

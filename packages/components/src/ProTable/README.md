@@ -8,8 +8,7 @@
 
 ### 基础用例
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -107,46 +106,51 @@ function Demo1() {
   );
 }
 
-ReactDOM.render(<Demo1 />, _mount_);
+export default Demo1
 
 ```
 
 > 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则继承columns列key
 
-```jsx
-<ProTable
-  columns={[
-    // input key 继承 column的key name
-    {
-      title: '名字',
-      key: 'name',
-      props: {
-        widget: 'input',
-        initialValue: '',
-        widgetProps: {
-          preIcon: 'user',
-          placeholder: '输入用户名',
+```jsx 
+import React from 'react';
+import { ProTable } from '@uiw-admin/components';
+const Demo1 = ()=> {
+  return (
+    <ProTable
+      columns={[
+      // input key 继承 column的key name
+        {
+          title: '名字',
+          key: 'name',
+          props: {
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {
+              preIcon: 'user',
+              placeholder: '输入用户名',
+            },
+          },
+      },
+      // 自定义表单key
+      {
+        title: '年龄',
+        key: 'registered',
+        props: {
+          widget: 'select',
+          key: 'age',
+          option: [
+            { label: '20', value: 20 },
+            { label: '10', value: 10 },
+          ],
         },
       },
-    },
-    // 自定义表单key
-    {
-      title: '年龄',
-      key: 'registered',
-      props: {
-        widget: 'select',
-        key: 'age',
-        option: [
-          { label: '20', value: 20 },
-          { label: '10', value: 10 },
-        ],
-      },
-    },
-  ]}
+    ]}
+  />
+  )
+}
 
-
-/>
-
+export default Demo1
 ```
 
 ### 显示操作栏
@@ -154,7 +158,7 @@ ReactDOM.render(<Demo1 />, _mount_);
 > 操作栏区域默认是`Button`按钮，可通过`render`自定义
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 import { Dropdown, Menu, ButtonGroup, Button, Divider, Icon } from 'uiw';
@@ -256,14 +260,13 @@ const table = useTable('https://randomuser.me/api', {
   );
 }
 
-ReactDOM.render(<Demo2 />, _mount_);
-
+export default Demo2
 ```
 
 ### table多选、单选行
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React, { useState } from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -338,14 +341,13 @@ const table = useTable('https://randomuser.me/api', {
   );
 }
 
-ReactDOM.render(<Demo3 />, _mount_);
-
+export default Demo3
 ```
 
 ### table表单验证
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -455,8 +457,7 @@ function Demo4() {
   );
 }
 
-ReactDOM.render(<Demo4 />, _mount_);
-
+export default Demo4
 ```
 
 ### 表头分组
@@ -464,7 +465,7 @@ ReactDOM.render(<Demo4 />, _mount_);
 与uiw table使用方法一致，可通过传props配置统一的表单
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -574,8 +575,7 @@ function Demo5() {
   );
 }
 
-ReactDOM.render(<Demo5 />, _mount_);
-
+export default Demo5
 ```
 
 ### 自定义表单列
@@ -583,7 +583,7 @@ ReactDOM.render(<Demo5 />, _mount_);
 默认是一行五个，可自定义
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -681,9 +681,7 @@ function Demo6() {
     />
   );
 }
-
-ReactDOM.render(<Demo6 />, _mount_);
-
+export default Demo6
 ```
 
 ## Props

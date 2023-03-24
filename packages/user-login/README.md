@@ -19,7 +19,7 @@ npm i @uiw-admin/user-login --save  # yarn add  @uiw-admin/user-login
 `api`：登录请求接口，`onSuccess`：登陆成功后回调
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { Notify } from "uiw"
@@ -38,8 +38,7 @@ const UserLayout = () => {
     />
   )
 }
-ReactDOM.render(<UserLayout />, _mount_);
-
+export default UserLayout
 ```
 
 ## 添加额外请求参数
@@ -47,7 +46,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `onBefore`：登陆前回调，用于添加额外请求参数。如果返回 `false`， 则不进行登录请求操作
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { Notify } from "uiw"
@@ -66,8 +65,7 @@ const UserLayout = () => {
     }}
   />
 }
-ReactDOM.render(<UserLayout />, _mount_);
-
+export default UserLayout
 ```
 
 ## 配置接口参数
@@ -75,7 +73,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `saveField`：配置登陆参数字段，⚠️ 注意：V6版本中删除当前属性。建议使用`defaultFieldsConfig`属性
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -98,7 +96,7 @@ const UserLayout = () => {
     }}
   />
 }
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout
 ```
 
 ## 默认输入框属性配置
@@ -106,7 +104,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `defaultFieldsConfig`：默认输入框属性配置
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -128,7 +126,7 @@ const UserLayout = () => {
     }}
   />
 }
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout
 ```
 
 ## 默认登录按钮属性配置
@@ -136,7 +134,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `btnProps`：默认登录按钮属性配置，自定义的按钮不生效
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -156,8 +154,7 @@ const UserLayout = () => {
     }}
   />
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 ## 自定义form表单项
@@ -165,7 +162,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `fields`：可进行自定义form表单项
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -199,8 +196,7 @@ const UserLayout = () => {
     }}
   />
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 ## 是否需要默认的输入框渲染
@@ -208,7 +204,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `isDefaultFields`：是否需要默认的输入框渲染
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -243,8 +239,7 @@ const UserLayout = () => {
     }}
   />
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 ## 使用配置渲染操作按钮
@@ -252,7 +247,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `buttons`：可进行自定义按钮配置,从而做更多业务拓展(如注册等)
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -280,8 +275,7 @@ const UserLayout = () => {
     }}
   />
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 ## 自定义背景样式
@@ -289,7 +283,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `styleContainer`：自定义背景样式 ，`bg`：可直接修改背景图片
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -311,8 +305,7 @@ const UserLayout = () => {
     }}
   />
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 ## 自定义背景图片
@@ -320,7 +313,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `bg`：可直接修改背景图片，⚠️ 注意：V6版本中删除当前属性。建议使用`styleContainer`
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -340,8 +333,7 @@ const UserLayout = () => {
     }}
   />
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 ## 自定义项目名称
@@ -349,7 +341,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `projectName`：自定义项目名称
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -369,8 +361,7 @@ const UserLayout = () => {
     }}
   />
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 
@@ -379,7 +370,7 @@ ReactDOM.render(<UserLayout />, _mount_);
 `children`：登录框进行重写
 
 <!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import UserLogin from '@uiw-admin/user-login';
 import { useNavigate, } from 'react-router-dom';
@@ -462,8 +453,7 @@ const UserLayout = () => {
   
   </UserLogin>
 }
-// export default UserLayout;
-ReactDOM.render(<UserLayout />, _mount_);
+export default UserLayout;
 ```
 
 <!-- ## 参数

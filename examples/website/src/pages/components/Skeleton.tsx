@@ -1,8 +1,9 @@
-import Markdown from '../../components/Markdown';
-import { Skeleton } from '@uiw-admin/components';
+import Preview from '../../components/Preview';
 
-export default class Demo extends Markdown {
-  editorUrl = '/packages/components/src/Skeleton/README.md';
-  dependencies = { Skeleton };
-  getMdStr = () => import('@uiw-admin/components/src/Skeleton/README.md');
-}
+const Page = () => (
+  <Preview
+    path={() => import('@uiw-admin/components/src/Skeleton/README.md')}
+  />
+);
+
+export default Page;

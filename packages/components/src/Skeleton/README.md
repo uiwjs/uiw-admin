@@ -4,18 +4,15 @@
 
 ## 用例
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import { Skeleton } from '@uiw-admin/components'
-
+import React from 'react'
 
 const Demo = () => <Skeleton loading={true}>
   <div>children</div>
 </Skeleton>
 
-
-ReactDOM.render(<Demo />, _mount_);
-
+export default Demo
 ```
 
 ## Props

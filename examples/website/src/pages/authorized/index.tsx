@@ -1,8 +1,7 @@
-import Markdown from '../../components/Markdown';
-import { AuthBtn } from '@uiw-admin/authorized';
+import Preview from '../../components/Preview';
 
-export default class Page extends Markdown {
-  editorUrl = '/packages/authorized/README.md';
-  dependencies = { AuthBtn };
-  getMdStr = () => import('@uiw-admin/authorized/README.md');
-}
+const Page = () => (
+  <Preview path={() => import('@uiw-admin/authorized/README.md')} />
+);
+
+export default Page;

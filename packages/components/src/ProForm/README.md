@@ -14,9 +14,7 @@
 ## 类型
 > 通过formType表单类型
 ### 卡片类型
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 const Demo = () => {
@@ -54,13 +52,11 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ### 折叠类型
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 const Demo = () => {
@@ -83,13 +79,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ### 纯表单类型
 > pure类型下将不再展示title
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
@@ -112,14 +107,13 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 布局
 ### 基本布局
 > 通过span(继承于uiw/Graid/Col)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
@@ -182,13 +176,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ### 只读布局
 > 通过readSpan(继承于uiw/Descriptions.Item)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 const Demo = () => {
@@ -251,15 +244,14 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 
 
 ## 基本使用
 > 与uiw/form使用保持一致
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
 import { ProForm } from '@uiw-admin/components'
@@ -479,16 +471,15 @@ const Demo = () => {
     </>
   )
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 通过useForm
 > (提交,重置,设置)
 > - 我们可以通过useForm注册form表单实例进行验证;重置;设置。(submitvalidate;getError;getFieldValues;setFields;resetForm...)
 > - 我们也可以通过传递rules配置验证规则(支持正则,required,回调验证)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -577,14 +568,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 多个表单
 ### 基础提交
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -687,14 +676,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ### promise提交
 > (通过validateFieldsAndGetValue方法先验证后获取值)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -779,13 +766,11 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ## 动态添加表单
 ### uiw/form提交
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button,Card } from 'uiw'
@@ -918,11 +903,10 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ### promise提交
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
@@ -1056,11 +1040,10 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ## 只读模式
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { formatter } from 'uiw'
@@ -1178,7 +1161,7 @@ const Demo = () => {
        />
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 
@@ -1187,9 +1170,7 @@ ReactDOM.render(<Demo />, _mount_);
 
 > 给组件传`value`, `onChange`  一个是值 一个是组件更改数据回调
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import { ProForm,useForm } from '@uiw-admin/components'
 import { formatter, Input, Button } from 'uiw'
 import React, { useState } from 'react';
@@ -1225,7 +1206,7 @@ const Demo = () => {
        />
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## Props
