@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button } from 'uiw';
 import { useNavigate } from 'react-router';
 import './styles/index.css';

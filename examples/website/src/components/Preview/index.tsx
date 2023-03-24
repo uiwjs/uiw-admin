@@ -48,7 +48,6 @@ const PreviewDocument = ({ path }: { path: MdDataHandle }) => {
   const $dom = useRef<HTMLDivElement>(null);
   const { mdData } = useMdData(path);
   useHyperlink($dom.current);
-  console.log(4444, mdData);
   return (
     <Wrapper ref={$dom}>
       <Markdown

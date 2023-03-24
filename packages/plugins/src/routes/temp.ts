@@ -22,7 +22,6 @@ ${routeStr};
 import React from "react";
 ${iconStr}
 import {Exceptions404,Exceptions403,Exceptions500 } from "@uiw-admin/exceptions"
-${getReactLazy(importLazy)}
 export default ${routeStr};
 `;
 };
