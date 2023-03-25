@@ -17,6 +17,8 @@ export default {
     env: 'development' | 'production',
     options: LoaderConfOptions | undefined,
   ) => {
+    conf.module!.exprContextCritical = false;
+    conf.module!.exprContextRecursive = false;
     conf = mdCodeModulesLoader(conf);
     return conf;
   },

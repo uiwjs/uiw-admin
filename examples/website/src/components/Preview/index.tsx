@@ -35,14 +35,14 @@ const Markdown = styled<
 >(MarkdownPreview)`
   padding: 20px 30px 120px 30px;
   max-width: 1336px;
-  display: grid;
-  grid-template-columns: minmax(0, 3.5fr) 240px;
-  grid-template-areas: 'main toc';
   &::after,
   &::before {
     content: none;
   }
 `;
+// display: grid;
+// grid-template-columns: minmax(0, 3.5fr) 240px;
+// grid-template-areas: 'main toc';
 
 const PreviewDocument = ({ path }: { path: MdDataHandle }) => {
   const $dom = useRef<HTMLDivElement>(null);
@@ -95,7 +95,7 @@ const PreviewDocument = ({ path }: { path: MdDataHandle }) => {
                   tagName: 'div',
                   children: child as Element[],
                 },
-                tocData,
+                // tocData,
               ];
             }
           }

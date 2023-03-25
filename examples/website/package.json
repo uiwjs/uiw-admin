@@ -5,7 +5,7 @@
   "description": "new webiste with kktp.",
   "scripts": {
     "build": "kktp build",
-    "start": "kktp start",
+    "start": "CI=false kktp start",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "map": "source-map-explorer build/static/js/*.js --html build/website-result.html"
   },
