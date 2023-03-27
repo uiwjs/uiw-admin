@@ -4,7 +4,12 @@ import { getReadValue } from './utils/index';
 
 export default ({ title, formDatas, readOnlyProps }: ProFormProps) => {
   return (
-    <Descriptions bordered title={title} {...readOnlyProps}>
+    <Descriptions
+      bordered
+      title={title}
+      {...readOnlyProps}
+      style={{ width: '100%' }}
+    >
       {formDatas?.map(
         (
           {

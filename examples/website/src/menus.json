@@ -37,6 +37,10 @@
     "path": "/models"
   },
   {
+    "label": "权限管理",
+    "path": "/auth"
+  },
+  {
     "label": "代理",
     "path": "/proxy"
   },

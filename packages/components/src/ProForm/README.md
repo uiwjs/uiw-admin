@@ -205,7 +205,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:2,
+               readSpan:3,
              },
                {
                label: 'input',
@@ -213,7 +213,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:1,
+               readSpan:3,
              },
              {
                label: 'input',
@@ -221,7 +221,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:1,
+               readSpan:3,
              },
              {
                label: 'input',
@@ -229,7 +229,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:1
+               readSpan:2
              },
              {
                label: 'input',
