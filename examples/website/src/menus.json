@@ -13,10 +13,6 @@
     "path": "https://github.com/uiwjs/uiw-admin/blob/master/CHANGELOG.md"
   },
   {
-    "divider": true,
-    "label": "示例"
-  },
-  {
     "label": "Uiw Admin 示例",
     "path": "/example"
   },
@@ -121,14 +117,14 @@
     "label": "相关链接"
   },
   {
+    "label": "KKTP",
+    "target": "__blank",
+    "path": "https://kktjs.github.io/kkt-pro/#/doc/kktp"
+  },
+  {
     "label": "UIW 组件库",
     "target": "__blank",
     "path": "https://uiwjs.github.io/"
-  },
-  {
-    "label": "@kkt/pro",
-    "target": "__blank",
-    "path": "https://kktjs.github.io/kkt-pro/#/doc/kktp"
   },
   {
     "label": "源码 Github 仓库",
