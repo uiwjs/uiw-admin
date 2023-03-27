@@ -17,6 +17,7 @@ const routeList = [
       { path: '/authorized/*', element: '@/pages/authorized' },
       { path: '/newPages/*', element: '@/pages/newPages' },
       { path: '/mocker/*', element: '@/pages/mocker' },
+      { path: '/request/*', element: '@/pages/request' },
       { path: '/proxy/*', element: '@/pages/proxy' },
       { path: '/basic-layouts/*', element: '@/pages/basic-layouts' },
       { path: '/components/*', element: '@/pages/components' },
