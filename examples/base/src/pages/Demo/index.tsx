@@ -5,7 +5,6 @@ import { Dispatch, useDispatch } from '@kkt/pro'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
-
   const updateData = (payload: any) => {
     dispatch({
       type: 'demo/updateState',

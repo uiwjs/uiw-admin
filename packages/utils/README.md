@@ -65,7 +65,7 @@ export const selectById  = (params:{id:string}) => request("/api/selectById",{ m
 ```
 > 在model/index.js中
 ```ts
-import { RootModel } from '@uiw-admin/models'
+import { RootModel } from '@kkt/pro'
 import { createModel } from '@rematch/core'
 import { selectById } from '../servers'
 
@@ -103,7 +103,7 @@ export default index
 ```tsx
 import React from 'react'
 import { useDispatch,useSelector } from 'react-redux'
-import { RootState,Dispatch } from '@uiw-admin/models'
+import { RootState,Dispatch } from '@kkt/pro'
 
 export default const Index = () => {
   const dispatch = useDispatch<Dispatch>()

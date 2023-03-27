@@ -13,11 +13,6 @@
     "path": "https://github.com/uiwjs/uiw-admin/blob/master/CHANGELOG.md"
   },
   {
-    "label": "@kkt/pro",
-    "target": "__blank",
-    "path": "https://kktjs.github.io/kkt-pro/#/doc/kktp"
-  },
-  {
     "divider": true,
     "label": "示例"
   },
@@ -40,6 +35,10 @@
   {
     "label": "网络请求",
     "path": "/request"
+  },
+  {
+    "label": "全局状态管理",
+    "path": "/models"
   },
   {
     "label": "代理",
@@ -76,10 +75,6 @@
   {
     "label": "Layout Tabs",
     "path": "/layout-tabs"
-  },
-  {
-    "label": "Models",
-    "path": "/models"
   },
   {
     "label": "Plugins",
@@ -131,9 +126,9 @@
     "path": "https://uiwjs.github.io/"
   },
   {
-    "label": "KKT",
+    "label": "@kkt/pro",
     "target": "__blank",
-    "path": "https://kktjs.github.io/kkt"
+    "path": "https://kktjs.github.io/kkt-pro/#/doc/kktp"
   },
   {
     "label": "源码 Github 仓库",
