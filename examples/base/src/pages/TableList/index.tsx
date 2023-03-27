@@ -96,7 +96,6 @@ export default function Demo() {
             key: 'name',
             // 组件属性
             widgetProps: {
-              preIcon: 'user',
               placeholder: '输入用户名',
             },
           },

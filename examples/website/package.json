@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.0",
-    "@babel/runtime": "~7.21.0",
     "@uiw-admin/authorized": "6.0.0",
     "@uiw-admin/basic-layouts": "6.0.0",
     "@uiw-admin/components": "6.0.0",
@@ -37,10 +36,6 @@
     "react-code-preview-layout":"3.0.0",
     "markdown-react-code-preview-loader":"2.1.5",
     "@uiw/reset.css": "1.0.5",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-router": "^6.2.1",
-    "react-router-dom": "^6.2.1",
     "react-test-renderer": "17.0.2",
     "styled-components": "^5.3.5",
     "@types/styled-components": "^5.1.26",
@@ -51,12 +46,7 @@
   "devDependencies": {
     "rehype-rewrite": "^3.0.6",
     "hast": "^1.0.0",
-    "@kkt/less-modules": "~7.2.0",
-    "@kkt/pro": "^1.0.8",
-    "@kkt/raw-modules": "~7.2.0",
-    "@kkt/scope-plugin-options": "~7.2.0",
-    "@types/react": "~18.0.25",
-    "@types/react-dom": "~18.0.11",
+    "@kkt/pro": "^1.0.10",
     "@types/react-test-renderer": "17.0.1",
     "source-map-explorer": "~2.5.2"
   },
