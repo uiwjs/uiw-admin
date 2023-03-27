@@ -12,4 +12,5 @@ export default {
     TOKEN_NAME: 'aaa',
     TOKEN_STORAGE: 'bbb',
   },
+  publicPath: './',
 }
