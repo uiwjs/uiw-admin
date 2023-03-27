@@ -12,6 +12,7 @@ export default {
     STORAGE: 'local',
     SEARCH_MENU: true,
   },
+  publicPath: './',
   overrideWebpack: (
     conf: WebpackConfiguration,
     env: 'development' | 'production',
