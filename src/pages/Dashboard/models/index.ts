@@ -1,4 +1,4 @@
-import { Dispatch, RootModel } from '@uiw-admin/models'
+import { Dispatch, RootModel } from '@kkt/pro'
 import { createModel } from '@rematch/core'
 
 export interface GlobalState {

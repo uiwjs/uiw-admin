@@ -1,4 +1,4 @@
-// import { Dispatch } from '@uiw-admin/models';
+// import { Dispatch } from '@kkt/pro';
 
 export interface LoginState {
   token?: string | null
