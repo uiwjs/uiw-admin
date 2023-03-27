@@ -1,6 +1,10 @@
 [
   {
-    "label": "快速开始",
+    "divider": true,
+    "label": "入门"
+  },
+  {
+    "label": "开始使用",
     "path": "/quick-start"
   },
   {
@@ -9,11 +13,16 @@
     "path": "https://github.com/uiwjs/uiw-admin/blob/master/CHANGELOG.md"
   },
   {
+    "label": "@kkt/pro",
+    "target": "__blank",
+    "path": "https://kktjs.github.io/kkt-pro/#/doc/kktp"
+  },
+  {
     "divider": true,
     "label": "示例"
   },
   {
-    "label": "Example 示例",
+    "label": "Uiw Admin 示例",
     "path": "/example"
   },
   {

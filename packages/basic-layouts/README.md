@@ -55,10 +55,10 @@ export default BasicLayoutScreen
 
 **菜单搜索功能**
 
-在根目录`.kktrc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen` 默认`true`
+在根目录`.kktprc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen` 默认`true`
 
 ```ts
-// .kktrc.js 
+// .kktprc.js 
 import config from "@uiw-admin/config"
 export default config({
   define:{

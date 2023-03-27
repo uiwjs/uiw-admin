@@ -6,7 +6,7 @@ UIW Admin Project
 [![npm version](https://img.shields.io/npm/v/uiw-admin.svg)](https://www.npmjs.com/package/uiw-admin)
 [![npm unpkg](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/uiw-admin/file/README.md)
 
-一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [kkt](https://github.com/kktjs/kkt) 的初始级别项目。
+一个基于 [uiw](https://github.com/uiwjs/uiw/) 和 [@kkt/pro](https://github.com/kktjs/kkt-pro) 的初始级别项目。
 
 ## 👀 预览
 
