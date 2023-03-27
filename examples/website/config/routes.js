@@ -15,6 +15,7 @@ const routeList = [
       },
       { path: '/quick-start/*', element: '@/pages/quick-start' },
       { path: '/authorized/*', element: '@/pages/authorized' },
+      { path: '/newPages/*', element: '@/pages/newPages' },
       { path: '/mocker/*', element: '@/pages/mocker' },
       { path: '/proxy/*', element: '@/pages/proxy' },
       { path: '/basic-layouts/*', element: '@/pages/basic-layouts' },

@@ -27,6 +27,26 @@
   },
   {
     "divider": true,
+    "label": "页面开发"
+  },
+  {
+    "label": "新增页面",
+    "path": "/newPages"
+  },
+  {
+    "label": "Mock 模拟数据",
+    "path": "/mocker"
+  },
+  {
+    "label": "开发代理",
+    "path": "/proxy"
+  },
+  {
+    "label": "eslint 配置",
+    "path": "/eslint-config"
+  },
+  {
+    "divider": true,
     "label": "架构依赖"
   },
   {
@@ -72,22 +92,6 @@
   {
     "label": "Utils",
     "path": "/utils"
-  },
-  {
-    "divider": true,
-    "label": "开发"
-  },
-  {
-    "label": "Mock 模拟数据",
-    "path": "/mocker"
-  },
-  {
-    "label": "开发代理",
-    "path": "/proxy"
-  },
-  {
-    "label": "eslint 配置",
-    "path": "/eslint-config"
   },
   {
     "divider": true,
