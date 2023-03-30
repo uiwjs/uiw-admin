@@ -41,7 +41,7 @@ function ComForm<T = any>(props: ComFormProps<T>) {
           return error.filed ? { ...error.filed } : null;
         }
       }}
-      fields={fieldArr}
+      fields={fieldArr as any}
       onSubmit={({ initial, current }, event) => {
         if (props.onSubmit) {
           props.onSubmit({ initial, current }, event);
@@ -60,31 +60,35 @@ function ComForm<T = any>(props: ComFormProps<T>) {
         return (
           <React.Fragment>
             <Row gutter={10}>
-              {Object.keys(fields).map((key) => {
-                let ColProps = {
-                  ...(props.colProps || {}),
-                };
-                if (fieldArr) {
-                  ColProps = { ...ColProps, ...(fieldArr[key].colProps || {}) };
-                }
-                return (
-                  <Col span={8} key={key} {...ColProps}>
-                    {fields[key]}
-                  </Col>
-                );
-              })}
+              {fields &&
+                Object.keys(fields).map((key) => {
+                  let ColProps = {
+                    ...(props.colProps || {}),
+                  };
+                  if (fieldArr) {
+                    ColProps = {
+                      ...ColProps,
+                      ...(fieldArr[key].colProps || {}),
+                    };
+                  }
+                  return (
+                    <Col span={8} key={key} {...ColProps}>
+                      {fields[key]}
+                    </Col>
+                  );
+                })}
             </Row>
             <div
               className={`w-form-item-center ${buttonGroupClassName}`}
               style={buttonGroupStyle}
             >
-              {buttonGroupArr.map((item, index) => {
+              {(buttonGroupArr as any).map((item: any, index: number) => {
                 if (typeof item === 'function') {
                   return item(childProps);
                 }
                 let props = { ...item };
                 if (item.htmlType === 'submit') {
-                  props.disabled = !canSubmit();
+                  props.disabled = !canSubmit?.();
                 } else if (item.htmlType === 'reset') {
                   props.onClick = resetForm;
                 }

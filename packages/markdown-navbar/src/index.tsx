@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import styles from './index.module.css';
+import './style.css';
 import { throttle } from 'lodash-es';
 
 interface NavBarProps {
@@ -245,7 +245,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   };
 
   return (
-    <div className={styles.navbox}>
+    <div className="uiw-admin-navbox">
       {navData &&
         navData.map((nav, idx) => (
           <div
@@ -255,7 +255,9 @@ const NavBar: React.FC<NavBarProps> = (props) => {
               lineHeight: '25px',
               cursor: 'pointer',
             }}
-            className={currentListNo === nav.listNo ? styles.active : ''}
+            className={
+              currentListNo === nav.listNo ? 'uiw-admin-navbox-active' : ''
+            }
             key={idx}
             onClick={() => {
               const currentHash = nav.text.toLowerCase().replace(' ', '-');

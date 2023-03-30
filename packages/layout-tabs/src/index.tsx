@@ -1,11 +1,7 @@
 import React from 'react';
 import { Tabs, Icon } from 'uiw';
-import {
-  RoutersProps,
-  useNavigate,
-  useLocation,
-  Location,
-} from '@uiw-admin/router-control';
+import { KktproRoutesProps } from '@kkt/pro';
+import { useNavigate, useLocation, Location } from '@uiw-admin/router-control';
 import { getRoutesList, getMatch, getMatchRender } from './utils';
 import { matchPath } from 'react-router';
 import { Outlet } from 'react-router-dom';
@@ -20,7 +16,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [pathArr, setPathArr] = React.useState<
-    (RoutersProps & { location: Location; isMatch: boolean })[]
+    (KktproRoutesProps & { location: Location; isMatch: boolean })[]
   >([]);
 
   const routeListData = React.useMemo(() => getRoutesList(routes), [routes]);
@@ -82,7 +78,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   const onDelete = (
     event: React.MouseEvent<'span', MouseEvent>,
     index: number,
-    item: RoutersProps,
+    item: KktproRoutesProps,
   ) => {
     event.stopPropagation();
     event.preventDefault();

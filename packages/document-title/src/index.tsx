@@ -1,11 +1,11 @@
 import React, { useEffect, Fragment } from 'react';
 
-export interface DocumentTitle {
+export interface DocumentTitleProps {
   title?: string;
   children?: React.ReactNode;
 }
 
-function DocumentTitle(props = {} as any): JSX.Element {
+function DocumentTitle(props: DocumentTitleProps): JSX.Element {
   useEffect(() => {
     document.title = props.title || '';
   }, [props.title]);
