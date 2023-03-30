@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import DomainVerify from '@uiw/react-domain-verify';
-import menus from '../../menus.json';
+import * as menus from '../../menus.json';
 import styles from './index.module.less';
 import React from 'react';
 

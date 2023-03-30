@@ -1,13 +1,17 @@
 import React from 'react';
 import { FileInput, Icon, Modal, Button, FileInputListProps } from 'uiw';
 
+interface FileInputProps extends Omit<FileInputListProps, 'uploadType'> {
+  uploadType?: 'card' | 'picture' | 'text';
+}
+
 const Upload = ({
   uploadType,
   value,
   readonly = false,
   maxNumber,
   ...others
-}: FileInputListProps) => {
+}: FileInputProps) => {
   const [visible, setVisible] = React.useState(false);
   const [src, setSrc] = React.useState('');
 

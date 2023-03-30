@@ -1,4 +1,4 @@
-import { RoutersProps } from '@uiw-admin/router-control';
+import { KktproRoutesProps } from '@kkt/pro';
 import { Location } from 'react-router-dom';
 import { matchPath } from 'react-router';
 
@@ -17,7 +17,7 @@ export const getRoutesList = (data: any[] = []) => {
   return list;
 };
 
-const getO = (routeListData: RoutersProps[], location: Location) => {
+const getO = (routeListData: KktproRoutesProps[], location: Location) => {
   return routeListData.find((item) => {
     if (location.pathname === '/' && item.index && item.redirect) {
       return item.index;
@@ -34,7 +34,7 @@ const getO = (routeListData: RoutersProps[], location: Location) => {
   });
 };
 
-const getM = (routeListData: RoutersProps[], location: Location) => {
+const getM = (routeListData: KktproRoutesProps[], location: Location) => {
   return routeListData.find((item) => {
     if (location.pathname === '/' && item.index && item.redirect) {
       return item.index;
@@ -51,7 +51,10 @@ const getM = (routeListData: RoutersProps[], location: Location) => {
   });
 };
 
-export const getMatch = (routeListData: RoutersProps[], location: Location) => {
+export const getMatch = (
+  routeListData: KktproRoutesProps[],
+  location: Location,
+) => {
   const o = getO(routeListData, location);
   if (o) {
     return {
@@ -68,17 +71,20 @@ export const getMatch = (routeListData: RoutersProps[], location: Location) => {
 };
 
 export const getMatchRender = (
-  routeListData: (RoutersProps & { location: Location; isMatch: boolean })[],
+  routeListData: (KktproRoutesProps & {
+    location: Location;
+    isMatch: boolean;
+  })[],
   location: Location,
   isMatch: boolean,
 ) => {
   if (isMatch) {
-    return getM(routeListData, location) as RoutersProps & {
+    return getM(routeListData, location) as KktproRoutesProps & {
       location: Location;
       isMatch: boolean;
     };
   } else {
-    return getO(routeListData, location) as RoutersProps & {
+    return getO(routeListData, location) as KktproRoutesProps & {
       location: Location;
       isMatch: boolean;
     };

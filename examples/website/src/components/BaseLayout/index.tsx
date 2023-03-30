@@ -1,7 +1,7 @@
 import { Outlet, Link } from 'react-router-dom';
 import { Layout, Affix } from 'uiw';
 import GitHubCorners from '@uiw/react-github-corners';
-import pkg from 'uiw-admin/package.json';
+import * as pkg from 'uiw-admin/package.json';
 import styles from './index.module.less';
 import SiderMenu from '../SideMenu';
 
