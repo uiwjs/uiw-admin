@@ -6,7 +6,7 @@ import { getFormFields } from './widgets';
 import { ProFormProps, UseFormStateProps, UseFormProps } from './type';
 import { StoreCtx, ColPropsContext } from './hooks/store';
 import { isObjectEmpty } from './utils';
-import './style/form-item.less';
+import './style/form-item.css';
 
 function ProForm(
   props: ProFormProps,
