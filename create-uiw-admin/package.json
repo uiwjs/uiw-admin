@@ -43,7 +43,7 @@
   "devDependencies": {
     "prettier": "^2.7.0",
     "pretty-quick": "~3.1.3",
-    "tsbb": "~3.7.0"
+    "tsbb": "^4.0.5"
   },
   "dependencies": {
     "create-kkt": "3.0.0"
