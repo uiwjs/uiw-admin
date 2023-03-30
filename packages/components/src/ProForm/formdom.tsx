@@ -3,7 +3,7 @@ import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
 import { ProFormProps, UseFormStateProps } from './type';
 import { useStore, useColPropsContext } from './hooks/store';
 import { fromValidate } from './utils';
-import './style/form-item.less';
+import './style/form-item.css';
 
 function FormDom({
   formDatas = [],

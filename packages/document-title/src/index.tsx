@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 
 export interface DocumentTitleProps {
-  title?: string;
+  title?: string | null | undefined;
   children?: React.ReactNode;
 }
 

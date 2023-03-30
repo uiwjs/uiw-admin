@@ -44,7 +44,7 @@
     "-----------": "--------------",
     "build:utils": "lerna exec --scope @uiw-admin/utils -- tsbb build",
     "watch:utils": "lerna exec --scope @uiw-admin/utils -- tsbb watch",
-    "build": "lerna exec --scope @uiw-admin/* -- tsbb build",
+    "build": "lerna exec --scope @uiw-admin/* -- tsbb build src/*.{ts,tsx,js,jsx} --use-babel",
     "watch": "lerna exec --scope @uiw-admin/* -- tsbb watch",
     "build:website": "lerna exec --scope @examples/base -- npm run build",
     "----": "----",
