@@ -847,7 +847,6 @@ const Demo = () => {
     const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
-    console.log("values",values)
     // 调用接口
   }
 
@@ -983,7 +982,6 @@ const Demo = () => {
     const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
-    console.log("values",values)
     // 调用接口
   }
 

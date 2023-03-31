@@ -171,6 +171,5 @@ export const fromValidate = (rules: FromValidateProps[] = []) => {
       );
     }
   });
-  console.log(4456, errorObj);
   return errorObj;
 };

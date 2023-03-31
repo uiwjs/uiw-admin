@@ -11,6 +11,7 @@
 ```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
+import { Icon } from 'uiw';
 
 function Demo1() {
   const table = useTable('https://randomuser.me/api', {
@@ -63,7 +64,6 @@ function Demo1() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
               placeholder: '输入用户名',
             },
           },
@@ -493,7 +493,6 @@ function Demo5() {
     },
     requestOptions: {method: 'GET'}
   });
-  console.log(table)
   return (
     <ProTable
        // 搜索栏按钮
