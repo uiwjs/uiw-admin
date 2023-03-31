@@ -88,6 +88,7 @@
   "dependencies": {
     "@babel/preset-typescript": "~7.21.0",
     "@babel/core": "~7.21.3",
+    "recursive-readdir-files": "^2.3.0",
     "ajv": "^8.9.0",
     "husky": "~7.0.4",
     "lerna": "~5.1.0",
