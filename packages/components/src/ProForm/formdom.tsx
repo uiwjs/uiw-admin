@@ -46,25 +46,21 @@ function FormDom({
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
         // 如果传入了onSubmit走onSubmit,否则主动验证
-        if (onSubmit) {
-          onSubmit?.(initial, current);
-        } else {
-          const filterFormDatas = formDatas.filter(
-            (item) => item.hide !== true,
-          );
-          const validateList =
-            filterFormDatas.map((item) => ({
-              key: item.key,
-              value: current[item.key],
-              rules: item.rules,
-            })) || [];
-          const errorObj = fromValidate(validateList);
-          if (Object.keys(errorObj).length > 0) {
-            const err: any = new Error();
-            err.filed = errorObj;
-            throw err;
-          }
+        const filterFormDatas = formDatas.filter((item) => item.hide !== true);
+        const validateList =
+          filterFormDatas.map((item) => ({
+            key: item.key,
+            value: current[item.key],
+            rules: item.rules,
+            required: item.required,
+          })) || [];
+        const errorObj = fromValidate(validateList);
+        if (Object.keys(errorObj).length > 0) {
+          const err: any = new Error();
+          err.filed = errorObj;
+          throw err;
         }
+        onSubmit?.(initial, current);
       }}
       onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {

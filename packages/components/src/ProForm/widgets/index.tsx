@@ -55,13 +55,19 @@ export function getFormFields(
         widget,
         label,
         initialValue,
+        required,
         ...otherProps
       } = col;
       if (!hide) {
         const name = key;
         const Widget = widgetsList[widget];
         fields[name] = {
-          label: label,
+          label:
+            otherProps.rules && otherProps.rules.length > 0 ? (
+              <span className="w-proform-label">{label}</span>
+            ) : (
+              label
+            ),
           children: <Widget {...widgetProps} />,
           ...otherProps,
           initialValue,

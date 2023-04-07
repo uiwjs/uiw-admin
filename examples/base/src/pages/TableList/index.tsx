@@ -83,7 +83,7 @@ export default function Demo() {
         pageSizeOptions: [10, 20, 30],
         pageSize: 10,
         onShowSizeChange: (current, pageSize) => {
-          console.log(current, pageSize)
+          // console.log(current, pageSize)
         },
       }}
       columns={[

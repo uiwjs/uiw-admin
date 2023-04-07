@@ -314,7 +314,9 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                help:"input不能为空",
-               required:true,
+               rules: [
+                 { required:true, message: 'input不能为空' }
+               ]
              },
              {
               label: 'textarea',
@@ -504,8 +506,8 @@ const Demo = () => {
                initialValue: state.input,
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
+                { required:true, message: 'input不能为空' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
              },
@@ -596,7 +598,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -618,7 +619,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -636,7 +636,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -712,7 +711,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -734,7 +732,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -850,7 +847,6 @@ const Demo = () => {
     const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
-    console.log("values",values)
     // 调用接口
   }
 
@@ -936,7 +932,6 @@ const Demo = () => {
       key: 'phone',
       widget: 'input',
       initialValue: '',
-      required:true,
       rules: [
         { required: true, message: '请输入' },
       ]
@@ -987,7 +982,6 @@ const Demo = () => {
     const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
-    console.log("values",values)
     // 调用接口
   }
 
@@ -1259,7 +1253,6 @@ export default Demo
 | hide         | 是否显示                                                      | boolean                 | true   |
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
-| required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | RulesProps[]                 | -      |
 | colstyle     | Col(uiw/Grid)样式                                         | React.CSSProperties                | -      |
 
