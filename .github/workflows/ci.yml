@@ -21,16 +21,16 @@ jobs:
         filter-author: (renovate-bot|Renovate Bot)
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
-    - run: yarn install
-    - run: yarn run build
-    - run: yarn run build:create
+    - run: npm install
+    - run: npm run build
+    - run: npm run build:create
 
     # examples/base 里面的 ts 转换 成 js版本并存储到 examples/basejs
-    - run: yarn run build:js
-    - run: yarn run test
+    - run: npm run build:js
+    - run: npm run test
 
     # 案例打包 
-    - run: yarn run build:website
+    - run: npm run build:website
       env:
         CI: false
     # 生成文档
