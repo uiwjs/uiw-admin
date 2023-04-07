@@ -6,7 +6,7 @@ const fs = require('fs');
 const FS = require('fs-extra');
 const ts = require('typescript');
 const { transformFileAsync } = require('@babel/core');
-const recursiveReaddirFiles = require('recursive-readdir-files');
+const recursiveReaddirFiles = await import('recursive-readdir-files');
 
 const PWDEntry = path.resolve(__dirname, '../examples/base/');
 const PWDOutPut = path.resolve(__dirname, '../examples/basejs/');
