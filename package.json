@@ -64,7 +64,7 @@
     "remove:yarn": "lerna exec --scope @uiw-admin/* --scope @example/*  -- rm -rf yarn.lock",
     "remove:lib": "lerna exec --scope @uiw-admin/*  -- rm -rf ./lib",
     "remove:esm": "lerna exec --scope @uiw-admin/*  -- rm -rf ./esm",
-    "test": "tsbb test",
+    "test": "tsbb test  ",
     "tsbb": "tsbb",
     "lerna": "lerna"
   },
@@ -94,7 +94,7 @@
     "lint-staged": "~12.5.0",
     "prettier": "^2.7.0",
     "recursive-readdir-files": "1.1.2",
-    "tsbb": "^4.0.5",
+    "tsbb": "^4.1.4",
     "webpack-bundle-analyzer": "~4.5.0"
   },
   "resolutions": {
