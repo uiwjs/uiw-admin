@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/config",
-  "version": "6.1.0",
+  "version": "6.1.1",
   "description": "config 全局配置",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/models#readme",
@@ -44,8 +44,8 @@
     "@kkt/less-modules": "~7.2.0",
     "@kkt/raw-modules": "~7.2.0",
     "@kkt/scope-plugin-options": "~7.2.0",
-    "@uiw-admin/plugins": "6.1.0",
-    "eslint-config-uiw-admin": "6.1.0"
+    "@uiw-admin/plugins": "6.1.1",
+    "eslint-config-uiw-admin": "6.1.1"
   },
   "devDependencies": {
     "kkt": "^7.2.0"
