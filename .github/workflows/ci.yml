@@ -21,13 +21,15 @@ jobs:
         filter-author: (renovate-bot|Renovate Bot)
         filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
 
-    - run: npm install --legacy-peer-deps
-    - run: npm run build
-    - run: npm run build:create
+    - run: yarn install
+    - run: yarn run build
+    - run: yarn run build:create
+
+    - run: yarn add recursive-readdir-files
 
     # examples/base 里面的 ts 转换 成 js版本并存储到 examples/basejs
-    - run: npm run build:js
-    - run: npm run test
+    - run: yarn run build:js
+    - run: yarn run test
 
     # 案例打包 
     - run: npm run build:website
