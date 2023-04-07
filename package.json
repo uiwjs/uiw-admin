@@ -86,14 +86,14 @@
   "author": "jaywcjlove",
   "license": "MIT",
   "dependencies": {
-    "@babel/preset-typescript": "~7.21.0",
     "@babel/core": "~7.21.3",
-    "recursive-readdir-files": "^2.3.0",
+    "@babel/preset-typescript": "~7.21.0",
     "ajv": "^8.9.0",
     "husky": "~7.0.4",
     "lerna": "~5.1.0",
     "lint-staged": "~12.5.0",
     "prettier": "^2.7.0",
+    "recursive-readdir-files": "1.1.2",
     "tsbb": "^4.0.5",
     "webpack-bundle-analyzer": "~4.5.0"
   },
