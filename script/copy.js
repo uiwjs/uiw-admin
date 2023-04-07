@@ -1,19 +1,19 @@
 /**
  * 转换 examples/base下除src目录下所有ts文件为js文件
  * */
+import recursiveReaddirFiles from 'recursive-readdir-files';
 const path = require('path');
 const fs = require('fs');
 const FS = require('fs-extra');
 const ts = require('typescript');
 const { transformFileAsync } = require('@babel/core');
-const recursiveReaddirFiles = require('recursive-readdir-files');
 
 const PWDEntry = path.resolve(__dirname, '../examples/base/');
 const PWDOutPut = path.resolve(__dirname, '../examples/basejs/');
 
 // 获取文件
 const getFields = async () => {
-  const dirToFiles = await recursiveReaddirFiles.default(PWDEntry, {
+  const dirToFiles = await recursiveReaddirFiles(PWDEntry, {
     exclude:
       /(node_modules|.uiw|build|dist|\.d\.ts|\.(test|spec)\.(ts|tsx|js|jsx))$/,
   });
