@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/exceptions",
-  "version": "6.1.2",
+  "version": "6.1.3",
   "description": "异常组件",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/Exceptions#readme",
