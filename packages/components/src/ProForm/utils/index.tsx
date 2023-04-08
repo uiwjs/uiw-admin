@@ -173,3 +173,15 @@ export const fromValidate = (rules: FromValidateProps[] = []) => {
   });
   return errorObj;
 };
+
+/**
+ * 判断rules 里面是 required 是否存在
+ */
+export const isRequired = (rules: any[] = []): boolean => {
+  if (rules.length === 0) return false;
+  const requireds = rules.find((item) => item.required) || [];
+  if (requireds && requireds.length > 0) {
+    return true;
+  }
+  return false;
+};

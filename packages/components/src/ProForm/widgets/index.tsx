@@ -15,6 +15,7 @@ import CheckBox from './CheckBox';
 import SelectMultiple from './SelectMultiple';
 import Upload from './Upload';
 import SearchTree from './SearchTree';
+import { isRequired } from '../utils';
 
 /**
  *
@@ -62,12 +63,11 @@ export function getFormFields(
         const name = key;
         const Widget = widgetsList[widget];
         fields[name] = {
-          label:
-            otherProps.rules && otherProps.rules.length > 0 ? (
-              <span className="w-proform-label">{label}</span>
-            ) : (
-              label
-            ),
+          label: isRequired(otherProps.rules) ? (
+            <span className="w-proform-label">{label}</span>
+          ) : (
+            label
+          ),
           children: <Widget {...widgetProps} />,
           ...otherProps,
           initialValue,
