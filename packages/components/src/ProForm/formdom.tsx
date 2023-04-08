@@ -17,6 +17,8 @@ function FormDom({
   saveButtonProps = {},
   resetButtonProps = {},
   formInstanceRef,
+  className,
+  style,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
   formInstanceRef: React.MutableRefObject<
@@ -36,13 +38,23 @@ function FormDom({
 
   // 通过ref获取表单实例
   useEffect(() => {
-    formInstanceRef.current = baseRef;
-  }, [baseRef]);
+    if (baseRef && baseRef.current) {
+      formInstanceRef.current = baseRef;
+    }
+  }, [baseRef, formInstanceRef]);
+
+  const styles: React.CSSProperties = {
+    background: '#fff',
+    paddingBottom: 10,
+    marginBottom: 14,
+    ...style,
+  };
 
   return (
     <Form
+      className={className}
       ref={baseRef}
-      style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
+      style={styles}
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
         // 如果传入了onSubmit走onSubmit,否则主动验证

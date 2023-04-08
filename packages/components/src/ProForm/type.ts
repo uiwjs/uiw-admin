@@ -11,6 +11,8 @@ import {
   ColProps,
 } from 'uiw';
 export interface ProFormProps {
+  style?: React.CSSProperties;
+  className?: string;
   formDatas?: FormItemsProps[];
   onSubmit?: (
     initial: Record<string, any>,

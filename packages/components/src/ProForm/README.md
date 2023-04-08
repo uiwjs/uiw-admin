@@ -190,6 +190,7 @@ const Demo = () => {
        <ProForm
          readOnly={true}
          formType="pure"
+         className="bbb"
          formDatas={ [
              {
                label: 'input',
@@ -844,7 +845,7 @@ const Demo = () => {
   }
 
   const handleSave = async ()=>{
-    const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
+    const validateList = await formList.map(itm => itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
     // 调用接口
@@ -979,7 +980,7 @@ const Demo = () => {
   }
 
   const handleSave = async ()=>{
-    const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
+    const validateList = formList.map(itm=> itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
     // 调用接口
@@ -996,6 +997,7 @@ const Demo = () => {
             extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}
             >
              <ProForm
+              className="aaa"
               ref={(e) =>(formRefList.current[idx] = e)}
               // 表单类型
               formType="pure"
