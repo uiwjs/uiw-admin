@@ -845,7 +845,7 @@ const Demo = () => {
   }
 
   const handleSave = async ()=>{
-    const validateList = await formList.map(itm => {})
+    const validateList = await formList.map(itm => itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
     // 调用接口
