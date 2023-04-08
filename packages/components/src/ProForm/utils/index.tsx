@@ -179,7 +179,7 @@ export const fromValidate = (rules: FromValidateProps[] = []) => {
  */
 export const isRequired = (rules: any[] = []): boolean => {
   if (rules.length === 0) return false;
-  const requireds = rules.find((item) => item.required) || [];
+  const requireds = rules.filter((item) => item.required || false);
   if (requireds && requireds.length > 0) {
     return true;
   }
