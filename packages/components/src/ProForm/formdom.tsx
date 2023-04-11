@@ -41,7 +41,7 @@ function FormDom({
     if (baseRef && baseRef.current) {
       formInstanceRef.current = baseRef;
     }
-  }, [baseRef, formInstanceRef]);
+  }, [baseRef]);
 
   const styles: React.CSSProperties = {
     background: '#fff',

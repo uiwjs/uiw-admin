@@ -42,19 +42,20 @@ function ProForm(
   // 通过ref导出实例方法
   useImperativeHandle(ref, () => {
     // 表单验证(同时兼容老api submitvalidate和新api onSubmit )
-    const submitvalidate = () => {
-      const { onSubmit } = formInstanceRef?.current?.current || {};
-      onSubmit?.() || null;
-    };
+    const submitvalidate = () =>
+      formInstanceRef?.current?.current?.onSubmit() || null;
+    // 获取表单的值
+    const getFieldValues = () =>
+      formInstanceRef?.current?.current?.getFieldValues() || {};
+    // 获取表单错误信息
+    const getError = () => formInstanceRef?.current?.current?.getError() || {};
     // 验证并获取表单值
     const validateFieldsAndGetValue = () => {
       return new Promise(async function (resolve, reject) {
-        const { getError, getFieldValues } =
-          formInstanceRef?.current?.current || {};
         await submitvalidate();
-        const errors = getError?.() || {};
+        const errors = (await getError()) || {};
         if (isObjectEmpty(errors)) {
-          const value = (await getFieldValues?.()) || {};
+          const value = (await getFieldValues()) || {};
           resolve(value);
         } else {
           reject(errors);
@@ -63,6 +64,7 @@ function ProForm(
     };
     return {
       ...formInstanceRef.current?.current,
+
       submitvalidate,
       validateFieldsAndGetValue,
     };
