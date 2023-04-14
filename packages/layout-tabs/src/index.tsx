@@ -163,20 +163,6 @@ const LayoutTabs = (props: LayoutTabsProps) => {
       </Tabs>
       <div className="uiw-layout-tabs-body">
         <Outlet />
-        {/* {pathArr.map((item) => {
-          const match = item.location.pathname === location.pathname;
-          return (
-            <div
-              key={item.location.pathname}
-              style={{
-                display: match ? 'block' : 'none',
-                overflow: 'auto',
-              }}
-            >
-              {item.element}
-            </div>
-          );
-        })} */}
       </div>
     </div>
   );

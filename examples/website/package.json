@@ -39,7 +39,7 @@
     "react-code-preview-layout": "3.0.0",
     "react-test-renderer": "17.0.2",
     "styled-components": "^5.3.5",
-    "uiw": "^5.0.0-bate-5",
+    "uiw":  "^4.21.25",
     "uiw-admin": "6.1.4"
   },
   "devDependencies": {

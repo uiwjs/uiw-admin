@@ -30,8 +30,6 @@ UIW Admin Project
 | [`@uiw-admin/user-login`](https://www.npmjs.com/package/@uiw-admin/user-login)         | [![npm](https://img.shields.io/npm/v/@uiw-admin/user-login.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/user-login)         | 登录界面 |
 | [`@uiw-admin/components`](https://www.npmjs.com/package/@uiw-admin/components)         | [![npm](https://img.shields.io/npm/v/@uiw-admin/components.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/components)         | 常见的业务组件 |
 | [`@uiw-admin/exceptions`](https://www.npmjs.com/package/@uiw-admin/exceptions)         | [![npm](https://img.shields.io/npm/v/@uiw-admin/exceptions.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/exceptions)         | 公共异常组件 |
-| [`@uiw-admin/config`](https://www.npmjs.com/package/@uiw-admin/config)                 | [![npm](https://img.shields.io/npm/v/@uiw-admin/config.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/config)                 | 简化 [`kkt`](https://github.com/kktjs/kkt) 配置           |
-| [`@uiw-admin/plugins`](https://www.npmjs.com/package/@uiw-admin/plugins)               | [![npm](https://img.shields.io/npm/v/@uiw-admin/plugins.svg?maxAge=3600)](https://www.npmjs.com/package/@uiw-admin/plugins)               | [`kkt`](https://github.com/kktjs/kkt) 插件                |
 | [`eslint-config-uiw-admin`](https://www.npmjs.com/package/eslint-config-uiw-admin) | [![npm](https://img.shields.io/npm/v/eslint-config-uiw-admin.svg?maxAge=3600)](https://www.npmjs.com/package/eslint-config-uiw-admin) | uiw-admin 内置 eslint 规则配置 |
 
 ##  ⌨️ 快速开始
@@ -69,11 +67,6 @@ $ yarn start
 
 ```
 
-## ✨默认账号密码
-
-- 账号: admin
-- 密码: admin
-
 ## 🔨 生产构建
 
 ```bash
@@ -90,6 +83,7 @@ $ yarn build
 .
 ├── README.md
 ├── config
+│   ├── .kktprc.ts   # 配置文件可放在根目录下
 │   └── routes.json  # 路由配置
 ├── mocker           # mock 数据
 │   ├── auth
@@ -102,7 +96,6 @@ $ yarn build
 ├── public
 │   ├── favicon.ico
 │   └── index.html
-├── sandbox.config.json
 ├── src
 │   ├── assets
 │   │   ├── head.png
@@ -114,7 +107,7 @@ $ yarn build
 │   │   ├── BasicLayout.tsx # 框架菜单
 │   │   ├── UserLayout.tsx  # 登陆页面
 │   │   └── logo.svg
-│   ├── models    remach models
+│   ├── models              # remach models
 │   │   ├── Doc
 │   │   │   └── doc.ts
 │   │   ├── demo.ts
@@ -137,6 +130,7 @@ $ yarn build
 │   ├── react-app-env.d.ts
 │   └── servers               # 放置api文件的地方，文件名已后端接口模块名命名，不以路由命名
 │       └── index.ts
+├── .kktprc.ts                # 配置文件可放在config目录下
 └── tsconfig.json
 ```
 

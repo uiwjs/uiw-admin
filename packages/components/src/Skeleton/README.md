@@ -8,9 +8,11 @@
 import { Skeleton } from '@uiw-admin/components'
 import React from 'react'
 
-const Demo = () => <Skeleton loading={true}>
-  <div>children</div>
-</Skeleton>
+const Demo = () => (
+  <Skeleton loading={true}>
+    <div>children</div>
+  </Skeleton>
+)
 
 export default Demo
 ```

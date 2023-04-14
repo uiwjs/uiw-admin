@@ -36,8 +36,7 @@ src
 ## model 校验
 
 ```ts
-import { createModel } from '@rematch/core'
-import { RootModel ，ModelDefault} from '@kkt/pro'
+import { createModel, RootModel, ModelDefault } from '@kkt/pro'
 
 //------- createModel 方式 ------ 
 // 通过
@@ -150,6 +149,16 @@ const Demo = () => {
 }
 export default Demo
 
+```
+
+## kktp配置文件
+
+```ts
+// .kktprc.ts
+export default {
+  // ...
+  initModel:true,
+}
 ```
 
 ## 贡献者

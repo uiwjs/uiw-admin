@@ -74,7 +74,7 @@ export default config({
 > - onReloadAuth调用刷新权限接口;
 > - layouts.closeMenu关闭菜单事件;
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -136,7 +136,7 @@ export default BasicLayoutScreen
 
 ## 内容区域默认样式(isDefaultContentStyle)
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -181,7 +181,7 @@ export default BasicLayoutScreen
 
 通过隐藏系统默认的退出登录，自定义退出登录
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```tsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -252,7 +252,7 @@ export default BasicLayoutScreen
 
 ## 菜单隐藏
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import React from 'react'

@@ -91,7 +91,7 @@ const Demos = ()=>{
 export default Demos
 ``` -->
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx
 
 window.AUTH = true // 是否开启权限校验

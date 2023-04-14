@@ -65,9 +65,8 @@ export const selectById  = (params:{id:string}) => request("/api/selectById",{ m
 ```
 > 在model/index.ts中
 ```ts
-import { RootModel } from '@kkt/pro'
-import { createModel } from '@rematch/core'
-import { selectById } from '../servers'
+import { RootModel, createModel } from '@kkt/pro';
+import { selectById } from '../servers';
 
 const index = createModel<RootModel>()({
   name: 'index',
@@ -101,9 +100,8 @@ export default index
 
 > 在页面中调用
 ```tsx
-import React from 'react'
-import { useDispatch,useSelector } from 'react-redux'
-import { RootState,Dispatch } from '@kkt/pro'
+import React from 'react';
+import { useDispatch, useSelector, RootState, Dispatch } from '@kkt/pro';
 
 export default const Index = () => {
   const dispatch = useDispatch<Dispatch>()
