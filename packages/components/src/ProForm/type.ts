@@ -24,7 +24,7 @@ export interface ProFormProps {
   ) => void;
   onSubmitError?: (error: any) => void;
   buttonsContainer?: React.CSSProperties;
-  title?: string;
+  title?: React.ReactNode | string;
   formType?: 'collapse' | 'card' | 'pure';
   showSaveButton?: boolean;
   showResetButton?: boolean;

@@ -64,7 +64,8 @@ function ProForm(
     };
     return {
       ...formInstanceRef.current?.current,
-
+      getError,
+      getFieldValues,
       submitvalidate,
       validateFieldsAndGetValue,
     };
@@ -90,7 +91,7 @@ function ProForm(
     );
   } else if (formType === 'collapse') {
     children = (
-      <Collapse title={renderTitle} activeKey="1" {...collapseProps}>
+      <Collapse activeKey="1" {...collapseProps}>
         <Collapse.Panel header={title} key={'1'} {...collapsePanelProps}>
           {child}
         </Collapse.Panel>
