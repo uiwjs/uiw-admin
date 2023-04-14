@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c4bbcd6d.css",
+    "main.js": "/static/js/main.fc60481b.js",
+    "static/js/130.57c967e7.chunk.js": "/static/js/130.57c967e7.chunk.js",
+    "static/js/212.75014b14.chunk.js": "/static/js/212.75014b14.chunk.js",
+    "static/js/546.cb1b1e58.chunk.js": "/static/js/546.cb1b1e58.chunk.js",
+    "static/js/86.9ebae77a.chunk.js": "/static/js/86.9ebae77a.chunk.js",
+    "static/js/930.d590fbda.chunk.js": "/static/js/930.d590fbda.chunk.js",
+    "static/js/817.69de4377.chunk.js": "/static/js/817.69de4377.chunk.js",
+    "static/js/525.8bd5cd25.chunk.js": "/static/js/525.8bd5cd25.chunk.js",
+    "static/js/348.9bbcdda0.chunk.js": "/static/js/348.9bbcdda0.chunk.js",
+    "static/js/8.cfb20b44.chunk.js": "/static/js/8.cfb20b44.chunk.js",
+    "static/js/455.9630abe0.chunk.js": "/static/js/455.9630abe0.chunk.js",
+    "static/js/576.ffe01402.chunk.js": "/static/js/576.ffe01402.chunk.js",
+    "static/js/942.b9956634.chunk.js": "/static/js/942.b9956634.chunk.js",
+    "static/js/91.9b13ad84.chunk.js": "/static/js/91.9b13ad84.chunk.js",
+    "static/js/764.d631be5d.chunk.js": "/static/js/764.d631be5d.chunk.js",
+    "static/js/954.46d162ac.chunk.js": "/static/js/954.46d162ac.chunk.js",
+    "static/js/150.2791880d.chunk.js": "/static/js/150.2791880d.chunk.js",
+    "static/js/494.963fc242.chunk.js": "/static/js/494.963fc242.chunk.js",
+    "static/js/146.49818789.chunk.js": "/static/js/146.49818789.chunk.js",
+    "static/js/203.f607c8fe.chunk.js": "/static/js/203.f607c8fe.chunk.js",
+    "static/js/80.30677768.chunk.js": "/static/js/80.30677768.chunk.js",
+    "static/media/r2g7rm.jpg": "/static/media/r2g7rm.c1f408daff26a9128797.jpg",
+    "static/media/README.md": "/static/media/README.75fa68ed14dda25894ee.md",
+    "index.html": "/index.html",
+    "main.c4bbcd6d.css.map": "/static/css/main.c4bbcd6d.css.map",
+    "main.fc60481b.js.map": "/static/js/main.fc60481b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c4bbcd6d.css",
+    "static/js/main.fc60481b.js"
+  ]
+}
