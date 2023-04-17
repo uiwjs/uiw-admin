@@ -30,35 +30,69 @@ interface LayoutTabsProps {
 
 单独使用，⚠️ 注意：需要路由包裹
 
-
-```jsx mdx:preview
-import React from 'react';
-import LayoutTabs from "@uiw-admin/layout-tabs";
+```jsx
+window.SEARCH_MENU = true
+import LayoutTabs from "@uiw-admin/layout-tabs"
 import { HashRouter } from 'react-router-dom';
-window.SEARCH_MENU = true;
 
-const routes = [
+const routes=[
   {
-    path: "/components/layout-tabs",
-    name: "选项卡布局",
+    path: "/layout-tabs",
+    name: "查询表格",
     element: <div>测试</div>,
   },
   {
-    path: "/components/user-login",
-    name: "登录",
+    path: "/doc/tableList2",
+    name: "查询表格2",
     element: <div>测试2</div>,
   }
 ]
 
 const Demo = ()=>{
   return (
-    <LayoutTabs routes={routes} />
+    <HashRouter window={window}>
+      <LayoutTabs routes={routes} />
+   </HashRouter>
   )
 }
 export default Demo
 ```
 
+## 案例2
 
+配合使用 `BasicLayout` 组件使用
+```jsx
+window.SEARCH_MENU = true
+import React from 'react'
+import BasicLayout from '@uiw-admin/basic-layouts'
+import { RoutersProps } from '@uiw-admin/router-control'
+import LayoutTabs from "@uiw-admin/layout-tabs"
+import { HashRouter } from 'react-router-dom';
+
+const routesArr=[
+  {
+    path: "/layout-tabs",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/basic-layouts",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
+
+function BasicLayoutScreen() {
+  return (
+     <HashRouter window={window}>
+      <BasicLayout routes={routesArr}  isDefaultContentStyle={false}  >
+        <LayoutTabs routes={routesArr} /> 
+      </BasicLayout>
+    </HashRouter>
+  )
+}
+export default BasicLayoutScreen
+```
 ## 贡献者
 
 感谢所有的贡献者，欢迎开发者为开源项目贡献力量。
