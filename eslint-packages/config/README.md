@@ -55,12 +55,12 @@ npx react-codemod update-react-imports
 
 ## 默认规则
 
- 1. [no-const-assign](https://eslint.org/docs/rules/no-const-assign#no-const-assign): 'error',
- 2. [eqeqeq](https://eslint.org/docs/rules/eqeqeq#eqeqeq): 'error',
- 3. [max-lines](https://eslint.org/docs/rules/max-lines#max-lines): ['error', { max: 500 }],
- 4. [max-depth](https://eslint.org/docs/rules/max-depth#max-depth): ['error', 4],
- 5. [no-empty-function](https://eslint.org/docs/rules/no-empty-function#no-empty-function): 'error',
- 6. [no-empty](https://eslint.org/docs/rules/no-empty#no-empty): 'error',
- 7. [no-var](https://eslint.org/docs/rules/no-var#no-var): 'error',
- 8. [no-use-before-define](https://eslint.org/docs/rules/no-use-before-define#no-use-before-define): 'off',
- 9. [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/rules/no-use-before-define.ts): ['error']
+ - [no-const-assign](https://eslint.org/docs/rules/no-const-assign#no-const-assign): 'error',
+ - [eqeqeq](https://eslint.org/docs/rules/eqeqeq#eqeqeq): 'error',
+ - [max-lines](https://eslint.org/docs/rules/max-lines#max-lines): ['error', { max: 500 }],
+ - [max-depth](https://eslint.org/docs/rules/max-depth#max-depth): ['error', 4],
+ - [no-empty-function](https://eslint.org/docs/rules/no-empty-function#no-empty-function): 'error',
+ - [no-empty](https://eslint.org/docs/rules/no-empty#no-empty): 'error',
+ - [no-var](https://eslint.org/docs/rules/no-var#no-var): 'error',
+ - [no-use-before-define](https://eslint.org/docs/rules/no-use-before-define#no-use-before-define): 'off',
+ - [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/src/rules/no-use-before-define.ts): ['error']

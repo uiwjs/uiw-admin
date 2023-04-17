@@ -235,9 +235,10 @@ export default (props: MenuProps = {}) => {
   const navigate = useNavigate();
   const pathName = location.pathname;
 
-  // @ts-ignore
   const searchMenu =
+    // @ts-ignore
     (SEARCH_MENU && collapsed) ||
+    // @ts-ignore
     (SEARCH_MENU ? <SearchMenus routes={allRoutes} /> : <></>);
   return (
     <React.Fragment>

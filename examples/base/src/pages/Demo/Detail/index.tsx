@@ -31,6 +31,16 @@ const Detail = ({ updateData }: DetailProps) => {
   const form = useForm()
   const form2 = useForm()
 
+  const asyncAwaitFormList: any = (arr = []) => {
+    return (
+      arr &&
+      arr.length > 0 &&
+      Promise.all(arr).then((vals) => {
+        return vals
+      })
+    )
+  }
+
   const onClose = () => dispatch({ type: 'demo/clean' })
 
   // 模拟搜索
@@ -44,17 +54,12 @@ const Detail = ({ updateData }: DetailProps) => {
   }
 
   const handleSave = async () => {
-    // 触发验证
-    await form.submitvalidate()
-    await form2.submitvalidate()
-
-    // 获取错误信息
-    const errors = form.getError()
-    const errors2 = form2.getError()
-
-    if (errors && Object.keys(errors).length > 0) return
-    if (errors2 && Object.keys(errors2).length > 0) return
-    // 调用接口
+    // 触发验证获取值
+    const values = await asyncAwaitFormList([
+      form?.validateFieldsAndGetValue(),
+      form2?.validateFieldsAndGetValue(),
+    ])
+    console.log('values', values)
   }
 
   return (

@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@uiw-admin/basic-layouts.svg?label=@uiw-admin/basic-layouts)](https://www.npmjs.com/package/@uiw-admin/basic-layouts)
 
-项目的整体默认布局组件，一般默认 '/' 路由的组件
+<!-- 项目的整体默认布局组件，一般默认 '/' 路由的组件 -->
 
 ## 何时使用
 
@@ -16,34 +16,27 @@ npm i @uiw-admin/basic-layouts --save # yarn add @uiw-admin/basic-layouts
 
 
 ## 基本使用
->   -  routes 渲染路由菜单
->   -  headerLayout 配置头部布局
->   -  headerBackground: 配置头部背景色
->   -  headerFontColor: 配置头部字体颜色
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```tsx
-window.SEARCH_MENU = true
+```jsx
 import React from 'react'
-import BasicLayout, {
-  useLayouts,
-} from '@uiw-admin/basic-layouts'
+import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
 import { HashRouter } from 'react-router-dom';
 import LayoutTabs from "@uiw-admin/layout-tabs"
-const routerArrs =[
-  {
-    path: "/basic-layouts",
-    name: "查询表格",
-    element: <div>测试</div>,
-  },
-  {
-    path: "/layout-tabs",
-    name: "查询表格2",
-    element: <div>测试2</div>,
-  }
-]
 
 function BasicLayoutScreen() {
+  window.SEARCH_MENU = true
+  const routerArrs =[
+    {
+      path: "/basic-layouts",
+      name: "查询表格",
+      element: <div>测试</div>,
+    },
+    {
+      path: "/layout-tabs",
+      name: "查询表格2",
+      element: <div>测试2</div>,
+    }
+  ]
   const basicLayoutProps = {
     headerLayout: 'top',
     headerBackground: '#343a40',
@@ -57,16 +50,15 @@ function BasicLayoutScreen() {
     </HashRouter>
   )
 }
-ReactDOM.render(<BasicLayoutScreen />, _mount_);
-
+export default BasicLayoutScreen
 ```
 
 **菜单搜索功能**
 
-在根目录`.kktrc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen` 默认`true`
+在根目录`.kktprc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen` 默认`true`
 
 ```ts
-// .kktrc.js 
+// .kktprc.js 
 import config from "@uiw-admin/config"
 export default config({
   define:{
@@ -82,7 +74,7 @@ export default config({
 > - onReloadAuth调用刷新权限接口;
 > - layouts.closeMenu关闭菜单事件;
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -139,12 +131,12 @@ function BasicLayoutScreen() {
     </HashRouter>
 }
 
-ReactDOM.render(<BasicLayoutScreen />, _mount_);
+export default BasicLayoutScreen
 ```
 
 ## 内容区域默认样式(isDefaultContentStyle)
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -181,7 +173,7 @@ function BasicLayoutScreen() {
       </BasicLayout>
     </HashRouter>
 }
-ReactDOM.render(<BasicLayoutScreen />, _mount_);
+export default BasicLayoutScreen
 ```
 
 
@@ -189,7 +181,7 @@ ReactDOM.render(<BasicLayoutScreen />, _mount_);
 
 通过隐藏系统默认的退出登录，自定义退出登录
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```tsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -254,13 +246,13 @@ function BasicLayoutScreen() {
     </HashRouter>
   )
 }
-ReactDOM.render(<BasicLayoutScreen />, _mount_);
+export default BasicLayoutScreen
 
 ```
 
 ## 菜单隐藏
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -325,7 +317,7 @@ function BasicLayoutScreen() {
     </HashRouter>
 }
 
-ReactDOM.render(<BasicLayoutScreen />, _mount_);
+export default BasicLayoutScreen
 ```
 
 ## Props

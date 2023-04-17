@@ -30,7 +30,6 @@ interface LayoutTabsProps {
 
 单独使用，⚠️ 注意：需要路由包裹
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import LayoutTabs from "@uiw-admin/layout-tabs"
@@ -56,13 +55,12 @@ const Demo = ()=>{
    </HashRouter>
   )
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 案例2
 
 配合使用 `BasicLayout` 组件使用
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
 ```jsx
 window.SEARCH_MENU = true
 import React from 'react'
@@ -93,7 +91,7 @@ function BasicLayoutScreen() {
     </HashRouter>
   )
 }
-ReactDOM.render(<BasicLayoutScreen />, _mount_);
+export default BasicLayoutScreen
 ```
 ## 贡献者
 

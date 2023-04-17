@@ -1,9 +1,12 @@
-import React from 'react';
 import { Button } from 'uiw';
 import './styles/index.css';
 import { useNavigate } from 'react-router';
+import { ExceptionsProps } from '../index';
 
-const Exception500 = () => {
+const Exception500 = ({
+  path = '/home',
+  btnText = '返回首页',
+}: ExceptionsProps) => {
   const navigate = useNavigate();
   return (
     <div className="exceptions">
@@ -14,10 +17,10 @@ const Exception500 = () => {
         <h1>500</h1>
         <h2>抱歉，服务器出错了</h2>
         <Button
-          onClick={() => navigate('/home', { replace: true })}
+          onClick={() => navigate(path, { replace: true })}
           type="primary"
         >
-          返回首页
+          {btnText}
         </Button>
       </div>
     </div>

@@ -1,7 +1,7 @@
-import Markdown from '../../components/Markdown';
+import Preview from '../../components/Preview';
 
-export default class Page extends Markdown {
-  editorUrl = '/packages/config/README.md';
-  // dependencies = { };
-  getMdStr = () => import('@uiw-admin/config/README.md');
-}
+const Page = () => (
+  <Preview path={() => import('@uiw-admin/config/README.md')} />
+);
+
+export default Page;

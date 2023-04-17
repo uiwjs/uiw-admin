@@ -1,11 +1,22 @@
-import React from 'react';
 import { Descriptions } from 'uiw';
 import { ProFormProps } from './type';
 import { getReadValue } from './utils/index';
 
-export default ({ title, formDatas, readOnlyProps }: ProFormProps) => {
+export default ({
+  title,
+  formDatas,
+  readOnlyProps,
+  className,
+  style,
+}: ProFormProps) => {
   return (
-    <Descriptions bordered title={title} {...readOnlyProps}>
+    <Descriptions
+      bordered
+      title={title}
+      {...readOnlyProps}
+      className={className}
+      style={{ width: '100%', ...style }}
+    >
       {formDatas?.map(
         (
           {

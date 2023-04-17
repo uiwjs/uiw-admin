@@ -1,10 +1,10 @@
-.navbox {
+.uiw-admin-navbox {
   position: fixed;
   padding-top: 20px;
   border-left: 1px solid #ddd;
 }
 
-.active {
+.uiw-admin-navbox-active {
   color:#008ef0;
   border-left: 1px solid #008ef0;
   margin-left: -1px;

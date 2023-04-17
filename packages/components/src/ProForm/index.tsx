@@ -3,12 +3,17 @@ import { Collapse, Card } from 'uiw';
 import FormDom from './formdom';
 import ReadFormDom from './readform';
 import { getFormFields } from './widgets';
-import { ProFormProps, UseFormStateProps } from './type';
+import { ProFormProps, UseFormStateProps, UseFormProps } from './type';
 import { StoreCtx, ColPropsContext } from './hooks/store';
 import { isObjectEmpty } from './utils';
-import './style/form-item.less';
+import './style/form-item.css';
 
-function ProForm(props: ProFormProps, ref: any) {
+function ProForm(
+  props: ProFormProps,
+  ref: React.ForwardedRef<
+    Partial<React.LegacyRef<UseFormProps>> | undefined | null
+  >,
+) {
   const {
     formDatas = [],
     title = '',
@@ -32,25 +37,25 @@ function ProForm(props: ProFormProps, ref: any) {
 
   const store = useMemo(() => ({ setFormState }), [form]);
 
-  // 通过ref导出实例方法
   const formInstanceRef = useRef<{ current: UseFormStateProps }>();
+
+  // 通过ref导出实例方法
   useImperativeHandle(ref, () => {
     // 表单验证(同时兼容老api submitvalidate和新api onSubmit )
     const submitvalidate = () =>
-      formInstanceRef.current?.current?.onSubmit() || null;
+      formInstanceRef?.current?.current?.onSubmit() || null;
     // 获取表单的值
     const getFieldValues = () =>
-      formInstanceRef.current?.current?.getFieldValues() || {};
+      formInstanceRef?.current?.current?.getFieldValues() || {};
     // 获取表单错误信息
     const getError = () => formInstanceRef?.current?.current?.getError() || {};
-
     // 验证并获取表单值
     const validateFieldsAndGetValue = () => {
       return new Promise(async function (resolve, reject) {
         await submitvalidate();
-        const errors = getError();
+        const errors = (await getError()) || {};
         if (isObjectEmpty(errors)) {
-          const value = getFieldValues();
+          const value = (await getFieldValues()) || {};
           resolve(value);
         } else {
           reject(errors);
@@ -59,9 +64,9 @@ function ProForm(props: ProFormProps, ref: any) {
     };
     return {
       ...formInstanceRef.current?.current,
-      submitvalidate,
-      getFieldValues,
       getError,
+      getFieldValues,
+      submitvalidate,
       validateFieldsAndGetValue,
     };
   });
@@ -86,7 +91,7 @@ function ProForm(props: ProFormProps, ref: any) {
     );
   } else if (formType === 'collapse') {
     children = (
-      <Collapse title={renderTitle} activeKey={['1']} {...collapseProps}>
+      <Collapse activeKey="1" {...collapseProps}>
         <Collapse.Panel header={title} key={'1'} {...collapsePanelProps}>
           {child}
         </Collapse.Panel>

@@ -4,7 +4,7 @@ import BasicLayout, {
 } from '@uiw-admin/basic-layouts'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
-import LayoutTabs from '@uiw-admin/layout-tabs'
+import { Outlet } from 'react-router-dom'
 import AuthPage from '@uiw-admin/authorized'
 import { KktproPageProps } from '@kkt/pro'
 
@@ -32,12 +32,12 @@ function BasicLayoutScreen(props: KktproPageProps) {
     menus: [
       {
         title: '欢迎来到uiw',
-        icon: 'smile',
+        icon: <Icon type="smile" />,
         onClick: () => layouts.closeMenu(),
       },
       {
         title: '修改密码',
-        icon: 'setting',
+        icon: <Icon type="setting" />,
         onClick: () => layouts.closeMenu(),
       },
     ],
@@ -72,7 +72,7 @@ function BasicLayoutScreen(props: KktproPageProps) {
           console.log('logo点击事件', event)
         }}
         isDefaultContentStyle={false}>
-        <LayoutTabs routes={props.routes || []} />
+        <Outlet />
       </BasicLayout>
     </AuthPage>
   )

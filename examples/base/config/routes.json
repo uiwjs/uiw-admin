@@ -24,6 +24,13 @@
         "icon": "home"
       },
       {
+        "path": "/:group/*",
+        "name": "测试点击页面",
+        "hideInMenu": true,
+        "component": "@/pages/TableList",
+        "icon": "home"
+      },
+      {
         "path": "/dom",
         "name": "子项",
         "icon": "copy",
@@ -60,17 +67,17 @@
               {
                 "path": "/dom/exceptions/403",
                 "name": "403-1",
-                "element": "@uiw-admin/exceptions/esm/Exceptions/403"
+                "element": "@uiw-admin/exceptions/lib/Exceptions/403"
               },
               {
                 "path": "/dom/exceptions/500",
                 "name": "500-1",
-                "element": "@uiw-admin/exceptions/esm/Exceptions/500"
+                "element": "@uiw-admin/exceptions/lib/Exceptions/500"
               },
               {
                 "path": "/dom/exceptions/404",
                 "name": "404-1",
-                "element": "@uiw-admin/exceptions/esm/Exceptions/404"
+                "element": "@uiw-admin/exceptions/lib/Exceptions/404"
               }
             ]
           }

@@ -8,10 +8,10 @@
 
 ### 基础用例
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
+import { Icon } from 'uiw';
 
 function Demo1() {
   const table = useTable('https://randomuser.me/api', {
@@ -64,7 +64,6 @@ function Demo1() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
               placeholder: '输入用户名',
             },
           },
@@ -107,54 +106,59 @@ function Demo1() {
   );
 }
 
-ReactDOM.render(<Demo1 />, _mount_);
+export default Demo1
 
 ```
 
 > 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则继承columns列key
 
-```jsx
-<ProTable
-  columns={[
-    // input key 继承 column的key name
-    {
-      title: '名字',
-      key: 'name',
-      props: {
-        widget: 'input',
-        initialValue: '',
-        widgetProps: {
-          preIcon: 'user',
-          placeholder: '输入用户名',
+```jsx 
+import React from 'react';
+import { ProTable } from '@uiw-admin/components';
+const Demo1 = ()=> {
+  return (
+    <ProTable
+      columns={[
+      // input key 继承 column的key name
+        {
+          title: '名字',
+          key: 'name',
+          props: {
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {
+              preIcon: 'tag',
+              placeholder: '输入用户名',
+            },
+          },
+      },
+      // 自定义表单key
+      {
+        title: '年龄',
+        key: 'registered',
+        props: {
+          widget: 'select',
+          key: 'age',
+          option: [
+            { label: '20', value: 20 },
+            { label: '10', value: 10 },
+          ],
         },
       },
-    },
-    // 自定义表单key
-    {
-      title: '年龄',
-      key: 'registered',
-      props: {
-        widget: 'select',
-        key: 'age',
-        option: [
-          { label: '20', value: 20 },
-          { label: '10', value: 10 },
-        ],
-      },
-    },
-  ]}
+    ]}
+  />
+  )
+}
 
-
-/>
-
+export default Demo1
 ```
 
 ### 显示操作栏
 
 > 操作栏区域默认是`Button`按钮，可通过`render`自定义
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 import { Dropdown, Menu, ButtonGroup, Button, Divider, Icon } from 'uiw';
@@ -213,7 +217,7 @@ const table = useTable('https://randomuser.me/api', {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: 'tag',
               placeholder: '输入用户名',
             },
           },
@@ -256,14 +260,13 @@ const table = useTable('https://randomuser.me/api', {
   );
 }
 
-ReactDOM.render(<Demo2 />, _mount_);
-
+export default Demo2
 ```
 
 ### table多选、单选行
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx mdx:preview
 import React, { useState } from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -324,7 +327,7 @@ const table = useTable('https://randomuser.me/api', {
               widget: 'input',
               initialValue: '',
               widgetProps: {
-                preIcon: 'user',
+                preIcon: 'tag',
                 placeholder: '输入用户名',
               },
             },
@@ -338,14 +341,13 @@ const table = useTable('https://randomuser.me/api', {
   );
 }
 
-ReactDOM.render(<Demo3 />, _mount_);
-
+export default Demo3
 ```
 
 ### table表单验证
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -412,7 +414,7 @@ function Demo4() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: 'tag',
               placeholder: '输入用户名',
             },
           },
@@ -455,16 +457,15 @@ function Demo4() {
   );
 }
 
-ReactDOM.render(<Demo4 />, _mount_);
-
+export default Demo4
 ```
 
 ### 表头分组
 
 与uiw table使用方法一致，可通过传props配置统一的表单
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -492,7 +493,6 @@ function Demo5() {
     },
     requestOptions: {method: 'GET'}
   });
-  console.log(table)
   return (
     <ProTable
        // 搜索栏按钮
@@ -526,7 +526,7 @@ function Demo5() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: 'tag',
               placeholder: '输入用户名',
             },
           },
@@ -574,16 +574,15 @@ function Demo5() {
   );
 }
 
-ReactDOM.render(<Demo5 />, _mount_);
-
+export default Demo5
 ```
 
 ### 自定义表单列
 
 默认是一行五个，可自定义
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx mdx:preview
 import React from 'react';
 import { ProTable, useTable } from '@uiw-admin/components';
 
@@ -639,7 +638,7 @@ function Demo6() {
             widget: 'input',
             initialValue: '',
             widgetProps: {
-              preIcon: 'user',
+              preIcon: 'tag',
               placeholder: '输入用户名',
             },
           },
@@ -681,16 +680,14 @@ function Demo6() {
     />
   );
 }
-
-ReactDOM.render(<Demo6 />, _mount_);
-
+export default Demo6
 ```
 
 ## Props
 
 | 参数           | 说明                                                   | 类型                                            | 默认值 |
 | -------------- | ------------------------------------------------------ | ----------------------------------------------- | ------ |
-| columns        | 与`uiw table` colunms用法一致 必传, 如果需要表单，也在此增加`props`                     | FormCol[]                                       | []     |
+| columns        | 与`uiw table` columns用法一致 必传, 如果需要表单，也在此增加`props`                     | FormCol[]                                       | []     |
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | searchBtns     | 搜索栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
 | table          | useTable返回值                                    | Object 必传                                     |        |
@@ -771,7 +768,7 @@ props: {
   widget: 'input',
   initialValue: 'zzz',
   widgetProps: {
-    preIcon: 'user',
+    preIcon: 'tag',
     placeholder: '输入用户名',
   }
 }

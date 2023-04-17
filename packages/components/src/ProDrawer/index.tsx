@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import { Drawer, Button, DrawerProps, ButtonProps } from 'uiw';
 import { AuthBtn, AuthBtnProps } from '@uiw-admin/authorized';
-
 /**
  * ProDrawer 组件继承于https://uiwjs.github.io/#/components/drawer
  * @param {boolean} visible 显示隐藏

@@ -14,15 +14,43 @@
 
 ## 403页面预览
 
-![](https://user-images.githubusercontent.com/49544090/150923788-e7ed881a-aec8-4c20-a49f-30b42d755c3e.png)
+```jsx mdx:preview
+import { Exceptions403 } from '@uiw-admin/exceptions'
+import React from 'react'
+
+const Demo = () => <Exceptions403 />
+
+export default Demo
+```
 
 ## 404页面预览
 
-![](https://user-images.githubusercontent.com/49544090/150924236-c0b61a41-b70d-4cf9-97a0-c4b903ebb71a.png)
+```jsx mdx:preview
+import { Exceptions404 } from '@uiw-admin/exceptions'
+import React from 'react'
+
+const Demo = () => <Exceptions404 />
+
+export default Demo
+```
 
 ## 500页面预览
 
-![](https://user-images.githubusercontent.com/49544090/150924481-2aa4f2df-6b92-46db-8e54-488b447c44f9.png)
+```jsx mdx:preview
+import { Exceptions500 } from '@uiw-admin/exceptions'
+import React from 'react'
+
+const Demo = () => <Exceptions500 />
+
+export default Demo
+```
+
+### ExceptionsProps
+
+| 参数 | 说明 | 类型 | 默认值 |
+| :------ | :------ | :------ | :------ |
+| path | 按钮跳转链接 | `string` | `/home` |
+| btnText | 按钮文字 | `string` | `返回首页` |
 
 ## 贡献者
 

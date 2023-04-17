@@ -28,7 +28,6 @@ export default function Demo() {
   const handleSearch = (val: string) => {
     setVal(val)
   }
-  // console.log(table)
   return (
     <ProTable
       // 操作栏按钮
@@ -84,7 +83,7 @@ export default function Demo() {
         pageSizeOptions: [10, 20, 30],
         pageSize: 10,
         onShowSizeChange: (current, pageSize) => {
-          console.log(current, pageSize)
+          // console.log(current, pageSize)
         },
       }}
       columns={[
@@ -97,7 +96,6 @@ export default function Demo() {
             key: 'name',
             // 组件属性
             widgetProps: {
-              preIcon: 'user',
               placeholder: '输入用户名',
             },
           },

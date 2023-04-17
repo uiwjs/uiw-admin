@@ -11,6 +11,8 @@ import {
   ColProps,
 } from 'uiw';
 export interface ProFormProps {
+  style?: React.CSSProperties;
+  className?: string;
   formDatas?: FormItemsProps[];
   onSubmit?: (
     initial: Record<string, any>,
@@ -22,7 +24,7 @@ export interface ProFormProps {
   ) => void;
   onSubmitError?: (error: any) => void;
   buttonsContainer?: React.CSSProperties;
-  title?: string;
+  title?: React.ReactNode | string;
   formType?: 'collapse' | 'card' | 'pure';
   showSaveButton?: boolean;
   showResetButton?: boolean;

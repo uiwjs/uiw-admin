@@ -6,17 +6,16 @@ on:
 
 jobs:
   build-uiw-admin:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-
-    - name: Setup Node
-      uses: actions/setup-node@v1
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
       with:
-        node-version: 14
+        node-version: 16
+        registry-url: 'https://registry.npmjs.org'
 
     - name: Look Changelog
-      uses: jaywcjlove/changelog-generator@v1.5.4
+      uses: jaywcjlove/changelog-generator@main
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         filter-author: (renovate-bot|Renovate Bot)
@@ -31,19 +30,11 @@ jobs:
     - run: yarn run test
 
     # 案例打包 
-    - run: yarn run build:website
+    - run: npm run build:website
       env:
         CI: false
     # 生成文档
-    - run: npm run www:build
-
-    # 生成案例网站
-    - name: Deploy Website
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: base-doc
-        publish_dir: ./examples/base/build
+    - run: export CI=false && npm run www:build
 
     # 压缩 examples/base 生成 ts 快捷开发
     - name: Compress uiw-admin-ts Example.
@@ -158,17 +149,24 @@ jobs:
 
     - name: Create Tag
       id: create_tag
-      uses: jaywcjlove/create-tag-action@v1.3.5
+      uses: jaywcjlove/create-tag-action@main
       with:
         package-path: ./packages/uiw-admin/package.json
 
     - name: get tag version
       id: tag_version
-      uses: jaywcjlove/changelog-generator@v1.5.4
+      uses: jaywcjlove/changelog-generator@main
+      
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        commit_message: '[${{steps.tag_version.outputs.tag}}] ${{ github.event.head_commit.message }}'
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./examples/website/build
 
     - name: Generate Changelog
       id: changelog
-      uses: jaywcjlove/changelog-generator@v1.5.4
+      uses: jaywcjlove/changelog-generator@main
       if: steps.create_tag.outputs.successful
       with:
         token: ${{ secrets.GITHUB_TOKEN }}

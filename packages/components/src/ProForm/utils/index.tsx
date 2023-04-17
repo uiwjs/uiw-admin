@@ -88,6 +88,7 @@ interface FromValidateProps {
   key: string;
   rules?: RulesProps[];
   value?: any[] | any;
+  required?: boolean;
 }
 
 //判断是否是arrary
@@ -112,6 +113,13 @@ export function isObjectEmpty(obj: any) {
   return true;
 }
 
+const getKeyMsg = (key: string) => {
+  if (['input', 'textarea'].includes(key)) {
+    return '请填写字段';
+  }
+  return '请选择字短';
+};
+
 /**
  * form表单提交验证
  * @param rules FromValidateProps[]
@@ -119,7 +127,12 @@ export function isObjectEmpty(obj: any) {
  */
 export const fromValidate = (rules: FromValidateProps[] = []) => {
   let errorObj: { [key: string]: string } = {};
-  rules.forEach(({ rules, key, value }) => {
+  rules.forEach(({ rules, key, value, required }) => {
+    if (required) {
+      if (!value || (Array.isArray(value) && value.length === 0)) {
+        errorObj[key] = getKeyMsg(key);
+      }
+    }
     if (rules && rules.length > 0) {
       rules.forEach(
         ({ validator = null, message = '', required, pattern = null }) => {
@@ -159,4 +172,16 @@ export const fromValidate = (rules: FromValidateProps[] = []) => {
     }
   });
   return errorObj;
+};
+
+/**
+ * 判断rules 里面是 required 是否存在
+ */
+export const isRequired = (rules: any[] = []): boolean => {
+  if (rules.length === 0) return false;
+  const requireds = rules.filter((item) => item.required || false);
+  if (requireds && requireds.length > 0) {
+    return true;
+  }
+  return false;
 };

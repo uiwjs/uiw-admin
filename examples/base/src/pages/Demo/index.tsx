@@ -5,7 +5,6 @@ import { Dispatch, useDispatch } from '@kkt/pro'
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
-
   const updateData = (payload: any) => {
     dispatch({
       type: 'demo/updateState',
@@ -93,7 +92,6 @@ const Demo = () => {
               widget: 'input',
               // 组件属性
               widgetProps: {
-                preIcon: 'user',
                 placeholder: '输入用户名',
               },
             },

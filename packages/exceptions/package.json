@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/exceptions",
-  "version": "6.0.0-bate-1.1",
+  "version": "6.1.4",
   "description": "异常组件",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/Exceptions#readme",
@@ -43,7 +43,7 @@
     "uiw": ">=4.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.17.0"
+    "@babel/runtime": "~7.20.0"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
@@ -53,6 +53,6 @@
     "react-dom": "18.2.0",
     "react-router": "^6.8.0",
     "react-router-dom": "^6.8.0",
-    "uiw": "^5.0.0-bate-5"
+    "uiw":  "^4.21.25"
   }
 }

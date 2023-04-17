@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import { Form, Button, Col, Row, FormFieldsProps } from 'uiw';
-import { ProFormProps } from './type';
+import { ProFormProps, UseFormStateProps } from './type';
 import { useStore, useColPropsContext } from './hooks/store';
 import { fromValidate } from './utils';
-import './style/form-item.less';
+import './style/form-item.css';
 
 function FormDom({
   formDatas = [],
@@ -11,56 +11,68 @@ function FormDom({
   onSubmit,
   onChange,
   onSubmitError,
-  // afterSubmit,
   buttonsContainer,
   showSaveButton = false,
   showResetButton = false,
   saveButtonProps = {},
   resetButtonProps = {},
   formInstanceRef,
+  className,
+  style,
 }: ProFormProps & {
   formfields: Record<string, FormFieldsProps<{}>> | undefined;
-  formInstanceRef: any;
+  formInstanceRef: React.MutableRefObject<
+    { current: UseFormStateProps | null } | undefined
+  >;
 }) {
-  const baseRef = useRef(null);
+  const baseRef: React.MutableRefObject<null> = useRef(null);
   const store = useStore();
   const colProps = useColPropsContext();
 
-  const { setFormState } = store as any;
+  const { setFormState } = store as {
+    setFormState: ((p: any) => void) | undefined;
+  };
 
   // 通过store获取表单实例
   useEffect(() => setFormState?.(baseRef), [baseRef]);
 
   // 通过ref获取表单实例
   useEffect(() => {
-    formInstanceRef.current = baseRef;
+    if (baseRef && baseRef.current) {
+      formInstanceRef.current = baseRef;
+    }
   }, [baseRef]);
+
+  const styles: React.CSSProperties = {
+    background: '#fff',
+    paddingBottom: 10,
+    marginBottom: 14,
+    ...style,
+  };
+
   return (
     <Form
+      className={className}
       ref={baseRef}
-      style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
+      style={styles}
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
         // 如果传入了onSubmit走onSubmit,否则主动验证
-        if (onSubmit) {
-          onSubmit?.(initial, current);
-        } else {
-          const filterFormDatas = formDatas.filter(
-            (item) => item.hide !== true,
-          );
-          const validateList =
-            filterFormDatas.map((item) => ({
-              key: item.key,
-              value: current[item.key],
-              rules: item.rules,
-            })) || [];
-          const errorObj = fromValidate(validateList);
-          if (Object.keys(errorObj).length > 0) {
-            const err: any = new Error();
-            err.filed = errorObj;
-            throw err;
-          }
+        const filterFormDatas = formDatas.filter((item) => item.hide !== true);
+        const validateList =
+          filterFormDatas.map((item) => ({
+            key: item.key,
+            value: current[item.key],
+            rules: item.rules,
+            required: item.required,
+          })) || [];
+        const errorObj = fromValidate(validateList);
+        if (Object.keys(errorObj).length > 0) {
+          const err: any = new Error();
+          err.filed = errorObj;
+          throw err;
         }
+        onSubmit?.(initial, current);
       }}
       onChange={({ initial, current }) => onChange?.(initial, current)}
       onSubmitError={(error) => {
@@ -72,7 +84,7 @@ function FormDom({
       }}
       fields={formfields}
     >
-      {({ fields, state, canSubmit, resetForm }) => {
+      {({ fields = {}, state, canSubmit = () => false, resetForm }) => {
         return (
           <React.Fragment>
             <Row gutter={10}>

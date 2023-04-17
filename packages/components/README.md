@@ -6,8 +6,8 @@
 
 ## Usage
 
-```
-import * from '@uiw-admin/components';
+``` ts
+import { ProTable, ProForm, ProDrawer, Skeleton } from '@uiw-admin/components';
 ```
 
 ## 已开发的组件

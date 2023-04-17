@@ -1,8 +1,12 @@
-import React from 'react';
 import { Button } from 'uiw';
 import { useNavigate } from 'react-router';
 import './styles/index.css';
-const Exception404 = () => {
+import { ExceptionsProps } from '../index';
+
+const Exception404 = ({
+  path = '/home',
+  btnText = '返回首页',
+}: ExceptionsProps) => {
   const navigate = useNavigate();
 
   return (
@@ -14,10 +18,10 @@ const Exception404 = () => {
         <h1>404</h1>
         <h2>抱歉，你访问的页面不存在</h2>
         <Button
-          onClick={() => navigate('/home', { replace: true })}
+          onClick={() => navigate(path, { replace: true })}
           type="primary"
         >
-          返回首页
+          {btnText}
         </Button>
       </div>
     </div>

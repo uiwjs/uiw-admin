@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Menu, Avatar, Popover } from 'uiw';
+import { Menu, Avatar, Popover, Icon } from 'uiw';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import { UseLayoutsProps } from '../useLayouts';
 import './index.css';
@@ -63,7 +63,7 @@ export default function HeaderRightMenu({
                 账号 {profile?.userName || 'admin'}
               </span>
             ),
-            icon: 'user',
+            icon: <Icon type="user" />,
           },
           {
             divider: true,
@@ -73,13 +73,13 @@ export default function HeaderRightMenu({
     ...menus,
     {
       title: '刷新权限',
-      icon: 'reload',
+      icon: <Icon type="reload" />,
       onClick: () => onReloadAuth(),
       style: { display: hideReloadButton ? 'none' : '' },
     },
     {
       title: '退出登录',
-      icon: 'logout',
+      icon: <Icon type="logout" />,
       style: { display: hideLogoutButton ? 'none' : '' },
       onClick: () => {
         if (onLogout) {

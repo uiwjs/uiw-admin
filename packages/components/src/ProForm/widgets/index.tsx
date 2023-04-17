@@ -1,6 +1,7 @@
 import { Fields, FormItemsProps } from '../type';
 import {
   Input,
+  InputNumber,
   Switch,
   Textarea,
   DateInput,
@@ -15,6 +16,7 @@ import CheckBox from './CheckBox';
 import SelectMultiple from './SelectMultiple';
 import Upload from './Upload';
 import SearchTree from './SearchTree';
+import { isRequired } from '../utils';
 
 /**
  *
@@ -29,6 +31,7 @@ export function getFormFields(
 ) {
   const widgetsList: Fields = {
     input: Input,
+    inputNumber: InputNumber,
     radio: Radio,
     checkbox: CheckBox,
     switch: Switch,
@@ -55,13 +58,15 @@ export function getFormFields(
         widget,
         label,
         initialValue,
+        required,
         ...otherProps
       } = col;
       if (!hide) {
         const name = key;
         const Widget = widgetsList[widget];
+        const is = isRequired(otherProps?.rules || []);
         fields[name] = {
-          label: label,
+          label: is ? <span className="w-proform-label">{label}</span> : label,
           children: <Widget {...widgetProps} />,
           ...otherProps,
           initialValue,

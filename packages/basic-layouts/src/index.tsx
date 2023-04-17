@@ -8,7 +8,7 @@ import LogoHeader from './LogoHeader';
 import Menu from './Menu';
 import Bread from './Breadcrumb';
 import './index.css';
-import { getMenu, BreadcrumbMap } from './utils';
+import { BreadcrumbMap } from './utils';
 import BodyContent, { WarpBody } from './Content';
 import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
 import FullScreen from './FullScreen';

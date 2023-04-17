@@ -1,0 +1,39 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  font-size: 16px;
+}
+
+body, html, #root{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+html, main {
+  scroll-behavior: smooth;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+}
+
+
+[data-color-mode*='light'] {
+  --font-color: #333;
+  --color-header-bg: 255 255 255;
+  --color-border-muted: #e5e5e5;
+  --color1: #f2f2f2;
+}
+
+[data-color-mode*='dark'] {
+  --font-color: #fff;
+  --color-header-bg: 13 17 22;
+  --color-border-muted: #373737;
+  --color1: #282828;
+}
+
+.menu-toc .menu-marker {
+  background: var(--color-accent-fg) !important;
+}

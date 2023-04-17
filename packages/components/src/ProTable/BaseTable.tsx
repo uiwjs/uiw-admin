@@ -15,7 +15,11 @@ import useSelections from './useSelections';
 const BaseTable: React.FC<BaseTableProps> = ({
   style,
   columns,
-  rowSelection = {},
+  rowSelection = {
+    selectKey: undefined,
+    type: 'checkbox',
+    defaultSelected: [],
+  },
   onPageChange: pageChange,
   scroll = {},
   paginationProps = {},
@@ -131,7 +135,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
       : data?.total || prevData?.total;
   // 分页
   const onPageChange = useCallback(
-    async (page) => {
+    async (page: number) => {
       if (pageChange) {
         pageChange(page);
       }
@@ -243,7 +247,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
             selectKey ? selectionCol.concat(defaultColumns()) : defaultColumns()
           }
           data={tableData}
-          empty={<Empty />}
+          empty={<Empty style={{ padding: '40px 0' }} />}
           footer={
             tableData &&
             tableData.length > 0 && (

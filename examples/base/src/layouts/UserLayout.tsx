@@ -32,7 +32,7 @@ const UserLayout = (props: KktproPageProps) => {
           sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
           localStorage.setItem('token', data.token)
           localStorage.setItem('auth', JSON.stringify(data.authList || []))
-          navigate('/home', { replace: true })
+          navigate?.('/home', { replace: true })
         } else {
           Notify.error({
             title: '错误通知',

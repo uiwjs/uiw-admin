@@ -14,9 +14,7 @@
 ## 类型
 > 通过formType表单类型
 ### 卡片类型
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 const Demo = () => {
@@ -54,13 +52,11 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ### 折叠类型
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 const Demo = () => {
@@ -83,13 +79,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ### 纯表单类型
 > pure类型下将不再展示title
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
@@ -112,14 +107,13 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 布局
 ### 基本布局
 > 通过span(继承于uiw/Graid/Col)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
@@ -182,13 +176,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ### 只读布局
 > 通过readSpan(继承于uiw/Descriptions.Item)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 const Demo = () => {
@@ -197,6 +190,7 @@ const Demo = () => {
        <ProForm
          readOnly={true}
          formType="pure"
+         className="bbb"
          formDatas={ [
              {
                label: 'input',
@@ -212,7 +206,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:2,
+               readSpan:3,
              },
                {
                label: 'input',
@@ -220,7 +214,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:1,
+               readSpan:3,
              },
              {
                label: 'input',
@@ -228,7 +222,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:1,
+               readSpan:3,
              },
              {
                label: 'input',
@@ -236,7 +230,7 @@ const Demo = () => {
                widget: 'input',
                initialValue: '',
                widgetProps: {},
-               readSpan:1
+               readSpan:2
              },
              {
                label: 'input',
@@ -251,15 +245,14 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 
 
 ## 基本使用
 > 与uiw/form使用保持一致
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
 import { ProForm } from '@uiw-admin/components'
@@ -322,7 +315,9 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                help:"input不能为空",
-               required:true,
+               rules: [
+                 { required:true, message: 'input不能为空' }
+               ]
              },
              {
               label: 'textarea',
@@ -479,21 +474,23 @@ const Demo = () => {
     </>
   )
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 通过useForm
 > (提交,重置,设置)
 > - 我们可以通过useForm注册form表单实例进行验证;重置;设置。(submitvalidate;getError;getFieldValues;setFields;resetForm...)
 > - 我们也可以通过传递rules配置验证规则(支持正则,required,回调验证)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
 const Demo = () => {
-  const [state,setState] = React.useState({})
+  const [state,setState] = React.useState({
+    input:'',
+    upload: []
+  })
   const form = useForm()
 
     return (
@@ -507,14 +504,23 @@ const Demo = () => {
                label: 'input',
                key: 'input',
                widget: 'input',
-               initialValue: '',
+               initialValue: state.input,
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
+                { required:true, message: 'input不能为空' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
                ]
              },
+              {
+              label: 'upload',
+              key: 'upload',
+              widget: 'upload',
+              initialValue: state.upload,
+              widgetProps:{
+                uploadType: 'card',
+              },
+            },
           ]}
        />
        <Button 
@@ -547,8 +553,14 @@ const Demo = () => {
         style={{ marginTop:10,width:80 }} 
         type="primary" 
         onClick={()=> {
-          form.setFields({input:'1234'})
-          setState({input:'1234'})
+          form.setFields({
+            input:'1234',
+            upload:[ { dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4', name: 'uiw.png' }]
+          })
+          setState({
+            input:'1234',
+            upload:[ { dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4', name: 'uiw.png' }]
+          })
         } }
        >
         设置
@@ -559,14 +571,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## 多个表单
 ### 基础提交
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -589,7 +599,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -611,7 +620,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -629,7 +637,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -669,14 +676,12 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ### promise提交
 > (通过validateFieldsAndGetValue方法先验证后获取值)
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button } from 'uiw'
@@ -707,7 +712,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { required: true, message: '请输入' },
                 { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
@@ -729,7 +733,6 @@ const Demo = () => {
                initialValue: '',
                widgetProps: {},
                span:"24",
-               required:true,
                rules: [
                 { 
                   validator: (value = '') => {
@@ -761,13 +764,11 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ## 动态添加表单
 ### uiw/form提交
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { Button,Card } from 'uiw'
@@ -844,10 +845,9 @@ const Demo = () => {
   }
 
   const handleSave = async ()=>{
-    const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
+    const validateList = await formList.map(itm => itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
-    console.log("values",values)
     // 调用接口
   }
 
@@ -900,11 +900,10 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ### promise提交
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import React, { useState,useRef } from 'react';
 import { ProForm,useForm } from '@uiw-admin/components'
@@ -934,7 +933,6 @@ const Demo = () => {
       key: 'phone',
       widget: 'input',
       initialValue: '',
-      required:true,
       rules: [
         { required: true, message: '请输入' },
       ]
@@ -982,10 +980,9 @@ const Demo = () => {
   }
 
   const handleSave = async ()=>{
-    const validateList = formList.map(itm=>itm.validateFieldsAndGetValue()) || []
+    const validateList = formList.map(itm=> itm.validateFieldsAndGetValue()) || []
     const values = await asyncAwaitFormList(validateList)
     setState(values)
-    console.log("values",values)
     // 调用接口
   }
 
@@ -1000,6 +997,7 @@ const Demo = () => {
             extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}
             >
              <ProForm
+              className="aaa"
               ref={(e) =>(formRefList.current[idx] = e)}
               // 表单类型
               formType="pure"
@@ -1038,11 +1036,10 @@ const Demo = () => {
     </div>
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 ## 只读模式
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
+```jsx mdx:preview
 import ReactDOM from 'react-dom';
 import { ProForm,useForm } from '@uiw-admin/components'
 import { formatter } from 'uiw'
@@ -1160,7 +1157,7 @@ const Demo = () => {
        />
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 
@@ -1169,9 +1166,7 @@ ReactDOM.render(<Demo />, _mount_);
 
 > 给组件传`value`, `onChange`  一个是值 一个是组件更改数据回调
 
-<!--rehype:bgWhite=true&codeSandbox=true&codePen=true-->
-```jsx
-import ReactDOM from 'react-dom';
+```jsx mdx:preview
 import { ProForm,useForm } from '@uiw-admin/components'
 import { formatter, Input, Button } from 'uiw'
 import React, { useState } from 'react';
@@ -1207,7 +1202,7 @@ const Demo = () => {
        />
   );
 }
-ReactDOM.render(<Demo />, _mount_);
+export default Demo
 ```
 
 ## Props
@@ -1260,7 +1255,6 @@ ReactDOM.render(<Demo />, _mount_);
 | hide         | 是否显示                                                      | boolean                 | true   |
 | span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
 | readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
-| required     | 是否必填                                                      | boolean                 | -      |
 | rules     | 验证规则                                                      | RulesProps[]                 | -      |
 | colstyle     | Col(uiw/Grid)样式                                         | React.CSSProperties                | -      |
 
