@@ -1,19 +1,22 @@
 import React, { useMemo, Fragment, useState } from 'react';
-import Layout from '@uiw/react-layout';
-import Button from '@uiw/react-button';
+import { KktproRoutesProps } from '@kkt/pro';
+import { Icon, Layout, Button } from 'uiw';
 import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
-import { RoutesBaseProps } from '@uiw-admin/router-control';
-import LogoHeader from './LogoHeader';
-import Menu from './Menu';
-import Bread from './Breadcrumb';
-import './index.css';
-import { BreadcrumbMap } from './utils';
-import BodyContent, { WarpBody } from './Content';
-import HeaderRightMenu, { HeaderRightProps } from './HeaderRightMenu';
-import FullScreen from './FullScreen';
-import { Icon } from 'uiw';
+import {
+  LogoHeader,
+  WarpBody,
+  Menu,
+  Breadcrumb,
+  BodyContent,
+  HeaderRightMenu,
+  FullScreen,
+  IconBox,
+} from './components';
+import type { HeaderRightProps } from './components';
 import { MainContext, useSideMenus } from './hook';
+import { BreadcrumbMap } from './utils';
+import './index.css';
 
 const { Header, Sider, Content } = Layout;
 
@@ -26,7 +29,7 @@ export type BasicLayoutProps = {
    * 页脚
    */
   footer?: React.ReactElement;
-  routes?: RoutesBaseProps[];
+  routes?: KktproRoutesProps[];
   children?: React.ReactNode;
   /** 头部 布局 */
   headerLayout?: 'top' | 'default';
@@ -49,6 +52,7 @@ export type BasicLayoutProps = {
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
   ) => void;
 } & HeaderRightProps;
+
 function BasicLayout(props: BasicLayoutProps) {
   const {
     className,
@@ -74,10 +78,9 @@ function BasicLayout(props: BasicLayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
 
   /** 转换 用于 侧边路由展示 */
-  const routeData = routes;
   const { sideItemIndex, ChildMenus, sideMenusMap, hiddenMainMenu } =
     useSideMenus({
-      routeData,
+      routeData: routes,
     });
   /**路由带参数隐藏菜单 */
   menuHide = hiddenMainMenu;
@@ -86,14 +89,14 @@ function BasicLayout(props: BasicLayoutProps) {
       <Menu
         collapsed={collapsed}
         routes={ChildMenus.routeData}
-        allRoutes={routeData}
+        allRoutes={routes}
       />
     );
   }, [JSON.stringify(ChildMenus), collapsed]);
 
   const mapRoute = React.useMemo(() => {
-    return new BreadcrumbMap(routeData);
-  }, [JSON.stringify(routeData)]);
+    return new BreadcrumbMap(routes);
+  }, [JSON.stringify(routes)]);
 
   const renderHeaderRightMenu = useMemo(() => {
     return (
@@ -135,7 +138,7 @@ function BasicLayout(props: BasicLayoutProps) {
     >
       <div style={{ display: 'flex' }}>
         {headerLayout === 'top' && (
-          <div style={{ minWidth: 200 }}>
+          <div>
             <LogoHeader
               onLogoClick={onLogoClick}
               collapsed={false}
@@ -145,20 +148,15 @@ function BasicLayout(props: BasicLayoutProps) {
           </div>
         )}
         {!menuHide && (
-          <div>
-            <Button
-              basic
-              icon={
-                <Icon
-                  type={collapsed ? 'menu-unfold' : 'menu-fold'}
-                  color={headerFontColor}
-                />
-              }
-              // icon={collapsed ? 'menu-unfold' : 'menu-fold'}
-              style={{ fontSize: 12, marginRight: 20 }}
-              onClick={() => setCollapsed(!collapsed)}
+          <div className="uiw-admin-nav">
+            <IconBox
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
+              iconSTyle={{ fontSize: 18 }}
+              color={headerFontColor}
+              onClick={(e) => setCollapsed(!collapsed)}
+              style={{ marginRight: 10 }}
             />
-            <Bread sideMenusMap={sideMenusMap} routeMap={mapRoute} />
+            <Breadcrumb sideMenusMap={sideMenusMap} routeMap={mapRoute} />
           </div>
         )}
       </div>
@@ -179,6 +177,7 @@ function BasicLayout(props: BasicLayoutProps) {
               <Sider
                 collapsed={collapsed}
                 className={classnames('uiw-admin-global-sider-menu', {})}
+                width={220}
               >
                 {headerLayout === 'default' ? (
                   <LogoHeader

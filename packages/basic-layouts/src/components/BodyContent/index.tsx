@@ -1,23 +1,17 @@
 import React from 'react';
-import {
-  RoutesBaseProps,
-  useLocation,
-  useNavigate,
-  Navigate,
-} from '@uiw-admin/router-control';
+import { KktproRoutesProps } from '@kkt/pro';
+import { useLocation, useNavigate, Navigate } from 'react-router-dom';
 import { onNavigate } from '../Menu';
 
 interface ContentProps {
   children: React.ReactNode;
 }
 export default (props: ContentProps) => {
-  return (
-    <div style={{ height: '100%', overflow: 'auto' }}>{props.children}</div>
-  );
+  return <React.Fragment>{props.children}</React.Fragment>;
 };
 export interface WarpBodyProps {
   children: React.ReactNode;
-  sideItemIndex: undefined | RoutesBaseProps;
+  sideItemIndex: undefined | KktproRoutesProps;
 }
 export const WarpBody = (props: WarpBodyProps) => {
   const { sideItemIndex } = props;

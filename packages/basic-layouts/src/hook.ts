@@ -1,5 +1,6 @@
 import React from 'react';
-import { RoutesBaseProps, useLocation } from '@uiw-admin/router-control';
+import { KktproRoutesProps } from '@kkt/pro';
+import { useLocation } from 'react-router-dom';
 
 import { getSideMenusMap, getMenuList, getCurrentPath } from './utils';
 export const MainContext = React.createContext<{
@@ -14,7 +15,7 @@ export const MainContext = React.createContext<{
 
 export const useMain = () => React.useContext(MainContext);
 
-export const useSideMenus = (props: { routeData: RoutesBaseProps[] }) => {
+export const useSideMenus = (props: { routeData: KktproRoutesProps[] }) => {
   const { routeData } = props;
   const location = useLocation();
 

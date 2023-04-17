@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 import { Menu, Avatar, Popover, Icon } from 'uiw';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
-import { UseLayoutsProps } from '../useLayouts';
+import IconBox from '../IconBox';
+import { UseLayoutsProps } from '../../useLayouts';
 import './index.css';
 
 export interface HeaderMenuItemsProps {
@@ -134,26 +135,29 @@ export default function HeaderRightMenu({
     } else if (userName) {
       node = <div className="avatar">{initialsName}</div>;
     } else {
-      node = <Avatar icon="user" size="default" />;
+      node = (
+        <div style={{ display: 'inline-flex', alignItems: 'center' }}>
+          <IconBox type="user" iconSTyle={{ fontSize: 18 }} />
+        </div>
+      );
+      // node = <Avatar icon="user" size="default" />;
     }
     return node;
   }, [profile?.avatar, profile?.userName]);
 
   return (
     <div className="uiw-global-header-menu">
-      <span className="uiw-global-header-menu">
-        <Popover
-          isOpen={!!headerRightvisible}
-          onVisibleChange={(visible) =>
-            updateStore?.({ headerRightvisible: visible })
-          }
-          trigger="click"
-          placement="bottomRight"
-          content={menuView}
-        >
-          {avatarWarp}
-        </Popover>
-      </span>
+      <Popover
+        isOpen={!!headerRightvisible}
+        onVisibleChange={(visible) =>
+          updateStore?.({ headerRightvisible: visible })
+        }
+        trigger="click"
+        placement="bottomRight"
+        content={menuView}
+      >
+        {avatarWarp}
+      </Popover>
     </div>
   );
 }

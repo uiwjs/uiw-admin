@@ -7,7 +7,20 @@
 }
 
 .uiw-admin-global-sider-menu .w-menu-item {
-  padding: 7px 7px;
+  padding: 9px;
+}
+.uiw-admin-global-sider-menu .w-menu-item.active {
+  background: rgba(167, 182, 194, 0.3) !important;
+  border-radius: 7px;
+}
+.uiw-admin-global-sider-menu .w-menu-item:hover {
+  background: transparent;
+  color: #fff;
+}
+
+.uiw-admin-global-sider-menu .w-search-select-search-true input {
+  height: 34px;
+  border-radius: 7px;
 }
 
 .w-layout-header.uiw-admin-global-header > * {
@@ -47,7 +60,7 @@
 .uiw-admin-global-title-top h1 {
   box-sizing: border-box;
   display: inline-block;
-  margin: 0 0 0 12px;
+  margin: 0 12px;
   color: #fff;
   font-weight: 600;
   font-size: 20px;
@@ -88,4 +101,13 @@
 
 .w-notify-warpper {
   z-index: 1001;
+}
+.uiw-admin-nav {
+  display: inline-flex;
+  align-items: center;
+}
+
+.w-overlay .w-menu-item {
+  padding: 9px 8px;
+  border-radius: 5px;
 }
