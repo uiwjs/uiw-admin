@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Menu, Avatar, Popover, Icon } from 'uiw';
+import { Menu, Popover, Icon } from 'uiw';
 import { useNavigate, NavigateFunction } from 'react-router-dom';
 import IconBox from '../IconBox';
 import { UseLayoutsProps } from '../../useLayouts';
