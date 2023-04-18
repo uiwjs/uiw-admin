@@ -47,7 +47,6 @@
     "@babel/runtime": "~7.21.0",
     "@uiw-admin/authorized": "6.1.5",
     "@uiw-admin/document-title": "6.1.5",
-    "@uiw-admin/router-control": "6.1.5",
     "@uiw-admin/utils": "6.1.5",
     "classnames": "2.3.1"
   },

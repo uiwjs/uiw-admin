@@ -1,7 +1,7 @@
 import React from 'react';
 import { Tabs, Icon } from 'uiw';
 import { KktproRoutesProps } from '@kkt/pro';
-import { useNavigate, useLocation, Location } from '@uiw-admin/router-control';
+import { useNavigate, useLocation, Location } from 'react-router-dom';
 import { getRoutesList, getMatch, getMatchRender } from './utils';
 import { matchPath } from 'react-router';
 import { Outlet } from 'react-router-dom';

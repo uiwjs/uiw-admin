@@ -1,5 +1,4 @@
 import { useState, useMemo, useEffect } from 'react';
-import { Icon } from 'uiw';
 import IconBox from '../IconBox';
 import { useMain } from '../../hook';
 
