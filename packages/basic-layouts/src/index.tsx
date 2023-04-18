@@ -92,11 +92,11 @@ function BasicLayout(props: BasicLayoutProps) {
         allRoutes={routes}
       />
     );
-  }, [JSON.stringify(ChildMenus), collapsed]);
+  }, [ChildMenus, collapsed]);
 
   const mapRoute = React.useMemo(() => {
     return new BreadcrumbMap(routes);
-  }, [JSON.stringify(routes)]);
+  }, [routes]);
 
   const renderHeaderRightMenu = useMemo(() => {
     return (

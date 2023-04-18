@@ -7,8 +7,9 @@
   top: -14px;
   z-index: 9;
   background: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+  border-bottom: 1px solid ;
   padding: 3px;
+  border-bottom: 1px solid #ccc;
 }
 .uiw-tabs-warp .w-tabs-flow-content {
   display: inline-flex;

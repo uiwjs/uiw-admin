@@ -75,6 +75,8 @@
   padding-top: 16px;
   padding-bottom: 10px;
   text-decoration: none;
+  color: #fff;
+  font-weight: bold;
 }
 .uiw-admin-global-title img,
 .uiw-admin-global-title-top img {
@@ -86,7 +88,7 @@
 .uiw-admin-global-title-top a {
   display: flex;
   align-items: center;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .uiw-admin-global-content {

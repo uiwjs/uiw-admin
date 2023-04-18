@@ -14,99 +14,26 @@
 npm i @uiw-admin/basic-layouts --save # yarn add @uiw-admin/basic-layouts
 ```
 
-> 在项目中，`BasicLayouts`组件下如果不使用`LayoutTabs`组件内容放`react-router-dom` 的`Outlet`组件。否则只需要放`LayoutTabs`组件即可。
-
-```jsx
-import BasicLayout from '@uiw-admin/basic-layouts';
-import { Outlet } from 'react-router-dom';
-import LayoutTabs from "@uiw-admin/layout-tabs"
-
-// 不使用 LayoutTabs 组件
-const Layouts = () => {
-  return (
-    <BasicLayout routes={[]}>
-      <Outlet />
-    </BasicLayout>
-  )
-}
-
-// 使用 LayoutTabs 组件
-const Layouts = () => {
-  return (
-    <BasicLayout routes={[]}>
-      <LayoutTabs routes={[]} />
-    </BasicLayout>
-  )
-}
-```
 
 ## 基本使用
 
-```jsx mdx:preview
+```jsx
 import React from 'react'
 import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
-import LayoutTabs from "@uiw-admin/layout-tabs";
+import { HashRouter } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
 
 function BasicLayoutScreen() {
-  const routerArrs = [
-    {
-      path: "/components/authorized",
-      name: "权限组件",
-      icon: 'appstore',
-      element: <div>测试</div>,
-    },
-    {
-      path: "/components/basic-layouts",
-      name: "页面布局",
-      icon: 'appstore',
-      element: <div>测试2</div>,
-    },
-    {
-      path: "/components/document-title",
-      name: "页面标题",
-      icon: 'appstore',
-      element: <div>测试2</div>,
-    }
-  ]
-  return (
-    <div style={{ height: 400 }}>
-      <BasicLayout
-        isDefaultContentStyle={false}
-        routes={routerArrs}
-      >
-        内容
-      </BasicLayout>
-    </div>
-  )
-}
-export default BasicLayoutScreen
-```
-
-## 头部布局
-
-```jsx mdx:preview
-import React from 'react'
-import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
-import LayoutTabs from "@uiw-admin/layout-tabs";
-
-function BasicLayoutScreen() {
+  window.SEARCH_MENU = true
   const routerArrs =[
     {
-      path: "/components/authorized",
-      name: "权限组件",
-      icon: 'appstore',
+      path: "/basic-layouts",
+      name: "查询表格",
       element: <div>测试</div>,
     },
     {
-      path: "/components/basic-layouts",
-      name: "页面布局",
-      icon: 'appstore',
-      element: <div>测试2</div>,
-    },
-    {
-      path: "/components/document-title",
-      name: "页面标题",
-      icon: 'appstore',
+      path: "/layout-tabs",
+      name: "查询表格2",
       element: <div>测试2</div>,
     }
   ]
@@ -116,15 +43,11 @@ function BasicLayoutScreen() {
     headerFontColor: '#fff',
   }
   return (
-    <div style={{ height: 400 }}>
-      <BasicLayout
-        {...basicLayoutProps} 
-        isDefaultContentStyle={false}
-        routes={routerArrs}
-      >
-        内容
+    <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps}  isDefaultContentStyle={false} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
       </BasicLayout>
-    </div>
+    </HashRouter>
   )
 }
 export default BasicLayoutScreen
@@ -152,7 +75,7 @@ export default config({
 > - layouts.closeMenu关闭菜单事件;
 
 <!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
-```jsx mdx:preview
+```jsx
 window.SEARCH_MENU = true
 import React from 'react'
 import BasicLayout, {
@@ -161,23 +84,15 @@ import BasicLayout, {
 import { HashRouter ,useRoutes ,Outlet} from 'react-router-dom';
 import LayoutTabs from "@uiw-admin/layout-tabs"
 
-const routerArrs = [
+const routerArrs =[
   {
-    path: "/components/authorized",
-    name: "权限组件",
-    icon: 'appstore',
+    path: "/basic-layouts",
+    name: "查询表格",
     element: <div>测试</div>,
   },
   {
-    path: "/components/basic-layouts",
-    name: "页面布局",
-    icon: 'appstore',
-    element: <div>测试2</div>,
-  },
-  {
-    path: "/components/document-title",
-    name: "页面标题",
-    icon: 'appstore',
+    path: "/layout-tabs",
+    name: "查询表格2",
     element: <div>测试2</div>,
   }
 ]
@@ -209,18 +124,55 @@ function BasicLayoutScreen() {
     layouts,
   }
 
-  return (
-    <div style={{ height: 400 }}>
-      <BasicLayout
-        {...basicLayoutProps}
-        isDefaultContentStyle={false}
-        routes={routerArrs}  >
-        内容
+  return <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
       </BasicLayout>
-    </div>
-  )
+    </HashRouter>
 }
 
+export default BasicLayoutScreen
+```
+
+## 内容区域默认样式(isDefaultContentStyle)
+
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx
+window.SEARCH_MENU = true
+import React from 'react'
+import BasicLayout from '@uiw-admin/basic-layouts'
+import { HashRouter } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
+
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
+
+
+function BasicLayoutScreen() {
+  return <HashRouter window={window}>
+
+    <div>不设置 isDefaultContentStyle 使用默认值(true)</div>
+    
+      <BasicLayout routes={routerArrs}  >
+        <div style={{background:"#fff"}} >测试 isDefaultContentStyle 值不设置的情况下渲染样式</div>
+      </BasicLayout>
+      <br/>
+      <div>设置 isDefaultContentStyle = false </div>
+       <BasicLayout routes={routerArrs} isDefaultContentStyle={false}  >
+        <div style={{background:"#fff"}} >测试 isDefaultContentStyle 值不设置的情况下渲染样式</div>
+      </BasicLayout>
+    </HashRouter>
+}
 export default BasicLayoutScreen
 ```
 
@@ -229,29 +181,24 @@ export default BasicLayoutScreen
 
 通过隐藏系统默认的退出登录，自定义退出登录
 
-```jsx mdx:preview
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```tsx
+window.SEARCH_MENU = true
 import React from 'react'
 import BasicLayout, {
   useLayouts,
 } from '@uiw-admin/basic-layouts'
+import { HashRouter } from 'react-router-dom';
 import LayoutTabs from "@uiw-admin/layout-tabs"
-const routerArrs = [
+const routerArrs =[
   {
-    path: "/components/authorized",
-    name: "权限组件",
-    icon: 'appstore',
+    path: "/basic-layouts",
+    name: "查询表格",
     element: <div>测试</div>,
   },
   {
-    path: "/components/basic-layouts",
-    name: "页面布局",
-    icon: 'appstore',
-    element: <div>测试2</div>,
-  },
-  {
-    path: "/components/document-title",
-    name: "页面标题",
-    icon: 'appstore',
+    path: "/layout-tabs",
+    name: "查询表格2",
     element: <div>测试2</div>,
   }
 ]
@@ -292,23 +239,91 @@ function BasicLayoutScreen() {
   }
 
   return (
-    <div style={{ height: 400 }}>
-      <BasicLayout
-        {...basicLayoutProps}
-        isDefaultContentStyle={false}
-        routes={routerArrs}  >
-        <div style={{ padding: 14 }}>
-          <LayoutTabs routes={routerArrs} /> 
-          <div>注意：项目中使用 不需要设置 padding 样式</div>
-        </div>
+    <HashRouter window={window}>
+      <BasicLayout {...basicLayoutProps} isDefaultContentStyle={false} routes={routerArrs}  >
+        <LayoutTabs routes={routerArrs} /> 
       </BasicLayout>
-    </div>
+    </HashRouter>
   )
 }
 export default BasicLayoutScreen
 
 ```
 
+## 菜单隐藏
+
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx
+window.SEARCH_MENU = true
+import React from 'react'
+import BasicLayout, {
+  useLayouts,
+} from '@uiw-admin/basic-layouts'
+import { HashRouter ,useRoutes ,Outlet,useLocation } from 'react-router-dom';
+import LayoutTabs from "@uiw-admin/layout-tabs"
+
+const routerArrs =[
+  {
+    path: "/basic-layouts",
+    name: "查询表格",
+    element: <div>测试</div>,
+  },
+  {
+    path: "/layout-tabs",
+    name: "查询表格2",
+    element: <div>测试2</div>,
+  }
+]
+
+
+const Com = (props)=>{
+  const { routes } = props
+  const location = useLocation()
+  return (
+    <BasicLayout
+      {...props}
+      menuHide={location.pathname==="/layout-tabs"}
+    >
+      <LayoutTabs routes={routes} /> 
+    </BasicLayout>
+  )
+}
+
+function BasicLayoutScreen() {
+  const layouts = useLayouts()
+  const basicLayoutProps = {
+    // 右侧下拉菜单内容
+    menus: [
+      {
+        title: '欢迎来到uiw',
+        icon: 'smile',
+        // 调用关闭菜单事件
+        onClick: () => layouts.closeMenu(),
+      },
+      {
+        title: '修改密码',
+        icon: 'setting',
+      },
+    ],
+    profile: {
+      // 头像地址
+      avatar: '',
+      // 下拉菜单左侧内容
+      menuLeft:<div style={{ marginRight: 15 }}>可做自定义dom</div>
+    },
+    // 调用刷新接口
+    onReloadAuth: () => {},
+    layouts,
+  }
+
+
+  return <HashRouter window={window}>
+      <Com  {...basicLayoutProps}  routes={routerArrs}  />
+    </HashRouter>
+}
+
+export default BasicLayoutScreen
+```
 
 ## Props
 
