@@ -1,6 +1,6 @@
 import React, { useMemo, Fragment, useState } from 'react';
 import { KktproRoutesProps } from '@kkt/pro';
-import { Icon, Layout, Button } from 'uiw';
+import { Layout } from 'uiw';
 import classnames from 'classnames';
 import DocumentTitle from '@uiw-admin/document-title';
 import {
@@ -153,7 +153,7 @@ function BasicLayout(props: BasicLayoutProps) {
               type={collapsed ? 'menu-unfold' : 'menu-fold'}
               iconSTyle={{ fontSize: 18 }}
               color={headerFontColor}
-              onClick={(e) => setCollapsed(!collapsed)}
+              onClick={() => setCollapsed(!collapsed)}
               style={{ marginRight: 10 }}
             />
             <Breadcrumb sideMenusMap={sideMenusMap} routeMap={mapRoute} />

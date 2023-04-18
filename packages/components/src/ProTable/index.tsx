@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Button } from 'uiw';
+import { Button, Card } from 'uiw';
 import Skeleton from '../Skeleton';
 import Table from './BaseTable';
 import BaseForm from './BaseForm';
@@ -66,46 +66,55 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       <Skeleton loading={loading}>
         {/* 表单查询区域 */}
         {searchBtns && searchBtns.length > 0 && (
-          <BaseForm
-            columns={columns}
-            searchBtns={searchBtns}
-            onBeforeSearch={onBeforeSearch}
-            formCol={formCol}
-          />
+          <Card
+            noHover
+            style={{ marginBottom: 14 }}
+            bodyStyle={{ padding: '8px 14px' }}
+          >
+            <BaseForm
+              columns={columns}
+              searchBtns={searchBtns}
+              onBeforeSearch={onBeforeSearch}
+              formCol={formCol}
+            />
+          </Card>
         )}
 
         {/* 操作区域 */}
-        {operateButtons && operateButtons.length > 0 && (
-          <div style={{ background: '#fff', padding: 10 }}>
-            {operateButtons.map((btn: any, idx: number) =>
-              btn?.render ? (
-                <React.Fragment key={idx.toString()}>
-                  {btn.render}
-                </React.Fragment>
-              ) : (
-                <Button key={idx.toString()} {...btn}>
-                  {btn.label}
-                </Button>
-              ),
-            )}
+        <Card noHover bodyStyle={{ paddingTop: 5 }}>
+          {operateButtons && operateButtons.length > 0 && (
+            <div style={{ background: '#fff', padding: '10px 0' }}>
+              {operateButtons.map((btn: any, idx: number) =>
+                btn?.render ? (
+                  <React.Fragment key={idx.toString()}>
+                    {btn.render}
+                  </React.Fragment>
+                ) : (
+                  <Button key={idx.toString()} {...btn}>
+                    {btn.label}
+                  </Button>
+                ),
+              )}
+            </div>
+          )}
+          {/* 列表组件 */}
+          <div
+            className={[
+              'uiw-admin-protable',
+              tableHeadHidden ? 'is-need-table-header' : '',
+              tableBackgroundColor ? 'table-parent-uiw-admin' : '',
+            ]
+              .filter((it) => it)
+              .join(' ')}
+            style={{ backgroundColor: tableBackgroundColor }}
+          >
+            <Table
+              columns={columns}
+              {...tableProps}
+              paginationProps={paginationProps}
+            />
           </div>
-        )}
-        {/* 列表组件 */}
-        <div
-          className={[
-            tableHeadHidden ? 'is-need-table-header' : '',
-            tableBackgroundColor ? 'table-parent-uiw-admin' : '',
-          ]
-            .filter((it) => it)
-            .join(' ')}
-          style={{ backgroundColor: tableBackgroundColor }}
-        >
-          <Table
-            columns={columns}
-            {...tableProps}
-            paginationProps={paginationProps}
-          />
-        </div>
+        </Card>
       </Skeleton>
     </StoreCtx.Provider>
   );

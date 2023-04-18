@@ -1,9 +1,62 @@
 .uiw-layout-tabs-warp {
+  margin: -14px;
+  position: relative;
+}
+.uiw-tabs-warp {
+  position: sticky;
+  top: -14px;
+  z-index: 9;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .2);
+  padding: 3px;
+}
+.uiw-tabs-warp .w-tabs-flow-content {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  z-index: 9;
+
+}
+.uiw-tabs-warp .w-tabs-bar::-webkit-scrollbar {
+  height: 0px;
+}
+.uiw-tabs-warp .w-tabs-item {
+  border-radius: 4px !important;
+  border-bottom: 1px solid #d9d9d9 !important;
+  bottom: 0 !important;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+}
+.uiw-tabs-warp .w-tabs-item .w-icon {
+  position: relative;
+  right: -7px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  margin-left: 3px !important;
+  transition: background .5s;
+}
+.uiw-tabs-warp .w-tabs-item:hover .w-icon {
+  background: rgba(167, 182, 194, 0.3);
+}
+.uiw-tabs-warp .w-tabs-flow-content > span {
+  line-height: 1;
+  position: relative;
+  top: -5px;
+}
+.uiw-tabs-warp .w-tabs-bar {
   height: 100%;
+}
+.uiw-tabs-warp .w-tabs-nav::after {
+  display: none !important;
 }
 .uiw-layout-tabs-warp .uiw-layout-tabs-body {
   margin: 14px;
   height: calc(100% - 64px);
-  overflow: auto;
   box-sizing: border-box;
 }

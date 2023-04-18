@@ -120,6 +120,7 @@ const LayoutTabs = (props: LayoutTabsProps) => {
   return (
     <div className="uiw-layout-tabs-warp">
       <Tabs
+        className="uiw-tabs-warp"
         type="card"
         activeKey={location.pathname}
         onTabClick={(keys) => {

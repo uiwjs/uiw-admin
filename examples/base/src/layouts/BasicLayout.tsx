@@ -1,11 +1,12 @@
-import BasicLayout, {
-  useLayouts,
-  BasicLayoutProps,
-} from '@uiw-admin/basic-layouts'
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import AuthPage from '@uiw-admin/authorized'
 import { KktproPageProps, Outlet } from '@kkt/pro'
+import BasicLayout, {
+  useLayouts,
+  BasicLayoutProps,
+} from '@uiw-admin/basic-layouts'
+import LayoutsTabs from '@uiw-admin/layout-tabs'
 
 function BasicLayoutScreen(props: KktproPageProps) {
   const { navigate, routes = [] } = props
@@ -66,11 +67,12 @@ function BasicLayoutScreen(props: KktproPageProps) {
     <AuthPage authority={true} redirectPath="/login">
       <BasicLayout
         {...basicLayoutProps}
-        routes={routes as any}
+        routes={routes}
         onLogoClick={() => {
           navigate('/')
         }}>
-        <Outlet />
+        <LayoutsTabs routes={routes} />
+        {/* <Outlet /> */}
       </BasicLayout>
     </AuthPage>
   )

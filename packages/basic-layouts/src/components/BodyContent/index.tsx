@@ -7,7 +7,11 @@ interface ContentProps {
   children: React.ReactNode;
 }
 export default (props: ContentProps) => {
-  return <React.Fragment>{props.children}</React.Fragment>;
+  return (
+    <div style={{ padding: 14, overflowY: 'auto', height: '100%' }}>
+      {props.children}
+    </div>
+  );
 };
 export interface WarpBodyProps {
   children: React.ReactNode;

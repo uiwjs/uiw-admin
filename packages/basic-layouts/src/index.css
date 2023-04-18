@@ -33,7 +33,7 @@
   line-height: 53px;
   background-color: #fff;
   padding-left: 10px;
-  padding-right: 10px;
+  padding-right: 20px;
   display: flex;
   justify-content: space-between;
 }
@@ -90,9 +90,9 @@
 }
 
 .uiw-admin-global-content {
-  overflow: auto;
+  /* overflow: auto; */
   height: 100%;
-  padding: 14px;
+  /* padding: 14px; */
 }
 
 .w-overlay {
