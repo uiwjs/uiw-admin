@@ -32,7 +32,6 @@
     "@uiw-admin/document-title": "6.1.4",
     "@uiw-admin/exceptions": "6.1.4",
     "@uiw-admin/layout-tabs": "6.1.4",
-    "@uiw-admin/router-control": "6.1.4",
     "@uiw-admin/user-login": "6.1.4",
     "@uiw-admin/utils": "6.1.4",
     "@uiw/reset.css": "~1.0.5",

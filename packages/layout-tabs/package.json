@@ -52,7 +52,6 @@
   "devDependencies": {
     "@types/react": "~18.0.25",
     "@types/react-dom": "~18.0.11",
-    "@uiw-admin/router-control": "6.1.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router": "^6.8.0",

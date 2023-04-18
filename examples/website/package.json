@@ -26,7 +26,6 @@
     "@uiw-admin/exceptions": "6.1.4",
     "@uiw-admin/layout-tabs": "6.1.4",
     "@uiw-admin/plugins": "6.1.4",
-    "@uiw-admin/router-control": "6.1.4",
     "@uiw-admin/user-login": "6.1.4",
     "@uiw/react-back-to-top": "^1.2.1",
     "@uiw/react-code-preview": "4.0.5",
