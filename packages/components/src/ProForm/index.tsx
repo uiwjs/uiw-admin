@@ -8,6 +8,8 @@ import { StoreCtx, ColPropsContext } from './hooks/store';
 import { isObjectEmpty } from './utils';
 import './style/form-item.css';
 
+export * from './type';
+
 function ProForm(
   props: ProFormProps,
   ref: React.ForwardedRef<
@@ -103,7 +105,7 @@ function ProForm(
   return (
     <StoreCtx.Provider value={store}>
       <ColPropsContext.Provider value={colProps || {}}>
-        {children}
+        <div className="uiw-admin-proform">{children}</div>
       </ColPropsContext.Provider>
     </StoreCtx.Provider>
   );

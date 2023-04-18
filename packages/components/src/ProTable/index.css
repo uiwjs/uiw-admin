@@ -8,3 +8,16 @@
   background-color: transparent !important;
   background: transparent !important;
 }
+
+.uiw-admin-protable table tr td {
+  padding: 8px;
+}
+
+.uiw-protable-form .w-form-label {
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.uiw-protable-form .w-select {
+  background-color: transparent;
+}

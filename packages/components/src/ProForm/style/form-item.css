@@ -27,3 +27,16 @@
   transform: translateX(-50%);
   color: red;
 }
+
+.uiw-admin-proform .w-form-label {
+  font-weight: normal;
+  color: rgba(0, 0, 0, .7);
+}
+.uiw-admin-proform .w-select {
+  background-color: transparent;
+}
+
+.uiw-admin-proform .w-card-head {
+  height: 50px;
+  line-height: 50px;
+}

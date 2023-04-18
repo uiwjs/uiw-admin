@@ -1,14 +1,13 @@
 .uiw-global-header-menu {
-  line-height: 42px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
+  position: relative;
 }
 .uiw-global-header-menu .avatar,
 .uiw-global-header-menu img {
   height: 30px;
   width: 30px;
-  margin-top: -5px;
-  vertical-align: middle;
   border-radius:50px;
   background-color: antiquewhite;
 }

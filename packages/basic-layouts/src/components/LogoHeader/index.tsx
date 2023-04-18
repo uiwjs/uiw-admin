@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { useMain } from './../hook';
+import { useMain } from '../../hook';
 
 interface LogoHeaderProps {
   collapsed?: boolean;
@@ -21,9 +21,9 @@ export default (props: LogoHeaderProps = {}) => {
   const name = useMemo(
     () =>
       props.projectName && (
-        <h1 style={headerLayout === 'top' ? { color: headerFontColor } : {}}>
+        <div style={headerLayout === 'top' ? { color: headerFontColor } : {}}>
           {props.projectName}
-        </h1>
+        </div>
       ),
     [props.projectName, headerFontColor],
   );

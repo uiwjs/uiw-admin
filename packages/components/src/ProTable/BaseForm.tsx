@@ -112,7 +112,8 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
 
   return (
     <Form
-      style={{ background: '#fff', paddingBottom: 10, marginBottom: 14 }}
+      style={{ background: '#fff' }}
+      className="uiw-protable-form"
       resetOnSubmit={false}
       onSubmit={({ initial, current }) => {
         // 搜索前校验
@@ -149,8 +150,8 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                 align="bottom"
                 style={{
                   textAlign: 'right',
-                  marginRight: 14,
-                  marginBottom: itemsLength % 5 === 0 ? 0 : 10,
+                  marginBottom: 10,
+                  marginTop: 10,
                 }}
               >
                 {searchBtns &&
@@ -162,7 +163,7 @@ const BaseForm: React.FC<BaseFormProps> = (props) => {
                     ) : (
                       <Button
                         key={idx.toString()}
-                        style={{ marginRight: 5 }}
+                        style={{ marginLeft: 5 }}
                         {...btn}
                       >
                         {btn.label}

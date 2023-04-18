@@ -1,5 +1,6 @@
 import React from 'react';
-import { RoutesBaseProps, useLocation } from '@uiw-admin/router-control';
+import { KktproRoutesProps } from '@kkt/pro';
+import { useLocation } from 'react-router-dom';
 
 import { getSideMenusMap, getMenuList, getCurrentPath } from './utils';
 export const MainContext = React.createContext<{
@@ -14,18 +15,13 @@ export const MainContext = React.createContext<{
 
 export const useMain = () => React.useContext(MainContext);
 
-export const useSideMenus = (props: { routeData: RoutesBaseProps[] }) => {
-  const { routeData } = props;
+export const useSideMenus = (props: { routeData: KktproRoutesProps[] }) => {
+  const { routeData = [] } = props;
   const location = useLocation();
 
-  const sideMenusMap = React.useMemo(() => {
-    return getSideMenusMap(routeData);
-  }, [JSON.stringify(routeData)]);
+  const sideMenusMap = getSideMenusMap(routeData);
 
-  const listMenus = React.useMemo(
-    () => getMenuList(routeData),
-    [JSON.stringify(routeData)],
-  );
+  const listMenus = getMenuList(routeData);
 
   // 获取当前路由匹配信息
   const currentPath = getCurrentPath(listMenus, location.pathname);
@@ -43,7 +39,7 @@ export const useSideMenus = (props: { routeData: RoutesBaseProps[] }) => {
       routeData,
       parentPath,
     };
-  }, [JSON.stringify({ currentPath, routeData, sideMenusMap })]);
+  }, [currentPath, routeData, sideMenusMap]);
 
   const sideItemIndex = React.useMemo(() => {
     if (currentPath && currentPath.side) {
@@ -53,7 +49,7 @@ export const useSideMenus = (props: { routeData: RoutesBaseProps[] }) => {
       }
     }
     return undefined;
-  }, [location.pathname, JSON.stringify(currentPath)]);
+  }, [location.pathname, currentPath]);
 
   return {
     sideItemIndex,

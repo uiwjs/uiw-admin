@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Icon } from 'uiw';
-import { useMain } from './../hook';
+import IconBox from '../IconBox';
+import { useMain } from '../../hook';
 
 /**
  * 当前是否全屏
@@ -70,15 +71,13 @@ export default () => {
 
   return useMemo(
     () => (
-      <span
+      <IconBox
+        type={fullscreen ? 'shrink' : 'arrows-alt'}
+        iconSTyle={{ fontSize: 18 }}
+        color={headerFontColor}
         onClick={() => setFullscreen(!fullscreen)}
-        style={{ fontSize: 18, marginRight: 15, cursor: 'pointer' }}
-      >
-        <Icon
-          type={fullscreen ? 'shrink' : 'arrows-alt'}
-          color={headerFontColor}
-        />
-      </span>
+        style={{ marginRight: 10 }}
+      />
     ),
     [fullscreen],
   );

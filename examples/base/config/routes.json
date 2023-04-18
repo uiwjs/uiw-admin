@@ -12,16 +12,22 @@
         "redirect": "/tableList"
       },
       {
+        "path": "/home",
+        "name": "首页",
+        "element": "@/pages/TableList",
+        "icon": "home"
+      },
+      {
         "path": "/tableList",
         "name": "查询表格",
         "element": "@/pages/TableList",
         "icon": "search"
       },
       {
-        "path": "/home",
-        "name": "首页",
-        "element": "@/pages/TableList",
-        "icon": "home"
+        "path": "/form",
+        "name": "数据录入",
+        "element": "@/pages/Form",
+        "icon": "search"
       },
       {
         "path": "/:group/*",
@@ -35,7 +41,7 @@
         "name": "子项",
         "icon": "copy",
         "isAuth": true,
-        "side": true,
+        "side": false,
         "children": [
           {
             "index": true,
@@ -53,33 +59,33 @@
             "name": "Dashboard2",
             "element": "@/pages/Demo",
             "icon": "home"
+          }
+        ]
+      },
+      {
+        "path": "/dom/exceptions",
+        "name": "异常",
+        "icon": "warning-o",
+        "side": false,
+        "children": [
+          {
+            "index": true,
+            "redirect": "/dom/exceptions/403"
           },
           {
-            "path": "/dom/exceptions",
-            "name": "异常12",
-            "icon": "warning-o",
-            "side": true,
-            "children": [
-              {
-                "index": true,
-                "redirect": "/dom/exceptions/403"
-              },
-              {
-                "path": "/dom/exceptions/403",
-                "name": "403-1",
-                "element": "@uiw-admin/exceptions/lib/Exceptions/403"
-              },
-              {
-                "path": "/dom/exceptions/500",
-                "name": "500-1",
-                "element": "@uiw-admin/exceptions/lib/Exceptions/500"
-              },
-              {
-                "path": "/dom/exceptions/404",
-                "name": "404-1",
-                "element": "@uiw-admin/exceptions/lib/Exceptions/404"
-              }
-            ]
+            "path": "/dom/exceptions/403",
+            "name": "403",
+            "element": "@uiw-admin/exceptions/esm/Exceptions/403"
+          },
+          {
+            "path": "/dom/exceptions/500",
+            "name": "500",
+            "element": "@uiw-admin/exceptions/esm/Exceptions/500"
+          },
+          {
+            "path": "/dom/exceptions/404",
+            "name": "404",
+            "element": "@uiw-admin/exceptions/esm/Exceptions/404"
           }
         ]
       },

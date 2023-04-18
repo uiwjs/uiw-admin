@@ -48,9 +48,17 @@ const routeList = [
             element: '@/pages/document-title',
           },
           { path: '/components/exceptions/*', element: '@/pages/exceptions' },
-          { path: '/components/layout-tabs/*', element: '@/pages/layout-tabs' },
+          {
+            name: '选项卡',
+            path: '/components/layout-tabs/*',
+            element: '@/pages/layout-tabs',
+          },
           { path: '/components/plugins/*', element: '@/pages/plugins' },
-          { path: '/components/user-login/*', element: '@/pages/user-login' },
+          {
+            name: '登录页',
+            path: '/components/user-login/*',
+            element: '@/pages/user-login',
+          },
           { path: '/components/utils/*', element: '@/pages/utils' },
           { path: '/components/components/*', element: '@/pages/components' },
           {

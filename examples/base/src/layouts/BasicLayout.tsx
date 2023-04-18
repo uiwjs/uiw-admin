@@ -1,17 +1,18 @@
+import { Badge, Icon } from 'uiw'
+import useSWR from 'swr'
+import AuthPage from '@uiw-admin/authorized'
+import { KktproPageProps, Outlet } from '@kkt/pro'
 import BasicLayout, {
   useLayouts,
   BasicLayoutProps,
 } from '@uiw-admin/basic-layouts'
-import { Badge, Icon } from 'uiw'
-import useSWR from 'swr'
-import { Outlet } from 'react-router-dom'
-import AuthPage from '@uiw-admin/authorized'
-import { KktproPageProps } from '@kkt/pro'
+import LayoutsTabs from '@uiw-admin/layout-tabs'
 
 function BasicLayoutScreen(props: KktproPageProps) {
-  const route = props.routes
+  const { navigate, routes = [] } = props
 
   const layouts = useLayouts()
+
   const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
     revalidateOnMount: false,
     revalidateOnFocus: false,
@@ -27,7 +28,7 @@ function BasicLayoutScreen(props: KktproPageProps) {
   })
 
   const basicLayoutProps: BasicLayoutProps = {
-    onReloadAuth: async () => mutate(),
+    onReloadAuth: () => mutate(),
     // 修改密码以及其他操作在项目中进行
     menus: [
       {
@@ -44,7 +45,7 @@ function BasicLayoutScreen(props: KktproPageProps) {
     profile: {
       avatar: require('../assets/head.png'),
       menuLeft: (
-        <div style={{ marginRight: 15 }}>
+        <div style={{ marginRight: 20 }}>
           <Badge count={66}>
             <Icon
               type="bell"
@@ -56,7 +57,7 @@ function BasicLayoutScreen(props: KktproPageProps) {
       ),
     },
     layouts,
-    routes: props.routes as any,
+    routes: routes,
     headerLayout: 'top',
     headerBackground: '#343a40',
     headerFontColor: '#fff',
@@ -66,13 +67,12 @@ function BasicLayoutScreen(props: KktproPageProps) {
     <AuthPage authority={true} redirectPath="/login">
       <BasicLayout
         {...basicLayoutProps}
-        routes={route as any}
-        onLogoClick={(event: any) => {
-          // history.push("/demo#/tableList");
-          console.log('logo点击事件', event)
-        }}
-        isDefaultContentStyle={false}>
-        <Outlet />
+        routes={routes}
+        onLogoClick={() => {
+          navigate('/')
+        }}>
+        <LayoutsTabs routes={routes} />
+        {/* <Outlet /> */}
       </BasicLayout>
     </AuthPage>
   )

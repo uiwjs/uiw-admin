@@ -1,16 +1,16 @@
 import React from 'react';
 import { Breadcrumb } from 'uiw';
+import { KktproRoutesProps } from '@kkt/pro';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { BreadcrumbMap } from './../utils';
+import { BreadcrumbMap } from '../../utils';
 import { matchPath } from 'react-router';
 import { onNavigate } from '../Menu';
-import { RoutesBaseProps } from '@uiw-admin/router-control';
 
 import './index.css';
 interface BreadProps {
   routeMap: BreadcrumbMap;
   sideMenusMap: {
-    sideMenus: Map<string, RoutesBaseProps[]>;
+    sideMenus: Map<string, KktproRoutesProps[]>;
     flat: Map<string, string>;
     flatSide: Map<string, string>;
   };
@@ -55,7 +55,7 @@ const Bread = (props: BreadProps) => {
                     return;
                   }
                   const newRoute = routeMap.flat.find(
-                    (item: RoutesBaseProps) => item.path === parentPath,
+                    (item: KktproRoutesProps) => item.path === parentPath,
                   );
                   if (
                     newRoute &&
@@ -63,7 +63,7 @@ const Bread = (props: BreadProps) => {
                     newRoute.children.length > 0
                   ) {
                     const redirectRoute = newRoute.children.find(
-                      (item: RoutesBaseProps) => item.redirect,
+                      (item: KktproRoutesProps) => item.redirect,
                     );
                     if (redirectRoute) {
                       navigate(redirectRoute.redirect || parentPath, {
