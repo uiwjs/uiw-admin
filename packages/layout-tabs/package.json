@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/layout-tabs",
-  "version": "6.1.4",
+  "version": "6.1.5",
   "description": "layout tabs",
   "author": "Kenny Wong <wowohoo@qq.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin/tree/master/packages/layout-tabs#readme",
@@ -56,6 +56,6 @@
     "react-dom": "18.2.0",
     "react-router": "^6.8.0",
     "react-router-dom": "^6.8.0",
-    "uiw":  "^4.21.25"
+    "uiw": "^4.21.25"
   }
 }
