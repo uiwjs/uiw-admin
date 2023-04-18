@@ -14,84 +14,56 @@
 npm i @uiw-admin/layout-tabs --save # yarn add @uiw-admin/layout-tabs
 ```
 
-## 参数
+## 配合使用 `BasicLayout` 组件使用
 
-```ts
-import { RoutersProps, } from "@uiw-admin/router-control"
-
-interface LayoutTabsProps {
-  /** 子集路由 */ 
-  routes: RoutersProps[]
-}
-
-```
-
-## 案例
-
-单独使用，⚠️ 注意：需要路由包裹
-
-```jsx
-window.SEARCH_MENU = true
-import LayoutTabs from "@uiw-admin/layout-tabs"
-import { HashRouter } from 'react-router-dom';
-
-const routes=[
-  {
-    path: "/layout-tabs",
-    name: "查询表格",
-    element: <div>测试</div>,
-  },
-  {
-    path: "/doc/tableList2",
-    name: "查询表格2",
-    element: <div>测试2</div>,
-  }
-]
-
-const Demo = ()=>{
-  return (
-    <HashRouter window={window}>
-      <LayoutTabs routes={routes} />
-   </HashRouter>
-  )
-}
-export default Demo
-```
-
-## 案例2
-
-配合使用 `BasicLayout` 组件使用
-```jsx
-window.SEARCH_MENU = true
+```jsx mdx:preview
 import React from 'react'
 import BasicLayout from '@uiw-admin/basic-layouts'
-import { RoutersProps } from '@uiw-admin/router-control'
 import LayoutTabs from "@uiw-admin/layout-tabs"
-import { HashRouter } from 'react-router-dom';
-
-const routesArr=[
+const routerArrs = [
   {
-    path: "/layout-tabs",
-    name: "查询表格",
+    path: "/components/authorized",
+    name: "权限组件",
+    icon: 'appstore',
     element: <div>测试</div>,
   },
   {
-    path: "/basic-layouts",
-    name: "查询表格2",
+    path: "/components/basic-layouts",
+    name: "页面布局",
+    icon: 'appstore',
+    element: <div>测试2</div>,
+  },
+  {
+    path: "/components/layout-tabs",
+    name: "选项卡",
+    icon: 'appstore',
     element: <div>测试2</div>,
   }
 ]
 
 function BasicLayoutScreen() {
   return (
-     <HashRouter window={window}>
-      <BasicLayout routes={routesArr}  isDefaultContentStyle={false}  >
-        <LayoutTabs routes={routesArr} /> 
+    <div style={{ height: 400 }}>
+      <BasicLayout routes={routerArrs}>
+        <LayoutTabs routes={routerArrs} />
       </BasicLayout>
-    </HashRouter>
+    </div>
   )
 }
 export default BasicLayoutScreen
+
+```
+
+## 参数
+
+```ts
+import { KktproRoutesProps } from '@kkt/pro';
+
+interface LayoutTabsProps {
+  /** 子集路由 */ 
+  routes: KktproRoutesProps[]
+}
+
 ```
 ## 贡献者
 
