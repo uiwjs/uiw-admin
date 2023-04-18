@@ -46,7 +46,6 @@ function FormDom({
   const styles: React.CSSProperties = {
     background: '#fff',
     paddingBottom: 10,
-    marginBottom: 14,
     ...style,
   };
 
