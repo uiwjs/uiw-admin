@@ -169,7 +169,7 @@ export default Demo
 ## Props
 
 #### 基础参数
-[继承于uiw,请参考Drawer其余参数](https://uiwjs.github.io/#/components/drawer)
+更多属性文档请参考 [uiw/Drawer](https://uiwjs.github.io/#/components/drawer)
 
 | 参数    | 说明     | 类型           | 默认值 |
 | :------ | :------- | :------------- | :----- |
@@ -181,7 +181,7 @@ export default Demo
 
 
 #### ButtonsProps
-[继承于uiw,请参考Button其余参数](https://uiwjs.github.io/#/components/button)
+更多属性文档请参考 [uiw/Button](https://uiwjs.github.io/#/components/button)
 
 | 参数     | 说明         | 类型    | 默认值 |
 | :------- | :----------- | :------ | :----- |

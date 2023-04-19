@@ -1238,7 +1238,7 @@ export default Demo
 
 ### saveButtonProps resetButtonProps
 
-其余属性继承于[uiw/button](https://uiwjs.github.io/#/components/button)
+更多属性文档请参考 [uiw/button](https://uiwjs.github.io/#/components/button)
 
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
