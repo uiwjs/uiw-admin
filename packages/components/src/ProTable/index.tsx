@@ -81,9 +81,9 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
         )}
 
         {/* 操作区域 */}
-        <Card noHover bodyStyle={{ paddingTop: 5 }}>
+        <Card noHover>
           {operateButtons && operateButtons.length > 0 && (
-            <div style={{ background: '#fff', padding: '10px 0' }}>
+            <div style={{ background: '#fff', paddingBottom: 14 }}>
               {operateButtons.map((btn: any, idx: number) =>
                 btn?.render ? (
                   <React.Fragment key={idx.toString()}>

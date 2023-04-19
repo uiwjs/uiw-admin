@@ -708,7 +708,7 @@ export default Demo6
 | label           | 按钮标题                               | string   | - |
 | render          | 不使用button，自定义组件                               | React Component   | - |
 
-其余属性继承[uiw button](https://uiwjs.github.io/#/components/button)
+更多属性文档请参考 [uiw button](https://uiwjs.github.io/#/components/button)
 
 ### operateButtons
 
@@ -796,7 +796,7 @@ props: [
 | pageSize | 每页条数       | Number | 10     |
 | onShowSizeChange     | pageSize 变化的回调  | Function(current, pageSize)  | -      |
 
-其余属性继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)
+更多属性文档请参考 [uiw Pagination](https://uiwjs.github.io/#/components/pagination)
 
 ## useTable
 

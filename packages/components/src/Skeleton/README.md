@@ -22,7 +22,7 @@ export default Demo
 | ------- | ------------ | ------- | ------ |
 | loading | 页面加载状态 | Boolean | false  |
 
-> 其余参数与[Uiw Loader](https://uiwjs.github.io/#/components/loader)相同
+> 更多属性文档请参考 [Uiw Loader](https://uiwjs.github.io/#/components/loader)
 
 
 ## 贡献者

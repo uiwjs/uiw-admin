@@ -8,6 +8,7 @@ import './style/form-item.css';
 function FormDom({
   formDatas = [],
   formfields,
+  formType,
   onSubmit,
   onChange,
   onSubmitError,
@@ -29,6 +30,8 @@ function FormDom({
   const store = useStore();
   const colProps = useColPropsContext();
 
+  console.log(8888, formType);
+
   const { setFormState } = store as {
     setFormState: ((p: any) => void) | undefined;
   };
@@ -44,10 +47,13 @@ function FormDom({
   }, [baseRef]);
 
   const styles: React.CSSProperties = {
-    background: '#fff',
     paddingBottom: 10,
     ...style,
   };
+
+  if (formType !== 'pure') {
+    styles.background = '#fff';
+  }
 
   return (
     <Form
@@ -110,14 +116,17 @@ function FormDom({
             </Row>
             <div className="w-form-item-center" style={{ ...buttonsContainer }}>
               <Button
+                className="uiw-admin-proform-btn"
                 style={{ display: showSaveButton ? 'flex' : 'none' }}
                 disabled={!canSubmit()}
+                type="primary"
                 htmlType="submit"
                 {...saveButtonProps}
               >
                 {saveButtonProps.label || '提交'}
               </Button>
               <Button
+                className="uiw-admin-proform-btn"
                 style={{ display: showResetButton ? 'flex' : 'none' }}
                 onClick={resetForm}
                 {...resetButtonProps}

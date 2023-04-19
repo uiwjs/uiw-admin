@@ -1172,10 +1172,15 @@ import { formatter, Input, Button } from 'uiw'
 import React, { useState } from 'react';
 
 const Inputs = ({value, onChange}) => {
-  return <>
-    <Button>不要输错哦</Button>
-    <Input placeholder="请输入内容"  value={value} onChange={e => { onChange(e.target.value) }}  />
-  </>
+  return (
+    <>
+      <Button style={{ marginRight: 10, width: 200 }}>按钮</Button>
+      <Input
+        placeholder="请输入内容"
+        value={value}
+        onChange={e => { onChange(e.target.value) }} />
+    </>
+  )
 }
 
 const Demo = () => {
@@ -1233,7 +1238,7 @@ export default Demo
 
 ### saveButtonProps resetButtonProps
 
-其余属性继承于[uiw/button](https://uiwjs.github.io/#/components/button)
+更多属性文档请参考 [uiw/button](https://uiwjs.github.io/#/components/button)
 
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
