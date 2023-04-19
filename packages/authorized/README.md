@@ -65,11 +65,11 @@ const isAuth = getAuthPath("/api/path")
 
 ### 参数说明
 
-| 参数     | 必填 | 类型              | 默认值  | 说明                                            |
-| :------- | :--- | :---------------- | :------ | :---------------------------------------------- |
-| path     | 否   | `string`          |         | 路径                                            |
-| disabled | 否   | `boolean`         | `false` | 禁用 状态 展示(适用于 存在 disabled 属性的组件) |
-| children | 是   | `React.ReactNode` |         | 内容                                            |
+| 参数 | 说明 | 必填 | 类型 | 默认值  |
+| :--- | :--- | :--- | :--- | :--- |
+| path | 路径  | 否 | `string` | - |
+| disabled | 禁用 状态 展示(适用于 存在 disabled 属性的组件) | 否 | `boolean` | `false` |
+| children | 内容 | 是 | `React.ReactNode` | - |
 <!-- 
 ```tsx
 import React from "react"

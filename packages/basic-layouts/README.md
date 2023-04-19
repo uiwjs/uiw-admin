@@ -305,29 +305,29 @@ export default BasicLayoutScreen;
 
 ## Props
 
-| 参数                  | 必填 | 类型                                                                                     | 默认值    | 说明                     |
-| :-------------------- | :--- | :--------------------------------------------------------------------------------------- | :-------- | :----------------------- |
-| className                  | 否   | `string`                                                                                 |           | BasicLayout 外层className                 |
-| style                  | 否   | `object`                                                                                 |           | BasicLayout 外层最外层样式式                  |
-| logo                  | 否   | `string`                                                                                 |           | logo图标                 |
-| projectName           | 否   | `string`                                                                                 |           | 项目名称                 |
-| footer                | 否   | `React.ReactElement`                                                                     |           | 页脚                     |
-| routes                | 否   | `RoutersProps[]`                                                                         |           | 菜单路由数据             |
-| children              | 否   | `React.ReactNode`                                                                        |           | 内容                     |
-| headerLayout          | 否   | `枚举类型："top" \| "default"`                                                           | `default` | 头部布局                 |
-| headerBackground      | 否   | `string`                                                                                 | `"#fff"`  | 头部背景色               |
-| headerFontColor       | 否   | `string`                                                                                 | `"#000"`  | 头部字体颜色             |
-| menuHide              | 否   | `boolen`                                                                                 | `false`   | 菜单隐藏(可从路由组件router-control组件带参数hiddenMainMenu控制)             |
-| menus                 | 否   | `HeaderMenuItemsProps[]`                                                                 |           | 右侧点击头像展示菜单     |
-| profile               | 否   | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |           | 头像部分                 |
-| onReloadAuth          | 否   | `() => void`                                                                             |           | 重新加载权限             |
-| layouts               | 否   | `UseLayoutsProps`                                                                        |           | 右侧点击头像展示菜单配置 |
-| isDefaultContentStyle | 否   | `boolean`                                                                                | `true`    | 内容区域默认样式展示     |
-| hideReloadButton | 隐藏刷新权限按钮 | `Boolean` | `false` |
-| hideLogoutButton | 隐藏退出登录按钮 | `Boolean` | `false` |
-| hideUserInfo | 隐藏用户信息 | `Boolean` | `false` |
-| onLogout     | 否   | `(navigate: NavigateFunction) => void` |  | 覆盖原始退出事件 | 
-| onLogoClick     | 否   | `(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void` |  | logo 点击事件 | 
+| 参数 | 说明 | 必填 | 类型 | 默认值 |
+| :--- | :--- | :--- | :--- | :--- |
+| className | BasicLayout 外层className | 否 | `string` | - |
+| style | BasicLayout 外层最外层样式式 | 否 | `object` | - |
+| logo | logo图标 | 否 | `string` | - |
+| projectName | 项目名称 | 否   | `string` | - |
+| footer | 页脚 | 否 | `React.ReactElement` | - |
+| routes | 菜单路由数据 | 否 | `KktproRoutesProps[]` | - |
+| children | 内容 | 否 | `React.ReactNode` | - |
+| headerLayout | 头部布局 | 否 | `枚举类型："top" \| "default"` | `default` |
+| headerBackground | 头部背景色 | 否 | `string` | `"#fff"` |
+| headerFontColor | 头部字体颜色 | 否 | `string` | `"#000"` |
+| menuHide | 菜单隐藏(可从路由组件router-control组件带参数hiddenMainMenu控制) | 否 | `boolen` | `false` |
+| menus | 右侧点击头像展示菜单 | 否 | `HeaderMenuItemsProps[]` | - |
+| profile | 头像部分 | 否 | `{avatar(头像)?:string,userName(用户名)?:string,menuLeft(菜单左侧)?:React.ReactElement}` |  - |
+| onReloadAuth | 重新加载权限 | 否 | `() => void` |
+| layouts | 右侧点击头像展示菜单配置 | 否 | `UseLayoutsProps` | - |
+| isDefaultContentStyle | 内容区域默认样式展示 | 否 | `boolean` | `true` |
+| hideReloadButton | 隐藏刷新权限按钮 | - | `Boolean` | `false` |
+| hideLogoutButton | 隐藏退出登录按钮 | - | `Boolean` | `false` |
+| hideUserInfo | 隐藏用户信息 | - | `Boolean` | `false` |
+| onLogout | 覆盖原始退出事件 |  否 | `(navigate: NavigateFunction) => void` | - |
+| onLogoClick | logo 点击事件 | 否   | `(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void` | -  | 
 
 
 建议：在使用 `@uiw-admin/layout-tabs` 组件渲染的时候，建议 `isDefaultContentStyle` 设置为 `false`
@@ -335,11 +335,11 @@ export default BasicLayoutScreen;
 ## useLayouts
 
 ### response
-| 参数               | 必填 | 类型                                             | 默认值 | 说明 |
-| :----------------- | :--- | :----------------------------------------------- | :----- | :--- |
-| headerRightvisible | 否   | `boolen`                                         |        |      |
-| closeMenu          | 否   | `() => void`                                     |        |      |
-| updateStore        | 否   | `(datas: {headerRightvisible: boolean}) => void` |        |      |
+| 参数 | 说明 | 必填 | 类型 | 默认值 |
+| :--- | :--- | :--- | :--- | :--- |
+| headerRightvisible | 关闭右上角menu菜单 | 否   | `boolen` | - |
+| closeMenu | 关闭右上角menu菜单事件 | 否 | `() => void` | - |
+| updateStore | 更新数据 | 否 | `({ headerRightvisible: boolean }) => void` | - |
 
 ## 贡献者
 
