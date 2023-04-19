@@ -12,16 +12,16 @@
 ```
 
 ## 二、路由和菜单
-当项目需要根据权限判断组件是否展示 使用组件时，请在 .kktprc.ts文件中配置全局变量(define)中AUTH=true
+当项目需要根据权限判断组件是否展示 使用组件时，在 `.kktprc.ts`文件中配置全局变量
+
 ```diff
-import config from "@uiw-admin/config"
-export default config({
+export default {
   define:{
-+    AUTH:true,
++   AUTH:true,
     //  ...
   }
   //  ...
-})
+}
 ```
 如果是路由权限判断,请在route.json中添加对应菜单的权限``isAuth``
 ```json
