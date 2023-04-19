@@ -116,14 +116,17 @@ function FormDom({
             </Row>
             <div className="w-form-item-center" style={{ ...buttonsContainer }}>
               <Button
+                className="uiw-admin-proform-btn"
                 style={{ display: showSaveButton ? 'flex' : 'none' }}
                 disabled={!canSubmit()}
+                type="primary"
                 htmlType="submit"
                 {...saveButtonProps}
               >
                 {saveButtonProps.label || '提交'}
               </Button>
               <Button
+                className="uiw-admin-proform-btn"
                 style={{ display: showResetButton ? 'flex' : 'none' }}
                 onClick={resetForm}
                 {...resetButtonProps}

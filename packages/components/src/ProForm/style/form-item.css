@@ -36,16 +36,16 @@
   background-color: transparent;
 }
 
-.uiw-admin-proform .w-card-head {
+.uiw-admin-proform > .w-card .w-card-head {
   height: 44px;
   line-height: 44px;
 }
-.uiw-admin-proform .w-descriptions-title {
+.uiw-admin-proform > .w-descriptions .w-descriptions-title {
   height: 44px;
   display: flex;
   align-items: center;
 }
-.uiw-admin-proform .w-collapse-header {
+.uiw-admin-proform > .w-collapse .w-collapse-header {
   height: 44px;
   align-items: center;
   font-weight: 500;
@@ -60,4 +60,8 @@
   line-height: 44px;
   border-top: 1px solid #dfe2e5;
   padding: 0 12px;
+}
+.uiw-admin-proform-btn {
+  height: 34px;
+  min-width: 80px;
 }
