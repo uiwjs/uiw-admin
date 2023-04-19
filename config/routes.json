@@ -18,16 +18,16 @@
         "icon": "home"
       },
       {
-        "path": "/tableList",
-        "name": "查询表格",
-        "element": "@/pages/TableList",
-        "icon": "search"
+        "path": "/demo",
+        "name": "列表查询/新增",
+        "element": "@/pages/Demo",
+        "icon": "home"
       },
       {
         "path": "/form",
-        "name": "数据录入",
+        "name": "高级表单",
         "element": "@/pages/Form",
-        "icon": "search"
+        "icon": "document"
       },
       {
         "path": "/:group/*",
@@ -35,32 +35,6 @@
         "hideInMenu": true,
         "component": "@/pages/TableList",
         "icon": "home"
-      },
-      {
-        "path": "/dom",
-        "name": "子项",
-        "icon": "copy",
-        "isAuth": true,
-        "side": false,
-        "children": [
-          {
-            "index": true,
-            "redirect": "/dom/dashboard",
-            "element": "@/pages/Dashboard"
-          },
-          {
-            "path": "/dom/dashboard",
-            "name": "Dashboard",
-            "isAuth": true,
-            "element": "@/pages/Dashboard"
-          },
-          {
-            "path": "/dom/demo",
-            "name": "Dashboard2",
-            "element": "@/pages/Demo",
-            "icon": "home"
-          }
-        ]
       },
       {
         "path": "/dom/exceptions",
@@ -88,12 +62,6 @@
             "element": "@uiw-admin/exceptions/esm/Exceptions/404"
           }
         ]
-      },
-      {
-        "path": "/demo",
-        "name": "列表查询/新增demo",
-        "element": "@/pages/Demo",
-        "icon": "home"
       }
     ]
   }

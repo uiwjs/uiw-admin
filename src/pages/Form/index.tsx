@@ -1,7 +1,21 @@
-import { ProForm } from '@uiw-admin/components'
-import { Slider } from 'uiw'
+import { useState } from 'react'
+import { Button, Slider } from 'uiw'
+import { ProForm, useForm } from '@uiw-admin/components'
+import { items, items2 } from './items'
+import { KktproKeys } from '@kkt/pro'
+import './index.less'
 
-const option = [
+const asyncAwaitFormList: any = (arr = []) => {
+  return (
+    arr &&
+    arr.length > 0 &&
+    Promise.all(arr).then((vals) => {
+      return vals
+    })
+  )
+}
+
+const selectOption = [
   { value: 1, label: '苹果' },
   { value: 2, label: '西瓜' },
   { value: 3, label: '香蕉' },
@@ -12,150 +26,105 @@ const option = [
 ]
 
 const Page = () => {
+  const [isView] = useState<boolean>(false)
+  const [queryInfo, setQueryInfo] = useState<KktproKeys>({})
+  const [option] = useState<KktproKeys[]>(selectOption)
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const form = useForm()
+  const form2 = useForm()
+
+  const onChange = (current: KktproKeys) => {
+    const newData: KktproKeys = {
+      ...queryInfo,
+      ...current,
+    }
+    setQueryInfo(newData)
+  }
+
+  // 模拟搜索
+  const handleSearch = (type: 'searchSelect') => {
+    if (type === 'searchSelect') {
+      setLoading(true)
+      setTimeout(() => {
+        setLoading(false)
+      }, 2000)
+    }
+  }
+
+  // 保存
+  const handleSave = async () => {
+    // 触发验证获取值
+    const values = await asyncAwaitFormList([
+      form?.validateFieldsAndGetValue(),
+      form2?.validateFieldsAndGetValue(),
+    ])
+    console.log('values', values)
+  }
+
+  // 重置
+  const handleReset = async () => {
+    form?.resetForm?.()
+    form2?.resetForm?.()
+  }
+
   return (
-    <ProForm
-      // 表单类型
-      formType="card"
-      title="基本使用(与uiw/form使用保持一致)"
-      // 自定义组件
-      customWidgetsList={{
-        slider: Slider,
-      }}
-      cardProps={{
-        noHover: true,
-      }}
-      // 是否展示uiw/form提交按钮
-      showSaveButton
-      // 是否展示uiw/form重置按钮
-      showResetButton
-      // 提交后验证
-      onSubmit={(initial, current) => {
-        console.log(111, initial, current)
-      }}
-      formDatas={[
-        {
-          label: 'input',
-          key: 'input',
-          widget: 'input',
-          initialValue: '',
-          widgetProps: {},
-          help: 'input不能为空',
-          rules: [{ required: true, message: 'input不能为空' }],
-        },
-        {
-          label: 'textarea',
-          key: 'textarea',
-          widget: 'textarea',
-          span: '24',
-          colstyle: { maxWidth: 800 },
-        },
-        {
-          label: 'select',
-          key: 'select',
-          widget: 'select',
-          option: [
-            { value: 1, label: '苹果' },
-            { value: 2, label: '西瓜' },
-            { value: 3, label: '香蕉' },
-            { value: 4, label: '东北大冻梨' },
-          ],
-        },
-        {
-          label: 'switch',
-          key: 'switch',
-          widget: 'switch',
-        },
-        {
-          label: 'radio',
-          widget: 'radio',
-          key: 'radio',
-          option: [
-            { label: '男', value: 'man' },
-            { label: '女', value: 'girl' },
-          ],
-        },
-        {
-          label: '多选框',
-          widget: 'checkbox',
-          key: 'checkbox',
-          option: [
-            { label: '四川菜', value: 'sichuan' },
-            { label: '湖北菜', value: 'hubei' },
-          ],
-        },
-        {
-          label: '年月日时分秒',
-          key: 'dateInputsecond',
-          widget: 'dateInput',
-          widgetProps: {
-            format: 'YYYY-MM-DD HH:mm:ss',
-          },
-        },
-        {
-          label: '年月日',
-          key: 'dateInput',
-          widget: 'dateInput',
-          widgetProps: {
-            format: 'YYYY-MM-DD',
-          },
-        },
-        {
-          label: '年月',
-          key: 'monthPicker',
-          widget: 'monthPicker',
-          widgetProps: {
-            format: 'YYYY-MM',
-          },
-        },
-        {
-          label: '时分秒',
-          key: 'timePicker',
-          widget: 'timePicker',
-        },
-        {
-          label: 'searchSelect',
-          key: 'searchSelect',
-          widget: 'searchSelect',
-          option: option,
-          widgetProps: {
-            mode: 'multiple',
-            allowClear: true,
-            showSearch: true,
-            style: { width: '100%' },
-          },
-        },
-        {
-          label: '评分',
-          key: 'rate',
-          widget: 'rate',
-          span: '8',
-        },
-        // 只读模式下支持读取React.ReactNode
-        {
-          label: '自定义组件',
-          key: 'slider',
-          widget: 'slider',
-          readSpan: 2,
-          span: '16',
-        },
-        {
-          label: '上传组件',
-          key: 'upload',
-          widget: 'upload',
-          span: '24',
-          readSpan: 3,
-          widgetProps: {
-            uploadType: 'card',
-            multiple: true,
-            maxNumber: 2,
-            showFileIcon: {
-              showPreviewIcon: true,
-              showRemoveIcon: true,
+    <div style={{ position: 'relative' }}>
+      <ProForm
+        form={form}
+        title="基础信息"
+        customWidgetsList={{
+          slider: Slider,
+        }}
+        cardProps={{
+          noHover: true,
+          style: { marginBottom: 10 },
+        }}
+        formType={isView ? 'pure' : 'card'}
+        readOnly={isView}
+        // 更新表单的值
+        onChange={(initial, current) => onChange(current)}
+        buttonsContainer={{ justifyContent: 'flex-start' }}
+        formDatas={
+          items(queryInfo, {
+            isView,
+            searchSelect: {
+              onSearch: () => handleSearch('searchSelect'),
+              loading: loading,
+              option: option,
             },
-          },
-        },
-      ]}
-    />
+          }) as any
+        }
+      />
+      <ProForm
+        form={form2}
+        title="个人信息"
+        customWidgetsList={{
+          slider: Slider,
+        }}
+        cardProps={{
+          noHover: true,
+        }}
+        formType={isView ? 'pure' : 'card'}
+        readOnly={isView}
+        // 更新表单的值
+        onChange={(initial, current) => onChange(current)}
+        buttonsContainer={{ justifyContent: 'flex-start' }}
+        formDatas={items2(queryInfo) as any}
+      />
+      <div className="fiexd-btns">
+        <Button
+          className="btn"
+          type="primary"
+          size="large"
+          onClick={handleSave}>
+          提交
+        </Button>
+        <Button className="btn" size="large" onClick={handleReset}>
+          重置
+        </Button>
+      </div>
+    </div>
   )
 }
 

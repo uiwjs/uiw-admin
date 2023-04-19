@@ -115,6 +115,7 @@ const Detail = ({ updateData }: DetailProps) => {
           }) as any
         }
       />
+      <div style={{ height: 14 }} />
       <ProForm
         form={form2}
         title="个人信息"
