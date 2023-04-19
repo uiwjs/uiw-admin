@@ -10,6 +10,7 @@ import {
   Title,
   Version,
   LinkMenu,
+  AMenu,
 } from './style';
 
 interface NavbarProps
@@ -30,6 +31,12 @@ const Navbar: FC<PropsWithRef<NavbarProps>> = (props) => {
         </Logo>
       </Left>
       <Right>
+        <AMenu
+          href="https://stackblitz.com/github/uiwjs/uiw-admin/tree/master/examples/base?embed=1&hideNavigation=0&hidedevtools=0"
+          target="__blank"
+        >
+          实例预览
+        </AMenu>
         <LinkMenu to="/docs">教程</LinkMenu>
         <LinkMenu to="/components">组件</LinkMenu>
         <HeaderTools>
