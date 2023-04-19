@@ -1172,10 +1172,15 @@ import { formatter, Input, Button } from 'uiw'
 import React, { useState } from 'react';
 
 const Inputs = ({value, onChange}) => {
-  return <>
-    <Button>不要输错哦</Button>
-    <Input placeholder="请输入内容"  value={value} onChange={e => { onChange(e.target.value) }}  />
-  </>
+  return (
+    <>
+      <Button style={{ marginRight: 10, width: 200 }}>按钮</Button>
+      <Input
+        placeholder="请输入内容"
+        value={value}
+        onChange={e => { onChange(e.target.value) }} />
+    </>
+  )
 }
 
 const Demo = () => {

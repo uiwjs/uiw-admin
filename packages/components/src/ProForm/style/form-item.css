@@ -37,6 +37,27 @@
 }
 
 .uiw-admin-proform .w-card-head {
-  height: 50px;
-  line-height: 50px;
+  height: 44px;
+  line-height: 44px;
+}
+.uiw-admin-proform .w-descriptions-title {
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+.uiw-admin-proform .w-collapse-header {
+  height: 44px;
+  align-items: center;
+  font-weight: 500;
+}
+.uiw-admin-proform > .w-descriptions {
+  border-top: none;
+}
+.uiw-admin-proform > .w-descriptions .w-descriptions-title {
+  width: 100%;
+  display: table-caption;
+  box-sizing: border-box;
+  line-height: 44px;
+  border-top: 1px solid #dfe2e5;
+  padding: 0 12px;
 }
