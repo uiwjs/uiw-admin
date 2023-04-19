@@ -1292,8 +1292,8 @@ export default Demo
 
 ## 注意
 > [继承于uiw/Form,请参考uiw/From以及表单组件](https://uiwjs.github.io/#/components/form),
- 默认集成了`Input`,`Checkbox`,`Switch`,`Textarea`,`DateInput`,`TimePicker`,
- `MonthPicker`,`SearchSelect`,`Select`,`Radio`,`selectMultiple`,`Rate`,`Upload`。
+ 默认集成了`Input`, `InputNumber`, `Checkbox`, `Switch`, `Textarea`,`DateInput`, `TimePicker`,
+ `MonthPicker`, `SearchSelect`, `Select`, `Radio`, `selectMultiple`, `Rate`, `Upload`。
 <!--rehype:style=border-left: 8px solid #ffe564;background-color: #ffe56440;padding: 12px 16px;-->
 
 ## 贡献者

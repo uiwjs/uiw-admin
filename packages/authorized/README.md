@@ -7,17 +7,16 @@
 ## 何时使用
 
 当项目需要根据权限判断组件是否展示
-使用组件时，请在 `.kktprc.js`文件中配置全局变量(`define`)中`AUTH=true`
+使用组件时，请在 `.kktprc.js`文件中配置全局变量
 
 ```diff
-import config from "@uiw-admin/config"
-export default config({
+export default {
   define:{
-+    AUTH:true,
++   AUTH:true,
     //  ...
   }
   //  ...
-})
+}
 
 ```
 

@@ -1,10 +1,22 @@
 # 全局数据状态管理
 
+> `kktp`配置 `initModel` 生效
+
   - 简化 @rematch/* 状态管理公共进行初始化;
   - 约定是到 model 组织方式，不用手动注册 model
   - 文件名即 name，model 内如果没有声明 name，会以文件名作为 name
   - 内置 @rematch/loading，直接 loading 字段使用即可
   - [更多 @rematch/core api](https://rematchjs.org/docs/api-reference)
+
+## kktp配置文件
+
+```ts
+// .kktprc.ts
+export default {
+  // ...
+  initModel:true,
+}
+```
 
 ## store  
 
@@ -71,13 +83,12 @@ export default model;
 
 ## 类型
 
-通过 @uiw-admin/models 导出类型：`FullModel`，`Store`，`AddModel`，`Dispatch`，`RootState`，`ModelDefault`，`RootModel`。
+通过 @kkt/pro 导出类型：`FullModel`，`Store`，`AddModel`，`Dispatch`，`RootState`，`ModelDefault`，`RootModel`。
 
 ## model 用例
 
 ```ts
-import { RootModel } from '@kkt/pro'
-import { createModel } from '@rematch/core'
+import { RootModel, createModel } from '@kkt/pro'
 import { selectById } from '../servers/demo'
 
 const demo = createModel<RootModel>()({
@@ -126,9 +137,7 @@ export default demo
 
 ```tsx
 import React from 'react'
-import { useDispatch,useSelector } from 'react-redux'
-import { Dispatch } from '@kkt/pro'
-import { RootState } from '@kkt/pro'
+import { Dispatch, RootState, useDispatch,useSelector } from '@kkt/pro';
 
 const Demo = () => {
   const dispatch = useDispatch<Dispatch>()
@@ -149,16 +158,6 @@ const Demo = () => {
 }
 export default Demo
 
-```
-
-## kktp配置文件
-
-```ts
-// .kktprc.ts
-export default {
-  // ...
-  initModel:true,
-}
 ```
 
 ## 贡献者

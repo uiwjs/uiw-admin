@@ -1,7 +1,7 @@
 import { Badge, Icon } from 'uiw'
 import useSWR from 'swr'
 import AuthPage from '@uiw-admin/authorized'
-import { KktproPageProps, Outlet } from '@kkt/pro'
+import { KktproPageProps } from '@kkt/pro'
 import BasicLayout, {
   useLayouts,
   BasicLayoutProps,

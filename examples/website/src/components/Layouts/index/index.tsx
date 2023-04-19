@@ -11,7 +11,7 @@ export default function Layout(props: KktproPageProps) {
       <Main>
         <Body>
           <Menu />
-          <div style={{ paddingLeft: 210, paddingTop: 58, height: '100%' }}>
+          <div style={{ paddingLeft: 240, paddingTop: 58, height: '100%' }}>
             <Outlet />
           </div>
         </Body>

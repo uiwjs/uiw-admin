@@ -79,10 +79,10 @@ const routeList = [
           },
         ],
       },
-      { path: '*', element: '@uiw-admin/exceptions/lib/Exceptions/404' },
+      { path: '*', element: '@uiw-admin/exceptions/esm/Exceptions/404' },
     ],
   },
-  { path: '*', element: '@uiw-admin/exceptions/lib/Exceptions/404' },
+  { path: '*', element: '@uiw-admin/exceptions/esm/Exceptions/404' },
 ];
 
 export default routeList;

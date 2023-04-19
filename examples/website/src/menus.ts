@@ -82,11 +82,11 @@ export const menusComponentsConfig: MenusConfigObject[] = [
     title: '架构',
   },
   {
-    title: 'Authorized',
+    title: 'Authorized 权限组件',
     path: '/components/authorized',
   },
   {
-    title: 'Basic Layouts',
+    title: 'BasicLayouts 高级布局',
     path: '/components/basic-layouts',
   },
   // {
@@ -94,15 +94,15 @@ export const menusComponentsConfig: MenusConfigObject[] = [
   //   "path": "/components/config"
   // },
   {
-    title: 'Document Title',
+    title: 'DocumentTitle 页面标题',
     path: '/components/document-title',
   },
   {
-    title: 'Exceptions',
+    title: 'Exceptions 异常组件',
     path: '/components/exceptions',
   },
   {
-    title: 'Layout Tabs',
+    title: 'LayoutTabs 选项卡',
     path: '/components/layout-tabs',
   },
   // {
@@ -110,11 +110,11 @@ export const menusComponentsConfig: MenusConfigObject[] = [
   //   "path": "/components/router-control"
   // },
   {
-    title: '登录UserLogin',
+    title: 'UserLogin 登录',
     path: '/components/user-login',
   },
   {
-    title: 'Utils',
+    title: 'Utils 工具',
     path: '/components/utils',
   },
   {
@@ -126,19 +126,19 @@ export const menusComponentsConfig: MenusConfigObject[] = [
     path: '/components/components',
   },
   {
-    title: 'ProTable',
+    title: 'ProTable 高级表格',
     path: '/components/protable',
   },
   {
-    title: 'ProDrawer',
+    title: 'ProDrawer 抽屉',
     path: '/components/prodrawer',
   },
   {
-    title: 'ProForm',
+    title: 'ProForm 高级表单',
     path: '/components/proform',
   },
   {
-    title: 'Skeleton',
+    title: 'Skeleton 骨架组件',
     path: '/components/skeleton',
   },
 ];

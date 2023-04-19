@@ -17,9 +17,9 @@ npm i @uiw-admin/basic-layouts --save # yarn add @uiw-admin/basic-layouts
 > 在项目中，`BasicLayouts`组件下如果不使用`LayoutTabs`组件内容放`react-router-dom` 的`Outlet`组件。否则只需要放`LayoutTabs`组件即可。
 
 ```jsx
+import { Outlet } from '@kkt/pro';
 import BasicLayout from '@uiw-admin/basic-layouts';
-import { Outlet } from 'react-router-dom';
-import LayoutTabs from "@uiw-admin/layout-tabs"
+import LayoutTabs from "@uiw-admin/layout-tabs";
 
 // 不使用 LayoutTabs 组件
 const Layouts = () => {
@@ -43,7 +43,7 @@ const Layouts = () => {
 ## 基本使用
 
 ```jsx mdx:preview
-import React from 'react'
+import React from 'react';
 import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
 import LayoutTabs from "@uiw-admin/layout-tabs";
 
@@ -79,13 +79,13 @@ function BasicLayoutScreen() {
     </div>
   )
 }
-export default BasicLayoutScreen
+export default BasicLayoutScreen;
 ```
 
 ## 头部布局
 
 ```jsx mdx:preview
-import React from 'react'
+import React from 'react';
 import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts'
 import LayoutTabs from "@uiw-admin/layout-tabs";
 
@@ -127,7 +127,7 @@ function BasicLayoutScreen() {
     </div>
   )
 }
-export default BasicLayoutScreen
+export default BasicLayoutScreen;
 ```
 
 **菜单搜索功能**
@@ -135,13 +135,12 @@ export default BasicLayoutScreen
 在根目录`.kktprc.js`文件配置 `SEARCH_MENU` 参数，类型：`boolen` 默认`true`
 
 ```ts
-// .kktprc.js 
-import config from "@uiw-admin/config"
-export default config({
+// .kktprc.ts 
+export default {
   define:{
     SEARCH_MENU:true
   }
-})
+}
 ```
 
 ## 右侧头像部分配置
@@ -154,12 +153,9 @@ export default config({
 <!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
 ```jsx mdx:preview
 window.SEARCH_MENU = true
-import React from 'react'
-import BasicLayout, {
-  useLayouts,
-} from '@uiw-admin/basic-layouts'
-import { HashRouter ,useRoutes ,Outlet} from 'react-router-dom';
-import LayoutTabs from "@uiw-admin/layout-tabs"
+import React from 'react';
+import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts';
+import LayoutTabs from "@uiw-admin/layout-tabs";
 
 const routerArrs = [
   {
@@ -221,7 +217,7 @@ function BasicLayoutScreen() {
   )
 }
 
-export default BasicLayoutScreen
+export default BasicLayoutScreen;
 ```
 
 
@@ -230,11 +226,10 @@ export default BasicLayoutScreen
 通过隐藏系统默认的退出登录，自定义退出登录
 
 ```jsx mdx:preview
-import React from 'react'
-import BasicLayout, {
-  useLayouts,
-} from '@uiw-admin/basic-layouts'
-import LayoutTabs from "@uiw-admin/layout-tabs"
+import React from 'react';
+import BasicLayout, { useLayouts } from '@uiw-admin/basic-layouts';
+import LayoutTabs from "@uiw-admin/layout-tabs";
+
 const routerArrs = [
   {
     path: "/components/authorized",
@@ -257,11 +252,9 @@ const routerArrs = [
 ]
 
 function BasicLayoutScreen() {
- 
-  const layouts = useLayouts()
+  const layouts = useLayouts();
 
-
- const basicLayoutProps = {
+  const basicLayoutProps = {
     // 右侧下拉菜单内容
     menus: [
       {
@@ -305,7 +298,7 @@ function BasicLayoutScreen() {
     </div>
   )
 }
-export default BasicLayoutScreen
+export default BasicLayoutScreen;
 
 ```
 
