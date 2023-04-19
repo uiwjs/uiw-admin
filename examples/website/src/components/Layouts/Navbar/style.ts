@@ -72,3 +72,17 @@ export const LinkMenu = styled(NavLink)`
     background: var(--color1);
   }
 `;
+export const AMenu = styled.a`
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--color-fg-default);
+  padding: 2px 15px;
+  border-radius: 3px;
+  &:first-child {
+    margin-left: 0;
+  }
+  &.active {
+    color: var(--font-color);
+    background: var(--color1);
+  }
+`;

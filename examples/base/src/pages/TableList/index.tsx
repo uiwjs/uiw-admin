@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import { ProTable, useTable } from '@uiw-admin/components'
-import { useCity } from '@/servers'
 
 export default function Demo() {
   const table = useTable('/api/getData', {
@@ -21,13 +19,6 @@ export default function Demo() {
     },
   })
 
-  const [val, setVal] = useState('')
-
-  const { city = [], isLoading } = useCity(val)
-
-  const handleSearch = (val: string) => {
-    setVal(val)
-  }
   return (
     <ProTable
       // 操作栏按钮
@@ -119,68 +110,6 @@ export default function Demo() {
             label: '详细地址',
             key: 'detailAddress',
             widget: 'textarea',
-          },
-        },
-        {
-          title: 'Switch',
-          key: 'Switch',
-          props: {
-            widget: 'switch',
-          },
-        },
-        {
-          title: 'timePicker',
-          key: 'timePicker',
-          props: {
-            widget: 'timePicker',
-          },
-        },
-        {
-          title: 'MonthPicker',
-          key: 'MonthPicker',
-          props: {
-            widget: 'monthPicker',
-          },
-        },
-        {
-          title: 'DateInput',
-          key: 'DateInput',
-          props: {
-            widget: 'dateInput',
-          },
-        },
-        {
-          title: 'timePicker',
-          key: 'timePicker1',
-          props: {
-            widget: 'timePicker',
-          },
-        },
-        {
-          title: 'Radio',
-          key: 'Radio',
-          props: {
-            widget: 'radio',
-            option: [
-              { label: '男', value: 'man' },
-              { label: '女', value: 'girl' },
-            ],
-          },
-        },
-        {
-          title: '家乡',
-          key: 'city',
-          width: 50,
-          props: {
-            widget: 'searchSelect',
-            widgetProps: {
-              allowClear: true,
-              placeholder: '请输入选择',
-              showSearch: true,
-              loading: isLoading,
-              option: city,
-              onSearch: handleSearch,
-            },
           },
         },
       ]}

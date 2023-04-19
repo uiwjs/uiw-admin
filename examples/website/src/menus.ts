@@ -19,10 +19,10 @@ export const menusDocsConfig: MenusConfigObject[] = [
     target: '__blank',
     path: 'https://github.com/uiwjs/uiw-admin/blob/master/CHANGELOG.md',
   },
-  {
-    title: 'Uiw Admin 示例',
-    path: '/example',
-  },
+  // {
+  //   title: 'Uiw Admin 示例',
+  //   path: '/example',
+  // },
   {
     divider: true,
     title: '页面开发',
