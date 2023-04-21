@@ -7,12 +7,14 @@ export default ({
   formDatas,
   readOnlyProps,
   className,
+  layout,
   style,
 }: ProFormProps) => {
   return (
     <Descriptions
       bordered
       title={title}
+      layout={layout}
       {...readOnlyProps}
       className={className}
       style={{ width: '100%', ...style }}

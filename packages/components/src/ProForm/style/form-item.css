@@ -30,7 +30,7 @@
 
 .uiw-admin-proform .w-form-label {
   font-weight: normal;
-  color: rgba(0, 0, 0, .7);
+  color: rgba(0, 0, 0, .5);
 }
 .uiw-admin-proform .w-select {
   background-color: transparent;
@@ -64,4 +64,36 @@
 .uiw-admin-proform-btn {
   height: 34px;
   min-width: 80px;
+}
+.uiw-admin-proform-horizontal .w-form {
+  padding-top: 14px;
+}
+.uiw-admin-proform-horizontal .w-form-item {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+  padding-bottom: 16px;
+}
+.uiw-admin-proform-horizontal .w-form-item .w-form-label {
+  margin-right: 14px;
+  width: 120px;
+  text-align: right;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.uiw-admin-proform-horizontal .w-form-item .w-form-label::after {
+  content: ':';
+  position: absolute;
+  right: 0;
+  top: 7px;
+}
+.uiw-admin-proform-horizontal .w-form-item .w-form-help {
+  position: absolute;
+  left: 134px;
+  bottom: -2px;
+}
+.uiw-admin-proform-vertical .w-descriptions-vertical .w-descriptions-item-label {
+  text-align: left;
 }

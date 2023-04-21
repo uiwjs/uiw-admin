@@ -14,6 +14,7 @@ export interface ProFormProps {
   style?: React.CSSProperties;
   className?: string;
   formDatas?: FormItemsProps[];
+  layout?: 'horizontal' | 'vertical';
   onSubmit?: (
     initial: Record<string, any>,
     current: Record<string, any>,
