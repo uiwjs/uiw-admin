@@ -178,6 +178,76 @@ const Demo = () => {
 }
 export default Demo
 ```
+
+### 基本布局 横排
+
+```jsx mdx:preview
+import ReactDOM from 'react-dom';
+import React from 'react';
+import { ProForm,useForm } from '@uiw-admin/components'
+const Demo = () => {
+  return (
+    <div>
+      <ProForm
+        formType="pure"
+        formType="card"
+        layout="horizontal"
+        formDatas={[
+          {
+            label: 'input',
+            key: 'input',
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {},
+            span:"24",
+          },
+            {
+            label: 'input',
+            key: 'input2',
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {},
+            span:"12",
+          },
+            {
+            label: 'input',
+            key: 'input3',
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {},
+            span:"12",
+          },
+          {
+            label: 'input',
+            key: 'input4',
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {},
+            span:"8",
+          },
+          {
+            label: 'input',
+            key: 'input5',
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {},
+            span:"8",
+          },
+          {
+            label: 'input',
+            key: 'input6',
+            widget: 'input',
+            initialValue: '',
+            widgetProps: {},
+            span:"8",
+          },
+        ]}
+       />
+    </div>
+  );
+}
+export default Demo
+```
 ### 只读布局
 > 通过readSpan(继承于uiw/Descriptions.Item)
 
@@ -493,50 +563,50 @@ const Demo = () => {
   })
   const form = useForm()
 
-    return (
-     <div>
-       <ProForm
-         form={form}
-         title="通过form api进行表单提交"
-         formType="card"
-         formDatas={ [
-             {
-               label: 'input',
-               key: 'input',
-               widget: 'input',
-               initialValue: state.input,
-               widgetProps: {},
-               span:"24",
-               rules: [
-                { required:true, message: 'input不能为空' },
-                { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
-               ]
-             },
-              {
-              label: 'upload',
-              key: 'upload',
-              widget: 'upload',
-              initialValue: state.upload,
-              widgetProps:{
-                uploadType: 'card',
-              },
+  return (
+    <div>
+      <ProForm
+        form={form}
+        title="通过form api进行表单提交"
+        formType="card"
+        formDatas={[
+          {
+            label: 'input',
+            key: 'input',
+            widget: 'input',
+            initialValue: state.input,
+            widgetProps: {},
+            span:"24",
+            rules: [
+            { required:true, message: 'input不能为空' },
+            { pattern: new RegExp(/[1][3][0-9]{9}$/), message: "请输入正确手机号" },
+            ]
+          },
+          {
+            label: 'upload',
+            key: 'upload',
+            widget: 'upload',
+            initialValue: state.upload,
+            widgetProps:{
+              uploadType: 'card',
             },
-          ]}
-       />
-       <Button 
+          },
+        ]}
+      />
+      <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
-        onClick={async()=>{
+        onClick={async () => {
           // 触发验证
           await form.submitvalidate();
           // 获取错误信息
-          const errors = form.getError()
-          if(errors && Object.keys(errors).length > 0 ) return
-          const value = form.getFieldValues?.()
-          setState(value)
-         // 调用请求接口
-       }}
-       >
+          const errors = form.getError();
+          if(errors && Object.keys(errors).length > 0 ) return;
+          const value = form.getFieldValues?.();
+          setState(value);
+          // 调用请求接口
+        }}
+      >
         保存
       </Button>
       <Button 
@@ -546,10 +616,10 @@ const Demo = () => {
           form.resetForm()
           setState({})
         }}
-       >
+      >
         重置
       </Button>
-       <Button 
+      <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
         onClick={()=> {
@@ -562,7 +632,7 @@ const Demo = () => {
             upload:[ { dataURL: 'https://avatars2.githubusercontent.com/u/1680273?s=40&v=4', name: 'uiw.png' }]
           })
         } }
-       >
+      >
         设置
       </Button>
       <div style={{ maxWidth: 500 }}>
@@ -987,16 +1057,16 @@ const Demo = () => {
   }
 
   return (
-     <div>
+    <div>
       {items.map((item, idx) => {
-          return (
-           <Card 
-            title={`表单${idx + 1}`} 
-            key={idx} 
-            style={{ marginBottom:10 }} 
-            extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}
-            >
-             <ProForm
+        return (
+          <Card 
+          title={`表单${idx + 1}`} 
+          key={idx} 
+          style={{ marginBottom:10 }} 
+          extra={<span onClick={handleAddFormItems.bind(this,'delete',idx)}>删除</span>}
+          >
+            <ProForm
               className="aaa"
               ref={(e) =>(formRefList.current[idx] = e)}
               // 表单类型
@@ -1016,15 +1086,15 @@ const Demo = () => {
               })}
             />
           </Card>
-          )
-        })}
-       <Button 
+        )
+      })}
+      <Button 
         style={{ marginTop:10,width:80 }}  
         type="primary"  
         onClick={handleAddFormItems.bind(this,'add')}>
-         新增
-        </Button>
-       <Button 
+        新增
+      </Button>
+      <Button 
         style={{ marginTop:10,width:80 }} 
         type="primary" 
         onClick={() => handleSave()}>
@@ -1063,6 +1133,7 @@ const Demo = () => {
          readOnly={true}
          title="只读模式"
          formType="pure"
+         layout="horizontal"
          // 只读模式下调整 一行的 DescriptionItems 数量,其余参数参考uiw/Descriptions
          readOnlyProps={{ column:2 }}
          formDatas={
@@ -1192,19 +1263,18 @@ const Demo = () => {
        <ProForm
         customWidgetsList={{inputs: Inputs}}
         form={form}
-         title="只读模式"
-         formType="pure"
-         formDatas={
-           [
-             {
-               label: '自定义组件',
-               key: 'input',
-               widget: 'inputs',
-               // 只读模式下支持读取React.ReactNode
-               initialValue: queryInfo.input,
-             },
-           ]}
-       />
+        title="只读模式"
+        formType="pure"
+        formDatas={[
+          {
+            label: '自定义组件',
+            key: 'input',
+            widget: 'inputs',
+            // 只读模式下支持读取React.ReactNode
+            initialValue: queryInfo.input,
+          },
+        ]}
+      />
   );
 }
 export default Demo
@@ -1213,27 +1283,28 @@ export default Demo
 ## Props
 > 继承uiw-Form
 
-| 参数               | 说明                                              | 类型                                                                     | 默认值 |
-| ------------------ | ------------------------------------------------- | ------------------------------------------------------------------------ | ------ |
-| formDatas          | 表单项集合                                        | FormItemsProps[]                                                         | []     |
-| onSubmit           | 提交表单回调 需配合btns，继承uiw/form submit      | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
-| onChange           | 表单值变化回调，继承uiw/form onChange             | (initial: `Record<string, any>`, current: `Record<string, any>`) => void | -      |
-| onSubmitError           | 调用 onSubmit 抛出的任何错误。从字段名称返回对象映射。 继承uiw/form onSubmitError             | (error:`any`) => void |  -     |
-| showSaveButton     | 展示提交按钮                                      | boolean                                                                  | false  |
-| showResetButton    | 展示重置按钮                                      | boolean                                                                  | false  |
-| saveButtonProps    | 提交按钮api;继承于uiw/button                      | ButtonProps                                                                  | -  |
-| resetButtonProps   | 重置按钮api;继承于uiw/button                      | ButtonProps                                                                  | -  |
-| buttonsContainer   | buttons容器样式(可调整button布局)                 | React.CSSProperties                                                      | -      |
-| title              | 标题                                              | string                                                                   | -      |
-| formType           | 表单类型                                          | 'collapse' 或 'card' 或 'pure'                                           | 'card' |
-| form               | useForm返回值,替换原有submitRef作用可进行表单验证 | UseFormProps 必传                                                              | -      |
-| readOnly           | 是否是只读模式模式                                | boolean                                                                  | false  |
-| readOnlyProps      | 只读模式 参考Descriptions参数                     | DescriptionsProps                                                        | {}     |
-| customWidgetsList  | 可配置自定义组件                                  | { [key: string]: any }                                                   | {}     |
-| cardProps          | uiw`Card` API                                     | CardProps                                                                | {}     |
-| collapseProps      | uiw`Collapse` API                                 | CollapseProps                                                            | {}     |
-| collapsePanelProps | uiw`Collapse.Panel` API                           | CollapsePanelProps                                                       | {}     |
-| colProps           | uiw`Col` API,公共属性                              | colProps                                                                 |         |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| title | 标题  | `string`  | - |
+| formType | 表单类型 | `collapse` `card`  `pure`  | `card` |
+| layout | 表单布局 | `horizontal \| vertical`  | `vertical` |
+| form | useForm返回值,替换原有submitRef作用可进行表单验证 | `UseFormProps` | - |
+| readOnly | `是否是只读模式模式`  | `boolean`  | false  |
+| readOnlyProps | 只读模式 参考Descriptions参数 | `DescriptionsProps`  | `{}` |
+| formDatas | 表单项集合  | `FormItemsProps[]` | `[]` |
+| showSaveButton | 展示提交按钮 | `boolean` | `false`  |
+| showResetButton | 展示重置按钮 | `boolean` | `false`  |
+| saveButtonProps  | 提交按钮api;继承于uiw/button | `ButtonProps` | -  |
+| resetButtonProps   | 重置按钮api;继承于uiw/button | `ButtonProps` | - |
+| buttonsContainer   | buttons容器样式(可调整button布局)  | `React.CSSProperties`  | -      |
+| customWidgetsList  | 可配置自定义组件  | `{ [key: string]: any }` | `{}` |
+| cardProps | uiw`Card` API | `CardProps` | `{}` |
+| collapseProps | uiw`Collapse` API  | `CollapseProps` | `{}` |
+| collapsePanelProps | uiw`Collapse.Panel` API | `CollapsePanelProps` | `{}` |
+| colProps | uiw`Col` API,公共属性 | `colProps` | - |
+| onSubmit | 提交表单回调 需配合btns，继承uiw/form submit | `(initial: Record<string, any>, current: Record<string, any>) => void` | - |
+| onChange | 表单值变化回调，继承uiw/form onChange  | `(initial: Record<string, any>, current: Record<string, any>) => void` | - |
+| onSubmitError | 调用 onSubmit 抛出的任何错误。从字段名称返回对象映射。 继承uiw/form onSubmitError | `(error: any) => void` |  - |
 
 
 ### saveButtonProps resetButtonProps
@@ -1249,35 +1320,35 @@ export default Demo
 ### FormItemsProps
 > 继承uiw-FormItem
 
-| 参数         | 说明                                                          | 类型                    | 默认值 |
-| ------------ | ------------------------------------------------------------- | ----------------------- | ------ |
-| label        | 表单项名称                                                    | string                  | -      |
-| key          | 表单项key                                                     | string                  | -      |
-| widget       | 表单项类型                                                    | sring                   | -      |
-| initialValue | 表单项值，可以是默认值                                        | any 或 any[]            | -      |
-| option       | 数据化选项内容, widget为 radio、checkbox、select 生效           | OptionsProps[] | -      |
-| widgetProps  | 表单组件其余参数,参考uiw表单组件                              | any                     | -      |
-| hide         | 是否显示                                                      | boolean                 | true   |
-| span         | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | string                  | '8'    |
-| readSpan     | 只读模式下包含列的数量 参考Descriptions.Item                  | number                  | 1      |
-| rules     | 验证规则                                                      | RulesProps[]                 | -      |
-| colstyle     | Col(uiw/Grid)样式                                         | React.CSSProperties                | -      |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| label  | 表单项名称  | `string`  | -  |
+| key| 表单项key  | `string`  | - |
+| widget | 表单项类型 | `sring` | - |
+| initialValue | 表单项值，可以是默认值 | `any \| any[]` | - |
+| option | 数据化选项内容, widget为 radio、checkbox、select 生效 | `OptionsProps[]` | - |
+| widgetProps  | 表单组件其余参数,参考uiw表单组件 | `any` | - |
+| hide | 是否显示  | `boolean`  | true   |
+| span | 非只读模式下,可以通过指定 24 列中每列的宽度来创建基本网格系统 | `string` | `'8'` |
+| readSpan     | 只读模式下包含列的数量 参考Descriptions.Item  | `number` | `1` |
+| rules | 验证规则 | `RulesProps[]` | - |
+| colstyle  | Col(uiw/Grid)样式  | `React.CSSProperties` | - |
 
 
 ### RulesProps
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
-| message    | 验证提示消息     | string           | -      |
-| pattern    | 验证正则      | RegExp | -      |
-| validator | 自定义验证规则 | (value: any \| any[]) => boolean\|string | - | 
-| required | 是否必填 | boolean | - | 
+| message | 验证提示消息 | `string` | - |
+| pattern  | 验证正则 | `RegExp` | - |
+| validator | 自定义验证规则 | `(value: any \| any[]) => boolean\|string` | - | 
+| required | 是否必填 | `boolean` | - | 
 
 ### OptionsProps
-| 参数     | 说明     | 类型                     | 默认值 |
-| -------- | -------- | ------------------------ | ------ |
-| label    | 名称     | string(必传值)           | -      |
-| value    | key      | string 或 number(必传值) | -      |
-| disabled | 是否禁用 | boolean                  | -      |
+| 参数 | 说明 | 类型  | 默认值 |
+| --- | --- | --- | --- |
+| label | 必传。名称 | `string` | - |
+| value | 必传。key | `string \| number` | - |
+| disabled | 是否禁用 | `boolean` | - |
 
 ## useForm
 
@@ -1287,13 +1358,13 @@ export default Demo
 
 | 参数     | 说明     | 类型                     | 默认值 |
 | -------- | -------- | ------------------------ | ------ |
-| submitvalidate | 表单验证 | ()=>void | - | 
-| resetForm | 重置表单值 | ()=>void | - | 
-| onSubmit | 表单提交 | (e: React.FormEvent)=>void | - |   
-| getFieldValues | 获取表单值 | ()=>void | - |  
-| getError | 获取表单错误 | ()=>void | - |  
-| setFields | 设置表单的值 | (fields: FormState['current'])=>void | [] |      
-| validateFieldsAndGetValue | 验证并获取值 | ()=>Promise`<any>` | [] |   
+| submitvalidate | 表单验证 | `()=>void` | - | 
+| resetForm | 重置表单值 | `()=>void` | - | 
+| onSubmit | 表单提交 | `(e: React.FormEvent)=>void` | - |   
+| getFieldValues | 获取表单值 | `()=>void` | - |  
+| getError | 获取表单错误 | `()=>void` | - |  
+| setFields | 设置表单的值 | `(fields: FormState['current'])=>void` | `[]` |      
+| validateFieldsAndGetValue | 验证并获取值 | `()=>Promise<any>` | `[]` |   
 
 ## 注意
 > [继承于uiw/Form,请参考uiw/From以及表单组件](https://uiwjs.github.io/#/components/form),

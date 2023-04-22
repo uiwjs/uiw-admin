@@ -39,8 +39,7 @@
     "react-code-preview-layout": "3.0.0",
     "react-test-renderer": "17.0.2",
     "styled-components": "^5.3.5",
-    "uiw": "^4.21.25",
-    "uiw-admin": "6.1.6"
+    "uiw": "^4.21.26"
   },
   "devDependencies": {
     "@kkt/pro": "^1.0.10",

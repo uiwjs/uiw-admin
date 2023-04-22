@@ -7,6 +7,8 @@ import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
 import './index.css';
 
+export * from './types';
+
 const ProTabel: React.FC<ProtableProps> = (props) => {
   const {
     table,

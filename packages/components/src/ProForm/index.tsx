@@ -20,6 +20,7 @@ function ProForm(
     formDatas = [],
     title = '',
     formType = 'card',
+    layout = 'vertical',
     readOnly = false,
     customWidgetsList = {},
     form,
@@ -74,7 +75,7 @@ function ProForm(
   });
 
   let children: React.ReactNode;
-  const formDomProps = { ...props, formfields, formInstanceRef };
+  const formDomProps = { ...props, layout, formfields, formInstanceRef };
   // 非详情模式下渲染标题
   const renderTitle = !readOnly ? title : undefined;
   // 判断是否是详情模式
@@ -105,7 +106,9 @@ function ProForm(
   return (
     <StoreCtx.Provider value={store}>
       <ColPropsContext.Provider value={colProps || {}}>
-        <div className="uiw-admin-proform">{children}</div>
+        <div className={`uiw-admin-proform uiw-admin-proform-${layout}`}>
+          {children}
+        </div>
       </ColPropsContext.Provider>
     </StoreCtx.Provider>
   );

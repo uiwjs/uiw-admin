@@ -21,3 +21,7 @@
 .uiw-protable-form .w-select {
   background-color: transparent;
 }
+
+.uiw-admin-protable .w-table > table {
+  border-top: 1px solid #e8e8e8;
+}

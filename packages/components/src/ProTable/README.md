@@ -35,7 +35,8 @@ function Demo1() {
 
   return (
     <ProTable
-       // 搜索栏按钮
+      // 搜索栏按钮
+      bordered
       searchBtns={[
         {
           label: '搜索',
@@ -108,49 +109,6 @@ function Demo1() {
 
 export default Demo1
 
-```
-
-> 表单根据columns配置的key作为唯一值，如果配置表单props里面不写key，则继承columns列key
-
-```jsx 
-import React from 'react';
-import { ProTable } from '@uiw-admin/components';
-const Demo1 = ()=> {
-  return (
-    <ProTable
-      columns={[
-      // input key 继承 column的key name
-        {
-          title: '名字',
-          key: 'name',
-          props: {
-            widget: 'input',
-            initialValue: '',
-            widgetProps: {
-              preIcon: 'tag',
-              placeholder: '输入用户名',
-            },
-          },
-      },
-      // 自定义表单key
-      {
-        title: '年龄',
-        key: 'registered',
-        props: {
-          widget: 'select',
-          key: 'age',
-          option: [
-            { label: '20', value: 20 },
-            { label: '10', value: 10 },
-          ],
-        },
-      },
-    ]}
-  />
-  )
-}
-
-export default Demo1
 ```
 
 ### 显示操作栏
@@ -700,6 +658,7 @@ export default Demo6
 | tableBackgroundColor        | 网格中表格的背景色                                 | React.CSSProperties['backgroundColor']    | -      |
 | tableHeadHidden        | 网格中表头是否显示                               | boolean    | false      |
  
+更多属性文档请参考 [uiw/Table](https://uiwjs.github.io/#/components/table)
 
 ### searchBtns
 

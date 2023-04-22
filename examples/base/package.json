@@ -39,7 +39,7 @@
     "classnames": "~2.3.1",
     "styled-components": "^5.3.5",
     "swr": "2.1.0",
-    "uiw": "^4.21.25"
+    "uiw": "^4.21.26"
   },
   "devDependencies": {
     "lint-staged": "~12.5.0",
