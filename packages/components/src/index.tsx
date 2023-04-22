@@ -9,7 +9,6 @@ export * from './ProDrawer';
 export { default as ProForm } from './ProForm';
 export * from './ProForm';
 export { default as useForm } from './ProForm/hooks/useForm';
-export * from './ProForm';
 
 export * from './form';
 export { default as Form } from './form';

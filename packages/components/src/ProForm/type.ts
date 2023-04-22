@@ -36,7 +36,7 @@ export interface ProFormProps {
   /** 只读模式 参考Descriptions参数 */
   readOnlyProps?: DescriptionsProps;
   /** 自定义组件 */
-  customWidgetsList?: Fields;
+  customWidgetsList?: FormFields;
   form?: UseFormProps;
   cardProps?: CardProps;
   collapseProps?: CollapseProps;
@@ -82,7 +82,7 @@ export interface RulesProps {
   required?: boolean;
 }
 
-export type Fields = {
+export type FormFields = {
   [key: string]: any;
 };
 
