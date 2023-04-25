@@ -117,7 +117,7 @@ const getKeyMsg = (key: string) => {
   if (['input', 'textarea'].includes(key)) {
     return '请填写字段';
   }
-  return '请选择字短';
+  return '请选择字段';
 };
 
 /**
