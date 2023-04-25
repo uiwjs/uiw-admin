@@ -1,4 +1,4 @@
-import { Fields, FormItemsProps } from '../type';
+import { FormFields, FormItemsProps } from '../type';
 import {
   Input,
   InputNumber,
@@ -27,9 +27,9 @@ import { isRequired } from '../utils';
 export function getFormFields(
   readOnly?: boolean,
   formDatas: FormItemsProps[] = [],
-  customWidgetsList: Fields = {},
+  customWidgetsList: FormFields = {},
 ) {
-  const widgetsList: Fields = {
+  const widgetsList: FormFields = {
     input: Input,
     inputNumber: InputNumber,
     radio: Radio,
@@ -47,7 +47,7 @@ export function getFormFields(
     searchTree: SearchTree,
     ...customWidgetsList,
   };
-  const fields: Fields = {};
+  const fields: FormFields = {};
   formDatas.forEach((col) => {
     if (!readOnly) delete col.readSpan;
     if (col) {
