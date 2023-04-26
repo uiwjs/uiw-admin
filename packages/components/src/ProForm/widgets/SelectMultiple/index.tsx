@@ -31,7 +31,7 @@ export interface SelectMultipleProps {
 }
 
 function SelectMultiple(
-  this: import('../../type').Fields,
+  this: import('../../type').FormFields,
   {
     option = [],
     onChange,
