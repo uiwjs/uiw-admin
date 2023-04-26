@@ -42,7 +42,7 @@
     "uiw": "^4.21.26"
   },
   "devDependencies": {
-    "@kkt/pro": "^1.0.10",
+    "@kkt/pro": "^1.0.13",
     "@types/react-test-renderer": "17.0.1",
     "hast": "^1.0.0",
     "rehype-rewrite": "^3.0.6",
