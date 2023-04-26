@@ -67,6 +67,7 @@ export interface UserLoginProps {
     /** 密码 */
     passWord?: string;
   };
+  initialValues?: any;
   /** 默认 输入框 属性配置 */
   defaultFieldsConfig?: {
     userName?: Partial<FieldsProps>;
@@ -100,6 +101,7 @@ const Login = (props: UserLoginProps) => {
     buttons,
     saveField,
     fields,
+    initialValues = {},
     isDefaultFields = true,
     defaultFieldsConfig,
     styleContainer = {},
@@ -131,6 +133,7 @@ const Login = (props: UserLoginProps) => {
       label: `${userNameLabel}`,
       labelFor: userName,
       required: true,
+      initialValue: initialValues && initialValues[userName],
       children: (
         <input
           type="text"
@@ -147,6 +150,7 @@ const Login = (props: UserLoginProps) => {
       label: `${passWordLabel}`,
       labelFor: passWord,
       required: true,
+      initialValue: initialValues && initialValues[passWord],
       children: (
         <input
           disabled={!!isLoading}

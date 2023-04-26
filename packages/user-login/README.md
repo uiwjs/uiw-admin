@@ -531,6 +531,7 @@ export interface UserLoginProps {
 | ---- | ---- | ---- | ---- | ---- |
 | api | 请求接口 | 是   | `string` |  - |
 | align | 卡片框的位置 | 否 | `枚举类型：'left' \| 'right' \| 'center'`  | `center`  |
+| initialValues | 表单默认值 | 否   | `object` |  - |
 | footer | 页脚  | 否  | `React.ReactNode` | `true`  |
 | bg | 页面背景图，可以`require('./image.png')`或者是图片链接  | 否 | `string` |  - |
 | logo | logo头像, 值为`null` 不显示logo | 否   | `string` | - |
@@ -538,8 +539,6 @@ export interface UserLoginProps {
 | projectName | 项目名称(页面标题)  如果值为`null`  不显示标题 | 否 | `string\|null` | `UIW Admin` |
 | btnProps | 登录按钮属性 | 否 | `Omit<ButtonProps, 'ref'>` | `{}` |
 | buttons | 登录按钮位置的自定义按钮组, title 为显示标题 | 否 | `(Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[]` | - |
-| onSuccess | 登录接口返回 | 是 | `(resp: any, form: (FormValue \| undefined)) => void` | `()=>null` |
-| onBefore | 用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作 | 否 | `(store: FormValue) => (Record<string, any> \| boolean)` | - |
 | requestConfig | `request` 请求 `options` 配置参数  | 否 | `Options` | - |
 | saveField | 默认输入框保存字段 | 否 | `{userName(登录账号字段)?:string,passWord(密码字段)?:string}` | `{userName:"username",passWord:"password"}` |
 | defaultFieldsConfig | 默认输入框保存字段 | 否 | `{userName(账户输入框)?:Partial<FieldsProps>,passWord(密码输入框)?:Partial<FieldsProps>}` | - |
@@ -550,6 +549,8 @@ export interface UserLoginProps {
 | classNameBody | 卡片框`className` | 否 | `string` | -  |
 | styleBody | 卡片框`style` | 否 | `React.CSSProperties` | - |
 | styleContainer | 背景框`style` 可再次调整背景图样式 | 否 | `React.CSSProperties` | - |
+| onSuccess | 登录接口返回 | 是 | `(resp: any, form: (FormValue \| undefined)) => void` | `()=>null` |
+| onBefore | 用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作 | 否 | `(store: FormValue) => (Record<string, any> \| boolean)` | - |
 
 ```tsx
 export interface FieldsProps<T = any> extends FormFieldsProps<T> {
