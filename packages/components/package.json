@@ -1,6 +1,6 @@
 {
   "name": "@uiw-admin/components",
-  "version": "6.1.7",
+  "version": "6.1.8",
   "description": "业务组件集合",
   "author": "xingyuefeng <15262870437@163.com>",
   "homepage": "https://github.com/uiwjs/uiw-admin#readme",
@@ -45,9 +45,9 @@
   },
   "dependencies": {
     "@babel/runtime": "~7.21.0",
-    "@uiw-admin/authorized": "6.1.7",
-    "@uiw-admin/document-title": "6.1.7",
-    "@uiw-admin/utils": "6.1.7",
+    "@uiw-admin/authorized": "6.1.8",
+    "@uiw-admin/document-title": "6.1.8",
+    "@uiw-admin/utils": "6.1.8",
     "classnames": "2.3.1"
   },
   "devDependencies": {
