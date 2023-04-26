@@ -32,7 +32,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-         Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+         Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -61,7 +61,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -95,7 +95,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -128,7 +128,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -158,7 +158,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -202,7 +202,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -247,7 +247,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -285,7 +285,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -317,7 +317,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -347,7 +347,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />
@@ -377,7 +377,7 @@ const UserLayout = () => {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
         } else {
-          Notify.error({ title: "错误通知", description: data.message || "请求失败" })
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
         }
       }}
     />

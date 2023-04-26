@@ -73,10 +73,10 @@ export default function HomePage() {
 
   return (
     <div>
-      <p className="title">ANEM x react-query</p>
+      <p className="title">x react-query</p>
       {isError && <p>请求 API 错误 ...</p>}
       {isLoading && <p>Loading ...</p>}
-      {data && <p>ANEM 现在有 {data.stargazers_count} 颗星！</p>}
+      {data && <p>现在有 {data.stargazers_count} 颗星！</p>}
     </div>
   );
 }

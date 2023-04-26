@@ -2,9 +2,12 @@ import React from 'react';
 import bgDefault from './assets/r2g7rm.jpg';
 import DocumentTitle from '@uiw-admin/document-title';
 import { Form, Row, Col, ButtonProps, Button, FormFieldsProps } from 'uiw';
-import useSWR from 'swr';
-import { request } from '@uiw-admin/utils';
-import { Options } from '@uiw-admin/utils/lib/request';
+import {
+  QueryClientProvider,
+  queryClient,
+  useReactMutation,
+  ReactMutationOptions,
+} from '@kkt/request';
 
 import './styles/index.css';
 
@@ -51,7 +54,7 @@ export interface UserLoginProps {
   /** 调用接口之前 , 可以通过这个添加额外参数  返回 false 则不进行登录操作  */
   onBefore?: (store: FormValue) => Record<string, any> | boolean;
   /** request 请求 options 配置参数 */
-  requestConfig?: Options;
+  requestConfig?: ReactMutationOptions;
   /** 登录按钮位置 按钮组, title 为显示标题 */
   buttons?: (Omit<ButtonProps, 'ref'> & { title?: React.ReactNode })[];
   /**
@@ -77,7 +80,7 @@ export interface UserLoginProps {
   styleContainer?: React.CSSProperties;
 }
 
-export default (props: UserLoginProps) => {
+const Login = (props: UserLoginProps) => {
   const {
     align = 'center',
     classNameWarp = '',
@@ -112,16 +115,15 @@ export default (props: UserLoginProps) => {
     ((defaultFieldsConfig || {})['passWord'] || {})['name'] || passWord;
 
   const [store, setStore] = React.useState<FormValue>();
-  const { isValidating } = useSWR(
-    store
-      ? [api, { method: 'POST', body: store, ...(requestConfig || {}) }]
-      : null,
-    request,
-    {
-      revalidateOnFocus: false,
-      onSuccess: (resp) => onSuccess(resp, store),
-    },
-  );
+
+  const { mutateAsync, isLoading } = useReactMutation({
+    url: api,
+    method: 'POST',
+    ...requestConfig,
+    mutationKey: ['login'],
+    onSuccess: (res) => onSuccess(res, store),
+    onError: () => onSuccess(undefined, store),
+  });
 
   const defaultFields: FieldsProps[] = [
     {
@@ -132,7 +134,7 @@ export default (props: UserLoginProps) => {
       children: (
         <input
           type="text"
-          disabled={!!isValidating}
+          disabled={!!isLoading}
           id={userName}
           placeholder={`请输入${userNameLabel}`}
           className="form-field"
@@ -147,7 +149,7 @@ export default (props: UserLoginProps) => {
       required: true,
       children: (
         <input
-          disabled={!!isValidating}
+          disabled={!!isLoading}
           id={passWord}
           type="password"
           placeholder={`请输入${passWordLabel}`}
@@ -201,7 +203,7 @@ export default (props: UserLoginProps) => {
           ) : (
             <Form
               resetOnSubmit={false}
-              onSubmit={({ current }) => {
+              onSubmit={async ({ current }) => {
                 const errorObj: any = {};
                 fieldArr.forEach((item) => {
                   if (
@@ -233,6 +235,10 @@ export default (props: UserLoginProps) => {
                         ...(result || {}),
                         swr_Rest_Time: new Date().getTime(),
                       });
+                      await mutateAsync({
+                        ...(current as any),
+                        ...(result || {}),
+                      });
                       return;
                     }
                     if (!result) {
@@ -240,6 +246,7 @@ export default (props: UserLoginProps) => {
                     }
                   }
                   setStore({ ...current, swr_Rest_Time: new Date().getTime() });
+                  await mutateAsync({ ...(current as any) });
                 }
               }}
               onSubmitError={(error: any) => {
@@ -279,7 +286,7 @@ export default (props: UserLoginProps) => {
                             <Button
                               key={idx}
                               loading={
-                                !!isValidating && item.htmlType === 'submit'
+                                !!isLoading && item.htmlType === 'submit'
                               }
                               disabled={!disabled}
                               className="btns"
@@ -293,10 +300,10 @@ export default (props: UserLoginProps) => {
                       ) : (
                         <Button
                           disabled={!disabled}
-                          loading={!!isValidating}
+                          loading={!!isLoading}
                           className="btns"
                           block
-                          style={{ marginTop: 20 }}
+                          style={{ marginTop: 20, height: 44 }}
                           htmlType="submit"
                           type="dark"
                           {...btnProps}
@@ -316,3 +323,13 @@ export default (props: UserLoginProps) => {
     </div>
   );
 };
+
+const LoginPage = (props: UserLoginProps) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Login {...props} />
+    </QueryClientProvider>
+  );
+};
+
+export default LoginPage;

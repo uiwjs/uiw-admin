@@ -94,7 +94,7 @@
     "lint-staged": "~12.5.0",
     "prettier": "^2.7.0",
     "recursive-readdir-files": "1.1.2",
-    "tsbb": "^4.1.4",
+    "tsbb": "^4.1.5",
     "webpack-bundle-analyzer": "~4.5.0"
   },
   "resolutions": {
