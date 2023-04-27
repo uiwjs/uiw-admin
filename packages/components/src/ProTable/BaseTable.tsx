@@ -94,7 +94,6 @@ const BaseTable: React.FC<BaseTableProps> = ({
   };
 
   const pageSize = formatQuery().pageSize || 10;
-
   // 调接口
   const { mutate, data, isLoading }: any = useReactMutation({
     mutationFn: async () => {
@@ -118,7 +117,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
   useEffect(() => {
     // 第一次加载
     mutate();
-  }, [mutate]);
+  }, []);
 
   // table数据
   const tableData =
