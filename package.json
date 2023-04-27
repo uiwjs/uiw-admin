@@ -57,6 +57,7 @@
     "publish": "npm run build && lerna publish from-package",
     "start": "lerna exec --scope @examples/base npm run start",
     "start:website": "lerna exec --scope website npm run start",
+    "preview": "lerna exec --scope @examples/preview npm run start",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "clean": "lerna clean && npm run remove && rm -rf ./package-lock.json && rm -rf node_modules && npm run remove:c ",
     "remove": " lerna exec --scope @uiw-admin/* --scope @example/*  -- rm -rf package-lock.json",

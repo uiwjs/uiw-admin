@@ -4,6 +4,7 @@ export default {
     routesOutletElement: '@/routesOutletElement',
   },
   initModel: true,
+  queryClient: true,
   define: {
     AUTH: false,
     STORAGE: 'local',
