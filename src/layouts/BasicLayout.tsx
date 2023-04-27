@@ -1,7 +1,6 @@
 import { Badge, Icon } from 'uiw'
-import useSWR from 'swr'
 import AuthPage from '@uiw-admin/authorized'
-import { KktproPageProps } from '@kkt/pro'
+import { KktproPageProps, useReactMutation } from '@kkt/pro'
 import BasicLayout, {
   useLayouts,
   BasicLayoutProps,
@@ -13,16 +12,17 @@ function BasicLayoutScreen(props: KktproPageProps) {
 
   const layouts = useLayouts()
 
-  const { mutate } = useSWR(['/api/reloadAuth', { method: 'POST' }], {
-    revalidateOnMount: false,
-    revalidateOnFocus: false,
-    onSuccess: (data) => {
+  const { mutate } = useReactMutation({
+    url: '/api/reloadAuth',
+    method: 'POST',
+    onSuccess: (data: any) => {
       if (data && data.code === 200) {
         sessionStorage.setItem('token', data.token)
         sessionStorage.setItem('auth', JSON.stringify(data.authList || []))
         localStorage.setItem('token', data.token)
         localStorage.setItem('auth', JSON.stringify(data.authList || []))
-        window.location.reload()
+        // window.location.reload()
+        layouts.closeMenu()
       }
     },
   })
