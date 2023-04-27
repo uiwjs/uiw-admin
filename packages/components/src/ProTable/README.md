@@ -643,20 +643,20 @@ export default Demo6
 
 ## Props
 
-| 参数           | 说明                                                   | 类型                                            | 默认值 |
-| -------------- | ------------------------------------------------------ | ----------------------------------------------- | ------ |
-| columns        | 与`uiw table` columns用法一致 必传, 如果需要表单，也在此增加`props`                     | FormCol[]                                       | []     |
+| 参数 | 说明 | 类型 | 默认值 |
+| ---- | ---- | ---- | ---- |
+| columns | 与`uiw table` columns用法一致 必传, 如果需要表单，也在此增加`props` | `FormCol[]` | []     |
 | operateButtons | 操作栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
-| searchBtns     | 搜索栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
-| table          | useTable返回值                                    | Object 必传                                     |        |
-| onPageChange   | 分页回调             |（page: number） => void                        | -      |
-| onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询 | ({initial, current}) => Boolean                 |        |
-| rowSelection   | 选择框配置                                        | RowSelection                                    | -      |
-| scroll         | 设置横向滚动                                      | ScrollProps        | -      |
-| paginationProps| 分页属性                                          | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination)        | -      |
-| formCol        | 网格中表单一行列数                                 | number    | 5      |
-| tableBackgroundColor        | 网格中表格的背景色                                 | React.CSSProperties['backgroundColor']    | -      |
-| tableHeadHidden        | 网格中表头是否显示                               | boolean    | false      |
+| searchBtns | 搜索栏按钮集合，属性与uiw button一致并支持自定义render | `Array<ButtonProps & { render?: JSX.Element }>` | []     |
+| table  | 必传。useTable返回值  | `object` | - |
+| onPageChange   | 分页回调 | `(page: number) => void` | - |
+| onBeforeSearch | 查询table前表单回调，可用于表单验证，返回true 继续查询 | `({initial, current}) => Boolean` | - |
+| rowSelection | 选择框配置  | `RowSelection`  | - |
+| scroll | 设置横向滚动 | `ScrollProps` | - |
+| paginationProps| 分页属性 | 继承自[uiw Pagination](https://uiwjs.github.io/#/components/pagination) | - |
+| formCol | 网格中表单一行列数 | `number` | `5`|
+| tableBackgroundColor | 网格中表格的背景色 | `React.CSSProperties['backgroundColor']` | - |
+| tableHeadHidden | 网格中表头是否显示 | `boolean` | `false` |
  
 更多属性文档请参考 [uiw/Table](https://uiwjs.github.io/#/components/table)
 
@@ -664,8 +664,8 @@ export default Demo6
 
 | 参数            | 说明                                     | 类型     | 默认值 |
 | --------------- | ---------------------------------------- | -------- | ------ |
-| label           | 按钮标题                               | string   | - |
-| render          | 不使用button，自定义组件                               | React Component   | - |
+| label | 按钮标题   | `string`   | - |
+| render  | 不使用button，自定义组件 | `React Component` | - |
 
 更多属性文档请参考 [uiw button](https://uiwjs.github.io/#/components/button)
 
@@ -677,9 +677,9 @@ export default Demo6
 
 | 参数            | 说明                                     | 类型     | 默认值 |
 | --------------- | ---------------------------------------- | -------- | ------ |
-| checkbox        | 选择框类型                               | checkbox | radio  | checkbox |
-| selectKey       | 选择框的键名，必填,对应的column里的key。 | String   | -      |
-| defaultSelected | 选中默认值                               | []       | -      |
+| checkbox | 选择框类型 | `checkbox \| radio`  | `checkbox` |
+| selectKey | 选择框的键名，必填,对应的column里的key。 | `string` | - |
+| defaultSelected | 选中默认值   | `string[]`  | - |
 
 ### ScrollProps
 
@@ -693,13 +693,13 @@ export default Demo6
 
 配置搜索表单
 
-| 参数        | 说明                                  | 类型                                                            | 默认值 |
-| ----------- | ------------------------------------- | --------------------------------------------------------------- | ------ |
-| widget      | 表单组件                              | 支持例子中的组件, 组件名与uiw表单组件名字一致，只是首字母小写了 | -      |
-| widgetProps | 组件属性                              | 与uiw对应的组件属性一致                                         | -      |
-| label       | 表单标题，如果不填则继承columns title | String                                                          | -      |
-| key         | 表单name，如果不填则继承columns key   | String       | -      |
-| option      | 组件 是`checkbox`、`select`、`searchSelect`、`searchTree` 使用， 数据源统一叫option   | Array       | -      |
+| 参数 | 说明  | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| widget | 表单组件 | 支持例子中的组件, 组件名与uiw表单组件名字一致，只是首字母小写了 | -  |
+| widgetProps | 组件属性  | 与uiw对应的组件属性一致 | - |
+| label | 表单标题，如果不填则继承columns title | `string`  | - |
+| key | 表单name，如果不填则继承columns key   | `string` | - |
+| option | 组件 是`checkbox`、`select`、`searchSelect`、`searchTree` 使用， 数据源统一叫option   | `array` | - |
 
 当前支持的widget组件有
 
@@ -722,7 +722,7 @@ dateInputRange
  props可以是个对象属性值是以上参数，也可以是个数组方便处理筛选条件大于列表展示的情况
 
 ```js
-<!-- 对象 -->
+// 对象
 props: {
   widget: 'input',
   initialValue: 'zzz',
@@ -732,7 +732,7 @@ props: {
   }
 }
 
-  <!-- 数组 -->
+// 数组
 props: [
   {
     widget: 'input',
@@ -751,9 +751,9 @@ props: [
 
 | 参数    | 说明         | 类型   | 默认值 |
 | ------- | ------------ | ------ | ------ |
-| pageSizeOptions | 指定每页可以显示多少条      | Number[]  | {}     |
-| pageSize | 每页条数       | Number | 10     |
-| onShowSizeChange     | pageSize 变化的回调  | Function(current, pageSize)  | -      |
+| pageSizeOptions | 指定每页可以显示多少条 | `number[]`  | - |
+| pageSize | 每页条数 | `number` | `10` |
+| onShowSizeChange | pageSize 变化的回调 | `(current, pageSize) => void` | - |
 
 更多属性文档请参考 [uiw Pagination](https://uiwjs.github.io/#/components/pagination)
 
@@ -763,48 +763,48 @@ props: [
 
 | 参数    | 说明         | 类型   | 默认值 |
 | ------- | ------------ | ------ | ------ |
-| api     | 接口请求地址 | string | -      |
-| options | 配置集合     | object | {}     |
+| api | 接口请求地址 | `string` | - |
+| options | 配置集合 | `object` | {} |
 
 ### options
 
-| 参数             | 说明                                                              | 类型                                                                                     | 默认值                     |
-| ---------------- | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------- |
-| formatData       | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式 | (data) => {total: 10, data: []}                                                          | -                          |
-| query            | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据   | (pageIndex: number, searchValues: any) => {page:  pageIndex, pageSize: 10, searchValues} | {}                         |
-| SWRConfiguration | swr配置                                                           | SWRConfiguration                                                                         | {revalidateOnFocus: false} |
-| requestOptions | request参数，继承自[axios config](https://axios-http.com/docs/req_config)     | object | {}     |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| formatData  | 格式化接口返回的数据，必须返回{total: 总数, data: 列表数据}的格式 | (data) => {total: 10, data: []} | - |
+| mutationOptions | [useReactMutation](https://uiwjs.github.io/uiw-admin/#/docs/request)配置  | ReactMutationOptions   | - |
+| query | 格式化请求参数, 会接收到pageIndex 当前页  searchValues 表单数据   | (pageIndex: number, searchValues: any) => {page:  pageIndex, pageSize: 10, searchValues} | {} |
+| requestOptions | request参数，继承自`fetch` | object | {}  |
 
 ### response
 
 | 参数         | 说明         | 类型          | 默认值 |
 | ------------ | ------------ | ------------- | ------ |
-| data         | 接口请求数据 | Array         | -      |
-| total        | 数据总数     | Number        | -      |
-| searchValues | 表单值       | Object        | -      |
-| selection    | 选择框属性   | UseSelections | -      |
-| pageIndex    | 当前分页     | Number        | 1      |
-| onRefersh    | 刷新分页数据  | () => void        | -      |
-| onReset      | 重置表单，查询数据  | () => void         | -      |
-| onSearch     | 查询数据             | () => void         | -     |
-| form     | 返回搜索表单form实例各种内部函数,可用于主动触发事件, 与[Uiw Form](https://uiwjs.github.io/#/components/form) ref 属性返回的一致              | Ref         | -     |
+| data  | 接口请求数据 | `any[]` | -      |
+| total | 数据总数 | `number` | -      |
+| searchValues | 表单值 | `object` | -      |
+| selection | 选择框属性 | `UseSelections` | -      |
+| pageIndex | 当前分页 | `number` | `1`      |
+| onRefersh | 刷新分页数据  | `() => void` | -  |
+| onReset | 重置表单，查询数据  | `() => void` | - |
+| onSearch | 查询数据 | `() => void` | - |
+| form | 返回搜索表单form实例各种内部函数,可用于主动触发事件, 与[Uiw Form](https://uiwjs.github.io/#/components/form) ref 属性返回的一致  | `Ref` | - |
 
 ### selection
 
 | 参数              | 说明               | 类型                  | 默认值 |
 | ----------------- | ------------------ | --------------------- | ------ |
-| selected          | 已经选择的元素     | array                 | -      |
-| allSelected       | 是否全选           | boolean               | -      |
-| noneSelected      | 是否一个都没有选择 | boolean               | -      |
-| partiallySelected | 是否半选           | boolean               | -      |
-| isSelected        | 是否被选择         | (value: T) => boolean | -      |
-| setSelected       | 设置选择的元素     | (value: T[]) => void  | -      |
-| select            | 选择元素           | (value: T) => void    | -      |
-| unSelect          | 取消选择元素       | (value: T) => void    | -      |
-| toggle            | 反选元素           | (value: T) => void    | -      |
-| selectAll         | 选择全部元素       | () => void            | -      |
-| unSelectAll       | 取消选择全部元素   | () => void            | -      |
-| toggleAll         | 反选全部元素       | () => void            | -      |
+| selected | 已经选择的元素 | `array`  | - |
+| allSelected | 是否全选 | `boolean` | - |
+| noneSelected | 是否一个都没有选择 | `boolean` | - |
+| partiallySelected | 是否半选 | boolean  | -  |
+| isSelected | 是否被选择 | `(value: T) => boolean` | - |
+| setSelected | 设置选择的元素 | `(value: T[]) => void`  | - |
+| select | 选择元素 | `(value: T) => void ` | - |
+| unSelect | 取消选择元素 | `(value: T) => void` | - |
+| toggle | 反选元素 | `(value: T) => void` | - |
+| selectAll | 选择全部元素 | `() => void` | - |
+| unSelectAll | 取消选择全部元素 | `() => void` | - |
+| toggleAll | 反选全部元素 | `() => void` | - |
 
 ## 贡献者
 

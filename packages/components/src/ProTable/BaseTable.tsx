@@ -35,8 +35,15 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
   const store = useStore();
 
-  let { formatData, updateStore, query, key, searchValues, requestOptions } =
-    store as any;
+  let {
+    formatData,
+    updateStore,
+    query,
+    key,
+    searchValues,
+    requestOptions,
+    mutationOptions,
+  } = store as any;
 
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
   const { x } = scroll;
@@ -91,13 +98,21 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // 调接口
   const { mutate, data, isLoading }: any = useReactMutation({
     mutationFn: async () => {
-      console.log(689, formatQuery(), query);
-      return fetchFn(key, {
+      let url = key;
+      const query = formatQuery();
+      const params = {
         method: 'POST',
-        body: JSON.stringify(formatQuery()),
+        body: JSON.stringify(query),
         ...requestOptions,
-      });
+      };
+      if (['get', 'GET'].includes(params.method)) {
+        const searchParams = new URLSearchParams(query);
+        url += '?' + searchParams.toString();
+        delete params.body;
+      }
+      return fetchFn(url, params);
     },
+    ...mutationOptions,
   });
 
   useEffect(() => {

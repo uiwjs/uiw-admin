@@ -3,7 +3,7 @@ import { Params, useTableData, stateParams } from './types';
 import { FormRefType } from 'uiw';
 
 const useTable = (key: string, params: Params = {}): useTableData => {
-  const { formatData, query, SWRConfiguration, requestOptions } = params;
+  const { formatData, query, mutationOptions, requestOptions } = params;
 
   // 表单组件实例
   const [form, setForm] = useState<MutableRefObject<FormRefType>>();
@@ -57,7 +57,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
   };
   // 刷新当前页数据
   const onRefersh = async () => {
-    state.mutate(false);
+    state.mutate();
   };
   // 点击查询
   const onSearch = async () => {
@@ -68,11 +68,11 @@ const useTable = (key: string, params: Params = {}): useTableData => {
       const isNoError = form.current.getError();
       if (Object.keys(isNoError).length === 0) {
         await state.setPageIndex(1);
-        state.mutate(false);
+        state.mutate();
       }
     } else {
       await state.setPageIndex(1);
-      state.mutate(false);
+      state.mutate();
     }
   };
 
@@ -87,7 +87,7 @@ const useTable = (key: string, params: Params = {}): useTableData => {
     formatData,
     query,
     updateStore,
-    SWRConfiguration,
+    mutationOptions,
     form,
     requestOptions,
     updateForm,
