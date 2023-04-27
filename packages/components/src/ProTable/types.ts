@@ -6,7 +6,7 @@ import {
   PaginationProps,
   FormRefType,
 } from 'uiw';
-import { SWRConfiguration, MutatorOptions } from 'swr';
+import { MutateOptions, ReactMutationOptions } from '@kkt/request';
 import { UseSelections } from './useSelections';
 import { Options } from '@uiw-admin/utils/src/request';
 import { MutableRefObject } from 'react';
@@ -93,7 +93,7 @@ export type Params = {
     [key: string]: any;
   };
   requestOptions?: Options;
-  SWRConfiguration?: SWRConfiguration;
+  mutationOptions?: ReactMutationOptions;
 };
 
 export interface useTableData extends Params {
@@ -113,7 +113,7 @@ export interface useTableData extends Params {
   form: MutableRefObject<FormRefType>;
   updateForm: (p: stateParams) => void;
   setPageIndex: (p: number) => void;
-  mutate: (data?: any, opts?: boolean | MutatorOptions | undefined) => void;
+  mutate: (data?: any, opts?: boolean | MutateOptions | undefined) => void;
 }
 
 export type stateParams = {

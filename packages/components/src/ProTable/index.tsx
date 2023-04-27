@@ -5,6 +5,7 @@ import Table from './BaseTable';
 import BaseForm from './BaseForm';
 import { StoreCtx } from './hooks';
 import { ProtableProps } from './types';
+import { QueryClientProvider, queryClient } from '@kkt/request';
 import './index.css';
 
 export * from './types';
@@ -32,7 +33,6 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
     searchValues,
     loading,
     onSearch,
-    SWRConfiguration,
     selection,
     pageIndex,
     form,
@@ -52,7 +52,6 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
       query,
       searchValues,
       onSearch,
-      SWRConfiguration,
       selection,
       pageIndex,
       form,
@@ -122,4 +121,12 @@ const ProTabel: React.FC<ProtableProps> = (props) => {
   );
 };
 
-export default ProTabel;
+const Tables: React.FC<ProtableProps> = (props) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ProTabel {...props} />
+    </QueryClientProvider>
+  );
+};
+
+export default Tables;

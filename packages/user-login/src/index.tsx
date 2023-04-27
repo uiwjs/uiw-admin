@@ -14,7 +14,6 @@ import './styles/index.css';
 export type FormValue = {
   username?: string;
   password?: string;
-  swr_Rest_Time?: number | string;
 };
 
 export interface FieldsProps<T = any> extends FormFieldsProps<T> {
@@ -122,7 +121,6 @@ const Login = (props: UserLoginProps) => {
     url: api,
     method: 'POST',
     ...requestConfig,
-    mutationKey: ['login'],
     onSuccess: (res) => onSuccess(res, store),
     onError: () => onSuccess(undefined, store),
   });
@@ -237,7 +235,6 @@ const Login = (props: UserLoginProps) => {
                       setStore({
                         ...current,
                         ...(result || {}),
-                        swr_Rest_Time: new Date().getTime(),
                       });
                       await mutateAsync({
                         ...(current as any),
@@ -249,7 +246,7 @@ const Login = (props: UserLoginProps) => {
                       return;
                     }
                   }
-                  setStore({ ...current, swr_Rest_Time: new Date().getTime() });
+                  setStore({ ...current });
                   await mutateAsync({ ...(current as any) });
                 }
               }}
