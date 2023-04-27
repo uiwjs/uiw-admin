@@ -30,8 +30,6 @@ function FormDom({
   const store = useStore();
   const colProps = useColPropsContext();
 
-  console.log(8888, formType);
-
   const { setFormState } = store as {
     setFormState: ((p: any) => void) | undefined;
   };

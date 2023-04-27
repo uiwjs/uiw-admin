@@ -5,12 +5,11 @@ import React, {
   useRef,
   useMemo,
 } from 'react';
-import useSWR from 'swr';
 import { Table, Pagination, Checkbox, Radio, Empty } from 'uiw';
-import { request } from '@uiw-admin/utils';
 import { useStore } from './hooks';
 import { Fields, BaseTableProps, FormCol } from './types';
 import useSelections from './useSelections';
+import { useReactMutation, fetchFn } from '@kkt/request';
 
 const BaseTable: React.FC<BaseTableProps> = ({
   style,
@@ -36,15 +35,8 @@ const BaseTable: React.FC<BaseTableProps> = ({
 
   const store = useStore();
 
-  let {
-    formatData,
-    updateStore,
-    query,
-    key,
-    searchValues,
-    SWRConfiguration = {},
-    requestOptions,
-  } = store as any;
+  let { formatData, updateStore, query, key, searchValues, requestOptions } =
+    store as any;
 
   const { selectKey, type = 'checkbox', defaultSelected = [] } = rowSelection;
   const { x } = scroll;
@@ -83,11 +75,8 @@ const BaseTable: React.FC<BaseTableProps> = ({
   // 格式化接口查询参数
   const formatQuery = () => {
     if (query) {
-      return query(
-        pageIndex,
-        pgSize,
-        isFirstMountRef.current === false ? defaultValues : searchValues,
-      );
+      const params = { ...defaultValues, ...searchValues };
+      return query(pageIndex, pgSize, params);
     } else {
       // 默认传参
       return {
@@ -98,21 +87,22 @@ const BaseTable: React.FC<BaseTableProps> = ({
   };
 
   const pageSize = formatQuery().pageSize || 10;
-  // 调接口
 
-  const { data, isValidating, mutate } = useSWR(
-    [key, { method: 'POST', body: formatQuery(), ...requestOptions }],
-    request,
-    {
-      revalidateOnFocus: false,
-      revalidateOnMount: false,
-      ...SWRConfiguration,
+  // 调接口
+  const { mutate, data, isLoading }: any = useReactMutation({
+    mutationFn: async () => {
+      console.log(689, formatQuery(), query);
+      return fetchFn(key, {
+        method: 'POST',
+        body: JSON.stringify(formatQuery()),
+        ...requestOptions,
+      });
     },
-  );
+  });
 
   useEffect(() => {
     // 第一次加载
-    mutate(false);
+    mutate();
   }, [mutate]);
 
   // table数据
@@ -165,7 +155,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
     const stores: any = {
       data: tableData,
       total,
-      loading: isValidating,
+      loading: isLoading,
       // onSearch,
       selection,
       pageIndex,
@@ -186,7 +176,7 @@ const BaseTable: React.FC<BaseTableProps> = ({
     }
   }, [
     JSON.stringify(tableData),
-    isValidating,
+    isLoading,
     JSON.stringify(columns),
     pageIndex,
     JSON.stringify(selection),
