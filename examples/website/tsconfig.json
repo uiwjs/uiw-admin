@@ -20,7 +20,8 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "types": ["jest", "node"],
-    "noEmit": true,
+    "noEmit": false,
+    "outDir": "cjs",
     "paths": {
       "@/*": ["./src/*"],
       "@@/*": ["./src/.kktp/*"],
