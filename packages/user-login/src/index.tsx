@@ -275,7 +275,9 @@ const Login = (props: UserLoginProps) => {
                     {fieldArr.map((item, index) => {
                       return (
                         <Row key={index}>
-                          <Col>{fields[item.name]}</Col>
+                          <Col style={{ color: '#333' }}>
+                            {fields[item.name]}
+                          </Col>
                         </Row>
                       );
                     })}

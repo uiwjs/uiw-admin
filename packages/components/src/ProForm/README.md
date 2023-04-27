@@ -350,20 +350,20 @@ const Demo = () => {
   }
     return (
     <>
-       <ProForm
-         // 表单类型
-         formType="collapse"
-         title="基本使用(与uiw/form使用保持一致)"
-         // 自定义组件
-         customWidgetsList={{
+      <ProForm
+        // 表单类型
+        formType="collapse"
+        title="基本使用(与uiw/form使用保持一致)"
+        // 自定义组件
+        customWidgetsList={{
           slider: Slider,
         }}
-         // 是否展示uiw/form提交按钮
-         showSaveButton
-         // 是否展示uiw/form重置按钮
-         showResetButton
-         // 提交后验证
-         onSubmit={(initial, current) => {
+        // 是否展示uiw/form提交按钮
+        showSaveButton
+        // 是否展示uiw/form重置按钮
+        showResetButton
+        // 提交后验证
+        onSubmit={(initial, current) => {
           const errorObj = {};
           if (!current?.input) {
             errorObj.input = 'input不能为空';
@@ -377,7 +377,7 @@ const Demo = () => {
           setState(current)
           // 调用请求接口
         }}
-         formDatas={[
+        formDatas={[
              {
                label: 'input',
                key: 'input',
