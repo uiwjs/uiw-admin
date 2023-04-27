@@ -89,6 +89,9 @@
   right: 0;
   top: 7px;
 }
+.uiw-admin-proform-horizontal .w-form-item .w-form-row > div {
+  width: 100%;
+}
 .uiw-admin-proform-horizontal .w-form-item .w-form-help {
   position: absolute;
   left: 134px;
