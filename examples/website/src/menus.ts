@@ -110,7 +110,7 @@ export const menusComponentsConfig: MenusConfigObject[] = [
   //   "path": "/components/router-control"
   // },
   {
-    title: 'UserLogin 登录',
+    title: 'LoginPage 登录',
     path: '/components/user-login',
   },
   {

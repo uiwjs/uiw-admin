@@ -1,8 +1,8 @@
-import { Outlet, KktproPageProps } from '@kkt/pro';
+import { Outlet, KktproPageProps, useLocation } from '@kkt/pro';
 import Menu from '../Menu';
 import Navbar from '../Navbar';
 import { createGlobalStyle } from 'styled-components';
-import { Wrapper, Main, Body } from './style';
+import { Wrapper, Main, Body, OutletWrap } from './style';
 import '@wcj/dark-mode';
 
 export const GlobalStyle = createGlobalStyle`
@@ -19,16 +19,19 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export default function Layout(props: KktproPageProps) {
+  const { pathname } = useLocation();
+  const isHome: boolean = pathname === '/home';
+
   return (
     <Wrapper className="wmde-markdown-var">
       <GlobalStyle />
       <Navbar />
       <Main>
-        <Body>
-          <Menu />
-          <div style={{ paddingLeft: 240, paddingTop: 58, height: '100%' }}>
+        <Body isHome={isHome}>
+          {!isHome && <Menu />}
+          <OutletWrap isHome={isHome}>
             <Outlet />
-          </div>
+          </OutletWrap>
         </Body>
       </Main>
     </Wrapper>
