@@ -11,8 +11,9 @@ const routeList = [
     children: [
       {
         index: true,
-        redirect: '/docs/quick-start',
+        redirect: '/home',
       },
+      { path: '/home', element: '@/pages/home' },
       {
         path: '/docs',
         children: [
