@@ -294,6 +294,36 @@ const UserLayout = () => {
 export default UserLayout;
 ```
 
+## 自定义页脚
+
+`footer`：自定义页脚内容
+
+<!--rehype:bgwhite=true&codesandbox=true&codepen=true-->
+```jsx mdx:preview
+import React from 'react';
+import UserLogin from '@uiw-admin/user-login';
+import { useNavigate, } from 'react-router-dom';
+import { Notify } from "uiw"
+
+const UserLayout = () => {
+  return (
+    <UserLogin
+      api="/api/login"
+      footer={<div className="copyright-footer">可以自定义页脚内容</div>}
+      onSuccess={(data) => {
+        if (data && data.token) {
+          sessionStorage.setItem("token", data.token)
+          sessionStorage.setItem("auth", JSON.stringify(data.authList || []))
+        } else {
+          Notify.error({ title: "错误通知", description: data?.message || "请求失败" })
+        }
+      }}
+    />
+  )
+}
+export default UserLayout;
+```
+
 ## 自定义背景样式
 
 `styleContainer`：自定义背景样式 ，`bg`：可直接修改背景图片
@@ -499,7 +529,7 @@ export interface UserLoginProps {
   footer?: React.ReactNode;
   /** 背景图片 */
   bg?: string;
-  /** 如果存在 children 则 覆盖默认登录框里面内容  */ 
+  /** 如果存在 children 则 覆盖默认登录框里面内容  */
   children?: React.ReactNode;
   /** 项目名称 */
   projectName?: string;
@@ -554,7 +584,7 @@ export interface UserLoginProps {
 
 ```tsx
 export interface FieldsProps<T = any> extends FormFieldsProps<T> {
-  /** 保存字段 */ 
+  /** 保存字段 */
   name: string;
   // 验证输入框值   value:输入框的值，current：当前表单的值，返回值为 string 类型时，进行报错提示
   verification?: (value: any, current: Record<string, any>) => string | boolean | null,

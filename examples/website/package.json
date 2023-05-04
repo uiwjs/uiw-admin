@@ -25,6 +25,8 @@
     "@react-login-page/page5": "^0.4.4",
     "@react-login-page/page6": "^0.4.4",
     "@react-login-page/page7": "^0.4.4",
+    "@react-login-page/page8": "^0.4.4",
+    "@react-login-page/page9": "^0.4.4",
     "@types/styled-components": "^5.1.26",
     "@uiw-admin/authorized": "6.1.9",
     "@uiw-admin/basic-layouts": "6.1.9",
