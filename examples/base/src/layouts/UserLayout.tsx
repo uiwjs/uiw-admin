@@ -24,6 +24,7 @@ const UserLayout = (props: KktproPageProps) => {
         userName: 'username',
         passWord: 'password',
       }}
+      footer={<div className="copyright-footer">可以自定义页脚内容</div>}
       // onBefore={(store) => ({ a: 12, b: 1221, ...store })}
       onSuccess={(data) => {
         if (data && data.token) {

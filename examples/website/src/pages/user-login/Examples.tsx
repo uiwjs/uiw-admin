@@ -9,6 +9,9 @@ import Login4 from '@react-login-page/page4';
 import Login5 from '@react-login-page/page5';
 import Login6 from '@react-login-page/page6';
 import Login7 from '@react-login-page/page7';
+import Login8 from '@react-login-page/page8';
+import Login9 from '@react-login-page/page9';
+import Login9Bg from '@react-login-page/page9/bg.jpg';
 
 const bannerImage = require('@react-login-page/page2/banner-image');
 const bannerImage3 = require('@react-login-page/page3/banner-image');
@@ -105,5 +108,27 @@ export const page7: Example = {
         <LoginLogo />
       </Login7.Logo>
     </Login7>
+  ),
+};
+
+export const page8: Example = {
+  magnify: 2.2,
+  children: (
+    <Login8>
+      <Login8.Logo>
+        <LoginLogo />
+      </Login8.Logo>
+    </Login8>
+  ),
+};
+
+export const page9: Example = {
+  magnify: 2.2,
+  children: (
+    <Login9 style={{ backgroundImage: `url(${Login9Bg})` }}>
+      <Login9.Logo>
+        <LoginLogo />
+      </Login9.Logo>
+    </Login9>
   ),
 };

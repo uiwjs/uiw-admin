@@ -26,8 +26,8 @@ import { useReactQuery, useReactMutation, queryClient, fetchFn } from '@kkt/pro'
 主要用于**默认**触发请求数据，默认 `GET` 请求，变更使用 `method="POST"` 参数配置
 
 ```jsx
-useReactQuery({ 
-  queryKey: ['user', userId], 
+useReactQuery({
+  queryKey: ['user', userId],
   url: `/api/user/list?id=${userId}`
 });
 ```
@@ -113,36 +113,6 @@ import { request } from "@uiw-admin/utils"
 
 **调用方式**
 
-**✨配和swr调用**
-> 如果已全局配置过swr,可不用传入request
-
-```tsx
-import React from 'react'
-import useSWR from 'swr';
-import { request } from "@uiw-admin/utils"
-
-export default const Index = () => {
-  const [ name ,setName ] = React.useState('')
-  const { mutate } = useSWR(
-    ['/api/selectById',{ method: 'POST', body: {id:1} }],
-    request,
-    {
-      revalidateOnMount: false,
-      revalidateOnFocus: false,
-      onSuccess: (data) => {
-        if (data && data.code === 200) {
-          setName(data.data)
-         }
-      },
-    }
-  )
-
-  React.useEffect(()=>mutate(false),[mutate])
-
-  return <div>{name}</div>
-}
-
-```
 **在rematch中使用**
 
 > 在servers/index.js中

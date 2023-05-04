@@ -25,36 +25,7 @@
 | requestType   | 数据格式    | 'form' 或 'json' 或 'urlencoded'        | -     |
 
 ### 调用方式
-### ✨配和swr调用
-> 如果已全局配置过swr,可不用传入request
 
-```tsx
-import React from 'react'
-import useSWR from 'swr';
-import { request } from "@uiw-admin/utils"
-
-export default const Index = () => {
-  const [ name ,setName ] = React.useState('')
-  const { mutate } = useSWR(
-    ['/api/selectById',{ method: 'POST', body: {id:1} }],
-    request,
-    {
-      revalidateOnMount: false,
-      revalidateOnFocus: false,
-      onSuccess: (data) => {
-        if (data && data.code === 200) {
-          setName(data.data)
-         }
-      },
-    }
-  )
-
-  React.useEffect(()=>mutate(false),[mutate])
-
-  return <div>{name}</div>
-}
-
-```
 ### 在rematch中使用
 > 在servers/index.js中
 ```ts
