@@ -41,7 +41,7 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@kkt/less-modules": "~7.2.0",
+    "@kkt/less-modules": "~7.5.0",
     "@kkt/raw-modules": "~7.2.0",
     "@kkt/scope-plugin-options": "~7.2.0",
     "@uiw-admin/plugins": "6.1.9",
