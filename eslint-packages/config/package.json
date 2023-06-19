@@ -15,7 +15,7 @@
     "eslint-plugin-react": "^7.30.1"
   },
   "devDependencies": {
-    "eslint-config-standard": "16.0.3",
+    "eslint-config-standard": "17.1.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0"
   },
