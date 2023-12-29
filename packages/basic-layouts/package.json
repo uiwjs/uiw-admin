@@ -46,7 +46,7 @@
     "@babel/runtime": "~7.21.0",
     "@kkt/pro": "^1.0.13",
     "@uiw-admin/document-title": "6.1.9",
-    "classnames": "2.3.1",
+    "classnames": "2.5.1",
     "pinyin": "~2.11.2"
   },
   "devDependencies": {

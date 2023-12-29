@@ -48,7 +48,7 @@
     "@uiw-admin/authorized": "6.1.9",
     "@uiw-admin/document-title": "6.1.9",
     "@uiw-admin/utils": "6.1.9",
-    "classnames": "2.3.1"
+    "classnames": "2.5.1"
   },
   "devDependencies": {
     "@types/classnames": "2.3.1",
