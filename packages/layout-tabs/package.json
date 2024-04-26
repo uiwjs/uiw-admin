@@ -50,10 +50,10 @@
     "@kkt/pro": "1.0.10"
   },
   "devDependencies": {
-    "@types/react": "~18.0.25",
-    "@types/react-dom": "~18.0.11",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "@types/react": "~18.3.0",
+    "@types/react-dom": "~18.3.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
     "react-router": "^6.8.0",
     "react-router-dom": "^6.8.0",
     "uiw": "^4.21.26"
