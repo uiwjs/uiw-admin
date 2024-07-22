@@ -17,7 +17,7 @@
   "devDependencies": {
     "eslint-config-standard": "16.0.3",
     "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "6.0.0"
+    "eslint-plugin-promise": "6.6.0"
   },
   "publishConfig": {
     "access": "public"
