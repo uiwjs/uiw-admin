@@ -44,7 +44,7 @@
     "uiw": ">=4.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.21.0",
+    "@babel/runtime": "~7.25.0",
     "@uiw-admin/authorized": "6.1.9",
     "@uiw-admin/document-title": "6.1.9",
     "@uiw-admin/utils": "6.1.9",

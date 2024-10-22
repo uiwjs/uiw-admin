@@ -46,7 +46,7 @@
     "uiw": ">=4.x"
   },
   "dependencies": {
-    "@babel/runtime": "~7.20.0",
+    "@babel/runtime": "~7.25.0",
     "@kkt/pro": "1.0.10"
   },
   "devDependencies": {
