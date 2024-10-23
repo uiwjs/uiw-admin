@@ -48,10 +48,10 @@
     "@uiw-admin/authorized": "6.1.9",
     "@uiw-admin/document-title": "6.1.9",
     "@uiw-admin/utils": "6.1.9",
-    "classnames": "2.3.1"
+    "classnames": "2.5.1"
   },
   "devDependencies": {
-    "@types/classnames": "2.3.1",
+    "@types/classnames": "2.3.4",
     "@types/react": "~18.0.25",
     "@types/react-dom": "~18.0.11",
     "react": "18.2.0",
